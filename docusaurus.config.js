@@ -1,28 +1,28 @@
 module.exports = {
-  title: 'My Site',
-  tagline: 'The tagline of my site',
-  url: 'https://your-docusaurus-test-site.com',
+  title: 'Ganymede Bio Cloud Server Documentation',
+  tagline: 'Connectivity between your instruments and your ELN/LIMS',
+  url: 'https://demo.ganymede.bio',
   baseUrl: '/',
-  favicon: 'img/favicon.ico',
-  organizationName: 'facebook', // Usually your GitHub org/user name.
-  projectName: 'docusaurus', // Usually your repo name.
+  favicon: 'img/favicon.png',
+  organizationName: 'Ganymede-Bio', // Usually your GitHub org/user name.
+  projectName: 'website-docusaurus', // Usually your repo name.
   themeConfig: {
     navbar: {
-      title: 'My Site',
+      title: 'Ganymede',
       logo: {
         alt: 'My Site Logo',
-        src: 'img/logo.svg',
+        src: 'img/ganymede_ball.png',
       },
       links: [
         {
           to: 'docs/doc1',
           activeBasePath: 'docs',
-          label: 'Docs',
+          label: 'API Server',
           position: 'left',
         },
-        {to: 'blog', label: 'Blog', position: 'left'},
+        { to: 'blog', label: 'Blog', position: 'left' },
         {
-          href: 'https://github.com/facebook/docusaurus',
+          href: 'https://github.com/Ganymede-Bio/website-docusaurus',
           label: 'GitHub',
           position: 'right',
         },
@@ -65,17 +65,17 @@ module.exports = {
           title: 'More',
           items: [
             {
-              label: 'Blog',
-              to: 'blog',
+              label: 'Main website',
+              to: 'https://www.ganymede.bio',
             },
             {
               label: 'GitHub',
-              href: 'https://github.com/facebook/docusaurus',
+              href: 'https://github.com/Ganymede-Bio/website-docusaurus',
             },
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+      copyright: `Copyright © ${new Date().getFullYear()} Ganymede Bio, Inc. Built with Docusaurus.`,
     },
   },
   presets: [
