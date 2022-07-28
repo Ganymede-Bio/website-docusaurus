@@ -10,7 +10,7 @@ yarn build
 ```
 #### Run local instance for debugging (defaulting to port 3000)
 ```
-yarn start
+yarn serve
 ```
 ---
 
@@ -18,8 +18,8 @@ yarn start
 
 Docusaurus v2.0.0 requires Node 16.14+; this website is known to run under Node 18.7.  If you run into unexpected issues, rebuild the dependencies by running
 ```
-> rm package.json
-> yarn install
+> yarn clear
+> yarn build
 ```
 
 --
