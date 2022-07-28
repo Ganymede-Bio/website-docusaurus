@@ -1,6 +1,17 @@
 module.exports = {
-  someSidebar: {
-    Docusaurus: ['doc1', 'doc2', 'doc3'],
-    Features: ['mdx'],
-  },
+  apiServerSidebar: [
+    {
+      type: 'link',
+      label: 'Quickstart',
+      href: '/docs/Quickstart'
+    },
+
+    {
+      type: 'category',
+      label: 'Getting Started',
+      items: ['Introduction', 'FlowEditor', 'FlowRuns'],
+      // Features: ['mdx'],
+    },
+  ],
+  instrumentSidebar: ['instruments/Scales']
 };

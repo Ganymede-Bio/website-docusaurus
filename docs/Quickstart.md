@@ -1,7 +1,7 @@
 ---
-id: doc1
-title: Style Guide
-sidebar_label: Style Guide
+title: API Server Quickstart
+sidebar_label: Quickstart
+displayed_sidebar: apiServerSidebar
 ---
 
 You can write content using [GitHub-flavored Markdown syntax](https://github.github.com/gfm/).

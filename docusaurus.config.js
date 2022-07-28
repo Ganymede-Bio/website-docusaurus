@@ -10,17 +10,19 @@ module.exports = {
     navbar: {
       title: 'Ganymede',
       logo: {
-        alt: 'My Site Logo',
+        alt: 'Ganymede Logo',
         src: 'img/ganymede_ball.png',
       },
       links: [
         {
-          to: 'docs/doc1',
-          activeBasePath: 'docs',
+          to: 'docs/Quickstart',
+          routeBasePath: '/',
+          // activeBasePath: 'docs',
           label: 'API Server',
           position: 'left',
         },
-        { to: 'blog', label: 'Blog', position: 'left' },
+        { to: 'docs/instruments/Quickstart', label: 'Instruments', position: 'left' },
+        // { to: 'blog', label: 'Blog', position: 'left' },
         {
           href: 'https://github.com/Ganymede-Bio/website-docusaurus',
           label: 'GitHub',
@@ -35,32 +37,32 @@ module.exports = {
           title: 'Docs',
           items: [
             {
-              label: 'Style Guide',
-              to: 'docs/doc1',
+              label: 'API Server',
+              to: 'docs/Quickstart',
             },
             {
-              label: 'Second Doc',
-              to: 'docs/doc2',
+              label: 'Instruments',
+              to: 'docs/instruments/Scales',
             },
           ],
         },
-        {
-          title: 'Community',
-          items: [
-            {
-              label: 'Stack Overflow',
-              href: 'https://stackoverflow.com/questions/tagged/docusaurus',
-            },
-            {
-              label: 'Discord',
-              href: 'https://discordapp.com/invite/docusaurus',
-            },
-            {
-              label: 'Twitter',
-              href: 'https://twitter.com/docusaurus',
-            },
-          ],
-        },
+        // {
+        //   title: 'Community',
+        //   items: [
+        //     {
+        //       label: 'Stack Overflow',
+        //       href: 'https://stackoverflow.com/questions/tagged/docusaurus',
+        //     },
+        //     {
+        //       label: 'Discord',
+        //       href: 'https://discordapp.com/invite/docusaurus',
+        //     },
+        //     {
+        //       label: 'Twitter',
+        //       href: 'https://twitter.com/docusaurus',
+        //     },
+        //   ],
+        // },
         {
           title: 'More',
           items: [
@@ -86,14 +88,14 @@ module.exports = {
           sidebarPath: require.resolve('./sidebars.js'),
           // Please change this to your repo.
           editUrl:
-            'https://github.com/facebook/docusaurus/edit/master/website/',
+            'https://github.com/Ganymede-Bio/website-docusaurus/edit/main/website-docusaurus',
         },
-        blog: {
-          showReadingTime: true,
-          // Please change this to your repo.
-          editUrl:
-            'https://github.com/facebook/docusaurus/edit/master/website/blog/',
-        },
+        // blog: {
+        //   showReadingTime: true,
+        //   // Please change this to your repo.
+        //   editUrl:
+        //     'https://github.com/facebook/docusaurus/edit/master/website/blog/',
+        // },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
         },
