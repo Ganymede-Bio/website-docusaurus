@@ -18,7 +18,7 @@ The inputs/buttons at the top of the screen perform the following functions:
 - **Save Environment**: Save the loaded Flow to Github repository.
 - **Run**: Run the currently loaded Flow on Ganymede Cloud.
 
-- **Functions**: List of available Operators, represented graphically as nodes, which can be added to loaded Flow.
+- **Functions**: List of available Functions, represented graphically as nodes, which can be added to loaded Flow.
 - **Horizontal/Vertical Layout**: Update Flow to either be displayed from left to right (Horizontal Layout) or top to bottom (Vertical Layout)
 - **Analysis Notebooks**: Enables access to notebooks which can be used for ad-hoc observation and analysis of data in the flow.  These notebooks are hosted on a virtual machine (VM) separate from the workflow management software running the Flow.
 
@@ -32,7 +32,7 @@ To load a Flow, specify the cloud environment in the _Choose An Environment_ inp
 
 ### Modifying Flows
 
-The second row of buttons provides tools for modifying Flows.  To incorporate new Operators, hover over the Functions button and select a desired Operator to incorporate into your flow.  The Operator can then be connected to an existing node by clicking and dragging between 2 nodes to specify their connectivity.  
+The second row of buttons provides tools for modifying Flows.  To incorporate new Functions, hover over the Functions button and select a desired Function to incorporate into your flow.  The Function can then be connected to an existing node by clicking and dragging between 2 nodes to specify their connectivity.  
 
 When ready, click the green Run button to kick off the Flow run.  Run progress can be tracked by refreshing the Flow runs tab.
 

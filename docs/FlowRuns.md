@@ -7,7 +7,7 @@ displayed_sidebar: apiServerSidebar
 
 ### Summary
 
-The Flow Runs tab contains the current status of different flow runs that have been executed.  
+The Flow Runs tab contains the current status of different Flow runs that have been executed.  
 
 ![Ganymede App Flow Runs](https://ganymede-bio.mo.cloudinary.net/apiServer/FlowRuns.png)
 

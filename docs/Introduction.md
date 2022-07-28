@@ -25,5 +25,5 @@ This exposes a pop-up for you to name your Flow and a cloud infra environment to
 In the sidebar, you'll find the following links:
 
 - **Home**: your homepage, from which you will be able to navigate to previously built Flows and build off of templates within our set of integrated instruments (in progress)
-- **Flow Editor**: primary screen for developing and running _Operators_ and _Flows_.
+- **Flow Editor**: primary screen for developing and running _Functions_ and _Flows_.
 - **Flow Runs**: table for tracking status of current and prior flow runs
