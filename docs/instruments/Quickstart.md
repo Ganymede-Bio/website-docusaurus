@@ -1,5 +1,4 @@
 ---
-id: InstrumentQuickstart
 title: Instrument Quickstart
 sidebar_label: Quickstart
 displayed_sidebar: instrumentSidebar

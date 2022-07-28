@@ -88,7 +88,7 @@ module.exports = {
           sidebarPath: require.resolve('./sidebars.js'),
           // Please change this to your repo.
           editUrl:
-            'https://github.com/Ganymede-Bio/website-docusaurus/edit/main/website-docusaurus',
+            'https://github.com/Ganymede-Bio/website-docusaurus/edit/main/',
         },
         // blog: {
         //   showReadingTime: true,
