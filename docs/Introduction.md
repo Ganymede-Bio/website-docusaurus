@@ -21,3 +21,9 @@ To create a new workflow, click the **New** button in the upper right hand corne
 This exposes a pop-up for you to name your Flow and a cloud infra environment to associate it to.  Each environment has its own dedicated workflow orchestration service, which can be configured to your data processing needs.  
 
 ![Ganymede App New Flow Creation](https://ganymede-bio.mo.cloudinary.net/apiServer/HomeNewPipeline.png)
+
+In the sidebar, you'll find the following links:
+
+- **Home**: your homepage, from which you will be able to navigate to previously built Flows and build off of templates within our set of integrated instruments (in progress)
+- **Flow Editor**: primary screen for developing and running _Operators_ and _Flows_.
+- **Flow Runs**: table for tracking status of current and prior flow runs

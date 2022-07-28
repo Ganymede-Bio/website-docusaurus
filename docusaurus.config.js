@@ -13,7 +13,7 @@ module.exports = {
         alt: 'Ganymede Logo',
         src: 'img/ganymede_ball.png',
       },
-      links: [
+      items: [
         {
           to: 'docs/Quickstart',
           routeBasePath: '/',
