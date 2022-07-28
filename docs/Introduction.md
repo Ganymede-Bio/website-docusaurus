@@ -12,12 +12,12 @@ API Server enables you to process and associate data and metadata from your lab 
 
 ## Home
 
-The Home page is the starting point for creating new _flows_, which are series of steps by which data processing occurs on Ganymede.  Logical manipulations are conducted by creating and assembling _operators_, which contain modular SQL or Python code snippets that enable you to expressively relate your data.
+The Home page is the starting point for creating new _Flows_, which are series of steps by which data processing occurs on Ganymede.  Logical manipulations are conducted by creating and assembling _Operators_, which contain modular SQL or Python code snippets that enable you to expressively relate your data.
 
 To create a new workflow, click the **New** button in the upper right hand corner of the screen.
 
  ![Ganymede App Home Page](https://ganymede-bio.mo.cloudinary.net/apiServer/HomeScreen.png)
 
-This exposes a pop-up for you to name your flow and a cloud infra environment to associate it to.  Each environment has its own dedicated workflow orchestration service, which can be configured to your data processing needs.  
+This exposes a pop-up for you to name your Flow and a cloud infra environment to associate it to.  Each environment has its own dedicated workflow orchestration service, which can be configured to your data processing needs.  
 
 ![Ganymede App New Flow Creation](https://ganymede-bio.mo.cloudinary.net/apiServer/HomeNewPipeline.png)
