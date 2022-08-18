@@ -1,7 +1,7 @@
 ---
 title: Introduction
 sidebar_label: Introduction
-displayed_sidebar: apiServerSidebar
+displayed_sidebar: webUiSidebar
 ---
 
 ## Summary

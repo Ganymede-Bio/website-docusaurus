@@ -1,7 +1,7 @@
 ---
 id: FlowEditor
 title: Flow Editor
-displayed_sidebar: apiServerSidebar
+displayed_sidebar: webUiSidebar
 ---
 
 ## Summary

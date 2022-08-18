@@ -1,10 +1,5 @@
 module.exports = {
-  apiServerSidebar: [
-    {
-      type: 'link',
-      label: 'Quickstart',
-      href: '/docs/Quickstart'
-    },
+  webUiSidebar: [
 
     {
       type: 'category',
@@ -13,5 +8,4 @@ module.exports = {
       // Features: ['mdx'],
     },
   ],
-  instrumentSidebar: ['instruments/Scales']
 };
