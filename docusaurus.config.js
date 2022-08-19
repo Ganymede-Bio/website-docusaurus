@@ -36,7 +36,7 @@ module.exports = {
           items: [
             {
               label: 'Web UI',
-              to: 'docs/Quickstart',
+              to: 'docs/Introduction',
             },
           ],
         },
