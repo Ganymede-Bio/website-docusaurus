@@ -1,6 +1,6 @@
 module.exports = {
-  title: 'Ganymede Bio Cloud Server Documentation',
-  tagline: 'Connectivity between your instruments and your ELN/LIMS',
+  title: 'Ganymede Bio Documentation',
+  tagline: 'Integrate your entire lab',
   url: 'https://demo.ganymede.bio',
   baseUrl: '/',
   favicon: 'img/favicon.png',
@@ -15,14 +15,12 @@ module.exports = {
       },
       items: [
         {
-          to: 'docs/Quickstart',
+          to: 'docs/Introduction',
           routeBasePath: '/',
           // activeBasePath: 'docs',
-          label: 'API Server',
+          label: 'Web UI',
           position: 'left',
         },
-        { to: 'docs/instruments/Quickstart', label: 'Instruments', position: 'left' },
-        // { to: 'blog', label: 'Blog', position: 'left' },
         {
           href: 'https://github.com/Ganymede-Bio/website-docusaurus',
           label: 'GitHub',
@@ -37,32 +35,11 @@ module.exports = {
           title: 'Docs',
           items: [
             {
-              label: 'API Server',
-              to: 'docs/Quickstart',
-            },
-            {
-              label: 'Instruments',
-              to: 'docs/instruments/Scales',
+              label: 'Web UI',
+              to: 'docs/Introduction',
             },
           ],
         },
-        // {
-        //   title: 'Community',
-        //   items: [
-        //     {
-        //       label: 'Stack Overflow',
-        //       href: 'https://stackoverflow.com/questions/tagged/docusaurus',
-        //     },
-        //     {
-        //       label: 'Discord',
-        //       href: 'https://discordapp.com/invite/docusaurus',
-        //     },
-        //     {
-        //       label: 'Twitter',
-        //       href: 'https://twitter.com/docusaurus',
-        //     },
-        //   ],
-        // },
         {
           title: 'More',
           items: [

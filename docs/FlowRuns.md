@@ -2,7 +2,7 @@
 id: FlowRuns
 title: Flow Runs
 sidebar_label: Flow Runs
-displayed_sidebar: apiServerSidebar
+displayed_sidebar: webUiSidebar
 ---
 
 ### Summary
