@@ -6,7 +6,7 @@ displayed_sidebar: webUiSidebar
 
 ## Summary
 
-The Flow Editor is the starting point for creating new _Flows_, which are series of steps by which data processing occurs on Ganymede. 
+The Flow Editor is the starting point for creating new _Flows_, which are a series of _Functions_. 
 
 ![Ganymede App Flow Editor Init](https://ganymede-bio.mo.cloudinary.net/apiServer/%20FlowEditor_20220824.png)
 
@@ -25,11 +25,11 @@ The inputs/buttons at the top of the screen perform the following functions:
 
 ### Creating Flows
 
-To create a new workflow, click the **New** button in the upper right hand corner of the screen.
+To create a new _Flow_, click the **New** button in the upper right hand corner of the screen.
 
 ![Ganymede App Home Page](https://ganymede-bio.mo.cloudinary.net/apiServer/HomeScreen_202220823.png)
 
-This exposes a pop-up for you to name and describe your Flow in addition to identifying a cloud infra environment to associate it to.  Each environment has its own dedicated Flow orchestration service, which can be configured to your data processing needs.  
+This exposes a pop-up for you to name and describe your Flow in addition to identifying an environment to associate it to.  Each environment has its own dedicated Flow orchestration service, which can be configured to your data processing needs.  
 
 ![Ganymede App New Flow Creation](https://ganymede-bio.mo.cloudinary.net/apiServer/HomeNewFlow_20220824.png)
 
