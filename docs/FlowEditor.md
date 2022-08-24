@@ -6,15 +6,14 @@ displayed_sidebar: webUiSidebar
 
 ## Summary
 
-The Flow Editor provides the venue for interacting with and building Flows.  
+The Flow Editor is the starting point for creating new _Flows_, which are series of steps by which data processing occurs on Ganymede. 
 
-![Ganymede App Flow Editor Init](https://ganymede-bio.mo.cloudinary.net/apiServer/FlowEditorInitial.png)
+![Ganymede App Flow Editor Init](https://ganymede-bio.mo.cloudinary.net/apiServer/%20FlowEditor_20220824.png)
 
 The inputs/buttons at the top of the screen perform the following functions:
 
 - **Choose An Environment**: Specify the cloud workflow environment in which the Flow will be loaded and executed.
 - **Choose A Flow**: Input for specifying the Flow to run.
-- **Load Flow**: Load the Flow onto the screen.
 - **Save Environment**: Save the loaded Flow to Github repository.
 - **Run**: Run the currently loaded Flow on Ganymede Cloud.
 
@@ -24,11 +23,21 @@ The inputs/buttons at the top of the screen perform the following functions:
 
 ## Flows
 
+### Creating Flows
+
+To create a new workflow, click the **New** button in the upper right hand corner of the screen.
+
+![Ganymede App Home Page](https://ganymede-bio.mo.cloudinary.net/apiServer/HomeScreen_202220823.png)
+
+This exposes a pop-up for you to name and describe your Flow in addition to identifying a cloud infra environment to associate it to.  Each environment has its own dedicated Flow orchestration service, which can be configured to your data processing needs.  
+
+![Ganymede App New Flow Creation](https://ganymede-bio.mo.cloudinary.net/apiServer/HomeNewFlow_20220824.png)
+
 ### Loading Flows
 
-To load a Flow, specify the cloud environment in the _Choose An Environment_ input box, the Flow you would like to load in the _Choose A Flow_ input box, and click on the _Load Flow_ button.  Upon doing so, you will see the graphical structure of your Flow, which will look as follows:
+To load a Flow, specify the cloud environment in the _Choose An Environment_ input box and the Flow you would like to load in the _Choose A Flow_ input box.  Upon doing so, you will see the graphical structure of your Flow, which will look as follows:
 
-![Ganymede App Flow Editor Displayed](https://ganymede-bio.mo.cloudinary.net/apiServer/FlowEditorLoaded.png)
+![Ganymede App Flow Editor Displayed](https://ganymede-bio.mo.cloudinary.net/apiServer/FlowEditorLoaded_20220824.png)
 
 ### Modifying Flows
 
@@ -40,7 +49,7 @@ When ready, click the green Run button to kick off the Flow run.  Run progress c
 
 Analysis notebooks are Jupyter notebooks hosted on VMs which enable access to data uploaded to the data lake within the Ganymede Cloud as part of a Flow run.  A fresh notebook instantiation has templates to retrieve data and save notebooks as shown below:
 
-![Ganymede Notebook](https://ganymede-bio.mo.cloudinary.net/apiServer/GanymedeNotebook.png)
+![Ganymede Notebook](https://ganymede-bio.mo.cloudinary.net/apiServer/%20GanymedeNotebook_20220824.png)
 
 ### Installing Python packages
 
@@ -63,10 +72,18 @@ for table in tables:
     print(table.table_id)
 ```
 
-A query can be run by passing a SQL snippet following [Bigquery syntax](https://cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax) to the __query_sql__ variable.  For example, the command below pulls ganymede_demo.demo_table into a Pandas Dataframe named df_example.
+A query can be run by passing a SQL snippet following [Bigquery syntax](https://cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax) to the __query_sql__ variable and running the __results__ method from Ganymede's __query__ module. This will return a Pandas dataframe. Before running the query, a dry run of the query is also available in the Ganymede's query module using the __dry_run__ method. For example, the commands below perform a dry run and return the results of the query provided in __query_sql__.
 
 ```python
-df_example = pd.read_gbq('select * from ganymede_demo.demo_table')
+query_sql = 'select * from ganymede_demo.demo_table'
+```
+```python
+from ganymede.notebook import query
+query.dry_run(query_sql)
+```
+```python
+from ganymede.notebook import query
+query.results(query_sql)
 ```
 
 ### Saving notebooks
