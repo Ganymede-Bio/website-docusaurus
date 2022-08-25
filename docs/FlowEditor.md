@@ -45,6 +45,17 @@ The second row of buttons provides tools for modifying Flows.  To incorporate ne
 
 When ready, click the green Run button to kick off the Flow run.  Run progress can be tracked by refreshing the Flow runs tab.
 
+### Modifying Nodes
+
+Once a Node is saved on a Flow, it can be modified by clicking the `edit` button in the bottom-right of the node. This will allow any properties to be changed as shown in the image below. 
+
+<img width="384" alt="image" src="https://user-images.githubusercontent.com/111307862/186734565-2a40e931-8135-4df7-8ef9-bd744d9d0459.png">
+
+While a node is be edited, it can also be deleted by clicking the trash icon in the top-right corner of the node. This action will not be permanent until the environment is saved. Until then, if the page is refreshed the node will re-appear.
+
+<img width="416" alt="image" src="https://user-images.githubusercontent.com/111307862/186736076-767796ee-c83a-415e-8d7d-709c9d011984.png">
+
+
 ### Deleting Flows
 
 In order to delete flows, there is a button that will appear once a pipeline is loaded. It contains the red trash icon, clicking this button will completely remove the flow from a users workspace. This action is NOT reversible.
