@@ -45,6 +45,12 @@ The second row of buttons provides tools for modifying Flows.  To incorporate ne
 
 When ready, click the green Run button to kick off the Flow run.  Run progress can be tracked by refreshing the Flow runs tab.
 
+### Deleting Flows
+
+In order to delete flows, there is a button that will appear once a pipeline is loaded. It contains the red trash icon, clicking this button will completely remove the flow from a users workspace. This action is NOT reversible.
+
+![Ganymede App Delete Flow button](https://ganymede-bio.mo.cloudinary.net/apiServer/DeleteButton_202220825.png)
+
 ## Analysis Notebooks
 
 Analysis notebooks are Jupyter notebooks hosted on VMs which enable access to data uploaded to the data lake within the Ganymede Cloud as part of a Flow run.  A fresh notebook instantiation has templates to retrieve data and save notebooks as shown below:
