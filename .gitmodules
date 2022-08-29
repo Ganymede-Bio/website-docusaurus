@@ -1,0 +1,3 @@
+[submodule "core-operators"]
+	path = core-operators
+	url = git@github.com:Ganymede-Bio/core-operators.git

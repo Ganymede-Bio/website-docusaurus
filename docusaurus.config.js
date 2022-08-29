@@ -22,6 +22,12 @@ module.exports = {
           position: 'left',
         },
         {
+          to: 'docs/functions/FunctionOverview',
+          routeBasePath: '/',
+          label: 'Functions',
+          position: 'left',
+        },
+        {
           href: 'https://github.com/Ganymede-Bio/website-docusaurus',
           label: 'GitHub',
           position: 'right',

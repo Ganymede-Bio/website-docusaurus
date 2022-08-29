@@ -1,6 +1,5 @@
 module.exports = {
   webUiSidebar: [
-
     {
       type: 'category',
       label: 'Getting Started',
@@ -8,4 +7,7 @@ module.exports = {
       // Features: ['mdx'],
     },
   ],
+  functionSidebar: [
+    require("./docs/functions/sidebar.json")
+  ]
 };

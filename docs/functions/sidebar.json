@@ -1,0 +1,17 @@
+{
+  "items": [
+    "functions/bq_to_excel",
+    "functions/excel_to_bq",
+    "functions/fcs_extract_and_load",
+    "functions/plate_annotation_load",
+    "functions/plate_reader_analytics",
+    "functions/py_analysis",
+    "functions/s3_read",
+    "functions/spectramax_load",
+    "functions/spectramax_xml",
+    "functions/table",
+    "functions/transform"
+  ],
+  "label": "Functions",
+  "type": "category"
+}
