@@ -9,7 +9,8 @@
 .cache-loader
 
 # Python installation
-/env
+pydoc/env
+pydoc/__pycache__
 
 # Misc
 .DS_Store

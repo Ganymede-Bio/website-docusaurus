@@ -1,10 +1,16 @@
 ---
-sidebar_label: transform
-title: transform
+sidebar_label: TransformSql
+title: TransformSql
+displayed_sidebar: functionSidebar
 ---
 
 ## TransformSql
 
-BigQuery to BigQuery Operator - base of all tranform operators
-:param output_table:            BigQuery table to contain results, stored in client&#x27;s dataset
+SQL Transform - Function for performing table operations using a user-specified SQL query.
+
+The content of the SQL query can be edited and saved using the integrated editor functionality.
+
+**Arguments**:
+
+- `output_table_sql_result`: Table name where the query results will be stored.
 

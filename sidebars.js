@@ -1,3 +1,5 @@
+functionDocs = require("./docs/functions/sidebar.json")
+functionDocs.collapsed = false
 module.exports = {
   webUiSidebar: [
     {
@@ -8,6 +10,7 @@ module.exports = {
     },
   ],
   functionSidebar: [
-    require("./docs/functions/sidebar.json")
+    'functions/FunctionOverview',
+    functionDocs
   ]
 };
