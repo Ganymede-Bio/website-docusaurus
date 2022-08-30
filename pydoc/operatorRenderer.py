@@ -30,6 +30,7 @@ class OperatorRenderer(DocusaurusRenderer):
         code = ("---\n"
         f"sidebar_label: {obj.name}\n"
         f"title: {obj.name}\n"
+        f"id: {obj.name}\n"
         "displayed_sidebar: functionSidebar\n"
         "---\n\n"
         f"## {obj.name}\n\n"
