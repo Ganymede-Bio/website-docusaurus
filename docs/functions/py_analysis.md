@@ -1,6 +1,7 @@
 ---
 sidebar_label: PyAnalysis
 title: PyAnalysis
+id: PyAnalysis
 displayed_sidebar: functionSidebar
 ---
 
