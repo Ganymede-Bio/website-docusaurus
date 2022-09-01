@@ -5,7 +5,7 @@ module.exports = {
     {
       type: 'category',
       label: 'Getting Started',
-      items: ['Introduction', 'FlowEditor', 'FlowRuns'],
+      items: ['Introduction', 'FlowEditor', 'FlowRuns', 'Files'],
       // Features: ['mdx'],
     },
   ],
