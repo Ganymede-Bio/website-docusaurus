@@ -1,6 +1,7 @@
+functionDocs = require("./docs/functions/sidebar.json")
+functionDocs.collapsed = false
 module.exports = {
   webUiSidebar: [
-
     {
       type: 'category',
       label: 'Getting Started',
@@ -8,4 +9,8 @@ module.exports = {
       // Features: ['mdx'],
     },
   ],
+  functionSidebar: [
+    'functions/FunctionOverview',
+    functionDocs
+  ]
 };
