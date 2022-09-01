@@ -1,7 +1,6 @@
 ---
 sidebar_label: TransformSql
 title: TransformSql
-id: TransformSql
 displayed_sidebar: functionSidebar
 ---
 
