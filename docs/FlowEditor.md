@@ -45,6 +45,20 @@ The second row of buttons provides tools for modifying Flows.  To incorporate ne
 
 When ready, click the green Run button to kick off the Flow run.  Run progress can be tracked by refreshing the Flow runs tab.
 
+### Understanding Nodes
+
+If you notice in the image below: 
+
+<img width="384" alt="image" src="https://storage.googleapis.com/ganymede-bio-website/public/apiServer/EditNodeBefore.png"/>
+
+That the parameter label has a different background (grey rounded box). This indicates that the parameter represents a table (the typical input/output of functions. These tables represent the data where the function ingests from or outputs to and they can be seen in the flow editor.
+
+<img width="384" alt="image" src="https://storage.googleapis.com/ganymede-bio-website/public/apiServer/TableHead.png"/>
+
+The table node shows all a truncated query result of the table that is produced by the node before it. You CANNOT delete this node or edges from this node. When connecting functions to each other, you can connect them through the table as well. Make sure that the input tables match the table name to ensure that the edge between them is consistent.
+
+<img width="384" alt="image" src="https://storage.googleapis.com/ganymede-bio-website/public/apiServer/TableHeadConnection.png"/>
+
 ### Modifying Nodes
 
 Once a Node is saved on a Flow, it can be modified by clicking the `edit` button in the bottom-right of the node. This will allow any properties to be changed as shown in the image below. 
