@@ -69,6 +69,21 @@ While a node is be edited, it can also be deleted by clicking the trash icon in 
 
 <img width="416" alt="image" src="https://user-images.githubusercontent.com/111307862/186736076-767796ee-c83a-415e-8d7d-709c9d011984.png"/>
 
+### Modifying Edges
+If you click on the edge you can remove them by hitting the delete button. Edges tend to have a small click box but you should notice the edge bolden when selected
+
+Before Click:
+
+<img width="384" alt="image" src="https://storage.googleapis.com/ganymede-bio-website/public/apiServer/BeforeEdgeClick.png"/>
+
+After Click:
+
+<img width="384" alt="image" src="https://storage.googleapis.com/ganymede-bio-website/public/apiServer/AfterEdgeClick.png" />
+
+How do we connect two nodes to make them dependent on each other? There are small circles at the beginning/end of each function and table. To make them dependent on each other, just connect them by clicking and dragging (a line should appear) one of these orbs to the next.
+
+<img width="384" alt="image" src="https://storage.googleapis.com/ganymede-bio-website/public/apiServer/Connection.png" />
+
 
 ### Deleting Flows
 
