@@ -1,6 +1,7 @@
 {
   "items": [
     "functions/py_analysis",
+    "functions/rheometer_read",
     "functions/transform"
   ],
   "label": "Function Documentation",

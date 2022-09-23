@@ -3,6 +3,7 @@ loaders:
     search_path: [
       '../core-operators/operators/transform_py',
       '../core-operators/operators/transform_sql',
+      '../core-operators/operators/rheometer'
     ]
 processors:
   - type: filter
