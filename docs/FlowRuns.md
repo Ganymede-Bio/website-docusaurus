@@ -31,4 +31,4 @@ To setup a watched directory, navigate to the 'Flow Editor' page and select the 
 
 <img width="312" alt="image" src="https://user-images.githubusercontent.com/111307862/192582099-97bb6e39-1726-4fb9-b09d-8c76a6f9796e.png">
 
-Clicking this option prompts the user to select a directory to be watched. Any new files that are added to this directory or existing files that are updated will now be uploaded to our servers so that a new flow can be kicked off. Users will receive a notification in the top right each time this occurs. This directory will not be watched until the page is refreshed or closed.
+Clicking this option prompts the user to select a directory to be watched. Any new files that are added to this directory or existing files that are updated will now be uploaded to our servers so that a new flow can be kicked off. Users will receive a notification in the top right each time this occurs. This directory will now be watched until the page is refreshed or closed.
