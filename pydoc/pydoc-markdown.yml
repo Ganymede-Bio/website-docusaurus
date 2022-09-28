@@ -1,6 +1,19 @@
 loaders:
   - type: python
     search_path: [
+      '../core-dev-operators/operators/airtable',
+      '../core-dev-operators/operators/benchling',
+      '../core-dev-operators/operators/clariostar',
+      '../core-dev-operators/operators/clariostar_csv',
+      '../core-dev-operators/operators/csv',
+      '../core-dev-operators/operators/excel',
+      '../core-dev-operators/operators/flow_cytometer',
+      '../core-dev-operators/operators/ganymede_echo',
+      '../core-dev-operators/operators/plate_reader',
+      '../core-dev-operators/operators/profilometer',
+      '../core-dev-operators/operators/rheometer',
+      '../core-dev-operators/operators/s3',
+      '../core-dev-operators/operators/spectramax',
       '../core-dev-operators/operators/transform_py',
       '../core-dev-operators/operators/transform_sql',
     ]
