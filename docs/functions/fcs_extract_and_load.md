@@ -71,10 +71,11 @@ def parse_metadata(metadata: dict)
 Parses FCS file metadata
 
 The result is a dict containing the following keys:
-    header: dict describing FCS version and byte offsets of TEXT, DATA, and ANALYSIS segments in FCS file
-    system_metadata: dict containing system metadata as specified by the FCS file format
-    channels: Pandas dataframe describing characteristics for each channel
-    channel_names: tuple containing channel names
+
+header: dict describing FCS version and byte offsets of TEXT, DATA, and ANALYSIS segments in FCS file
+system_metadata: dict containing system metadata as specified by the FCS file format
+channels: Pandas dataframe describing characteristics for each channel
+channel_names: tuple containing channel names
 
 **Arguments**:
 
