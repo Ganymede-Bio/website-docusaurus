@@ -18,8 +18,6 @@ def execute(df_sql_result: pd.DataFrame) -> pd.DataFrame:
     ... Your code goes here ...
 ```
 
-Parameters:
-
 **Arguments**:
 
 - `output_table_analysis`: table name where the function results will be stored.

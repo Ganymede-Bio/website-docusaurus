@@ -8,8 +8,6 @@ displayed_sidebar: functionSidebar
 
 Execute Benchling API call and upload results to data lake
 
-Parameters:
-
 **Arguments**:
 
 - `input_benchling_object_id`: Benchling object ID to reference.  This ID can be flexibly used to refer to any Benchling object - Entity, Entry, etc. depending on the exact API call made within the `execute` function.

@@ -8,8 +8,6 @@ displayed_sidebar: functionSidebar
 
 Parse SpectraMax XML and upload metadata and data to data lake
 
-Parameters:
-
 **Arguments**:
 
 - `output_table_metadata`: Table name for metadata associated with SpectraMax run

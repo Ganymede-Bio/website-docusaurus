@@ -8,13 +8,11 @@ displayed_sidebar: functionSidebar
 
 Function to write data lake table to spreadsheet
 
-Parameters:
-
 **Arguments**:
 
 - `output_file_name`: string
 - `output_path`: The output path
-- `output_gcs_bucket` (`string`): The output GCS bucket.
+- `output_gcs_bucket`: The output GCS bucket.
 - `input_sql_query`: The BigQuery SQL to execute.
 - `input_bq_location`: 
 

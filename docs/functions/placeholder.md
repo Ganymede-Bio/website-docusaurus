@@ -8,8 +8,6 @@ displayed_sidebar: functionSidebar
 
 Placeholder Function, useful for laying out intended operations
 
-Parameters:
-
 **Arguments**:
 
 - `input`: string for describing node inputs

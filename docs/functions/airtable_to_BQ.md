@@ -10,8 +10,6 @@ Pulls Airtable table and uploads data to Ganymede data lake
 
 A bearer token from Airtable is required to enable Airtable access.
 
-Parameters:
-
 **Arguments**:
 
 - `output_table_ganymede_table`: table in Ganymede data lake to store results of pulling Airtable table

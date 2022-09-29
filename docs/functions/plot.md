@@ -8,8 +8,6 @@ displayed_sidebar: functionSidebar
 
 Runs query, plotting the result of the SQL query as a histogram and as a scatterplot
 
-Parameters:
-
 **Arguments**:
 
 - `input_table`: table to query from

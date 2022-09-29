@@ -8,8 +8,6 @@ displayed_sidebar: functionSidebar
 
 Parse Clariostar file (as Excel file) and write results to data lake
 
-Parameters:
-
 **Arguments**:
 
 - `output_table_metadata`: Name of data lake table to write Clariostar metadata to

@@ -54,8 +54,6 @@ metadata comprises of the following components:
 
     channel_names: names for each channel
 
-Parameters:
-
 **Arguments**:
 
 - `output_table_data`: table to write core FCS data to

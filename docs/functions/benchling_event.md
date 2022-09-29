@@ -13,8 +13,6 @@ This function allows you to read files from Benchling for processing via Ganymed
 A subscription in the corresponding Benchling account is required for sending events to Ganymede's AWS account 
 (see Benchling docs here: https://docs.benchling.com/docs/events-getting-started#setting-up-a-subscription).
 
-Parameters
-
 **Arguments**:
 
 - `output_table_result`: Result table to write to

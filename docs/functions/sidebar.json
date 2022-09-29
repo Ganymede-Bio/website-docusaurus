@@ -18,7 +18,6 @@
     "functions/rheometer_read",
     "functions/s3_read",
     "functions/spectramax_xml",
-    "functions/table",
     "functions/transform"
   ],
   "label": "Function Documentation",
