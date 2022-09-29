@@ -6,7 +6,7 @@ displayed_sidebar: functionSidebar
 
 ## XLSToBQOperator
 
-Function to upload excel spreadsheet to data lake
+Uploads excel spreadsheet to data lake
 
 **Arguments**:
 

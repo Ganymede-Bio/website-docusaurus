@@ -6,7 +6,7 @@ displayed_sidebar: functionSidebar
 
 ## BQToSpreadsheetOperator
 
-Function to write data lake table to spreadsheet
+Write contents of table from Ganymede data lake to spreadsheet
 
 **Arguments**:
 

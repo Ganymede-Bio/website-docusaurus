@@ -6,7 +6,7 @@ displayed_sidebar: functionSidebar
 
 ## SpectramaxXMLParser
 
-Parse SpectraMax XML and upload metadata and data to data lake
+Parses SpectraMax XML and upload instrument metadata and data to data lake
 
 **Arguments**:
 

@@ -10,10 +10,11 @@ Function for reading Flow Cytometry Standard (FCS) files into BigQuery
 
 The fcsparser python package is used to parse FCS files into metadata and data
 
-data contains a record for each flow cytometer detection event (generally passage of single cell past detector); 
+*data* contains a record for each flow cytometer detection event (generally passage of single cell past detector); 
     for each event, a value is recorded for each channel
 
-metadata comprises of the following components:
+*metadata* comprises of the following components:
+
     header: contains FCS version number and bytes corresponding to where binary positions of text, data, and analysis in FCS file.
         FCS format: FCS version number
         text start: byte offset to the beginning of the TEXT segment

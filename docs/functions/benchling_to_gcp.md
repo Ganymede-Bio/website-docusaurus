@@ -6,7 +6,7 @@ displayed_sidebar: functionSidebar
 
 ## BenchlingRead
 
-Execute Benchling API call and upload results to data lake
+Executes Benchling API call and upload results to data lake
 
 **Arguments**:
 

@@ -6,7 +6,7 @@ displayed_sidebar: functionSidebar
 
 ## PyAnalysis
 
-Run python-based analysis on the results of a SQL query
+Runs python-based analysis on the results of a SQL query
 
 This Function takes as input the results of the SQL query, which is specified at the top of the Function notebook.
 The SQL query results are passed to the execute function as a [`pandas.DataFrame`](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html).

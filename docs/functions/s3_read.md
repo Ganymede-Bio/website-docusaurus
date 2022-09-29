@@ -6,11 +6,9 @@ displayed_sidebar: functionSidebar
 
 ## S3ReadOperator
 
-Copy files from S3 in to Ganymede
+Copy files from S3 in to a data lake
 
-This Function reads files from an S3 storage bucket for processing in Ganymede.
-
-Usage Requirements: AWS S3 buckets must be configured to permit Ganymede access.
+Prior to usage, AWS S3 buckets must be configured to permit Ganymede access.
 
 **Arguments**:
 

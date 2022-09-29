@@ -6,5 +6,5 @@ displayed_sidebar: functionSidebar
 
 ## EchoOperator
 
-Function used for test purposes.
+Test Function
 

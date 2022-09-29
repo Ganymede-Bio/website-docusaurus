@@ -6,7 +6,7 @@ displayed_sidebar: functionSidebar
 
 ## BenchlingOperator
 
-Pulls table from Ganymede data lake and uploads result to Benchling
+Pulls table from data lake and uploads result to Benchling
 
 **Arguments**:
 

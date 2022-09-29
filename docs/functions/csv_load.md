@@ -6,7 +6,7 @@ displayed_sidebar: functionSidebar
 
 ## CSVLoad
 
-Load large CSV files into Ganymede
+Load large CSV files into data lake
 
 **Arguments**:
 

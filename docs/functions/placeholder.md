@@ -6,7 +6,7 @@ displayed_sidebar: functionSidebar
 
 ## PlaceholderOperator
 
-Placeholder Function, useful for laying out intended operations
+Placeholder Function; useful for laying out components of Flow
 
 **Arguments**:
 

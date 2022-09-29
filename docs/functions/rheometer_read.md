@@ -6,7 +6,7 @@ displayed_sidebar: functionSidebar
 
 ## TriosRheometerRead
 
-Read Trios output data tables from TA Waters DHR-2 / DHR-3 and uploads files to data lake
+Reads Trios output data tables from (in Excel format, with each tab denoting a separate run) and uploads files to data lake
 
 **Arguments**:
 
