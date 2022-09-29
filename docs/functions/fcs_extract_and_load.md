@@ -68,12 +68,15 @@ The fcsparser python package is used to parse FCS files into metadata and data
 def parse_metadata(metadata: dict)
 ```
 
-**Arguments**:
+Parses FCS file metadata
 
-- `metadata`: Metadata contained within FCS file, as parsed by the fcsparser python package
-Output: dict containing the following keys
+The result is a dict containing the following keys:
     header: dict describing FCS version and byte offsets of TEXT, DATA, and ANALYSIS segments in FCS file
     system_metadata: dict containing system metadata as specified by the FCS file format
     channels: Pandas dataframe describing characteristics for each channel
     channel_names: tuple containing channel names
+
+**Arguments**:
+
+- `metadata`: Metadata contained within FCS file, as parsed by the fcsparser python package
 
