@@ -37,7 +37,7 @@ This exposes a pop-up for you to name and describe your Flow in addition to iden
 
 To load a Flow, specify the cloud environment in the _Choose An Environment_ input box and the Flow you would like to load in the _Choose A Flow_ input box.  Upon doing so, you will see the graphical structure of your Flow, which will look as follows:
 
-<img width="1511" alt="Ganymede App Flow Editor Displayed" src="https://user-images.githubusercontent.com/111307862/194399585-67d7ff1d-b1c0-4ff7-98ac-4e1e1b1599d3.png">
+<img width="1511" alt="Ganymede App Flow Editor Displayed" src="https://user-images.githubusercontent.com/111307862/194399585-67d7ff1d-b1c0-4ff7-98ac-4e1e1b1599d3.png" />
 
 
 ### Modifying Flows
@@ -47,7 +47,7 @@ The second row of buttons provides tools for modifying Flows.  To incorporate ne
 ### Running Flows
 To run a flow that accepts data from file input, first the data has to be uploaded. Every flow is provided with a File Connection node at the start of the flow to allow file uploads. Click the button that says "Or, click or drag file to upload", a file selector menu will appear. Any number of data files can be selected. Once selected, they will appear in the file queue.
 
-<img width="243" alt="image" src="https://user-images.githubusercontent.com/111307862/194400524-4911cca5-415c-4223-b605-12a20cdde2e5.png">
+<img width="243" alt="image" src="https://user-images.githubusercontent.com/111307862/194400524-4911cca5-415c-4223-b605-12a20cdde2e5.png" />
 
 When ready, click the green Run button to kick off the Flow run.  Run progress can be tracked by refreshing the Flow runs tab.
 
@@ -94,7 +94,7 @@ How do we connect two nodes to make them dependent on each other? There are smal
 
 In order to delete flows, there is a button that will appear once a pipeline is loaded. It contains the red trash icon, clicking this button will completely remove the flow from a users workspace. This action is NOT reversible.
 
-<img width="1511" alt="Ganymede App Delete Flow button" src="https://user-images.githubusercontent.com/111307862/194401886-043c0e9c-a07b-4518-b778-35aaf913aa11.png">
+<img width="1511" alt="Ganymede App Delete Flow button" src="https://user-images.githubusercontent.com/111307862/194401886-043c0e9c-a07b-4518-b778-35aaf913aa11.png" />
 
 
 ## Analysis Notebooks
