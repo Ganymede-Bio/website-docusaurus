@@ -29,6 +29,6 @@ Ganymede allows users to define a directory that can be watched for changes to f
 
 To setup a watched directory, navigate to the 'Flow Editor' page and select the flow that should have a directory watcher attached. By clicking the blue folder right of the "Select agent directory" field, a form will appear that will allow a user to specify which directory to watch.
 
-<img width="246" alt="image" src="https://user-images.githubusercontent.com/111307862/194402465-cdec9cc2-5d2c-4618-b78e-2e3db50cc650.png">
+<img width="246" alt="image" src="https://user-images.githubusercontent.com/111307862/194402465-cdec9cc2-5d2c-4618-b78e-2e3db50cc650.png" />
 
 Clicking this option prompts the user to select a directory to be watched. Any new files that are added to this directory or existing files that are updated will now be uploaded to our servers so that a new flow can be kicked off. Users will receive a notification in the top right each time this occurs. This directory will now be watched until the page is refreshed or closed.
