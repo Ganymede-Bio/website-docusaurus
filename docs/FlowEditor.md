@@ -49,7 +49,11 @@ To run a flow that accepts data from file input, first the data has to be upload
 
 <img width="243" alt="image" src="https://user-images.githubusercontent.com/111307862/194400524-4911cca5-415c-4223-b605-12a20cdde2e5.png" />
 
-When ready, click the green Run button to kick off the Flow run.  Run progress can be tracked by refreshing the Flow runs tab.
+For each file uploaded, an optional run tag can be assigned from the dropdown menu labeled "Run Tag". These run tags are populated with the names that correspond to your entities in Benchling so that you can easily attribute files and write back to your ELN. We are able to enable this functionality with a simple integration with your Benchling account. 
+
+<img width="243" alt="image" src="https://user-images.githubusercontent.com/46538575/194587287-762d718c-f587-42bd-97ed-f194a7a79a5e.png" />
+
+When ready, click the green Run button to kick off the Flow run.  Run progress can be tracked in the Flow runs tab.
 
 Watching a directory for file additions and modifications is also possible. Documentation on that can be found on the [flow runs page](https://docs.ganymede.bio/docs/FlowRuns#watching-a-directory).
 
