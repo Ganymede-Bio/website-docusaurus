@@ -8,9 +8,6 @@ displayed_sidebar: webUiSidebar
 
 Files provides access to all of the data uploaded to Ganymede and all of your results from actions taken in the Flow Editor, organized by _flow_.
 
-![Ganymede Files](https://storage.googleapis.com/ganymede-bio-website/public/apiServer/Files_20220831.png)
+<img width="1248" alt="image" src="https://user-images.githubusercontent.com/46538575/195644596-f4dbafd9-371f-44d4-8888-dd1a92c274fc.png" />
 
-The inputs/buttons at the top of the screen perform the following functions:
-
-- **Choose An Environment**: Specify the cloud workflow environment in which the files will provided.
 
