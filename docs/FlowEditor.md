@@ -47,11 +47,11 @@ The second row of buttons provides tools for modifying Flows.  To incorporate ne
 ### Running Flows
 To run a flow that accepts data from file input, first the data has to be uploaded. Every flow is provided with a File Connection node at the start of the flow to allow file uploads. Click the button that says "Or, click or drag file to upload", a file selector menu will appear. Any number of data files can be selected. Once selected, they will appear in the file queue.
 
-<img width="243" alt="image" src="https://user-images.githubusercontent.com/111307862/194400524-4911cca5-415c-4223-b605-12a20cdde2e5.png" />
+<img width="243" alt="input_node" src="https://user-images.githubusercontent.com/46538575/195667700-9b417fb9-f688-4b63-86ee-2e31500bb6e4.png" />
 
 For each file uploaded, an optional run tag can be assigned from the dropdown menu labeled "Run Tag". These run tags are populated with the names that correspond to your entities in Benchling so that you can easily attribute files and write back to your ELN. We are able to enable this functionality with a simple integration with your Benchling account. 
 
-<img width="243" alt="image" src="https://user-images.githubusercontent.com/46538575/194587287-762d718c-f587-42bd-97ed-f194a7a79a5e.png" />
+<img width="243" alt="run_tags" src="https://user-images.githubusercontent.com/46538575/195667470-4157635b-0784-44f8-9011-d7d8800aee2a.png" />
 
 When ready, click the green Run button to kick off the Flow run.  Run progress can be tracked in the Flow runs tab.
 
