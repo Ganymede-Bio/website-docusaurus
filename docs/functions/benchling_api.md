@@ -1,10 +1,10 @@
 ---
-sidebar_label: BenchlingOperator
-title: BenchlingOperator
+sidebar_label: BenchlingWrite
+title: BenchlingWrite
 displayed_sidebar: functionSidebar
 ---
 
-## BenchlingOperator
+## BenchlingWrite
 
 Pulls table from data lake and uploads result to Benchling
 

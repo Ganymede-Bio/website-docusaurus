@@ -12,5 +12,5 @@ The CSV data will be run through a python function for any processing prior to s
 
 **Arguments**:
 
-- `output_table`: Table name where the CSV data will be stored.
+- `output_table_results`: Table name where the CSV data will be stored.
 
