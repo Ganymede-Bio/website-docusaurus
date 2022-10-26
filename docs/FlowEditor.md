@@ -37,13 +37,25 @@ This exposes a pop-up for you to name and describe your Flow in addition to iden
 
 To load a Flow, specify the cloud environment in the _Choose An Environment_ input box and the Flow you would like to load in the _Choose A Flow_ input box.  Upon doing so, you will see the graphical structure of your Flow, which will look as follows:
 
-![Ganymede App Flow Editor Displayed](https://ganymede-bio.mo.cloudinary.net/apiServer/FlowEditorLoaded_20220824.png)
+<img width="1511" alt="Ganymede App Flow Editor Displayed" src="https://user-images.githubusercontent.com/111307862/194399585-67d7ff1d-b1c0-4ff7-98ac-4e1e1b1599d3.png" />
+
 
 ### Modifying Flows
 
 The second row of buttons provides tools for modifying Flows.  To incorporate new Functions, hover over the Functions button and select a desired Function to incorporate into your flow.  The Function can then be connected to an existing node by clicking and dragging between 2 nodes to specify their connectivity.  
 
-When ready, click the green Run button to kick off the Flow run.  Run progress can be tracked by refreshing the Flow runs tab.
+### Running Flows
+To run a flow that accepts data from file input, first the data has to be uploaded. Every flow is provided with a File Connection node at the start of the flow to allow file uploads. Click the button that says "Or, click or drag file to upload", a file selector menu will appear. Any number of data files can be selected. Once selected, they will appear in the file queue.
+
+<img width="243" alt="input_node" src="https://user-images.githubusercontent.com/46538575/195667700-9b417fb9-f688-4b63-86ee-2e31500bb6e4.png" />
+
+For each file uploaded, an optional run tag can be assigned from the dropdown menu labeled "Run Tag". These run tags are populated with the names that correspond to your entities in Benchling so that you can easily attribute files and write back to your ELN. We are able to enable this functionality with a simple integration with your Benchling account. 
+
+<img width="243" alt="run_tags" src="https://user-images.githubusercontent.com/46538575/195667470-4157635b-0784-44f8-9011-d7d8800aee2a.png" />
+
+When ready, click the green Run button to kick off the Flow run.  Run progress can be tracked in the Flow runs tab.
+
+Watching a directory for file additions and modifications is also possible. Documentation on that can be found on the [flow runs page](https://docs.ganymede.bio/docs/FlowRuns#watching-a-directory).
 
 ### Understanding Nodes
 
@@ -82,14 +94,12 @@ After Click:
 
 How do we connect two nodes to make them dependent on each other? There are small circles at the beginning/end of each function and table. To make them dependent on each other, just connect them by clicking and dragging (a line should appear) one of these orbs to the next.
 
-<img width="384" alt="image" src="https://storage.googleapis.com/ganymede-bio-website/public/apiServer/Connection.png" />
-
-
 ### Deleting Flows
 
 In order to delete flows, there is a button that will appear once a pipeline is loaded. It contains the red trash icon, clicking this button will completely remove the flow from a users workspace. This action is NOT reversible.
 
-![Ganymede App Delete Flow button](https://ganymede-bio.mo.cloudinary.net/apiServer/DeleteButton_202220825.png)
+<img width="1511" alt="Ganymede App Delete Flow button" src="https://user-images.githubusercontent.com/111307862/194401886-043c0e9c-a07b-4518-b778-35aaf913aa11.png" />
+
 
 ## Analysis Notebooks
 
