@@ -12,7 +12,6 @@ The Flow Editor is the starting point for creating new _Flows_, which are a seri
 
 The inputs/buttons at the top of the screen perform the following functions:
 
-- **Choose An Environment**: Specify the cloud workflow environment in which the Flow will be loaded and executed.
 - **Choose A Flow**: Input for specifying the Flow to run.
 - **Save Environment**: Save the loaded Flow to Github repository.
 - **Run**: Run the currently loaded Flow on Ganymede Cloud.
