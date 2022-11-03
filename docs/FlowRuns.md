@@ -26,7 +26,7 @@ The table displayed consists of the following columns:
 Each row can be expanded for detailed status updates and logs with the following information available:
 
 - **Function run statuses**: The status of each function within a Flow. 
-- **Metadata about the run**: Execution date, start date, and end data of the run. 
+- **Metadata about the run**: Execution date, start date, and end date of the run. 
 - **Logs**: Logs associated with the flow and function run statuses to help users gain more insight and debug. Logs are provided in the following categories: INFO, WARNING, and ERROR.
 
 ### Watching a Directory
