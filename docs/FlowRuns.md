@@ -9,8 +9,7 @@ displayed_sidebar: webUiSidebar
 
 The Flow Runs tab contains the current status of different Flow runs that have been executed.  
 
-![Ganymede App Flow Runs](https://ganymede-bio.mo.cloudinary.net/apiServer/FlowRuns.png)
-
+<img width="800" alt="image" src="https://user-images.githubusercontent.com/46538575/199794611-fdd3c037-1045-43bf-bf1d-20603acac42d.png" />
 
 ### Run Status
 
@@ -23,6 +22,12 @@ The table displayed consists of the following columns:
   - **Running**: Flow is currently being run.
   - **Success**: Flow has been completed execution without program error.
   - **Failure**: Flow execution exited prematurely due to program error.
+
+Each row can be expanded for detailed status updates and logs with the following information available:
+
+- **Function run statuses**: The status of each function within a Flow. 
+- **Metadata about the run**: Execution date, start date, and end data of the run. 
+- **Logs**: Logs associated with the flow and function run statuses to help users gain more insight and debug. Logs are provided in the following categories: INFO, WARNING, and ERROR.
 
 ### Watching a Directory
 Ganymede allows users to define a directory that can be watched for changes to files that will kick off new flow runs automatically. This functionality is great for automating flows by allowing devices to directly kick them off simply by saving files to a specific location.
