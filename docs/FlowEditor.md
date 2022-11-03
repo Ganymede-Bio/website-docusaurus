@@ -8,17 +8,27 @@ displayed_sidebar: webUiSidebar
 
 The Flow Editor is the starting point for creating new _Flows_, which are a series of _Functions_. 
 
-![Ganymede App Flow Editor Init](https://ganymede-bio.mo.cloudinary.net/apiServer/%20FlowEditor_20220824.png)
+![Ganymede App Flow Editor Init](https://storage.googleapis.com/ganymede-bio-website/public/apiServer/FlowEditorInitial.png)
 
-The inputs/buttons at the top of the screen perform the following functions:
+The inputs/buttons at the top of the screen perform the following functions (some functions will open a sidebar):
 
 - **Choose A Flow**: Input for specifying the Flow to run.
 - **Save Environment**: Save the loaded Flow to Github repository.
 - **Run**: Run the currently loaded Flow on Ganymede Cloud.
 
 - **Functions**: List of available Functions, represented graphically as nodes, which can be added to loaded Flow.
-- **Horizontal/Vertical Layout**: Update Flow to either be displayed from left to right (Horizontal Layout) or top to bottom (Vertical Layout)
+- **View**: Update Flow to either be displayed from left to right (Horizontal Layout) or top to bottom (Vertical Layout). This can be chosen from the sidebar
 - **Analysis Notebooks**: Enables access to notebooks which can be used for ad-hoc observation and analysis of data in the flow.  These notebooks are hosted on a virtual machine (VM) separate from the workflow management software running the Flow.
+
+## Sidebar
+Some actions bring up a side bar that will contain more advance actions. Clicking the icon in the top right corner closes the sidebar.
+Examples shown here:
+
+- **View**:
+<img width="384" alt="image" src="https://storage.googleapis.com/ganymede-bio-website/public/apiServer/ViewSideBar.png"/>
+
+- **Functions**
+<img width="384" alt="image" src="https://storage.googleapis.com/ganymede-bio-website/public/apiServer/FunctionSideBar.png"/>
 
 ## Flows
 
