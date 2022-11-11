@@ -8,7 +8,7 @@ displayed_sidebar: webUiSidebar
 
 The Flow Editor is the starting point for creating new _Flows_, which are a series of _Functions_. 
 
-![Ganymede App Flow Editor Init](https://storage.googleapis.com/ganymede-bio-website/public/apiServer/FlowEditorInitial.png)
+![Ganymede App Flow Editor Init](https://storage.googleapis.com/ganymede-bio-website/public/apiServer/FlowEditor.png)
 
 The inputs/buttons at the top of the screen perform the following functions (some functions will open a sidebar):
 
@@ -23,25 +23,24 @@ The inputs/buttons at the top of the screen perform the following functions (som
 
 ## Sidebar
 Some actions bring up a side bar that will contain more advance actions. Clicking the icon in the top right corner closes the sidebar. Here is an image of the sidebar that pops up:
+
 <img width="384" alt="image" src="https://storage.googleapis.com/ganymede-bio-website/public/apiServer/SideBar.png"/>
 
 ## Flows
 
 ### Creating Flows
 
-To create a new _Flow_, click the **Manage** button in the upper right hand corner of the screen. Then click the "Add" button.
-
-![Ganymede App Home Page](https://ganymede-bio.mo.cloudinary.net/apiServer/HomeScreen_202220823.png)
+To create a new _Flow_, click the **Manage** button in the upper right hand corner of the screen. Then click the "Add" button on the sidebar.
 
 This exposes a pop-up for you to name and describe your Flow in addition to identifying an environment to associate it to.  Each environment has its own dedicated Flow orchestration service, which can be configured to your data processing needs.  
 
-![Ganymede App New Flow Creation](https://ganymede-bio.mo.cloudinary.net/apiServer/HomeNewFlow_20220824.png)
+![Ganymede App New Flow Creation](https://storage.googleapis.com/ganymede-bio-website/public/apiServer/AddNewFlow.png)
 
 ### Loading Flows
 
-To load a Flow, specify the cloud environment in the _Choose An Environment_ input box and the Flow you would like to load in the _Choose A Flow_ input box.  Upon doing so, you will see the graphical structure of your Flow, which will look as follows:
+To load a Flow, specify Flow you would like to load in the _Choose A Flow_ input box.  Upon doing so, you will see the graphical structure of your Flow, which will look as follows:
 
-<img width="1511" alt="Ganymede App Flow Editor Displayed" src="https://user-images.githubusercontent.com/111307862/194399585-67d7ff1d-b1c0-4ff7-98ac-4e1e1b1599d3.png" />
+<img width="1511" alt="Ganymede App Flow Editor Displayed" src="https://storage.googleapis.com/ganymede-bio-website/public/apiServer/ChooseFlow.png" />
 
 
 ### Modifying Flows
@@ -100,10 +99,7 @@ How do we connect two nodes to make them dependent on each other? There are smal
 
 ### Deleting Flows
 
-In order to delete flows, there is a button that will appear once a pipeline is loaded. It contains the red trash icon, clicking this button will completely remove the flow from a users workspace. This action is NOT reversible.
-
-<img width="1511" alt="Ganymede App Delete Flow button" src="https://user-images.githubusercontent.com/111307862/194401886-043c0e9c-a07b-4518-b778-35aaf913aa11.png" />
-
+In order to delete flows, click on the "Manage" button on the flow editor page and there should be a button called "Delete Flow" that should appear in the sidebar. This action is NOT reversible.
 
 ## Analysis Notebooks
 
