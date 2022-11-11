@@ -13,28 +13,23 @@ The Flow Editor is the starting point for creating new _Flows_, which are a seri
 The inputs/buttons at the top of the screen perform the following functions (some functions will open a sidebar):
 
 - **Choose A Flow**: Input for specifying the Flow to run.
-- **Save Environment**: Save the loaded Flow to Github repository.
-- **Run**: Run the currently loaded Flow on Ganymede Cloud.
-
-- **Functions**: List of available Functions, represented graphically as nodes, which can be added to loaded Flow.
-- **View**: Update Flow to either be displayed from left to right (Horizontal Layout) or top to bottom (Vertical Layout). This can be chosen from the sidebar
-- **Analysis Notebooks**: Enables access to notebooks which can be used for ad-hoc observation and analysis of data in the flow.  These notebooks are hosted on a virtual machine (VM) separate from the workflow management software running the Flow.
+- **New**: Add functions to a flow, only does anything if a flow is selected
+- **View**: Layout options for the flow in view
+- **Analysis**: Enables access to notebooks which can be used for ad-hoc observation and analysis of data in the flow.  These notebooks are hosted on a virtual machine (VM) separate from the workflow management software running the Flow.
+- **Runs** See the jobs that were ran for a specific flow
+- **Processing** Shows the number of files in the queue for your next run
+- **Run** Button to execute a flow with given inputs. 0 files in the queue causes the flow to not execute
+- **Manage** This setting deals with managing flows. Save, Add, and Delete actions are stored under here.
 
 ## Sidebar
-Some actions bring up a side bar that will contain more advance actions. Clicking the icon in the top right corner closes the sidebar.
-Examples shown here:
-
-- **View**:
-<img width="384" alt="image" src="https://storage.googleapis.com/ganymede-bio-website/public/apiServer/ViewSideBar.png"/>
-
-- **Functions**
-<img width="384" alt="image" src="https://storage.googleapis.com/ganymede-bio-website/public/apiServer/FunctionSideBar.png"/>
+Some actions bring up a side bar that will contain more advance actions. Clicking the icon in the top right corner closes the sidebar. Here is an image of the sidebar that pops up:
+<img width="384" alt="image" src="https://storage.googleapis.com/ganymede-bio-website/public/apiServer/SideBar.png"/>
 
 ## Flows
 
 ### Creating Flows
 
-To create a new _Flow_, click the **New** button in the upper right hand corner of the screen.
+To create a new _Flow_, click the **Manage** button in the upper right hand corner of the screen. Then click the "Add" button.
 
 ![Ganymede App Home Page](https://ganymede-bio.mo.cloudinary.net/apiServer/HomeScreen_202220823.png)
 
