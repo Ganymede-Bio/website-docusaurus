@@ -47,6 +47,13 @@ To load a Flow, specify Flow you would like to load in the _Choose A Flow_ input
 
 The second row of buttons provides tools for modifying Flows.  To incorporate new Functions, hover over the Functions button and select a desired Function to incorporate into your flow.  The Function can then be connected to an existing node by clicking and dragging between 2 nodes to specify their connectivity.  
 
+### Saving Flows Flows
+
+After saving a flow, the entire environment (containing all flows) is saved and deployed. When this save and deploy is taking place, users are unable to run any flow. A tooltip will be displayed to the user if they try to run a flow during this time. To see the status of flow saves, users can view the [Notifications page](Notifications.md) page.
+
+<img width="306" alt="image" src="https://user-images.githubusercontent.com/46538575/202579236-2c4c9aa5-9afa-48ec-b8bb-eb93fe524eea.png" />
+
+
 ### Running Flows
 To run a flow that accepts data from file input, first the data has to be uploaded. Every flow is provided with a File Connection node at the start of the flow to allow file uploads. Click the button that says "Or, click or drag file to upload", a file selector menu will appear. Any number of data files can be selected. Once selected, they will appear in the file queue.
 
