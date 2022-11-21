@@ -6,19 +6,19 @@ displayed_sidebar: functionSidebar
 
 ## PyAnalysis
 
-Python Analysis - Run python-based analysis on the results of a SQL query, storing the results
+Runs python-based analysis on the results of a SQL query
 
-The content of the SQL query and python function can be edited and saved using the integrated editor functionality.
+This Function takes as input the results of the SQL query, which is specified at the top of the Function notebook.
+The SQL query results are passed to the execute function as a [`pandas.DataFrame`](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html).
 
-The python function needs to be named `execute` and will be called with the results of the SQL in a [`pandas.DataFrame`](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html).
-The results of the function will be saved as a table with the specified name.
+The results of this Function are saved as a table with the table name specified *output_table_analysis*.
 
 ```python
-def execute(df: pandas.DataFrame) -> pandas.DataFrame:
+def execute(df_sql_result: pd.DataFrame) -> pd.DataFrame:
     ... Your code goes here ...
 ```
 
 **Arguments**:
 
-- `output_table_analysis_table`: Table name where the function results will be stored.
+- `output_table_analysis`: table name where the function results will be stored.
 

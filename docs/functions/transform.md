@@ -6,9 +6,9 @@ displayed_sidebar: functionSidebar
 
 ## TransformSql
 
-SQL Transform - Function for performing table operations using a user-specified SQL query.
+Function for performing table operations using a user-specified SQL query.
 
-The content of the SQL query can be edited and saved using the integrated editor functionality.
+This Function runs a SQL query, writing the results of the query to the table specified in *output_table_sql_result*.
 
 **Arguments**:
 
