@@ -1,3 +1,4 @@
+---
 id: AdminControls
 title: Admin Page
 displayed_sidebar: webUiSidebar
