@@ -67,11 +67,11 @@ Function parameters will specify which input type(s) they accept in the format `
 ### Running Flows
 To run a flow that accepts data from file input, the file has to be uploaded. The  Click the button that says "Upload" and a file selector menu will appear, or drag a file onto the "Upload" button. If you want to trigger multiple flows with multiple file, add additional rows with the 'Add button'. 
 
-<img width="243" alt="input_node" src="https://user-images.githubusercontent.com/46538575/195667700-9b417fb9-f688-4b63-86ee-2e31500bb6e4.png" />
+<img width="384" alt="input_node" src="https://storage.googleapis.com/ganymede-bio-website/public/apiServer/flowInputFile.png"/>
 
 A Flow can support a run tag to be set on each run from the dropdown menu labeled "Run Tag". These run tags are populated with the names that correspond to your entities in Benchling so that you can easily attribute files and write back to your ELN. We are able to enable this functionality with a simple integration with your Benchling account. 
 
-<img width="243" alt="run_tags" src="https://user-images.githubusercontent.com/46538575/195667470-4157635b-0784-44f8-9011-d7d8800aee2a.png" />
+<img width="384" alt="run_tags"  src="https://storage.googleapis.com/ganymede-bio-website/public/apiServer/flowInputBenchlingTag.png"/>
 
 When ready, click the Run button to kick off the Flow run.  Run progress can be tracked in the Flow runs tab.
 
