@@ -8,14 +8,14 @@ displayed_sidebar: webUiSidebar
 
 The Notifications page provides real time updates on the status of flow saves and runs. 
 
-<img width="800" alt="image" src="https://user-images.githubusercontent.com/46538575/202572194-262c9b29-7ec8-4e79-b481-5b5b8d366ef7.png" />
-
+<img width="800" alt="image" src="https://user-images.githubusercontent.com/46538575/205396666-b530db1c-b3d8-4124-a53c-436181e51c4f.png" />
 
 The notifications table provides the following information per event:
 
 - **Type**: Events of type _SAVE_ are created when flows are saved and events of type _RUN_ are created when flows are run.
 - **Flow Name**: The name of the flow that was saved or run. Search bar is provided for filtering on specific flows.
 - **Date / Time**: The date and time the event was created.
+- ** User**: Email address of the authenticated user that saved or ran the flow. 
 - **Status**: The following are the status types:
     - **Processing**: Event was kicked off and is processing. Processing _SAVE_ events will disable users from running flows as the entire environment is saved and deployed when a user saves a flow. Once all _SAVE_ events are out of the _Processing_ state, flow runs will be available again.
     - **Completed**: Event completed successfully. 
