@@ -32,12 +32,13 @@ Each row can be expanded for detailed status updates and logs with the following
 ### Watching a Directory
 Ganymede allows users to define a directory that will be watched for new file additions or modifications. These files will be queued to allow running at a later time. This functionality is great for hand-free usage of Ganymede throughout the day in the lab. To setup a directory watcher, navigate to a flow's "Flow View" or "Flow Editor" page. The input node contains all input types that have been defined for that flow. Any inputs that are file types  have a folder icon that is used to select which directory needs to be watched.
 
-<img width="1050" alt="image" src="https://user-images.githubusercontent.com/111307862/207990602-8e25e317-6b96-4d2a-a630-0d87dc5ed237.png">
+<img width="1050" alt="image" src="https://user-images.githubusercontent.com/111307862/207990602-8e25e317-6b96-4d2a-a630-0d87dc5ed237.png" />
 
 Prior to setting a watcher, the watcher can be configured by clicking on the gear icon. This produces a modal with two settings. The first is the observation mode.
 - Differential mode will only detect files that are created or modified in a directory after the watcher is started
 - Cumulative mode will select any files in the directory when the watcher is started, the proceed to detect any new creations or modifications
 
 The second setting is the write mode. When a file is detected by the watcher, regardless of mode, it will upload to our system. If a detected file has the same file name as one that already exists in our system for a given flow and input, there are two ways the watcher can move forward. The first is to queue the file already in our system to run. The second is to upload the file into our system with a unique name.
+<img width="521" alt="image" src="https://user-images.githubusercontent.com/111307862/208010181-4b94c040-3c65-49ba-9c84-f137d75636d4.png" />
 
 Once the watcher is configured, close out of the modal and click the file icon to select directory. The watcher will now continue to observe that directory until a user refreshes or closes the site.
