@@ -7,13 +7,13 @@ module.exports = {
       type: 'category',
       label: 'Getting Started',
       collapsed: false,
-      items: ['Overview'],
+      items: ['About'],
     },
     {
       type: 'category',
       label: 'Application',
       collapsed: false,
-      items: ['Home', 'FlowEditor', 'FlowRuns', 'Files', 'FlowView', 'Notifications', 'AdminControls']
+      items: ['Home', 'FlowEditor', 'FlowRuns', 'DataExplorer', 'Files', 'Notifications', 'AdminControls']
     }
   ],
   functionSidebar: [

@@ -2,6 +2,6 @@ import React from 'react';
 import { Redirect } from '@docusaurus/router';
 
 const Home = () => {
-  return <Redirect to="/docs/Overview" />;
+  return <Redirect to="/docs/About" />;
 };
 export default Home;

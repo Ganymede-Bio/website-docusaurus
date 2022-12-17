@@ -15,7 +15,7 @@ module.exports = {
       },
       items: [
         {
-          to: 'docs/Overview',
+          to: 'docs/About',
           routeBasePath: '/',
           label: 'Web UI',
           position: 'left',
@@ -47,7 +47,7 @@ module.exports = {
           items: [
             {
               label: 'Web UI',
-              to: 'docs/Overview',
+              to: 'docs/About',
             },
             {
               label: 'Functions',
