@@ -4,8 +4,8 @@ module.exports = {
   url: 'https://demo.ganymede.bio',
   baseUrl: '/',
   favicon: 'img/favicon.png',
-  organizationName: 'Ganymede-Bio', // Usually your GitHub org/user name.
-  projectName: 'website-docusaurus', // Usually your repo name.
+  organizationName: 'Ganymede-Bio',
+  projectName: 'website-docusaurus',
   themeConfig: {
     navbar: {
       title: 'Ganymede',
@@ -15,16 +15,21 @@ module.exports = {
       },
       items: [
         {
-          to: 'docs/Introduction',
+          to: 'docs/Overview',
           routeBasePath: '/',
-          // activeBasePath: 'docs',
           label: 'Web UI',
           position: 'left',
         },
         {
-          to: 'docs/functions/FunctionOverview',
+          to: 'docs/functions/Overview',
           routeBasePath: '/',
           label: 'Functions',
+          position: 'left',
+        },
+        {
+          to: 'docs/releases/ReleaseNotes',
+          routeBasePath: '/',
+          label: 'Release Notes',
           position: 'left',
         },
         {
@@ -42,8 +47,16 @@ module.exports = {
           items: [
             {
               label: 'Web UI',
-              to: 'docs/Introduction',
+              to: 'docs/Overview',
             },
+            {
+              label: 'Functions',
+              to: 'docs/functions/Overview'
+            },
+            {
+              label: 'Release Notes',
+              to: 'docs/releases/ReleaseNotes'
+            }
           ],
         },
         {
@@ -69,16 +82,13 @@ module.exports = {
       {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
-          // Please change this to your repo.
           editUrl:
             'https://github.com/Ganymede-Bio/website-docusaurus/edit/main/',
         },
-        // blog: {
-        //   showReadingTime: true,
-        //   // Please change this to your repo.
-        //   editUrl:
-        //     'https://github.com/facebook/docusaurus/edit/master/website/blog/',
-        // },
+        gtag: {
+          trackingID: 'G-CDRHMZJ61T',
+          anonymizeIP: true,
+        },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
         },
