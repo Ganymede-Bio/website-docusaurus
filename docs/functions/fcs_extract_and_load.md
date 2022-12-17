@@ -57,6 +57,7 @@ The fcsparser python package is used to parse FCS files into metadata and data
 
 **Arguments**:
 
+- `input_file_fcs`: file extension of FCS file
 - `output_table_data`: table to write core FCS data to
 - `output_table_metadata_file`: table to write FCS file metadata to (position of different file elements)
 - `output_table_metadata_fcs`: table to write flow cytometer system metadata to (e.g. - # of events detected, type of flow cytometer)

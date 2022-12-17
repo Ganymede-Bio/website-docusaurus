@@ -1,10 +1,10 @@
 ---
-sidebar_label: BenchlingRead
-title: BenchlingRead
+sidebar_label: BenchlingReadObject
+title: BenchlingReadObject
 displayed_sidebar: functionSidebar
 ---
 
-## BenchlingRead
+## BenchlingReadObject
 
 Executes Benchling API call and upload results to data lake
 

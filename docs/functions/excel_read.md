@@ -6,9 +6,10 @@ displayed_sidebar: functionSidebar
 
 ## ExcelRead
 
-Reads Trios output data tables from (in Excel format, with each tab denoting a separate run) and uploads files to data lake
+Reads Excel files and upload to data lake
 
 **Arguments**:
 
+- `input_file_excel`: file extension on excel file
 - `output_table_results`: data lake table to write to
 
