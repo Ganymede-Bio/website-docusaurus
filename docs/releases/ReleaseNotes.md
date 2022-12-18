@@ -63,7 +63,7 @@ Ganymede releases generally occur on Thursdays each week.
 **Function updates**
 - Benchling tag and Coda write Functions now available
 
-## Nov 17 2022
+### Nov 17 2022
 
 **Platform updates**
 - Admin page now allows administrators to configure access
@@ -74,7 +74,7 @@ Ganymede releases generally occur on Thursdays each week.
 - Benchling read Function can now output multiple tables
 - Flow run id captured as timestamp in ISO format
 
-## Nov 10 2022
+### Nov 10 2022
 
 **Platform updates**
 - Notifications page now available, displaying all flow run and environment deploy events
@@ -83,7 +83,7 @@ Ganymede releases generally occur on Thursdays each week.
 **Function updates**
 - Azure read/write Functions now available
 
-## Nov 3 2022
+### Nov 3 2022
 
 **Platform updates**
 - Information, warning, and error logs are now available for each flow run at the Function level on the Flow View and Flow Run pages
@@ -97,7 +97,7 @@ Ganymede releases generally occur on Thursdays each week.
 - Excel write and image write Functions now available
 - Template code for Excel read cleaned up to handle single and multi-tab files
 
-## Oct 27 2022
+### Oct 27 2022
 
 **Platform updates**
 - Flow nodes and edges are larger and easier to select
@@ -109,12 +109,12 @@ Ganymede releases generally occur on Thursdays each week.
 - Ganymede context variable now passed into Functions, which allow Functions to access run_id timestamp and name of file ingested in Flow
 - Table with numeric column names are now prefixed with '__var' when uploading to data lake
 
-## Oct 20 2022
+### Oct 20 2022
 
 **Function updates**
 - CSV read Function now takes in a dictionary of {filename: file_contents} rather than file_contents, to enable association between input file name and file content
 
-## Oct 13 2022
+### Oct 13 2022
 
 **Platform updates**
 - Environment selection is no longer required; selected Flows are persisted across page navigations
@@ -124,7 +124,7 @@ Ganymede releases generally occur on Thursdays each week.
 **Function updates**
 - FCS load Function refactored to allow user-modifiable code
 
-## Oct 6 2022
+### Oct 6 2022
 
 **Platform updates**
 - List of Flows added to Home page, with search functionality and ability to delete flows from page
@@ -134,12 +134,12 @@ Ganymede releases generally occur on Thursdays each week.
 - Input files on the Flow Editor page are now listed in a run queue, with icons that indicate if files were manually uploaded or added via the file watcher
 - Files uploaded via the file watcher now queue rather than run automatically
 
-## Sep 29 2022
+### Sep 29 2022
 
 **Platform updates**
 - Users have ability to watch local directory for file changes
 
-## Sep 22 2022
+### Sep 22 2022
 
 **Platform updates**
 - Notebook launch errors now displayed as a notification
