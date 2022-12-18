@@ -4,16 +4,36 @@ title: Flow View
 displayed_sidebar: webUiSidebar
 ---
 
-The Flow View provides access to run functionality and run history for each _Flow_. 
+The Flow View provides access to running `flows` and viewing run history. 
 
-<img width="800" alt="image" src="https://user-images.githubusercontent.com/46538575/199783855-36c754bc-b19f-418d-b56c-3f80a9fbd215.png" />
+<img alt="Flow view page" src="https://ganymede-bio.mo.cloudinary.net/apiServer/FlowView_20221216.png" />
 
-For more information on the run functionality, see the [Flow Runs page](FlowRuns.md).
+To run a `flow`, drop a file into the upload box and click the run button on the left side of the run box.
 
-To view the results of current and historical runs, the Runs History table provides the following information per run:
+### Flow-level status
 
-- **Overall run status**: The status of the overall _Flow_ run, input file used in the run, and run tag (if provided).
-- **Functions run status**: The status of each function within a _Flow_. This can be viewed by expanding the table.
-- **Metadata about the run**: Execution date, start date, and end date of the run. This can be viewed by expanding the table.
-- **Logs**: Logs associated with the flow and function run statuses to help users gain more insight and debug. Logs are provided in the following categories: INFO, WARNING, and ERROR.
+The Run History table provides status information on historical runs.
 
+- **File**: Input files and input parameters associated with `flow` run
+- **Run Tag**: Run tags associated with `flow` run. An example run tag would be a Benchling custom entity ID used to reference a table within Benchling.
+- **Status**: Run status for a `flow` run instance.  Possible status values are: 
+  - Running: Job is in the process of running
+  - Success: All `nodes` have run successfully
+  - Failed: At least one `node` has failed to run successfully
+
+### Node-level status
+
+Expanding the status box shows a list of nodes with corresponding run statuses indicated by color.  Some common values for colors that you will see are:
+  - Red: failure after retries exhausted
+  - Light green: currently running
+  - Dark green: successful run
+  - Gray: queued; awaiting system resource to commence
+  - Yellow: failure to run on at least 1 try; awaiting retry
+  - Pink: skipped prior to completion; this color may indicate a system resource limitation
+  - Orange: dependency for node has failed, preventing this node from being run
+
+:::info
+
+Clicking on the status box associated with a node shows logs associated with execution of the node.
+
+:::

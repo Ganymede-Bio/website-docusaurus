@@ -9,9 +9,11 @@ The homepage contains links to built flows, from which the user can access and r
 
 ![Ganymede App Flow Editor Homepage](https://ganymede-bio.mo.cloudinary.net/apiServer/HomeScreen_20221216.png)
 
+The search bar at the top filters the list of flows by name.
+
 ## Navigation
 
-In the sidebar, you'll find the following links in the top part of the sidebar:
+The sidebar contains links to the rest of the app.  The top part of the sidebar contains pages for building and running flows, as well as observing data processed by flows.
 
 - [**Home**](./Home.md): Home screen used to access _flows_ to run
 - [**Flow Editor**](./FlowEditor.md): Editor for modifying _flows_ and their underlying code
@@ -20,7 +22,7 @@ In the sidebar, you'll find the following links in the top part of the sidebar:
 - [**Files**](./Files.md): File browser for accessing snapshotted input and output data processed through _flows_
 - [**Notifications**](./Notifications.md): Activity (e.g. - _flow_ saves, _flow_ runs, etc.) associated with Ganymede tenant environment
 
-And the following links at the bottom part of the sidebar:
+The bottom part of the sidebar contains documentation and pages for administering access to Ganymede.
 
 - **Docs**: Link to Ganymede's documentation, which can also be accessed directly at [https://docs.ganymede.bio/](https://docs.ganymede.bio/) 
 - [**Admin**](./AdminControls.md): Panel for configuring levels of access for different individuals

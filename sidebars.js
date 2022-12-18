@@ -6,7 +6,8 @@ module.exports = {
     {
       type: 'doc',
       id: 'About',
-      label: 'Introduction'
+      label: 'Welcome',
+
     },
     {
       type: 'category',

@@ -4,8 +4,6 @@ title: Flow Editor
 displayed_sidebar: webUiSidebar
 ---
 
-## Summary
-
 The Flow Editor is the starting point for creating new _Flows_, which are a series of _Functions_. 
 
 ![Ganymede App Flow Editor Init](https://storage.googleapis.com/ganymede-bio-website/public/apiServer/FlowEditor.png)
