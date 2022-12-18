@@ -4,16 +4,43 @@ functionDocs.collapsed = false
 module.exports = {
   webUiSidebar: [
     {
-      type: 'category',
-      label: 'Getting Started',
-      collapsed: false,
-      items: ['About'],
+      type: 'doc',
+      id: 'About',
+      label: 'Introduction'
     },
     {
       type: 'category',
-      label: 'Application',
+      label: 'Guides',
       collapsed: false,
-      items: ['Home', 'FlowEditor', 'FlowRuns', 'DataExplorer', 'Files', 'Notifications', 'AdminControls']
+      items: [{
+        type: 'category',
+        label: 'Running Flows',
+        collapsed: false,
+        items: ['Home', 'FlowView']
+      },
+      {
+        type: 'doc',
+        id: 'FlowEditor',
+        label: 'Editing Flows',
+      },
+      {
+        type: 'category',
+        label: 'Monitoring Flows',
+        collapsed: false,
+        items: ['FlowRuns', 'Notifications']
+      },
+      {
+        type: 'category',
+        label: 'Observing Data',
+        collapsed: false,
+        items: ['DataExplorer', 'Files']
+      },
+      {
+        type: 'doc',
+        id: 'AdminControls',
+        label: 'Managing Access'
+      },
+      ]
     }
   ],
   functionSidebar: [
@@ -22,10 +49,9 @@ module.exports = {
   ],
   releaseSideBar: [
     {
-      type: 'category',
+      type: 'doc',
+      id: 'releases/ReleaseNotes',
       label: 'Release Notes',
-      collapsed: false,
-      items: ['releases/ReleaseNotes']
     }
   ]
 };
