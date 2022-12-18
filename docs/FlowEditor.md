@@ -4,166 +4,188 @@ title: Flow Editor
 displayed_sidebar: webUiSidebar
 ---
 
-The Flow Editor is the starting point for creating new _Flows_, which are a series of _Functions_. 
+## Flow Editor Header
 
-![Ganymede App Flow Editor Init](https://storage.googleapis.com/ganymede-bio-website/public/apiServer/FlowEditor.png)
+The Flow Editor is the starting point for creating and modifying `flows`. 
 
-The inputs/buttons at the top of the screen perform the following functions (some functions will open a sidebar):
+![Ganymede App Flow Editor Init](https://ganymede-bio.mo.cloudinary.net/apiServer/FlowEditor_20221216.png)
 
-- **Choose A Flow**: Input for specifying the Flow to run.
-- **New**: Add functions to a flow, only does anything if a flow is selected
-- **View**: Layout options for the flow in view
-- **Analysis**: Enables access to notebooks which can be used for ad-hoc observation and analysis of data in the flow.  These notebooks are hosted on a virtual machine (VM) separate from the workflow management software running the Flow.
-- **Runs** See the jobs that were ran for a specific flow
-- **Processing** Shows the number of files in the queue for your next run
-- **Run** Button to execute a flow with given inputs. 0 files in the queue causes the flow to not execute
-- **Manage** This setting deals with managing flows. Save, Add, and Delete actions are stored under here.
+The inputs/buttons in the header bar perform the following functions.
 
-## Sidebar
-Some actions bring up a side bar that will contain more advance actions. Clicking the icon in the top right corner closes the sidebar. Here is an image of the sidebar that pops up:
-
-<img width="384" alt="image" src="https://storage.googleapis.com/ganymede-bio-website/public/apiServer/SideBar.png"/>
+- **Choose A Flow**: Input for specifying the `flow` to run.
+- **New**: Opens up sidebar for selecting new `function` to add
+- **View**: Opens sidebar for specifying whether `flow` should be laid out horizontally or vertically
+- **Analysis**: Enables access to Jupyter notebooks which can be used for ad-hoc observation and data analysis.  These notebooks are hosted on a virtual machine (VM) separate from the workflow management software running the `flow`.
+- **Runs** Opens a sidebar showing statuses of historical runs of the selected `flow`.  The [Flow Runs](FlowRuns.md) page contains greater detail about the contents of this tab.
+- **Processing** Shows the number of files in the queue for your next run.  Clicking this button brings up the [Flow Runs](FlowRuns.md) page.
+- **Save** Button to save `flow` layout to git repo and deploy code to workflow management system.
+- **Manage** Opens sidebar to add new `flows` or delete existing ones.
 
 ## Flows
 
 ### Creating Flows
 
-To create a new _Flow_, click the **Manage** button in the upper right hand corner of the screen. Then click the "Add" button on the sidebar.
+To create a new `flow`, click the **Manage** button in the upper right hand corner of the screen. Then click the "Add" button on the sidebar.
 
-This exposes a pop-up for you to name and describe your Flow in addition to identifying an environment to associate it to.  Each environment has its own dedicated Flow orchestration service, which can be configured to your data processing needs.  
+This exposes a pop-up to name and describe your `flow` in addition to identifying an environment to associate it to.  Each environment has its own dedicated `flow` orchestration service, which can be configured to your data processing needs.  
 
-![Ganymede App New Flow Creation](https://storage.googleapis.com/ganymede-bio-website/public/apiServer/AddNewFlow.png)
+![Ganymede App New Flow Creation](https://ganymede-bio.mo.cloudinary.net/apiServer/AddNewFlow.png)
 
-### Loading Flows
+### Loading and Saving Flows
 
 To load a Flow, specify Flow you would like to load in the _Choose A Flow_ input box.  Upon doing so, you will see the graphical structure of your Flow, which will look as follows:
 
-<img width="1511" alt="Ganymede App Flow Editor Displayed" src="https://storage.googleapis.com/ganymede-bio-website/public/apiServer/ChooseFlow.png" />
+<img width="1511" alt="Ganymede App Flow Editor Displayed" src="https://ganymede-bio.mo.cloudinary.net/apiServer/ChooseFlow.png" />
 
-
-### Modifying Flows
-
-The second row of buttons provides tools for modifying Flows.  To incorporate new Functions, hover over the Functions button and select a desired Function to incorporate into your flow.  The Function can then be connected to an existing node by clicking and dragging between 2 nodes to specify their connectivity.  
-
-### Saving Flows
-
-After saving a flow, the entire environment (containing all flows) is saved and deployed. When this save and deploy is taking place, users are unable to run any flow. A tooltip will be displayed to the user if they try to run a flow during this time. To see the status of flow saves, users can view the [Notifications page](Notifications.md) page.
+After saving a `flow`, the entire environment (containing all `flows`) is saved and deployed. When this save and deploy is taking place, users are temporarily restricted from running `flows`. A tooltip will be displayed to the user if they try to run a `flow` during this time. To see the status of environment updates, users can view the [Notifications page](Notifications.md) page.
 
 <img width="306" alt="image" src="https://user-images.githubusercontent.com/46538575/202579236-2c4c9aa5-9afa-48ec-b8bb-eb93fe524eea.png" />
 
-### Adding inputs to Flow Runs
-
-Flows can be configured to accept user inputs at the start of each run. There are three types of inputs:
-
-- File inputs 
-- Tag inputs 
-- Text (string) inputs
-
-Function parameters will specify which input type(s) they accept in the format `input_<type>_<tag>`. The value of the `tag` will be used to reference the input during flow execution.
-
-
 ### Running Flows
-To run a flow that accepts data from file input, the file has to be uploaded. The  Click the button that says "Upload" and a file selector menu will appear, or drag a file onto the "Upload" button. If you want to trigger multiple flows with multiple file, add additional rows with the 'Add button'. 
 
-<img width="384" alt="input_node" src="https://storage.googleapis.com/ganymede-bio-website/public/apiServer/flowInputFile.png"/>
+To run a flow that accepts data from file input, upload the input file by either clicking the "Upload" button or dragging and dropping a file into the upload box. To run a flow with different files, add additional rows to the input box by clicking on the "Add" button. 
 
-A Flow can support a run tag to be set on each run from the dropdown menu labeled "Run Tag". These run tags are populated with the names that correspond to your entities in Benchling so that you can easily attribute files and write back to your ELN. We are able to enable this functionality with a simple integration with your Benchling account. 
+<img width="384" alt="input_node" src="https://ganymede-bio.mo.cloudinary.net/apiServer/flowInputFile.png"/>
 
-<img width="384" alt="run_tags"  src="https://storage.googleapis.com/ganymede-bio-website/public/apiServer/flowInputBenchlingTag.png"/>
-
-When ready, click the Run button to kick off the Flow run.  Run progress can be tracked in the Flow runs tab.
-
-Watching a directory for file additions and modifications is also possible. Documentation on that can be found on the [flow runs page](https://docs.ganymede.bio/docs/FlowRuns#watching-a-directory).
-
-### Understanding Nodes
-
-If you notice in the image below: 
-
-<img width="384" alt="image" src="https://storage.googleapis.com/ganymede-bio-website/public/apiServer/EditNodeBefore.png"/>
-
-That the parameter label has a different background (grey rounded box). This indicates that the parameter represents a table (the typical input/output of functions. These tables represent the data where the function ingests from or outputs to and they can be seen in the flow editor.
-
-<img width="384" alt="image" src="https://storage.googleapis.com/ganymede-bio-website/public/apiServer/TableHead.png"/>
-
-The table node shows all a truncated query result of the table that is produced by the node before it. You CANNOT delete this node or edges from this node. When connecting functions to each other, you can connect them through the table as well. Make sure that the input tables match the table name to ensure that the edge between them is consistent.
-
-<img width="384" alt="image" src="https://storage.googleapis.com/ganymede-bio-website/public/apiServer/TableHeadConnection.png"/>
-
-### Modifying Nodes
-
-Once a Node is saved on a Flow, it can be modified by clicking the `edit` button in the bottom-right of the node. This will allow any properties to be changed as shown in the image below. 
-
-<img width="384" alt="image" src="https://user-images.githubusercontent.com/111307862/186734565-2a40e931-8135-4df7-8ef9-bd744d9d0459.png"/>
-
-While a node is be edited, it can also be deleted by clicking the trash icon in the top-right corner of the node. This action will not be permanent until the environment is saved. Until then, if the page is refreshed the node will re-appear.
-
-<img width="416" alt="image" src="https://user-images.githubusercontent.com/111307862/186736076-767796ee-c83a-415e-8d7d-709c9d011984.png"/>
-
-### Modifying Edges
-If you click on the edge you can remove them by hitting the delete button. Edges tend to have a small click box but you should notice the edge bolden when selected
-
-Before Click:
-
-<img width="384" alt="image" src="https://storage.googleapis.com/ganymede-bio-website/public/apiServer/BeforeEdgeClick.png"/>
-
-After Click:
-
-<img width="384" alt="image" src="https://storage.googleapis.com/ganymede-bio-website/public/apiServer/AfterEdgeClick.png" />
-
-How do we connect two nodes to make them dependent on each other? There are small circles at the beginning/end of each function and table. To make them dependent on each other, just connect them by clicking and dragging (a line should appear) one of these orbs to the next.
+When ready, click the Run button to kick off the Flow run.  Run progress can be tracked by clicking the "Runs" button in the header.
 
 ### Deleting Flows
 
-In order to delete flows, click on the "Manage" button on the flow editor page and there should be a button called "Delete Flow" that should appear in the sidebar. This action is NOT reversible.
+In order to delete flows, click on the "Manage" button on the flow editor page and there should be a button called "Delete Flow" that should appear in the sidebar. 
 
-## Analysis Notebooks
+:::caution
 
-Analysis notebooks are Jupyter notebooks hosted on VMs which enable access to data uploaded to the data lake within the Ganymede Cloud as part of a Flow run.  A fresh notebook instantiation has templates to retrieve data and save notebooks as shown below:
+Deleting flows is not reversible from within the Ganymede UI, so undoing a flow deletion will require restoring code from a prior commit in the git repo corresponding to the Ganymede cloud tenant.
 
-![Ganymede Notebook](https://ganymede-bio.mo.cloudinary.net/apiServer/%20GanymedeNotebook_20220824.png)
+:::
 
-### Installing Python packages
+## Nodes
 
-Additional packages can be installed using pip magic.  For example, the following command installs a number of analytics and plotting packages:
+:::info
 
-```python
-!pip install scikit-learn seaborn matplotlib pandas_gbq
-```
+Understanding this section is critical for developing on the Ganymede platform; the customizability of underlying nodes sets Ganymede apart from many other dataflow programming environments.
 
-### Loading data from BigQuery
+:::
 
-The __client__ object can be used to access data stored in Google BigQuery as part of a Flow run.  For example, run the code below to list available tables in the __ganymede_demo__ environment:
+Nodes are customizable blocks of code with default functionality specified by its type.
 
-```python
-pandas_gbq.context.credentials = client._credentials
-pandas_gbq.context.project = client.project
+<img width="384" alt="image" src="https://ganymede-bio.mo.cloudinary.net/apiServer/EditNodeBefore.png"/>
 
-tables = client.list_tables('ganymede_demo')
-for table in tables:
-    print(table.table_id)
-```
+The image above shows how a node is represented on the Flow Editor page; the node consists of:
+- node name, located in the header of the node
+- pencil icon for editing the user-editable code backing the function
+- input and output parameter(s); in this example, the node has 1 input parameter named _sql_result_ which has _example_ as its value
+- edit button, which unlocks the node for modifying node name, changing node parameter values, or deletion
 
-A query can be run by passing a SQL snippet following [Bigquery syntax](https://cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax) to the __query_sql__ variable and running the __results__ method from Ganymede's __query__ module. This will return a Pandas dataframe. Before running the query, a dry run of the query is also available in the Ganymede's query module using the __dry_run__ method. For example, the commands below perform a dry run and return the results of the query provided in __query_sql__.
+<img width="300" alt="Example node layout" src="https://ganymede-bio.mo.cloudinary.net/apiServer/Operator_Conceptual_Layout_20221216.png" />
 
-```python
-query_sql = 'select * from ganymede_demo.demo_table'
-```
-```python
-from ganymede.notebook import query
-query.dry_run(query_sql)
-```
-```python
-from ganymede.notebook import query
-query.results(query_sql)
-```
+Stylistically, the functionality of a node is represented by the diagram above.  Input/output parameters are passed to the operator associated to the node, which is responsible for I/O with respect to the node.  User-defined SQL (if relevant) determines the data associated with processing, and user-defined python (if relevant) performs the processing.
 
-### Saving notebooks
+![Editor notebook backing node](https://ganymede-bio.mo.cloudinary.net/apiServer/Editor_Notebook_20221216.png)
 
-The final cell contains a code which commits the notebook to the HEAD of the Github repository containing the stored Flow.  The _src_ entry in the files dictionary specifies the location of the notebook within the repo, and the _dest_ entry specifies the name that the notebook is committed under.
+Clicking on the edit button of the node opens up a notebook similar to what is shown above.  For nodes that reference the Ganymede data lake on input, the _query_sql_ string is used to specify the data table to process on the input parameter in the _execute_ function.  The _query_sql_ string corresponds to the blue box labeled "User-defined SQL" and the _execute_ function corresponds to the green box labeled "User-defined python" in the schematic of the node above.
 
-```python
-from ganymede.notebook import save
+:::tip
 
-files = [{'src': 'default', 'dest': 'new_notebook'}]
-save(files)
-```
+More than 1 query can be specified as input; to do so, specify multiple queries as semicolon-delimited query strings.
+
+:::
+
+In this example, the first 3 cells offer a template for validating the SQL query to specify data inputs to the node, while the 4th cell performs processing on the node.  The _execute_ function takes the results of 1 or more tables as input, presented as either a Pandas DataFrame or list of Pandas DataFrames.  The execute function returns either a Pandas DataFrame or a dictionary of Pandas DataFrames with table names as keys.
+
+:::tip
+
+By default, if only 1 DataFrame is returned, it would be displayed in the table head associated with the node.  
+
+If multiple DataFrames are returned, the table displayed corresponds to the one labeled with the parameter with the gray chip background.  In the example above, the dataframe correponding to "sql_result" key would be the one displayed if multiple tables were returned from the _execute_ function.
+
+:::
+
+:::caution
+
+The names of the _query_sql_ variable and execute function cannot be modified.  Upon running the save cell in the notebook, the contents of the _query_sql_ string and execute function are saved - and the contents of all other cells are discarded.  
+
+This allows users to verify functionality of nodes prior to committing and loading code to the workflow orchestrator.
+
+:::
+
+### Modifying Node Dependencies
+
+Edges can be removed by selecting them and pressing "delete" or "backspace" on the keyboard.  A selected edge is slightly darker and wider than unselected edges.
+
+To make two nodes dependent on each other within a run, click and drag between two orbs two different nodes.  Flow dependencies run top-to-bottom (if  vertical layout is specified) or left-to-right (if horizontal layout is specified).
+
+### Adding Inputs to Flow Runs
+
+`Flows` can be configured to accept user inputs at the start of each run. There are three types of inputs:
+
+- File inputs 
+- Text (string) inputs
+- Tag inputs 
+
+The value of these inputs are referenced by the corresponding `function` during flow execution.
+
+:::note
+
+Tag inputs, in its current state, refer to Benchling tags.  Tenants can be configured to listen to events emitted by Benchling, which enable `flows` to reference specific Benchling tables to incorporate in `flow` processing.
+
+:::
+
+#### Watching for input files
+
+An alternative method for adding inputs is to listen for file additions and modifications to a specific directory on a local machine. 
+
+To setup a watched directory, click the blue folder icon in the `flow` input box, which will open up a form for selecting a directory to watch.
+
+<img width="246" alt="image" src="https://ganymede-bio.mo.cloudinary.net/apiServer/File_Watcher_20221216.png" />
+
+Any new file adds or modifications of existing files will now prep Ganymede Cloud to queue new flow runs. Upon the detection of one of these events, users receive a notification in the top right hand corner of the app. Ganymede continues to watch the directory until the page is either refreshed or closed.
+
+### Node categories
+
+A list of available nodes and their associated categories can be found by clicking the "New" Button in the header of the Flow Editor page.  
+
+There are 6 categories of nodes: 
+- **Test**: Useful for either validating platform functionality or for mocking Flows prior to implementation
+- **App**: Processing that involves accessing corresponding third-party APIs; in many cases, key exchange is necessary for availing these Functions to Ganymede
+- **Analysis**: Perform Python / SQL manipulations
+- **Instrument**: Instrument-specific functions
+- **File**: Functions to ETL data of specified type into Ganymede cloud
+- **Other**: Unclassified nodes; currently contains nodes for specifying parameters in Flows
+
+#### Node characteristics
+
+<img width="800" alt="image" src="https://ganymede-bio.mo.cloudinary.net/apiServer/Function_Chip_20221216.png"/>
+
+Each node in the listing is represented by a chip containing the
+- name of node
+- description of node functionality
+- inputs, if any
+- outputs, if any
+
+For the example chip above, the CSV_Read node takes a CSV file as input and outputs either a Pandas DataFrame or a dictionary of Pandas DataFrames indexed by table name, which are uploaded to the Ganymede data lake.
+
+### Node-specific Table Heads
+
+<img width="384" alt="image" src="https://ganymede-bio.mo.cloudinary.net/apiServer/TableHead.png"/>
+
+The `table head` exists for nodes that produce an output table.  For this subset of `nodes`, the `table head` shows the first 5 records of the primary table produced by its associated node, which is the table specified by the gray chip of the associated `node`.  This table facilitates the development of downstream `flow` components.
+
+:::note
+
+Nodes can be connected either directly or by connecting to the corresponding table head
+
+:::
+
+### Modifying contents of a node
+
+Once a `node` is saved on a `flow`, it can be modified by clicking the `edit` button in the bottom-right of the node. This will allow any properties to be changed, as shown in the image below. 
+
+<img width="384" alt="image" src="https://user-images.githubusercontent.com/111307862/186734565-2a40e931-8135-4df7-8ef9-bd744d9d0459.png"/>
+
+:::info
+
+Node modifications are not permanent until the environment is saved; if the Flow Editor page is refreshed prior to saving, any edits are discarded.
+
+:::
+

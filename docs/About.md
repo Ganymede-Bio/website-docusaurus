@@ -45,6 +45,8 @@ Parameters specified on `nodes` on the Flow Editor page are interpreted by the `
 
 As `flows` and `nodes` are saved, both the graph structure and modified code are saved to a Git repository backing `flows` within an environment.  The updated code is also copied to a cloud-based workflow orchestration platform, which provides the environment to execute `flows`.  Data inputs and outputs are timestamped upon each run, and accessible via the Data Explorer within Ganymede.
 
+The cloud infrastructure supporting data storage and workflow orchestration are unique per tenant instance of Ganymede.
+
 :::info
 
 By separating code into distinct nodes, different nodes can be run in parallel.  Edges between nodes specify dependencies prior to the start of running a node.
