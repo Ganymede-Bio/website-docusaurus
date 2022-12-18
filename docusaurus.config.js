@@ -1,5 +1,5 @@
 module.exports = {
-  title: 'Ganymede Bio Documentation',
+  title: 'Ganymede Documentation',
   tagline: 'Integrate your entire lab',
   url: 'https://demo.ganymede.bio',
   baseUrl: '/',

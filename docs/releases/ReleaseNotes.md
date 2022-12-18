@@ -106,7 +106,7 @@ Ganymede releases generally occur on Thursdays each week.
 **Function updates**
 - PyAnalysis and TransformSQL functions can now take multiple SQL queries as input, specified as a semicolon-delimited string
 - CSVRead, TransformSQL, and PyAnalysis nodes can now output multiple tables
-- Ganymede context variable now passed into Functions, which allow Functions to access run_id timestamp and name of file ingested in Flow
+- Ganymede context variable now passed into Functions, which allow Functions to access run_id timestamp and name of file ingested in flow
 - Table with numeric column names are now prefixed with '__var' when uploading to data lake
 
 ### Oct 20 2022
@@ -117,9 +117,9 @@ Ganymede releases generally occur on Thursdays each week.
 ### Oct 13 2022
 
 **Platform updates**
-- Environment selection is no longer required; selected Flows are persisted across page navigations
+- Environment selection is no longer required; selected flows are persisted across page navigations
 - Platform can now listen for Benchling events, and users can specify Benchling association using the Benchling run tag dropdown
-- Flows can now be set to production mode, which defaults all Flows to write to the data lake in append-only mode
+- Flows can now be set to production mode, which defaults all flows to write to the data lake in append-only mode
 
 **Function updates**
 - FCS load Function refactored to allow user-modifiable code
@@ -127,7 +127,7 @@ Ganymede releases generally occur on Thursdays each week.
 ### Oct 6 2022
 
 **Platform updates**
-- List of Flows added to Home page, with search functionality and ability to delete flows from page
+- List of flows added to Home page, with search functionality and ability to delete flows from page
 - Flow Runs page now contains the input file used to kick off runs
 
 **File watcher updates**

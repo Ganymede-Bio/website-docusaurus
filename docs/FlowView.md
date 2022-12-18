@@ -4,8 +4,6 @@ title: Flow View
 displayed_sidebar: webUiSidebar
 ---
 
-## Summary
-
 The Flow View provides access to run functionality and run history for each _Flow_. 
 
 <img width="800" alt="image" src="https://user-images.githubusercontent.com/46538575/199783855-36c754bc-b19f-418d-b56c-3f80a9fbd215.png" />

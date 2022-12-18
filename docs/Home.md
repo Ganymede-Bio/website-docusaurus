@@ -5,15 +5,13 @@ displayed_sidebar: webUiSidebar
 ---
 
 
-## Summary
-
-The homepage contains links to built Flows, from which the user can access and run Flows.
+The homepage contains links to built flows, from which the user can access and run flows.  Clicking on any listed flow brings you to the Flow View page, from which the user can run the selected flow and view historical runs.
 
 ![Ganymede App Flow Editor Homepage](https://ganymede-bio.mo.cloudinary.net/apiServer/HomeScreen_20221216.png)
 
 ## Navigation
 
-In the sidebar, you'll find the following links in the top section:
+In the sidebar, you'll find the following links in the top part of the sidebar:
 
 - [**Home**](./Home.md): Home screen used to access _flows_ to run
 - [**Flow Editor**](./FlowEditor.md): Editor for modifying _flows_ and their underlying code
@@ -24,6 +22,6 @@ In the sidebar, you'll find the following links in the top section:
 
 And the following links at the bottom part of the sidebar:
 
-- **Docs**: Ganymede's documentation available at [https://docs.ganymede.bio/](https://docs.ganymede.bio/) 
+- **Docs**: Link to Ganymede's documentation, which can also be accessed directly at [https://docs.ganymede.bio/](https://docs.ganymede.bio/) 
 - [**Admin**](./AdminControls.md): Panel for configuring levels of access for different individuals
 - **Log Out**: Log out from Ganymede cloud

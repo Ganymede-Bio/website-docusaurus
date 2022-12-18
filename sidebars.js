@@ -10,7 +10,7 @@ module.exports = {
     },
     {
       type: 'category',
-      label: 'Guides',
+      label: 'Using Ganymede',
       collapsed: false,
       items: [{
         type: 'category',
@@ -35,13 +35,13 @@ module.exports = {
         collapsed: false,
         items: ['DataExplorer', 'Files']
       },
-      {
-        type: 'doc',
-        id: 'AdminControls',
-        label: 'Managing Access'
-      },
       ]
-    }
+    },
+    {
+      type: 'doc',
+      id: 'AdminControls',
+      label: 'Managing Access'
+    },
   ],
   functionSidebar: [
     'functions/FunctionOverview',
