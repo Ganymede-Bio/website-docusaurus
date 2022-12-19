@@ -4,23 +4,28 @@ title: Flow View
 displayed_sidebar: webUiSidebar
 ---
 
-The Flow View page provides access to running `flows` and viewing run history. 
+### Running Flows
+
+The Flow View page provides access to running `flows` and viewing run history. To run a `flow`, drop a file into the upload box and click the run button on the left side of the run box.
 
 <img alt="Flow view page" src="https://ganymede-bio.mo.cloudinary.net/apiServer/FlowView_20221216.png" />
 
-### Running a Flow
-
-To run a `flow`, drop a file into the upload box and click the run button on the left side of the run box.
 
 ### Watching a Directory
 
-Ganymede allows users to define a directory that can be watched for changes to files that will kick off new flow runs automatically. This functionality is great for automating flows by allowing devices to directly kick them off simply by saving files to a specific location.
+Ganymede allows users to define a directory that can be watched for changes to files that will kick off new flow runs automatically. This functionality is great for automating flows by allowing instruments to queue files saved to a specific location for execution.  
+
+:::note
+
+Watched directories are monitored until the page is either refreshed or closed.
+
+:::
 
 To setup a watched directory, navigate to the 'Flow Editor' page and select the flow that should have a directory watcher attached. By clicking the blue folder right of the "Select agent directory" field, a form will appear that will allow a user to specify which directory to watch.
 
 <img width="246" alt="image" src="https://user-images.githubusercontent.com/111307862/194402465-cdec9cc2-5d2c-4618-b78e-2e3db50cc650.png" />
 
-Clicking this option prompts the user to select a directory to be watched. Any new files that are added to this directory or existing files that are updated will now be uploaded to our servers so that a new flow can be kicked off. Users will receive a notification in the top right each time this occurs. This directory will now be watched until the page is refreshed or closed.
+Clicking this option prompts the user to select a directory to be watched. Any new files that are added to this directory or existing files that are updated will now be queued for running in Ganymede.  Users receive a notification in the top right each time files are added to _flow_ run queues. 
 
 ### Flow-level status
 

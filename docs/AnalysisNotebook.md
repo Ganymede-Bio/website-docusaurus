@@ -4,7 +4,7 @@ sidebar_label: Analysis Notebooks
 displayed_sidebar: webUiSidebar
 ---
 
-Analysis notebooks are Jupyter notebooks that enable access to data uploaded to the Ganymede Cloud data lake as part of a `flow` run.  A fresh notebook instantiation has templates to retrieve data and save notebooks.  To access a fresh notebook instance, on the Flow Editor page, click on the "Analysis" button in the header and "new-notebook".  The image below shows an example of what this notebook would contain:
+Analysis notebooks are Jupyter notebooks that enable access to data uploaded to the Ganymede Cloud data lake as part of a _flow_ run.  A fresh notebook instantiation has templates to retrieve data and save notebooks.  To access a fresh notebook instance, on the Flow Editor page, click on the **Analysis** button in the header and `new-notebook`.  The image below shows an example of what this notebook would contain:
 
 ![Ganymede Notebook](https://ganymede-bio.mo.cloudinary.net/apiServer/%20GanymedeNotebook_20220824.png)
 
@@ -12,7 +12,7 @@ The first 3 cells in the image provide templates for validating and querying dat
 
 :::info
 
-To save the notebook to a new name, modify 'new-notebook' to a different name in the cell to save the notebook to.
+To save the notebook to a different name, modify the `dest` key (i.e. - replace `new_notebook` with the desired notebook name) and execute the cell.
 
 :::
 
@@ -58,6 +58,6 @@ The final cell contains a code which commits the notebook to the HEAD of the Git
 ```python
 from ganymede.notebook import save
 
-files = [{'src': 'default', 'dest': 'new_notebook'}]
+files = [{'src': 'default', 'dest': 'notebook_to_save_to'}]
 save(files)
 ```

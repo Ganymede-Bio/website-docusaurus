@@ -28,7 +28,5 @@ in the list contain all the access of roles beneath them (admin has all the capa
     Only allowed to see flows and environment settings. Not allowed to execute or alter any flows.
 
 ### Access Granularity
-Currently the access is granted to the entire environment. Flow based access is under active development
+Currently the access is granted to the entire environment. Flow-based access is under active development
 
-### Inviting Users
-This is still under progress but for now, please contact Ganymede Support if you wish to add new users.

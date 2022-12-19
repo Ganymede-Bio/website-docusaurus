@@ -7,6 +7,9 @@ module.exports = {
   organizationName: 'Ganymede-Bio',
   projectName: 'website-docusaurus',
   themeConfig: {
+    prism: {
+      theme: require('prism-react-renderer/themes/github'),
+    },
     navbar: {
       title: 'Ganymede',
       logo: {
