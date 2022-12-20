@@ -48,7 +48,7 @@ if __name__ == "__main__":
         sidebar = dict()
         sidebar['type'] = 'category'
         sidebar['label'] = operator_type
-        sidebar['items'] = [f"nodes/{operator_type}/{k}"
+        sidebar['items'] = [f"nodes/{operator_type}/{k}.md"
                             for k, v in operators.items()
                             if v['path'].split('.')[-2] not in missing_files
                             and v['type'] == operator_type]
