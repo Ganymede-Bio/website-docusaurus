@@ -18,6 +18,12 @@ To save the notebook to a different name, modify the `dest` key (i.e. - replace 
 
 ### Installing Python packages
 
+A list of available packages can be retrieved by running
+
+```python
+!pip freeze --local
+```
+
 Additional packages can be installed using pip magic.  For example, the following command installs a number of analytics and plotting packages:
 
 ```python
