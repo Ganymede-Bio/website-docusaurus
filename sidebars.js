@@ -1,5 +1,9 @@
-functionDocs = require("./docs/functions/sidebar.json")
-functionDocs.collapsed = false
+functionAnalysis = require('./docs/functions/Analysis/sidebar.json')
+functionApp = require('./docs/functions/App/sidebar.json')
+functionFile = require('./docs/functions/File/sidebar.json')
+functionInstrument = require('./docs/functions/Instrument/sidebar.json')
+functionTag = require('./docs/functions/Tag/sidebar.json')
+functionTest = require('./docs/functions/Test/sidebar.json')
 
 module.exports = {
   webUiSidebar: [
@@ -7,7 +11,6 @@ module.exports = {
       type: 'doc',
       id: 'About',
       label: 'Welcome',
-
     },
     {
       type: 'category',
@@ -45,8 +48,22 @@ module.exports = {
     },
   ],
   functionSidebar: [
-    'functions/FunctionOverview',
-    functionDocs
+    {
+      type: 'doc',
+      id: 'functions/FunctionOverview',
+      label: 'Function Overview'
+    },
+    {
+      type: 'category',
+      label: 'Function Types',
+      collapsed: false,
+      items: [functionAnalysis,
+        functionApp,
+        functionFile,
+        functionInstrument,
+        functionTag,
+        functionTest]
+    }
   ],
   releaseSideBar: [
     {

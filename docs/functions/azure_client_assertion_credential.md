@@ -4,8 +4,6 @@ title: AccessToken
 displayed_sidebar: functionSidebar
 ---
 
-## AccessToken
-
 Represents an OAuth access token.
 
 ---
@@ -13,8 +11,6 @@ sidebar_label: ClientAssertionCredential
 title: ClientAssertionCredential
 displayed_sidebar: functionSidebar
 ---
-
-## ClientAssertionCredential
 
 Implements TokenCredential Class, which is a protocol for classes to provide OAuth tokens
 More detail can be found here: https://learn.microsoft.com/en-us/python/api/azure-core/azure.core.credentials.tokencredential?view=azure-python

@@ -20,7 +20,7 @@ loaders:
       '../core-operators/operators/spectramax',
       '../core-operators/operators/transform_py',
       '../core-operators/operators/transform_sql',
-      '../core-operators/operators/xml',
+      '../core-operators/operators/xml', 
     ]
 processors:
   - type: filter
@@ -38,5 +38,4 @@ renderer:
     classdef_code_block: false
     descriptive_class_title: false
     insert_header_anchors: false
-
-    
+    escape_html_in_docstring: false

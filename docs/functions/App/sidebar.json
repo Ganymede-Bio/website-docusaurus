@@ -1,0 +1,1 @@
+{"type": "category", "label": "App", "items": ["functions/App/airtable_to_BQ", "functions/App/airtable", "functions/App/s3_read", "functions/App/s3_write", "functions/App/azure_read", "functions/App/azure_write", "functions/App/benchling_api", "functions/App/benchling_to_gcp", "functions/App/benchling_read_object", "functions/App/coda_write"]}
