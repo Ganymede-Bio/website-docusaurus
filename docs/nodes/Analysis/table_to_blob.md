@@ -1,6 +1,6 @@
 ---
-sidebar_label: TableToBlob
-title: TableToBlob
+sidebar_label: Table_to_Blob
+title: Table_to_Blob
 displayed_sidebar: nodeSidebar
 ---
 

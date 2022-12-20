@@ -1,9 +1,3 @@
----
-sidebar_label: BenchlingRead
-title: BenchlingRead
-displayed_sidebar: nodeSidebar
----
-
 Executes Benchling API call and upload results to data lake
 
 **Arguments**:

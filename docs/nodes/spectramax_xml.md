@@ -1,9 +1,3 @@
----
-sidebar_label: SpectramaxXMLParser
-title: SpectramaxXMLParser
-displayed_sidebar: nodeSidebar
----
-
 Parses SpectraMax XML and upload instrument metadata and data to data lake
 
 **Arguments**:

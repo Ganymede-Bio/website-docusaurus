@@ -1,9 +1,3 @@
----
-sidebar_label: ImageRead
-title: ImageRead
-displayed_sidebar: nodeSidebar
----
-
 Ingest image data and process
 
 This Function takes an image as input and stores a set of processed images to the data store

@@ -24,5 +24,20 @@ The notifications table provides the following information per event.
 - **User**: User login triggering the associated event
 
 
+Parameterse
+----------
+df_sql_result: DataFrame or List[DataFrame]
+    Data input from SQL output of query_str string
+
+ganymede_context: GanymedeContext (optional)
+    Context variable for flow runs; contains input file name(s) and flow run timestamp.
+
+Returns
+-------
+DataFrame or Dict[str, DataFrame]
+    If a pandas DataFrame is returned, the table name that the data is stored to within the Ganymede data lake corresponds to the 'analysis' value on the node.
+
+    If a dictionary is returned, keys are table names in the Ganymede data lake.  The DataFrame with the keyword 'analysis' as the key will be saved to the Ganymede data lake as specified by the 'analysis' variable on the node.
+
 
 

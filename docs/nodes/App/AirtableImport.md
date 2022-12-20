@@ -1,3 +1,9 @@
+---
+sidebar_label: AirtableImport
+title: AirtableImport
+displayed_sidebar: nodeSidebar
+---
+
 Pulls Airtable table and uploads data to Ganymede data lake
 
 A bearer token from Airtable is required to enable Airtable access.

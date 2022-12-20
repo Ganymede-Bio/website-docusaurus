@@ -1,6 +1,6 @@
 ---
-sidebar_label: InputParameter
-title: InputParameter
+sidebar_label: Input_Param
+title: Input_Param
 displayed_sidebar: nodeSidebar
 ---
 

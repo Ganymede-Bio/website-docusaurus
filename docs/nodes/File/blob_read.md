@@ -1,6 +1,6 @@
 ---
-sidebar_label: BlobRead
-title: BlobRead
+sidebar_label: Blob_Read
+title: Blob_Read
 displayed_sidebar: nodeSidebar
 ---
 

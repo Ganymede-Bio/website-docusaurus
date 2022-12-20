@@ -1,3 +1,9 @@
+---
+sidebar_label: CSV_Read
+title: CSV_Read
+displayed_sidebar: nodeSidebar
+---
+
 Reads in the content of a CSV storing the results
 
 The CSV data will be run through a python function for any processing prior to storage.

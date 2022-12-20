@@ -1,6 +1,6 @@
 ---
-sidebar_label: Benchling_Read_Object
-title: Benchling_Read_Object
+sidebar_label: Benchling_Read
+title: Benchling_Read
 displayed_sidebar: nodeSidebar
 ---
 

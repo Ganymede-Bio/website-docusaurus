@@ -1,9 +1,3 @@
----
-sidebar_label: CodaWrite
-title: CodaWrite
-displayed_sidebar: nodeSidebar
----
-
 Writes a table or set of tables to a Coda.io page.
 
 **Arguments**:

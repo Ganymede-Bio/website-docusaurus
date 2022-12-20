@@ -1,3 +1,9 @@
+---
+sidebar_label: FCS_Extract_Load
+title: FCS_Extract_Load
+displayed_sidebar: nodeSidebar
+---
+
 Function for reading Flow Cytometry Standard (FCS) files into BigQuery
 
 The fcsparser python package is used to parse FCS files into metadata and data

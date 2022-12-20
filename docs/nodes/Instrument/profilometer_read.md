@@ -1,6 +1,6 @@
 ---
-sidebar_label: ProfilometerReadOperator
-title: ProfilometerReadOperator
+sidebar_label: Profilometer_Read
+title: Profilometer_Read
 displayed_sidebar: nodeSidebar
 ---
 

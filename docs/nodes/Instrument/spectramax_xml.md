@@ -1,6 +1,6 @@
 ---
-sidebar_label: SpectramaxXMLParser
-title: SpectramaxXMLParser
+sidebar_label: SpectraMax_XML
+title: SpectraMax_XML
 displayed_sidebar: nodeSidebar
 ---
 

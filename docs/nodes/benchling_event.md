@@ -1,9 +1,3 @@
----
-sidebar_label: BenchlingEventOperator
-title: BenchlingEventOperator
-displayed_sidebar: nodeSidebar
----
-
 Copies data from Benchling to Ganymede
 
 This function allows you to read files from Benchling for processing via Ganymede based on Events.

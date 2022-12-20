@@ -1,6 +1,6 @@
 ---
-sidebar_label: ExcelRead
-title: ExcelRead
+sidebar_label: Excel_Read
+title: Excel_Read
 displayed_sidebar: nodeSidebar
 ---
 

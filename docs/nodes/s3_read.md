@@ -1,9 +1,3 @@
----
-sidebar_label: S3ReadOperator
-title: S3ReadOperator
-displayed_sidebar: nodeSidebar
----
-
 Sync S3 Bucket -> data lake bucket
 
 Prior to usage, AWS S3 buckets must be configured to permit Ganymede access.

@@ -1,9 +1,3 @@
----
-sidebar_label: AzureReadBlob
-title: AzureReadBlob
-displayed_sidebar: nodeSidebar
----
-
 Read files from Azure Blob Storage into data lake
 
 Prior to usage, Azure Blob Storage must be configured to permit Ganymede access.

@@ -1,6 +1,6 @@
 ---
-sidebar_label: CSVWrite
-title: CSVWrite
+sidebar_label: CSV_Write
+title: CSV_Write
 displayed_sidebar: nodeSidebar
 ---
 

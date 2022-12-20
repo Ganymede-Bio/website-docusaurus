@@ -1,6 +1,6 @@
 ---
-sidebar_label: CodaWrite
-title: CodaWrite
+sidebar_label: Coda_Write
+title: Coda_Write
 displayed_sidebar: nodeSidebar
 ---
 

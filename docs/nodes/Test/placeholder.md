@@ -1,6 +1,6 @@
 ---
-sidebar_label: PlaceholderOperator
-title: PlaceholderOperator
+sidebar_label: Placeholder
+title: Placeholder
 displayed_sidebar: nodeSidebar
 ---
 

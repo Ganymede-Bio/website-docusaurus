@@ -1,6 +1,6 @@
 ---
-sidebar_label: ImageRead
-title: ImageRead
+sidebar_label: Image_Read
+title: Image_Read
 displayed_sidebar: nodeSidebar
 ---
 

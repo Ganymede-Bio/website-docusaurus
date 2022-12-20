@@ -1,9 +1,3 @@
----
-sidebar_label: PlaceholderOperator
-title: PlaceholderOperator
-displayed_sidebar: nodeSidebar
----
-
 Placeholder Function; useful for laying out components of Flow
 
 **Arguments**:

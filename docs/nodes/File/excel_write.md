@@ -1,6 +1,6 @@
 ---
-sidebar_label: ExcelWrite
-title: ExcelWrite
+sidebar_label: Excel_Write
+title: Excel_Write
 displayed_sidebar: nodeSidebar
 ---
 

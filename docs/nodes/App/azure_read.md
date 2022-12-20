@@ -1,6 +1,6 @@
 ---
-sidebar_label: AzureReadBlob
-title: AzureReadBlob
+sidebar_label: Azure_Read
+title: Azure_Read
 displayed_sidebar: nodeSidebar
 ---
 

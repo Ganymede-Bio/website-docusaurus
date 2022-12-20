@@ -1,6 +1,6 @@
 ---
-sidebar_label: AzureWriteBlob
-title: AzureWriteBlob
+sidebar_label: Azure_Write
+title: Azure_Write
 displayed_sidebar: nodeSidebar
 ---
 

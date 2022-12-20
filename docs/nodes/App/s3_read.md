@@ -1,6 +1,6 @@
 ---
-sidebar_label: S3ReadOperator
-title: S3ReadOperator
+sidebar_label: S3_Read
+title: S3_Read
 displayed_sidebar: nodeSidebar
 ---
 

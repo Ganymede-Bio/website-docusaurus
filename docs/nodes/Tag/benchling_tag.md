@@ -1,6 +1,6 @@
 ---
-sidebar_label: BenchlingTag
-title: BenchlingTag
+sidebar_label: Benchling_Tag
+title: Benchling_Tag
 displayed_sidebar: nodeSidebar
 ---
 

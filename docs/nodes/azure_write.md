@@ -1,9 +1,3 @@
----
-sidebar_label: AzureWriteBlob
-title: AzureWriteBlob
-displayed_sidebar: nodeSidebar
----
-
 Write files from data lake to Azure Blob Storage
 
 Prior to usage, Azure Blob Storage must be configured to permit Ganymede access.

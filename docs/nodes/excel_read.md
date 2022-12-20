@@ -1,9 +1,3 @@
----
-sidebar_label: ExcelRead
-title: ExcelRead
-displayed_sidebar: nodeSidebar
----
-
 Reads Excel files and upload to data lake
 
 **Arguments**:

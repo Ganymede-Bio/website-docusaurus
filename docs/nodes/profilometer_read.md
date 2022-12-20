@@ -1,9 +1,3 @@
----
-sidebar_label: ProfilometerReadOperator
-title: ProfilometerReadOperator
-displayed_sidebar: nodeSidebar
----
-
 Parse profilometer data from Mx Software and upload contents to data lake.
 
 **Arguments**:

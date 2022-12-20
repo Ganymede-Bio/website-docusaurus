@@ -1,3 +1,9 @@
+---
+sidebar_label: Transform_py
+title: Transform_py
+displayed_sidebar: nodeSidebar
+---
+
 Runs python-based analysis on the results of a SQL query
 
 This Function takes as input the results of the SQL query, which is specified at the top of the Function notebook.
