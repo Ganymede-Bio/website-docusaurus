@@ -13,20 +13,19 @@ The Flow View page provides access to running `flows` and viewing run history. T
 
 ### Watching a Directory
 
-Ganymede allows users to define a directory that can be watched for changes to files that will kick off new flow runs automatically. This functionality is great for automating flows by allowing instruments to queue files saved to a specific location for execution.  
+Ganymede allows users to define a directory that will be watched for new file additions or modifications. These files will be queued to allow running at a later time. This functionality is great for hand-free usage of Ganymede throughout the day in the lab. To setup a directory watcher, navigate to a flow's "Flow View" or "Flow Editor" page. The input node contains all input types that have been defined for that flow. Any inputs that are file types  have a folder icon that is used to select which directory needs to be watched.
 
-:::note
+ <img width="1050" alt="image" src="https://user-images.githubusercontent.com/111307862/207990602-8e25e317-6b96-4d2a-a630-0d87dc5ed237.png" />
 
-Watched directories are monitored until the page is either refreshed or closed.
+ Prior to setting a watcher, the watcher can be configured by clicking on the gear icon. This produces a modal with two settings. The first is the observation mode.
+ - Differential mode will only detect files that are created or modified in a directory after the watcher is started
+ - Cumulative mode will select any files in the directory when the watcher is started, the proceed to detect any new creations or modifications
 
-:::
+ The second setting is the write mode. When a file is detected by the watcher, regardless of mode, it will upload to our system. If a detected file has the same file name as one that already exists in our system for a given flow and input, there are two ways the watcher can move forward. The first is to queue the file already in our system to run. The second is to upload the file into our system with a unique name.
+ <img width="521" alt="image" src="https://user-images.githubusercontent.com/111307862/208010181-4b94c040-3c65-49ba-9c84-f137d75636d4.png" />
 
-To setup a watched directory, navigate to the 'Flow Editor' page and select the flow that should have a directory watcher attached. By clicking the blue folder right of the "Select agent directory" field, a form will appear that will allow a user to specify which directory to watch.
-
-<img width="246" alt="image" src="https://user-images.githubusercontent.com/111307862/194402465-cdec9cc2-5d2c-4618-b78e-2e3db50cc650.png" />
-
-Clicking this option prompts the user to select a directory to be watched. Any new files that are added to this directory or existing files that are updated will now be queued for running in Ganymede.  Users receive a notification in the top right each time files are added to _flow_ run queues. 
-
+ Once the watcher is configured, close out of the modal and click the file icon to select directory. The watcher will now continue to observe that directory until a user refreshes or closes the site.
+ 
 ### Flow-level status
 
 The Run History table provides status information on historical runs.
