@@ -2,21 +2,25 @@ loaders:
   - type: python
     search_path: [
       '../core-operators/operators/airtable',
+      '../core-operators/operators/azure',
       '../core-operators/operators/benchling',
       '../core-operators/operators/blob',
       '../core-operators/operators/clariostar',
+      '../core-operators/operators/coda',
       '../core-operators/operators/csv',
       '../core-operators/operators/excel',
       '../core-operators/operators/flow_cytometer',
       '../core-operators/operators/ganymede_echo',
-      '../core-operators/operators/plate_reader',
+      '../core-operators/operators/image',
+      '../core-operators/operators/params',
+      '../core-operators/operators/powerpoint',
       '../core-operators/operators/profilometer',
       '../core-operators/operators/rheometer',
       '../core-operators/operators/s3',
       '../core-operators/operators/spectramax',
       '../core-operators/operators/transform_py',
       '../core-operators/operators/transform_sql',
-      '../core-operators/operators/xml',
+      '../core-operators/operators/xml', 
     ]
 processors:
   - type: filter
@@ -34,5 +38,4 @@ renderer:
     classdef_code_block: false
     descriptive_class_title: false
     insert_header_anchors: false
-
-    
+    escape_html_in_docstring: false

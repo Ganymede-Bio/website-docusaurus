@@ -2,7 +2,7 @@
 id: FunctionOverview
 title: Function Overview
 displayed_sidebar: functionSidebar
-sidebar_label: Overview
+sidebar_label: Function Overview
 ---
 
 ## Functions

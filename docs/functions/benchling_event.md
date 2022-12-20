@@ -4,8 +4,6 @@ title: BenchlingEventOperator
 displayed_sidebar: functionSidebar
 ---
 
-## BenchlingEventOperator
-
 Copies data from Benchling to Ganymede
 
 This function allows you to read files from Benchling for processing via Ganymede based on Events.
@@ -15,6 +13,6 @@ A subscription in the corresponding Benchling account is required for sending ev
 
 **Arguments**:
 
-- `output_table_result`: Result table to write to
+- `output_table_results`: Result table to write to
 - `input_event_benchling`: Type of event sent to benchling in this flow
 

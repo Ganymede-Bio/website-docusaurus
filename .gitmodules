@@ -4,4 +4,3 @@
 [submodule "core-dev-operators"]
 	path = core-dev-operators
 	url = git@github.com:Ganymede-Bio/core-dev-operators.git
-	branch = benson/write-docs

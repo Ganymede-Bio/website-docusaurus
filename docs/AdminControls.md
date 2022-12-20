@@ -16,19 +16,17 @@ There are four levels of access. They are written in order from least restrictiv
 in the list contain all the access of roles beneath them (admin has all the capabilities of writer but not vise versa)
 
 **Admin**:
-    Manage the environment settings, able to manage access of others. Able to modify, create ,and execute flows. Also have access to modify functions.
+    Manage the environment settings, able to manage access of others. Admins are able to modify, create, and execute _flows_, as well as have access to modify functions.
 
 **Writer**:
-    Cam create, run, and modify flows. Capable of also editing functions used for flows.
+    Can create, run, and modify _flows_. Capable of also editing functions used for _flows_.
 
 **Runner**:
-    Allowed to execute the items in the environment/flow. Cannot modify or create new flows.
+    Can execute _flows_, but cannot modify or create new _flows_.
 
 **Reader**:
-    Only allowed to see flows and environment settings. Not allowed to execute or alter any flows.
+    Are able to see _flows_ and environment settings, but not permitted to execute or alter _flows_.
 
 ### Access Granularity
-Currently the access is granted to the entire environment. Flow based access is under active development
+Currently the access is granted to the entire environment. Flow-based access is under active development
 
-### Inviting Users
-This is still under progress but for now, please contact Ganymede Support if you wish to add new users.

@@ -1,12 +1,15 @@
 module.exports = {
-  title: 'Ganymede Bio Documentation',
+  title: 'Ganymede Documentation',
   tagline: 'Integrate your entire lab',
   url: 'https://demo.ganymede.bio',
   baseUrl: '/',
   favicon: 'img/favicon.png',
-  organizationName: 'Ganymede-Bio', // Usually your GitHub org/user name.
-  projectName: 'website-docusaurus', // Usually your repo name.
+  organizationName: 'Ganymede-Bio',
+  projectName: 'website-docusaurus',
   themeConfig: {
+    prism: {
+      theme: require('prism-react-renderer/themes/github'),
+    },
     navbar: {
       title: 'Ganymede',
       logo: {
@@ -15,9 +18,8 @@ module.exports = {
       },
       items: [
         {
-          to: 'docs/Introduction',
+          to: 'docs/About',
           routeBasePath: '/',
-          // activeBasePath: 'docs',
           label: 'Web UI',
           position: 'left',
         },
@@ -25,6 +27,12 @@ module.exports = {
           to: 'docs/functions/FunctionOverview',
           routeBasePath: '/',
           label: 'Functions',
+          position: 'left',
+        },
+        {
+          to: 'docs/releases/ReleaseNotes',
+          routeBasePath: '/',
+          label: 'Release Notes',
           position: 'left',
         },
         {
@@ -42,8 +50,16 @@ module.exports = {
           items: [
             {
               label: 'Web UI',
-              to: 'docs/Introduction',
+              to: 'docs/About',
             },
+            {
+              label: 'Functions',
+              to: 'docs/functions/FunctionOverview'
+            },
+            {
+              label: 'Release Notes',
+              to: 'docs/releases/ReleaseNotes'
+            }
           ],
         },
         {
@@ -69,16 +85,13 @@ module.exports = {
       {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
-          // Please change this to your repo.
           editUrl:
             'https://github.com/Ganymede-Bio/website-docusaurus/edit/main/',
         },
-        // blog: {
-        //   showReadingTime: true,
-        //   // Please change this to your repo.
-        //   editUrl:
-        //     'https://github.com/facebook/docusaurus/edit/master/website/blog/',
-        // },
+        gtag: {
+          trackingID: 'G-CDRHMZJ61T',
+          anonymizeIP: true,
+        },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
         },
