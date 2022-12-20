@@ -1,0 +1,1 @@
+{"type": "category", "label": "Analysis", "items": ["nodes/Analysis/py_analysis", "nodes/Analysis/transform", "nodes/Analysis/blob_to_blob", "nodes/Analysis/blob_to_table", "nodes/Analysis/table_to_blob"]}

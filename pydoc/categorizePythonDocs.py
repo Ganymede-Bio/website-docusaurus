@@ -4,9 +4,9 @@ import json
 import shutil
 
 if __name__ == "__main__":
-    """Generates sidebars for Functions
+    """Generates sidebars for Nodes
     """
-    markdown_dir = '../docs/functions'
+    markdown_dir = '../docs/nodes'
 
     with open('../core-operators/operators.yaml', 'r') as operators_yaml:
         operators = yaml.safe_load(operators_yaml)
@@ -40,7 +40,8 @@ if __name__ == "__main__":
         sidebar = dict()
         sidebar['type'] = 'category'
         sidebar['label'] = operator_type
-        sidebar['items'] = [f"functions/{operator_type}/{v['path'].split('.')[-2]}" for v in operators.values()
+        sidebar['items'] = [f"nodes/{operator_type}/{v['path'].split('.')[-2]}" 
+                            for v in operators.values()
                             if v['path'].split('.')[-2] not in missing_files
                             and v['type'] == operator_type]
         with open(os.path.join(markdown_dir, operator_type, 'sidebar.json'), 'w') as json_file:

@@ -24,9 +24,9 @@ module.exports = {
           position: 'left',
         },
         {
-          to: 'docs/functions/FunctionOverview',
+          to: 'docs/nodes/NodeOverview',
           routeBasePath: '/',
-          label: 'Functions',
+          label: 'Nodes',
           position: 'left',
         },
         {

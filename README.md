@@ -54,7 +54,6 @@ deactivate
 popd
 ```
 
-
 ## License
 
 [MIT](https://github.com/Ganymede-Bio/website-docusaurus/blob/main/LICENSE)

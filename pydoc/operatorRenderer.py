@@ -30,7 +30,7 @@ class OperatorRenderer(DocusaurusRenderer):
             code = ("---\n"
                     f"sidebar_label: {obj.name}\n"
                     f"title: {obj.name}\n"
-                    "displayed_sidebar: functionSidebar\n"
+                    "displayed_sidebar: nodeSidebar\n"
                     "---\n\n")
             fp.write(code)
         else:

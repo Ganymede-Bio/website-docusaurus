@@ -1,9 +1,9 @@
-functionAnalysis = require('./docs/functions/Analysis/sidebar.json')
-functionApp = require('./docs/functions/App/sidebar.json')
-functionFile = require('./docs/functions/File/sidebar.json')
-functionInstrument = require('./docs/functions/Instrument/sidebar.json')
-functionTag = require('./docs/functions/Tag/sidebar.json')
-functionTest = require('./docs/functions/Test/sidebar.json')
+nodeAnalysis = require('./docs/nodes/Analysis/sidebar.json')
+nodeApp = require('./docs/nodes/App/sidebar.json')
+nodeFile = require('./docs/nodes/File/sidebar.json')
+nodeInstrument = require('./docs/nodes/Instrument/sidebar.json')
+nodeTag = require('./docs/nodes/Tag/sidebar.json')
+nodeTest = require('./docs/nodes/Test/sidebar.json')
 
 module.exports = {
   webUiSidebar: [
@@ -47,22 +47,22 @@ module.exports = {
       label: 'Managing Access'
     },
   ],
-  functionSidebar: [
+  nodeSidebar: [
     {
       type: 'doc',
-      id: 'functions/FunctionOverview',
-      label: 'Function Overview'
+      id: 'nodes/NodeOverview',
+      label: 'Node Overview'
     },
     {
       type: 'category',
-      label: 'Function Types',
+      label: 'Node Types',
       collapsed: false,
-      items: [functionAnalysis,
-        functionApp,
-        functionFile,
-        functionInstrument,
-        functionTag,
-        functionTest]
+      items: [nodeAnalysis,
+        nodeApp,
+        nodeFile,
+        nodeInstrument,
+        nodeTag,
+        nodeTest]
     }
   ],
   releaseSideBar: [

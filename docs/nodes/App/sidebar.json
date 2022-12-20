@@ -1,0 +1,1 @@
+{"type": "category", "label": "App", "items": ["nodes/App/airtable_to_BQ", "nodes/App/airtable", "nodes/App/s3_read", "nodes/App/s3_write", "nodes/App/azure_read", "nodes/App/azure_write", "nodes/App/benchling_api", "nodes/App/benchling_to_gcp", "nodes/App/benchling_read_object", "nodes/App/coda_write"]}

@@ -1,0 +1,1 @@
+{"type": "category", "label": "File", "items": ["nodes/File/fcs_extract_and_load", "nodes/File/csv_to_bq", "nodes/File/csv_write", "nodes/File/xml_to_bq", "nodes/File/excel_read", "nodes/File/excel_write", "nodes/File/hdf5", "nodes/File/blob_read", "nodes/File/image_read", "nodes/File/image_write", "nodes/File/powerpoint"]}
