@@ -26,10 +26,10 @@ The run status table displayed consists of the following columns:
 ### Observing Node Status
 
 Expanding the status box shows a list of nodes with corresponding run statuses indicated by color.  Some common values for colors that you will see are:
-  - **Red**: failure after retries exhausted
-  - **Light green**: currently running
-  - **Dark green**: successful run
-  - **Gray**: queued; awaiting system resource to commence
-  - **Yellow**: failure to run on at least 1 try; awaiting retry
-  - **Pink**: skipped prior to completion; this color may indicate a system resource limitation
-  - **Orange**: dependency for node has failed, preventing this node from being run
+  - ![#B22222](https://placehold.co/2x2/B22222/B22222.png) **Red**: failure after retries exhausted
+  - ![#01FF70](https://placehold.co/2x2/01FF70/01FF70.png) **Light green**: currently running
+  - ![#2ECC40](https://placehold.co/2x2/2ECC40/2ECC40.png) **Dark green**: successful run
+  - ![#A9A9A9](https://placehold.co/2x2/A9A9A9/A9A9A9.png) **Gray**: queued; awaiting system resource to commence
+  - ![#FFFF00](https://placehold.co/2x2/FFFF00/FFFF00.png) **Yellow**: failure to run on at least 1 try; awaiting retry
+  - ![#9932CC](https://placehold.co/2x2/9932CC/9932CC.png) **Pink**: skipped prior to completion; this color may indicate a system resource limitation
+  - ![#FFA500](https://placehold.co/2x2/FFA500/FFA500.png) **Orange**: dependency for node has failed, preventing this node from being run

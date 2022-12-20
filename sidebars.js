@@ -23,9 +23,10 @@ module.exports = {
         items: ['Home', 'FlowView']
       },
       {
-        type: 'doc',
-        id: 'FlowEditor',
+        type: 'category',
         label: 'Editing Flows',
+        collapsed: false,
+        items: ['FlowEditor', 'Nodes'],
       },
       {
         type: 'category',

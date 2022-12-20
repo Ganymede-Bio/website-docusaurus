@@ -8,7 +8,7 @@ displayed_sidebar: webUiSidebar
 
 The Flow View page provides access to running `flows` and viewing run history. To run a `flow`, drop a file into the upload box and click the run button on the left side of the run box.
 
-<img alt="Flow view page" src="https://ganymede-bio.mo.cloudinary.net/apiServer/FlowView_20221216.png" />
+<img alt="Flow view page" src="https://ganymede-bio.mo.cloudinary.net/apiServer/FlowView_20221220.png" />
 
 
 ### Watching a Directory
