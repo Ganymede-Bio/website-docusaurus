@@ -53,8 +53,8 @@ module.exports = {
               to: 'docs/About',
             },
             {
-              label: 'Functions',
-              to: 'docs/functions/FunctionOverview'
+              label: 'Nodes',
+              to: 'docs/nodes/NodeOverview'
             },
             {
               label: 'Release Notes',
