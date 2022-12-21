@@ -23,7 +23,8 @@ Ganymede allows users to define a directory that will be watched for new file ad
  - Cumulative mode will select any files in the directory when the watcher is started, the proceed to detect any new creations or modifications
 
  The second setting is the write mode. When a file is detected by the watcher, regardless of mode, it will upload to our system. If a detected file has the same file name as one that already exists in our system for a given flow and input, there are two ways the watcher can move forward. The first is to queue the file already in our system to run. The second is to upload the file into our system with a unique name.
- <img width="521" alt="image" src="https://user-images.githubusercontent.com/111307862/208010181-4b94c040-3c65-49ba-9c84-f137d75636d4.png" />
+<img width="516" alt="image" src="https://user-images.githubusercontent.com/111307862/208987244-9fddd32f-5584-4979-9694-e9c8d8383777.png" />
+
 
  Once the watcher is configured, close out of the modal and click the file icon to select directory. The watcher will now continue to observe that directory until a user refreshes or closes the site.
  
