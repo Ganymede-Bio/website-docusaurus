@@ -2,10 +2,8 @@
 id: NodeOverview
 title: Node Overview
 displayed_sidebar: nodeSidebar
-sidebar_label: Node Overview
+sidebar_label: Overview
 ---
-
-## Nodes
 
 _Nodes_ provide template structure for performing data extraction, processing, and API communication.  The tables below summarize how different _nodes_ work.
 
