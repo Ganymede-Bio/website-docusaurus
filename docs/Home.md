@@ -7,7 +7,7 @@ displayed_sidebar: webUiSidebar
 
 The Home page contains links to previously built _flows_, from which the user can access and run flows.  Clicking on any listed _flow_ brings you to the Flow View page, from which the user can run the selected _flow_ and view historical runs.
 
-![Ganymede App Flow Editor Homepage](https://ganymede-bio.mo.cloudinary.net/apiServer/HomeScreen_20221216.png)
+![Ganymede App Flow Editor Homepage](https://ganymede-bio.mo.cloudinary.net/apiServer/HomeScreen_20221220.png)
 
 The search bar at the top filters the available _flows_ by name.
 

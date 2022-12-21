@@ -31,5 +31,11 @@ Expanding the status box shows a list of nodes with corresponding run statuses i
   - ![#2ECC40](https://placehold.co/2x2/2ECC40/2ECC40.png) **Dark green**: successful run
   - ![#A9A9A9](https://placehold.co/2x2/A9A9A9/A9A9A9.png) **Gray**: queued; awaiting system resource to commence
   - ![#FFFF00](https://placehold.co/2x2/FFFF00/FFFF00.png) **Yellow**: failure to run on at least 1 try; awaiting retry
-  - ![#9932CC](https://placehold.co/2x2/9932CC/9932CC.png) **Pink**: skipped prior to completion; this color may indicate a system resource limitation
+  - ![#9932CC](https://placehold.co/2x2/9932CC/9932CC.png) **Dark Orchid**: skipped prior to completion; this color may indicate a system resource limitation
   - ![#FFA500](https://placehold.co/2x2/FFA500/FFA500.png) **Orange**: dependency for node has failed, preventing this node from being run
+
+:::note
+
+If 
+
+:::
