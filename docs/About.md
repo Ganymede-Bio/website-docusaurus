@@ -49,7 +49,7 @@ The cloud infrastructure supporting data storage and workflow orchestration are 
 
 :::info
 
-By separating code into distinct _nodes_, different _nodes_ can be run in parallel.  _Edges_ between _nodes_ specify dependencies in the execution of different _nodes_.
+By separating code into distinct _nodes_, different _nodes_ can be run in parallel.  _Edges_ between _nodes_ specify the order by which different _nodes_ are run.
 
 :::
 

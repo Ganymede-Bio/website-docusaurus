@@ -52,11 +52,11 @@ module.exports = {
     {
       type: 'doc',
       id: 'nodes/NodeOverview',
-      label: 'Node Overview'
+      label: 'Overview'
     },
     {
       type: 'category',
-      label: 'Node Types',
+      label: 'Node Category',
       collapsed: false,
       items: [nodeAnalysis,
         nodeApp,

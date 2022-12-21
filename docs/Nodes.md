@@ -131,12 +131,12 @@ Tag inputs, in its current state, refer to Benchling tags.  Tenants can be confi
 A list of available _nodes_ and their associated categories can be found by clicking the **New** Button in the header of the Flow Editor page.  
 
 Nodes are classified into the following categories: 
-- **Test**: Useful for either validating platform functionality or for mocking Flows prior to implementation
 - **App**: Processing that involves accessing corresponding third-party APIs; in many cases, key exchange is necessary for using these Functions in Ganymede
 - **Analysis**: Perform Python / SQL manipulations
 - **Instrument**: Instrument-specific functions
 - **File**: Functions to ETL data of specified type into Ganymede cloud
-- **Other**: Unclassified; currently contains _nodes_ for specifying parameters in Flows
+- **Tag**: Functions for specifying parameters at _flow_ runtime
+- **Test**: Useful for either validating platform functionality or for mocking Flows prior to implementation
 
 #### Node characteristics
 
