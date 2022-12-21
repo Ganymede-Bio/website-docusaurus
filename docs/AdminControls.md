@@ -16,16 +16,16 @@ There are four levels of access. They are written in order from least restrictiv
 in the list contain all the access of roles beneath them (admin has all the capabilities of writer but not vise versa)
 
 **Admin**:
-    Manage the environment settings, able to manage access of others. Admins are able to modify, create, and execute _flows_, as well as have access to modify functions.
+    Manage the environment settings, able to manage access of others. Admins are able to create, modify, and execute _flows_.
 
 **Writer**:
-    Can create, run, and modify _flows_. Capable of also editing functions used for _flows_.
+    Can create, modify, and execute _flows_.
 
 **Runner**:
     Can execute _flows_, but cannot modify or create new _flows_.
 
 **Reader**:
-    Are able to see _flows_ and environment settings, but not permitted to execute or alter _flows_.
+    Can execute _flows_ and environment settings, but not permitted to execute or alter _flows_.
 
 ### Access Granularity
 Currently the access is granted to the entire environment. Flow-based access is under active development

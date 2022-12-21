@@ -24,5 +24,3 @@ The notifications table provides the following information per event.
 - **User**: User login triggering the associated event
 
 
-
-

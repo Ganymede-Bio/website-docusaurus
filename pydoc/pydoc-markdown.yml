@@ -30,9 +30,9 @@ processors:
 renderer:
   type: operatorRenderer.OperatorRenderer
   docs_base_path: ../docs
-  relative_output_path: functions
+  relative_output_path: nodes
   relative_sidebar_path: sidebar.json
-  sidebar_top_level_label: Function Documentation
+  sidebar_top_level_label: Node Documentation
   markdown:
     render_module_header: false
     classdef_code_block: false

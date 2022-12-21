@@ -24,9 +24,9 @@ module.exports = {
           position: 'left',
         },
         {
-          to: 'docs/functions/FunctionOverview',
+          to: 'docs/nodes/NodeOverview',
           routeBasePath: '/',
-          label: 'Functions',
+          label: 'Nodes',
           position: 'left',
         },
         {
@@ -53,8 +53,8 @@ module.exports = {
               to: 'docs/About',
             },
             {
-              label: 'Functions',
-              to: 'docs/functions/FunctionOverview'
+              label: 'Nodes',
+              to: 'docs/nodes/NodeOverview'
             },
             {
               label: 'Release Notes',
