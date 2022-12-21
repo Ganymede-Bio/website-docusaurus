@@ -56,6 +56,6 @@ popd
 
 ## License
 
-[MIT](https://github.com/Ganymede-Bio/website-docusaurus/blob/main/LICENSE)
+[Apache 2.0](https://github.com/Ganymede-Bio/website-docusaurus/blob/main/LICENSE)
 
 Ganymede Documentation is developed using [Docusaurus](https://docusaurus.io/)
