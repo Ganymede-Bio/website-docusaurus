@@ -7,6 +7,16 @@ sidebar_label: Overview
 
 _Nodes_ provide template structure for performing data extraction, processing, and API communication.  The tables below summarize how different _nodes_ work.
 
+### Node categories
+
+Nodes are classified into the following categories: 
+- **App**: Accesses third-party APIs for processing; in many cases, key exchange between third-party and Ganymede are necessary for functionality
+- **Analysis**: Performs Python / SQL manipulations
+- **Instrument**: Lab instrument-specific functions
+- **File**: For ETL operations on data of specified type into Ganymede cloud
+- **Tag**: For specifying parameters at _flow_ runtime
+- **Test**: For validating platform functionality or for mocking Flows prior to implementation
+
 ### Node Description
 
 | Category   | Name                       | Brief Description                                                  |
