@@ -24,6 +24,6 @@ The sidebar contains links to the rest of the app.  The top part of the sidebar 
 
 The bottom part of the sidebar contains documentation and pages for administering access to Ganymede.
 
-- **Docs**: Link to Ganymede's documentation, which can also be accessed directly at [https://docs.ganymede.bio/](https://docs.ganymede.bio/) 
+- **Docs**: Link to Ganymede's documentation, which can also be accessed directly at [docs.ganymede.bio](https://docs.ganymede.bio/) 
 - [**Admin**](./AdminControls.md): Panel for configuring levels of access for different individuals
 - **Log Out**: Log out from Ganymede cloud
