@@ -26,7 +26,7 @@ class OperatorRenderer(DocusaurusRenderer):
     def custom_header(self, fp: t.TextIO, level: int, obj: docspec.ApiObject):
         if not isinstance(obj, docspec.Class):
             self.render_header(fp, level, obj)
-            
+
         # if isinstance(obj, docspec.Class):
         #     # If this is a class definition, use it as the header
         #     # see https://github.com/NiklasRosenstein/pydoc-markdown/blob/b15127e3c643976e71a10c7fa4d03297ee616542/src/pydoc_markdown/contrib/renderers/docusaurus.py#L31

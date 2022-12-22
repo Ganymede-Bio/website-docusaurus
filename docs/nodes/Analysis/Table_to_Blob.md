@@ -4,9 +4,6 @@ title: Table_to_Blob
 displayed_sidebar: nodeSidebar
 ---
 
-Parse table data and writes to storage
-
-**Arguments**:
-
-- `output_table_data_desc`: table describing objects moved
-
+Retrieves table(s) from Ganymede data lake, processes via user-defined function,
+and writes result to storage bucket.  The user-defined function returns key-value
+pairs in which keys specify file path in cloud storage and values are objects to store.

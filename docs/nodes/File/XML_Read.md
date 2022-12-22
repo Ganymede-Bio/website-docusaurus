@@ -4,9 +4,10 @@ title: XML_Read
 displayed_sidebar: nodeSidebar
 ---
 
-XMLRead - Read in the content of an XML file and store the results in the data lake
+Reads an XML file and stores processed results in data lake
+Reads an XML file, processes via user-defined function, and stores result
+table in Ganymede data lake
 
-**Arguments**:
-
-- `output_table_results`: Table name where parsed XML data will be stored.
-
+### Parameters
+- **output_table_results** : `str`
+  - Table name where parsed XML data will be stored.

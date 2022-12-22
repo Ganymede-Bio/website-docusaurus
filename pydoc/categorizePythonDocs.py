@@ -2,13 +2,65 @@ import os
 import yaml
 import json
 import shutil
+import re
+
+keywords = ['Parameters', 'Notes', 'Returns', 'Yields']
+
+
+def extract_docstring(filename, remove_spaces=4):
+    """
+    Extracts docstring from Ganymede operator class
+    """
+    docstrings = []
+    is_comment = False
+    lines = open(filename, 'r').readlines()
+    current_table = None
+
+    for prev_line, line in zip(lines[:-1], lines[1:]):
+        line = line[remove_spaces:]
+        line_stripped = line.strip()
+
+        if prev_line.startswith('class') and line_stripped.startswith('"""'):
+            is_comment = True
+            continue
+        elif line_stripped.endswith('"""') and is_comment:
+            is_comment = False
+            break
+        elif prev_line.strip() in keywords and line.strip() == "-" * len(prev_line.strip()):
+            cleaned_docstring = prev_line[remove_spaces:].strip()
+            docstrings[-1] = f"\n### {cleaned_docstring}"
+            current_table = cleaned_docstring
+        elif is_comment:
+            if re.search(r'^\w+ : \w+$', line):
+                params = [val.strip() for val in line.split(':')]
+                docstrings.append(f"- **{params[0]}**" + " : " + f"`{params[1]}`")
+            else:
+                if current_table:
+                    table_record = re.findall(r"^( +)(.+)", line)
+                    
+                    if not table_record:
+                        docstrings.append(line_stripped)
+                        continue
+                    table_record = table_record[0]
+                    
+                    num_spaces = len(table_record[0]) // remove_spaces
+                    if current_table != 'Parameters':
+                        num_spaces -= 1
+                    
+                    docstring_line = max(num_spaces, 0) * "  " + "- " + table_record[1]
+                    docstrings.append(docstring_line)
+                else:
+                    docstrings.append(line_stripped)
+    return [line for line in docstrings if line != '']
+
 
 if __name__ == "__main__":
-    """Generates sidebars for Nodes"""
+    """Generates sidebars for nodes"""
 
     markdown_dir = '../docs/nodes'
+    operators_dir = '../core-operators'
 
-    with open('../core-operators/operators.yaml', 'r') as operators_yaml:
+    with open(os.path.join(operators_dir, 'operators.yaml'), 'r') as operators_yaml:
         operators = yaml.safe_load(operators_yaml)
 
     for path in os.listdir(markdown_dir):
@@ -18,20 +70,15 @@ if __name__ == "__main__":
     # copy markdown files to subdirectory by operator type
     missing_files = []
     for name, desc in operators.items():
-        src_filename = desc['path'].split('.')[-2]
+        src_filename = os.path.join(operators_dir, "/".join(desc['path'].split('.')[1:-1])) + ".py"
+        print(f"processing {src_filename}...")
 
-        src = os.path.join(markdown_dir, f'{src_filename}.md')
+        dest_dir = os.path.join(markdown_dir, desc['type'])
+        if not os.path.exists(dest_dir):
+            os.makedirs(dest_dir)
 
-        if not os.path.exists(src):
-            missing_files.append(src_filename)
-            print(f'Warning: {src} does not exist; markdown file for {src} not copied..')
-            continue
-
-        with open(src, 'r') as src_file:
-            dest_dir = os.path.join(markdown_dir, desc['type'])
-            if not os.path.exists(dest_dir):
-                os.makedirs(dest_dir)
-            src_data = src_file.read()
+        src_data_list = extract_docstring(src_filename)
+        src_data = "\n".join(src_data_list)
 
         with open(os.path.join(dest_dir, f'{name}.md'), 'w') as dest_file:
             header = ("---\n"
