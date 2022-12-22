@@ -4,12 +4,10 @@ title: Transform_py
 displayed_sidebar: nodeSidebar
 ---
 
-Runs python-based analysis on the results of a SQL query
-This Function takes as input the results of the SQL query, which is specified at the top of the Function notebook.
-The SQL query results are passed to the execute function as a [`pandas.DataFrame`](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html).
-The results of this Function are saved as a table with the table name specified *output_table_analysis*.
-```python
-def execute(df_sql_result: pd.DataFrame) -> pd.DataFrame:
-... Your code goes here ...
-```
-:param output_table_analysis: table name where the function results will be stored.
+Runs user-defined Python function on results of query on Ganymede data lake.
+Retrieves table(s) from Ganymede data lake, processes via user-defined Python function,
+and stores result table(s) to Ganymede data lake.
+
+### Parameters
+- **output_table_analysis** : `str`
+  - Table displayed on Table Head

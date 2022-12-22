@@ -4,6 +4,10 @@ title: Placeholder
 displayed_sidebar: nodeSidebar
 ---
 
-Placeholder Function; useful for laying out components of Flow
-:param input: string for describing node inputs
-:param output_info: string for describing node outputs
+Placeholder Function; intended to be used as a placeholder node while designing flows.
+
+### Parameters
+- **input** : `str`
+  - string to provide example of node inputs
+- **output_info** : `str`
+  - string to proide example of node outputs
