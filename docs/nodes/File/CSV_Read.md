@@ -4,9 +4,11 @@ title: CSV_Read
 displayed_sidebar: nodeSidebar
 ---
 
-Reads in the content of a CSV
+Reads contents of a CSV file into data lake
+
 The contents of CSV file are passed to the user-defined function, which
 return one or more tables for storage in Ganymede data lake.
+
 
 ### Parameters
 - **input_file_csv** : `str`

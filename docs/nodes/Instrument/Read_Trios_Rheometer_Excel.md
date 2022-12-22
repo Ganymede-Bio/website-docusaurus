@@ -4,8 +4,12 @@ title: Read_Trios_Rheometer_Excel
 displayed_sidebar: nodeSidebar
 ---
 
-Reads Trios output data tables from (in Excel format, with each tab denoting a separate run),
-and uploads files to data lake.
+Reads Trios Rheometer output data tables and uploads files to data lake.
+
+Reads Trios data output in Excel format, with data for each run stored as a tab on an excel
+file.  The contents of the file are passed to a user-defined function for processing, which
+returns a table for storage in the Ganymede data lake.
+
 
 ### Parameters
 - **input_file_excel** : `str`

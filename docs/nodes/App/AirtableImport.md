@@ -6,6 +6,7 @@ displayed_sidebar: nodeSidebar
 
 Retrieves Airtable table and uploads data to Ganymede data lake.
 
+
 ### Parameters
 - **output_table_ganymede_table** : `str`
   - Table in Ganymede data lake to store results of pulling Airtable table
@@ -13,6 +14,7 @@ Retrieves Airtable table and uploads data to Ganymede data lake.
   - Base ID used in Airtable API
 - **airtable_id** : `str`
   - ID used in Airtable API
+
 
 ### Notes
 A bearer token from Airtable is required to enable Airtable access.

@@ -6,6 +6,7 @@ displayed_sidebar: nodeSidebar
 
 Read files from Azure Blob Storage into data lake.
 
+
 ### Parameters
 - **src_azure_container_name** : `str`
   - Azure container name to pull from
@@ -13,6 +14,7 @@ Read files from Azure Blob Storage into data lake.
   - Azure blob name to pull
 - **dest_blob_name** : `str`
   - GCP blob name to store
+
 
 ### Notes
 Prior to usage, Azure Blob Storage must be configured to permit Ganymede access.  This requires

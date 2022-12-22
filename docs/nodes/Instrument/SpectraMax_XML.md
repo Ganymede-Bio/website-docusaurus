@@ -4,7 +4,8 @@ title: SpectraMax_XML
 displayed_sidebar: nodeSidebar
 ---
 
-Parse SpectraMax XML file and upload instrument metadata and data to data lake
+Parses SpectraMax XML file and uploads contents to data lake
+
 
 ### Parameters
 - **input_file_xml** : `str`

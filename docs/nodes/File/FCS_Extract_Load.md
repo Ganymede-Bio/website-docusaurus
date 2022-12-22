@@ -5,7 +5,9 @@ displayed_sidebar: nodeSidebar
 ---
 
 Function for reading Flow Cytometry Standard (FCS) files into Ganymede data lake
+
 The fcsparser python package is used to parse FCS files into metadata and data
+
 
 ### Parameters
 - **input_file_fcs** : `str`
@@ -21,11 +23,14 @@ output_table_metadata_fcs :str
   - table containing flow cytometer channel metadata
   - (e.g. - fluoresence marker, amplifier gain, FSC vs. SSC)
 
+
 ### Notes
 *data* contains a record for each flow cytometer detection event
 - (generally passage of single cell past detector); for each event, a value is recorded for
 - each channel
+
 *metadata* comprises of the following components:
+
 - header: contains FCS version number and bytes corresponding to where binary positions of text, data, and analysis in FCS file.
   - FCS format: FCS version number
   - text start: byte offset to the beginning of the TEXT segment
@@ -34,6 +39,7 @@ output_table_metadata_fcs :str
   - data end: byte offset to the last byte of the DATA segment
   - analysis start: byte offset to the beginning of the ANALYSIS segment
   - analysis end: byte offset to the last byte of the ANALYSIS segment
+
 - sys_metadata: contains system metadata
   - BEGINANALYSIS: byte offset to the beginning of the TEXT segment
   - BEGINDATA: byte offset to the beginning of the DATA segment
@@ -54,6 +60,7 @@ output_table_metadata_fcs :str
   - SRC: source of specimen (e.g. - patient name, cell types)
   - SYS: type of computer and its operating system
   - TOT: Number of events in the dataset
+
 - channels: contains TEXT segment metadata - information for each flow cytometer channel, which are referred to as "parameter" in FCS parlance
   - PnN: name for parameter n
   - PnR: range of values for parameter n
@@ -61,4 +68,5 @@ output_table_metadata_fcs :str
   - PnE: amplification type for parameter n
   - PnG: amplifier gain used for acquisition of parameter n
   - PnB: number of bits reserved for parameter n
+
 - channel_names: names for each channel

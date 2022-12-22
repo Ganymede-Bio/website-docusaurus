@@ -51,7 +51,7 @@ def extract_docstring(filename, remove_spaces=4):
                     docstrings.append(docstring_line)
                 else:
                     docstrings.append(line_stripped)
-    return [line for line in docstrings if line != '']
+    return docstrings
 
 
 if __name__ == "__main__":

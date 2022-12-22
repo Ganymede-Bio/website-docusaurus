@@ -4,6 +4,7 @@ title: Powerpoint_Write
 displayed_sidebar: nodeSidebar
 ---
 
-Parse table data and writes Powerpoint to storage bucket
+Parses table data and writes Powerpoint output to storage.
+
 Retrieves one or more tables from Ganymede data lake, processes via user-defined function,
 and writes powerpoint output to Ganymede cloud storage.

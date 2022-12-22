@@ -5,6 +5,7 @@ displayed_sidebar: nodeSidebar
 ---
 
 Parse profilometer data from Mx Software and upload contents to data lake.
+
 - **input_file_datx** : `str`
 file extension of input data file
 - **output_table_image** : `str`

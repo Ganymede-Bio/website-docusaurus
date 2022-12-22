@@ -5,7 +5,8 @@ displayed_sidebar: nodeSidebar
 ---
 
 Reads input parameter into Flow. Useful when downstream nodes need
-access to a string input param.
+access to a input parameter specified by the _flow_ runner.
+
 
 ### Parameters
 - **input_string_param** : `str`

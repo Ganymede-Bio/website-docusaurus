@@ -4,9 +4,11 @@ title: Image_Read
 displayed_sidebar: nodeSidebar
 ---
 
-Ingest and process image data
+Ingests and processes an image file
+
 Takes an image as input, processes via user-defined function, and stores a dict of processed
 image(s) to the storage bucket
+
 
 ### Parameters
 - **input_file_image** : `str`

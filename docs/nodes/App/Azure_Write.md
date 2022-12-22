@@ -6,6 +6,7 @@ displayed_sidebar: nodeSidebar
 
 Write files from data lake to Azure Blob Storage.
 
+
 ### Parameters
 - **src_object_name** : `str`
   - Data lake object to write
@@ -13,6 +14,7 @@ Write files from data lake to Azure Blob Storage.
   - Destination Azure container to write to
 - **dest_azure_blob_name** : `str`
   - Destination Azure blob name to write to
+
 
 ### Notes
 Prior to usage, Azure Blob Storage must be configured to permit Ganymede access.  This requires
