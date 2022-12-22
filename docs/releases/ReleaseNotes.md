@@ -8,6 +8,18 @@ displayed_sidebar: releaseSideBar
 
 Ganymede releases generally occur on Thursdays each week.
 
+### Dec 22 2022
+
+**Platform administration**
+- Data environment secrets are now user-manageable by environment Admins
+
+**Data Explorer**
+- SQL Editor is now available
+
+**File upload**
+- If a file uploaded from user’s local machine already exists in Ganymede, user has ability to choose to use the existing file in Ganymede, or to store a new version with a unique ID added to file name
+
+
 ### Dec 15 2022
 
 **Notebooks improved**

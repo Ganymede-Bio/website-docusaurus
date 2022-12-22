@@ -4,12 +4,14 @@ title: CSV_Read
 displayed_sidebar: nodeSidebar
 ---
 
-Reads in the content of a CSV storing the results
+Reads contents of a CSV file into data lake
 
-The CSV data will be run through a python function for any processing prior to storage.
+The contents of CSV file are passed to the user-defined function, which
+return one or more tables for storage in Ganymede data lake.
 
-**Arguments**:
 
-- `input_file_csv`: File extension on CSV file
-- `output_table_results`: Table name where the CSV data will be stored.
-
+### Parameters
+- **input_file_csv** : `str`
+  - File extension on CSV file
+- **output_table_results** : `str`
+  - Table to display on Table Head in Flow Editor

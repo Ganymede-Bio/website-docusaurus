@@ -4,9 +4,12 @@ title: Excel_Write
 displayed_sidebar: nodeSidebar
 ---
 
-Writes a table or set of tables as an excel spreadsheet
+Writes a table or set of tables as an Excel spreadsheet.
 
-**Arguments**:
+Retrieves one or more tables from Ganymede data lake, processes via user-defined function,
+and writes output to specified Excel spreadsheet.
 
-- `output_table_analysis`: table name where the function results will be stored.
 
+### Parameters
+- **output_spreadsheet_name** : `str`
+  - spreadsheet name to write to storage bucket

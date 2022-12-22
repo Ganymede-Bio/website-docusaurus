@@ -4,10 +4,15 @@ title: Excel_Read
 displayed_sidebar: nodeSidebar
 ---
 
-Reads Excel files and upload to data lake
+Reads Excel file and uploads processed result to data lake
 
-**Arguments**:
+Ingests one Excel file, which is passed to the user-defined function as a bytes object
+for processing.  The user-defined function returns one or more tables, which are
+uploaded to the Ganymede data lake.
 
-- `input_file_excel`: file extension on excel file
-- `output_table_results`: data lake table to write to
 
+### Parameters
+- **input_file_excel** : `str`
+  - File extension on excel file
+- **output_table_results** : `str`
+  - Data lake table to write to

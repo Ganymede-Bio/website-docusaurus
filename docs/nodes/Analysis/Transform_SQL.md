@@ -4,11 +4,9 @@ title: Transform_SQL
 displayed_sidebar: nodeSidebar
 ---
 
-Function for performing table operations using a user-specified SQL query.
+Runs SQL query on data lake
 
-This Function runs a SQL query, writing the results of the query to the table specified in *output_table_sql_result*.
 
-**Arguments**:
-
-- `output_table_sql_result`: Table name where the query results will be stored.
-
+### Parameters
+- **output_table_sql_result** : `str`
+  - Table name where the query results will be stored.

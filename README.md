@@ -48,7 +48,6 @@ Fetch the latest operators and generate the docs
 git submodule update --recursive --remote --init
 pushd pydoc
 source env/bin/activate
-PYTHONPATH=$PYTHONPATH:. pydoc-markdown -v
 python categorizePythonDocs.py
 deactivate
 popd

@@ -4,12 +4,14 @@ title: Image_Read
 displayed_sidebar: nodeSidebar
 ---
 
-Ingest image data and process
+Ingests and processes an image file
 
-This Function takes an image as input and stores a set of processed images to the data store
+Takes an image as input, processes via user-defined function, and stores a dict of processed
+image(s) to the storage bucket
 
-**Arguments**:
 
-- `input_file_image`: file extension of image file
-- `output_table_image_info`: table to write metadata into
-
+### Parameters
+- **input_file_image** : `str`
+  - file extension of image file
+- **output_table_image_info** : `str`
+  - table to write metadata into

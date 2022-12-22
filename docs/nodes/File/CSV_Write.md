@@ -4,9 +4,13 @@ title: CSV_Write
 displayed_sidebar: nodeSidebar
 ---
 
-Writes a table or set of tables as an excel spreadsheet
+Writes 1 table from data lake to CSV
 
-**Arguments**:
+Retrieves one or more tables from Ganymede data lake, which the user-defined function processes
+to a single table.  The table returned by the user-defined function is saved in the Ganymede
+data lake.
 
-- `output_table_analysis`: table name where the function results will be stored.
 
+### Parameters
+- **output_csv_filename** : `str`
+  - name of output CSV file
