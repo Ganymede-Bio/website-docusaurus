@@ -22,7 +22,7 @@ A useful way to interact with nodes is to consider input and output types of nod
 in the table below, along with whether there is a user-editable component associated with the node.
 
 Input/output types are split into the following categories:
-- **Table**: tabular data retrieved from or passed to tenant-specific Ganymede data lake
+- **Table**: Tabular data retrieved from or passed to tenant-specific Ganymede data lake.  Tables are retrieved from Ganymede data lake via ANSI SQL queries, and are passed to Ganymede data lake as pandas DataFrames
 - **API**: access via third-party API
 - **File-related inputs/outputs**: File of specified type
   - **FileCSV**: CSV file
@@ -33,6 +33,10 @@ Input/output types are split into the following categories:
   - **FileAny**: generic data file, which may be unstructured
 - **TagBenchling**: Benchling run tag
 - **string**: String parameter
+
+**List** and **Dict** correspond to Python lists and dictionaries respectively.
+
+**Optional** indicates that the input or output is optional.
 
 | Category   | Name                       | Input Types                                | Output Types         | Is Editable   |
 |------------|----------------------------|--------------------------------------------|----------------------|---------------|
