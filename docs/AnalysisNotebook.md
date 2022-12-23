@@ -4,7 +4,7 @@ sidebar_label: Analysis Notebooks
 displayed_sidebar: webUiSidebar
 ---
 
-Analysis notebooks are Jupyter notebooks that enable access to data uploaded to the Ganymede Cloud data lake as part of a _flow_ run.  A fresh notebook instantiation has templates to retrieve data and save notebooks.  To access a fresh notebook instance, on the Flow Editor page, click on the **Analysis** button in the header and `new-notebook`.  The image below shows an example of what this notebook would contain:
+Analysis notebooks are Jupyter notebooks that enable access to data uploaded to the Ganymede Cloud data lake as part of a _flow_ run.  A fresh notebook instantiation has templates to retrieve data and save notebooks.  To access a fresh notebook instance, on the Flow Editor page, click on the **Analysis** button in the header and select `new-notebook`.  The image below shows an example of what this notebook would contain:
 
 ![Ganymede Notebook](https://ganymede-bio.mo.cloudinary.net/apiServer/%20GanymedeNotebook_20220824.png)
 
