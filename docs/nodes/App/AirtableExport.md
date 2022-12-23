@@ -4,16 +4,17 @@ title: AirtableExport
 displayed_sidebar: nodeSidebar
 ---
 
+## Operator
 Reads 1 table from Ganymede data lake and uploads to Airtable.
 
 
 ### Parameters
 - **input_table_bq** : `str`
-  - Table from data lake to read in
+    - Table from data lake to read in
 - **airtable_base_id** : `str`
-  - Base ID used in Airtable API
+    - Base ID used in Airtable API
 - **airtable_id** : `str`
-  - ID used in Airtable API
+    - ID used in Airtable API
 
 
 ### Notes
