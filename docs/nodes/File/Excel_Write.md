@@ -4,16 +4,16 @@ title: Excel_Write
 displayed_sidebar: nodeSidebar
 ---
 
-## Operator
+### Node Operator
 Writes a table or set of tables as an Excel spreadsheet.
 
 Retrieves one or more tables from Ganymede data lake, processes via user-defined function,
 and writes output to specified Excel spreadsheet.
 
 
-### Parameters
-- **output_spreadsheet_name** : `str`
-    - spreadsheet name to write to storage bucket
+### Node Attributes
+- **output_spreadsheet_name**
+  - spreadsheet name to write to storage bucket
 ## User-Defined Python
 Graphs table(s) from SQL query and stores graphs in cloud storage.
 

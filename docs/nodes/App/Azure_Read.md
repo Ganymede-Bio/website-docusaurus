@@ -4,17 +4,17 @@ title: Azure_Read
 displayed_sidebar: nodeSidebar
 ---
 
-## Operator
+### Node Operator
 Read files from Azure Blob Storage into data lake.
 
 
-### Parameters
-- **src_azure_container_name** : `str`
-    - Azure container name to pull from
-- **src_azure_blob_name** : `str`
-    - Azure blob name to pull
-- **dest_blob_name** : `str`
-    - GCP blob name to store
+### Node Attributes
+- **src_azure_container_name**
+  - Azure container name to pull from
+- **src_azure_blob_name**
+  - Azure blob name to pull
+- **dest_blob_name**
+  - GCP blob name to store
 
 
 ### Notes

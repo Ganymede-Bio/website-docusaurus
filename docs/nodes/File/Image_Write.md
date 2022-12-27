@@ -4,16 +4,16 @@ title: Image_Write
 displayed_sidebar: nodeSidebar
 ---
 
-## Operator
+### Node Operator
 Parse table data and writes to storage.  Useful for storing graphs created from data.
 
 Retrieves table(s) from Ganymede data lake, processes table(s) via user-defined function,
 and stores result in cloud storages
 
 
-### Parameters
-- **output_table_data_desc** : `str`
-    - Table describing objects to be moved
+### Node Attributes
+- **output_table_data_desc**
+  - Table describing objects to be moved
 ## User-Defined Python
 Process image data into a dictionary of images indexed by filename to save in cloud storage
 

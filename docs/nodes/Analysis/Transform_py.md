@@ -4,16 +4,16 @@ title: Transform_py
 displayed_sidebar: nodeSidebar
 ---
 
-## Operator
+### Node Operator
 Runs user-defined Python function on results of query on Ganymede data lake.
 
 Retrieves table(s) from Ganymede data lake, processes via user-defined Python function,
 and stores result table(s) to Ganymede data lake.
 
 
-### Parameters
-- **output_table_analysis** : `str`
-    - Table displayed on Table Head
+### Node Attributes
+- **output_table_analysis**
+  - Table displayed on Table Head
 ## User-Defined Python
 Process tabular data from user-defined SQL query, writing results back to data lake
 

@@ -4,17 +4,17 @@ title: Azure_Write
 displayed_sidebar: nodeSidebar
 ---
 
-## Operator
+### Node Operator
 Write files from data lake to Azure Blob Storage.
 
 
-### Parameters
-- **src_object_name** : `str`
-    - Data lake object to write
-- **dest_azure_container_name** : `str`
-    - Destination Azure container to write to
-- **dest_azure_blob_name** : `str`
-    - Destination Azure blob name to write to
+### Node Attributes
+- **src_object_name**
+  - Data lake object to write
+- **dest_azure_container_name**
+  - Destination Azure container to write to
+- **dest_azure_blob_name**
+  - Destination Azure blob name to write to
 
 
 ### Notes

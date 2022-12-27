@@ -4,7 +4,7 @@ title: CSV_Write
 displayed_sidebar: nodeSidebar
 ---
 
-## Operator
+### Node Operator
 Writes 1 table from data lake to CSV
 
 Retrieves one or more tables from Ganymede data lake, which the user-defined function processes
@@ -12,9 +12,9 @@ to a single table.  The table returned by the user-defined function is saved in 
 data lake.
 
 
-### Parameters
-- **output_csv_filename** : `str`
-    - name of output CSV file
+### Node Attributes
+- **output_csv_filename**
+  - name of output CSV file
 ## User-Defined Python
 Process table(s) resulting from user-defined SQL query into CSV file
 

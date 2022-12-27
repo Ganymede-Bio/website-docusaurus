@@ -4,13 +4,15 @@ title: Profilometer_Read
 displayed_sidebar: nodeSidebar
 ---
 
-## Operator
+### Node Operator
 Parse profilometer data from Mx Software and upload contents to data lake.
 
-- **input_file_datx** : `str`
-file extension of input data file
-- **output_table_image** : `str`
-location to write processed data file to
+
+### Node Attributes
+- **input_file_datx**
+  - file extension of input data file
+- **output_table_image**
+  - location to write processed data file to
 ## User-Defined Python
 Processes h5data into bytes object for saving in cloud storage
 

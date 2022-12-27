@@ -4,15 +4,15 @@ title: S3_Write
 displayed_sidebar: nodeSidebar
 ---
 
-## Operator
+### Node Operator
 Sync GCS bucket -> S3 bucket
 
 
-### Parameters
-- **src_object_name** : `str`
-    - Data lake object to write
-- **dest_s3_key** : `str`
-    - destination S3 key to write to
+### Node Attributes
+- **src_object_name**
+  - Data lake object to write
+- **dest_s3_key**
+  - destination S3 key to write to
 
 
 ### Notes

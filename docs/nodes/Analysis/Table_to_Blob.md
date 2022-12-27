@@ -4,7 +4,7 @@ title: Table_to_Blob
 displayed_sidebar: nodeSidebar
 ---
 
-## Operator
+### Node Operator
 Processes data table(s) into blobs
 
 Retrieves table(s) from Ganymede data lake, processes via user-defined function,

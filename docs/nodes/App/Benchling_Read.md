@@ -4,7 +4,7 @@ title: Benchling_Read
 displayed_sidebar: nodeSidebar
 ---
 
-## Operator
+### Node Operator
 Reads Benchling data specified by Benchling run tag.
 
 Passes Benchling run tag to user-defined function and uploads tabular output
@@ -17,9 +17,9 @@ to retrieve data and process data into table(s), which are uploaded to the Ganym
 data lake.
 
 
-### Parameters
-- **output_table_results** : `str`
-    - Name of data lake table to write results to
+### Node Attributes
+- **output_table_results**
+  - Name of data lake table to write results to
 
 
 ### Notes

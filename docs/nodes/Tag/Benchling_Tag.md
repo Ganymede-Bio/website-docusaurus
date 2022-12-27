@@ -4,13 +4,13 @@ title: Benchling_Tag
 displayed_sidebar: nodeSidebar
 ---
 
-## Operator
+### Node Operator
 Associates a Benchling run tag with a Flow run
 
 
-### Parameters
-- **input_tag_benchling** : `str`
-    - Benchling run tag to associate with flow run
+### Node Attributes
+- **input_tag_benchling**
+  - Benchling run tag to associate with flow run
 
 
 ### Notes

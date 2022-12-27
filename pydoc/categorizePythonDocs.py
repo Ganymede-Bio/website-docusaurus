@@ -5,7 +5,7 @@ import shutil
 import re
 from typing import List
 
-keywords = ['Parameters', 'Notes', 'Returns', 'Yields', 'Raises']
+keywords = ['Parameters', 'Notes', 'Returns', 'Yields', 'Raises', 'Node Attributes']
 
 
 def extract_docstring(filename: str, search_str: str = 'class', python_spaces: str = 4) -> List:
@@ -58,6 +58,8 @@ def extract_docstring(filename: str, search_str: str = 'class', python_spaces: s
 
                     if current_table == 'Notes':
                         docstring_line = table_record[1].strip()
+                    elif current_table == 'Node Attributes' and num_spaces == 0:
+                        docstring_line = num_spaces * "  " + "- **" + table_record[1].strip() + "**"
                     else:
                         docstring_line = max(num_spaces, 0) * "  " + "- " + table_record[1]
                     docstrings.append(docstring_line)
@@ -90,7 +92,7 @@ if __name__ == "__main__":
             os.makedirs(dest_dir)
 
         operator_data_list = extract_docstring(operator_filename, search_str='class')
-        operator_data = "## Operator\n" + "\n".join(operator_data_list)
+        operator_data = "### Node Operator\n" + "\n".join(operator_data_list)
 
         action_data = ""
         if 'action' in desc:

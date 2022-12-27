@@ -4,10 +4,10 @@ title: Transform_SQL
 displayed_sidebar: nodeSidebar
 ---
 
-## Operator
+### Node Operator
 Runs SQL query on data lake
 
 
-### Parameters
-- **output_table_sql_result** : `str`
-    - Table name where the query results will be stored.
+### Node Attributes
+- **output_table_sql_result**
+  - Table name where the query results will be stored.

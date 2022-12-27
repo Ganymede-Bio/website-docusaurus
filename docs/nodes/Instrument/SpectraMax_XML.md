@@ -4,17 +4,17 @@ title: SpectraMax_XML
 displayed_sidebar: nodeSidebar
 ---
 
-## Operator
+### Node Operator
 Parses SpectraMax XML file and uploads contents to data lake
 
 
-### Parameters
-- **input_file_xml** : `str`
-    - File extension of input XML file
-- **output_table_metadata** : `str`
-    - Table name for metadata associated with SpectraMax run
-- **output_table_results** : `str`
-    - Table name for SpectraMax core data
+### Node Attributes
+- **input_file_xml**
+  - File extension of input XML file
+- **output_table_metadata**
+  - Table name for metadata associated with SpectraMax run
+- **output_table_results**
+  - Table name for SpectraMax core data
 ## User-Defined Python
 Processes Quantigene data into tables for storage in data lake
 

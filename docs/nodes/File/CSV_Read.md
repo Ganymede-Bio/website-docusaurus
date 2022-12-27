@@ -4,18 +4,18 @@ title: CSV_Read
 displayed_sidebar: nodeSidebar
 ---
 
-## Operator
+### Node Operator
 Reads contents of a CSV file into data lake
 
 The contents of CSV file are passed to the user-defined function, which
 return one or more tables for storage in Ganymede data lake.
 
 
-### Parameters
-- **input_file_csv** : `str`
-    - File extension on CSV file
-- **output_table_results** : `str`
-    - Table to display on Table Head in Flow Editor
+### Node Attributes
+- **input_file_csv**
+  - File extension on CSV file
+- **output_table_results**
+  - Table to display on Table Head in Flow Editor
 ## User-Defined Python
 Processes CSV file(s) (passed to function as BytesIO file-like objects) into data tables
 stored in data lake

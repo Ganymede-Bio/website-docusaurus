@@ -4,25 +4,25 @@ title: FCS_Extract_Load
 displayed_sidebar: nodeSidebar
 ---
 
-## Operator
+### Node Operator
 Function for reading Flow Cytometry Standard (FCS) files into Ganymede data lake
 
 The fcsparser python package is used to parse FCS files into metadata and data
 
 
-### Parameters
-- **input_file_fcs** : `str`
-    - file extension of FCS file
-  - output_table_data :str
-    - table to write core FCS data to
-  - output_table_metadata_file :str
-    - table to write FCS file metadata to (position of different file elements)
-  - output_table_metadata_fcs :str
-    - table to write flow cytometer system metadata to
-    - (e.g. - # of events detected, flow cytometer type)
-- **output_table_metadata_channels** : `str`
-    - table containing flow cytometer channel metadata
-    - (e.g. - fluoresence marker, amplifier gain, FSC vs. SSC)
+### Node Attributes
+- **input_file_fcs**
+  - file extension of FCS file
+- **output_table_data**
+  - table to write core FCS data to
+- **output_table_metadata_file**
+  - table to write FCS file metadata to (position of different file elements)
+- **output_table_metadata_fcs**
+  - table to write flow cytometer system metadata to
+  - (e.g. - # of events detected, flow cytometer type)
+- **output_table_metadata_channels**
+  - table containing flow cytometer channel metadata
+  - (e.g. - fluoresence marker, amplifier gain, FSC vs. SSC)
 
 
 ### Notes

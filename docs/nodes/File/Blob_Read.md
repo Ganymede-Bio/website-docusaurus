@@ -4,16 +4,16 @@ title: Blob_Read
 displayed_sidebar: nodeSidebar
 ---
 
-## Operator
+### Node Operator
 Retrieves blob data for processing by user-defined function and uploads
 result to Ganymede cloud storage.
 
 
-### Parameters
-- **output_data** : `str`
-    - Filename to be written to storage bucket
-- **input_file_object** : `obj`
-    - Data to be written to storage bucket
+### Node Attributes
+- **output_data**
+  - Filename to be written to storage bucket
+- **input_file_object**
+  - Data to be written to storage bucket
 ## User-Defined Python
 Processes blob data for saving in cloud storage
 

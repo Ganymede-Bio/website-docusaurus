@@ -4,7 +4,7 @@ title: Benchling_Write
 displayed_sidebar: nodeSidebar
 ---
 
-## Operator
+### Node Operator
 Writes to Benchling via API
 
 Pulls table from data lake based on SQL query provided, applies user-defined logic,

@@ -4,10 +4,10 @@ title: GanymedeEcho
 displayed_sidebar: nodeSidebar
 ---
 
-## Operator
+### Node Operator
 Function used for testing; echos input to logs
 
 
-### Parameters
-- **echo_str** : `str`
-    - string to be written to run log
+### Node Attributes
+- **echo_str**
+  - string to be written to run log

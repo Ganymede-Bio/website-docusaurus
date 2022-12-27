@@ -4,7 +4,7 @@ title: Read_Trios_Rheometer_Excel
 displayed_sidebar: nodeSidebar
 ---
 
-## Operator
+### Node Operator
 Reads Trios Rheometer output data tables and uploads files to data lake.
 
 Reads Trios data output in Excel format, with data for each run stored as a tab on an excel
@@ -12,11 +12,11 @@ file.  The contents of the file are passed to a user-defined function for proces
 returns a table for storage in the Ganymede data lake.
 
 
-### Parameters
-- **input_file_excel** : `str`
-    - file extension of input excel file
-- **output_table_results** : `str`
-    - data lake table to write to
+### Node Attributes
+- **input_file_excel**
+  - file extension of input excel file
+- **output_table_results**
+  - data lake table to write to
 
 ## User-Defined Python
 Processes Excel file containing Trios Rheometer run data into a single table stored in

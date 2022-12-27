@@ -4,7 +4,7 @@ title: Benchling_Read_Object
 displayed_sidebar: nodeSidebar
 ---
 
-## Operator
+### Node Operator
 Reads Benchling data specified by input Benchling ID string.
 
 Executes Benchling API call(s) based on user-defined function and upload results to data lake
@@ -14,11 +14,11 @@ The user-defined function returns one or more DataFrames, which are uploaded as 
 the Ganymede data lake.
 
 
-### Parameters
-- **input_string_id** : `str`
-    - Benchling API ID, specified on node
-- **output_table_results** : `str`
-    - Name of data lake table to write results to
+### Node Attributes
+- **input_string_id**
+  - Benchling API ID, specified on node
+- **output_table_results**
+  - Name of data lake table to write results to
 
 
 ### Notes
