@@ -57,6 +57,6 @@ Expanding the status box shows a list of _nodes_ with corresponding run statuses
 
 :::info
 
-Run logs are accessible by clicking on the colored status box associated with the _node_
+Run logs can be accessed by clicking on the colored status box associated with the _node_
 
 :::

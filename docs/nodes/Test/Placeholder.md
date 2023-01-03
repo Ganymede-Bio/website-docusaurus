@@ -4,11 +4,12 @@ title: Placeholder
 displayed_sidebar: nodeSidebar
 ---
 
+### Node Operator
 Placeholder Function; intended to be used as a placeholder node while designing flows.
 
 
-### Parameters
-- **input** : `str`
+### Node Attributes
+- **input**
   - string to provide example of node inputs
-- **output_info** : `str`
+- **output_info**
   - string to provide example of node outputs

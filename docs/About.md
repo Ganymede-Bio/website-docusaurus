@@ -47,7 +47,7 @@ As _flows_ and _nodes_ are saved, both the graph structure and modified code are
 
 The cloud infrastructure supporting data storage and workflow orchestration are unique per tenant instance of Ganymede.
 
-:::info
+:::info running in parallel
 
 By separating code into distinct _nodes_, different _nodes_ can be run in parallel.  _Edges_ between _nodes_ specify the order by which different _nodes_ are run.
 

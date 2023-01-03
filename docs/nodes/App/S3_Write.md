@@ -4,16 +4,17 @@ title: S3_Write
 displayed_sidebar: nodeSidebar
 ---
 
+### Node Operator
 Sync GCS bucket -> S3 bucket
 
 
-### Parameters
-- **src_object_name** : `str`
+### Node Attributes
+- **src_object_name**
   - Data lake object to write
-- **dest_s3_key** : `str`
+- **dest_s3_key**
   - destination S3 key to write to
 
 
 ### Notes
 Prior to usage, AWS S3 buckets must be configured to permit Ganymede access with the following:
-- AWS Service Account Name
+AWS Service Account Name

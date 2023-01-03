@@ -4,14 +4,29 @@ title: HDF5_Read
 displayed_sidebar: nodeSidebar
 ---
 
+### Node Operator
 Reads HDF5 file
 
 Retrieves HDF5 data for processing by user-defined function. The result of the user-defined
 function is stored in Ganymede cloud storage
 
 
-### Parameters
-- **input_file_hdf5** : `hdf5`
+### Node Attributes
+- **input_file_hdf5**
   - Glob pattern for HDF5 input file
-- **output_data** : `str`
+- **output_data**
   - Name of file to write processed data to
+## User-Defined Python
+Processes HDF5 data
+
+
+### Parameters
+- **h5data** : `dict[str, object]`
+    - HDF5 data presented as a nested dict
+- **ganymede_context** : `GanymedeContext`
+    - Ganymede context variable, which stores flow run metadata
+
+
+### Returns
+`dict[str, object]`
+  - Processed dictionary to store in cloud storage
