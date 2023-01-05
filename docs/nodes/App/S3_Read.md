@@ -18,3 +18,5 @@ Sync S3 Bucket -> Ganymede data lake bucket
 ### Notes
 Prior to usage, AWS S3 buckets must be configured to permit Ganymede access with the following:
 AWS Service Account Name
+
+Please reach out to Ganymede for configuration assistance.

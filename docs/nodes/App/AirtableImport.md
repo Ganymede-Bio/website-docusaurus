@@ -9,12 +9,12 @@ Retrieves Airtable table and uploads data to Ganymede data lake.
 
 
 ### Node Attributes
-- **output_table_ganymede_table**
-  - Table in Ganymede data lake to store results of pulling Airtable table
 - **airtable_base_id**
   - Base ID used in Airtable API
 - **airtable_id**
   - ID used in Airtable API
+- **output_table_ganymede_table**
+  - Table in Ganymede data lake to store results of pulling Airtable table
 
 
 ### Notes

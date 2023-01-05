@@ -10,10 +10,10 @@ result to Ganymede cloud storage.
 
 
 ### Node Attributes
-- **output_data**
-  - Filename to be written to storage bucket
 - **input_file_object**
   - Data to be written to storage bucket
+- **output_data**
+  - Filename to be written to storage bucket
 ## User-Defined Python
 Processes blob data for saving in cloud storage
 

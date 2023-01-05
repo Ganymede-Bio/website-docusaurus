@@ -19,7 +19,7 @@ data lake.
 
 ### Node Attributes
 - **output_table_results**
-  - Name of data lake table to write results to
+  - Table to display on Table Head in Flow Editor
 
 
 ### Notes
@@ -28,6 +28,13 @@ the client's Benchling URL, this requires creating and utilizing secrets with th
 IDs generated in the App setup process via Benchling:
 Client_ID
 Client_Secret
+
+Please reach out to Ganymede for configuration assistance.
+
+If a DataFrame is returned, the table name corresponds to the output_table_results parameter of the node.
+
+If a dict is returned, the keys of the dict are used as table names for the corresponding
+DataFrames to store. The table with output_table_results as its key is displayed on the Flow Editor.
 ## User-Defined Python
 Reads Benchling data based on run tag.  This node should be used in
 conjunction with the Benchling_Tag node.

@@ -12,6 +12,8 @@ table in Ganymede data lake
 
 
 ### Node Attributes
+- **input_file_xml**
+  - File extension on XML file
 - **output_table_results**
   - Table name where parsed XML data will be stored.
 ## User-Defined Python

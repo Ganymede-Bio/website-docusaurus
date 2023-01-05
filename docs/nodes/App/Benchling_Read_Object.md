@@ -27,6 +27,8 @@ the client's Benchling URL, this requires creating and utilizing secrets with th
 IDs generated in the App setup process via Benchling:
 Client_ID
 Client_Secret
+
+Please reach out to Ganymede for configuration assistance.
 ## User-Defined Python
 Reads Benchling data based on input parameter.  This node should be used in
 conjunction with the Input_Param node.

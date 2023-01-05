@@ -8,7 +8,7 @@ displayed_sidebar: nodeSidebar
 Reads HDF5 file
 
 Retrieves HDF5 data for processing by user-defined function. The result of the user-defined
-function is stored in Ganymede cloud storage
+function is stored in Ganymede cloud storage.
 
 
 ### Node Attributes
@@ -16,6 +16,10 @@ function is stored in Ganymede cloud storage
   - Glob pattern for HDF5 input file
 - **output_data**
   - Name of file to write processed data to
+
+- **Notes**
+- **---------------**
+- **HDF5 is stored in generic storage rather than as a table since the format is not tabular.**
 ## User-Defined Python
 Processes HDF5 data
 

@@ -28,3 +28,5 @@ App Azure Active Directory (AAD) Authority
 Windows Azure Storage Blob (WASB) URI, which consists of
 Storage URL
 Storage Container
+
+Please reach out to Ganymede for configuration assistance.

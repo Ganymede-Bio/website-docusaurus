@@ -19,3 +19,5 @@ the client's Benchling URL, this requires creating and utilizing secrets with th
 IDs generated in the App setup process via Benchling:
 Client_ID
 Client_Secret
+
+Please reach out to Ganymede for configuration assistance.
