@@ -35,7 +35,7 @@ To create a new _flow_, click the **Manage** button in the upper right hand corn
 
 To load a _flow_, specify the _flow_ to load in the **Choose A Flow** datalist input.  Upon doing so, the primary pane displays the graphical structure of the _flow_.
 
-<img width="1111" alt="Editor_select_flow" src="https://user-images.githubusercontent.com/46538575/211052598-fd886af4-1364-4220-ad2d-aee8f8881398.png" />
+<img width="1111" alt="Editor_select_flow" src="https://user-images.githubusercontent.com/46538575/211091935-c8074b1b-6545-4e18-bd81-a0a63ae6f507.png" />
 &nbsp;
 
 After saving a _flow_, the entire environment (which contains all _flows_) is saved and deployed. When this save and deploy is taking place, users are temporarily restricted from running _flows_. A tooltip will be displayed to the user if they try to run a _flow_ during this time. Users can observe the status of environment updates on the [Notifications](Notifications.md) page.
