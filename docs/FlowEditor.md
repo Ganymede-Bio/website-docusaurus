@@ -6,7 +6,8 @@ displayed_sidebar: webUiSidebar
 
 The Flow Editor is the starting point for creating and modifying _flows_.  _Flows_ can also be run from the Flow Editor by clicking on the **Run** button located on the Flow Inputs _node_.
 
-![Ganymede App Flow Editor Init](https://ganymede-bio.mo.cloudinary.net/apiServer/FlowEditor_20221219.png)
+<img width="1111" alt="Editor_main" src="https://user-images.githubusercontent.com/46538575/211052485-057fcd90-77bf-4cae-aec8-102773445421.png" />
+&nbsp;
 
 ## Header Bar
 
@@ -27,24 +28,35 @@ The inputs/buttons in the header bar perform the following functions.
 
 To create a new _flow_, click the **Manage** button in the upper right hand corner of the screen. Then click the **Add New Flow** button on the sidebar.  This action exposes a modal for naming and describing the _flow_.  
 
-![Ganymede App New Flow Creation](https://ganymede-bio.mo.cloudinary.net/apiServer/AddNewFlow_20221220.png)
+<img width="1111" alt="Editor_add_flow" src="https://user-images.githubusercontent.com/46538575/211052554-2f6d272a-1d63-4f4e-a1b2-2bc92e5fd412.png" />
+&nbsp;
 
 ### Loading and Saving Flows
 
 To load a _flow_, specify the _flow_ to load in the **Choose A Flow** datalist input.  Upon doing so, the primary pane displays the graphical structure of the _flow_.
 
-<img width="1511" alt="Ganymede Flow Editor displayed" src="https://ganymede-bio.mo.cloudinary.net/apiServer/ChooseFlow_20221220.png" />
+<img width="1111" alt="Editor_select_flow" src="https://user-images.githubusercontent.com/46538575/211091935-c8074b1b-6545-4e18-bd81-a0a63ae6f507.png" />
 &nbsp;
 
 After saving a _flow_, the entire environment (which contains all _flows_) is saved and deployed. When this save and deploy is taking place, users are temporarily restricted from running _flows_. A tooltip will be displayed to the user if they try to run a _flow_ during this time. Users can observe the status of environment updates on the [Notifications](Notifications.md) page.
 
-<img width="306" alt="Runs restricted temporarily popover" src="https://user-images.githubusercontent.com/46538575/202579236-2c4c9aa5-9afa-48ec-b8bb-eb93fe524eea.png" />
+<img width="569" alt="Editor_tooltip" src="https://user-images.githubusercontent.com/46538575/211051939-0bba7a3f-4b9d-4a69-a7e0-34735fc2c4b8.png" />
+&nbsp;
+
 
 ### Running Flows
 
-To run a _flow_ that accepts data from file input, upload the input file by either clicking the **Upload** button or dragging and dropping a file into the upload box. To run the same _flow_ with different sets of input files, add additional rows to the input box by clicking on the **Add** button. 
+ To run a _flow_ that accepts data from file input, upload the input file by either clicking the **Browse** button followed by selecting **Local File Browser** or dragging and dropping a file into the upload box. 
 
-<img width="600" alt="Sample input node" src="https://ganymede-bio.mo.cloudinary.net/apiServer/FlowInputFile_20221220.png"/>
+<img width="550" alt="Browse" src="https://user-images.githubusercontent.com/46538575/211056720-732928a5-86dc-4057-a110-8c9e269d0b09.png" />
+
+If the input file has previously been uploaded to the corresponding flow and node, you will be prompted with an option to use the file that was previously uploaded or to save a new version with a unique id appended to the end of the file name. We determine file uniqueness based on the file's name.
+
+<img width="550" alt="existing_file_treatment" src="https://user-images.githubusercontent.com/46538575/211057216-bd34e3db-c4ed-49f5-8042-e6b420f7efd3.png" />
+
+To run the same _flow_ with different sets of input files, add additional rows to the input box by clicking on the **Add** button.
+
+<img width="550" alt="Sample input node" src="https://ganymede-bio.mo.cloudinary.net/apiServer/FlowInputFile_20221220.png"/>
 
 Clicking the **Run** button on the Flow Inputs _node_ kicks off the _flow_ run.  Run progress can be tracked by clicking on the **Runs** button in the header to display flow runs history in the right sidebar, or by navigating to the [Flow Runs](FlowRuns.md) page.
 
