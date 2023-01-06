@@ -15,6 +15,14 @@ the specified Coda.io page.
 ### Node Attributes
 - **output_page_url**
   - URL of the page where table results will be stored.
+
+
+### Notes
+Prior to usage, Coda must be configured to permit Ganymede access.  This requires
+configuring Ganymede with the following IDs from Coda:
+Coda API Key
+
+Please reach out to Ganymede for configuration assistance.
 ## User-Defined Python
 Example demonstrating submission of user-defined SQL query into Coda
 

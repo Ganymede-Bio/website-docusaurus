@@ -7,19 +7,20 @@ sidebar_label: Overview
 
 _Nodes_ provide template structure for performing data extraction, processing, and API communication.  The tables below summarize how different _nodes_ work.
 
-Nodes are classified into the following categories: 
+_Nodes_ are classified into the following categories: 
 - **App**: Accesses third-party APIs for processing; in many cases, key exchange between third-party and Ganymede are necessary for functionality
 - **Analysis**: Performs Python / SQL manipulations
 - **Instrument**: Lab instrument-specific functions
 - **File**: For ETL operations on data of specified type into Ganymede cloud
 - **Tag**: For specifying parameters at _flow_ runtime
-- **Test**: For validating platform functionality or for mocking Flows prior to implementation
+- **Test**: For validating platform functionality or for mocking _flows_ prior to implementation
 
+## Key Node Characteristics
 
-### Node Characteristics
-
-A useful way to interact with nodes is to consider input and output types of nodes.  This information is displayed
+A useful way to interact with _nodes_ is to consider input and output types of _nodes_.  This information is displayed
 in the table below, along with whether there is a user-editable component associated with the node.
+
+### Node Input/Output Types
 
 Input/output types are split into the following categories:
 - **Table**: Tabular data retrieved from or passed to tenant-specific Ganymede data lake.  Tables are retrieved from Ganymede data lake via ANSI SQL queries, and are passed to Ganymede data lake as pandas DataFrames
@@ -38,8 +39,29 @@ Input/output types are split into the following categories:
 
 **Optional** indicates that the input or output is optional.
 
+### User-editable Nodes
+
+User-editable nodes present an interface for modifying and testing code that is executed by the workflow management system.  These Jupyter notebooks are split into the following sections:
+- **Node Description**: A short blurb about the node that the user-editable function corresponds to
+- **Node Input Data**: For nodes that retrieve tabular data from the data lake as input, the query string in this cell specifies the query (-ies) that are executed and presented to the user-defined function for processing.  
+- **User-Defined Function**: The _execute_ function within this cell processes data.  The workflow management system calls the _execute_ function within this cell during _flow_ execution.
+
+:::info
+
+The _execute_ function may call classes and functions found within the User-Defined Function cell.
+
+:::
+
+- **Save Pipeline Code**: This cell stores any changes to the **Node Input Data** (if present) and **User-Defined Function** cells.
+
+- **Testing Section**: The cells in this section can be used for testing modifications to the SQL query and user-defined python function.  This enables rapid iteration on user-defined code; after necessary edits are made, changes can be saved in by running the **Save Pipeline Code** cell.
+
+
+### Table Listing of Node Characteristics
+
 | Category   | Name                       | Input Types                                | Output Types         | Is Editable   |
 |------------|----------------------------|--------------------------------------------|----------------------|---------------|
+| Analysis   | Great_Expectations         | Table                                      | Table                | True          |
 | Analysis   | Process_Blob_to_Blob       | FileAny and Optional[Table or List[Table]] | Dict[FileAny]        | True          |
 | Analysis   | Process_Blob_to_Table      | FileAny and Optional[Table or List[Table]] | Table or Dict[Table] | True          |
 | Analysis   | Table_to_Blob              | Table or List[Table]                       | Dict[FileAny]        | True          |
@@ -76,12 +98,13 @@ Input/output types are split into the following categories:
 | Test       | Placeholder                |                                            |                      | False         |
 
 
-### Node Description
+## Node Descriptions
 
 The table below contains a full listing of available nodes.
 
 | Category   | Name                       | Brief Description                                                  |
 |------------|----------------------------|--------------------------------------------------------------------|
+| Analysis   | Great_Expectations         | Grant access to Great Expectations validator                       |
 | Analysis   | Process_Blob_to_Blob       | Process blob data; write results to data store                     |
 | Analysis   | Process_Blob_to_Table      | Process data; write tabular data results to data lake              |
 | Analysis   | Table_to_Blob              | Process tabular data; write data results to data lake              |
