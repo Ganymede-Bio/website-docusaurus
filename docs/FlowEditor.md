@@ -42,9 +42,17 @@ After saving a _flow_, the entire environment (which contains all _flows_) is sa
 
 ### Running Flows
 
-To run a _flow_ that accepts data from file input, upload the input file by either clicking the **Upload** button or dragging and dropping a file into the upload box. To run the same _flow_ with different sets of input files, add additional rows to the input box by clicking on the **Add** button. 
+ To run a _flow_ that accepts data from file input, upload the input file by either clicking the **Browse** button followed by selecting **Local File Browser** or dragging and dropping a file into the upload box. 
 
-<img width="600" alt="Sample input node" src="https://ganymede-bio.mo.cloudinary.net/apiServer/FlowInputFile_20221220.png"/>
+<img width="550" alt="Browse" src="https://user-images.githubusercontent.com/46538575/211056720-732928a5-86dc-4057-a110-8c9e269d0b09.png" />
+
+If the input file has previously been uploaded to the corresponding flow and node, you will be prompted with an option to use the file that was previously uploaded or to save a new version with a unique id appended to the end of the file name. We determine file uniqueness based on the file's name.
+
+<img width="550" alt="existing_file_treatment" src="https://user-images.githubusercontent.com/46538575/211057216-bd34e3db-c4ed-49f5-8042-e6b420f7efd3.png" />
+
+To run the same _flow_ with different sets of input files, add additional rows to the input box by clicking on the **Add** button.
+
+<img width="550" alt="Sample input node" src="https://ganymede-bio.mo.cloudinary.net/apiServer/FlowInputFile_20221220.png"/>
 
 Clicking the **Run** button on the Flow Inputs _node_ kicks off the _flow_ run.  Run progress can be tracked by clicking on the **Runs** button in the header to display flow runs history in the right sidebar, or by navigating to the [Flow Runs](FlowRuns.md) page.
 
