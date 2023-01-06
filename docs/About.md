@@ -30,7 +30,7 @@ Developers author _flows_, which are programs represented as directed graphs com
 
 The core unit of code that performs processing in Ganymede is the _node_.  The _node_ type specifies the _operator_ code, template SQL code, and template Python code.
 
-- **operator**: performs I/O with different systems and provides ergonomic handoffs for user-defined components of the _node_.  Depending on the _node_, data may be retrieved from either a Ganymede data lake, Ganymede cloud storage, third-party API, or input data files.  In the example above, the _operator_ retrieves input data in the `userSQL()` call based on the user-defined SQL query and uploads processed data to the Ganymede data lake in the `storeDataFrame(res)` call.  
+- **Operator**: performs I/O with different systems and provides ergonomic handoffs for user-defined components of the _node_.  Depending on the _node_, data may be retrieved from either a Ganymede data lake, Ganymede cloud storage, third-party API, or input data files.  In the example above, the _operator_ retrieves input data in the `userSQL()` call based on the user-defined SQL query and uploads processed data to the Ganymede data lake in the `storeDataFrame(res)` call.  
 
 :::note
 
