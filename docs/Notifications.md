@@ -6,7 +6,7 @@ displayed_sidebar: webUiSidebar
 
 The Notifications page provides real time updates on the status of flow saves and runs. 
 
-<img width="800" alt="image" src="https://ganymede-bio.mo.cloudinary.net/apiServer/Notifications_20221218.png" />
+<img width="1120" alt="Notifications_2022-0106" src="https://user-images.githubusercontent.com/46538575/211053033-d6c6abf7-2216-4de4-8327-25ae867ddfa9.png" />
 <br />
 <br />
 
