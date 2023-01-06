@@ -61,6 +61,7 @@ The _execute_ function may call classes and functions found within the User-Defi
 
 | Category   | Name                       | Input Types                                | Output Types         | Is Editable   |
 |------------|----------------------------|--------------------------------------------|----------------------|---------------|
+| Analysis   | Great_Expectations         | Table                                      | Table                | True          |
 | Analysis   | Process_Blob_to_Blob       | FileAny and Optional[Table or List[Table]] | Dict[FileAny]        | True          |
 | Analysis   | Process_Blob_to_Table      | FileAny and Optional[Table or List[Table]] | Table or Dict[Table] | True          |
 | Analysis   | Table_to_Blob              | Table or List[Table]                       | Dict[FileAny]        | True          |
@@ -103,6 +104,7 @@ The table below contains a full listing of available nodes.
 
 | Category   | Name                       | Brief Description                                                  |
 |------------|----------------------------|--------------------------------------------------------------------|
+| Analysis   | Great_Expectations         | Grant access to Great Expectations validator                       |
 | Analysis   | Process_Blob_to_Blob       | Process blob data; write results to data store                     |
 | Analysis   | Process_Blob_to_Table      | Process data; write tabular data results to data lake              |
 | Analysis   | Table_to_Blob              | Process tabular data; write data results to data lake              |
