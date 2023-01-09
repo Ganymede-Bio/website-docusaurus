@@ -26,7 +26,7 @@ module.exports = {
         type: 'category',
         label: 'Editing Flows',
         collapsed: false,
-        items: ['FlowEditor', 'Nodes'],
+        items: ['FlowEditor', 'Nodes', 'FlowMetadata'],
       },
       {
         type: 'category',

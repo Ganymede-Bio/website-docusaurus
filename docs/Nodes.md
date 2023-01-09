@@ -78,8 +78,6 @@ def execute(df_sql_result: Union[pd.DataFrame, List[pd.DataFrame]], ganymede_con
     return df_out
 ```
 
-Below the  the _execute_ function corresponds to the green box labeled "User-defined python" in the schematic of the _node_ above.  This 
-
 :::tip
 
 More than 1 query can be specified as input; to do so, specify multiple queries as semicolon-delimited query strings.

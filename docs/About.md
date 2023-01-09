@@ -26,7 +26,7 @@ Developers author _flows_, which are programs represented as directed graphs com
 
 ### Inside a node
 
-<img width="300" alt="Example node layout" src="https://ganymede-bio.mo.cloudinary.net/apiServer/Operator_Conceptual_Layout_20221216.png" />
+<img width="300" alt="Example node layout" src="https://ganymede-bio.mo.cloudinary.net/apiServer/Operator_Conceptual_Layout_20230108.png" />
 
 The core unit of code that performs processing in Ganymede is the _node_.  The _node_ type specifies the _operator_ code, template SQL code, and template Python code.
 
