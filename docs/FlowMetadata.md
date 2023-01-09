@@ -22,7 +22,7 @@ The example _flow_ performs the following operations:
 
 Template variables allow access to flow metadata in _node_ attributes and user-defined SQL queries through [Jinja templates](https://jinja.palletsprojects.com/en/3.1.x/).  These variables can be accessed in Node Attributes and user-defined SQL queries by wrapping the template variable name with two braces.
 
-In the example _flow_, the output of the CSV_Write node uses the **run_id** template variable to add a timestamp to the CSV file output.
+In the example _flow_ shown above, the output of the CSV_Write node uses the **run_id** template variable to add a timestamp to the CSV file output.
 
 ### Available template variables
 
