@@ -4,7 +4,7 @@ title: Context / Flow Metadata
 displayed_sidebar: webUiSidebar
 ---
 
-Template variables and Context variables are used for accessing _flow_ metadata that is known at runtime.  Some examples of this metadata are:
+Template variables and context variables are used for accessing _flow_ metadata that is known at runtime.  Some examples of this metadata are:
 - timestamp associated with run
 - filename of file processed in run
 - input parameter specified by end user
@@ -65,13 +65,13 @@ def execute(
 
 #### Ganymede Context class methods
 - **get_param(node_name: `str`, parameter_type: `str`) -> `str`**:
-  - Method to obtain input parameter or input filename in _flow_.  Node name can be found in the indigo bar at the top of each node.  Parameter type generally references the file extension for nodes that ingest load files, and can be found on the Flow Editor as values with green background and white text.
+  - Method to obtain input parameter or input filename in _flow_.  Node name can be found in the indigo bar at the top of each node.  Parameter type generally references the file extension for nodes that ingest files, and can be found on the Flow Editor as values with green background and white text.
 
 ### Benchling Context
 
 The _benchling_context_ object is used to access the Benchling API, and can only be found on nodes that make calls to Benchling.  
 
-As an example, suppose that user had registered a custom entity named `plasmid-GFP-TAG`, which was assigned the Benchling custom entity id `ts_DF578lfK`.  If selected by the user during _flow_ execution, the **run_tag** in this example would be `ts_DF578lfK` and the **run_tag** would be `plasmid-GFP-TAG`
+As an example, suppose that user had registered a custom entity named `plasmid-GFP-TAG`, which was assigned the Benchling custom entity id `ts_DF578lfK`.  If selected by the user during _flow_ execution, the **run_tag** in this example would be `ts_DF578lfK` and the **display_tag** would be `plasmid-GFP-TAG`
 
 #### Benchling Context class variables
 - **conn**: Benchling connection
