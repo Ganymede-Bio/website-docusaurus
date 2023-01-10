@@ -63,7 +63,11 @@ To run the same _flow_ with different sets of input files, add additional rows t
 
 Clicking the **Run** button on the Flow Inputs _node_ kicks off the _flow_ run.  Run progress can be tracked by clicking on the **Runs** button in the header, or by navigating to the [Flow Runs](FlowRuns.md) page.
 
-### Deleting Flows
+### Modifying and Deleting Flows
+
+Edges can be removed by selecting them and pressing "delete" or "backspace" on the keyboard.  A selected edge is slightly darker and wider than unselected edges.
+
+To make two nodes dependent on each other within a run, click and drag between two orbs two different nodes.  _Flow_ dependencies run top-to-bottom (if vertical layout is specified) or left-to-right (if horizontal layout is specified).
 
 In order to delete _flows_, click the **Manage** button on the Flow Editor page and which opens up the right sidebar offering a button to **Delete Flow**. 
 

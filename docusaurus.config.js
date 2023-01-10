@@ -50,7 +50,7 @@ module.exports = {
           items: [
             {
               label: 'Web UI',
-              to: 'docs/About',
+              to: 'docs/Introduction',
             },
             {
               label: 'Nodes',

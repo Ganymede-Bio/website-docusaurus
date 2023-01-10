@@ -155,75 +155,19 @@ df = execute({'test_file': BytesIO(file_uploader.value[0].content.tobytes())})
 display(df)
 ```
 
-## Modifying Node Dependencies
+## Adding flow inputs
 
-Edges can be removed by selecting them and pressing "delete" or "backspace" on the keyboard.  A selected edge is slightly darker and wider than unselected edges.
+_Flows_ can be configured to accept user inputs at the start of each run by selecting the appropriate node and saving the _flow_. There are three types of inputs:
 
-To make two nodes dependent on each other within a run, click and drag between two orbs two different nodes.  _Flow_ dependencies run top-to-bottom (if vertical layout is specified) or left-to-right (if horizontal layout is specified).
+- File inputs (e.g. - FileAny, FileCSV, etc.)
+- Text (string) inputs (e.g. - string)
+- Tag inputs (e.g. - TagBenchling)
 
-## Adding Inputs to Flow Runs
-
-_Flows_ can be configured to accept user inputs at the start of each run. There are three types of inputs:
-
-- File inputs 
-- Text (string) inputs
-- Tag inputs 
-
-The value of these inputs are used by the _node_ during flow execution, and are made available to the _node_ within editable code (for user-editable _nodes_).
-
-:::note
-
-Tag inputs, in its current state, refer to Benchling tags.  Tenants can be configured to listen to events emitted by Benchling, which enable _flows_ to reference specific Benchling tables to incorporate in _flow_ processing.
-
-:::
-
-### Node categories
-
-A list of available _nodes_ and their associated categories can be found by clicking the **New** Button in the header of the Flow Editor page.  
-
-Nodes are classified into the following categories: 
-- **App**: Accesses third-party APIs for processing; in many cases, key exchange between third-party and Ganymede are necessary for functionality
-- **Analysis**: Performs Python / SQL manipulations
-- **Instrument**: Lab instrument-specific functions
-- **File**: For ETL operations on data of specified type into Ganymede cloud
-- **Tag**: For specifying parameters at _flow_ runtime
-- **Test**: For validating platform functionality or for mocking Flows prior to implementation
-
-### Node characteristics
-
-<img width="500" alt="image" src="https://ganymede-bio.mo.cloudinary.net/apiServer/Function_Chip_20221216.png"/>
-
-Each _node_ in the listing is represented by a chip containing the
-- name of node
-- description of node functionality
-- inputs, if any
-- outputs, if any
-
-For the example chip above, the CSV_Read node takes a CSV file as input and outputs either a pandas DataFrame or a dictionary of pandas DataFrames indexed by table name, which are uploaded to the Ganymede data lake.
+A list of available _nodes_ and their associated categories can be found on the [table listing of node characteristics](./nodes/Overview.md#table-listing-of-node-characteristics)  More detail can be found on the [Node documentation page](./nodes/Overview.md).
 
 ### Node-specific Table Heads
 
 <img width="384" alt="image" src="https://ganymede-bio.mo.cloudinary.net/apiServer/TableHead.png"/>
 
-The _table head_ exists for _nodes_ that produce an output table.  For this subset of _nodes_, the _table head_ shows the first 5 records of the primary table produced by its associated _node_, which is the table specified by the gray chip of the associated _node_.  This table facilitates the development of downstream _flow_ components.
-
-:::note
-
-_Nodes_ can be connected either directly to each other, or by connecting the downstream _node_ to the _table head_ corresponding to its immediately upstream neighbor.
-
-:::
-
-## Modifying contents of a node
-
-Once a _node_ is saved on a _flow_, it can be modified by clicking the **Edit** button in the bottom-right of the node. This will allow any properties to be changed, as shown in the image below. 
-
-<img width="300" alt="image" src="https://ganymede-bio.mo.cloudinary.net/apiServer/SampleNode_20221218.png"/>
-<br />
-<br />
-
-:::info
-
-_Node_ modifications are not permanent until the environment is saved; if the Flow Editor page is refreshed prior to saving, any edits are discarded.
-
-:::
+The _table head_ exists for _nodes_ that produce an output table.  For this subset of _nodes_, the _table head_ shows 5 records of the primary table produced by its associated _node_, which is the table specified by the gray chip of the associated _node_.  This table can facilitate the development of downstream _flow_ components.
 
