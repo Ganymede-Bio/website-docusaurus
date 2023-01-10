@@ -165,9 +165,9 @@ _Flows_ can be configured to accept user inputs at the start of each run by sele
 
 A list of available _nodes_ and their associated categories can be found on the [table listing of node characteristics](./nodes/Overview.md#table-listing-of-node-characteristics)  More detail can be found on the [Node documentation page](./nodes/Overview.md).
 
-### Node-specific Table Heads
+### Table heads
 
 <img width="384" alt="image" src="https://ganymede-bio.mo.cloudinary.net/apiServer/TableHead.png"/>
 
-The _table head_ exists for _nodes_ that produce an output table.  For this subset of _nodes_, the _table head_ shows 5 records of the primary table produced by its associated _node_, which is the table specified by the gray chip of the associated _node_.  This table can facilitate the development of downstream _flow_ components.
+_table heads_ are present for _nodes_ that produce an output table.  For this subset of _nodes_, the _table head_ shows 5 records of the primary table produced by its associated _node_, which is the table specified by the gray chip of the associated _node_.  This table can facilitate the development of downstream _flow_ components.
 
