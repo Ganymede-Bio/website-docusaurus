@@ -14,7 +14,7 @@ module.exports = {
     },
     {
       type: 'category',
-      label: 'Using Ganymede',
+      label: 'Processing Data',
       collapsed: false,
       items: [{
         type: 'category',
@@ -34,13 +34,13 @@ module.exports = {
         collapsed: false,
         items: ['FlowRuns', 'Notifications']
       },
-      {
-        type: 'category',
-        label: 'Observing Data',
-        collapsed: false,
-        items: ['AnalysisNotebook', 'DataExplorer', 'Files']
-      },
       ]
+    },
+    {
+      type: 'category',
+      label: 'Observing Data',
+      collapsed: false,
+      items: ['AnalysisNotebook', 'DataExplorer', 'Files']
     },
     {
       type: 'doc',
