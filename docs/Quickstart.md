@@ -120,16 +120,16 @@ When complete, the status of the _flow_ should indicate success:
 
 <img alt="Example flow success" src="https://ganymede-bio.mo.cloudinary.net/apiServer/QuickstartFlowSuccess_20230110.png"/>
 
-### Step 7: Observe Results in Data Explorer
+### Step 7: Observe results in Data Explorer
 
-Click on **Data Explorer** in the left sidebar and run the following query to observe the processed results.
+Click on **Data Explorer** in the left sidebar and run the following query (with <tenant\> replaced) to observe the processed results.
 
 ```sql
 select 
     left(field, 1) as well_row, 
     cast(right(field, length(field)-1) as int) as well_column,
     *
-from ganymede_dev.Quickstart_Absorbance_Change_Transform_py_analysis 
+from <tenant>.Quickstart_Absorbance_Change_Transform_py_analysis 
 order by left(field, 1), cast(right(field, length(field)-1) as int)
 ```
 
