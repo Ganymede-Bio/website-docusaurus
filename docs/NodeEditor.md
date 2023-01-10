@@ -8,24 +8,23 @@ displayed_sidebar: webUiSidebar
 
 _Nodes_ are customizable blocks of code with default functionality specified by its type.
 
-<img width="384" alt="image" src="https://ganymede-bio.mo.cloudinary.net/apiServer/EditNodeBefore.png"/>
+<div class="text--center">
+<img width="300" alt="image" src="https://ganymede-bio.mo.cloudinary.net/apiServer/EditNodeBefore_20230110.png"/>
+</div>
 
 The image above shows how _nodes_ are represented on the Flow Editor page; each _node_ consists of:
+
 - **node name**: located in the header of the _node_
 - **pencil icon**: button for editing the user-editable code backing the _node_
 - **node attribute(s)**: attributes associated with the _node_ that are processed by the node
 - **edit button**: unlocks the _node_ for modifying _node_ name, changing _node_ attributes, or deleting the _node_
 
-<img width="300" alt="Example node layout" src="https://ganymede-bio.mo.cloudinary.net/apiServer/Operator_Conceptual_Layout_20230108.png" />
-
 Notebooks that back nodes are laid out in the following order:
 
-- User-defined SQL for retrieving tabular data to be processed by the node
-- User-defined Python for processing input
-- Save Pipeline Code
-- Testing Section
-
-The cells that contain user-defined SQL and user-defined Python are loaded into the workflow management software when the **Save Pipeline Code** cell is run.  This allows users to test the functionality of the two cells, without saving exploratory work that not meant for execution.
+- **User-defined SQL** for retrieving tabular data to be processed by the node
+- **User-defined Python** for processing input
+- **Save Pipeline Code** for saving and deploying user-defined SQL and Python snippets to workflow management software
+- **Testing Section** for testing changes to user-defined SQL and Python
 
 ## Backing Notebooks
 
@@ -167,7 +166,9 @@ A list of available _nodes_ and their associated categories can be found on the 
 
 ### Node-specific Table Heads
 
-<img width="384" alt="image" src="https://ganymede-bio.mo.cloudinary.net/apiServer/TableHead.png"/>
+<div class="text--center">
+<img width="400" alt="image" src="https://ganymede-bio.mo.cloudinary.net/apiServer/TableHead_20230110.png"/>
+</div>
 
 The _table head_ exists for _nodes_ that produce an output table.  For this subset of _nodes_, the _table head_ shows 5 records of the primary table produced by its associated _node_, which is the table specified by the gray chip of the associated _node_.  This table can facilitate the development of downstream _flow_ components.
 
