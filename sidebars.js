@@ -9,7 +9,7 @@ module.exports = {
   webUiSidebar: [
     {
       type: 'doc',
-      id: 'About',
+      id: 'Introduction',
       label: 'Welcome',
     },
     {
@@ -26,7 +26,7 @@ module.exports = {
         type: 'category',
         label: 'Editing Flows',
         collapsed: false,
-        items: ['FlowEditor', 'Nodes', 'FlowMetadata'],
+        items: ['FlowEditor', 'NodeEditor', 'FlowMetadata'],
       },
       {
         type: 'category',

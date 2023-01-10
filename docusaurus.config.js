@@ -18,7 +18,7 @@ module.exports = {
       },
       items: [
         {
-          to: 'docs/About',
+          to: 'docs/Introduction',
           routeBasePath: '/',
           label: 'Web UI',
           position: 'left',

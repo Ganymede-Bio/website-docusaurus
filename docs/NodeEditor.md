@@ -1,0 +1,229 @@
+---
+id: NodeEditor
+title: Node Editor
+displayed_sidebar: webUiSidebar
+---
+
+## Node Overview
+
+_Nodes_ are customizable blocks of code with default functionality specified by its type.
+
+<img width="384" alt="image" src="https://ganymede-bio.mo.cloudinary.net/apiServer/EditNodeBefore.png"/>
+
+The image above shows how _nodes_ are represented on the Flow Editor page; each _node_ consists of:
+- **node name**: located in the header of the _node_
+- **pencil icon**: button for editing the user-editable code backing the _node_
+- **node attribute(s)**: attributes associated with the _node_ that are processed by the node
+- **edit button**: unlocks the _node_ for modifying _node_ name, changing _node_ attributes, or deleting the _node_
+
+<img width="300" alt="Example node layout" src="https://ganymede-bio.mo.cloudinary.net/apiServer/Operator_Conceptual_Layout_20230108.png" />
+
+Notebooks that back nodes are laid out in the following order:
+
+- User-defined SQL for retrieving tabular data to be processed by the node
+- User-defined Python for processing input
+- Save Pipeline Code
+- Testing Section
+
+The cells that contain user-defined SQL and user-defined Python are loaded into the workflow management software when the **Save Pipeline Code** cell is run.  This allows users to test the functionality of the two cells, without saving exploratory work that not meant for execution.
+
+## Backing Notebooks
+
+Editable nodes contain an edit button, a pencil icon in its upper right hand corner that opens up the notebook backing the node upon button click.  This section walks through the code associated with such a node to discuss its functionality.
+
+### Notebook: User-defined SQL
+
+```python
+from ganymede.editor import query
+
+query_sql = """
+  SELECT * FROM ganymede_dev.demo_file;
+"""
+```
+
+For nodes that reference the Ganymede data lake on input, the _query_sql_ string is used to specify the data table to process on the input parameter in the _execute_ function.  The schema in the query is specific to the tenant used, and the file corresponds to the name used in an upstream node.
+
+:::info observing columns and tables in Ganymede data lake
+
+Available tables and their associated schemas can be observed in the [Data Explorer](./DataExplorer.md) tab of the Ganymede app.
+
+:::
+
+More than 1 query can be specified as input; to do so, specify multiple queries as semicolon-delimited query strings.  These are passed as a parameter to the user-defined Python function as a list of tables.
+
+
+### Notebook: User-defined Python
+
+```python
+import pandas as pd
+from typing import Union, Dict, List
+
+def execute(df_sql_result: Union[pd.DataFrame, List[pd.DataFrame]], ganymede_context=None) -> Union[pd.DataFrame, Dict[str, pd.DataFrame]]:
+    """
+    Process dataframe(s) resulting from SQL query using python
+
+    Parameters
+    ----------
+    df_sql_result: DataFrame or List[DataFrame]
+      Data input from SQL output of query_str string
+
+    ganymede_context: GanymedeContext (optional)
+      Context variable for flow runs; contains input file name(s) and flow run timestamp.
+
+    Returns
+    -------
+    DataFrame or Dict[str, DataFrame]
+      If a pandas DataFrame is returned, the table name that the data is stored to within the Ganymede data lake corresponds to the 'analysis' value on the node.
+
+      If a dictionary is returned, keys are table names in the Ganymede data lake.  The DataFrame with the keyword 'analysis' as the key will be saved to the Ganymede data lake as specified by the 'analysis' variable on the node.
+    """
+
+    if isinstance(df_sql_result, pd.DataFrame):
+        df_out = df_sql_result.copy()
+    else:
+        df_out = {k: df for k, df in enumerate(df_sql_result)}
+
+    return df_out
+```
+
+The _execute_ function can be thought of as the _main_ function where execution starts.  
+
+In this example, the _execute_ function takes the results of 1 or more tables as input, presented as either a pandas DataFrame or list of pandas DataFrames.  The execute function returns either a pandas DataFrame or a dictionary of pandas DataFrames with table names as keys.
+
+By default, if only 1 DataFrame is returned, it would be displayed in the table head associated with the node.  If multiple DataFrames are returned, the table displayed corresponds to the one labeled with the parameter with the gray chip background.  In the example above, the dataframe correponding to `sql_result` key would be the one displayed if multiple tables were returned from the _execute_ function.
+
+
+:::caution
+
+The names of the _query_sql_ variable and _execute_ function cannot be modified or moved to different cells in a notebook.  Upon running the save cell in the notebook, the cells that contain the _query_sql_ string and execute function are saved, and the contents of all other cells are discarded.  
+
+This allows users to conduct testing in other cells prior to committing and loading code to the workflow orchestrator.
+
+:::
+
+### Notebook: Save Pipeline Code cell
+
+```python
+# Save the updated query and python function to the pipeline
+from ganymede.editor import save
+
+files = { 'query.sql': query_sql }
+save(files)
+```
+
+Running this cell commits any code changes to the Git repository associated with the tenant and uploads the code to the workflow management system for executing code.
+
+### Notebook: Testing Section
+
+```python
+# Example 1: Testing section for Transform_Py node
+
+from ganymede.editor import query
+
+# dry run SQL query (ies)
+print(query.dry_run(query_sql))
+
+# retrieve data from query (ies) 
+qs = [q for q in query_sql.split(';') if q.strip() != '']
+result_dfs = [query.results(q) for q in qs]
+result_dfs
+
+# run user-defined python on retrieved data
+execute(result_dfs)
+```
+
+The testing section enables users to test pipeline code prior to deployment.  In the example above, the testing code executes _query_sql_ and sends the result to the _execute_ function.  
+
+_Nodes_ that load data use a file upload widget so that a file can be uploaded prior to processing.  Running the code below yields a button that allows users to submit a CSV file.  Data associated with the code can be accessed by the execute function as shown in the 2nd code snippet below.
+
+```python
+# Example 2: Testing section for Read_CSV node
+from IPython.display import display
+from io import BytesIO
+import ipywidgets as widgets
+
+file_uploader = widgets.FileUpload(
+    accept='.csv',
+    multiple=False,
+)
+display(file_uploader)
+```
+
+```python
+# Example 2 (ctd):
+df = execute({'test_file': BytesIO(file_uploader.value[0].content.tobytes())})
+display(df)
+```
+
+## Modifying Node Dependencies
+
+Edges can be removed by selecting them and pressing "delete" or "backspace" on the keyboard.  A selected edge is slightly darker and wider than unselected edges.
+
+To make two nodes dependent on each other within a run, click and drag between two orbs two different nodes.  _Flow_ dependencies run top-to-bottom (if vertical layout is specified) or left-to-right (if horizontal layout is specified).
+
+## Adding Inputs to Flow Runs
+
+_Flows_ can be configured to accept user inputs at the start of each run. There are three types of inputs:
+
+- File inputs 
+- Text (string) inputs
+- Tag inputs 
+
+The value of these inputs are used by the _node_ during flow execution, and are made available to the _node_ within editable code (for user-editable _nodes_).
+
+:::note
+
+Tag inputs, in its current state, refer to Benchling tags.  Tenants can be configured to listen to events emitted by Benchling, which enable _flows_ to reference specific Benchling tables to incorporate in _flow_ processing.
+
+:::
+
+### Node categories
+
+A list of available _nodes_ and their associated categories can be found by clicking the **New** Button in the header of the Flow Editor page.  
+
+Nodes are classified into the following categories: 
+- **App**: Accesses third-party APIs for processing; in many cases, key exchange between third-party and Ganymede are necessary for functionality
+- **Analysis**: Performs Python / SQL manipulations
+- **Instrument**: Lab instrument-specific functions
+- **File**: For ETL operations on data of specified type into Ganymede cloud
+- **Tag**: For specifying parameters at _flow_ runtime
+- **Test**: For validating platform functionality or for mocking Flows prior to implementation
+
+### Node characteristics
+
+<img width="500" alt="image" src="https://ganymede-bio.mo.cloudinary.net/apiServer/Function_Chip_20221216.png"/>
+
+Each _node_ in the listing is represented by a chip containing the
+- name of node
+- description of node functionality
+- inputs, if any
+- outputs, if any
+
+For the example chip above, the CSV_Read node takes a CSV file as input and outputs either a pandas DataFrame or a dictionary of pandas DataFrames indexed by table name, which are uploaded to the Ganymede data lake.
+
+### Node-specific Table Heads
+
+<img width="384" alt="image" src="https://ganymede-bio.mo.cloudinary.net/apiServer/TableHead.png"/>
+
+The _table head_ exists for _nodes_ that produce an output table.  For this subset of _nodes_, the _table head_ shows the first 5 records of the primary table produced by its associated _node_, which is the table specified by the gray chip of the associated _node_.  This table facilitates the development of downstream _flow_ components.
+
+:::note
+
+_Nodes_ can be connected either directly to each other, or by connecting the downstream _node_ to the _table head_ corresponding to its immediately upstream neighbor.
+
+:::
+
+## Modifying contents of a node
+
+Once a _node_ is saved on a _flow_, it can be modified by clicking the **Edit** button in the bottom-right of the node. This will allow any properties to be changed, as shown in the image below. 
+
+<img width="300" alt="image" src="https://ganymede-bio.mo.cloudinary.net/apiServer/SampleNode_20221218.png"/>
+<br />
+<br />
+
+:::info
+
+_Node_ modifications are not permanent until the environment is saved; if the Flow Editor page is refreshed prior to saving, any edits are discarded.
+
+:::
+
