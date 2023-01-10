@@ -5,7 +5,7 @@ sidebar_label: Quickstart
 displayed_sidebar: webUiSidebar
 ---
 
-This guide walks through building a simple _flow_ to ingest plate reader absorbance data captured at two timepoints and computing the difference between the two values.
+This guide walks through building a _flow_ for ingesting plate reader absorbance data captured at two timepoints and computing the difference between the two values.
 
 ### Step 0: Download sample plate reader file
 
