@@ -57,12 +57,12 @@ The Run History table contains the following status information on historical ru
 Clicking on the plus sign found on the left hand side of each Run History table record expands the view to display _node_-level status.  
 
 Some common values for colors that you will see are:
-  - **Red**: failure after retries exhausted
-  - **Light green**: currently running
-  - **Dark green**: successful run
-  - **Gray**: queued; awaiting system resource to commence
-  - **Yellow**: failure to run on at least 1 try; awaiting retry
-  - **Pink**: skipped prior to completion; this color may indicate a system resource limitation
-  - **Orange**: dependency for node has failed, preventing this node from being run
+  - ![#B22222](https://placehold.co/2x2/B22222/B22222.png) **Red**: failure after retries exhausted
+  - ![#01FF70](https://placehold.co/2x2/01FF70/01FF70.png) **Light green**: currently running
+  - ![#2ECC40](https://placehold.co/2x2/2ECC40/2ECC40.png) **Dark green**: successful run
+  - ![#A9A9A9](https://placehold.co/2x2/A9A9A9/A9A9A9.png) **Gray**: queued; awaiting system resource to commence
+  - ![#FFFF00](https://placehold.co/2x2/FFFF00/FFFF00.png) **Yellow**: failure to run on at least 1 try; awaiting retry
+  - ![#9932CC](https://placehold.co/2x2/9932CC/9932CC.png) **Dark Orchid**: skipped prior to completion; this color may indicate a system resource limitation
+  - ![#FFA500](https://placehold.co/2x2/FFA500/FFA500.png) **Orange**: dependency for node has failed, preventing this node from being run
 
 Logs associated with each _flow_ step can be accessed by clicking on the corresponding colored box.

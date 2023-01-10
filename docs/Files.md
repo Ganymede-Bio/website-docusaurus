@@ -8,4 +8,4 @@ The Files page provides access to all of the data uploaded to Ganymede and all o
 
 <img width="1248" alt="image" src="https://user-images.githubusercontent.com/46538575/195644596-f4dbafd9-371f-44d4-8888-dd1a92c274fc.png" />
 
-
+Input files can be found under the Uploaded Files section while _flow_ outputs can be found in the Results section of the Files page.s
