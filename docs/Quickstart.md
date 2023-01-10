@@ -67,11 +67,11 @@ Extension validation can be removed by leaving the file validation node attribut
 
 By default, the Excel_Read _node_ treats the first row in the input file as the header row, so no modification is necessary for ingesting the file.
 
-Open up the backing notebook for the Transform_Py _node_ by clicking on the pencil icon in the upper-right hand corner.  Edit the query_sql string to query for the output of the Excel_Read node and run the cell by clicking on the Run button in the header.
+Open up the backing notebook for the Transform_Py _node_ by clicking on the pencil icon in the upper-right hand corner.  Edit the query_sql string to query for the output of the Excel_Read node (replacing <tenant\> with the appropriate tenant name) and run the cell by clicking on the Run button in the header.
 
 ```python
 query_sql = """
-  SELECT * FROM Quickstart_Absorbance_Change_Excel_Read_results;
+  SELECT * FROM <tenant>.Quickstart_Absorbance_Change_Excel_Read_results
 """
 ```
 
@@ -86,7 +86,7 @@ def execute(
 ) -> Union[pd.DataFrame, Dict[str, pd.DataFrame]]:
 
     # remove fields that do not contain well measurements
-    df_out = df_sql_result[df_sql_result['field'].notin(['Cycle Nr.', 'Time [s]', 'Temp. [°C]'])].copy()    
+    df_out = df_sql_result[~df_sql_result['field'].isin(['Cycle Nr.', 'Time [s]', 'Temp. [°C]'])].copy()    
     
     # calculate absorbance difference
     df_out['run_diff'] = df_out['run2'] - df_out['run1']
@@ -112,4 +112,32 @@ Upon doing so, the response in the Save Pipeline Cell should say "Commit complet
 
 Deployment takes roughly 1-2 minutes.  Once the deployment is completed, return to the Flow Editor view and click Browse on the Flow Inputs _node_.  Select local storage and the PlateReader.xlsx file downloaded at the beginning of this quickstart.
 
-Flow run status can be monitored by clicking on the **Runs** button in the header bar
+Flow run status can be monitored by clicking on the **Runs** button in the header bar, or by clicking **Flow Runs** in the left sidebar.
+
+<img alt="Example flow running" src="https://ganymede-bio.mo.cloudinary.net/apiServer/QuickstartFlowRun_20230110.png"/>
+
+When complete, the status of the _flow_ should indicate success:
+
+<img alt="Example flow success" src="https://ganymede-bio.mo.cloudinary.net/apiServer/QuickstartFlowSuccess_20230110.png"/>
+
+### Step 7: Observe Results in Data Explorer
+
+Click on **Data Explorer** in the left sidebar and run the following query to observe the processed results.
+
+```sql
+select 
+    left(field, 1) as well_row, 
+    cast(right(field, length(field)-1) as int) as well_column,
+    *
+from ganymede_dev.Quickstart_Absorbance_Change_Transform_py_analysis 
+order by left(field, 1), cast(right(field, length(field)-1) as int)
+```
+
+Running this query will yield the result table from the _flow_, which is displayed below.
+
+<img alt="Querying results" src="https://ganymede-bio.mo.cloudinary.net/apiServer/QuickstartDataExplorer_20230110.png"/>
+
+The associated file ingested into the flow in this quickstart can be found in the **Files** tab of Ganymede.
+
+<img alt="Files tab input files" src="https://ganymede-bio.mo.cloudinary.net/apiServer/QuickstartFiles_20230110.png"/>
+
