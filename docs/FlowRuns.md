@@ -34,8 +34,3 @@ Expanding the status box shows a list of nodes with corresponding run statuses i
   - ![#9932CC](https://placehold.co/2x2/9932CC/9932CC.png) **Dark Orchid**: skipped prior to completion; this color may indicate a system resource limitation
   - ![#FFA500](https://placehold.co/2x2/FFA500/FFA500.png) **Orange**: dependency for node has failed, preventing this node from being run
 
-:::note
-
-If 
-
-:::

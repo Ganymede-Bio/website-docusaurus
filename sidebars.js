@@ -9,12 +9,12 @@ module.exports = {
   webUiSidebar: [
     {
       type: 'doc',
-      id: 'About',
+      id: 'Introduction',
       label: 'Welcome',
     },
     {
       type: 'category',
-      label: 'Using Ganymede',
+      label: 'Processing Data',
       collapsed: false,
       items: [{
         type: 'category',
@@ -26,7 +26,7 @@ module.exports = {
         type: 'category',
         label: 'Editing Flows',
         collapsed: false,
-        items: ['FlowEditor', 'Nodes', 'FlowMetadata'],
+        items: ['FlowEditor', 'NodeEditor', 'FlowMetadata'],
       },
       {
         type: 'category',
@@ -34,13 +34,13 @@ module.exports = {
         collapsed: false,
         items: ['FlowRuns', 'Notifications']
       },
-      {
-        type: 'category',
-        label: 'Observing Data',
-        collapsed: false,
-        items: ['AnalysisNotebook', 'DataExplorer', 'Files']
-      },
       ]
+    },
+    {
+      type: 'category',
+      label: 'Observing Data',
+      collapsed: false,
+      items: ['AnalysisNotebook', 'DataExplorer', 'Files']
     },
     {
       type: 'doc',
