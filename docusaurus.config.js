@@ -18,7 +18,7 @@ module.exports = {
       },
       items: [
         {
-          to: 'docs/Introduction',
+          to: 'docs/Welcome',
           routeBasePath: '/',
           label: 'Web UI',
           position: 'left',
@@ -50,7 +50,7 @@ module.exports = {
           items: [
             {
               label: 'Web UI',
-              to: 'docs/Introduction',
+              to: 'docs/Welcome',
             },
             {
               label: 'Nodes',

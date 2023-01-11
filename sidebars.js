@@ -9,8 +9,13 @@ module.exports = {
   webUiSidebar: [
     {
       type: 'doc',
-      id: 'Introduction',
+      id: 'Welcome',
       label: 'Welcome',
+    },
+    {
+      type: 'doc',
+      id: 'Quickstart',
+      label: 'Quickstart',
     },
     {
       type: 'category',

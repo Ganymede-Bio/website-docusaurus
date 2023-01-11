@@ -32,7 +32,7 @@ Additional packages can be installed using pip magic.  For example, the followin
 
 ### Loading data from BigQuery
 
-The __client__ object can be used to access data stored in Google BigQuery as part of a Flow run.  For example, run the code below to list available tables in the __ganymede_demo__ environment:
+The __client__ object can be used to access data stored in Google BigQuery as part of a Flow run.  For example, run the code below to list available tables in the __ganymede_demo__ tenant:
 
 ```python
 pandas_gbq.context.credentials = client._credentials
@@ -59,7 +59,7 @@ query.results(query_sql)
 
 ### Saving notebooks
 
-The final cell contains a code which commits the notebook to the HEAD of the Github repository containing the stored Flow.  The _src_ entry in the files dictionary specifies the location of the notebook within the repo, and the _dest_ entry specifies the name that the notebook is committed under.
+The final cell contains a code which commits the notebook to the HEAD of the Github repository containing the stored Flow.  The src entry in the files dictionary specifies the location of the notebook within the repo, and the dest entry specifies the name that the notebook is committed under.
 
 ```python
 from ganymede.notebook import save

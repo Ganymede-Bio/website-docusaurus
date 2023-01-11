@@ -31,7 +31,10 @@ The observation mode specifies which files are captured:
  - Cumulative mode will queue any files incorporate any files that already exist in the directory, and proceed to look for any new files created or modified in the selected directory
 
 The write mode describes how Ganymede Cloud handles observed files.  When the watcher detects a file, it will upload to our system independent of its mode. If a detected file has the same file name as one that already exists in our system for a given flow and input, there are two ways the watcher can move forward. The first is to queue the file already in our system to run. The second is to upload the file into our system with a unique name.
+
+<div class="text--center">
 <img width="516" alt="image" src="https://user-images.githubusercontent.com/111307862/208987244-9fddd32f-5584-4979-9694-e9c8d8383777.png" />
+</div>
 
 Once the watcher is configured, close out of the modal and click the file icon to select directory. The watcher will now continue to observe that directory until a user refreshes or closes the site or select the 'X' icon that appears when watching a file.
  

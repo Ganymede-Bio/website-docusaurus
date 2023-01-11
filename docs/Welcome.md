@@ -1,11 +1,11 @@
 ---
-id: Introduction
-title: About
-sidebar_label: About
+id: Welcome
+title: Welcome to Ganymede
+sidebar_label: Welcome
 displayed_sidebar: webUiSidebar
 ---
 
-## Why Ganymede?
+<img alt="Ganymede hero image" src="https://ganymede-bio.mo.cloudinary.net/apiServer/HeroImage_20230110.png"/>
 
 Ganymede is cloud-based managed infrastructure that lets life science companies execute their data strategy.  
 
@@ -31,7 +31,9 @@ Developers author _flows_, which are programs represented as directed graphs com
 
 ### Inside a node
 
-<img width="300" alt="Example node layout" src="https://ganymede-bio.mo.cloudinary.net/apiServer/Operator_Conceptual_Layout_20230108.png" />
+<div class="text--center">
+<img width="400" alt="Example node layout" src="https://ganymede-bio.mo.cloudinary.net/apiServer/Operator_Conceptual_Layout_20230108.png" />
+</div>
 
 The core unit that performs processing in Ganymede is the [_node_](./nodes/Overview.md).  The _node_ type specifies the _operator_ code, template SQL code, and template Python code.
 
