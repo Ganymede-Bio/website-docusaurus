@@ -40,9 +40,28 @@
   text-align: center
 }
 
+.keystroke {
+  display: inline;
+  color: #363636;
+  font-weight: 700;
+  border-style: solid;
+  border: 1px;
+  padding-left: 2px;
+  padding-right: 2px;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  vertical-align: text-top;
+  border-color: #363636;
+}
+
+.button.darker_gray_button {
+  color: #363636;
+  font-weight: 700;
+}
+
 .button.dark_gray_button {
   color: #454545;
-  font-weight: 500;
+  font-weight: 700;
 }
 
 .button.gray_button {
@@ -52,7 +71,16 @@
 
 .button.black_button {
   color: black;
-  font-weight: 500;
+  font-weight: 700;
+}
+
+.button.purple_button_icon {
+  padding-left: 3px;
+  padding-right: 3px;
+  padding-top: 4px;
+  padding-bottom: 1px;
+  background-color: var(--ifm-color-primary-darker);
+  color: #f2f2f2;
 }
 
 .button.purple_button {

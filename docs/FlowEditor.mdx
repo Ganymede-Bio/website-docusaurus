@@ -5,11 +5,11 @@ displayed_sidebar: webUiSidebar
 ---
 
 import { NodeIndexOutlined,
-         PlusCircleOutlined,
          CheckCircleOutlined,
          NotificationOutlined,
          CaretRightOutlined,
-         SettingOutlined
+         SettingOutlined,
+         DownOutlined
        } from '@ant-design/icons';
 
 The <div className="button border_button"><NodeIndexOutlined /> **Flow Editor**</div> page is the starting point for creating and modifying _flows_.  
@@ -37,14 +37,14 @@ The header bar contains buttons for creating _flows_ and monitoring _flow_ runs.
 
 ### Creating Flows
 
-To create a new _flow_, click the **Manage** button in the upper right hand corner of the screen. Then click the <div className="button black_button">Add New Flow</div> button on the sidebar.  This action exposes a modal for naming and describing the _flow_.  
+To create a new _flow_, click the <div className="button purple_button">**Manage <SettingOutlined />**</div> button in the upper right hand corner of the screen. Then click the <div className="button black_button">Add New Flow</div> button on the sidebar.  This action exposes a modal for naming and describing the _flow_.  
 
 <img width="1111" alt="Editor_add_flow" src="https://user-images.githubusercontent.com/46538575/211052554-2f6d272a-1d63-4f4e-a1b2-2bc92e5fd412.png" />
 &nbsp;
 
 ### Loading and Saving Flows
 
-To load a _flow_, specify the _flow_ to load in the **Choose A Flow** selection box.  Upon doing so, the primary pane displays the graphical structure of the _flow_.
+To load a _flow_, specify the _flow_ to load in the <div className="button purple_button">**Choose A Flow <DownOutlined />**</div> selection box.  Upon doing so, the primary pane displays the graphical structure of the _flow_.
 
 <img width="1111" alt="Editor_select_flow" src="https://user-images.githubusercontent.com/46538575/211091935-c8074b1b-6545-4e18-bd81-a0a63ae6f507.png" />
 &nbsp;
@@ -65,7 +65,7 @@ If the input file has previously been uploaded to the corresponding flow and nod
 
 <img width="550" alt="existing_file_treatment" src="https://user-images.githubusercontent.com/46538575/211057216-bd34e3db-c4ed-49f5-8042-e6b420f7efd3.png" />
 
-To run the same _flow_ with different sets of input files, add additional rows to the input box by clicking on the **Add** button.
+To run the same _flow_ with different sets of input files, add additional rows to the input box by clicking on the <div className="button dark_gray_button">**+ Add**</div> button.
 
 <img width="550" alt="Sample input node" src="https://ganymede-bio.mo.cloudinary.net/apiServer/FlowInputFile_20221220.png"/>
 

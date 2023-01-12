@@ -1,0 +1,23 @@
+---
+id: DataExplorer
+title: Data Explorer
+displayed_sidebar: webUiSidebar
+---
+
+import { FileSearchOutlined } from '@ant-design/icons';
+
+The <div className="button border_button"><FileSearchOutlined /> **Data Explorer**</div> page offers an ANSI SQL interface to query tabular data generated from Ganymede _flows_.  
+
+<img alt="Files page" src="https://storage.googleapis.com/ganymede-bio-website/public/apiServer/TableBrowser.png" />
+
+- The Data Lake Tables pane contains a list of tables that exist in the current environment. 
+  - There is a search bar to filter tables that contain the search string
+  - The button next to table overwrites the SQL query in the top right and give an example query
+
+- The Query Editor provides an input window for users to type in queries.
+  - This query is limited to data query (DQL) calls only. (e.g. `SELECT` are the only keyword allowed in the query)
+  - Table names should be surrounded with backticks - use <div className="keystroke">`</div> to escape special characters
+  - If the `LIMIT` keyword in not included, the default of `LIMIT 1000` to prevent long loading times related to tables.
+  
+- The Results pane contains the query results
+  - There is a download button on the top right which takes the current output and produces a CSV file

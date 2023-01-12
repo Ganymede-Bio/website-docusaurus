@@ -1,8 +1,11 @@
 ---
 id: FlowMetadata
-title: Context / Flow Metadata
+title: Flow Context & Metadata
 displayed_sidebar: webUiSidebar
 ---
+
+import NodeChip from '@site/src/components/NodeChip.js'
+
 
 Template variables and context variables are used for accessing _flow_ metadata that is known at runtime.  Some examples of this metadata are:
 - timestamp associated with run
@@ -11,25 +14,25 @@ Template variables and context variables are used for accessing _flow_ metadata 
 
 In this section, we'll reference the _flow_ below to demonstrate concepts associated with templating and context in Ganymede.  
 
-<img alt="demo flow with input parameter" src="https://ganymede-bio.mo.cloudinary.net/apiServer/Input_Param_20230108.png"/>
+<img alt="demo flow with input parameter" src="https://ganymede-bio.mo.cloudinary.net/apiServer/Input_Param_20230112.png"/>
 
 The example _flow_ performs the following operations:
-- ingests a CSV file in the CSV_Read node
-- adds run metadata in the Transform_py node
-- writes the resulting file to a CSV file in the CSV_Write node
+- ingests a CSV file in <NodeChip text="CSV_Read" />
+- in <NodeChip text="Transform_Py" />, adds run metadata
+- writes the resulting file to a CSV file in <NodeChip text="CSV_Write" />
 
 ## Template Variables
 
-Template variables allow access to flow metadata in _node_ attributes and user-defined SQL queries through [Jinja templates](https://jinja.palletsprojects.com/en/3.1.x/).  These variables can be accessed in Node Attributes and user-defined SQL queries by wrapping the template variable name with two braces.
+Template variables allow access to flow metadata in _node_ attributes and user-defined SQL queries through [Jinja templates](https://jinja.palletsprojects.com/en/3.1.x/).  These variables can be accessed in Node Attributes and user-defined SQL queries by wrapping the template variable name with two braces on each side.
 
-In the example _flow_ shown above, the output of the CSV_Write node uses the **run_id** template variable to add a timestamp to the CSV file output.
+In the example _flow_ shown above, the output of <NodeChip text="CSV_Write" /> uses the **{{run_id}}** template variable to add a timestamp to the CSV file output.
 
 ### Available template variables
 
 - **run_id**: Timestamp in ms when _flow_ was kicked off; guaranteed to be unique per _flow_ run
 - **dag.dag_id**: name of _flow_
 - **operator**: name of _node_
-- **task_id**: type of _node_ (e.g. - CSV_Read or Transform_Py)
+- **task_id**: type of _node_ (e.g. - <NodeChip text="CSV_Read" /> or <NodeChip text="Transform_Py" />)
 
 ## Context Variables
 
@@ -39,7 +42,7 @@ Context variables are used to access _flow_ metadata in user-defined Python.  Th
 
 The _ganymede_context_ object enables access to _flow_-specific metadata, input parameters, and input files in user-defined Python functions.  
 
-The code below demonstrates how this object can be used.  This code corresponds to the user-defined function found within the Transform_py _node_.  The flow run timestamp, filename uploaded, and **experiment_id** flow input parameter are incorporated into the input CSV as new columns and written to the data lake.
+The code below demonstrates how this object can be used.  This code corresponds to the user-defined function found within <NodeChip text="Transform_Py" />.  The flow run timestamp, filename uploaded, and experiment_id flow input parameter are incorporated into the input CSV as new columns and written to the data lake.
 
 ```python
 import pandas as pd
@@ -60,7 +63,7 @@ def execute(
 ```
 
 #### Ganymede Context class variables
-- **run_id**: `str`
+- **run_id: `str`**
   - Timestamp in ms when _flow_ was kicked off; guaranteed to be unique per _flow_ run.
 
 #### Ganymede Context class methods

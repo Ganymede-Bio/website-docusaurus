@@ -18,10 +18,10 @@ _Nodes_ are customizable blocks of code with default functionality specified by 
 
 The image above shows how _nodes_ are represented on the Flow Editor page; each _node_ consists of:
 
-- **Node Name**: located in the header of the _node_
-- **Pencil Icon**: button for editing the user-editable code backing the _node_
-- **Node Attribute(s)**: attributes associated with the _node_ that are processed by the node
-- **Edit Button**: unlocks the _node_ for modifying _node_ name, changing _node_ attributes, or deleting the _node_
+- **Node Name**: located in the header of the _node_; Read_CSV in the image above.
+- **Pencil Icon**: if present, the <EditOutlined className="button purple_button_icon"/> is a button that opens the user-editable notebook when clicked.
+- **Node Attribute(s)**: if present, the attributes associated with the _node_ that are processed by the node.  In the image above, the node attributes 'csv' and 'results' have values '.csv' and 'example_results' respectively.
+- **Edit Button**: the <div className="button dark_gray_button">Edit</div> button that unlocks the _node_ for modifying _node_ name, changing _node_ attributes, or deleting the _node_
 
 Notebooks that back nodes are laid out in the following order:
 
@@ -32,7 +32,7 @@ Notebooks that back nodes are laid out in the following order:
 
 ## Backing Notebooks
 
-Editable nodes contain an edit button, a pencil icon (<EditOutlined className="button purple_button"/>) in its upper right hand corner that opens up the notebook backing the node upon button click.  This section walks through the code associated with such a node to discuss its functionality.
+Editable nodes contain a pencil icon (<EditOutlined className="button purple_button_icon"/>) in their upper right hand corner that opens up the notebook backing the node upon button click.  This section walks through the code associated with such a node to discuss its functionality.
 
 ### Notebook: User-defined SQL
 
@@ -89,7 +89,7 @@ def execute(df_sql_result: Union[pd.DataFrame, List[pd.DataFrame]], ganymede_con
     return df_out
 ```
 
-The _execute_ function can be thought of as the _main_ function where execution starts.  
+The _execute_ function can be viewed analogous to the _main_ function in Python; it is the starting point for execution by the workflow manager when user-defined Python is executed.
 
 In this example, the _execute_ function takes the results of 1 or more tables as input, presented as either a pandas DataFrame or list of pandas DataFrames.  The execute function returns either a pandas DataFrame or a dictionary of pandas DataFrames with table names as keys.
 
@@ -168,7 +168,7 @@ _Flows_ can be configured to accept user inputs at the start of each run by sele
 
 A list of available _nodes_ and their associated categories can be found on the [table listing of node characteristics](./nodes/Overview.md#table-listing-of-node-characteristics)  More detail can be found on the [Node documentation page](./nodes/Overview.md).
 
-### Node-specific Table Heads
+### Table Heads
 
 <div class="text--center">
 <img width="400" alt="image" src="https://ganymede-bio.mo.cloudinary.net/apiServer/TableHead_20230110.png"/>

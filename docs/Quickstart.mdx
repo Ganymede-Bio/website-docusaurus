@@ -15,6 +15,8 @@ import { UserOutlined,
          CheckCircleOutlined,
          FolderOutlined } from '@ant-design/icons';
 
+import NodeChip from '@site/src/components/NodeChip.js'
+
 This guide walks through building a _flow_ for ingesting plate reader absorbance data captured at two timepoints and computing the difference between the two values.
 
 ### Step 0: Download sample plate reader file
@@ -31,7 +33,7 @@ The <div className="button gray_button"><UserOutlined /> Sign In</div> button sh
 
 ### Step 2: Select the Flow Editor page
 
-Click on the <div className="button border_button"><NodeIndexOutlined /> **Flow Editor**</div> button in the sidebar.
+Click on the <div className="button purple_button"><NodeIndexOutlined /> **Flow Editor**</div> button in the sidebar.
 
 <img alt="Flow Editor Select" src="https://ganymede-bio.mo.cloudinary.net/apiServer/FlowEditorSelect_20230110.png"/>
 
@@ -51,18 +53,18 @@ This exposes a modal for adding a new _flow_.  Populate the _flow_ name and desc
 
 ### Step 4: Add nodes to ingest and process data
 
-Click on the <div className="button purple_button_navbar">**New** <PlusCircleOutlined /></div> button in the header bar and search for the term "excel" to filter for the relevant <div className="button dark_gray_button"><PlusCircleOutlined className="tree_node_icon"/> **Excel_Read**</div> *node*.  On the Flow diagram, select the <div className="button dark_gray_button"><PlusCircleOutlined className="tree_node_icon"/> **Excel_Read**</div> *node* and connect its top attachment point to the bottom attachment point of the <div className="button dark_gray_button"><PlusCircleOutlined className="tree_node_icon"/> **Flow_Inputs**</div> *node*.
+Click on the <div className="button purple_button_navbar">**New** <PlusCircleOutlined /></div> button in the header bar and search for the term "excel" to filter for the relevant <NodeChip text="Excel_Read" /> *node*.  On the Flow diagram, select the <NodeChip text="Excel_Read" /> *node* and connect its top attachment point to the bottom attachment point of the <NodeChip text="Flow_Inputs" /> *node*.
 
 
 <div class="text--center">
 <img width="350" alt="Excel_Read node chip" src="https://ganymede-bio.mo.cloudinary.net/apiServer/QuickstartExcelRead_20230111.png"/>
 </div> 
 
-Repeat this process with the <div className="button dark_gray_button"><PlusCircleOutlined className="tree_node_icon"/> **Transform_Py**</div> *node*.  Upon doing so, the <div className="button purple_button"><NodeIndexOutlined/> **Flow Editor**</div> window should look as follows:
+Repeat this process with the <NodeChip text="Transform_Py" /> *node*.  Upon doing so, the <div className="button purple_button"><NodeIndexOutlined/> **Flow Editor**</div> window should look as follows:
 
 <img alt="Quickstart Flow Init" src="https://ganymede-bio.mo.cloudinary.net/apiServer/QuickstartFlow_20230110.png"/>
 
-Node attributes with <div className="green_text">**green labels**</div> indicate validation attributes.  In this example, the <div className="green_text">**excel**</div> node attribute on the Excel_Read _node_ refers to the file extension that the *flow* looks for during runs.  Click on the edit button, and modify the <div className="green_text">**excel**</div> node attribute to be ".xlsx", so that only files with ".xlsx" as an extension would be let through.  
+Node attributes with <div className="green_text">**green labels**</div> indicate validation attributes.  In this example, the <div className="green_text">**excel**</div> node attribute on <NodeChip text="Excel_Read" /> refers to the file extension that the *flow* looks for during runs.  Click on the edit button, and modify the <div className="green_text">**excel**</div> node attribute to be ".xlsx", so that only files with ".xlsx" as an extension would be let through.  
 
 Click <div className="button purple_button_navbar">**Save** <CaretRightOutlined className="white_icon" /></div> in the header to save this change.  After making this change, the _flow_ will look as follows:
 
@@ -76,9 +78,9 @@ Extension validation can be removed by leaving the file validation node attribut
 
 ### Step 5: Modify the Transform_Py node to calculate absorbance difference
 
-By default, <div className="button dark_gray_button"><PlusCircleOutlined className="tree_node_icon"/> **Excel_Read**</div> treats the first row in the input file as the header row, so no modification is necessary for ingesting the sample file.
+By default, <NodeChip text="Excel_Read" /> treats the first row in the input file as the header row, so no modification is necessary for ingesting the sample file.
 
-The <div className="button dark_gray_button"><PlusCircleOutlined className="tree_node_icon"/> **Transform_Py**</div> node needs to be modified to calculate absorbance difference.  To do so, open up the backing notebook for <div className="button dark_gray_button"><PlusCircleOutlined className="tree_node_icon"/> **Transform_Py**</div> by clicking on pencil icon (<EditOutlined className="button purple_button"/>) in the upper-right hand corner of the _node_.  This opens up the Jupyter notebook corresponding to the node in a separate tab on the browser.
+The <NodeChip text="Transform_Py" /> node needs to be modified to calculate absorbance difference.  To do so, open up the backing notebook for <NodeChip text="Transform_Py" /> by clicking on pencil icon (<EditOutlined className="button purple_button_icon"/>) in the upper-right hand corner of the _node_.  This opens up the Jupyter notebook corresponding to the node in a separate tab on the browser.
 
 <img alt="Transform_Py Jupyter Notebook" src="https://ganymede-bio.mo.cloudinary.net/apiServer/TransformPyNotebook_20230111.png"/>
 &nbsp;
