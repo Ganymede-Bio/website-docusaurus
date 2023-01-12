@@ -112,3 +112,7 @@
   border-style: solid;
   border-color: var(--ifm-color-primary-darkest);
 }
+
+.filter-white{
+  filter: brightness(0) invert(1);
+}

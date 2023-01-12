@@ -51,7 +51,7 @@ This exposes a modal for adding a new _flow_.  Populate the _flow_ name and desc
 
 ### Step 4: Add nodes to ingest and process data
 
-Click on the <div className="button purple_button_navbar">**New <PlusCircleOutlined />**</div> button in the header bar and search for the term "excel" to filter for the relevant <div className="button dark_gray_button"><PlusCircleOutlined className="tree_node_icon"/> **Excel_Read**</div> *node*.  On the Flow diagram, select the <div className="button dark_gray_button"><PlusCircleOutlined className="tree_node_icon"/> **Excel_Read**</div> *node* and connect its top attachment point to the bottom attachment point of the <div className="button dark_gray_button"><PlusCircleOutlined className="tree_node_icon"/> **Flow_Inputs**</div> *node*.
+Click on the <div className="button purple_button_navbar">**New** <PlusCircleOutlined /></div> button in the header bar and search for the term "excel" to filter for the relevant <div className="button dark_gray_button"><PlusCircleOutlined className="tree_node_icon"/> **Excel_Read**</div> *node*.  On the Flow diagram, select the <div className="button dark_gray_button"><PlusCircleOutlined className="tree_node_icon"/> **Excel_Read**</div> *node* and connect its top attachment point to the bottom attachment point of the <div className="button dark_gray_button"><PlusCircleOutlined className="tree_node_icon"/> **Flow_Inputs**</div> *node*.
 
 
 <div class="text--center">
@@ -127,6 +127,8 @@ Upon doing so, the response in the Save Pipeline Cell should say "Commit complet
 ### Step 6: Run the flow
 
 Deployment takes roughly 1-2 minutes.  Once the deployment is completed, return to the <div className="button purple_button"><NodeIndexOutlined /> **Flow Editor**</div> view and click <div className="button light_blue_button">**Browse**</div> on the Flow Inputs _node_.  Select local storage and the PlateReader.xlsx file downloaded at the beginning of this quickstart.
+
+Click <div className="button border_button">**Run**<CaretRightOutlined /></div> on the Flow Inputs _node_ to kick off the _flow_.
 
 Click on <div className="button border_button"><CheckCircleOutlined /> **Flow Runs**</div> in the left sidebar to monitor the run.
 

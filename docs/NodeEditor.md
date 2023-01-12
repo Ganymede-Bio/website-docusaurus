@@ -14,10 +14,10 @@ _Nodes_ are customizable blocks of code with default functionality specified by 
 
 The image above shows how _nodes_ are represented on the Flow Editor page; each _node_ consists of:
 
-- **node name**: located in the header of the _node_
-- **pencil icon**: button for editing the user-editable code backing the _node_
-- **node attribute(s)**: attributes associated with the _node_ that are processed by the node
-- **edit button**: unlocks the _node_ for modifying _node_ name, changing _node_ attributes, or deleting the _node_
+- **Node Name**: located in the header of the _node_
+- **Pencil Icon**: button for editing the user-editable code backing the _node_
+- **Node Attribute(s)**: attributes associated with the _node_ that are processed by the node
+- **Edit Button**: unlocks the _node_ for modifying _node_ name, changing _node_ attributes, or deleting the _node_
 
 Notebooks that back nodes are laid out in the following order:
 
