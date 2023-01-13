@@ -8,10 +8,18 @@ displayed_sidebar: releaseSideBar
 
 Ganymede releases generally occur on Thursdays each week.
 
+### Jan 12 2023
+
+**Node Editor Templates**
+- Additional template cleanups performed
+
+**Data Explorer**
+- SQL editor UI updated
+
 ### Jan 6 2023
 
 **Node Editor Templates**
-- Node editor templates updated
+- Node editor templates updated; most notebooks for nodes that ingest files now have a cell for ingesting files in the notebook.
 
 **Node updates**
 - Node for performing validation using Great Expectations added
