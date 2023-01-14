@@ -1,7 +1,7 @@
 module.exports = {
   title: 'Ganymede Documentation',
   tagline: 'Integrate your entire lab',
-  url: 'https://demo.ganymede.bio',
+  url: 'https://www.ganymede.bio',
   baseUrl: '/',
   favicon: 'img/favicon.png',
   organizationName: 'Ganymede-Bio',
@@ -40,6 +40,9 @@ module.exports = {
           label: 'GitHub',
           position: 'right',
         },
+        {
+
+        }
       ],
     },
     footer: {
@@ -95,7 +98,22 @@ module.exports = {
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
         },
+        sitemap: {
+          changefreq: 'weekly',
+          priority: 0.5,
+          filename: 'sitemap.xml',
+        }
       },
     ],
   ],
+  plugins: [
+    [
+      '@docusaurus/plugin-sitemap',
+      {
+        changefreq: 'weekly',
+        priority: 0.5,
+        filename: 'sitemap.xml',
+      }
+    ]
+  ]
 };
