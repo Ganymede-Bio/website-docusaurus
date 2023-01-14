@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 module.exports = {
   title: 'Ganymede Documentation',
   tagline: 'Integrate your entire lab',
@@ -6,7 +8,39 @@ module.exports = {
   favicon: 'img/favicon.png',
   organizationName: 'Ganymede-Bio',
   projectName: 'website-docusaurus',
+  themes: ['docusaurus-theme-search-typesense'],
   themeConfig: {
+    typesense: {
+      typesenseCollectionName: 'website-docusaurus',
+
+      typesenseServerConfig: {
+        nodes: [
+          {
+            host: `${process.env.TYPESENSE_HOST}-1.a1.typesense.net`,
+            port: 443,
+            protocol: 'https',
+          },
+          {
+            host: `${process.env.TYPESENSE_HOST}-2.a1.typesense.net`,
+            port: 443,
+            protocol: 'https',
+          },
+          {
+            host: `${process.env.TYPESENSE_HOST}-3.a1.typesense.net`,
+            port: 443,
+            protocol: 'https',
+          },
+        ],
+        apiKey: process.env.TYPESENSE_API_KEY,
+        contextualSearch: false
+      },
+
+      // Optional: Typesense search parameters: https://typesense.org/docs/0.21.0/api/search.md#search-parameters
+      typesenseSearchParameters: {},
+
+      // Optional
+      contextualSearch: true,
+    },
     prism: {
       theme: require('prism-react-renderer/themes/github'),
     },
@@ -39,9 +73,6 @@ module.exports = {
           href: 'https://github.com/Ganymede-Bio/website-docusaurus',
           label: 'GitHub',
           position: 'right',
-        },
-        {
-
         }
       ],
     },
@@ -105,15 +136,5 @@ module.exports = {
         }
       },
     ],
-  ],
-  plugins: [
-    [
-      '@docusaurus/plugin-sitemap',
-      {
-        changefreq: 'weekly',
-        priority: 0.5,
-        filename: 'sitemap.xml',
-      }
-    ]
   ]
 };
