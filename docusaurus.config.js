@@ -3,18 +3,33 @@ require('dotenv').config()
 module.exports = {
   title: 'Ganymede Documentation',
   tagline: 'Integrate your entire lab',
-  url: 'https://www.ganymede.bio',
+  // url: 'https://www.ganymede.bio',
+  url: 'http://host.docker.internal',
   baseUrl: '/',
   favicon: 'img/favicon.png',
   organizationName: 'Ganymede-Bio',
   projectName: 'website-docusaurus',
   themes: ['docusaurus-theme-search-typesense'],
   themeConfig: {
+    // algolia: {
+    //   appId: process.env.ALGOLIA_APP_ID,
+    //   // Public API key: it is safe to commit it
+    //   apiKey: process.env.ALGOLIA_API_KEY,
+
+    //   indexName: 'websiteDocusaurus',
+    //   contextualSearch: false,
+    // },
+
     typesense: {
-      typesenseCollectionName: 'website-docusaurus',
+      typesenseCollectionName: 'websiteDocusaurus',
 
       typesenseServerConfig: {
         nodes: [
+          // {
+          //   host: 'localhost',
+          //   port: 8108,
+          //   protocol: 'http'
+          // }
           {
             host: `${process.env.TYPESENSE_HOST}-1.a1.typesense.net`,
             port: 443,
@@ -31,6 +46,7 @@ module.exports = {
             protocol: 'https',
           },
         ],
+        // apiKey: 'dev',
         apiKey: process.env.TYPESENSE_API_KEY,
         contextualSearch: false
       },
@@ -39,7 +55,7 @@ module.exports = {
       typesenseSearchParameters: {},
 
       // Optional
-      contextualSearch: true,
+      contextualSearch: false,
     },
     prism: {
       theme: require('prism-react-renderer/themes/github'),
@@ -118,6 +134,7 @@ module.exports = {
       '@docusaurus/preset-classic',
       {
         docs: {
+          routeBasePath: '/',
           sidebarPath: require.resolve('./sidebars.js'),
           editUrl:
             'https://github.com/Ganymede-Bio/website-docusaurus/edit/main/',
