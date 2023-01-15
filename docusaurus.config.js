@@ -11,7 +11,7 @@ module.exports = {
   themes: ['docusaurus-theme-search-typesense'],
   themeConfig: {
     typesense: {
-      typesenseCollectionName: 'websiteDocusaurus',
+      typesenseCollectionName: process.env.TYPESENSE_COLLECTION_NAME,
 
       typesenseServerConfig: {
         nodes: [
