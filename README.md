@@ -53,6 +53,15 @@ deactivate
 popd
 ```
 
+### Updating search crawler
+
+1. Follow [setup instructions on typesense documentation search](https://typesense.org/docs/guide/docsearch.html)
+
+2. Run the following command:
+```
+docker run -it --env-file=.env -e "CONFIG=$(cat docsearch-config.json | jq -r tostring)" typesense/docsearch-scraper
+```
+
 ## License
 
 [Apache 2.0](https://github.com/Ganymede-Bio/website-docusaurus/blob/main/LICENSE)
