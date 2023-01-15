@@ -16,20 +16,10 @@ module.exports = {
       typesenseServerConfig: {
         nodes: [
           {
-            host: `${process.env.TYPESENSE_HOST}-1.a1.typesense.net`,
+            host: process.env.TYPESENSE_HOST,
             port: 443,
             protocol: 'https',
-          },
-          {
-            host: `${process.env.TYPESENSE_HOST}-2.a1.typesense.net`,
-            port: 443,
-            protocol: 'https',
-          },
-          {
-            host: `${process.env.TYPESENSE_HOST}-3.a1.typesense.net`,
-            port: 443,
-            protocol: 'https',
-          },
+          }
         ],
         apiKey: process.env.TYPESENSE_API_KEY,
         contextualSearch: true
