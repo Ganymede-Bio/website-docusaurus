@@ -1,6 +1,6 @@
 {
   "index_name": "websiteDocusaurus",
-  "start_urls": ["http://docs.ganymede.bio"],
+  "start_urls": ["https://docs.ganymede.bio/"],
   "sitemap_urls": [
     "https://docs.ganymede.bio/sitemap.xml"
   ],
@@ -42,5 +42,5 @@
   "conversation_id": [
     "1535599749"
   ],
-    "nb_hits": 108
+    "nb_hits": 1329
 }
