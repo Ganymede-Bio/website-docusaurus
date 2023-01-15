@@ -3,6 +3,7 @@ id: Welcome
 title: Welcome to Ganymede
 sidebar_label: Welcome
 displayed_sidebar: webUiSidebar
+slug: /
 ---
 
 <img alt="Ganymede hero image" src="https://ganymede-bio.mo.cloudinary.net/apiServer/HeroImage_20230110.png"/>

@@ -17,12 +17,14 @@
     "@docusaurus/plugin-google-gtag": "^2.2.0",
     "@docusaurus/preset-classic": "^2.2.0",
     "classnames": "^2.2.6",
+    "docusaurus-theme-search-typesense": "^0.8.0-0",
     "react": "^16.8.4",
     "react-dom": "^16.8.4"
   },
   "devDependencies": {
     "@docusaurus/module-type-aliases": "^2.1.0",
     "@tsconfig/docusaurus": "^1.0.6",
+    "dotenv": "^16.0.3",
     "typescript": "^4.7.4"
   },
   "browserslist": {
