@@ -12,7 +12,7 @@ function.  The user-defined function returns a table which is uploaded to the Ga
 
 A subscription in the corresponding Benchling account is required for sending events to
 Ganymede's AWS account.
-See [Benchling docs](https://docs.benchling.com/docs/events-getting-started#setting-up-a-subscription))
+See [Benchling docs](https://docs.benchling.com/docs/events-getting-started#setting-up-a-subscription)
 [Benchling events reference](https://docs.benchling.com/docs/events-reference)
 
 
