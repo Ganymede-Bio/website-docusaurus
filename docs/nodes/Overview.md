@@ -5,7 +5,11 @@ displayed_sidebar: nodeSidebar
 sidebar_label: Overview
 ---
 
-_Nodes_ provide template structure for performing data extraction, processing, and API communication.  The tables below summarize how different _nodes_ work.
+_Nodes_ provide template structure for performing data extraction, processing, and API communication. Stylistically, their layout looks as follows.
+
+<img width="400" alt="Example node layout" src="https://ganymede-bio.mo.cloudinary.net/apiServer/Operator_Conceptual_Layout_20230108.png" />
+
+Operators perform the function that is specified by their name.  For nodes for which flexibility is important, the node has user-defined SQL and user-defined Python components, which allow the flow developer to tailor _node_ function to the _flow_.
 
 _Nodes_ are classified into the following categories: 
 - **App**: Accesses third-party APIs for processing; in many cases, key exchange between third-party and Ganymede are necessary for functionality
