@@ -8,6 +8,14 @@ displayed_sidebar: releaseSideBar
 
 Ganymede releases generally occur on Thursdays each week.
 
+### Jan 19 2023
+
+**Node Editor Templates**
+- Additional template cleanups performed
+
+**Node Updates**
+- Node to trigger _flow_ upon Benchling entity registration created
+
 ### Jan 12 2023
 
 **Node Editor Templates**
