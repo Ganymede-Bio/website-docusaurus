@@ -20,7 +20,7 @@ module.exports = {
     {
       type: 'category',
       label: 'Processing Data',
-      collapsed: false,
+      collapsed: true,
       items: [{
         type: 'category',
         label: 'Running Flows',
@@ -44,7 +44,7 @@ module.exports = {
     {
       type: 'category',
       label: 'Observing Data',
-      collapsed: false,
+      collapsed: true,
       items: ['AnalysisNotebook', 'DataExplorer', 'Files']
     },
     {
