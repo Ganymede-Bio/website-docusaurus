@@ -5,13 +5,57 @@ displayed_sidebar: nodeSidebar
 sidebar_label: Overview
 ---
 
-_Nodes_ provide template structure for performing data extraction, processing, and API communication. Stylistically, their layout looks as follows.
+_Nodes_ provide template structure for performing data extraction, processing, and API communication. The diagram below shows how a node performs a base function, but exposes an interface for user-defined code to enable tailoring.
 
 <img width="400" alt="Example node layout" src="https://ganymede-bio.mo.cloudinary.net/apiServer/Operator_Conceptual_Layout_20230108.png" />
 
-Operators perform the function that is specified by their name.  For nodes for which flexibility is important, the node has user-defined SQL and user-defined Python components, which allow the flow developer to tailor _node_ function to the _flow_.
+## Key Node Characteristics
 
-_Nodes_ are classified into the following categories: 
+A useful way to interact with _nodes_ is to consider how _nodes_ interact with other systems, their input and output types, and whether or not they contain a user-editable component.  The table below showsthe full list of available _nodes_, along with whether there is a user-editable component associated with the node.
+
+### Available Nodes with Key Characteristics
+
+| Category   | Name                       | Input Types                                | Output Types         | Is Editable   |
+|------------|----------------------------|--------------------------------------------|----------------------|---------------|
+| Analysis   | Great_Expectations         | Table                                      | Table                | True          |
+| Analysis   | Process_Blob_to_Blob       | FileAny and Optional[Table or List[Table]] | Dict[FileAny]        | True          |
+| Analysis   | Process_Blob_to_Table      | FileAny and Optional[Table or List[Table]] | Table or Dict[Table] | True          |
+| Analysis   | Table_to_Blob              | Table or List[Table]                       | Dict[FileAny]        | True          |
+| Analysis   | Transform_SQL              | Table                                      | Table                | True          |
+| Analysis   | Transform_py               | Table or List[Table]                       | Table or Dict[Table] | True          |
+| App        | AirtableExport             | Table                                      | API                  | False         |
+| App        | AirtableImport             | API                                        | Table                | False         |
+| App        | Azure_Read                 | API                                        | FileAny              | False         |
+| App        | Azure_Write                | FileAny                                    | API                  | False         |
+| App        | Benchling_Event            | App                                        | FileAny              | True          |
+| App        | Benchling_Read             | API                                        | Table                | True          |
+| App        | Benchling_Read_Object      | API                                        | Table                | True          |
+| App        | Benchling_Write            | Table                                      | API                  | True          |
+| App        | Coda_Write                 | Table                                      | API                  | True          |
+| App        | S3_Read                    | API                                        | FileAny              | False         |
+| App        | S3_Write                   | FileAny                                    | API                  | False         |
+| File       | Blob_Read                  | FileAny                                    | FileAny              | True          |
+| File       | CSV_Read                   | FileCSV                                    | Table or Dict[Table] | True          |
+| File       | CSV_Write                  | Table or List[Table]                       | FileCSV              | True          |
+| File       | Excel_Read                 | FileExcel                                  | Table or Dict[Table] | True          |
+| File       | Excel_Write                | Table or List[Table]                       | FileExcel            | True          |
+| File       | FCS_Extract_Load           | FileFCS                                    | Dict[Table]          | True          |
+| File       | HDF5_Read                  | FileHDF5                                   | FileAny              | True          |
+| File       | Image_Read                 | FileImage                                  | Dict[FileAny]        | True          |
+| File       | Image_Write                | Table or List[Table]                       | Dict[FileAny]        | True          |
+| File       | Powerpoint_Write           | Table or List[Table]                       | Dict[FileAny]        | True          |
+| File       | XML_Read                   | FileXML                                    | Table                | True          |
+| Instrument | BMG_Clariostar_CSV         | FileCSV                                    | Dict[Table]          | True          |
+| Instrument | Profilometer_Read          | FileHDF5                                   | FileHDF5             | True          |
+| Instrument | Read_Trios_Rheometer_Excel | FileExcel                                  | Table                | True          |
+| Instrument | SpectraMax_XML             | FileXML                                    | Table                | True          |
+| Tag        | Benchling_Tag              | TagBenchling                               | string               | False         |
+| Tag        | Input_Param                | string                                     | string               | False         |
+| Test       | GanymedeEcho               |                                            |                      | False         |
+| Test       | Placeholder                |                                            |                      | False         |
+
+#### Node Categories
+
 - **App**: Accesses third-party APIs for processing; in many cases, key exchange between third-party and Ganymede are necessary for functionality
 - **Analysis**: Performs Python / SQL manipulations
 - **Instrument**: Lab instrument-specific functions
@@ -19,12 +63,7 @@ _Nodes_ are classified into the following categories:
 - **Tag**: For specifying parameters at _flow_ runtime
 - **Test**: For validating platform functionality or for mocking _flows_ prior to implementation
 
-## Key Node Characteristics
-
-A useful way to interact with _nodes_ is to consider input and output types of _nodes_.  This information is displayed
-in the table below, along with whether there is a user-editable component associated with the node.
-
-### Node Input/Output Types
+#### Node Input/Output Types
 
 Input/output types are split into the following categories:
 - **Table**: Tabular data retrieved from or passed to tenant-specific Ganymede data lake.  Tables are retrieved from Ganymede data lake via ANSI SQL queries, and are passed to Ganymede data lake as pandas DataFrames
@@ -61,50 +100,7 @@ The _execute_ function may call classes and functions found within the User-Defi
 - **Testing Section**: The cells in this section can be used for testing modifications to the SQL query and user-defined python function.  This enables rapid iteration on user-defined code; after necessary edits are made, changes can be saved in by running the **Save Pipeline Code** cell.
 
 
-### Table Listing of Node Characteristics
-
-| Category   | Name                       | Input Types                                | Output Types         | Is Editable   |
-|------------|----------------------------|--------------------------------------------|----------------------|---------------|
-| Analysis   | Great_Expectations         | Table                                      | Table                | True          |
-| Analysis   | Process_Blob_to_Blob       | FileAny and Optional[Table or List[Table]] | Dict[FileAny]        | True          |
-| Analysis   | Process_Blob_to_Table      | FileAny and Optional[Table or List[Table]] | Table or Dict[Table] | True          |
-| Analysis   | Table_to_Blob              | Table or List[Table]                       | Dict[FileAny]        | True          |
-| Analysis   | Transform_SQL              | Table                                      | Table                | True          |
-| Analysis   | Transform_py               | Table or List[Table]                       | Table or Dict[Table] | True          |
-| App        | AirtableExport             | Table                                      | API                  | False         |
-| App        | AirtableImport             | API                                        | Table                | False         |
-| App        | Azure_Read                 | API                                        | FileAny              | False         |
-| App        | Azure_Write                | FileAny                                    | API                  | False         |
-| App        | Benchling_Read             | API                                        | Table                | True          |
-| App        | Benchling_Read_Object      | API                                        | Table                | True          |
-| App        | Benchling_Write            | Table                                      | API                  | True          |
-| App        | Coda_Write                 | Table                                      | API                  | True          |
-| App        | S3_Read                    | API                                        | FileAny              | False         |
-| App        | S3_Write                   | FileAny                                    | API                  | False         |
-| File       | Blob_Read                  | FileAny                                    | FileAny              | True          |
-| File       | CSV_Read                   | FileCSV                                    | Table or Dict[Table] | True          |
-| File       | CSV_Write                  | Table or List[Table]                       | FileCSV              | True          |
-| File       | Excel_Read                 | FileExcel                                  | Table or Dict[Table] | True          |
-| File       | Excel_Write                | Table or List[Table]                       | FileExcel            | True          |
-| File       | FCS_Extract_Load           | FileFCS                                    | Dict[Table]          | True          |
-| File       | HDF5_Read                  | FileHDF5                                   | FileAny              | True          |
-| File       | Image_Read                 | FileImage                                  | Dict[FileAny]        | True          |
-| File       | Image_Write                | Table or List[Table]                       | Dict[FileAny]        | True          |
-| File       | Powerpoint_Write           | Table or List[Table]                       | Dict[FileAny]        | True          |
-| File       | XML_Read                   | FileXML                                    | Table                | True          |
-| Instrument | BMG_Clariostar_CSV         | FileCSV                                    | Dict[Table]          | True          |
-| Instrument | Profilometer_Read          | FileHDF5                                   | FileHDF5             | True          |
-| Instrument | Read_Trios_Rheometer_Excel | FileExcel                                  | Table                | True          |
-| Instrument | SpectraMax_XML             | FileXML                                    | Table                | True          |
-| Tag        | Benchling_Tag              | TagBenchling                               | string               | False         |
-| Tag        | Input_Param                | string                                     | string               | False         |
-| Test       | GanymedeEcho               |                                            |                      | False         |
-| Test       | Placeholder                |                                            |                      | False         |
-
-
-## Node Descriptions
-
-The table below contains a full listing of available nodes.
+## List of Available Nodes
 
 | Category   | Name                       | Brief Description                                                  |
 |------------|----------------------------|--------------------------------------------------------------------|
@@ -118,6 +114,7 @@ The table below contains a full listing of available nodes.
 | App        | AirtableImport             | Import data from Airtable into Ganymede data lake                  |
 | App        | Azure_Read                 | Read data from Azure Blob Storage                                  |
 | App        | Azure_Write                | Write data to Azure Blob storage                                   |
+| App        | Benchling_Event            | Capture events from Benchling for triggering flows                 |
 | App        | Benchling_Read             | Read Benchling data into data lake using run tag                   |
 | App        | Benchling_Read_Object      | Read Benchling data into data lake using object ID                 |
 | App        | Benchling_Write            | Write to Benchling                                                 |
