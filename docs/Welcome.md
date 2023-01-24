@@ -24,7 +24,7 @@ Code written in Ganymede is version-controlled and deployed to a workflow orches
 
 **In short, Ganymede reduces barriers to technical communication in modern, data-driven enterprises.**
 
-### How Does Ganymede Work?
+### How does Ganymede work?
 
 ![Ganymede example flow](https://ganymede-bio.mo.cloudinary.net/apiServer/FlowImage_Annotated_20221216.png)
 
