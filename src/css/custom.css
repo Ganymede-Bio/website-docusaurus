@@ -26,13 +26,13 @@
 }
 
 [data-theme='dark'] {
-  --ifm-color-primary: #4339ab;
-  --ifm-color-primary-light: #3c339a;
-  --ifm-color-primary-lighter: #393091;
-  --ifm-color-primary-lightest: #2f2878;
-  --ifm-color-primary-dark: #4a3fbc;
-  --ifm-color-primary-darker: #5045c1;
-  --ifm-color-primary-darkest: #685fca;
+  --ifm-color-primary: #bab6e6;
+  --ifm-color-primary-light: #d7d5f1;
+  --ifm-color-primary-lighter: #e6e4f6;
+  --ifm-color-primary-lightest: #f4f3fb;
+  --ifm-color-primary-dark: #9d97db;
+  --ifm-color-primary-darker: #8e88d6;
+  --ifm-color-primary-darkest: #8079d1;
   --ifm-color-gray-lighter: #f2f2f2;
   --ifm-color-gray-light: #e5e5e5;
   --ifm-color-gray: #8d8d8d;
@@ -40,7 +40,7 @@
   --ifm-color-gray-darker: #c9c9c9;
   --ifm-color-white: black;
   --ifm-color-black: white;
-  --ifm-color-blue: #4d4dff;
+  --ifm-color-blue: #6699cc;
   --ifm-code-font-size: 95%;
 }
 
@@ -155,19 +155,6 @@
 .button.light_blue_button {
   background-color: #669ff4;
   color: white;
-}
-
-.button.border_button {
-  display: inline;
-  background-color: var(--ifm-color-primary);
-  color: white;
-  padding-top: 3px;
-  padding-bottom: 3px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-radius: 4px;
-  border-style: solid;
-  border-color: var(--ifm-color-primary-darkest);
 }
 
 .filter-white{
