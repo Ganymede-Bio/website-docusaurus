@@ -8,6 +8,12 @@ displayed_sidebar: releaseSideBar
 
 Ganymede releases generally occur on Thursdays each week.
 
+### Jan 26 2023
+
+**UI Updates**
+- Clearer navigation between files and flow runs
+- Users can filter flows by file run via Files page
+
 ### Jan 19 2023
 
 **Node Editor Templates**
