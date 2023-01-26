@@ -8,15 +8,17 @@ displayed_sidebar: webUiSidebar
 import { CheckCircleOutlined } from '@ant-design/icons';
 
 The <div className="button purple_button"><CheckCircleOutlined /> **Flow Runs**</div> page contains the current status of different _flow_ runs that have been executed.  To view historical runs for a given _flow_, select the _flow_ from the datalist in the header.
+To download or get more information on an input or output file, click on the file name to navigate to the [Files page](Files.mdx).
 
-<img width="800" alt="image" src="https://ganymede-bio.mo.cloudinary.net/apiServer/FlowRuns_Layout_20221218.png" />
+<img width="1100" alt="Flow Runs" src="https://user-images.githubusercontent.com/46538575/214942023-68dcdf38-1c53-4663-a4ed-172eea4689c1.png" />
 
 ### Observing Flow Status
 
 The run status table displayed consists of the following columns:
 
 - **Flow Name**: Name of the _flow_ executed
-- **File**: Input files and input parameters associated with _flow_ run
+- **Input File**: Input files and input parameters associated with _flow_ run
+- **Output File**: Output files (if applicable)
 - **Run Tag**: Run tags associated with _flow_ run. An example run tag would be a Benchling custom entity ID used to reference a table within Benchling.
 - **Start date**: Timestamp of when _flow_ was initiated
 - **End date**: Timestamp of when _flow_ completed execution
