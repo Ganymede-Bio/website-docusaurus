@@ -12,7 +12,7 @@ import { NodeIndexOutlined,
          DownOutlined
        } from '@ant-design/icons';
 
-The <div className="button border_button"><NodeIndexOutlined /> **Flow Editor**</div> page is the starting point for creating and modifying _flows_.  
+The <div className="button purple_button"><NodeIndexOutlined /> **Flow Editor**</div> page is the starting point for creating and modifying _flows_.  
 
 <img width="1111" alt="Flow Editor before flow load" src="https://ganymede-bio.mo.cloudinary.net/apiServer/FlowEditor_20230109.png" />
 
@@ -28,8 +28,8 @@ The header bar contains buttons for creating _flows_ and monitoring _flow_ runs.
 - **New**: Opens right sidebar for selecting new *node* to add.  
 - **View** : Opens right sidebar for specifying whether _flow_ should be laid out horizontally or vertically
 - **Analysis**: Enables access to Jupyter notebooks which can be used for ad-hoc observation and data analysis.  These notebooks are hosted on a virtual machine (VM) separate from the workflow management software running the _flow_.
-- **Runs**: Opens right sidebar showing statuses of historical runs for the selected _flow_.  The [<div className="button border_button"><CheckCircleOutlined /> **Flow Runs**</div>](FlowRuns.mdx) page contains greater detail about the contents of this tab.
-- **Processing**: Shows the number of files in the queue for your next run.  Clicking this button brings up the [<div className="button border_button"><CheckCircleOutlined /> **Flow Runs**</div>](FlowRuns.mdx) page.
+- **Runs**: Opens right sidebar showing statuses of historical runs for the selected _flow_.  The [<div className="button purple_button"><CheckCircleOutlined /> **Flow Runs**</div>](FlowRuns.mdx) page contains greater detail about the contents of this tab.
+- **Processing**: Shows the number of files in the queue for your next run.  Clicking this button brings up the [<div className="button purple_button"><CheckCircleOutlined /> **Flow Runs**</div>](FlowRuns.mdx) page.
 - **Save**: Button to save _flow_ layout to git repo and deploy code to workflow management system.
 - **Manage**: Opens right sidebar to create new _flows_ or delete existing ones.
 
@@ -49,7 +49,7 @@ To load a _flow_, specify the _flow_ to load in the <div className="button purpl
 <img width="1111" alt="Editor_select_flow" src="https://user-images.githubusercontent.com/46538575/211091935-c8074b1b-6545-4e18-bd81-a0a63ae6f507.png" />
 &nbsp;
 
-After saving a _flow_, the entire environment (which contains all _flows_) is saved and deployed. When this save and deploy is taking place, users are temporarily restricted from running _flows_. A tooltip will be displayed to the user if they try to run a _flow_ during this time. Users can observe the status of environment updates on the [<div className="button border_button"><NotificationOutlined /> **Notifications**</div>](Notifications.mdx) page.
+After saving a _flow_, the entire environment (which contains all _flows_) is saved and deployed. When this save and deploy is taking place, users are temporarily restricted from running _flows_. A tooltip will be displayed to the user if they try to run a _flow_ during this time. Users can observe the status of environment updates on the [<div className="button purple_button"><NotificationOutlined /> **Notifications**</div>](Notifications.mdx) page.
 
 <img width="569" alt="Editor_tooltip" src="https://user-images.githubusercontent.com/46538575/211051939-0bba7a3f-4b9d-4a69-a7e0-34735fc2c4b8.png" />
 &nbsp;
@@ -69,7 +69,7 @@ To run the same _flow_ with different sets of input files, add additional rows t
 
 <img width="550" alt="Sample input node" src="https://ganymede-bio.mo.cloudinary.net/apiServer/FlowInputFile_20221220.png"/>
 
-Clicking the <div className="button border_button">**Run**<CaretRightOutlined /></div> button on the Flow Inputs _node_ kicks off the _flow_ run.  Run progress can be tracked by clicking on the **Runs** button in the header, or by navigating to the [<div className="button border_button"><CheckCircleOutlined /> **Flow Runs**</div>](FlowRuns.mdx) page.
+Clicking the <div className="button purple_button">**Run**<CaretRightOutlined /></div> button on the Flow Inputs _node_ kicks off the _flow_ run.  Run progress can be tracked by clicking on the **Runs** button in the header, or by navigating to the [<div className="button purple_button"><CheckCircleOutlined /> **Flow Runs**</div>](FlowRuns.mdx) page.
 
 ### Modifying and Deleting Flows
 
