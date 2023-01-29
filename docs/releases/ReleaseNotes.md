@@ -14,6 +14,11 @@ Ganymede releases generally occur on Thursdays each week.
 - Clearer navigation between files and flow runs
 - Users can filter flows by file run via Files page
 
+**Node Updates**
+- Added nodes to read zip files and instron files
+- Excel write node can now take in spreadsheet name as a parameter
+- Process_Blob_to_Blob and Process_Blob_to_Table now requires bucket source to be specified (either "input" or "output")
+
 ### Jan 19 2023
 
 **Node Editor Templates**

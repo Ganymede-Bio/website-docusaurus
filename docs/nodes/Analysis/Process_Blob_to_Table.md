@@ -10,6 +10,9 @@ to data lake.
 
 
 ### Node Attributes
+- **src_input_or_output_bucket**
+  - Specify "input" or "output" for the Ganymede cloud storage bucket to read from.
+  - "input" contains files ingested into a flow; "output" contains processed data.
 - **input_object_names**
   - Objects to read from Ganymede cloud storage
 - **output_table_results**
