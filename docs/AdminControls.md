@@ -24,4 +24,4 @@ There are four levels of access, and are set at the tenant level.  These access 
     Can execute _flows_, but cannot modify or create new _flows_.
 
 **Reader**:
-    Can execute _flows_ and environment settings, but not permitted to execute or alter _flows_.
+    Can execute _flows_ and observe environment settings, but not permitted to execute or alter _flows_.
