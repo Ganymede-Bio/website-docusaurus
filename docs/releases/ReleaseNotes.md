@@ -8,6 +8,14 @@ displayed_sidebar: releaseSideBar
 
 Ganymede releases generally occur on Thursdays each week.
 
+### Feb 2 2023
+
+**UI Updates**
+- Table heads can now be hidden
+
+**Node Updates**
+- Updated S3 nodes to retrieve data from either input or output buckets
+
 ### Jan 26 2023
 
 **UI Updates**

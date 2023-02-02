@@ -5,14 +5,17 @@ displayed_sidebar: nodeSidebar
 ---
 
 ### Node Operator
-Sync S3 Bucket -> Ganymede data lake bucket
+Sync S3 bucket -> Ganymede data lake bucket
 
 
 ### Node Attributes
-- **input_s3_bucket**
+- **src_s3_bucket**
   - Name of S3 bucket to read files from
-- **input_prefix**
+- **src_s3_prefix**
   - Prefix pattern to match for files to copy from S3 bucket
+- **dest_input_or_output_bucket**
+  - Specify "input" or "output" for the Ganymede cloud storage bucket to sync to.
+  - "input" contains files ingested into a flow; "output" contains processed data.
 
 
 ### Notes

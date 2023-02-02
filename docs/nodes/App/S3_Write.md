@@ -9,8 +9,11 @@ Sync GCS bucket -> S3 bucket
 
 
 ### Node Attributes
-- **src_object_name**
-  - Data lake object to write
+- **src_input_or_output_bucket**
+  - Specify "input" or "output" for the Ganymede cloud storage bucket to sync from.
+  - "input" contains files ingested into a flow; "output" contains processed data.
+- **src_object_prefix**
+  - Prefix of data lake object to write
 - **dest_s3_key**
   - destination S3 key to write to
 
