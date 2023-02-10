@@ -8,6 +8,16 @@ displayed_sidebar: releaseSideBar
 
 Ganymede releases generally occur on Thursdays each week.
 
+### Feb 9 2023
+
+**Logging**
+- Run logs now load faster, and are available in full screen modal
+
+**Node Updates**
+- Snowflake write operator now available
+- Instron instrument operator added
+
+
 ### Feb 2 2023
 
 **UI Updates**

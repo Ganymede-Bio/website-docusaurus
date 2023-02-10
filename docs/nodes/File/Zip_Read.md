@@ -14,7 +14,7 @@ which are written to the Ganymede data lake.
 
 ### Node Attributes
 - **input_file_zip**
-  - File extension on excel file
+  - File extension on zip file
 - **output_table_results**
   - Data lake table to write metadata to
 ## User-Defined Python
