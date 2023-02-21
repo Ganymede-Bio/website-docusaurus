@@ -8,6 +8,17 @@ displayed_sidebar: releaseSideBar
 
 Ganymede releases generally occur on Thursdays each week.
 
+### Feb 16 2023
+
+**UI Updates**
+- Styling for side and top navbars updated
+
+**Flow Editor**
+- Benchling tags now searchable
+
+**Node Updates**
+- Input nodes can now ingest multiple files
+
 ### Feb 9 2023
 
 **Logging**
@@ -16,7 +27,6 @@ Ganymede releases generally occur on Thursdays each week.
 **Node Updates**
 - Snowflake write operator now available
 - Instron instrument operator added
-
 
 ### Feb 2 2023
 
