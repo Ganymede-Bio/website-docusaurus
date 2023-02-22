@@ -69,5 +69,4 @@ By separating code into distinct _nodes_, different _nodes_ can be run in parall
 
 
 <br />
-Features of Ganymede interact with users' file system and are not compatible with Mozilla Firefox or Internet Explorer.
-
+Features of Ganymede that interact with users' file system are not compatible with Mozilla Firefox or Internet Explorer.
