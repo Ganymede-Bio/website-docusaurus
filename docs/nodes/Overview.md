@@ -36,10 +36,14 @@ A useful way to interact with _nodes_ is to consider how _nodes_ interact with o
 | App        | S3_Read                    | API                                                                   | FileAny              | False         |
 | App        | S3_Write                   | FileAny                                                               | API                  | False         |
 | App        | Snowflake_Write            | Table                                                                 | API                  | False         |
+| File       | AVI_Read                   | FileAVI                                                               | Table or Dict[Table] | True          |
+| File       | AVI_Read_Multi             | Set[FileAVI]                                                          | Table or Dict[Table] | True          |
 | File       | Blob_Read                  | FileAny                                                               | FileAny              | True          |
 | File       | CSV_Read                   | FileCSV                                                               | Table or Dict[Table] | True          |
+| File       | CSV_Read_Multi             | Set[FileCSV]                                                          | Table or Dict[Table] | True          |
 | File       | CSV_Write                  | Table or List[Table]                                                  | FileCSV              | True          |
 | File       | Excel_Read                 | FileExcel                                                             | Table or Dict[Table] | True          |
+| File       | Excel_Read_Multi           | Set[FileExcel]                                                        | Table or Dict[Table] | True          |
 | File       | Excel_Write                | Table or List[Table]                                                  | FileExcel            | True          |
 | File       | FCS_Extract_Load           | FileFCS                                                               | Dict[Table]          | True          |
 | File       | HDF5_Read                  | FileHDF5                                                              | FileAny              | True          |
@@ -47,12 +51,14 @@ A useful way to interact with _nodes_ is to consider how _nodes_ interact with o
 | File       | Image_Write                | Table or List[Table]                                                  | Dict[FileAny]        | True          |
 | File       | Powerpoint_Write           | Table or List[Table]                                                  | Dict[FileAny]        | True          |
 | File       | XML_Read                   | FileXML                                                               | Table                | True          |
-| File       | Zip_Read                   | FileZip                                                               | Dict[Table]          | True          |
+| File       | Zip_Read                   | FileZip                                                               | Dict[FileAny]        | True          |
 | Instrument | BMG_Clariostar_CSV         | FileCSV                                                               | Dict[Table]          | True          |
 | Instrument | Instron_Tensile_Read       | FileIsTens                                                            | Dict[Table]          | True          |
 | Instrument | Profilometer_Read          | FileHDF5                                                              | FileHDF5             | True          |
 | Instrument | Read_Trios_Rheometer_Excel | FileExcel                                                             | Table                | True          |
 | Instrument | SpectraMax_XML             | FileXML                                                               | Table                | True          |
+| Instrument | Synergy_Read               | FileTxt                                                               | Dict[Table]          | True          |
+| Instrument | Synergy_Read_Multi         | Set[FileTxt]                                                          | Dict[Table]          | True          |
 | Tag        | Benchling_Tag              | TagBenchling                                                          | string               | False         |
 | Tag        | Input_Param                | string                                                                | string               | False         |
 | Test       | GanymedeEcho               |                                                                       |                      | False         |
@@ -127,10 +133,14 @@ The _execute_ function may call classes and functions found within the User-Defi
 | App        | S3_Read                    | Ingest data into Ganymede data storage from AWS S3 storage         |
 | App        | S3_Write                   | Write data to an S3 bucket                                         |
 | App        | Snowflake_Write            | Sync tables in Ganymede data lake to Snowflake                     |
+| File       | AVI_Read                   | Read in contents of an AVI file to a table                         |
+| File       | AVI_Read_Multi             | Read in contents of multiple avi files to a table                  |
 | File       | Blob_Read                  | Read blob data into Ganymede data storage                          |
 | File       | CSV_Read                   | Read in contents of a CSV file                                     |
+| File       | CSV_Read_Multi             | Read in contents of multiple CSV files                             |
 | File       | CSV_Write                  | Write table to CSV file                                            |
 | File       | Excel_Read                 | Read Excel spreadsheet                                             |
+| File       | Excel_Read_Multi           | Read Excel spreadsheets                                            |
 | File       | Excel_Write                | Write Excel spreadsheet                                            |
 | File       | FCS_Extract_Load           | Load FCS file to data lake                                         |
 | File       | HDF5_Read                  | Read HDF5 data                                                     |
@@ -144,6 +154,8 @@ The _execute_ function may call classes and functions found within the User-Defi
 | Instrument | Profilometer_Read          | Read Mx Profiler data file                                         |
 | Instrument | Read_Trios_Rheometer_Excel | Read Trios runs from Excel                                         |
 | Instrument | SpectraMax_XML             | Read in XML output from Molecular Devices SpectraMax               |
+| Instrument | Synergy_Read               | Load Synergy text file to data lake                                |
+| Instrument | Synergy_Read_Multi         | Load multiple Synergy texts file to data lake                      |
 | Tag        | Benchling_Tag              | Read benchling tag                                                 |
 | Tag        | Input_Param                | Input parameter into Flow                                          |
 | Test       | GanymedeEcho               | Echo command for Ganymede                                          |

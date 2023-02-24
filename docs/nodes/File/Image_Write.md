@@ -12,8 +12,8 @@ and stores result in cloud storages
 
 
 ### Node Attributes
-- **output_table_data_desc**
-  - Table describing objects to be moved
+- **output_table_metadata**
+  - Table describing objects created
 ## User-Defined Python
 Process image data into a dictionary of images indexed by filename to save in cloud storage
 

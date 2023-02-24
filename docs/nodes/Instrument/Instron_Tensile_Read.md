@@ -14,8 +14,12 @@ return one or more tables for storage in Ganymede data lake.
 ### Node Attributes
 - **input_file_is_tens**
   - File extension on is_tens file
-- **output_table_results**
-  - Table to display on Table Head in Flow Editor
+- **output_table_key**
+  - Table with associations between files
+- **output_table_raw_metadata**
+  - Table with the raw metadata
+- **output_table_dimensions**
+  - Table with the material dimensions
 ## User-Defined Python
 Processes is_tens file (passed to function as BytesIO file-like objects) into data tables
 stored in data lake
@@ -31,8 +35,3 @@ stored in data lake
 ### Returns
 `Dict[str, pd.DataFrame]`
   - Tables to store in data lake
-
-
-### Notes
-If a dict is returned, the keys of the dict are used as table names for the corresponding
-DataFrames to store.  The table with **results** as its key is displayed on the Flow Editor.

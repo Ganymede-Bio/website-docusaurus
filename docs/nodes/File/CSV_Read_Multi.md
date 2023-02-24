@@ -1,18 +1,18 @@
 ---
-sidebar_label: CSV_Read
-title: CSV_Read
+sidebar_label: CSV_Read_Multi
+title: CSV_Read_Multi
 displayed_sidebar: nodeSidebar
 ---
 
 ### Node Operator
-Reads contents of a CSV file into data lake
+Reads contents of multiple CSV files into data lake
 
-The contents of CSV file are passed to the user-defined function, which
+The contents of the CSV files are passed to the user-defined function, which
 return one or more tables for storage in Ganymede data lake.
 
 
 ### Node Attributes
-- **input_file_csv**
+- **input_multi_csv**
   - File extension on CSV file used for specifying valid file extensions
 - **output_table_results**
   - Table to display on Table Head in Flow Editor

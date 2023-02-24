@@ -8,6 +8,16 @@ displayed_sidebar: releaseSideBar
 
 Ganymede releases generally occur on Thursdays each week.
 
+### Feb 23 2023
+
+**App Infra**
+- Flow editor and node saves should now occur more quickly
+
+**Node Updates**
+- Node for processing AVI video files now available
+- Node for handling Synergy instrument files now available
+- Nodes that process multiple Excel and CSV files now available
+
 ### Feb 16 2023
 
 **UI Updates**
