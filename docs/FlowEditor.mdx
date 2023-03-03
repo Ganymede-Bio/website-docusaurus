@@ -32,6 +32,8 @@ The header bar contains buttons for creating _flows_ and monitoring _flow_ runs.
 - **Processing**: Shows the number of files in the queue for your next run.  Clicking this button brings up the [<div className="button purple_button"><CheckCircleOutlined /> **Flow Runs**</div>](FlowRuns.mdx) page.
 - **Save**: Button to save _flow_ layout to git repo and deploy code to workflow management system.
 - **Manage**: Opens right sidebar to create new _flows_ or delete existing ones. When a flow is selected, we can apply new configurations to the flow.
+         * Owner - Owner of the flow. Does not affect how the flow runs.
+         * Retries - How often the flow retries to run in case of an error or a timeout.
 
 ## Flows
 
