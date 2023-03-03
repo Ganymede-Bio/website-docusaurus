@@ -8,6 +8,16 @@ displayed_sidebar: releaseSideBar
 
 Ganymede releases generally occur on Thursdays each week.
 
+### Mar 2 2023
+
+**Flow Editor**
+- Flow runs with input fields now require input submission
+- Concurrent saving no longer causes timeout
+
+**UI Updates**
+- Font family and navigation colors updated in UI
+
+
 ### Feb 23 2023
 
 **App Infra**
