@@ -30,7 +30,7 @@ The header bar contains buttons for creating _flows_ and monitoring _flow_ runs.
 * **Analysis**: Enables access to Jupyter notebooks which can be used for ad-hoc observation and data analysis.  These notebooks are hosted on a virtual machine (VM) separate from the workflow management software running the _flow_.
 * **Runs**: Opens right sidebar showing statuses of historical runs for the selected _flow_.  The [<div className="button purple_button"><CheckCircleOutlined /> **Flow Runs**</div>](FlowRuns.mdx) page contains greater detail about the contents of this tab.
 * **Processing**: Shows the number of files in the queue for your next run.  Clicking this button brings up the [<div className="button purple_button"><CheckCircleOutlined /> **Flow Runs**</div>](FlowRuns.mdx) page.
-* **Rerun**: This button requeues the last row that was ran for this specific flow. The button is greyed out if the current session had no runs (reloads reset this). If inputs have changed, this button will fill out all parameters that exist using the existing run.
+* **Rerun**: This requeues the last row that was ran for this specific flow. The button is greyed out if the current session had no runs (reloads reset this). If inputs have changed, this button will fill out all parameters that exist using the existing run.
 * **Run All** : Runs all flows that are queued in the flow
 * **Save**: Button to save _flow_ layout to git repo and deploy code to workflow management system.
 * **Manage**: Opens right sidebar to create new _flows_ or delete existing ones. When a flow is selected, we can apply new configurations to the flow.
