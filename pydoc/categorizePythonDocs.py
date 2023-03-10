@@ -143,7 +143,9 @@ if __name__ == "__main__":
         sidebar["items"] = [
             f"nodes/{operator_type}/{k}"
             for k, v in operators.items()
-            if v["path"].split(".")[-2] not in missing_files and v["type"] == operator_type
+            if v["path"].split(".")[-2] not in missing_files
+            and v["type"] == operator_type
+            and not ("dev" in v and v["dev"])
         ]
         with open(os.path.join(markdown_dir, operator_type, "sidebar.json"), "w") as json_file:
             json_file.write(json.dumps(sidebar))
