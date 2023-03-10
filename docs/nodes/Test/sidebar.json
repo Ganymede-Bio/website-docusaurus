@@ -1,1 +1,1 @@
-{"type": "category", "label": "Test", "items": ["nodes/Test/GanymedeEcho", "nodes/Test/Placeholder"]}
+{"type": "category", "label": "Test", "items": ["nodes/Test/GanymedeEcho", "nodes/Test/Placeholder", "nodes/Test/Test_Create_Cluster", "nodes/Test/Test_Delete_Cluster", "nodes/Test/Test_Run_Cluster"]}

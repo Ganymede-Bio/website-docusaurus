@@ -1,6 +1,6 @@
 ---
-sidebar_label: Synergy_Read_Mutli
-title: Synergy_Read_Mutli
+sidebar_label: Synergy_Read_Multi
+title: Synergy_Read_Multi
 displayed_sidebar: nodeSidebar
 ---
 

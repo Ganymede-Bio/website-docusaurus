@@ -8,6 +8,18 @@ displayed_sidebar: releaseSideBar
 
 Ganymede releases generally occur on Thursdays each week.
 
+
+### Mar 9 2023
+
+**Flow Editor**
+- Number of retries can now be configured at the Flow level
+- Rerun button now available in editor for facilitate running Flow with same parameters as most recent prior run
+
+**Node Editor Templates**
+- Editor notebooks now have default MockGanymedeContext to facilitate debugging nodes with flow-level variables
+- Editor notebooks for Benchling nodes have default MockBenchlingContext objects which provide a Benchling connection if configured for the environment
+- Convenience functions added for retrieving data from Ganymede data lake and cloud storage
+
 ### Mar 2 2023
 
 **Flow Editor**
@@ -16,7 +28,6 @@ Ganymede releases generally occur on Thursdays each week.
 
 **UI Updates**
 - Font family and navigation colors updated in UI
-
 
 ### Feb 23 2023
 

@@ -45,4 +45,5 @@ If new custom entities are created, returns DataFrame associated with custom ent
 
 
 ### Returns
-`CustomEntity objects (if created within flow)`
+`Optional[List[CustomEntity]]`
+  - List of Benchling custom entity ids if created within flow, otherwise None
