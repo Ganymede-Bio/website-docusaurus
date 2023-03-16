@@ -4,13 +4,18 @@ title: Data Explorer
 displayed_sidebar: webUiSidebar
 ---
 
-import { FileSearchOutlined } from '@ant-design/icons';
+import { FileSearchOutlined } from "@ant-design/icons";
 
-The <div className="button purple_button"><FileSearchOutlined /> **Data Explorer**</div> page offers an ANSI SQL interface to query tabular data generated from Ganymede _flows_.  
+The <div className="button purple_button"><FileSearchOutlined /> **Data Explorer**</div> page offers an ANSI SQL interface to query tabular data generated from Ganymede _flows_.
 
-<img width="1303" alt="Data_Explorer" src="https://user-images.githubusercontent.com/46538575/219486073-e4836b7c-5a3e-44bb-a99b-7aa299ce4681.png"/>
+<img
+  width="1251"
+  alt="DataExplorer"
+  src="https://user-images.githubusercontent.com/46538575/225708685-e40e0227-3dc4-40f1-9400-906cb6c6924c.png"
+/>
 
-- The Data Lake Tables pane contains a list of tables that exist in the current environment. 
+- The Data Lake Tables pane contains a list of tables that exist in the current environment.
+
   - There is a search bar to filter tables that contain the search string
   - The button next to table overwrites the SQL query in the top right and give an example query
 
@@ -18,6 +23,5 @@ The <div className="button purple_button"><FileSearchOutlined /> **Data Explorer
   - This query is limited to data query (DQL) calls only. (e.g. `SELECT` are the only keyword allowed in the query)
   - Table names should be surrounded with backticks - use <div className="keystroke">`</div> to escape special characters
   - If the `LIMIT` keyword in not included, the default of `LIMIT 1000` to prevent long loading times related to tables.
-  
 - The Results pane contains the query results
   - There is a download button on the top right which takes the current output and produces a CSV file
