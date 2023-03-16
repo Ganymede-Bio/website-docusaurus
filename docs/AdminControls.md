@@ -8,7 +8,7 @@ displayed_sidebar: webUiSidebar
 
 The admin page is where user's access is managed. An example page is show below:
 
-<img width="1294" alt="Admin" src="https://user-images.githubusercontent.com/46538575/219479669-dde8f89e-91ff-4848-a3bd-9931d6dac76b.png"/>
+<img width="1228" alt="Admin" src="https://user-images.githubusercontent.com/46538575/225719236-4a5681c2-e883-4acd-9302-ab2925f09eac.png"/>
 
 
 ### Access Levels
