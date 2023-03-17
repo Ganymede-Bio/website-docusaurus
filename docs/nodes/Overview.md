@@ -25,6 +25,7 @@ A useful way to interact with _nodes_ is to consider how _nodes_ interact with o
 | Analysis   | Transform_py               | Table or List[Table]                                                  | Table or Dict[Table] | True          |
 | App        | AirtableExport             | Table                                                                 | API                  | False         |
 | App        | AirtableImport             | API                                                                   | Table                | False         |
+| App        | Azure_Query                | API                                                                   | Table or Dict[Table] | True          |
 | App        | Azure_Read                 | API                                                                   | FileAny              | False         |
 | App        | Azure_Write                | FileAny                                                               | API                  | False         |
 | App        | Benchling_Event            | App                                                                   | FileAny              | True          |
@@ -33,12 +34,15 @@ A useful way to interact with _nodes_ is to consider how _nodes_ interact with o
 | App        | Benchling_Write            | Table                                                                 | API                  | True          |
 | App        | Benchling_Write_Object     | Optional[FileAny or List[FileAny]] and Optional[Table or List[Table]] | API                  | True          |
 | App        | Coda_Write                 | Table                                                                 | API                  | True          |
+| App        | ELabNext_Write             | Table                                                                 | API                  | True          |
 | App        | S3_Read                    | API                                                                   | FileAny              | False         |
 | App        | S3_Write                   | FileAny                                                               | API                  | False         |
+| App        | SciNote_Write              | Table                                                                 | API                  | True          |
 | App        | Snowflake_Write            | Table                                                                 | API                  | False         |
 | File       | AVI_Read                   | FileAVI                                                               | Table or Dict[Table] | True          |
 | File       | AVI_Read_Multi             | Set[FileAVI]                                                          | Table or Dict[Table] | True          |
 | File       | Blob_Read                  | FileAny                                                               | FileAny              | True          |
+| File       | Blob_Read_Multi            | Set[FileAny]                                                          | Dict[FileAny]        | True          |
 | File       | CSV_Read                   | FileCSV                                                               | Table or Dict[Table] | True          |
 | File       | CSV_Read_Multi             | Set[FileCSV]                                                          | Table or Dict[Table] | True          |
 | File       | CSV_Write                  | Table or List[Table]                                                  | FileCSV              | True          |
@@ -122,6 +126,7 @@ The _execute_ function may call classes and functions found within the User-Defi
 | Analysis   | Transform_py               | Manipulate data with python                                        |
 | App        | AirtableExport             | Export data from Ganymede data lake to Airtable                    |
 | App        | AirtableImport             | Import data from Airtable into Ganymede data lake                  |
+| App        | Azure_Query                | Query data from Azure SQL Server                                   |
 | App        | Azure_Read                 | Read data from Azure Blob Storage                                  |
 | App        | Azure_Write                | Write data to Azure Blob storage                                   |
 | App        | Benchling_Event            | Capture events from Benchling for triggering flows                 |
@@ -130,12 +135,15 @@ The _execute_ function may call classes and functions found within the User-Defi
 | App        | Benchling_Write            | Write to Benchling                                                 |
 | App        | Benchling_Write_Object     | Write object to Benchling                                          |
 | App        | Coda_Write                 | Write Coda tables                                                  |
+| App        | ELabNext_Write             | Create and write eLabNext entry                                    |
 | App        | S3_Read                    | Ingest data into Ganymede data storage from AWS S3 storage         |
 | App        | S3_Write                   | Write data to an S3 bucket                                         |
+| App        | SciNote_Write              | Create and write SciNote entry                                     |
 | App        | Snowflake_Write            | Sync tables in Ganymede data lake to Snowflake                     |
 | File       | AVI_Read                   | Read in contents of an AVI file to a table                         |
 | File       | AVI_Read_Multi             | Read in contents of multiple avi files to a table                  |
 | File       | Blob_Read                  | Read blob data into Ganymede data storage                          |
+| File       | Blob_Read_Multi            | Read blob data into Ganymede data storage                          |
 | File       | CSV_Read                   | Read in contents of a CSV file                                     |
 | File       | CSV_Read_Multi             | Read in contents of multiple CSV files                             |
 | File       | CSV_Write                  | Write table to CSV file                                            |

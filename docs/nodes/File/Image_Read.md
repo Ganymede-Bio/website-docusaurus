@@ -28,5 +28,6 @@ Process image data into a dictionary of images indexed by filename to save in cl
 
 
 ### Returns
-`Dict[str, bytes]`
-  - Bytes object(s) to store in cloud storage, indexed by file name
+`Tuple[Dict[str, bytes], pd.DataFrame]`
+  - First value in tuple is bytes object(s) to store in cloud storage, indexed by file name
+  - Second value in tuple is metadata associated with processed image

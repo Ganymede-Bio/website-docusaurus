@@ -9,6 +9,19 @@ displayed_sidebar: releaseSideBar
 Ganymede releases generally occur on Thursdays each week.
 
 
+### Mar 16 2023
+
+**Flow Runs**
+- Flows that use File Watcher now start immediately once all inputs are present
+- Exceptions are highlighted above run logs
+
+**Node Documentation Updates**
+- Nodes that require secret management now describe which environment credentials need to be set for integration, enabling self-service setup of nodes with this functionality
+
+**Node Updates**
+- Azure SQL node now available
+- Node for interacting with eLabNext now available
+
 ### Mar 9 2023
 
 **Flow Editor**

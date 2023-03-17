@@ -18,15 +18,15 @@ Write files from data lake to Azure Blob Storage.
 
 
 ### Notes
-Prior to usage, Azure Blob Storage must be configured to permit Ganymede access.  This requires
-configuring Ganymede with the following IDs from Azure:
-App client ID
-App object ID
-App tenant ID
-Azure subscription ID
-App Azure Active Directory (AAD) Authority
-Windows Azure Storage Blob (WASB) URI, which consists of
-Storage URL
-Storage Container
+Prior to usage, the following secrets must be configured in your Ganymede environment:
+- **azure_client_id**: App client ID
+- **azure_tenant_id**: App tenant ID
+- **azure_subscription_id**: Azure subscription ID
+- **azure_aad_authority**: App Azure Active Directory (AAD) Authority
 
-Please reach out to Ganymede for configuration assistance.
+Windows Azure Storage Blob (WASB) URI, which consists of
+- **azure_storage_uri**: Storage URL
+
+Secrets can be configured by clicking on the gear icon in the upper-right hand of the Ganymede
+application, then selecting Settings and navigating to the Settings tab.  If you need
+assistance, please don't hesitate to reach out to Ganymede.

@@ -14,10 +14,12 @@ Associates a Benchling run tag with a Flow run
 
 
 ### Notes
-Prior to usage, Benchling must be configured to permit Ganymede access. In addition to
-the client's Benchling URL, this requires creating and utilizing secrets with the following
-IDs generated in the App setup process via Benchling:
-Client_ID
-Client_Secret
+Prior to usage, the secrets below must be configured in your Ganymede environment.  More information
+on acquiring these credentials can be found [here](https://docs.benchling.com/docs/authentication).
+- **benchling_url**: URL for Benchling tenant
+- **benchling_app_client_id**: Client_ID
+- **benchling_client_secret**: Client_Secret
 
-Please reach out to Ganymede for configuration assistance.
+Secrets can be configured by clicking on the gear icon in the upper-right hand of the Ganymede
+application, then selecting Settings and navigating to the Settings tab.  If you need
+assistance, please don't hesitate to reach out to Ganymede.

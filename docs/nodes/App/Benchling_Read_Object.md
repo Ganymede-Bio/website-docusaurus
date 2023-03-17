@@ -22,13 +22,15 @@ the Ganymede data lake.
 
 
 ### Notes
-Prior to usage, Benchling must be configured to permit Ganymede access. In addition to
-the client's Benchling URL, this requires creating and utilizing secrets with the following
-IDs generated in the App setup process via Benchling:
-Client_ID
-Client_Secret
+Prior to usage, the secrets below must be configured in your Ganymede environment.  More information
+on acquiring these credentials can be found [here](https://docs.benchling.com/docs/authentication).
+- **benchling_url**: URL for Benchling tenant
+- **benchling_app_client_id**: Client_ID
+- **benchling_client_secret**: Client_Secret
 
-Please reach out to Ganymede for configuration assistance.
+Secrets can be configured by clicking on the gear icon in the upper-right hand of the Ganymede
+application, then selecting Settings and navigating to the Settings tab.  If you need
+assistance, please don't hesitate to reach out to Ganymede.
 ## User-Defined Python
 Reads Benchling data based on input parameter.  This node should be used in
 conjunction with the Input_Param node.
@@ -51,6 +53,6 @@ This template shows how a target plate could be pulled via the Benchling API
 Documentation for the Benchling API can be found here: https://benchling.com/api/reference
 
 benchling_context is an object of class BenchlingContext, consisting of
-conn: Benchling connection
-run_tag: Benchling ID associated with run tag
-display_tag: Displayed value of Benchling run tag
+- **conn**: Benchling connection
+- **run_tag**: Benchling ID associated with run tag
+- **display_tag**: Displayed value of Benchling run tag

@@ -18,11 +18,12 @@ the specified Coda.io page.
 
 
 ### Notes
-Prior to usage, Coda must be configured to permit Ganymede access.  This requires
-configuring Ganymede with the following IDs from Coda:
-Coda API Key
+Prior to usage, the following secrets must be configured in your Ganymede environment:
+- **coda_api_key**: Coda API Key
 
-Please reach out to Ganymede for configuration assistance.
+Secrets can be configured by clicking on the gear icon in the upper-right hand of the Ganymede
+application, then selecting Settings and navigating to the Settings tab.  If you need
+assistance, please don't hesitate to reach out to Ganymede.
 ## User-Defined Python
 Example demonstrating submission of user-defined SQL query into Coda
 
