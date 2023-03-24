@@ -9,20 +9,17 @@ displayed_sidebar: releaseSideBar
 Ganymede releases generally occur on Thursdays each week.
 
 
-## Mar 23 2023
+### Mar 23 2023
 
-### Improvements
-**Flow Editor UI Improvements**
+**Flow Editor UI**
 
 Over the next few weeks, we will be rolling out updates to the Flow Editor user interface. The new interface overlays the Flow Editor with a Run Queue panel, which developers can use to iteratively test Flows during development. Although the updates are being rolled out incrementally, it should not disrupt use of the Flow Editor.
 
-### Bug Fixes
+**Bug Fixes**
 - Fixed an issue where logs were appearing as empty
 - Fixed an issue where Flows appeared to be ready to run while large files were still in the process of uploading
 
-## Mar 16 2023
-
-### Features/Updates
+### Mar 16 2023
 
 **Automatically kick off Flows**
 
