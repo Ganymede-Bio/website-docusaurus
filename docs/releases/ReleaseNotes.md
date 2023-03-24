@@ -9,11 +9,28 @@ displayed_sidebar: releaseSideBar
 Ganymede releases generally occur on Thursdays each week.
 
 
-### Mar 16 2023
+## Mar 23 2023
 
-**Flow Runs**
-- Flows that use File Watcher now start immediately once all inputs are present
-- Exceptions are highlighted above run logs
+### Improvements
+**Flow Editor UI Improvements**
+
+Over the next few weeks, we will be rolling out updates to the Flow Editor user interface. The new interface overlays the Flow Editor with a Run Queue panel, which developers can use to iteratively test Flows during development. Although the updates are being rolled out incrementally, it should not disrupt use of the Flow Editor.
+
+### Bug Fixes
+- Fixed an issue where logs were appearing as empty
+- Fixed an issue where Flows appeared to be ready to run while large files were still in the process of uploading
+
+## Mar 16 2023
+
+### Features/Updates
+
+**Automatically kick off Flows**
+
+Flows can now be run automatically! The setting resides in the input node on both the Flow View and Flow Editor pages. When the setting is enabled, a Flow will run automatically once all inputs are present.
+
+**User-configurable errors**
+
+Exceptions that are thrown within a user-editable function are now surfaced to the top of the logs.
 
 **Node Documentation Updates**
 - Nodes that require secret management now describe which environment credentials need to be set for integration, enabling self-service setup of nodes with this functionality
