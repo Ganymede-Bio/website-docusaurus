@@ -5,7 +5,7 @@ displayed_sidebar: nodeSidebar
 ---
 
 ### Node Operator
-Reads 1 table from Ganymede data lake and uploads to Airtable.
+Reads table(s) from Ganymede data lake and uploads to Airtable.
 
 
 ### Node Attributes

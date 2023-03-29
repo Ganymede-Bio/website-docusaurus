@@ -15,7 +15,9 @@ return one or more tables for storage in Ganymede data lake.
 - **input_file_avi**
   - File extension on avi file used for specifying valid file extensions
 - **output_table_results**
-  - Table to display on Table Head in Flow Editor
+  - Table to display on Table Head referencing table output from node in Flow Editor
+- **output_table_blob_metadata**
+  - Table to display on Table Head referencing non-tabular data output from node in Flow Editor
 ## User-Defined Python
 Processes avi file(s) (passed to function as BytesIO file-like objects) into blobs and
 data tables stored in the data lake
