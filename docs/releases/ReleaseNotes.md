@@ -8,6 +8,14 @@ displayed_sidebar: releaseSideBar
 
 Ganymede releases generally occur on Thursdays each week.
 
+### Mar 30 2023
+
+**Improvements**
+- S3 Write node now writes to a file path that includes the Flow ID and Flow Run ID
+- Helper functions were added to the Benchling Read editor notebook
+
+**Bug Fixes**
+- Minor fix applied to Blob to Table node
 
 ### Mar 23 2023
 
