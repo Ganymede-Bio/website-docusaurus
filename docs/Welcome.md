@@ -26,7 +26,7 @@ Code written in Ganymede is version-controlled and deployed to a workflow orches
 
 ### How does Ganymede work?
 
-![Ganymede example flow](https://ganymede-bio.mo.cloudinary.net/apiServer/FlowImage_Annotated_20221216.png)
+![Ganymede example flow](https://ganymede-bio.mo.cloudinary.net/apiServer/FlowImage_Annotated_20230405.png)
 
 Developers author _flows_, which are programs represented as directed graphs comprised of user-editable _nodes_.  By assembling and editing SQL/Python within _nodes_, users can ingest data, communicate with third-party APIs, and read/write data to spreadsheets and documents.  
 

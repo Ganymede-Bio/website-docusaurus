@@ -6,12 +6,14 @@ displayed_sidebar: webUiSidebar
 
 ## Summary
 
-The admin page is where user's access is managed. An example page is show below:
-
-<img width="1228" alt="Admin" src="https://user-images.githubusercontent.com/46538575/225719236-4a5681c2-e883-4acd-9302-ab2925f09eac.png"/>
-
+The Admin page enables administrators to manage user access and configure environment secrets. This page can be accessed by clicking on the gear icon in the top right corner of the top navbar.
 
 ### Access Levels
+
+The Roles panel shown below enables adminstrators to specify access levels for different users:
+
+<img width="1228" alt="Admin - Access Panel" src="https://user-images.githubusercontent.com/46538575/225719236-4a5681c2-e883-4acd-9302-ab2925f09eac.png"/>
+
 There are four levels of access, and are set at the tenant level.  These access levels are shown below in order from least to most restrictive. Roles that are higher in the list contain all the access of roles beneath them.  For example, users with Writer privilege have all the privileges of a Runner in addition to the ability to create _flows_.
 
 **Admin**:
@@ -25,3 +27,12 @@ There are four levels of access, and are set at the tenant level.  These access 
 
 **Reader**:
     Can execute _flows_ and observe environment settings, but not permitted to execute or alter _flows_.
+
+### Access Levels
+
+The secrets panel enables administrators to configure secrets.  These secrets are specific to the nodes used; the example shown in the image below shows an environment with a AWS S3 Role ARN specified, enabling connectivity between Ganymede cloud and AWS S3 Storage.
+
+<img alt="Admin - Secrets Panel" src="https://ganymede-bio.mo.cloudinary.net/apiServer/SecretsPanel_20230405.png" />
+
+Admins can add secrets by clicking on the Add Secret button and edit secrets as appropriate.  Note that secrets cannot be viewed from this panel, so if a secret is lost, it can either be re-entered here or recovered by contacting Ganymede support.
+

@@ -4,11 +4,11 @@ sidebar_label: Analysis Notebooks
 displayed_sidebar: webUiSidebar
 ---
 
-Analysis notebooks are Jupyter notebooks that enable access to data uploaded to the Ganymede Cloud data lake as part of a _flow_ run.  A fresh notebook instantiation has templates to retrieve data and save notebooks.  To access a fresh notebook instance, on the Flow Editor page, click on the **Analysis** button in the header and select `new-notebook`.  The image below shows an example of what this notebook would contain:
+Analysis notebooks are Jupyter notebooks that enable access to data uploaded to the Ganymede Cloud data lake as part of a _flow_ run.  A fresh notebook instantiation has templates to retrieve data and save notebooks.  To access a fresh notebook instance, on the Flow Editor page, click on the **Analysis** button in the header and select `default`.  The image below shows an example of what this notebook would contain:
 
-![Ganymede Notebook](https://ganymede-bio.mo.cloudinary.net/apiServer/%20GanymedeNotebook_20220824.png)
+![Ganymede Notebook](https://ganymede-bio.mo.cloudinary.net/apiServer/GanymedeNotebook_20230405.png)
 
-The first 3 cells in the image provide templates for validating and querying data, while the last cell enables the notebook to be saved to git.
+The first 2 cells in the image provide templates for validating and querying data, while the last cell enables the notebook to be saved to git.
 
 :::info
 
@@ -30,15 +30,14 @@ Additional packages can be installed using pip magic.  For example, the followin
 !pip install scikit-learn seaborn matplotlib pandas_gbq
 ```
 
-### Loading data from BigQuery
+### Loading data from Ganymede data lake
 
-The __client__ object can be used to access data stored in Google BigQuery as part of a Flow run.  For example, run the code below to list available tables in the __ganymede_demo__ tenant:
+Tables in the environment can be accessed via the Ganymede SDK.  For example, the code below lists available tables in the environment:
 
 ```python
-pandas_gbq.context.credentials = client._credentials
-pandas_gbq.context.project = client.project
+from ganymede_sdk.editor import list_tables
 
-tables = client.list_tables('ganymede_demo')
+tables = list_tables()
 for table in tables:
     print(table.table_id)
 ```
@@ -46,15 +45,11 @@ for table in tables:
 A query can be run by passing a SQL snippet following [Bigquery syntax](https://cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax) to the __query_sql__ variable and running the __results__ method from Ganymede's __query__ module. This will return a Pandas dataframe. Before running the query, a dry run of the query is also available in the Ganymede's query module using the __dry_run__ method. For example, the commands below perform a dry run and return the results of the query provided in __query_sql__.
 
 ```python
-query_sql = 'select * from ganymede_demo.demo_table'
+q = 'select * from ganymede_demo.demo_table'
 ```
 ```python
-from ganymede.notebook import query
-query.dry_run(query_sql)
-```
-```python
-from ganymede.notebook import query
-query.results(query_sql)
+from ganymede_sdk.io import retrieve_sql
+retrieve_sql(query_sql)
 ```
 
 ### Saving notebooks
@@ -62,7 +57,7 @@ query.results(query_sql)
 The final cell contains a code which commits the notebook to the HEAD of the Github repository containing the stored Flow.  The src entry in the files dictionary specifies the location of the notebook within the repo, and the dest entry specifies the name that the notebook is committed under.
 
 ```python
-from ganymede.notebook import save
+from ganymede_sdk.notebook import save
 
 files = [{'src': 'default', 'dest': 'notebook_to_save_to'}]
 save(files)

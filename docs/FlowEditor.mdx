@@ -9,10 +9,22 @@ import { NodeIndexOutlined,
          NotificationOutlined,
          CaretRightOutlined,
          SettingOutlined,
-         DownOutlined
+         DownOutlined,
+         BranchesOutlined,
+         PlusOutlined,
+         PlayCircleOutlined,
+         RedoOutlined,
+         PlusCircleOutlined
        } from '@ant-design/icons';
 
-The <div className="button purple_button"><NodeIndexOutlined /> **Flow Editor**</div> page is the starting point for creating and modifying _flows_.  
+import {
+    ExpandLessOutlined,
+    DashboardOutlined
+    } from '@mui/icons-material';
+
+import NotebookIcon from '../static/img/notebook.png';
+
+The <div className="button darkblue_button"><BranchesOutlined /> **Flow Editor**</div> page is the starting point for creating and modifying _flows_.  
 
 <img width="1124" alt="Quickstart" src="https://user-images.githubusercontent.com/46538575/225718050-e0ef0484-a46d-4476-a739-1d2ebdd811d1.png" />
 
@@ -21,72 +33,80 @@ The <div className="button purple_button"><NodeIndexOutlined /> **Flow Editor**<
 
 The header bar contains buttons for creating _flows_ and monitoring _flow_ runs.
 
-<img alt="Flow Editor header" src="https://ganymede-bio.mo.cloudinary.net/apiServer/FlowEditorHeader_20230310.png" />
+<img alt="Flow Editor header" src="https://ganymede-bio.mo.cloudinary.net/apiServer/FlowEditorHeader_20230405.png" />
 &nbsp;
 
-* **Choose A Flow**: Selection box for specifying the _flow_ to load.
-* **New**: Opens right sidebar for selecting new *node* to add.  
-* **View** : Opens right sidebar for specifying whether _flow_ should be laid out horizontally or vertically
+* **Choose a Flow**: Selection box for specifying the _flow_ to load.
+* **Node**: Opens right sidebar for selecting new *node* to add.  
+* **View**: Opens right sidebar for specifying whether _flow_ should be laid out horizontally or vertically
 * **Analysis**: Enables access to Jupyter notebooks which can be used for ad-hoc observation and data analysis.  These notebooks are hosted on a virtual machine (VM) separate from the workflow management software running the _flow_.
-* **Runs**: Opens right sidebar showing statuses of historical runs for the selected _flow_.  The [<div className="button purple_button"><CheckCircleOutlined /> **Flow Runs**</div>](FlowRuns.mdx) page contains greater detail about the contents of this tab.
-* **Processing**: Shows the number of files in the queue for your next run.  Clicking this button brings up the [<div className="button purple_button"><CheckCircleOutlined /> **Flow Runs**</div>](FlowRuns.mdx) page.
-* **Rerun**: This requeues the last row that was ran for this specific flow. The button is greyed out if the current session had no runs (reloads reset this). If inputs have changed, this button will fill out all parameters that exist using the existing run.
-* **Run All** : Runs all flows that are queued in the flow
+* **Runs**: Opens right sidebar showing statuses of historical runs for the selected _flow_.  The [<div className="button darkblue_button"><CheckCircleOutlined /> **Flow Runs**</div>](FlowRuns.mdx) page contains greater detail about the contents of this tab.
+
 * **Save**: Button to save _flow_ layout to git repo and deploy code to workflow management system.
 * **Manage**: Opens right sidebar to create new _flows_ or delete existing ones. When a flow is selected, we can apply new configurations to the flow.
   * Owner - Owner of the flow. Does not affect how the flow runs.
-  * Retries - How often the flow retries to run in case of an error or a timeout.
+  * Retries - How many times the flow would retry to execute a node, in case of an error or a timeout.
+
+## Run Queue Bar
+
+The Run Queue Bar located at the bottom of the screen contains buttons for executing _flow_ runs.  The full menu can be accessed by clicking on the <div className="button darkblue_button_mui"><ExpandLessOutlined className="white_icon" />**Expand**</div> icon in the bottom right corner of the bar.
+
+<img alt="Flow Editor header" src="https://ganymede-bio.mo.cloudinary.net/apiServer/RunQueueBar_20230405.png" />
+&nbsp;
+
+
+* **Add run**: Adds a row to the run queue.
+* **Run all**: Runs all jobs loaded into the run queue.
+* **Re-run**: This requeues the last row that was ran for this specific flow. The button is greyed out if the current session had no prior runs, or if the page has been refreshed. If inputs have changed, this button will fill out all parameters that exist using the existing run.
+* **Processing**: Shows the number of files in the queue for your next run.  Clicking this button brings up the [<div className="button darkblue_button"><CheckCircleOutlined /> **Flow Runs**</div>](FlowRuns.mdx) page.
 
 ## Flows
 
 ### Creating Flows
 
-To create a new _flow_, click the <div className="button purple_button">**Manage <SettingOutlined />**</div> button in the upper right hand corner of the screen. Then click the <div className="button black_button">Add New Flow</div> button on the sidebar.  This action exposes a modal for naming and describing the _flow_.  
+To create a new _flow_, click the <div className="button darkblue_button">**Manage <SettingOutlined />**</div> button in the upper right hand corner of the screen. Then click the <div className="button black_button">Add New Flow</div> button on the sidebar.  This action exposes a modal for naming and describing the _flow_.  
 
 <img width="1124" alt="Settings" src="https://user-images.githubusercontent.com/46538575/225718203-69bd40b2-6dec-4a3f-a186-40799a044da0.png"/>
 &nbsp;
 
 ### Loading and Saving Flows
 
-To load a _flow_, specify the _flow_ to load in the <div className="button purple_button">**Choose A Flow <DownOutlined />**</div> selection box.  Upon doing so, the primary pane displays the graphical structure of the _flow_.
+To load a _flow_, specify the _flow_ to load in the <div className="button datalist_button">**Choose A Flow <DownOutlined />**</div> selection box.  Upon doing so, the primary pane displays the graphical structure of the _flow_.
 
 <img width="1241" alt="FlowEditor" src="https://user-images.githubusercontent.com/46538575/225718730-7e2dd267-e6ec-49c6-b77b-bd1183788022.png"/>
 &nbsp;
 
-After saving a _flow_, the entire environment (which contains all _flows_) is saved and deployed. When this save and deploy is taking place, users are temporarily restricted from running _flows_. A tooltip will be displayed to the user if they try to run a _flow_ during this time. Users can observe the status of environment updates on the [<div className="button purple_button"><NotificationOutlined /> **Notifications**</div>](Notifications.mdx) page.
-
-<img width="569" alt="Editor_tooltip" src="https://user-images.githubusercontent.com/46538575/211051939-0bba7a3f-4b9d-4a69-a7e0-34735fc2c4b8.png" />
-&nbsp;
+After saving a _flow_, the entire environment (which contains all _flows_) is saved and deployed. When this save and deploy is taking place, users are temporarily restricted from running _flows_. A tooltip will be displayed to the user if they try to run a _flow_ during this time. Users can observe the status of environment updates on the [<div className="button darkblue_button"><NotificationOutlined /> **Notifications**</div>](Notifications.mdx) page.
 
 
 ### Running Flows
 
 To select input files for _flows_, users can click <div className="button light_blue_button">**Browse**</div> to choose a file or drag-and-drop a file into the box labeled "Upload file here".  If <div className="button light_blue_button">**Browse**</div> is clicked, users have the option to either select an input file to process from the local computer or from Ganymede Cloud Storage (for files previously executed on _flows_ in Ganymede).  
 
-<img width="550" alt="Browse" src="https://user-images.githubusercontent.com/46538575/212136018-7b13613b-2fd3-4910-b10e-2e920dfb55d0.png" />
+<img width="550" alt="Browse" src="https://ganymede-bio.mo.cloudinary.net/apiServer/RunQueueBar_Browse_20230405.png" />
 
 If the input file is uploaded from local computer and has previously been uploaded to the corresponding flow and node (as determined by file name), users are prompted with an option to use the file that was previously uploaded or to save a new version with a unique id appended to the end of the file name.
 
-<img width="550" alt="existing_file_treatment" src="https://user-images.githubusercontent.com/46538575/211057216-bd34e3db-c4ed-49f5-8042-e6b420f7efd3.png" />
+<img width="550" alt="existing_file_treatment" src="https://ganymede-bio.mo.cloudinary.net/apiServer/RunQueueBar_AddRun_20230405.png" />
 
-To run the same _flow_ with different sets of input files, add additional rows to the input box by clicking on the <div className="button dark_gray_button">**+ Add**</div> button.
+To run the same _flow_ with different sets of input files, add additional rows to the input box by clicking on the <div className="button darkblue_button"><PlusOutlined /> Add run</div> button.
 
-<img width="324" alt="FCS_Parse" src="https://user-images.githubusercontent.com/46538575/225914733-31675cc7-aa5f-40e3-9b6f-a41edecbaa3b.png"/>
-
-Clicking the <div className="button purple_button">**Run**<CaretRightOutlined /></div> button on the Flow Inputs _node_ kicks off the _flow_ run.  Run progress can be tracked by clicking on the **Runs** button in the header, or by navigating to the [<div className="button purple_button"><CheckCircleOutlined /> **Flow Runs**</div>](FlowRuns.mdx) page.
+Clicking the <div className="button run_queue_button">**Run** <PlayCircleOutlined /></div> button on the Flow Inputs _node_ kicks off the _flow_ run.  Run progress can be tracked by clicking on the **Runs** button in the header, or by navigating to the [<div className="button darkblue_button"><CheckCircleOutlined /> **Flow Runs**</div>](FlowRuns.mdx) page.
 
 All inputs MUST be filled out otherwise the run will not be started. A message box will appear saying which inputs have not been filled. 
 
-Input settings can be found on the top right of the input node:
+#### Configuring Autorun
 
-<img width="550" alt="Sample input node with settings" src="https://storage.googleapis.com/ganymede-bio-website/public/apiServer/InputNodeWithSettings.png"/>
+Autorun can be configured by clicking on the Input Settings button, which can be found on the top left corner of the Run Queue form:
 
-Clicking here will bring up the modal: 
+<img width="550" alt="Sample input node with settings" src="https://ganymede-bio.mo.cloudinary.net/apiServer/RunQueueBar_InputSettings_20230405.png"/>
 
-<img width="550" alt="Sample input node with settings" src="https://storage.googleapis.com/ganymede-bio-website/public/apiServer/AutoRunModal.png"/>
+Clicking here will bring up this modal: 
 
-#### AutoRuns
-Inside input settings, we have the capability to automatically run whenever all inputs are filled. This button is disabled if there is a Multi-File input parameter or if there are no input parameters. Works with filewatcher and will work while not on the flow editor page.
+<img width="550" alt="Autorun modal" src="https://ganymede-bio.mo.cloudinary.net/apiServer/RunQueueBar_InputSettingsModalExample_20230405.png"/>
+
+Enabling this feature will allow for runs to start whenever all inputs for a row in the run queue are filled. This button is disabled if any nodes take more than 1 file, or if there are no input parameters for the Flow. This feature melds nicely with file watcher, and will work even after navigating away from the <div className="button darkblue_button"><BranchesOutlined /> **Flow Editor**</div> page.
+
 
 ### Modifying and Deleting Flows
 
@@ -94,8 +114,8 @@ Edges can be removed by selecting them and pressing "delete" or "backspace" on t
 
 To make two nodes dependent on each other within a run, click and drag between two orbs two different nodes.  _Flow_ dependencies run top-to-bottom (if vertical layout is specified) or left-to-right (if horizontal layout is specified).
 
-In order to delete _flows_, click the <div className="button purple_button">**Manage <SettingOutlined />**</div>Button on the Flow Editor page and which opens up the right sidebar offering a button to <div className="button black_button">Delete Flow</div>
+In order to delete _flows_, click the <div className="button darkblue_button">**Manage <SettingOutlined />**</div>Button on the Flow Editor page and which opens up the right sidebar offering a button to <div className="button black_button">Delete Flow</div>
 
-***CAUTION***
-
+:::caution
 Deleting _flows_ is not reversible from within the Ganymede UI, so undoing a _flow_ deletion will require restoring code from a prior commit in the git repo corresponding to the Ganymede cloud tenant.
+:::

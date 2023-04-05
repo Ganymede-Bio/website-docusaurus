@@ -12,40 +12,42 @@ import {
   CheckCircleOutlined,
   SubnodeOutlined,
   FolderOutlined,
-  NotificationOutlined,
+  BellOutlined,
   FileSearchOutlined,
+  BranchesOutlined,
+  SettingOutlined
 } from '@ant-design/icons';
 
-The <div className="button purple_button"><HomeOutlined /> **Home**</div> page contains links to available _flows_ in an environment.  Clicking on any listed _flow_ brings you to the <div className="button purple_button"><HomeOutlined /> **Flow View**</div> page, from which the user can run the selected _flow_ and view historical runs.
+The <div className="button darkblue_button"><HomeOutlined /> **Home**</div> page contains links to available _flows_ in an environment.  Clicking on any listed _flow_ brings you to the <div className="button darkblue_button"><HomeOutlined /> **Flow View**</div> page, from which the user can run the selected _flow_ and view historical runs.
 
 <img width="1302" alt="Home" src="https://user-images.githubusercontent.com/46538575/225718404-f32ad40f-fa5b-488d-83ad-902ede21bf60.png"/>
 
 The search bar at the top filters available _flows_ by name.
 
-## Navigation Sidebar
+## NavBars
 
-### Top Section
+### Collapsible Sidebar
 
-The top part of the sidebar contains pages for building and running flows, as well as observing data processed by _flows_.
+The navigation sidebar contains pages for building and running flows, as well as observing data processed by _flows_.
 
-[<div className="button purple_button"><HomeOutlined /> **Home**</div>](./Home.mdx) - Home screen used to access _flows_ to run
+[<div className="button darkblue_button"><HomeOutlined /> **Home**</div>](./Home.mdx) - Home screen used to access _flows_ to run
 
-[<div className="button purple_button"><NodeIndexOutlined /> **Flow Editor**</div>](./FlowEditor.mdx) - Editor for modifying _flows_ and their underlying code
+[<div className="button darkblue_button"><BranchesOutlined /> **Flow Editor**</div>](./FlowEditor.mdx) - Editor for modifying _flows_ and their underlying code
 
-[<div className="button purple_button"><CheckCircleOutlined /> **Flow Runs**</div>](./FlowRuns.mdx) - Table for tracking status of current and prior _flow_ runs
+[<div className="button darkblue_button"><CheckCircleOutlined /> **Flow Runs**</div>](./FlowRuns.mdx) - Table for tracking status of current and prior _flow_ runs
 
-[<div className="button purple_button"><FileSearchOutlined /> **Data Explorer**</div>](./DataExplorer.mdx) - SQL editor for querying tabular data created within _flows_
+[<div className="button darkblue_button"><FileSearchOutlined /> **Data Explorer**</div>](./DataExplorer.mdx) - SQL editor for querying tabular data created within _flows_
 
-[<div className="button purple_button"><FolderOutlined /> **Files**</div>](./Files.mdx) - File browser for accessing snapshotted input and output data processed through _flows_
+[<div className="button darkblue_button"><FolderOutlined /> **Files**</div>](./Files.mdx) - File browser for accessing snapshotted input and output data processed through _flows_
 
-### Bottom Section
+### Header Navigation
 
-The bottom part of the sidebar contains documentation and pages for administering access to Ganymede.
+The header contains buttons for accessing environment notifications, app documentation, and settings for administering access to Ganymede and secrets stored used on Ganymede platform.
 
-[<div className="button purple_button"><NotificationOutlined /> **Notifications**</div>](./Notifications.mdx) - Activity (e.g. - _flow_ saves, _flow_ runs, etc.) associated with Ganymede tenant environment
+[<div className="button darkblue_button"><BellOutlined /> **Notifications**</div>](./Notifications.mdx) - Activity (e.g. - _flow_ saves, _flow_ runs, etc.) associated with Ganymede tenant environment
 
-[<div className="button purple_button"><FileTextOutlined /> **Docs**</div>](https://docs.ganymede.bio) - Link to Ganymede's documentation, which can also be accessed directly at [docs.ganymede.bio](https://docs.ganymede.bio/) 
+[<div className="button darkblue_button"><FileTextOutlined /> **Docs**</div>](https://docs.ganymede.bio) - Link to Ganymede's documentation, which can also be accessed directly at [docs.ganymede.bio](https://docs.ganymede.bio/) 
 
-[<div className="button purple_button"><SubnodeOutlined /> **Admin**</div>](./AdminControls.md) - Panel for configuring levels of access for different individuals
+[<div className="button darkblue_button"><SettingOutlined /> **Admin**</div>](./AdminControls.md) - Panel for configuring access to Ganymede and secrets for accessing third-party applications from Ganymede
 
-[<div className="button purple_button"><UserOutlined /> **Log Out**</div>](https://www.ganymede.bio) - Log out from Ganymede cloud
+[<div className="button darkblue_button"><UserOutlined /> **Log Out**</div>](https://www.ganymede.bio) - Log out from Ganymede cloud

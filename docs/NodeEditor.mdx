@@ -19,7 +19,7 @@ _Nodes_ are customizable blocks of code with default functionality specified by 
 The image above shows how _nodes_ are represented on the Flow Editor page; each _node_ consists of:
 
 - **Node Name**: located in the header of the _node_; Read_CSV in the image above.
-- **Pencil Icon**: if present, the <EditOutlined className="button purple_button_icon"/> is a button that opens the user-editable notebook when clicked.
+- **Pencil Icon**: if present, the <EditOutlined className="button darkblue_button"/> is a button that opens the user-editable notebook when clicked.
 - **Node Attribute(s)**: if present, the attributes associated with the _node_ that are processed by the node.  In the image above, the node attributes 'csv' and 'results' have values '.csv' and 'example_results' respectively.
 - **Edit Button**: the <div className="button dark_gray_button">Edit</div> button that unlocks the _node_ for modifying _node_ name, changing _node_ attributes, or deleting the _node_
 
@@ -34,12 +34,12 @@ A full listing of available nodes and their key characteristics can be found on 
 
 ## Backing Notebooks
 
-Editable nodes contain a pencil icon (<EditOutlined className="button purple_button_icon"/>) in their upper right hand corner that opens up the notebook backing the node upon button click.  This section walks through the code associated with such a node to discuss its functionality.
+Editable nodes contain a pencil icon (<EditOutlined className="button darkblue_button"/>) in their upper right hand corner that opens up the notebook backing the node upon button click.  This section walks through the code associated with such a node to discuss its functionality.
 
 ### Notebook: User-defined SQL
 
 ```python
-from ganymede.editor import query
+from ganymede_sdk.editor import query
 
 query_sql = """
   SELECT * FROM ganymede_dev.demo_file;
@@ -110,7 +110,7 @@ This allows users to conduct testing in other cells prior to committing and load
 
 ```python
 # Save the updated query and python function to the pipeline
-from ganymede.editor import save
+from ganymede_sdk.editor import save
 
 files = { 'query.sql': query_sql }
 save(files)
@@ -123,18 +123,19 @@ Running this cell commits any code changes to the Git repository associated with
 ```python
 # Example 1: Testing section for Transform_Py node
 
-from ganymede.editor import query
+from ganymede_sdk.io import retrieve_sql
+from ganymede_sdk.editor import MockGanymedeContext
 
-# dry run SQL query (ies)
-print(query.dry_run(query_sql))
+# Retrieve Ganymede context object from prior run, to mimic the execution environment of most recent pipeline run
+mock_ganymede_context = MockGanymedeContext()
 
-# retrieve data from query (ies) 
-qs = [q for q in query_sql.split(';') if q.strip() != '']
-result_dfs = [query.results(q) for q in qs]
+# Retrieve dataframes to process; the context object enables rendering of Jinja template variables used in data retrieval
+# More detail can be found on the Flow Context & Metadata page of this documentation, under the Template Variables section
+result_dfs = retrieve_sql(query_sql, context=mock_ganymede_context)
 result_dfs
 
-# run user-defined python on retrieved data
-execute(result_dfs)
+# Run user-defined python on retrieved data
+execute(result_dfs, ganymede_context=mock_ganymede_context)
 ```
 
 The testing section enables users to test pipeline code prior to deployment.  In the example above, the testing code executes _query_sql_ and sends the result to the _execute_ function.  
@@ -143,6 +144,8 @@ _Nodes_ that load data use a file upload widget so that a file can be uploaded p
 
 ```python
 # Example 2: Testing section for Read_CSV node
+
+# Create widget for uploading CSV for testing node operation
 from IPython.display import display
 from io import BytesIO
 import ipywidgets as widgets
@@ -152,10 +155,12 @@ file_uploader = widgets.FileUpload(
     multiple=False,
 )
 display(file_uploader)
-```
 
-```python
-# Example 2 (ctd):
+# Retrieve context variable from most recent run
+from ganymede_sdk.editor import MockGanymedeContext
+mock_ganymede_context = MockGanymedeContext()
+
+# Run user-defined Python on uploaded file
 df = execute({'test_file': BytesIO(file_uploader.value[0].content.tobytes())})
 display(df)
 ```

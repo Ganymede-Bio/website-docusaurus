@@ -22,6 +22,7 @@
   --ifm-color-white: white;
   --ifm-color-black: black;
   --ifm-color-blue: blue;
+  --ifm-color-blue-dark: #211e55;
   --ifm-code-font-size: 95%;
 }
 
@@ -41,19 +42,20 @@
   --ifm-color-white: black;
   --ifm-color-black: white;
   --ifm-color-blue: #6699cc;
+  --ifm-color-blue-dark: #3f39a2;
   --ifm-code-font-size: 95%;
 }
 
 .button {
   border: 1px;
-  display: inline;
+  display: inline-block;
   border-radius: 4px;
   padding-left: 5px;
   padding-right: 5px;
-  padding-top: 3px;
-  padding-bottom: 3px;
+  padding-top: 2px;
+  padding-bottom: 2px;
   border-style: solid;
-  vertical-align: text-top;
+  vertical-align: text-middle;
 }
 
 .docusaurus-highlight-code-line {
@@ -102,6 +104,30 @@
   font-weight: 700;
 }
 
+.button.darkblue_button {
+  border-color: var(--ifm-color-black);
+  background-color: var(--ifm-color-blue-dark);
+  color: var(--ifm-color-gray-lighter);
+}
+
+.button.darkblue_button_mui {
+  border-color: var(--ifm-color-black);
+  background-color: var(--ifm-color-blue-dark);
+  color: var(--ifm-color-gray-lighter);
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+
+.button.darkblue_button_icon {
+  padding-left: 3px;
+  padding-right: 3px;
+  padding-top: 4px;
+  padding-bottom: 1px;
+  background-color: var(--ifm-color-blue-dark);
+  color: var(--ifm-color-gray-lighter);
+}
+
+
 .button.purple_button_icon {
   padding-left: 3px;
   padding-right: 3px;
@@ -140,8 +166,17 @@
 }
 
 .white_icon {
-  display: inline;
+  position: relative;
+  scale: 75%;
   color: var(--ifm-color-white);
+  vertical-align: middle;
+}
+
+.custom_icon {
+  position: relative;
+  scale: 50%;
+  color: var(--ifm-color-white);
+  vertical-align: middle;
 }
 
 .button.jupyter_button {
@@ -150,6 +185,22 @@
   padding-right: 6px;
   border-color: var(--ifm-color-black);
   color: var(--ifm-color-black);
+}
+
+.button.run_queue_button {
+  border-radius: 3px;
+  padding-left: 6px;
+  padding-right: 6px;
+  border-color: var(--ifm-color-black);
+  color: var(--ifm-color-black);
+}
+
+.button.datalist_button {
+  border-radius: 3px;
+  padding-left: 6px;
+  padding-right: 6px;
+  border-color: var(--ifm-color-gray);
+  color: var(--ifm-color-gray);
 }
 
 .button.light_blue_button {
