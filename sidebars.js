@@ -31,7 +31,7 @@ module.exports = {
         type: 'category',
         label: 'Editing Flows',
         collapsed: false,
-        items: ['FlowEditor', 'NodeEditor', 'FlowMetadata'],
+        items: ['FlowEditor', 'NodeEditor', 'FlowMetadata', 'NodeEditorFunctions'],
       },
       {
         type: 'category',
@@ -50,7 +50,7 @@ module.exports = {
     {
       type: 'doc',
       id: 'AdminControls',
-      label: 'Managing Access'
+      label: 'Environment Administration'
     },
   ],
   nodeSidebar: [

@@ -6,6 +6,7 @@ This repository hosts documentation for using the Ganymede Cloud Server. It is s
 
 #### Installation
 ```
+yarn install
 yarn build
 ```
 #### Run local instance for debugging (defaulting to port 3000)
@@ -48,7 +49,7 @@ Fetch the latest operators and generate the docs
 git submodule update --recursive --remote --init
 pushd pydoc
 source env/bin/activate
-python categorizePythonDocs.py
+python generateOperatorDocs.py
 deactivate
 popd
 ```

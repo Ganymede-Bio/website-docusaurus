@@ -4,7 +4,11 @@ sidebar_label: Analysis Notebooks
 displayed_sidebar: webUiSidebar
 ---
 
-Analysis notebooks are Jupyter notebooks that enable access to data uploaded to the Ganymede Cloud data lake as part of a _flow_ run.  A fresh notebook instantiation has templates to retrieve data and save notebooks.  To access a fresh notebook instance, on the Flow Editor page, click on the **Analysis** button in the header and select `default`.  The image below shows an example of what this notebook would contain:
+import {
+  BranchesOutlined,
+} from '@ant-design/icons';
+
+Analysis notebooks are Jupyter notebooks that enable access to data uploaded to the Ganymede Cloud data lake as part of a _flow_ run.  A fresh notebook instantiation has templates to retrieve data and save notebooks.  To access a fresh notebook instance, on the <div className="button darkblue_button"><BranchesOutlined /> **Flow Editor**</div> page, click on the **Analysis** button in the header and select `default`.  The image below shows an example of what this notebook would contain:
 
 ![Ganymede Notebook](https://ganymede-bio.mo.cloudinary.net/apiServer/GanymedeNotebook_20230405.png)
 
@@ -42,7 +46,7 @@ for table in tables:
     print(table.table_id)
 ```
 
-A query can be run by passing a SQL snippet following [Bigquery syntax](https://cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax) to the __query_sql__ variable and running the __results__ method from Ganymede's __query__ module. This will return a Pandas dataframe. Before running the query, a dry run of the query is also available in the Ganymede's query module using the __dry_run__ method. For example, the commands below perform a dry run and return the results of the query provided in __query_sql__.
+A query can be run by passing a SQL snippet following [ANSI SQL syntax](https://cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax) to the __query_sql__ variable and running the __results__ method from Ganymede's __query__ module. This will return a Pandas dataframe. Before running the query, a dry run of the query is also available in the Ganymede's query module using the __dry_run__ method. For example, the commands below perform a dry run and return the results of the query provided in __query_sql__.
 
 ```python
 q = 'select * from ganymede_demo.demo_table'

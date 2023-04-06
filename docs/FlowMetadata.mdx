@@ -62,6 +62,10 @@ def execute(
     return df_out
 ```
 
+The MockGanymedeContext object is used to mimic the _flow_ environment when conducting tests within the notebook environment.  When called without parameters, the object contains runtime variables associated with the most recent run, allowing the user to replicate the environment during the run.
+
+This enables users to debug individual _nodes_ within a _flow_ more easily.
+
 #### Ganymede Context class variables
 - **run_id: `str`**
   - Timestamp in ms when _flow_ was kicked off; guaranteed to be unique per _flow_ run.
