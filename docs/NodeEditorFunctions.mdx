@@ -134,9 +134,9 @@ retrieve_object("sample_test.csv", input_or_output_bucket="input")
 
 ### function _list_data_
 
-_list_data_ lists files in the environment
+_list_data_ lists files related to the _flow_
 
-- _param_ **bucket**: str - Either "input" or "output" - to reference whether the object should be retrieved from the input or output bucket of the _flow_.
+- _param_ **bucket**: str - Either "input" or "output" - to reference whether to observe the input or output bucket of the _flow_.
 
 ```python
 from ganymede_sdk.storage import list_data
