@@ -23,7 +23,21 @@ ganymede_sdk.editor provides an interface for accessing data hosted on Ganymede
 
 **MockGanymedeContext** replicates the behavior of **GanymedeContext** in Editor notebooks, enabling users to replicate the environment of prior workflow executions in a Jupyter notebook environment.  When no parameters are passed into the object, calling **MockGanymedeContext()** with no parameters retrieves metadata from the most recent execution of the corresponding _flow_.
 
-This enables users to test user-defined Python and SQL that incorporates metadata; for example, the **MockGanymedeContext** can be used to render Jinja template variables in a _retrieve_sql_ call, or to resolve references to the ganymede_context parameter within _execute_ functions.
+This enables users to test user-defined Python and SQL that incorporates metadata; for example, the **MockGanymedeContext** can be used to render [Jinja template variables](./FlowMetadata.mdx#template-variables) in a _retrieve_sql_ call, or to resolve references to the ganymede_context parameter within _execute_ functions.
+
+```python
+query_sql = "SELECT * FROM tbl WHERE run_id = {{ run_id }}"
+```
+
+```python
+from ganymede_sdk.editor import MockGanymedeContext
+
+# Create MockGanymedeContext with inputs from most recent run
+mock_ganymede_context = MockGanymedeContext()
+
+# Retrieve dataframe with run_id from most recent run
+result = retrieve_sql(query_sql, context=mock_ganymede_context)
+```
 
 ### class MockBenchlingContext
 
@@ -31,11 +45,23 @@ This enables users to test user-defined Python and SQL that incorporates metadat
 
 Alternatively, _url_ and _api_key_ keyword parameters can be passed on initialization for authentication.  For more detail, see [Access the Benchling Developer Platform](https://help.benchling.com/hc/en-us/articles/9714802977805-Access-the-Benchling-Developer-Platform).
 
+```python
+from ganymede_sdk.editor import MockBenchlingContext
+
+# Retrieve Benchling connection information from environment
+mock_benchling_context = MockBenchlingContext()
+print(mock_benchling_context.conn)
+```
+
 ### class GPT
 
 **GPT** allows users to make calls to the OpenAI GPT models as a coding assistant.  This requires configuring an OpenAI API Key for the environment, which can be done on the [Environment Administration](./AdminControls.mdx) page. Some example use cases of this class are shown below.
 
+:::caution
+
 Please ensure your internal corporate policies allow for usage following [OpenAI policies](https://openai.com/policies) such as the [OpenAI data usage policy](https://openai.com/policies/api-data-usage-policies) prior to enabling and using this feature.
+
+:::
 
 #### Basic question and answering
 Calling GPT with no parameters initializes the API with a default persona.  The _render_ function renders the output from GPT in markdown.  By default, gpt-3.5-turbo is used.
@@ -139,7 +165,7 @@ _list_data_ lists files related to the _flow_
 - _param_ **bucket**: str - Either "input" or "output" - to reference whether to observe the input or output bucket of the _flow_.
 
 ```python
-from ganymede_sdk.storage import list_data
+from ganymede_sdk.io import list_data
 
 # Lists all files in the input bucket within the environment
 list_data("input")
