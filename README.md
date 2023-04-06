@@ -41,9 +41,9 @@ deactivate
 popd
 ```
 
-### Doc generation
+### Node documentation generation
 
-Fetch the latest operators and generate the docs
+Fetch the latest nodes and generate the docs
 
 ```
 git submodule update --recursive --remote --init
