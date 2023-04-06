@@ -26,17 +26,35 @@ ganymede_sdk.editor provides an interface for accessing data hosted on Ganymede
 This enables users to test user-defined Python and SQL that incorporates metadata; for example, the **MockGanymedeContext** can be used to render [Jinja template variables](./FlowMetadata.mdx#template-variables) in a _retrieve_sql_ call, or to resolve references to the ganymede_context parameter within _execute_ functions.
 
 ```python
-query_sql = "SELECT * FROM tbl WHERE run_id = {{ run_id }}"
-```
-
-```python
 from ganymede_sdk.editor import MockGanymedeContext
+from ganymede_sdk.io import retrieve_sql
 
 # Create MockGanymedeContext with inputs from most recent run
 mock_ganymede_context = MockGanymedeContext()
 
 # Retrieve dataframe with run_id from most recent run
+# Note: replace <tenant_name> with your tenant
+query_sql = "SELECT * FROM <tenant_name>.tbl WHERE run_id = '{{ run_id }}'"
 result = retrieve_sql(query_sql, context=mock_ganymede_context)
+```
+
+```python
+import pandas as pd
+from ganymede_sdk.editor import GanymedeContext, MockGanymedeContext
+from ganymede_sdk.io import retrieve_sql
+
+# Note: replace <tenant_name> with your tenant
+query_sql = "SELECT * FROM <tenant_name>.input_table"
+
+# User-editable Python function for node
+def execute(df: pd.DataFrame, ganymede_context: GanymedeContext = None) -> pd.DataFrame:
+  df['run_id'] = ganymede_context.run_id
+  return df
+
+# Use MockGanymedeContext object from most recent run in execute function
+mock_ganymede_context = MockGanymedeContext()
+df_input = retrieve_sql(query_sql)
+df_output = execute(df_input, ganymede_context=mock_ganymede_context)
 ```
 
 ### class MockBenchlingContext
@@ -67,6 +85,8 @@ Please ensure your internal corporate policies allow for usage following [OpenAI
 Calling GPT with no parameters initializes the API with a default persona.  The _render_ function renders the output from GPT in markdown.  By default, gpt-3.5-turbo is used.
 
 ```python
+from ganymede_sdk.editor import GPT
+
 gpt = GPT()
 res = gpt.ask("How do I write a python function to print hello world")
 res.render()
@@ -162,11 +182,11 @@ retrieve_object("sample_test.csv", input_or_output_bucket="input")
 
 _list_data_ lists files related to the _flow_
 
-- _param_ **bucket**: str - Either "input" or "output" - to reference whether to observe the input or output bucket of the _flow_.
+- _param_ **input_or_output_bucket**: str - Either "input" or "output" - to reference whether to observe the input or output bucket of the _flow_.
 
 ```python
 from ganymede_sdk.io import list_data
 
 # Lists all files in the input bucket within the environment
-list_data("input")
+list_data(input_or_output_bucket="input")
 ````
