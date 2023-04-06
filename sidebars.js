@@ -20,23 +20,23 @@ module.exports = {
     {
       type: 'category',
       label: 'Processing Data',
-      collapsed: true,
+      collapsed: false,
       items: [{
         type: 'category',
         label: 'Running Flows',
-        collapsed: false,
+        collapsed: true,
         items: ['Home', 'FlowView']
       },
       {
         type: 'category',
         label: 'Editing Flows',
-        collapsed: false,
+        collapsed: true,
         items: ['FlowEditor', 'NodeEditor', 'FlowMetadata', 'NodeEditorFunctions'],
       },
       {
         type: 'category',
         label: 'Monitoring Flows',
-        collapsed: false,
+        collapsed: true,
         items: ['FlowRuns', 'Notifications']
       },
       ]
@@ -44,7 +44,7 @@ module.exports = {
     {
       type: 'category',
       label: 'Observing Data',
-      collapsed: true,
+      collapsed: false,
       items: ['AnalysisNotebook', 'DataExplorer', 'Files']
     },
     {

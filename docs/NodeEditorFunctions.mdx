@@ -93,9 +93,30 @@ If the input is submitted as a semicolon-delimited string, the results are retur
 - _param_ **context**: Optional[GanymedeContext] - Context object used for rendering Jinja template variables in query
 - _param_ **render_dict**: Optional[Dict[str, str]] - Dictionary used for rendering Jinja template variables in query.
 
+#### Example Usage
+```python
+from ganymede_sdk.io import retrieve_sql
+
+query_sql = {
+  'query1': 'SELECT * FROM (SELECT "sample", "query")',
+  'query2': 'SELECT * FROM (SELECT "sample", "query2")'
+}
+
+df_result_dict = retrieve_sql(query_sql)
+```
+
 ### function _list_tables_
 
 _list_tables_ provides a listing of all tables in the environment.
+
+#### Example Usage
+```python
+from ganymede_sdk.io import list_tables
+
+tables = list_tables()
+for table in tables:
+  print(table)
+```
 
 ### function _retrieve_object_
 
@@ -103,3 +124,23 @@ _retrieve_object_ allows users to retrieve objects from Ganymede cloud storage.
 
 - _param_ **object_names**: Union[str, List[str]] - Object or list of objects to retrieve
 - _param_ **input_or_output_bucket**: str - Either "input" or "output" - to reference whether the object should be retrieved from the input or output bucket of the _flow_.
+
+```python
+from ganymede_sdk.io import retrieve_object
+
+# Retrieves a file from the input bucket called "sample_test.csv"
+retrieve_object("sample_test.csv", input_or_output_bucket="input")
+```
+
+### function _list_data_
+
+_list_data_ lists files in the environment
+
+- _param_ **bucket**: str - Either "input" or "output" - to reference whether the object should be retrieved from the input or output bucket of the _flow_.
+
+```python
+from ganymede_sdk.storage import list_data
+
+# Lists all files in the input bucket within the environment
+list_data("input")
+````
