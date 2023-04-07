@@ -8,6 +8,20 @@ displayed_sidebar: releaseSideBar
 
 Ganymede releases generally occur on Thursdays each week.
 
+### Apr 6 2023
+
+**Features/Updates**
+- Users can now receive email notifications when a Flow fails. This setting is available in the Manage sidebar of a Flow, where email addresses can be specified.
+
+**Improvements**
+- In editor notebooks, MockGanymedeContext can now be used to populate template variables in SQL queries while testing.
+
+**Bug Fixes**
+- Some Benchling entities were not appearing in the tag dropdown. This has been resolved, and all Benchling entities in Ganymede now appear in the dropdown.
+- File watcher settings no longer appear modifiable while the file watcher is active.
+- Minor UI updates were made to the sidebar to ensure it scales correctly.
+- A few elements in the UI appeared clickable, but were not. Those non-clickable elements no longer appear to be clickable.
+
 ### Mar 30 2023
 
 **Improvements**
