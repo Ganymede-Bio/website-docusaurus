@@ -13,7 +13,7 @@ The Ganymede SDK provides a set of convenience functions for interacting with Ga
 import ganymede_sdk
 ```
 
-## ganymede_sdk.editor submodule
+## ganymede_sdk.editor
 
 ganymede_sdk.editor provides an interface for accessing data hosted on Ganymede
 
@@ -115,17 +115,20 @@ gpt.clear_history()
 Default coding prompts are available for assistance with common coding-related tasks.
 
 ```python
+# List available actions
+gpt.list_actions()
+
 # For the execute function within a notebook, this call yields 
 # step-by-step explanation of code behavior
-gpt.ask(execute, "explain_code")
+gpt.ask(execute, action="explain_code")
 
 # Generates a docstring in NumpyDoc format for the execute function
-gpt.ask(execute, "generate_docstring")
+gpt.ask(execute, action="generate_docstring")
 ```
 
 For the examples above, Python code can also be passed as a string to the _ask_ function to achieve the same results.
 
-## ganymede_sdk.io submodule
+## ganymede_sdk.io
 
 ganymede_sdk.io provides functions for accessing Ganymede cloud storage and data lake.
 
@@ -137,7 +140,7 @@ If the input is submitted as a semicolon-delimited string, the results are retur
 
 - _param_ **query_str**: Union[str, Dict[str, str]] - Semicolon-delimited query string(s) to retrieve.
 - _param_ **context**: Optional[GanymedeContext] - Context object used for rendering Jinja template variables in query
-- _param_ **render_dict**: Optional[Dict[str, str]] - Dictionary used for rendering Jinja template variables in query.
+- _param_ **render_dict**: Optional[Dict[str, str]] - Dictionary used for rendering Jinja template variables in query.  Not used if context is provided.
 
 #### Example Usage
 ```python
@@ -159,34 +162,38 @@ _list_tables_ provides a listing of all tables in the environment.
 ```python
 from ganymede_sdk.io import list_tables
 
-tables = list_tables()
-for table in tables:
-  print(table)
+for table_name in list_tables():
+  print(table_name)
 ```
 
-### function _retrieve_object_
+### function _retrieve_files_
 
-_retrieve_object_ allows users to retrieve objects from Ganymede cloud storage.  
+_retrieve_files_ allows users to retrieve files from Ganymede cloud storage.  
 
-- _param_ **object_names**: Union[str, List[str]] - Object or list of objects to retrieve
-- _param_ **input_or_output_bucket**: str - Either "input" or "output" - to reference whether the object should be retrieved from the input or output bucket of the _flow_.
+- _param_ **file_names**: Union[str, List[str]] - File or list of files to retrieve
+- _param_ **input_or_output_bucket**: str - Either "input" or "output" - to reference bucket to retrieve files from
+- _param_ **context**: Optional[GanymedeContext] - GanymedeContext to use for pulling file(s)
 
 ```python
-from ganymede_sdk.io import retrieve_object
+from ganymede_sdk.io import retrieve_files
 
 # Retrieves a file from the input bucket called "sample_test.csv"
-retrieve_object("sample_test.csv", input_or_output_bucket="input")
+input_file = retrieve_files("sample_test.csv", input_or_output_bucket="input")
+
+# Retrieves 2 files from the output bucket
+output_files = retrieve_files(['sample_output.xlsx', 'sample_validation.txt'], input_or_output_bucket="output")
 ```
 
-### function _list_data_
+### function _list_files_
 
-_list_data_ lists files related to the _flow_
+_list_files_ lists files in the environment
 
 - _param_ **input_or_output_bucket**: str - Either "input" or "output" - to reference whether to observe the input or output bucket of the _flow_.
 
 ```python
-from ganymede_sdk.io import list_data
+from ganymede_sdk.io import list_files
 
 # Lists all files in the input bucket within the environment
-list_data(input_or_output_bucket="input")
+for f in list_files(input_or_output_bucket="input"):
+  print(f)
 ````
