@@ -24,7 +24,7 @@ ganymede_sdk.editor provides an interface for accessing data hosted on Ganymede
 
 **MockGanymedeContext** replicates the behavior of **GanymedeContext** in Editor notebooks, enabling users to replicate the environment of prior workflow executions in a Jupyter notebook environment.  When no parameters are passed into the object, calling **MockGanymedeContext()** with no parameters retrieves metadata from the most recent execution of the corresponding _flow_.
 
-This enables users to test user-defined Python and SQL that incorporates metadata; for example, the **MockGanymedeContext** can be used to render [Jinja template variables](./FlowMetadata.mdx#template-variables) in a _retrieve_sql_ call, or to resolve references to the ganymede_context parameter within _execute_ functions.
+This enables users to test user-defined Python and SQL that incorporates metadata; for example, the **MockGanymedeContext** can be used to render [Jinja template variables](./FlowMetadata.mdx#template-variables) in a _retrieve_sql_ call, or to resolve references to the GanymedeContext parameter within _execute_ functions.
 
 ```python
 from ganymede_sdk.editor import MockGanymedeContext
@@ -156,12 +156,23 @@ df_result_dict = retrieve_sql(query_sql)
 
 ### function _list_tables_
 
-_list_tables_ provides a listing of all tables in the environment.
+_list_tables_ returns a listing of tables, column names, and associated _flows_ as a Pandas DataFrame.  By default, the function retrieves tables associated with the current _flow_.
+
+- _param_ **context**: GanymedeContext - GanymedeContext to use for pulling table listing
+- _param_ **current_flow_flag**: bool, by default True - Whether to filter for tables associated with current flow or not
 
 ```python
+from ganymede_sdk.editor import MockGanymedeContext
 from ganymede_sdk.io import list_tables
 
-for table_name in list_tables():
+mock_ganymede_context = MockGanymedeContext()
+
+# retrieves tables associated with flow
+tables_in_current_flow = list_tables(context):
+print(tables_in_current_flow)
+
+# retrieves all tables in environment
+for table_name in list_tables(context, current_flow_flag=False):
   print(table_name)
 ```
 
@@ -170,29 +181,38 @@ for table_name in list_tables():
 _retrieve_files_ allows users to retrieve files from Ganymede cloud storage.  
 
 - _param_ **file_names**: Union[str, List[str]] - File or list of files to retrieve
-- _param_ **input_or_output_bucket**: str - Either "input" or "output" - to reference bucket to retrieve files from
-- _param_ **context**: Optional[GanymedeContext] - GanymedeContext to use for pulling file(s)
+- _param_ **context**: GanymedeContext - GanymedeContext to use for pulling file(s)
+- _param_ **input_or_output_bucket**: str, by default "input" - Either "input" or "output" - to reference bucket to retrieve files from
+- _param_ **current_flow_flag**: bool, by default True - Whether to filter for files associated with current flow or not
 
 ```python
+from ganymede_sdk.editor import MockGanymedeContext
 from ganymede_sdk.io import retrieve_files
 
+mock_ganymede_context = MockGanymedeContext()
+
 # Retrieves a file from the input bucket called "sample_test.csv"
-input_file = retrieve_files("sample_test.csv", input_or_output_bucket="input")
+input_file = retrieve_files("sample_test.csv", mock_ganymede_context, input_or_output_bucket="input")
 
 # Retrieves 2 files from the output bucket
-output_files = retrieve_files(['sample_output.xlsx', 'sample_validation.txt'], input_or_output_bucket="output")
+output_files = retrieve_files(['sample_output.xlsx', 'sample_validation.txt'], mock_ganymede_context, input_or_output_bucket="output")
 ```
 
 ### function _list_files_
 
 _list_files_ lists files in the environment
 
-- _param_ **input_or_output_bucket**: str - Either "input" or "output" - to reference whether to observe the input or output bucket of the _flow_.
+- _param_ **context**: GanymedeContext - GanymedeContext to use for pulling file(s)
+- _param_ **input_or_output_bucket**: str - Either "input" or "output" - to reference whether to observe the input or output bucket of the _flow_
+- _param_ **current_flow_flag**: bool, by default True - Whether to filter for files associated with current flow or not
 
 ```python
+from ganymede_sdk.editor import MockGanymedeContext
 from ganymede_sdk.io import list_files
 
+mock_ganymede_context = MockGanymedeContext()
+
 # Lists all files in the input bucket within the environment
-for f in list_files(input_or_output_bucket="input"):
+for f in list_files(mock_ganymede_context, input_or_output_bucket="input"):
   print(f)
 ````
