@@ -143,7 +143,6 @@ If the input is submitted as a semicolon-delimited string, the results are retur
 - _param_ **context**: Optional[GanymedeContext] - Context object used for rendering Jinja template variables in query
 - _param_ **render_dict**: Optional[Dict[str, str]] - Dictionary used for rendering Jinja template variables in query.  Not used if context is provided.
 
-#### Example Usage
 ```python
 from ganymede_sdk.io import retrieve_sql
 
@@ -159,7 +158,6 @@ df_result_dict = retrieve_sql(query_sql)
 
 _list_tables_ provides a listing of all tables in the environment.
 
-#### Example Usage
 ```python
 from ganymede_sdk.io import list_tables
 
