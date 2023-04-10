@@ -135,24 +135,21 @@ ganymede_sdk.io provides functions for accessing Ganymede cloud storage and data
 
 ### function _retrieve_sql_
 
-_retrieve_sql_ allows users to retrieve tabular data from the Ganymede data lake.  Input can either be a semicolon-delimited string containing a set of queries to run, or a dictionary of queries indexed by query name.
+_retrieve_sql_ allows users to retrieve tabular data from the Ganymede data lake.  Input can either be a semicolon-delimited string containing a set of queries to run.
 
-If the input is submitted as a semicolon-delimited string, the results are returned as a DataFrame if singular or a list of Pandas DataFrames if multiple queries are submitted.  If the input is submitted as a dictionary, results are returned as a dict of DataFrames keyed by query name.
+If the input is submitted as a semicolon-delimited string, the results are returned as a DataFrame if singular or a list of Pandas DataFrames if multiple queries are submitted.
 
-- _param_ **query_str**: Union[str, Dict[str, str]] - Semicolon-delimited query string(s) to retrieve.
+- _param_ **query_str**: str - Semicolon-delimited query string(s) to retrieve.
 - _param_ **context**: Optional[GanymedeContext] - Context object used for rendering Jinja template variables in query
 - _param_ **render_dict**: Optional[Dict[str, str]] - Dictionary used for rendering Jinja template variables in query.  Not used if context is provided.
 
 ```python
 from ganymede_sdk.io import retrieve_sql
 
-query_sql = {
-  'query1': 'SELECT * FROM (SELECT "sample", "query")',
-  'query2': 'SELECT * FROM (SELECT "sample", "query2")'
+query_sql = 'SELECT * FROM (SELECT "sample", "query"); SELECT * FROM (SELECT "sample", "query2")'
 }
 
-# Returns a dict with 'query1' and 'query2' as keys, with contents of query returned as Pandas DataFrames 
-df_result_dict = retrieve_sql(query_sql)
+df_query1, df_query2 = retrieve_sql(query_sql)
 ```
 
 ### function _list_tables_

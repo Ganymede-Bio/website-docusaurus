@@ -71,8 +71,10 @@ This enables users to debug individual _nodes_ within a _flow_ more easily.
   - Timestamp in ms when _flow_ was kicked off; guaranteed to be unique per _flow_ run.
 
 #### Ganymede Context class methods
-- **get_param(node_name: `str`, parameter_type: `str`) -> `str`**:
-  - Method to obtain input parameter or input filename in _flow_.  Node name can be found in the indigo bar at the top of each node.  Parameter type generally references the file extension for nodes that ingest files, and can be found on the Flow Editor as values with green background and white text.
+- **get_param(self, node_name: `str`, parameter_type: `str`) -> `str`**:
+  - Obtain input parameter or input filename in _flow_.  Node name can be found in the indigo bar at the top of each node.  Parameter type generally references the file extension for nodes that ingest files, and can be found on the Flow Editor as values with green background and white text.
+- **set_param(self, parameter_type: `str`, parameter_value: Any, node_name: `str` = None) -> None**:
+  - Set parameter value
 
 ### Benchling Context
 
