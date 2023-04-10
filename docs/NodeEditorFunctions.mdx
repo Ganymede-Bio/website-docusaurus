@@ -151,6 +151,7 @@ query_sql = {
   'query2': 'SELECT * FROM (SELECT "sample", "query2")'
 }
 
+# Returns a dict with 'query1' and 'query2' as keys, with contents of query returned as Pandas DataFrames 
 df_result_dict = retrieve_sql(query_sql)
 ```
 
