@@ -133,6 +133,8 @@ For the examples above, Python code can also be passed as a string to the _ask_ 
 
 ganymede_sdk.io provides functions for accessing Ganymede cloud storage and data lake.
 
+## Functions for accessing tables
+
 ### function _retrieve_sql_
 
 _retrieve_sql_ allows users to retrieve tabular data from the Ganymede data lake.  Input can either be a semicolon-delimited string containing a set of queries to run.
@@ -158,6 +160,7 @@ _list_tables_ returns a listing of tables, column names, and associated _flows_ 
 
 - _param_ **context**: GanymedeContext - GanymedeContext to use for pulling table listing
 - _param_ **current_flow_flag**: bool, by default True - Whether to filter for tables associated with current flow or not
+- _param_ **current_run_id**: Optional[int], by default None - If set to specific run ID, filter to include records for specified run ID.
 
 ```python
 from ganymede_sdk.editor import MockGanymedeContext
@@ -174,15 +177,29 @@ for table_name in list_tables(context, current_flow_flag=False):
   print(table_name)
 ```
 
+### function _list_tables_current_run_
+
+_list_tables_current_run_ returns a listing of all tables associated with the current flow and run ID as a Pandas DataFrame.
+
+- _param_ **context**: GanymedeContext - GanymedeContext to use for pulling table listing
+
+### function _list_tables_all_
+
+_list_tables_all_ returns a listing of all tables associated with the current environment as a Pandas DataFrame.
+
+- _param_ **context**: GanymedeContext - GanymedeContext to use for pulling table listing
+
+## Functions for accessing files
+
 ### function _retrieve_files_
 
-_retrieve_files_ allows users to retrieve files from Ganymede cloud storage.  
+_retrieve_files_ allows users to retrieve files from Ganymede cloud storage.  By default, the most recent file associated with current run is retrieved.
 
 - _param_ **context**: GanymedeContext - GanymedeContext to use for pulling file(s)
 - _param_ **file_names**: Union[str, List[str]] - File or list of files to retrieve
 - _param_ **input_or_output_bucket**: str, by default "input" - Either "input" or "output" - to reference bucket to retrieve files from
 - _param_ **current_flow_flag**: bool, by default True - Whether to filter for files associated with current flow or not
-- _param_ **run_id**: Optional[int] - If set, filters for results with specified run_id; useful for retrieving files associated with run ID of current run in a live setting
+- _param_ **run_id**: Optional[int], by default None - If set, filters for results with specified run_id; useful for retrieving files associated with run ID of current run in a live setting
 
 ```python
 from ganymede_sdk.editor import MockGanymedeContext
@@ -193,7 +210,7 @@ mock_ganymede_context = MockGanymedeContext()
 # Retrieves a file from the input bucket called "sample_test.csv" associated with the current flow
 input_file = retrieve_files(mock_ganymede_context, "sample_test.csv", input_or_output_bucket="input")
 
-# Retrieves 2 files from the output bucket in the environment
+# Retrieves 2 files from the output bucket in the environment associated with most recent run of flow
 output_files = retrieve_files(mock_ganymede_context, ['sample_output.xlsx', 'sample_validation.txt'], 
                               input_or_output_bucket="output", current_flow_flag=False)
 ```
@@ -203,7 +220,7 @@ output_files = retrieve_files(mock_ganymede_context, ['sample_output.xlsx', 'sam
 _list_files_ lists files in the environment
 
 - _param_ **context**: GanymedeContext - GanymedeContext to use for pulling file(s)
-- _param_ **input_or_output_bucket**: str - Either "input" or "output" - to reference whether to observe the input or output bucket of the _flow_
+- _param_ **input_or_output_bucket**: str, by default "input" - Either "input" or "output" - to reference whether to observe the input or output bucket of the _flow_
 - _param_ **current_flow_flag**: bool, by default True - Whether to filter for files associated with current flow or not
 - _param_ **run_id**: Optional[int] - If set, filters for results with specified run_id
 
@@ -220,4 +237,19 @@ display(df_cur_flow_input_files)
 # Lists all files in the output bucket of the environment
 df_output_files = list_files(mock_ganymede_context, input_or_output_bucket="output", current_flow_flag=False):
 display(df_output_files)
-````
+```
+
+### function _list_files_current_run_
+
+_list_files_current_run_ returns a listing of available files in the specified bucket associated with the run ID provided by Ganymede context
+
+- _param_ **context**: GanymedeContext - GanymedeContext to use for pulling file(s)
+- _param_ **input_or_output_bucket**: str, by default "input" - Either "input" or "output" - to reference whether to observe the input or output bucket of the _flow_
+
+### function _list_files_all_
+
+_list_files_all_ returns a listing of all files in the specified bucket in the environment
+
+- _param_ **context**: GanymedeContext - GanymedeContext to use for pulling file(s)
+- _param_ **input_or_output_bucket**: str, by default "input" - Either "input" or "output" - to reference whether to observe the input or output bucket of the _flow_
+
