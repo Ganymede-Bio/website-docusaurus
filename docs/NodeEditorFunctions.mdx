@@ -183,6 +183,12 @@ _list_tables_current_run_ returns a listing of all tables associated with the cu
 
 - _param_ **context**: GanymedeContext - GanymedeContext to use for pulling table listing
 
+### function _list_tables_current_flow_
+
+_list_tables_current_flow_ returns a listing of all tables associated with the current flow and run ID as a Pandas DataFrame.
+
+- _param_ **context**: GanymedeContext - GanymedeContext to use for pulling table listing
+
 ### function _list_tables_all_
 
 _list_tables_all_ returns a listing of all tables associated with the current environment as a Pandas DataFrame.
@@ -242,6 +248,13 @@ display(df_output_files)
 ### function _list_files_current_run_
 
 _list_files_current_run_ returns a listing of available files in the specified bucket associated with the run ID provided by Ganymede context
+
+- _param_ **context**: GanymedeContext - GanymedeContext to use for pulling file(s)
+- _param_ **input_or_output_bucket**: str, by default "input" - Either "input" or "output" - to reference whether to observe the input or output bucket of the _flow_
+
+### function _list_files_current_flow_
+
+_list_files_current_flow_ returns a listing of available files in the specified bucket associated with the current _flow_ provided by Ganymede context
 
 - _param_ **context**: GanymedeContext - GanymedeContext to use for pulling file(s)
 - _param_ **input_or_output_bucket**: str, by default "input" - Either "input" or "output" - to reference whether to observe the input or output bucket of the _flow_
