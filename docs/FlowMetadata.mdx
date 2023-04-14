@@ -4,45 +4,50 @@ title: Flow Context & Metadata
 displayed_sidebar: webUiSidebar
 ---
 
-import NodeChip from '@site/src/components/NodeChip.js'
+import NodeChip from "@site/src/components/NodeChip.js";
 
+Template variables and context variables are used for accessing _flow_ metadata that is known at runtime. Some examples of this metadata are:
 
-Template variables and context variables are used for accessing _flow_ metadata that is known at runtime.  Some examples of this metadata are:
 - timestamp associated with run
 - filename of file processed in run
 - input parameter specified by end user
 
-In this section, we'll reference the _flow_ below to demonstrate concepts associated with templating and context in Ganymede.  
+In this section, we'll reference the _flow_ below to demonstrate concepts associated with templating and context in Ganymede.
 
-<img alt="demo flow with input parameter" src="https://ganymede-bio.mo.cloudinary.net/apiServer/Input_Param_20230405.png"/>
+<img
+  alt="demo flow with input parameter"
+  src="https://ganymede-bio.mo.cloudinary.net/apiServer/Input_Param_20230405.png"
+/>
 
 The example _flow_ performs the following operations:
+
 - ingests a CSV file in <NodeChip text="CSV_Read" />
 - in <NodeChip text="Transform_Py" />, adds run metadata
 - writes the resulting file to a CSV file in <NodeChip text="CSV_Write" />
 
 ## Template Variables
 
-Template variables allow access to flow metadata in _node_ attributes and user-defined SQL queries through [Jinja templates](https://jinja.palletsprojects.com/en/3.1.x/).  These variables can be accessed in Node Attributes and user-defined SQL queries by wrapping the template variable name with two braces on each side.
+Template variables allow access to flow metadata in _node_ attributes and user-defined SQL queries through [Jinja templates](https://jinja.palletsprojects.com/en/3.1.x/). These variables can be accessed in Node Attributes and user-defined SQL queries by wrapping the template variable name with two braces on each side.
 
 In the example _flow_ shown above, the output of <NodeChip text="CSV_Write" /> uses the **{{run_id}}** template variable to add a timestamp to the CSV file output.
 
 ### Available template variables
 
 - **run_id**: Timestamp in ms when _flow_ was kicked off; guaranteed to be unique per _flow_ run
+- **created**: Timestamp in ms when _flow_ was kicked off; for use in event-triggered flows only
 - **dag.dag_id**: name of _flow_
 - **operator**: name of _node_
 - **task_id**: type of _node_ (e.g. - <NodeChip text="CSV_Read" /> or <NodeChip text="Transform_Py" />)
 
 ## Context Variables
 
-Context variables are used to access _flow_ metadata in user-defined Python.  The Ganymede context variable is available for all nodes that have user-defined Python functions, while other context variables are specific to 3rd party APIs.
+Context variables are used to access _flow_ metadata in user-defined Python. The Ganymede context variable is available for all nodes that have user-defined Python functions, while other context variables are specific to 3rd party APIs.
 
 ### Ganymede Context
 
-The _ganymede_context_ object enables access to _flow_-specific metadata, input parameters, and input files in user-defined Python functions.  
+The _ganymede_context_ object enables access to _flow_-specific metadata, input parameters, and input files in user-defined Python functions.
 
-The code below demonstrates how this object can be used.  This code corresponds to the user-defined function found within <NodeChip text="Transform_Py" />.  The flow run timestamp, filename uploaded, and experiment_id flow input parameter are incorporated into the input CSV as new columns and written to the data lake.
+The code below demonstrates how this object can be used. This code corresponds to the user-defined function found within <NodeChip text="Transform_Py" />. The flow run timestamp, filename uploaded, and experiment_id flow input parameter are incorporated into the input CSV as new columns and written to the data lake.
 
 ```python
 import pandas as pd
@@ -62,27 +67,30 @@ def execute(
     return df_out
 ```
 
-The MockGanymedeContext object is used to mimic the _flow_ environment when conducting tests within the notebook environment.  When called without parameters, the object contains runtime variables associated with the most recent run, allowing the user to replicate the environment during the run.
+The MockGanymedeContext object is used to mimic the _flow_ environment when conducting tests within the notebook environment. When called without parameters, the object contains runtime variables associated with the most recent run, allowing the user to replicate the environment during the run.
 
 This enables users to debug individual _nodes_ within a _flow_ more easily.
 
 #### Ganymede Context class variables
+
 - **run_id: `str`**
   - Timestamp in ms when _flow_ was kicked off; guaranteed to be unique per _flow_ run.
 
 #### Ganymede Context class methods
+
 - **get_param(self, node_name: `str`, parameter_type: `str`) -> `str`**:
-  - Obtain input parameter or input filename in _flow_.  Node name can be found in the indigo bar at the top of each node.  Parameter type generally references the file extension for nodes that ingest files, and can be found on the Flow Editor as values with green background and white text.
+  - Obtain input parameter or input filename in _flow_. Node name can be found in the indigo bar at the top of each node. Parameter type generally references the file extension for nodes that ingest files, and can be found on the Flow Editor as values with green background and white text.
 - **set_param(self, parameter_type: `str`, parameter_value: Any, node_name: `str` = None) -> None**:
   - Set parameter value
 
 ### Benchling Context
 
-The _benchling_context_ object is used to access the Benchling API, and can only be found on nodes that make calls to Benchling.  
+The _benchling_context_ object is used to access the Benchling API, and can only be found on nodes that make calls to Benchling.
 
-As an example, suppose that a Benchling user had registered a custom entity named `plasmid-GFP-TAG`, which was assigned the Benchling custom entity id `ts_DF578lfK`.  If selected by the user during _flow_ execution, the **run_tag** in this example would be `ts_DF578lfK` and the **display_tag** would be `plasmid-GFP-TAG`.
+As an example, suppose that a Benchling user had registered a custom entity named `plasmid-GFP-TAG`, which was assigned the Benchling custom entity id `ts_DF578lfK`. If selected by the user during _flow_ execution, the **run_tag** in this example would be `ts_DF578lfK` and the **display_tag** would be `plasmid-GFP-TAG`.
 
 #### Benchling Context class variables
+
 - **conn**: Benchling connection
 - **run_tag**: Benchling ID associated with run tag selected by user during run
 - **display_tag**: Benchling name of run tag selected by user during run
