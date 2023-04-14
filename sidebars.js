@@ -74,8 +74,15 @@ module.exports = {
   releaseSideBar: [
     {
       type: 'doc',
-      id: 'releases/ReleaseNotes',
-      label: 'Release Notes',
+      id: 'releases/2023Q2'
+    },
+    {
+      type: 'doc',
+      id: 'releases/2023Q1'
+    },
+    {
+      type: 'doc',
+      id: 'releases/2022'
     }
   ]
 };
