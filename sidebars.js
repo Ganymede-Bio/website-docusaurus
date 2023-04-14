@@ -45,7 +45,7 @@ module.exports = {
       type: 'category',
       label: 'Observing Data',
       collapsed: false,
-      items: ['AnalysisNotebook', 'DataExplorer', 'Files']
+      items: ['AnalysisNotebook', 'DataExplorer', 'Files', 'Dashboard']
     },
     {
       type: 'doc',
