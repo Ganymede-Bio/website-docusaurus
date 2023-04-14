@@ -23,7 +23,7 @@ A useful way to interact with _nodes_ is to consider how _nodes_ interact with o
 | Analysis   | Table_to_Blob              | Table or List[Table]                                                  | Dict[FileAny]        | True          |
 | Analysis   | Transform_SQL              | Table                                                                 | Table                | True          |
 | Analysis   | Transform_py               | Table or List[Table]                                                  | Table or Dict[Table] | True          |
-| App        | AirtableExport             | Table                                                                 | API                  | False         |
+| App        | AirtableExport             | Table                                                                 | API                  | True          |
 | App        | AirtableImport             | API                                                                   | Table                | False         |
 | App        | Azure_Query                | API                                                                   | Table or Dict[Table] | True          |
 | App        | Azure_Read                 | API                                                                   | FileAny              | False         |
@@ -38,6 +38,7 @@ A useful way to interact with _nodes_ is to consider how _nodes_ interact with o
 | App        | S3_Read                    | API                                                                   | FileAny              | False         |
 | App        | S3_Write                   | FileAny                                                               | API                  | False         |
 | App        | SciNote_Write              | Table                                                                 | API                  | True          |
+| App        | Smartsheet_Read            | API                                                                   | Table                | True          |
 | App        | Snowflake_Write            | Table                                                                 | API                  | False         |
 | File       | AVI_Read                   | FileAVI                                                               | Table or Dict[Table] | True          |
 | File       | AVI_Read_Multi             | Set[FileAVI]                                                          | Table or Dict[Table] | True          |
@@ -139,6 +140,7 @@ The _execute_ function may call classes and functions found within the User-Defi
 | App        | S3_Read                    | Ingest data into Ganymede data storage from AWS S3 storage         |
 | App        | S3_Write                   | Write data to an S3 bucket                                         |
 | App        | SciNote_Write              | Create and write SciNote entry                                     |
+| App        | Smartsheet_Read            | Read sheet from Smartsheet                                         |
 | App        | Snowflake_Write            | Sync tables in Ganymede data lake to Snowflake                     |
 | File       | AVI_Read                   | Read in contents of an AVI file to a table                         |
 | File       | AVI_Read_Multi             | Read in contents of multiple avi files to a table                  |
