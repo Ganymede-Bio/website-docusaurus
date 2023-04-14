@@ -94,13 +94,17 @@ module.exports = {
               to: 'https://www.ganymede.bio',
             },
             {
+              label: 'Blog',
+              to: 'https://blog.ganymede.bio'
+            },
+            {
               label: 'GitHub',
               href: 'https://github.com/Ganymede-Bio/website-docusaurus',
             },
           ],
         },
       ],
-      copyright: `Built with Docusaurus`,
+      copyright: `Copyright © 2023 Ganymede Bio, Inc.  Built with Docusaurus`,
     },
   },
   presets: [
@@ -117,6 +121,9 @@ module.exports = {
         gtag: {
           trackingID: 'G-CDRHMZJ61T',
           anonymizeIP: true,
+        },
+        googleTagManager: {
+          containerId: 'GTM-554GP3T'
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
