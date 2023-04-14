@@ -8,6 +8,17 @@ displayed_sidebar: releaseSideBar
 
 Ganymede releases generally occur on Thursdays each week.
 
+### Apr 13 2023
+
+**Features/Updates**
+- Dashboards are now available in Ganymede. Datasets for dashboards are currently read-only, but every environment has a set of pre-configured datasets based on Flow Run metadata. Those datasets can be used to create operational charts and dashboards. The Implementation team is happy to assist in configuring additional datasets.
+
+**Improvements**
+- Flow Runs are now available to track in the bottom drawer of the Flow Editor.
+
+**Bug Fixes**
+- Verbose node logs now wrap properly within the modal, instead of overflowing.
+
 ### Apr 6 2023
 
 **Features/Updates**
