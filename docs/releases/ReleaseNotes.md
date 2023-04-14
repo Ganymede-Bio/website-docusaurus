@@ -14,7 +14,7 @@ Ganymede releases generally occur on Thursdays each week.
 - [Dashboards](../Dashboards.mdx) are now available in Ganymede. 
   - Datasets available for dashboards can be based on either tables in the environment or SQL queries of tables.  
   - Datasets are currently read only; the Implementations team can assist with configuring additional datasets for charting.
-- [SDK](../NodeEditorFunctions.mdx) now has convenience functions for listing and retrieving files and tables within the editor notebook environment
+- [Ganymede SDK](../NodeEditorFunctions.mdx) now has convenience functions for listing and retrieving files and tables within the editor notebook environment
 
 **Improvements**
 - Flow Runs are now available to track in the bottom drawer of the Flow Editor.
