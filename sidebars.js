@@ -73,16 +73,16 @@ module.exports = {
   ],
   releaseSideBar: [
     {
-      type: 'doc',
-      id: 'releases/2023Q2'
+      type: 'category',
+      label: '2023',
+      collapsed: false,
+      items: ['releases/202304', 'releases/202303', 'releases/202302', 'releases/202301']
     },
     {
-      type: 'doc',
-      id: 'releases/2023Q1'
+      type: 'category',
+      label: '2022',
+      collapsed: false,
+      items: ['releases/202212', 'releases/202211', 'releases/202210', 'releases/202209']
     },
-    {
-      type: 'doc',
-      id: 'releases/2022'
-    }
   ]
 };
