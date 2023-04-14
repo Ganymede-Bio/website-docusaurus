@@ -9,10 +9,6 @@ Query Azure SQL database, process data in Python, and upload results to Ganymede
 
 
 ### Node Attributes
-- **location**
-  - GCP region for k8s cluster
-- **cluster_name**
-  - Name of k8s cluster to launch
 - **src_azure_host_name**
   - Host name for Azure database to pull from
 - **src_azure_database**
@@ -27,9 +23,6 @@ Prior to usage, the following secrets must be configured in your Ganymede enviro
 - **azure_tenant_id**: App tenant ID
 - **azure_subscription_id**: Azure subscription ID
 - **azure_aad_authority**: App Azure Active Directory (AAD) Authority
-
-Windows Azure Storage Blob (WASB) URI, which consists of
-- **azure_storage_uri**: Storage URL
 
 Secrets can be configured by clicking on the gear icon in the upper-right hand of the Ganymede
 application, then selecting Settings and navigating to the Settings tab.  If you need

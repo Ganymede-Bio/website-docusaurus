@@ -40,7 +40,7 @@ Secrets can be configured by clicking on the gear icon in the upper-right hand o
 application, then selecting Settings and navigating to the Settings tab.  If you need
 assistance, please don't hesitate to reach out to Ganymede.
 ## User-Defined Python
-Example demonstrating submission of user-defined SQL query into eLabNext
+Example demonstrating submission of user-defined SQL query into SciNote
 
 
 ### Parameters
@@ -49,7 +49,7 @@ Example demonstrating submission of user-defined SQL query into eLabNext
 - **data_input** : `Dict[str, bytes]`
     - Objects to retrieve from cloud storage
 - **base_url** : `str`
-    - Base URL for eLabNext to retrieve data from / post data to
+    - Base URL for SciNote to retrieve data from / post data to
 - **token** : `str`
     - token used for API access
 - **ganymede_context** : `GanymedeContext`
