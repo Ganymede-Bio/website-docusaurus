@@ -228,7 +228,7 @@ _list_files_ lists files in the environment
 - _param_ **context**: GanymedeContext - GanymedeContext to use for pulling file(s)
 - _param_ **input_or_output_bucket**: str, by default "input" - Either "input" or "output" - to reference whether to observe the input or output bucket of the _flow_
 - _param_ **current_flow_flag**: bool, by default True - Whether to filter for files associated with current flow or not
-- _param_ **run_id**: Optional[int] - If set, filters for results with specified run_id
+- _param_ **current_run_id**: Optional[int] - If set, filters for results with specified run_id
 
 ```python
 from ganymede_sdk.editor import MockGanymedeContext
