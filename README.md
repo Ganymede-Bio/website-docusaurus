@@ -17,7 +17,7 @@ yarn start
 
 ## Dependencies
 
-Docusaurus v2.0.0 requires Node 16.14+; this website is known to run under Node 18.7.  If you run into unexpected issues, rebuild the dependencies by running
+Docusaurus v2.4.0 requires Node 16.14+; this website is known to run under Node v18.12.  If you run into unexpected issues, rebuild the dependencies by running
 ```
 > yarn clear
 > yarn build
