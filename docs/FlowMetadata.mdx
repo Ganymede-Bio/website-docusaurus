@@ -33,8 +33,8 @@ In the example _flow_ shown above, the output of <NodeChip text="CSV_Write" /> u
 
 ### Available template variables
 
-- **run_id**: Timestamp in ms when _flow_ was kicked off; guaranteed to be unique per _flow_ run
-- **created**: Timestamp in ms when _flow_ was kicked off; for use in event-triggered flows only
+- **run_id**: Timestamp in ms when _flow_ was kicked off for manually triggered flows; guaranteed to be unique per _flow_ run
+- **created**: Timestamp in ms when _flow_ was kicked off for event-triggered flows
 - **dag.dag_id**: name of _flow_
 - **operator**: name of _node_
 - **task_id**: type of _node_ (e.g. - <NodeChip text="CSV_Read" /> or <NodeChip text="Transform_Py" />)

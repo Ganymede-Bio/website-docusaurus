@@ -34,8 +34,7 @@ from ganymede_sdk.io import retrieve_sql
 mock_ganymede_context = MockGanymedeContext()
 
 # Retrieve dataframe with run_id from most recent run
-# Note: replace <tenant_name> with your tenant
-query_sql = "SELECT * FROM <tenant_name>.tbl WHERE run_id = '{{ run_id }}'"
+query_sql = "SELECT * FROM tbl WHERE run_id = '{{ run_id }}'"
 result = retrieve_sql(query_sql, context=mock_ganymede_context)
 ```
 
@@ -44,8 +43,7 @@ import pandas as pd
 from ganymede_sdk.editor import GanymedeContext, MockGanymedeContext
 from ganymede_sdk.io import retrieve_sql
 
-# Note: replace <tenant_name> with your tenant
-query_sql = "SELECT * FROM <tenant_name>.input_table"
+query_sql = "SELECT * FROM input_table"
 
 # User-editable Python function for node
 def execute(df: pd.DataFrame, ganymede_context: GanymedeContext = None) -> pd.DataFrame:
