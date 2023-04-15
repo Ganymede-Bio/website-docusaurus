@@ -4,7 +4,5 @@ title: Release Notes
 displayed_sidebar: releaseSideBar
 ---
 
-## Release History
-
-Ganymede releases generally occur on Thursdays each week.
+Ganymede releases generally occur on Thursdays each week.  Please reach out to [Ganymede support](support@ganymede.bio) if you have any questions about the release notes.
 

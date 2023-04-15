@@ -94,11 +94,11 @@ The <NodeChip text="Transform_Py" /> node needs to be modified to calculate abso
 <img alt="Transform_Py Jupyter Notebook" src="https://ganymede-bio.mo.cloudinary.net/apiServer/TransformPyNotebook_20230111.png"/>
 &nbsp;
 
-Edit the query_sql string to query for the output of the Excel_Read node (replacing <tenant\> in the query shown below with the appropriate tenant name).  Run the cell by clicking on the <div className="button jupyter_button">▶️ Run</div> button in the header.
+Edit the query_sql string to query for the output of the Excel_Read node.  Run the cell by clicking on the <div className="button jupyter_button">▶️ Run</div> button in the header.
 
 ```python
 query_sql = """
-  SELECT * FROM <tenant>.Quickstart_Absorbance_Change_Excel_Read_results
+  SELECT * FROM Quickstart_Absorbance_Change_Excel_Read_results
 """
 ```
 

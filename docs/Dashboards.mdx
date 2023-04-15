@@ -4,14 +4,85 @@ title: Dashboards
 displayed_sidebar: webUiSidebar
 ---
 
-import { AreaChartOutlined } from '@ant-design/icons';
+import { AreaChartOutlined, PlusOutlined } from '@ant-design/icons';
 
 The <div className="button darkblue_button"><AreaChartOutlined /> **Dashboard**</div> page offers charts and dashboard visualizations based on data stored within Ganymede.  
 
 <img width="1200" alt="image" src="https://user-images.githubusercontent.com/33580338/231939989-a8a76977-2b7b-412e-a3ec-dd68da8a2ed2.png"/>
 
-- Select Charts to create a chart based on the library of chart types
-  - There are several pre-configured datasets based on run metadata
-  - If you need access to additional datasets, reach out to your Ganymede Implementation Manager
+## Adding a Dataset
 
-- Select Dashboards to create a dashboard composed of the charts
+Datasets must be added from the environment prior to charting, either chosen from the environment ([Physical Datasets](#adding-physical-datasets)) or created via an ANSI SQL query ([Virtual Datasets](#adding-virtual-datasets)).  
+
+In the parlance of other database systems, virtual datasets are sometimes referred to as _views_, while physical datasets are referred to as _tables_.
+
+### Adding Physical Datasets
+
+To make an existing dataset available for use:
+
+- Hover over Data in the menu bar at the top and click on Datasets.
+
+<img alt="Dashboard - Select Dataset" src="https://ganymede-bio.mo.cloudinary.net/dashboard/Select_Dataset20230415.png" />
+
+- Click on <div className="button darkblue_button"><PlusOutlined /> **DATASET**</div> and select a table to make it available for charting.
+
+<img alt="Dashboard - Add Physical Dataset" src="https://ganymede-bio.mo.cloudinary.net/dashboard/Add_Physical_Dataset20230415.png" />
+
+### Adding Virtual Datasets
+
+Virtual datasets are created by ANSI SQL query; for a list of available functions and syntax guidance, please reference the [SQL in BigQuery documentation](https://cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax).
+
+To create a virtual dataset:
+
+- Hover over SQL Lab in the top menu bar and click on SQL Editor.  This should bring you to a SQL editor that lets you preview tables, and results of SQL queries:
+
+<img alt="Dashboard - SQL Editor" src="https://ganymede-bio.mo.cloudinary.net/dashboard/SQL_Editor20230415.png" />
+
+- Fill in the SQL Editor with a query string, select an appropriate number of rows to observe, and click <div className="button darkblue_button">**RUN**</div> to execute SQL.
+
+<img alt="Dashboard - SQL Editor Query" src="https://ganymede-bio.mo.cloudinary.net/dashboard/SQL_Editor_Query20230415.png" />
+
+- Save a virtual dataset by clicking on the **Create Chart** button, which should bring up the following modal:
+
+<img alt="Dashboard - Add Virtual Dataset" src="https://ganymede-bio.mo.cloudinary.net/dashboard/Add_Virtual_Dataset20230415.png" />
+
+:::info Saving queries
+
+The **SAVE** button saves SQL queries for future edits, but does not register a query as a virtual dataset.
+
+:::
+
+## Creating a chart
+
+Charts can be created from physical or virtual datasets.  
+
+To create a chart:
+
+- Hover over Data in the top menu bar and click on Datasets.  Then, click on one of the listed datasets, which should bring up the following pane:
+
+<img alt="Dashboard - Create Chart" src="https://ganymede-bio.mo.cloudinary.net/dashboard/Create_Chart20230415.png" />
+
+The DATA tab has controls for specifying chart type and pivoting/aggregating data from the selected table.  The customize tab has functionality for annotating axis labels, specifying axis format, and chart title.
+
+- Once the created chart looks satisfactory, add a chart to a dashboard by clicking on **SAVE** in the upper-right hand corner of the screen to bring up this modal:
+
+<img alt="Dashboard - Save Chart" src="https://ganymede-bio.mo.cloudinary.net/dashboard/Save_Chart20230415.png" />
+
+### Calculated columns
+
+Calculated columns can be added to the dataset, which can be handy for correcting data for visualization.  Some example use cases are:
+
+- Taking the floor or ceiling of a variable to truncate data outside of a desired range
+- Performing string manipulations on a field to categorize or subset data
+- Extracting values from a string for aggregation
+
+To create a calculated column:
+
+- Hover over the three dots to the right of the dataset on the Chart Creation page and click Edit Dataset.
+
+<img alt="Dashboard - Edit Dataset" src="https://ganymede-bio.mo.cloudinary.net/dashboard/Edit_Dataset20230415.png" />
+
+- Select the Calculated Columns tab to add new columns to the dataset.  Specify the field definition using a SQL expression.
+
+<img alt="Dashboard - Calculated Column" src="https://ganymede-bio.mo.cloudinary.net/dashboard/Calculated_Column20230415.png" />
+
