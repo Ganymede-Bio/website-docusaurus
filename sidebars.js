@@ -31,7 +31,7 @@ module.exports = {
         type: 'category',
         label: 'Editing Flows',
         collapsed: true,
-        items: ['FlowEditor', 'NodeEditor', 'FlowMetadata', 'NodeEditorFunctions'],
+        items: ['FlowEditor', 'NodeEditor', 'FlowMetadata', 'GanymedeSDK'],
       },
       {
         type: 'category',
