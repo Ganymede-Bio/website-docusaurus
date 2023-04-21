@@ -23,10 +23,14 @@ Prior to usage, the following secrets must be configured in your Ganymede enviro
 - **azure_tenant_id**: App tenant ID
 - **azure_subscription_id**: Azure subscription ID
 - **azure_aad_authority**: App Azure Active Directory (AAD) Authority
+- **azure_sql_odbc_driver**: Azure SQL ODBC Driver to reference
 
 Secrets can be configured by clicking on the gear icon in the upper-right hand of the Ganymede
 application, then selecting Settings and navigating to the Settings tab.  If you need
 assistance, please don't hesitate to reach out to Ganymede.
+
+On the Ganymede end - make sure that the relevant MSSQL ODBC Driver is availed for
+workflow execution environment.
 ## User-Defined Python
 Process tabular data from user-defined SQL query, writing results back to data lake
 

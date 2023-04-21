@@ -14,7 +14,7 @@ Retrieves sheet from Smartsheet, which is processed by user-defined function.
 
 ### Notes
 Prior to usage, the following secrets must be configured in your Ganymede environment:
-- **smartsheet_api_key**: Smartsheet API Key
+- **smartsheet_access_token**: Smartsheet Access Token
 
 Secrets can be configured by clicking on the gear icon in the upper-right hand of the Ganymede
 application, then selecting Settings and navigating to the Settings tab.  If you need
