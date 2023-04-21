@@ -56,6 +56,12 @@ module.exports = {
         {
           type: 'doc',
           position: 'left',
+          docId: 'sdk/GanymedeSDK',
+          label: 'SDK'
+        },
+        {
+          type: 'doc',
+          position: 'left',
           docId: 'releases/ReleaseNotes',
           label: 'Release Notes'
         },
@@ -79,6 +85,10 @@ module.exports = {
             {
               label: 'Nodes',
               to: 'nodes/NodeOverview'
+            },
+            {
+              label: 'Ganymede SDK',
+              to: 'sdk/GanymedeSDK'
             },
             {
               label: 'Release Notes',
