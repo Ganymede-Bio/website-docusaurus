@@ -5,10 +5,18 @@ displayed_sidebar: webUiSidebar
 ---
 
 import { AreaChartOutlined, PlusOutlined } from '@ant-design/icons';
+import DashboardFilterIcon from '@site/static/img/dashboard_filter_icon.svg';
 
 The <div className="button darkblue_button"><AreaChartOutlined /> **Dashboard**</div> page offers charts and dashboard visualizations based on data stored within Ganymede.  
 
 <img width="1200" alt="image" src="https://user-images.githubusercontent.com/33580338/231939989-a8a76977-2b7b-412e-a3ec-dd68da8a2ed2.png"/>
+&nbsp;
+
+To assemble a dashboard:
+- [Add a dataset](#adding-a-dataset), either chosen from the environment or via SQL query
+- [Create a chart](#creating-a-chart) from the dataset
+- [Save the chart](#saving-charts-to-dashboards) to add the chart to the specified dashboard.
+- [Modify dashboards and chart layouts](#editing-dashboards) by selecting the corresponding dashboard from the **Dashboards** tab in the top menu bar
 
 ## Adding a Dataset
 
@@ -64,6 +72,8 @@ To create a chart:
 
 The DATA tab has controls for specifying chart type and pivoting/aggregating data from the selected table.  The customize tab has functionality for annotating axis labels, specifying axis format, and chart title.
 
+### Saving charts to dashboards
+
 - Once the created chart looks satisfactory, add a chart to a dashboard by clicking on **SAVE** in the upper-right hand corner of the screen to bring up this modal:
 
 <img alt="Dashboard - Save Chart" src="https://ganymede-bio.mo.cloudinary.net/dashboard/Save_Chart20230415.png" />
@@ -84,11 +94,33 @@ To create a calculated column:
 
 - Select the Calculated Columns tab to add new columns to the dataset.  Specify the field definition using a SQL expression.
 
+:::tip Calculated Column flexibility
+
+Calculated columns are more flexible than what is found in other BI tools offering similar functionality.  Beyond aggregation, these fields 
+can be filtered on, sorted by, and/or used to categorize data.
+
+:::
+
 <img alt="Dashboard - Calculated Column" src="https://ganymede-bio.mo.cloudinary.net/dashboard/Calculated_Column20230415.png" />
 
-:::tip Permissions for editing datasets
+:::info Permissions for editing datasets
 
 Dashboards can only be edited by their owner.  One method for multiple users to avoid conflicting dataset modifications would be for
 users of shared datasets to create virtual datasets for their own use.
+
+:::
+
+## Editing dashboards
+
+To edit a dashboard, select **Dashboards** from the top menu bar and navigate to the desired dashboard.  Clicking on <div className="button purple_button_dashboard">**EDIT DASHBOARD**</div> allows users
+to resize and rearrange the layout of different charts.
+
+Data backing the graphs can be filtered by clicking on the <DashboardFilterIcon /> icon on the left side of the dashboard, selecting <div className="button superset_button"><PlusOutlined /> Add filters and dividers</div> and selecting the SCOPING panel.
+
+:::tip Tables referenced by dashboard filter
+
+The SCOPING tab on the filters modal allows users to specify which graphs the filter applies to.
+Note that if 2 charts are backed by different datasets which share a field name, a single filter can 
+be used to manipulate both tables simultaneously. 
 
 :::

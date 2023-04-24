@@ -148,6 +148,17 @@
   color: var(--ifm-color-gray-light);
 }
 
+.button.purple_button_dashboard {
+  border: 0px;
+  padding-left: 6px;
+  padding-right: 6px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  background-color: rgb(208, 204, 229);
+  color: rgb(39, 34, 67);
+}
+
+
 .tree_node_icon {
   display: inline;
   color: var(--ifm-color-blue);
@@ -177,6 +188,14 @@
   scale: 50%;
   color: var(--ifm-color-white);
   vertical-align: middle;
+}
+
+.button.superset_button {
+  border-radius: 3px;
+  padding-left: 6px;
+  padding-right: 3px;
+  border-color: var(--ifm-color-black);
+  color: var(--ifm-color-black);
 }
 
 .button.jupyter_button {
