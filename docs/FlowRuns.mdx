@@ -10,22 +10,22 @@ import { CheckCircleOutlined } from '@ant-design/icons';
 The <div className="button darkblue_button"><CheckCircleOutlined /> **Flow Runs**</div> page contains the current status of different _flow_ runs that have been executed.  To view historical runs for a given _flow_, select the _flow_ from the datalist in the header.
 To download or get more information on an input or output file, click on the file name to navigate to the [Files page](Files.mdx).
 
-<img width="1288" alt="FlowRuns" src="https://user-images.githubusercontent.com/46538575/225718847-fc818fba-9e9e-41f9-ba72-2c4501fa73c6.png"/>
+<img width="1288" alt="FlowRuns" src="https://ganymede-bio.mo.cloudinary.net/apiServer/FlowRuns_20230424.png"/>
 
 ### Observing Flow Status
 
 The run status table displayed consists of the following columns:
 
-- **Flow Name**: Name of the _flow_ executed
 - **Input File**: Input files and input parameters associated with _flow_ run
 - **Output File**: Output files (if applicable)
-- **Run Tag**: Run tags associated with _flow_ run. An example run tag would be a Benchling custom entity ID used to reference a table within Benchling.
-- **Start date**: Timestamp of when _flow_ was initiated
-- **End date**: Timestamp of when _flow_ completed execution
+- **Run By**: Login associated with user that ran the _flow_
+- **Start Time**: Timestamp of when _flow_ was initiated
+- **Run Duration**: HH:MM:SS of _flow_ execution time.
 - **Status**: Current status for a _flow_ run instance.  Possible status values are: 
   - **Running**: Job is in the process of running
   - **Success**: All _nodes_ have run successfully
   - **Failed**: At least one _node_ has failed to run successfully
+- **Logs**: Opens up a modal with logs for each _node_.
 
 ### Observing Node Status
 

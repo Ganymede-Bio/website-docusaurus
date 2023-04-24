@@ -1,0 +1,19 @@
+---
+id: GanymedeSDKOverview
+title: Ganymede SDK
+displayed_sidebar: SDKSidebar
+---
+
+import NodeChip from '@site/src/components/NodeChip.js'
+
+
+The Ganymede SDK provides a set of convenience functions for interacting with Ganymede from editor and analysis notebooks.
+
+```python
+import ganymede_sdk.editor
+import ganymede_sdk.io
+```
+
+- [**ganymede_sdk.editor**](./ModuleEditor.mdx) provides access to GanymedeContext and BenchlingContext variables, which allow users to test logic with different input parameters and Benchling API calls.
+- [**ganymede_sdk.io**](./ModuleIO.mdx) contains functions for listing files and tables stored in Ganymede, as well as functions for that retrieve files and tables by environment, flow, or specific run.
+- [**GPT**](./GPT.mdx) is a class found in Ganymede SDK that provides coding assistance for use in Editor notebooks.  Usage requires configuring OpenAI API Key and Organization in your environment.

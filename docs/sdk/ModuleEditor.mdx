@@ -1,0 +1,65 @@
+---
+id: ModuleEditor
+title: ganymede_sdk.editor
+displayed_sidebar: SDKSidebar
+---
+
+import NodeChip from '@site/src/components/NodeChip.js'
+
+
+## Overview
+
+**ganymede_sdk.editor** contains classes for mimicking pipeline environment to facilitate debugging.
+
+### class MockGanymedeContext
+
+**GanymedeContext** stores _flow_ metadata such as user ID, input filenames, input parameters, and execution timestamp upon _flow_ execution.
+
+**MockGanymedeContext** replicates the behavior of **GanymedeContext** in Editor notebooks, enabling users to replicate the environment of prior workflow executions in a Jupyter notebook environment.  When no parameters are passed into the object, calling **MockGanymedeContext()** with no parameters retrieves metadata from the most recent execution of the corresponding _flow_.
+
+This enables users to test user-defined Python and SQL that incorporates metadata; for example, the **MockGanymedeContext** can be used to render [Jinja template variables](../FlowMetadata.mdx#template-variables) in a _retrieve_sql_ call, or to resolve references to the GanymedeContext parameter within _execute_ functions.
+
+```python
+from ganymede_sdk.editor import MockGanymedeContext
+from ganymede_sdk.io import retrieve_sql
+
+# Create MockGanymedeContext with inputs from most recent run
+mock_ganymede_context = MockGanymedeContext()
+
+# Retrieve dataframe with run_id from most recent run
+query_sql = "SELECT * FROM tbl WHERE run_id = FORMAT_TIMESTAMP("%Y-%m-%dT%R:%E6S", TIMESTAMP_MILLIS({{run_id}}))"
+result = retrieve_sql(query_sql, context=mock_ganymede_context)
+```
+
+```python
+import pandas as pd
+from ganymede_sdk.editor import GanymedeContext, MockGanymedeContext
+from ganymede_sdk.io import retrieve_sql
+
+query_sql = "SELECT * FROM input_table"
+
+# User-editable Python function for node
+def execute(df: pd.DataFrame, ganymede_context: GanymedeContext = None) -> pd.DataFrame:
+  df['run_id'] = ganymede_context.run_id
+  return df
+
+# Use MockGanymedeContext object from most recent run in execute function
+mock_ganymede_context = MockGanymedeContext()
+df_input = retrieve_sql(query_sql)
+df_output = execute(df_input, ganymede_context=mock_ganymede_context)
+```
+
+### class MockBenchlingContext
+
+**MockBenchlingContext** retrieves Benchling connection information from the environment so users can make calls to their configured Benchling tenant in Jupyter notebooks.  If client ID and client secret are configured for the environment, declaring **MockBenchlingContext()** retrieves a Benchling connection.
+
+Alternatively, _url_ and _api_key_ keyword parameters can be passed on initialization for authentication.  For more detail, see [Access the Benchling Developer Platform](https://help.benchling.com/hc/en-us/articles/9714802977805-Access-the-Benchling-Developer-Platform).
+
+```python
+from ganymede_sdk.editor import MockBenchlingContext
+
+# Retrieve Benchling connection information from environment
+mock_benchling_context = MockBenchlingContext()
+print(mock_benchling_context.conn)
+```
+

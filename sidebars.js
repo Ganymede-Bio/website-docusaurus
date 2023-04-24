@@ -71,6 +71,35 @@ module.exports = {
         nodeTest]
     }
   ],
+  SDKSidebar: [
+    {
+      type: 'doc',
+      id: 'sdk/GanymedeSDKOverview',
+      label: 'Overview'
+    },
+    {
+      type: 'category',
+      label: 'SDK', 
+      collapsed: false,
+      items: [
+        {
+          type: 'doc',
+          id: 'sdk/ModuleEditor',
+          label: 'Context Variables'
+        },
+        {
+          type: 'doc',
+          id: 'sdk/ModuleIO',
+          label: 'Accessing Data'
+        },
+        {
+          type: 'doc',
+          id: 'sdk/GPT',
+          label: 'GPT'
+        },
+      ]
+  }
+  ],
   releaseSideBar: [
     {
       type: 'category',
