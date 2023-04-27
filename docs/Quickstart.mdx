@@ -151,20 +151,20 @@ When the job is complete, the status of the _flow_ should indicate success:
 
 ### Step 7: Observe results in Data Explorer
 
-Click on <div className="button darkblue_button"><FileSearchOutlined /> **Data Explorer**</div> in the left sidebar and run the following query (with <tenant\> replaced) to observe the processed results.
+Click on <div className="button darkblue_button"><FileSearchOutlined /> **Data Explorer**</div> in the left sidebar and run the following query to observe the processed results.
 
 ```sql
 select 
     left(field, 1) as well_row, 
     cast(right(field, length(field)-1) as int) as well_column,
     *
-from <tenant>.Quickstart_Absorbance_Change_Transform_py_analysis 
+from Quickstart_Absorbance_Change_Transform_py_analysis 
 order by left(field, 1), cast(right(field, length(field)-1) as int)
 ```
 
 Running this query will yield the result table from the _flow_, which is displayed below.
 
-<img alt="Querying results" src="https://ganymede-bio.mo.cloudinary.net/apiServer/QuickstartDataExplorer_20230110.png"/>
+<img alt="Querying results" src="https://ganymede-bio.mo.cloudinary.net/apiServer/QuickstartDataExplorer_20230427.png"/>
 
 The associated file ingested into the flow in this quickstart can be found in the <div className="button darkblue_button"><FolderOutlined /> **Files**</div> tab of Ganymede.
 
