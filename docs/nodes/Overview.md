@@ -35,6 +35,7 @@ A useful way to interact with _nodes_ is to consider how _nodes_ interact with o
 | App        | Benchling_Write_Object     | Optional[FileAny or List[FileAny]] and Optional[Table or List[Table]] | API                  | True          |
 | App        | Coda_Write                 | Table                                                                 | API                  | True          |
 | App        | ELabNext_Write             | Table                                                                 | API                  | True          |
+| App        | S3_Event                   | App                                                                   |                      | False         |
 | App        | S3_Read                    | API                                                                   | FileAny              | False         |
 | App        | S3_Write                   | FileAny                                                               | API                  | False         |
 | App        | SciNote_Write              | Table                                                                 | API                  | True          |
@@ -51,6 +52,7 @@ A useful way to interact with _nodes_ is to consider how _nodes_ interact with o
 | File       | Excel_Read_Multi           | Set[FileExcel]                                                        | Table or Dict[Table] | True          |
 | File       | Excel_Write                | Table or List[Table]                                                  | FileExcel            | True          |
 | File       | FCS_Extract_Load           | FileFCS                                                               | Dict[Table]          | True          |
+| File       | FCS_Extract_Load_Multi     | Set[FileFCS]                                                          | Dict[Table]          | True          |
 | File       | HDF5_Read                  | FileHDF5                                                              | FileAny              | True          |
 | File       | Image_Read                 | FileImage                                                             | Dict[FileAny]        | True          |
 | File       | Image_Write                | Table or List[Table]                                                  | Dict[FileAny]        | True          |
@@ -137,6 +139,7 @@ The _execute_ function may call classes and functions found within the User-Defi
 | App        | Benchling_Write_Object     | Write object to Benchling                                          |
 | App        | Coda_Write                 | Write Coda tables                                                  |
 | App        | ELabNext_Write             | Create and write eLabNext entry                                    |
+| App        | S3_Event                   | Capture events from AWS S3 for triggering flows                    |
 | App        | S3_Read                    | Ingest data into Ganymede data storage from AWS S3 storage         |
 | App        | S3_Write                   | Write data to an S3 bucket                                         |
 | App        | SciNote_Write              | Create and write SciNote entry                                     |
@@ -153,6 +156,7 @@ The _execute_ function may call classes and functions found within the User-Defi
 | File       | Excel_Read_Multi           | Read Excel spreadsheets                                            |
 | File       | Excel_Write                | Write Excel spreadsheet                                            |
 | File       | FCS_Extract_Load           | Load FCS file to data lake                                         |
+| File       | FCS_Extract_Load_Multi     | Load multiple FCS files to data lake                               |
 | File       | HDF5_Read                  | Read HDF5 data                                                     |
 | File       | Image_Read                 | Process image data; store processed images to data store           |
 | File       | Image_Write                | Process tabular data; write an image to data lake                  |

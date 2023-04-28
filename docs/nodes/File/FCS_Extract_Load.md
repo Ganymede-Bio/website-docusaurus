@@ -76,7 +76,7 @@ Process FCS data/metadata file
 
 
 ### Parameters
-- **metadata** : `Dict[str, pd.DataFrame]`
+- **metadata** : `Dict[str, pd.DataFrame]|Dict[Dict[str, pd.DataFrame]]`
     - Metadata from FCS file
 - **data** : `pd.DataFrame`
 

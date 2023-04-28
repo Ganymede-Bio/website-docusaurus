@@ -20,6 +20,7 @@ Query Azure SQL database, process data in Python, and upload results to Ganymede
 ### Notes
 Prior to usage, the following secrets must be configured in your Ganymede environment:
 - **azure_client_id**: App client ID
+- **azure_object_id**: App object ID
 - **azure_tenant_id**: App tenant ID
 - **azure_subscription_id**: Azure subscription ID
 - **azure_aad_authority**: App Azure Active Directory (AAD) Authority
@@ -31,6 +32,7 @@ assistance, please don't hesitate to reach out to Ganymede.
 
 On the Ganymede end - make sure that the relevant MSSQL ODBC Driver is availed for
 workflow execution environment.
+artifact_registry should be populated in secrets with the web address hosting the container
 ## User-Defined Python
 Process tabular data from user-defined SQL query, writing results back to data lake
 
