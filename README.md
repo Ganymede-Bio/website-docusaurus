@@ -4,7 +4,9 @@ This repository hosts documentation for using the Ganymede Cloud Server. It is s
 
 ---
 
-## Pre-Setup
+## Setup for local development
+
+### Pre-Setup
 
 Download and install [nodejs](https://nodejs.org/en/download)
 
@@ -18,9 +20,7 @@ Install xcode command line tools by running:
 xcode-select --install
 ```
 
-## Setup for local development
-
-Clone the website-docusaurus repo
+### Clone the website-docusaurus repo
 
 ```shell
 git clone https://github.com/Ganymede-Bio/website-docusaurus.git
