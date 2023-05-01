@@ -1,12 +1,10 @@
 # Ganymede Documentation
 
-This repository hosts documentation for using the Ganymede Cloud Server. It is served at docs.ganymede.bio.
+This repository hosts documentation for using the Ganymede Cloud Server. It is served at [docs.ganymede.bio](docs.ganymede.bio).
 
 ---
 
 ## Setup for local development
-
-### Pre-Setup
 
 Download and install [nodejs](https://nodejs.org/en/download)
 
@@ -26,13 +24,15 @@ xcode-select --install
 git clone https://github.com/Ganymede-Bio/website-docusaurus.git
 ```
 
-### Installing packages required for running documentation website
+### Install packages required for running documentation website
 ```shell
 yarn install
 yarn build
 ```
 
-## Running website-docusaurus locally
+---
+
+## Run website-docusaurus locally
 
 Run local instance for debugging (defaults to port 3000).  Doing so, you should be able to see the website in the browser by visiting [localhost:3000](localhost:3000).
 
@@ -103,6 +103,24 @@ python generateOperatorDocs.py
 deactivate
 popd
 ```
+
+---
+
+## Notes on Docusaurus, as used in this repo
+
+### Key files
+* sidebars.js in the root directory contains the layout of the sidebars for each page
+* docusaurus.config.js in the root directory contains navbar and footer menu
+
+### Docusaurus features
+* Documentation files are in [MD or MDX format](https://docusaurus.io/docs/markdown-features/react); MDX is markdown that allows for React components
+* [Admonitions](https://docusaurus.io/docs/markdown-features/admonitions) are used to add colored chips
+* The [title size determines how titles are featured in a sidebar](https://docusaurus.io/docs/markdown-features/toc)
+
+### Other packages employed
+* For search, the documentation website uses [Typesense](https://cloud.typesense.org/login), which is configured in docsearch-config.json
+
+---
 
 ## License
 
