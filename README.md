@@ -6,7 +6,9 @@ This repository hosts documentation for using the Ganymede Cloud Server. It is s
 
 ## Setup for local development
 
-Download and install [nodejs](https://nodejs.org/en/download)
+Download and install [nodejs](https://nodejs.org/en/download).  Install v18.16 LTS (or other LTS version with a major version number of 18) if possible.
+
+Download and install [VS Code](https://code.visualstudio.com/) or other editor of choice.
 
 If you are using MacOS, install brew by running the following in terminal:
 ```
@@ -18,14 +20,15 @@ Install xcode command line tools by running:
 xcode-select --install
 ```
 
-### Clone the website-docusaurus repo
+Clone the website-docusaurus repo
 
 ```shell
 git clone https://github.com/Ganymede-Bio/website-docusaurus.git
 ```
 
-### Install packages required for running documentation website
+Install packages required for running documentation website
 ```shell
+npm install --global yarn
 yarn install
 yarn build
 ```
@@ -42,10 +45,10 @@ yarn start
 
 ## Editing website-docusaurus
 
-1. Create a new branch, so that you can validate website updates before deploying to [docs.ganymede.bio](docs.ganymede.bio).
+1. Create a new branch, so that you can validate website updates before deploying to [docs.ganymede.bio](docs.ganymede.bio).  The -b option on the checkout command below creates a new branch.
 ```
 cd website-docusaurus
-git checkout -b <add-new-branch>
+git checkout -b <name-of-new-branch>
 ```
 
 2. Make changes.  Changes should viewable in the browser on [localhost:3000](localhost:3000)
@@ -59,7 +62,7 @@ git push
 4. If successful, run the following code to deploy to [docs.ganymede.bio](docs.ganymede.bio)
 ```shell
 git checkout main
-git merge <add-new-branch>
+git merge <name-of-new-branch>
 git push
 ```
 
