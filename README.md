@@ -26,7 +26,9 @@ Clone the website-docusaurus repo
 git clone https://github.com/Ganymede-Bio/website-docusaurus.git
 ```
 
-Install packages required for running documentation website
+> It is necessary to create an `.env` file to configure Typesense to get the following steps to work.
+
+### Install packages required for running documentation website
 ```shell
 npm install --global yarn
 yarn install
@@ -92,7 +94,7 @@ source env/bin/activate
 pip install -r requirements.txt
 deactivate
 popd
-```
+ to our flow```
 
 ### Node documentation generation
 
