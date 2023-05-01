@@ -34,7 +34,7 @@ yarn build
 
 ## Running website-docusaurus locally
 
-Run local instance for debugging (defaults to port 3000).  Doing so, you should be able to see the website in the browser by visiting localhost:3000.
+Run local instance for debugging (defaults to port 3000).  Doing so, you should be able to see the website in the browser by visiting [localhost:3000](localhost:3000).
 
 ```shell
 yarn start
@@ -42,13 +42,13 @@ yarn start
 
 ## Editing website-docusaurus
 
-1. Create a new branch, so that you can validate website updates before deploying to docs.ganymede.bio.
+1. Create a new branch, so that you can validate website updates before deploying to [docs.ganymede.bio](docs.ganymede.bio).
 ```
 cd website-docusaurus
 git checkout -b <add-new-branch>
 ```
 
-2. Make changes.  Changes should viewable in the browser on localhost:3000
+2. Make changes.  Changes should viewable in the browser on [localhost:3000](localhost:3000)
 
 3. When satisfied, with changes, run the following code.  You should be able to view changes after a couple minutes from the link in the notifications-website channel in Slack.
 ```shell
@@ -56,7 +56,7 @@ git commit -am '<description of changes>'
 git push
 ```
 
-4. If successful, run the following code to deploy to docs.ganymede.bio
+4. If successful, run the following code to deploy to [docs.ganymede.bio](docs.ganymede.bio)
 ```shell
 git checkout main
 git merge <add-new-branch>
