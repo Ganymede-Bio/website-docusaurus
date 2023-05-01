@@ -26,7 +26,7 @@ xcode-select --install
 git clone https://github.com/Ganymede-Bio/website-docusaurus.git
 ```
 
-### Installing packages required for 
+### Installing packages required for running documentation website
 ```shell
 yarn install
 yarn build
