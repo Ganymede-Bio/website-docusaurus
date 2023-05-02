@@ -9,6 +9,7 @@ import { UserOutlined,
          BranchesOutlined,
          NodeIndexOutlined,
          SettingOutlined,
+         BellOutlined,
          PlusCircleOutlined,
          PlayCircleOutlined,
          CodeOutlined,
@@ -56,7 +57,7 @@ Click on the <div className="button darkblue_button">**Manage <SettingOutlined /
 <img width="1124" alt="Settings" src="https://ganymede-bio.mo.cloudinary.net/apiServer/QuickstartCreateNewFlow_20230501.png"/>
 &nbsp;
 
-This exposes a modal for adding a new _flow_. Populate the flow name and description as shown below, then hit the "Create Flow" button.
+This exposes a modal for adding a new _flow_. Name the flow "Quickstart_Absorbance_Change" as shown below, add a description, and then hit the "Create Flow" button.
 
 <div class="text--center">
 <img alt="Quickstart flow description" src="https://ganymede-bio.mo.cloudinary.net/apiServer/QuickstartFlowDesc_20230110.png"/>
@@ -86,7 +87,13 @@ Change the **excel** node attribute from "excel" to ".xlsx" so that only files w
 Extension validation can be removed by leaving the file validation node attribute blank.
 :::
 
-Click <div className="button darkblue_button_mui">**Save**<SaveOutlined className="white_icon" /></div> in the header to save this change. Now you have a one-node flow that is capable of ingesting Excel files. Let's add a second node to process this incoming raw data into some useful output.
+Click <div className="button darkblue_button_mui">**Save**<SaveOutlined className="white_icon" /></div> in the header to save this change. 
+
+:::tip
+A message will pop up in the upper right when the Save is complete. You can also click the <BellOutlined className="button darkblue_button_icon"/> button in the upper right corner to view the Notifications page where you can track the progress of a Save. 
+:::
+
+Now you have a one-node flow that is capable of ingesting Excel files. Let's add a second node to process this incoming raw data into some useful output.
 
 Click on the <div className="button darkblue_button">**Node** <PlusCircleOutlined /></div> button in the header bar again, and search for the term "transform". This time, we want to add a <div className="button darkblue_button">**Transform_Py**</div> node to our flow.  Click the <div className="button darkblue_button">**Add**</div> button to add it to your flow, and then click the **X** button in the upper right corner to return to your flow.
 
