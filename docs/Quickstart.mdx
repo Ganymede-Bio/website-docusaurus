@@ -11,7 +11,8 @@ import { UserOutlined,
          SettingOutlined,
          PlusCircleOutlined,
          PlayCircleOutlined,
-         EditOutlined,
+         CodeOutlined,
+         DownOutlined,
          FileSearchOutlined,
          CheckCircleOutlined,
          FolderOutlined } from '@ant-design/icons';
@@ -55,7 +56,7 @@ Click on the <div className="button darkblue_button">**Manage <SettingOutlined /
 <img width="1124" alt="Settings" src="https://ganymede-bio.mo.cloudinary.net/apiServer/QuickstartCreateNewFlow_20230501.png"/>
 &nbsp;
 
-This exposes a modal for adding a new _flow_.  Populate the _flow_ name and description as shown below, then hit the "Create Flow" button.
+This exposes a modal for adding a new _flow_. Populate the flow name and description as shown below, then hit the "Create Flow" button.
 
 <div class="text--center">
 <img alt="Quickstart flow description" src="https://ganymede-bio.mo.cloudinary.net/apiServer/QuickstartFlowDesc_20230110.png"/>
@@ -65,28 +66,27 @@ After a few seconds, your flow will be created and you'll be redirected to a bla
 
 ### Step 4: Add nodes to ingest and process data
 
-Click on the <div className="button darkblue_button">**Node** <PlusCircleOutlined /></div> button in the header bar and search for the term "excel" to filter for the relevant <div className="button darkblue_button">**Excel_Read**</div> *node*.  Click the <div className="button darkblue_button">**Add**</div> button to add it to your flow. 
+Click on the <div className="button darkblue_button">**Node** <PlusCircleOutlined /></div> button in the header bar and search for the term "excel" to filter for the relevant <div className="button darkblue_button">**Excel_Read**</div> node.  Click the <div className="button darkblue_button">**Add**</div> button to add it to your flow. 
 <div class="text--center">
 <img alt="Excel_Read node chip" src="https://ganymede-bio.mo.cloudinary.net/apiServer/QuickstartAddExcelNode20230501.png"/>
 </div> 
 
 Then click the **X** button in the upper right corner to return to your flow, where you should now see an <div className="button darkblue_button">**Excel_Read**</div> node.
-<!-- TODO: Last clause should remain in docs until adding a node gives some feedback -->
+<!-- TODO: This last clause should remain in docs until adding a node gives some feedback -->
 
-Click on the downward-pointing carat in the corner of the <div className="button darkblue_button">**Excel_Read**</div> node to expand it to edit its attributes. 
+Click on the downward-pointing carat <DownOutlined className="button darkblue_button_icon"/> in the corner of the <div className="button darkblue_button">**Excel_Read**</div> node to expand it and edit its attributes.
 
 <div class="text--center">
 <img alt="Quickstart flow description" src="https://ganymede-bio.mo.cloudinary.net/apiServer/QuickstartAddedNodeExcel2_20230501.png"/>
 </div>
 
-Change the **excel** node attribute from "excel" to ".xlsx" so that only files with `.xlsx` as an extension will be processed by this node (and other file types, such as `.xlsm` will be blocked). 
-<!-- TODO: how? -->
+Change the **excel** node attribute from "excel" to ".xlsx" so that only files with `.xlsx` as an extension will be processed by this node (other file types, such as `.xlsm` will be blocked). 
 
 :::tip file extension validation
 Extension validation can be removed by leaving the file validation node attribute blank.
 :::
 
-Click <div className="button darkblue_button_mui">**Save**<SaveOutlined className="white_icon" /></div> in the header to save this change. Now you have a one-node flow that is capable of ingesting excel files. Let's add a second node to process the data into some useful output.
+Click <div className="button darkblue_button_mui">**Save**<SaveOutlined className="white_icon" /></div> in the header to save this change. Now you have a one-node flow that is capable of ingesting Excel files. Let's add a second node to process this incoming raw data into some useful output.
 
 Click on the <div className="button darkblue_button">**Node** <PlusCircleOutlined /></div> button in the header bar again, and search for the term "transform". This time, we want to add a <div className="button darkblue_button">**Transform_Py**</div> node to our flow.  Click the <div className="button darkblue_button">**Add**</div> button to add it to your flow, and then click the **X** button in the upper right corner to return to your flow.
 
@@ -98,14 +98,12 @@ Of course, we want the data to flow from the <div className="button darkblue_but
 
 ### Step 5: Modify the Transform_Py node to calculate absorbance difference
 
-Right now the <div className="button darkblue_button">**Transform_Py**</div> node is in its default state, so let's edit it to make it do something useful specific to our Plate Reader data. To do so, open up the backing notebook for <div className="button darkblue_button">**Transform_Py**</div> by clicking on command prompt icon (<EditOutlined className="button darkblue_button_icon"/>) in the upper-right hand corner of the _node_. This opens up the Jupyter notebook that corresponds to this node in a separate tab on the browser.
-
-<!-- need to find command prompt icon -->
+Right now the <div className="button darkblue_button">**Transform_Py**</div> node is in its default state, so let's edit it to make it do some processing specific to our Plate Reader data. To do so, open up the backing notebook for <div className="button darkblue_button">**Transform_Py**</div> by clicking on the command prompt icon <CodeOutlined className="button darkblue_button_icon"/> in the upper-right-hand corner of the node. This opens up the Jupyter notebook that corresponds to this node in a separate tab in your browser.
 
 <img alt="Transform_Py Jupyter Notebook" src="https://ganymede-bio.mo.cloudinary.net/apiServer/TransformPyNotebook_20230111.png"/>
 &nbsp;
 
-Edit the `query_sql` string to query for the output of the Excel_Read node.  
+Edit the `query_sql` string to query for the output of the <div className="button darkblue_button">**Excel_Read**</div> node.  
 
 ```python
 query_sql = """
@@ -113,13 +111,13 @@ query_sql = """
 """
 ```
 
-Since the excel file has been ingested in the <div className="button darkblue_button">**Excel_Read**</div> node, we now can query the results of that node using a SQL query on the table `Quickstart_Absorbance_Change_Excel_Read_results` (as defined in the **results** attributed of the <div className="button darkblue_button">**Excel_Read**</div> node). The query above simply selects all the data from the table. 
+Since the Excel file has been ingested in the <div className="button darkblue_button">**Excel_Read**</div> node, we now can query the results of that node using a SQL query on the table `Quickstart_Absorbance_Change_Excel_Read_results` (as defined in the **results** attribute of the <div className="button darkblue_button">**Excel_Read**</div> node). The query above simply selects all the data from this table. 
 
 :::tip
 By default, <div className="button darkblue_button">**Excel_Read**</div> treats the first row in the input file as the header row, so no modification is necessary for ingesting the sample file.
 :::
  
-Run the notebook cell by clicking on the <div className="button jupyter_button">▶️ Run</div> button in the header.
+Run this notebook cell by clicking on the <div className="button jupyter_button">▶️ Run</div> button in the header.
 
 Next, modify the `execute` function to calculate the absorbance difference as follows, and run the cell:
 
@@ -140,13 +138,13 @@ def execute(
     return df_out
 ```
 
-This takes the difference between the two columns `run1` and `run2`.
+This takes the difference between the two columns `run1` and `run2`, and stores the result in a new column called `run_diff`.
 
 :::tip
 Near the bottom of the notebook you'll find the **Testing Section**. Here, you can test out your SQL query and user-defined Python function interactively by running the cells. This is a great way to debug your code before deploying the flow.
 :::
 
-Save and deploy changes made to the Transform_Py *node* by running the Save Pipeline Code cell **AND** saving the notebook.  To save the notebook, click on <div className="button jupyter_button">**File**</div> -> <div className="button jupyter_button">Save and Checkpoint</div> in the menu.
+Save and deploy changes made to the Transform_Py node by running the Save Pipeline Code cell below **AND** saving the notebook. To save the notebook, click on <div className="button jupyter_button">**File**</div> -> <div className="button jupyter_button">Save and Checkpoint</div> in the menu.
 
 ```python
 """
@@ -162,29 +160,29 @@ Upon doing so, the response in the Save Pipeline Cell should say "Commit complet
 
 ### Step 6: Run the flow
 
-Deployment takes roughly 1-2 minutes.  Once the deployment is completed, return to the <div className="button darkblue_button"><BranchesOutlined /> **Flow Editor**</div> view and click <div className="button darkblue_button_mui"><ExpandLessOutlined className="white_icon" />**Expand**</div> in the Run Queue bar at the bottom of the screen to expand the input form for running nodes.  Select local storage and the PlateReader.xlsx file downloaded at the beginning of this quickstart.
+Deployment takes roughly 1-2 minutes.  Once the deployment is completed, return to the <div className="button darkblue_button"><BranchesOutlined /> **Flow Editor**</div> view and click <div className="button darkblue_button_mui"><ExpandLessOutlined className="white_icon" />**Expand**</div> in the Run Queue bar at the bottom of the screen to expand the input form for running nodes. Click the "Drag and drop files here or Browse" button and upload the "PlateReader.xlsx" file downloaded at the beginning of this quickstart.
 
 :::tip
-The associated file ingested into the flow in this quickstart can be now found in the <div className="button darkblue_button"><FolderOutlined /> **Files**</div> tab of Ganymede.
+The associated file ingested into the flow can be now found in the <div className="button darkblue_button"><FolderOutlined /> **Files**</div> tab of Ganymede.
 
 <img alt="Files tab input files" src="https://ganymede-bio.mo.cloudinary.net/apiServer/QuickstartFiles_20230110.png"/>
 :::
 
 
-Click <div className="button run_queue_button">**Run** <PlayCircleOutlined /></div> on the Flow Inputs _node_ to kick off the _flow_. The running flow run will now be visible below.
+Click the <div className="button run_queue_button">**Run** <PlayCircleOutlined /></div> button to kick off the flow. The running flow run will now be visible below.
 
-<img alt="Example flow running" src="https://ganymede-bio.mo.cloudinary.net/apiServer/QuickstartFlowRun_20230110.png"/>
+<img alt="Example flow running" src="https://ganymede-bio.mo.cloudinary.net/apiServer/QuickstartFlowRunning2_20230501.png"/>
 
 :::tip
 You can also click on <div className="button darkblue_button"><CheckCircleOutlined /> **Flow Runs**</div> in the left sidebar to monitor the current run or browse past runs.
 :::
 
-When the job is complete, the status of the _flow_ should indicate success:
+When the job is complete, the status of the flow should indicate success:
 
-<img alt="Example flow success" src="https://ganymede-bio.mo.cloudinary.net/apiServer/QuickstartFlowSuccess_20230110.png"/>
+<img alt="Example flow success" src="https://ganymede-bio.mo.cloudinary.net/apiServer/QuickstartFlowSuccess_20230502.png"/>
 
 
-To aid with observing data outputs from nodes, table heads can be shown by clicking on the <div className="button darkblue_button_mui">**View** <DashboardOutlined className="white_icon"/></div>
+To aid with observing data outputs from nodes, table heads can be shown by clicking on the <div className="button darkblue_button_mui">**View** <DashboardOutlined className="white_icon"/></div> button.
 
 <img alt="Quickstart Flow After Edit" src="https://ganymede-bio.mo.cloudinary.net/apiServer/QuickstartFinalView_20230501.png"/>
 
@@ -202,7 +200,7 @@ from Quickstart_Absorbance_Change_Transform_py_analysis
 order by left(field, 1), cast(right(field, length(field)-1) as int)
 ```
 
-Running this query will yield the result table from the _flow_, which is displayed below.
+Note that we can now query the `Quickstart_Absorbance_Change_Transform_py_analysis` table, which is defined in the **analysis** attributed of the <div className="button darkblue_button">**Transform_Py**</div> node. Running this query will yield the result table from the flow, which is displayed below.
 
 <img alt="Querying results" src="https://ganymede-bio.mo.cloudinary.net/apiServer/QuickstartDataExplorer_20230427.png"/>
 
