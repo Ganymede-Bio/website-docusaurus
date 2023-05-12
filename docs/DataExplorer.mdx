@@ -4,20 +4,23 @@ title: Data Explorer
 displayed_sidebar: webUiSidebar
 ---
 
-import { FileSearchOutlined } from '@ant-design/icons';
+import { TableOutlined } from '@ant-design/icons';
 
-The <div className="button darkblue_button"><FileSearchOutlined /> **Data Explorer**</div> page offers an ANSI SQL interface to query tabular data generated from Ganymede _flows_.  
+The <div className="button darkblue_button"><TableOutlined /> **Data Explorer**</div> page offers access to tabular data generated from Ganymede flows or from other sources.
 
-<img width="1251" alt="DataExplorer" src="https://user-images.githubusercontent.com/46538575/225719033-5a93f896-2926-44b8-a871-7502d2cc8b34.png"/>
+<img width="1251" alt="DataExplorer" src="img/data/page.png"/>
 
-- The Data Lake Tables pane contains a list of tables that exist in the current environment. 
+- The Explorer pane contains a list of tables in the current environment. 
   - There is a search bar to filter tables that contain the search string
-  - The button next to table overwrites the SQL query in the top right and give an example query
+- The rest of the window has various tabs that let you view or modify the selected table.
+  - The Fields tab lets you view and edit the table schema (the defined columns of the table) and other table metadata, including a description.
 
-- The Query Editor provides an input window for users to type in queries.
-  - This query is limited to data query (DQL) calls only. (e.g. `SELECT` are the only keyword allowed in the query)
+  - The Preview tab displays the first 10 rows of the selected table.
+
+  - The Query tab provides an input window for users to type in queries.
+    - This query is limited to data query (DQL) calls only. (e.g. `SELECT` are the only keyword allowed in the query)
   - Table names should be surrounded with backticks - use <div className="keystroke">`</div> to escape special characters
-  - If the `LIMIT` keyword in not included, the default of `LIMIT 1000` to prevent long loading times related to tables.
-  
-- The Results pane contains the query results
-  - There is a download button on the top right which takes the current output and produces a CSV file
+    
+    - The Results pane contains the query results. There is a download button on the top right which takes the current output and produces a CSV file
+
+  - The Flows tab shows Flows that are associated with this table. Clicking on the link will take you to the appropriate page
