@@ -10,17 +10,23 @@ The <div className="button darkblue_button"><TableOutlined /> **Data Explorer**<
 
 <img width="1251" alt="DataExplorer" src="img/data/page.png"/>
 
-- The Explorer pane contains a list of tables in the current environment. 
+- The **Explorer** pane contains a list of tables in the current environment. 
   - There is a search bar to filter tables that contain the search string
+  - There is an <img className="inline-img" src="img/data/addTableButton.png"/> button that lets you create a new table with a name and schema that you specify.
 - The rest of the window has various tabs that let you view or modify the selected table.
-  - The Fields tab lets you view and edit the table schema (the defined columns of the table) and other table metadata, including a description.
+  - The **Fields** tab lets you view and edit the table schema (the defined columns of the table) and other table metadata, including a description.
 
-  - The Preview tab displays the first 10 rows of the selected table.
+    - Fields have a name, a datatype (STRING by default), a flag for whether they are required, and an optional description.
+    - You can edit a schema with the [Edit] button. In Edit mode, you can add fields and change some of the field information. You can't delete existing fields, or change their datatype, or change a non-required field to required, so many options are disabled.
 
-  - The Query tab provides an input window for users to type in queries.
-    - This query is limited to data query (DQL) calls only. (e.g. `SELECT` are the only keyword allowed in the query)
-  - Table names should be surrounded with backticks - use <div className="keystroke">`</div> to escape special characters
+  - The **Preview** tab displays the first 10 data rows of the selected table.
+
+  - The **Query** tab allows you to do SQL queries on the table.
+
+    - You specify the query ihn **Query Editor** pane, which is preloaded with a default query for the selected table.  In the query, table names should be surrounded with backticks. (Why?) Only `SELECT` statements are allowed.
     
-    - The Results pane contains the query results. There is a download button on the top right which takes the current output and produces a CSV file
+    - The **Results** pane shows the result of the query. There is a download button on the top right which will produce a CSV file based on the results.
 
-  - The Flows tab shows Flows that are associated with this table. Clicking on the link will take you to the appropriate page
+  - The **Flows** tab shows Ganymede Flows that are associated with this table. Clicking on the links in the Flow Id column will take you to the appropriate page.
+
+  
