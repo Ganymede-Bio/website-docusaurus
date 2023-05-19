@@ -8,16 +8,16 @@ import { TableOutlined } from '@ant-design/icons';
 
 The <div className="button darkblue_button"><TableOutlined /> **Data Explorer**</div> page offers access to tabular data generated from Ganymede flows or from other sources.
 
-<img width="1251" alt="DataExplorer" src="img/data/page.png"/>
+<img width="1251" alt="DataExplorer" src="img/data/page1.png"/>
 
 - The **Explorer** pane contains a list of tables in the current environment. 
-  - There is a search bar to filter tables that contain the search string
-  - There is an <img className="inline-img" src="img/data/addTableButton.png"/> button that lets you create a new table with a name and schema that you specify.
+  - There is a search bar to filter the list to tables that contain the given search string
+  - There is an <img className="inline-img" src="img/data/addTableButton.png"/> button that lets you create a new table with a name and schema that you specify, using the [Schema Editor](SchemaEditor),
 - The rest of the window has various tabs that let you view or modify the selected table.
   - The **Fields** tab lets you view and edit the table schema (the defined columns of the table) and other table metadata, including a description.
 
     - Fields have a name, a datatype (STRING by default), a flag for whether they are required, and an optional description.
-    - You can edit a schema with the [Edit] button. In Edit mode, you can add fields and change some of the field information. You can't delete existing fields, or change their datatype, or change a non-required field to required, so many options are disabled.
+    - You can edit a schema with the [Schema Editor](SchemaEditor) <img className="inline-img" src="img/data/editButton.png"/> button. In Edit mode, you can edit the table description, and add fields and change some of the field information. 
 
   - The **Preview** tab displays the first 10 data rows of the selected table.
 
