@@ -1,6 +1,6 @@
 # Ganymede Documentation
 
-This repository hosts documentation for using the Ganymede Cloud Server. It is served at [docs.ganymede.bio](docs.ganymede.bio).
+This repository hosts documentation for using the Ganymede Cloud Server. It is served at [docs.ganymede.bio](https://docs.ganymede.bio).
 
 ---
 
@@ -26,7 +26,7 @@ Clone the website-docusaurus repo
 git clone https://github.com/Ganymede-Bio/website-docusaurus.git
 ```
 
-> It is necessary to create an `.env` file to configure Typesense to get the following steps to work.
+> It is necessary to create an `.env` file to configure Typesense to get the following steps to work. [Instructions here](https://docs.google.com/document/d/1e9MGV-JOuCrt06K_9yyWBO5McjJDGCDNlCspIe1Jjz8/edit#)
 
 ### Install packages required for running documentation website
 ```shell

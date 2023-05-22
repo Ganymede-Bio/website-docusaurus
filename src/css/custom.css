@@ -230,3 +230,7 @@
 .filter-white{
   filter: brightness(0) invert(1);
 }
+
+.inline-img {
+  vertical-align: middle;
+}
