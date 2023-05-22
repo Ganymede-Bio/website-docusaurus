@@ -4,7 +4,7 @@ title: Benchling_Read
 displayed_sidebar: nodeSidebar
 ---
 
-### Node Operator
+### Node Description
 Reads Benchling data specified by Benchling run tag.
 
 Passes Benchling run tag to user-defined function and uploads tabular output

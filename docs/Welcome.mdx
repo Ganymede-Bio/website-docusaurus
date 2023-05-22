@@ -36,19 +36,19 @@ Developers author _flows_, which are programs represented as directed graphs com
 <img width="400" alt="Example node layout" src="https://ganymede-bio.mo.cloudinary.net/apiServer/Operator_Conceptual_Layout_20230108.png" />
 </div>
 
-The core unit that performs processing in Ganymede is the [_node_](./nodes/Overview.md).  The _node_ type specifies the _operator_ code, template SQL code, and template Python code.
+The core unit that performs processing in Ganymede is the [_node_](./nodes/Overview.md).  The _node_ type determines the code within the node, template SQL code, and template Python code.
 
-- **Operator**: performs I/O between different systems and the user-defined components of a _node_.  Depending on the _node_, data may be retrieved from or sent to 
+- **Node**: performs I/O between different systems and the user-defined components of a _node_.  Depending on the _node_, data may be retrieved from or sent to 
   - a SQL database
   - cloud storage 
   - third-party API 
   - flat files
   
-In the layout shown above, the execute function _operator_ retrieves input data in the `userSQL()` call based on the user-defined SQL query and uploads processed data to the Ganymede data lake in the `storeDataFrame(res)` call.  
+In the layout shown above, the execute function node retrieves input data in the `userSQL()` call based on the user-defined SQL query and uploads processed data to the Ganymede data lake in the `storeDataFrame(res)` call.  
 
 :::note
 
-Node attributes specified on _nodes_ on the Flow Editor page are interpreted by the _operator_ logic within a _node_.
+Node attributes specified on _nodes_ on the Flow Editor page are interpreted by the node logic within a _node_.
 
 :::
 

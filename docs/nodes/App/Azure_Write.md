@@ -4,11 +4,13 @@ title: Azure_Write
 displayed_sidebar: nodeSidebar
 ---
 
-### Node Operator
+### Node Description
 Write files from data lake to Azure Blob Storage.
 
 
 ### Node Attributes
+- **azure_storage_uri**
+  - Windows Azure Storage Blob (WASB) URI to set URL for blob service endpoint
 - **src_object_name**
   - Data lake object to write
 - **dest_azure_container_name**
@@ -23,9 +25,6 @@ Prior to usage, the following secrets must be configured in your Ganymede enviro
 - **azure_tenant_id**: App tenant ID
 - **azure_subscription_id**: Azure subscription ID
 - **azure_aad_authority**: App Azure Active Directory (AAD) Authority
-
-Windows Azure Storage Blob (WASB) URI, which consists of
-- **azure_storage_uri**: Storage URL
 
 Secrets can be configured by clicking on the gear icon in the upper-right hand of the Ganymede
 application, then selecting Settings and navigating to the Settings tab.  If you need

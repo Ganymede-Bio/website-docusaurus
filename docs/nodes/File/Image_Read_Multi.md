@@ -1,19 +1,19 @@
 ---
-sidebar_label: Image_Read
-title: Image_Read
+sidebar_label: Image_Read_Multi
+title: Image_Read_Multi
 displayed_sidebar: nodeSidebar
 ---
 
 ### Node Description
 Ingests and processes an image file
 
-Takes an image as input, processes via user-defined function, and stores a dict of processed
-image(s) to the storage bucket
+Takes multiple images as input, processes via user-defined function, and stores a dict of processed
+images to the storage bucket
 
 
 ### Node Attributes
-- **input_file_image**
-  - file extension of image file
+- **input_multi_image**
+  - file extension of image files
 - **output_table_image_info**
   - table to write metadata into
 ## User-Defined Python

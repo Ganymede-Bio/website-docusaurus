@@ -1,6 +1,6 @@
 ---
-sidebar_label: Transform_py
-title: Transform_py
+sidebar_label: Python
+title: Python
 displayed_sidebar: nodeSidebar
 ---
 
@@ -12,10 +12,11 @@ and stores result table(s) to Ganymede data lake.
 
 
 ### Node Attributes
-- **output_table_analysis**
+- **output_table_results**
   - Table displayed on Table Head
 ## User-Defined Python
-Process tabular data from user-defined SQL query, writing results back to data lake
+Process tabular data from user-defined SQL query, writing results back to data lake.  Data
+is written to the output bucket.
 
 
 ### Parameters
@@ -26,12 +27,5 @@ Process tabular data from user-defined SQL query, writing results back to data l
 
 
 ### Returns
-`Union[pd.DataFrame, Dict[str, pd.DataFrame]]`
-  - Table(s) to store in data lake
-
-
-### Notes
-If a DataFrame is returned, the table name corresponds to the **results** parameter of the node.
-
-If a dict is returned, the keys of the dict are used as table names for the corresponding
-DataFrames to store.  The table with **results** as its key is displayed on the Flow Editor.
+`NodeReturn`
+  - Table(s) and File(s) to store in Ganymede

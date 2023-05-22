@@ -4,7 +4,7 @@ title: Image_Write
 displayed_sidebar: nodeSidebar
 ---
 
-### Node Operator
+### Node Description
 Parse table data and writes to storage.  Useful for storing graphs created from data.
 
 Retrieves table(s) from Ganymede data lake, processes table(s) via user-defined function,

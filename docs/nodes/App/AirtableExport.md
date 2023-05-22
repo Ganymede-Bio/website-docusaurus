@@ -4,7 +4,7 @@ title: AirtableExport
 displayed_sidebar: nodeSidebar
 ---
 
-### Node Operator
+### Node Description
 Reads table(s) from Ganymede data lake and uploads to Airtable.
 
 

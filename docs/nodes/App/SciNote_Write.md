@@ -4,7 +4,7 @@ title: SciNote_Write
 displayed_sidebar: nodeSidebar
 ---
 
-### Node Operator
+### Node Description
 Writes a table or set of tables to an SciNote entry.
 
 Retrieves one or more tables from Ganymede data lake, which are processed by user-defined

@@ -4,7 +4,7 @@ title: Snowflake_Write
 displayed_sidebar: nodeSidebar
 ---
 
-### Node Operator
+### Node Description
 Sync Ganymede data lake tables to Snowflake
 
 Specify semicolon-delimited tables to sync to Snowflake

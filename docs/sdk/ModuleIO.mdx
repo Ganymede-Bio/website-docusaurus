@@ -15,9 +15,9 @@ ganymede_sdk.io provides functions for listing available data and retrieving dat
 
 ### function _retrieve_sql_
 
-_retrieve_sql_ allows users to retrieve tabular data from the Ganymede data lake.  Input can either be a semicolon-delimited string containing a set of queries to run.
+_retrieve_sql_ allows users to retrieve tabular data from the Ganymede data lake.  Input can either be single SQL query, or a semicolon-delimited string containing a set of queries to run.
 
-If the input is submitted as a semicolon-delimited string, the results are returned as a DataFrame if singular or a list of Pandas DataFrames if multiple queries are submitted.
+The results are returned as a DataFrame in Python if a single DataFrame is specified, or a list of Pandas DataFrames if multiple queries are submitted.
 
 - _param_ **query_str**: str - Semicolon-delimited query string(s) to retrieve.
 - _param_ **context**: Optional[GanymedeContext] - Context object used for rendering Jinja template variables in query

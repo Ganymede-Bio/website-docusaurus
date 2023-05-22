@@ -4,7 +4,7 @@ title: FCS_Extract_Load_Multi
 displayed_sidebar: nodeSidebar
 ---
 
-### Node Operator
+### Node Description
 Reads contents of multiple FCS files into data lake
 
 The contents of the FCS files are passed to the user-defined function, which

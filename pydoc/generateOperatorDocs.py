@@ -105,7 +105,7 @@ if __name__ == "__main__":
             os.makedirs(dest_dir)
 
         operator_data_list = extract_docstring(operator_filename, search_str="class")
-        operator_data = "### Node Operator\n" + "\n".join(operator_data_list)
+        operator_data = "### Node Description\n" + "\n".join(operator_data_list)
 
         action_data = ""
         if "action" in desc:

@@ -4,7 +4,7 @@ title: Benchling_Event
 displayed_sidebar: nodeSidebar
 ---
 
-### Node Operator
+### Node Description
 Copies data from Benchling to Ganymede
 
 Listens for Benchling events, which are shared for processing by the user-defined _execute_

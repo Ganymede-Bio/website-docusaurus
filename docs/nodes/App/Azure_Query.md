@@ -4,7 +4,7 @@ title: Azure_Query
 displayed_sidebar: nodeSidebar
 ---
 
-### Node Operator
+### Node Description
 Query Azure SQL database, process data in Python, and upload results to Ganymede data lake
 
 

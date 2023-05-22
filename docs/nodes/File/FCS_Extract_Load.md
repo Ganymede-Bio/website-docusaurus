@@ -4,7 +4,7 @@ title: FCS_Extract_Load
 displayed_sidebar: nodeSidebar
 ---
 
-### Node Operator
+### Node Description
 Function for reading Flow Cytometry Standard (FCS) files into Ganymede data lake
 
 The fcsparser python package is used to parse FCS files into metadata and data

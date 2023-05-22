@@ -4,7 +4,7 @@ title: Benchling_Read_Object
 displayed_sidebar: nodeSidebar
 ---
 
-### Node Operator
+### Node Description
 Reads Benchling data specified by input Benchling ID string.
 
 Executes Benchling API call(s) based on user-defined function and upload results to data lake

@@ -4,7 +4,7 @@ title: Input_Param
 displayed_sidebar: nodeSidebar
 ---
 
-### Node Operator
+### Node Description
 Reads input parameter into Flow. Useful when downstream nodes need
 access to a input parameter specified by the _flow_ runner.
 

@@ -13,7 +13,7 @@ import {
 _Nodes_ are customizable blocks of code with default functionality specified by its type.
 
 <div class="text--center">
-<img width="300" alt="image" src="https://ganymede-bio.mo.cloudinary.net/apiServer/EditNodeBefore_20230110.png"/>
+<img width="300" alt="image" src="https://ganymede-bio.mo.cloudinary.net/apiServer/EditNodeBefore_20230522.png"/>
 </div>
 
 The image above shows how _nodes_ are represented on the Flow Editor page; each _node_ consists of:
@@ -27,7 +27,7 @@ Notebooks that back nodes are laid out in the following order:
 
 - **User-defined SQL** for retrieving tabular data to be processed by the node
 - **User-defined Python** for processing input
-- **Save Pipeline Code** for saving and deploying user-defined SQL and Python snippets to workflow management software
+- **Save Pipeline Code** for saving and deploying user-defined SQL and Python snippets to the workflow management system, enabling users to run flows
 - **Testing Section** for testing changes to user-defined SQL and Python
 
 A full listing of available nodes and their key characteristics can be found on the [Node Overview](./nodes/NodeOverview) page.
@@ -95,7 +95,7 @@ The _execute_ function can be viewed analogous to the _main_ function in Python;
 
 In this example, the _execute_ function takes the results of 1 or more tables as input, presented as either a pandas DataFrame or list of pandas DataFrames.  The execute function returns either a pandas DataFrame or a dictionary of pandas DataFrames with table names as keys.
 
-By default, if only 1 DataFrame is returned, it would be displayed in the table head associated with the node.  If multiple DataFrames are returned, the table displayed corresponds to the one labeled with the parameter with the gray chip background.  In the example above, the dataframe correponding to **sql_result** key would be the one displayed if multiple tables were returned from the _execute_ function.
+By default, if only 1 DataFrame is returned, it would be displayed in the table head associated with the node.  If multiple DataFrames are returned, the table displayed corresponds to table name specified on the node parameter.  In the example above, the dataframe correponding to **sql_result** key would be the one displayed if multiple tables were returned from the _execute_ function.
 
 
 :::caution
@@ -178,8 +178,8 @@ A list of available _nodes_ and their associated categories can be found on the 
 ### Table Heads
 
 <div class="text--center">
-<img width="400" alt="image" src="https://ganymede-bio.mo.cloudinary.net/apiServer/TableHead_20230110.png"/>
+<img width="400" alt="image" src="https://ganymede-bio.mo.cloudinary.net/apiServer/TableHead_20230522.png"/>
 </div>
 
-The _table head_ exists for _nodes_ that produce an output table.  For this subset of _nodes_, the _table head_ shows 5 records of the primary table produced by its associated _node_, which is the table specified by the gray chip of the associated _node_.  This table can facilitate the development of downstream _flow_ components.
+The _table head_ exists for _nodes_ that produce an output table.  For this subset of _nodes_, the _table head_ shows 5 records of the primary table produced by its associated _node_.  This table can facilitate the development of downstream _flow_ components.
 

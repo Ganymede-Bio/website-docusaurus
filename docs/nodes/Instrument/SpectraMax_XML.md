@@ -4,7 +4,7 @@ title: SpectraMax_XML
 displayed_sidebar: nodeSidebar
 ---
 
-### Node Operator
+### Node Description
 Parses SpectraMax XML file and uploads contents to data lake
 
 
