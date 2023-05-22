@@ -4,20 +4,29 @@ title: Data Explorer
 displayed_sidebar: webUiSidebar
 ---
 
-import { FileSearchOutlined } from '@ant-design/icons';
+import { TableOutlined } from '@ant-design/icons';
 
-The <div className="button darkblue_button"><FileSearchOutlined /> **Data Explorer**</div> page offers an ANSI SQL interface to query tabular data generated from Ganymede _flows_.  
+The <div className="button darkblue_button"><TableOutlined /> **Data Explorer**</div> page offers access to tabular data generated from Ganymede flows or from other sources.
 
-<img width="1251" alt="DataExplorer" src="https://user-images.githubusercontent.com/46538575/225719033-5a93f896-2926-44b8-a871-7502d2cc8b34.png"/>
+<img width="1251" alt="DataExplorer" src="img/data/page1.png"/>
 
-- The Data Lake Tables pane contains a list of tables that exist in the current environment. 
-  - There is a search bar to filter tables that contain the search string
-  - The button next to table overwrites the SQL query in the top right and give an example query
+- The **Explorer** pane contains a list of tables in the current environment. 
+  - There is a search bar to filter the list to tables that contain the given search string.
+  - There is an <img className="inline-img" src="img/data/addTableButton.png"/> button that lets you create a new table with a name and schema that you specify, using the [Table Structure Editor](TableStructureEditor).
+- The rest of the window has various tabs that let you view or modify the selected table.
+  - The **Fields** tab lets you view and edit the table structure (the defined columns of the table, aka schema) and other table metadata, including a description.
 
-- The Query Editor provides an input window for users to type in queries.
-  - This query is limited to data query (DQL) calls only. (e.g. `SELECT` are the only keyword allowed in the query)
-  - Table names should be surrounded with backticks - use <div className="keystroke">`</div> to escape special characters
-  - If the `LIMIT` keyword is not included, a default of limit of 1000 records is inserted to limit loading time.
+    - Fields have a name, a datatype (STRING by default), a flag for whether they are required, and an optional description.
+    - You can edit a schema with the [Table Structure Editor](TableStructureEditor) <img className="inline-img" src="img/data/editButton.png"/> button. In Edit mode, you can edit the table description, and add fields and change some of the field information. 
+
+  - The **Preview** tab displays the first 10 data rows of the selected table.
+
+  - The **Query** tab allows you to do SQL queries on the table.
+
+    - You specify the query ihn **Query Editor** pane, which is preloaded with a default query for the selected table.  In the query, table names should be surrounded with backticks. (Why?) Only `SELECT` statements are allowed.
+    
+    - The **Results** pane shows the result of the query. There is a download button on the top right which will produce a CSV file based on the results.
+
+  - The **Flows** tab shows Ganymede Flows that are associated with this table. Clicking on the links in the Flow Id column will take you to the appropriate page.
+
   
-- The Results pane contains the query results
-  - There is a download button on the top right which takes the current output and produces a CSV file
