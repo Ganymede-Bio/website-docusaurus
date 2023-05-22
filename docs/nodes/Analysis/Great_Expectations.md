@@ -4,7 +4,7 @@ title: Great_Expectations
 displayed_sidebar: nodeSidebar
 ---
 
-### Node Operator
+### Node Description
 Reads data from data lake and grants acccess to Great Expectations validation methods. Validation results
 are written to data lake.
 

@@ -4,7 +4,7 @@ title: Placeholder
 displayed_sidebar: nodeSidebar
 ---
 
-### Node Operator
+### Node Description
 Placeholder Function; intended to be used as a placeholder node while designing flows.
 
 

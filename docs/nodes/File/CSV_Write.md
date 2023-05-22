@@ -4,7 +4,7 @@ title: CSV_Write
 displayed_sidebar: nodeSidebar
 ---
 
-### Node Operator
+### Node Description
 Writes 1 table from data lake to CSV
 
 Retrieves one or more tables from Ganymede data lake, which the user-defined function processes

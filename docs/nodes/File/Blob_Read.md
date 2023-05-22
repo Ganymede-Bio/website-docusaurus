@@ -4,7 +4,7 @@ title: Blob_Read
 displayed_sidebar: nodeSidebar
 ---
 
-### Node Operator
+### Node Description
 Retrieves blob data for processing by user-defined function and uploads
 result to Ganymede cloud storage.
 

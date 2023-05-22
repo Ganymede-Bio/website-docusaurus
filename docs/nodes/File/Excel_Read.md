@@ -4,7 +4,7 @@ title: Excel_Read
 displayed_sidebar: nodeSidebar
 ---
 
-### Node Operator
+### Node Description
 Reads Excel file and uploads processed result to data lake
 
 Ingests one Excel file, which is passed to the user-defined function as a bytes object

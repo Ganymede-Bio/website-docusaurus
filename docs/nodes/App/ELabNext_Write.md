@@ -4,7 +4,7 @@ title: ELabNext_Write
 displayed_sidebar: nodeSidebar
 ---
 
-### Node Operator
+### Node Description
 Writes a table or set of tables to an eLabNext entry.
 
 Retrieves one or more tables from Ganymede data lake, which are processed by user-defined

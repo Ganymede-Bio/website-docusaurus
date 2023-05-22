@@ -4,7 +4,7 @@ title: Zip_Read
 displayed_sidebar: nodeSidebar
 ---
 
-### Node Operator
+### Node Description
 Reads a Zip file and uploads the extracted files to the data lake
 
 Ingests one Zip file, which is passed to the user-defined function as a bytes object

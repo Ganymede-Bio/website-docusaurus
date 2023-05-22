@@ -4,7 +4,7 @@ title: Synergy_Read_Multi
 displayed_sidebar: nodeSidebar
 ---
 
-### Node Operator
+### Node Description
 Reads contents of multiple Synergy files into data lake
 
 The contents of the Synergy files are passed to the user-defined function, which

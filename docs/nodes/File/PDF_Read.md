@@ -1,31 +1,31 @@
 ---
-sidebar_label: AVI_Read_Multi
-title: AVI_Read_Multi
+sidebar_label: PDF_Read
+title: PDF_Read
 displayed_sidebar: nodeSidebar
 ---
 
 ### Node Description
-Reads contents of multiple avi files into data lake
+Reads contents of a pdf file into data lake
 
-The contents of the avi files are passed to the user-defined function, which
+The contents of pdf file are passed to the user-defined function, which
 return one or more tables for storage in Ganymede data lake.
 
 
 ### Node Attributes
-- **input_multi_avi**
-  - File extension on avi file used for specifying valid file extensions
+- **input_file_pdf**
+  - File extension on pdf file used for specifying valid file extensions
 - **output_table_results**
-  - Table to display on Table Head in Flow Editor
+  - Table to display on Table Head referencing table output from node in Flow Editor
 - **output_table_blob_metadata**
   - Table to display on Table Head referencing non-tabular data output from node in Flow Editor
 ## User-Defined Python
-Processes avi file(s) (passed to function as BytesIO file-like objects) into blobs and
+Processes pdf file(s) (passed to function as BytesIO file-like objects) into blobs and
 data tables stored in the data lake
 
 
 ### Parameters
-- **avi_file** : `Dict[str, BytesIO]`
-    - avi files, indexed by file name
+- **pdf_file** : `Dict[str, BytesIO]`
+    - pdf files, indexed by file name
 - **ganymede_context** : `GanymedeContext`
     - Ganymede context variable, which stores flow run metadata
 
@@ -45,3 +45,7 @@ If a DataFrame is returned, the table name corresponds to the **results** parame
 If a dict of dataframes is returned, the keys of the dict are used as table names
 for the corresponding DataFrames to store.  The table with **results** as its key
 is displayed on the Flow Editor.
+
+If a tuple is returned, the first element is a table or dict of tables, and the second
+element is a dict of blobs. The blob filename will be referenced in the blob_metadata table
+on the Flow Editor.

@@ -4,7 +4,7 @@ title: Excel_Write
 displayed_sidebar: nodeSidebar
 ---
 
-### Node Operator
+### Node Description
 Writes a table or set of tables as an Excel spreadsheet.
 
 Retrieves one or more tables from Ganymede data lake, processes via user-defined function,

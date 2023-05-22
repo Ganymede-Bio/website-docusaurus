@@ -4,7 +4,7 @@ title: Instron_Tensile_Read
 displayed_sidebar: nodeSidebar
 ---
 
-### Node Operator
+### Node Description
 Reads contents of a is_tens file into data lake
 
 The contents of is_tens file are passed to the user-defined function, which

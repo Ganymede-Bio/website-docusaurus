@@ -4,7 +4,7 @@ title: Blob_Read_Multi
 displayed_sidebar: nodeSidebar
 ---
 
-### Node Operator
+### Node Description
 Reads contents of multiple blob files into data lake
 
 The contents of the blob files are passed to the user-defined function, which

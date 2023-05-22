@@ -4,7 +4,7 @@ title: AirtableImport
 displayed_sidebar: nodeSidebar
 ---
 
-### Node Operator
+### Node Description
 Retrieves Airtable table and uploads data to Ganymede data lake.
 
 

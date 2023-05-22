@@ -4,7 +4,7 @@ title: S3_Read
 displayed_sidebar: nodeSidebar
 ---
 
-### Node Operator
+### Node Description
 Sync S3 bucket -> Ganymede data lake bucket
 
 

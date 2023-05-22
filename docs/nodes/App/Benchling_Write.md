@@ -4,7 +4,7 @@ title: Benchling_Write
 displayed_sidebar: nodeSidebar
 ---
 
-### Node Operator
+### Node Description
 Writes to Benchling via API
 
 Pulls table from data lake based on SQL query provided, applies user-defined logic,
@@ -28,7 +28,7 @@ Processes input DataFrame for upload to Benchling
 
 
 ### Parameters
-- **df_all** : `pd.DataFrame`
+- **df** : `pd.DataFrame`
     - Tabular result of user-defined SQL query
 - **benchling_context** : `BenchlingContext`
     - Benchling context variable, which stores Benchling connection information

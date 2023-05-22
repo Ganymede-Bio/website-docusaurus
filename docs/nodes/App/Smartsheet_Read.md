@@ -4,7 +4,7 @@ title: Smartsheet_Read
 displayed_sidebar: nodeSidebar
 ---
 
-### Node Operator
+### Node Description
 Reads Smartsheet sheet into Ganymede
 
 Retrieves sheet from Smartsheet, which is processed by user-defined function.

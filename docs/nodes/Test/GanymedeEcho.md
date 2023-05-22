@@ -4,7 +4,7 @@ title: GanymedeEcho
 displayed_sidebar: nodeSidebar
 ---
 
-### Node Operator
+### Node Description
 Function used for testing; echos input to logs
 
 
