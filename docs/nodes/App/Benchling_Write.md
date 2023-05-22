@@ -8,8 +8,8 @@ displayed_sidebar: nodeSidebar
 Writes to Benchling via API
 
 Pulls table from data lake based on SQL query provided, applies user-defined logic,
-and uploads processed result to Benchling.  This operator is used in conjunction with
-the BenchlingTag operator; this operator writes to the location specified by the Benchling
+and uploads processed result to Benchling.  This node is used in conjunction with
+the BenchlingTag node; this node writes to the location specified by the Benchling
 run tag.
 
 
