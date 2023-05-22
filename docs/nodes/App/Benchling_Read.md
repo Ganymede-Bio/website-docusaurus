@@ -10,7 +10,7 @@ Reads Benchling data specified by Benchling run tag.
 Passes Benchling run tag to user-defined function and uploads tabular output
 from user-defined function to Ganymede data lake.
 
-This operator is used in conjunction with BenchlingTag; adding BenchlingTag to
+This node is used in conjunction with BenchlingTag; adding BenchlingTag to
 a _flow_ enables a Benchling run tag to be specified in the _flow_ input box.
 The user-defined function uses the Benchling ID associated with the run tag
 to retrieve data and process data into table(s), which are uploaded to the Ganymede
