@@ -31,7 +31,7 @@ module.exports = {
         type: 'category',
         label: 'Editing Flows',
         collapsed: true,
-        items: ['FlowEditor', 'NodeEditor', 'FlowMetadata'],
+        items: ['FlowEditor', 'NodeEditor'],
       },
       {
         type: 'category',
@@ -76,6 +76,11 @@ module.exports = {
       type: 'doc',
       id: 'sdk/GanymedeSDKOverview',
       label: 'Overview'
+    },
+    {
+      type: 'doc',
+      id: 'FlowMetadata',
+      label: 'Flow Context & Metadata'
     },
     {
       type: 'category',

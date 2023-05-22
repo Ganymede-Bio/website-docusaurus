@@ -26,11 +26,12 @@ There are four levels of access, and are set at the tenant level.  These access 
     Can execute _flows_, but cannot modify or create new _flows_.
 
 **Reader**:
-    Can execute _flows_ and observe environment settings, but not permitted to execute or alter _flows_.
+    Can observe _flows_ and observe environment settings, but not permitted to execute or alter _flows_.
 
 ### Environment Secrets
 
-The secrets panel enables administrators to configure secrets.  These secrets are specific to the nodes used; the example shown in the image below shows an environment with a AWS S3 Role ARN specified, enabling connectivity between Ganymede cloud and AWS S3 Storage.
+The secrets panel enables administrators to configure secrets.  These secrets are specific to the nodes used within a given environment (i.e. - development or production environment).
+The example shown in the image below shows an environment with a AWS S3 Role ARN specified, enabling connectivity between Ganymede cloud and AWS S3 Storage.
 
 <img alt="Admin - Secrets Panel" src="https://ganymede-bio.mo.cloudinary.net/apiServer/SecretsPanel_20230405.png" />
 
