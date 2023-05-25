@@ -15,61 +15,63 @@ A useful way to interact with _nodes_ is to consider how _nodes_ interact with o
 
 ### Available Nodes with Key Characteristics
 
-| Category   | Name                       | Input Types                                                           | Output Types         | Is Editable   |
-|------------|----------------------------|-----------------------------------------------------------------------|----------------------|---------------|
-| Analysis   | Great_Expectations         | Table                                                                 | Table                | True          |
-| Analysis   | Process_Blob_to_Blob       | FileAny and Optional[Table or List[Table]]                            | Dict[FileAny]        | True          |
-| Analysis   | Process_Blob_to_Table      | FileAny and Optional[Table or List[Table]]                            | Table or Dict[Table] | True          |
-| Analysis   | Table_to_Blob              | Table or List[Table]                                                  | Dict[FileAny]        | True          |
-| Analysis   | Transform_SQL              | Table                                                                 | Table                | True          |
-| Analysis   | Transform_py               | Table or List[Table]                                                  | Table or Dict[Table] | True          |
-| App        | AirtableExport             | Table                                                                 | API                  | True          |
-| App        | AirtableImport             | API                                                                   | Table                | False         |
-| App        | Azure_Query                | API                                                                   | Table or Dict[Table] | True          |
-| App        | Azure_Read                 | API                                                                   | FileAny              | False         |
-| App        | Azure_Write                | FileAny                                                               | API                  | False         |
-| App        | Benchling_Event            | App                                                                   | FileAny              | True          |
-| App        | Benchling_Read             | API                                                                   | Table                | True          |
-| App        | Benchling_Read_Object      | API                                                                   | Table                | True          |
-| App        | Benchling_Write            | Table                                                                 | API                  | True          |
-| App        | Benchling_Write_Object     | Optional[FileAny or List[FileAny]] and Optional[Table or List[Table]] | API                  | True          |
-| App        | Coda_Write                 | Table                                                                 | API                  | True          |
-| App        | ELabNext_Write             | Table                                                                 | API                  | True          |
-| App        | S3_Event                   | App                                                                   |                      | False         |
-| App        | S3_Read                    | API                                                                   | FileAny              | False         |
-| App        | S3_Write                   | FileAny                                                               | API                  | False         |
-| App        | SciNote_Write              | Table                                                                 | API                  | True          |
-| App        | Smartsheet_Read            | API                                                                   | Table                | True          |
-| App        | Snowflake_Write            | Table                                                                 | API                  | False         |
-| File       | AVI_Read                   | FileAVI                                                               | Table or Dict[Table] | True          |
-| File       | AVI_Read_Multi             | Set[FileAVI]                                                          | Table or Dict[Table] | True          |
-| File       | Blob_Read                  | FileAny                                                               | FileAny              | True          |
-| File       | Blob_Read_Multi            | Set[FileAny]                                                          | Dict[FileAny]        | True          |
-| File       | CSV_Read                   | FileCSV                                                               | Table or Dict[Table] | True          |
-| File       | CSV_Read_Multi             | Set[FileCSV]                                                          | Table or Dict[Table] | True          |
-| File       | CSV_Write                  | Table or List[Table]                                                  | FileCSV              | True          |
-| File       | Excel_Read                 | FileExcel                                                             | Table or Dict[Table] | True          |
-| File       | Excel_Read_Multi           | Set[FileExcel]                                                        | Table or Dict[Table] | True          |
-| File       | Excel_Write                | Table or List[Table]                                                  | FileExcel            | True          |
-| File       | FCS_Extract_Load           | FileFCS                                                               | Dict[Table]          | True          |
-| File       | FCS_Extract_Load_Multi     | Set[FileFCS]                                                          | Dict[Table]          | True          |
-| File       | HDF5_Read                  | FileHDF5                                                              | FileAny              | True          |
-| File       | Image_Read                 | FileImage                                                             | Dict[FileAny]        | True          |
-| File       | Image_Write                | Table or List[Table]                                                  | Dict[FileAny]        | True          |
-| File       | Powerpoint_Write           | Table or List[Table]                                                  | Dict[FileAny]        | True          |
-| File       | XML_Read                   | FileXML                                                               | Table                | True          |
-| File       | Zip_Read                   | FileZip                                                               | Dict[FileAny]        | True          |
-| Instrument | BMG_Clariostar_CSV         | FileCSV                                                               | Dict[Table]          | True          |
-| Instrument | Instron_Tensile_Read       | FileIsTens                                                            | Dict[Table]          | True          |
-| Instrument | Profilometer_Read          | FileHDF5                                                              | FileHDF5             | True          |
-| Instrument | Read_Trios_Rheometer_Excel | FileExcel                                                             | Table                | True          |
-| Instrument | SpectraMax_XML             | FileXML                                                               | Table                | True          |
-| Instrument | Synergy_Read               | FileTxt                                                               | Dict[Table]          | True          |
-| Instrument | Synergy_Read_Multi         | Set[FileTxt]                                                          | Dict[Table]          | True          |
-| Tag        | Benchling_Tag              | TagBenchling                                                          | string               | False         |
-| Tag        | Input_Param                | string                                                                | string               | False         |
-| Test       | GanymedeEcho               |                                                                       |                      | False         |
-| Test       | Placeholder                |                                                                       |                      | False         |
+| Category   | Name                   | Input Types                                                           | Output Types                                | Is Editable   |
+|------------|------------------------|-----------------------------------------------------------------------|---------------------------------------------|---------------|
+| Analysis   | Process_Blob_to_Blob   | FileAny and Optional[Table or List[Table]]                            | Dict[FileAny]                               | True          |
+| Analysis   | Process_Blob_to_Table  | FileAny and Optional[Table or List[Table]]                            | Table or Dict[Table]                        | True          |
+| Analysis   | Python                 | Table(s) and/or File(s)                                               | Table(s) and/or File(s)                     | True          |
+| Analysis   | Table_to_Blob          | Table or List[Table]                                                  | Dict[FileAny]                               | True          |
+| Analysis   | Transform_SQL          | Table                                                                 | Table                                       | True          |
+| Analysis   | Transform_py           | Table or List[Table]                                                  | Table or Dict[Table]                        | True          |
+| App        | AirtableExport         | Table                                                                 | API                                         | True          |
+| App        | AirtableImport         | API                                                                   | Table                                       | False         |
+| App        | Azure_Query            | API                                                                   | Table or Dict[Table]                        | True          |
+| App        | Azure_Read             | API                                                                   | FileAny                                     | False         |
+| App        | Azure_Read_Multi       | API                                                                   | FileAny                                     | False         |
+| App        | Azure_Write            | FileAny                                                               | API                                         | False         |
+| App        | Benchling_Event        | App                                                                   | FileAny                                     | True          |
+| App        | Benchling_Read         | API                                                                   | Table                                       | True          |
+| App        | Benchling_Read_Object  | API                                                                   | Table                                       | True          |
+| App        | Benchling_Write        | Table                                                                 | API                                         | True          |
+| App        | Benchling_Write_Object | Optional[FileAny or List[FileAny]] and Optional[Table or List[Table]] | API                                         | True          |
+| App        | Coda_Write             | Table                                                                 | API                                         | True          |
+| App        | ELabNext_Write         | Table                                                                 | API                                         | True          |
+| App        | S3_Event               | App                                                                   | FileAny                                     | True          |
+| App        | S3_Read                | API                                                                   | FileAny                                     | False         |
+| App        | S3_Write               | FileAny                                                               | API                                         | False         |
+| App        | SciNote_Write          | Table                                                                 | API                                         | True          |
+| App        | Smartsheet_Read        | API                                                                   | Table                                       | True          |
+| App        | Snowflake_Write        | Table                                                                 | API                                         | False         |
+| File       | AVI_Read               | FileAVI                                                               | Table or Dict[Table]                        | True          |
+| File       | AVI_Read_Multi         | Set[FileAVI]                                                          | Table or Dict[Table]                        | True          |
+| File       | Agilent_HPLC_Read      | File                                                                  | Dict[Table]                                 | True          |
+| File       | Blob_Read              | FileAny                                                               | FileAny                                     | True          |
+| File       | Blob_Read_Multi        | Set[FileAny]                                                          | Dict[FileAny]                               | True          |
+| File       | CSV_Read               | FileCSV                                                               | Table or Dict[Table]                        | True          |
+| File       | CSV_Read_Multi         | Set[FileCSV]                                                          | Table or Dict[Table]                        | True          |
+| File       | CSV_Write              | Table or List[Table]                                                  | FileCSV                                     | True          |
+| File       | Excel_Read             | FileExcel                                                             | Table or Dict[Table]                        | True          |
+| File       | Excel_Read_Multi       | Set[FileExcel]                                                        | Table or Dict[Table]                        | True          |
+| File       | Excel_Write            | Table or List[Table]                                                  | FileExcel                                   | True          |
+| File       | FCS_Extract_Load       | FileFCS                                                               | Dict[Table]                                 | True          |
+| File       | FCS_Extract_Load_Multi | Set[FileFCS]                                                          | Dict[Table]                                 | True          |
+| File       | HDF5_Read              | FileHDF5                                                              | FileAny                                     | True          |
+| File       | Image_Read             | FileImage                                                             | Dict[FileAny]                               | True          |
+| File       | Image_Read_Multi       | List[FileImage]                                                       | Dict[FileAny]                               | True          |
+| File       | Image_Write            | Table or List[Table]                                                  | Dict[FileAny]                               | True          |
+| File       | PDF_Read               | FilePDF                                                               | Table or Dict[Table], Optional[Dict[bytes]] | True          |
+| File       | PDF_Read_Multi         | Set[FilePDF]                                                          | Table or Dict[Table], Optional[Dict[bytes]] | True          |
+| File       | Powerpoint_Write       | Table or List[Table]                                                  | Dict[FileAny]                               | True          |
+| File       | XML_Read               | FileXML                                                               | Table                                       | True          |
+| File       | Zip_Read               | FileZip                                                               | Dict[FileAny]                               | True          |
+| Instrument | Instron_Tensile_Read   | FileIsTens                                                            | Dict[Table]                                 | True          |
+| Instrument | Profilometer_Read      | FileHDF5                                                              | FileHDF5                                    | True          |
+| Instrument | Synergy_Read           | FileTxt                                                               | Dict[Table]                                 | True          |
+| Instrument | Synergy_Read_Multi     | Set[FileTxt]                                                          | Dict[Table]                                 | True          |
+| Tag        | Benchling_Tag          | TagBenchling                                                          | string                                      | False         |
+| Tag        | Input_Param            | string                                                                | string                                      | False         |
+| Test       | GanymedeEcho           |                                                                       |                                             | False         |
+| Test       | Placeholder            |                                                                       |                                             | False         |
 
 #### Node Categories
 
@@ -116,61 +118,62 @@ The _execute_ function may call classes and functions found within the User-Defi
 
 - **Testing Section**: The cells in this section can be used for testing modifications to the SQL query and user-defined python function.  This enables rapid iteration on user-defined code; after necessary edits are made, changes can be saved in by running the **Save Pipeline Code** cell.
 
-
 ## List of Available Nodes
 
-| Category   | Name                       | Brief Description                                                  |
-|------------|----------------------------|--------------------------------------------------------------------|
-| Analysis   | Great_Expectations         | Grant access to Great Expectations validator                       |
-| Analysis   | Process_Blob_to_Blob       | Process blob data; write results to data store                     |
-| Analysis   | Process_Blob_to_Table      | Process data; write tabular data results to data lake              |
-| Analysis   | Table_to_Blob              | Process tabular data; write data results to data lake              |
-| Analysis   | Transform_SQL              | SQL analysis Function                                              |
-| Analysis   | Transform_py               | Manipulate data with python                                        |
-| App        | AirtableExport             | Export data from Ganymede data lake to Airtable                    |
-| App        | AirtableImport             | Import data from Airtable into Ganymede data lake                  |
-| App        | Azure_Query                | Query data from Azure SQL Server                                   |
-| App        | Azure_Read                 | Read data from Azure Blob Storage                                  |
-| App        | Azure_Write                | Write data to Azure Blob storage                                   |
-| App        | Benchling_Event            | Capture events from Benchling for triggering flows                 |
-| App        | Benchling_Read             | Read Benchling data into data lake using run tag                   |
-| App        | Benchling_Read_Object      | Read Benchling data into data lake using object ID                 |
-| App        | Benchling_Write            | Write to Benchling                                                 |
-| App        | Benchling_Write_Object     | Write object to Benchling                                          |
-| App        | Coda_Write                 | Write Coda tables                                                  |
-| App        | ELabNext_Write             | Create and write eLabNext entry                                    |
-| App        | S3_Event                   | Capture events from AWS S3 for triggering flows                    |
-| App        | S3_Read                    | Ingest data into Ganymede data storage from AWS S3 storage         |
-| App        | S3_Write                   | Write data to an S3 bucket                                         |
-| App        | SciNote_Write              | Create and write SciNote entry                                     |
-| App        | Smartsheet_Read            | Read sheet from Smartsheet                                         |
-| App        | Snowflake_Write            | Sync tables in Ganymede data lake to Snowflake                     |
-| File       | AVI_Read                   | Read in contents of an AVI file to a table                         |
-| File       | AVI_Read_Multi             | Read in contents of multiple avi files to a table                  |
-| File       | Blob_Read                  | Read blob data into Ganymede data storage                          |
-| File       | Blob_Read_Multi            | Read blob data into Ganymede data storage                          |
-| File       | CSV_Read                   | Read in contents of a CSV file                                     |
-| File       | CSV_Read_Multi             | Read in contents of multiple CSV files                             |
-| File       | CSV_Write                  | Write table to CSV file                                            |
-| File       | Excel_Read                 | Read Excel spreadsheet                                             |
-| File       | Excel_Read_Multi           | Read Excel spreadsheets                                            |
-| File       | Excel_Write                | Write Excel spreadsheet                                            |
-| File       | FCS_Extract_Load           | Load FCS file to data lake                                         |
-| File       | FCS_Extract_Load_Multi     | Load multiple FCS files to data lake                               |
-| File       | HDF5_Read                  | Read HDF5 data                                                     |
-| File       | Image_Read                 | Process image data; store processed images to data store           |
-| File       | Image_Write                | Process tabular data; write an image to data lake                  |
-| File       | Powerpoint_Write           | Process tabular data; write a powerpoint presentation to data lake |
-| File       | XML_Read                   | Read XML file into data lake                                       |
-| File       | Zip_Read                   | Extract Zip file                                                   |
-| Instrument | BMG_Clariostar_CSV         | BMG Clariostar Function                                            |
-| Instrument | Instron_Tensile_Read       | Load .is_tens file to data lake                                    |
-| Instrument | Profilometer_Read          | Read Mx Profiler data file                                         |
-| Instrument | Read_Trios_Rheometer_Excel | Read Trios runs from Excel                                         |
-| Instrument | SpectraMax_XML             | Read in XML output from Molecular Devices SpectraMax               |
-| Instrument | Synergy_Read               | Load Synergy text file to data lake                                |
-| Instrument | Synergy_Read_Multi         | Load multiple Synergy texts file to data lake                      |
-| Tag        | Benchling_Tag              | Read benchling tag                                                 |
-| Tag        | Input_Param                | Input parameter into Flow                                          |
-| Test       | GanymedeEcho               | Echo command for Ganymede                                          |
-| Test       | Placeholder                | Function for planning Flow                                         |
+| Category   | Name                   | Brief Description                                                            |
+|------------|------------------------|------------------------------------------------------------------------------|
+| Analysis   | Process_Blob_to_Blob   | Process blob data; write results to data store                               |
+| Analysis   | Process_Blob_to_Table  | Process data; write tabular data results to data lake                        |
+| Analysis   | Python                 | Process data with python                                                     |
+| Analysis   | Table_to_Blob          | Process tabular data; write data results to data lake                        |
+| Analysis   | Transform_SQL          | SQL analysis Function                                                        |
+| Analysis   | Transform_py           | Manipulate data with python                                                  |
+| App        | AirtableExport         | Export data from Ganymede data lake to Airtable                              |
+| App        | AirtableImport         | Import data from Airtable into Ganymede data lake                            |
+| App        | Azure_Query            | Query data from Azure SQL Server                                             |
+| App        | Azure_Read             | Read data from Azure Blob Storage                                            |
+| App        | Azure_Read_Multi       | Read all data from Azure Blob Storage                                        |
+| App        | Azure_Write            | Write data to Azure Blob storage                                             |
+| App        | Benchling_Event        | Capture events from Benchling for triggering flows                           |
+| App        | Benchling_Read         | Read Benchling data into data lake using run tag                             |
+| App        | Benchling_Read_Object  | Read Benchling data into data lake using object ID                           |
+| App        | Benchling_Write        | Write to Benchling                                                           |
+| App        | Benchling_Write_Object | Write object to Benchling                                                    |
+| App        | Coda_Write             | Write Coda tables                                                            |
+| App        | ELabNext_Write         | Create and write eLabNext entry                                              |
+| App        | S3_Event               | Capture events from AWS S3 for triggering flows                              |
+| App        | S3_Read                | Ingest data into Ganymede data storage from AWS S3 storage                   |
+| App        | S3_Write               | Write data to an S3 bucket                                                   |
+| App        | SciNote_Write          | Create and write SciNote entry                                               |
+| App        | Smartsheet_Read        | Read sheet from Smartsheet                                                   |
+| App        | Snowflake_Write        | Sync tables in Ganymede data lake to Snowflake                               |
+| File       | AVI_Read               | Read in contents of an AVI file to a table                                   |
+| File       | AVI_Read_Multi         | Read in contents of multiple avi files to a table                            |
+| File       | Agilent_HPLC_Read      | Read an Agilent HPLC file of type .uv, .ms, .ch, or .bin                     |
+| File       | Blob_Read              | Read blob data into Ganymede data storage                                    |
+| File       | Blob_Read_Multi        | Read blob data into Ganymede data storage                                    |
+| File       | CSV_Read               | Read in contents of a CSV file                                               |
+| File       | CSV_Read_Multi         | Read in contents of multiple CSV files                                       |
+| File       | CSV_Write              | Write table to CSV file                                                      |
+| File       | Excel_Read             | Read Excel spreadsheet                                                       |
+| File       | Excel_Read_Multi       | Read Excel spreadsheets                                                      |
+| File       | Excel_Write            | Write Excel spreadsheet                                                      |
+| File       | FCS_Extract_Load       | Load FCS file to data lake                                                   |
+| File       | FCS_Extract_Load_Multi | Load multiple FCS files to data lake                                         |
+| File       | HDF5_Read              | Read HDF5 data                                                               |
+| File       | Image_Read             | Process image data; store processed images to data store                     |
+| File       | Image_Read_Multi       | Process image data for multiple images; store processed images to data store |
+| File       | Image_Write            | Process tabular data; write an image to data lake                            |
+| File       | PDF_Read               | Read in contents of an PDF file to a table                                   |
+| File       | PDF_Read_Multi         | Read in contents of multiple pdf files to a table                            |
+| File       | Powerpoint_Write       | Process tabular data; write a powerpoint presentation to data lake           |
+| File       | XML_Read               | Read XML file into data lake                                                 |
+| File       | Zip_Read               | Extract Zip file                                                             |
+| Instrument | Instron_Tensile_Read   | Load .is_tens file to data lake                                              |
+| Instrument | Profilometer_Read      | Read Mx Profiler data file                                                   |
+| Instrument | Synergy_Read           | Load Synergy text file to data lake                                          |
+| Instrument | Synergy_Read_Multi     | Load multiple Synergy texts file to data lake                                |
+| Tag        | Benchling_Tag          | Read benchling tag                                                           |
+| Tag        | Input_Param            | Input parameter into Flow                                                    |
+| Test       | GanymedeEcho           | Echo command for Ganymede                                                    |
+| Test       | Placeholder            | Function for planning Flow                                                   |
