@@ -1,0 +1,120 @@
+---
+id: DashboardQuickstartGuide
+title: Dashboard Quickstart Guide
+displayed_sidebar: webUiSidebar
+---
+
+import { AreaChartOutlined, PlusOutlined } from '@ant-design/icons';
+import DashboardFilterIcon from '@site/static/img/dashboard_filter_icon.svg';
+
+This guide walks you through creating a _dashboard_ to visualize plate reader data ingested into Ganymede. This dashboard will leverage the same data ingested and processed in the original [Quickstart guide](https://docs.ganymede.bio/Quickstart). By the time you're finished, you'll have converted raw data to a dashboard that looks like this:
+
+<div class="text--center">
+<img width="800" alt="Absorbance Analytics Dashboard" src="https://ganymede-bio.mo.cloudinary.net/dashboard/absorbance_analytics_dashboard.png"/>
+</div>
+
+To do this we'll proceed through the following steps:
+- Sign into Ganymede
+- Set up virtual datasets
+- Build charts from those virtual datasets
+- Add those charts to a dashboard
+
+### Step 1: Sign into Ganymede
+
+The <div className="button gray_button"><UserOutlined /> Sign In</div> button should be available once authentication is configured for your tenant, which is generally going to be a web address accessible via any web browser with the URL [https://<your_tenant\>.ganymede.bio](https://<your_tenant>.ganymede.bio).
+
+<div class="text--center">
+<img width="400" alt="Ganymede sign-in" src="https://ganymede-bio.mo.cloudinary.net/apiServer/GanymedeSignIn_20230110.png"/>
+</div>
+
+### Step 2. Create the necessary virtual datasets for this visualization
+
+In order to create our dashboard we'll need two datasets, a **Quickstart_Absorbance_Change_Absolute_Differences** dataset and a **Quickstart_Absorbance_Change_Run_Parameters** dataset. To create a dataset, navigate to dashboards, hover over **Data**, and click **Dataset**.
+
+Hover over SQL Lab in the top menu bar and click on SQL Editor.  This should bring you to a SQL editor that lets you preview tables, and results of SQL queries:
+
+<img alt="Dashboard - SQL Editor" src="https://ganymede-bio.mo.cloudinary.net/dashboard/Navigate_to_SQL_Editor.png" />
+
+Fill in the SQL Editor with the query below, select an appropriate number of rows to observe, and click <div className="button darkblue_button">**RUN**</div> to execute SQL.
+
+```
+SELECT field, run_diff, left(field, 1) as row, cast(right(field, length(field)-1) as int64) as column
+FROM Quickstart_Absorbance_Change_Transform_py_analysis 
+UNPIVOT (value for run IN (run1, run2))
+WHERE field not in ('Time [s]', 'Temp. [°C]', 'Cycle Nr.')
+```
+<img alt="Dashboard - SQL Editor Query" src="https://ganymede-bio.mo.cloudinary.net/dashboard/SQL_Query_Quickstart_Absorbance_Change_Absolute_Differences.png" />
+
+Save a virtual dataset by clicking on the **Create Chart** button, which should bring up the following modal:
+
+<img alt="Dashboard - Add Virtual Dataset" src="https://ganymede-bio.mo.cloudinary.net/dashboard/Add_Virtual_Dataset20230415.png" />
+
+Make sure **Save as new** is checked and give your dataset the name "Quickstart_Absorbance_Change_Absolute_Differences".
+
+Navigate back to the SQL Editor and repeat this process with the below query, saving it as "Quickstart_Absorbance_Change_Run_Parameters". Now you've created the datasets you'll need to build your dashboard.
+
+
+## Step 3. Creating charts to visualize data
+
+Charts can be created from physical or virtual datasets.  
+
+To create a chart:
+
+- Hover over Data in the top menu bar and click on Datasets.  Then, click on one of the listed datasets, which should bring up the following pane:
+
+<img alt="Dashboard - Create Chart" src="https://ganymede-bio.mo.cloudinary.net/dashboard/Create_Chart20230415.png" />
+
+The DATA tab has controls for specifying chart type and pivoting/aggregating data from the selected table.  The customize tab has functionality for annotating axis labels, specifying axis format, and chart title.
+
+### Saving charts to dashboards
+
+- Once the created chart looks satisfactory, add a chart to a dashboard by clicking on **SAVE** in the upper-right hand corner of the screen to bring up this modal:
+
+<img alt="Dashboard - Save Chart" src="https://ganymede-bio.mo.cloudinary.net/dashboard/Save_Chart20230415.png" />
+
+### Calculated columns
+
+Calculated columns can be added to the dataset, which can be handy for correcting data for visualization.  Some example use cases are:
+
+- Taking the floor or ceiling of a variable to truncate data outside of a desired range
+- Performing string manipulations on a field to categorize or subset data
+- Extracting values from a string for aggregation
+
+To create a calculated column:
+
+- Hover over the three dots to the right of the dataset on the Chart Creation page and click Edit Dataset.
+
+<img alt="Dashboard - Edit Dataset" src="https://ganymede-bio.mo.cloudinary.net/dashboard/Edit_Dataset20230415.png" />
+
+- Select the Calculated Columns tab to add new columns to the dataset.  Specify the field definition using a SQL expression.
+
+:::tip Calculated Column flexibility
+
+Calculated columns are more flexible than what is found in other BI tools offering similar functionality.  Beyond aggregation, these fields 
+can be filtered on, sorted by, and/or used to categorize data.
+
+:::
+
+<img alt="Dashboard - Calculated Column" src="https://ganymede-bio.mo.cloudinary.net/dashboard/Calculated_Column20230415.png" />
+
+:::info Permissions for editing datasets
+
+Dashboards can only be edited by their owner.  One method for multiple users to avoid conflicting dataset modifications would be for
+users of shared datasets to create virtual datasets for their own use.
+
+:::
+
+## Editing dashboards
+
+To edit a dashboard, select **Dashboards** from the top menu bar and navigate to the desired dashboard.  Clicking on <div className="button purple_button_dashboard">**EDIT DASHBOARD**</div> allows users
+to resize and rearrange the layout of different charts.
+
+Data backing the graphs can be filtered by clicking on the <DashboardFilterIcon /> icon on the left side of the dashboard, selecting <div className="button superset_button"><PlusOutlined /> Add filters and dividers</div> and selecting the SCOPING panel.
+
+:::tip Tables referenced by dashboard filter
+
+The SCOPING tab on the filters modal allows users to specify which graphs the filter applies to.
+Note that if 2 charts are backed by different datasets which share a field name, a single filter can 
+be used to manipulate both tables simultaneously. 
+
+:::
