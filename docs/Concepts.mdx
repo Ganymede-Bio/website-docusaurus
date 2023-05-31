@@ -5,49 +5,26 @@ sidebar_label: Ganymede Concepts
 displayed_sidebar: webUiSidebar
 ---
 
-### How does Ganymede work?
+![Ganymede example flow](https://ganymede-bio.mo.cloudinary.net/apiServer/FlowImageExpanded_20230531.png)
 
-![Ganymede example flow](https://ganymede-bio.mo.cloudinary.net/apiServer/FlowImage_Annotated_20230405.png)
+Developers author **flows**, which are functions comprised of user-editable **nodes**.
 
-Developers author _flows_, which are programs represented as directed graphs comprised of user-editable _nodes_.  By assembling and editing SQL/Python within _nodes_, users can ingest data, communicate with third-party APIs, and read/write data to spreadsheets and documents.  
+- **Flow**: a set of nodes that processes data; the diagram above shows a flow named _ganymede_documentation_.  Flows are executed top-to-bottom, with edges describing execution dependencies between different nodes.  
+- [**Node**](./nodes/Overview.md): core unit of processing in Ganymede which performs I/O between different systems and the user-defined components of a node.  The diagram above contains four nodes: Read_CSV, LIMS_Read, Associate_Data, Excel_Write.
+- **Node Attribute**: parameters passed into a node.  The Read_CSV node above has two node attributes: `csv` and `results`.
+- **Table Head**: a preview of a table output from the node; in the flow above, example_results is the table head for the Read_CSV node.
 
-### Inside a node
+Each node consists of an Operator and, if customizable, user-defined SQL and/or user-defined Python to enable customization as shown in the conceptual diagram below:
 
 <div class="text--center">
-<img width="400" alt="Example node layout" src="https://ganymede-bio.mo.cloudinary.net/apiServer/Operator_Conceptual_Layout_20230108.png" />
+  <img width="400" alt="Example node layout" src="https://ganymede-bio.mo.cloudinary.net/apiServer/Operator_Conceptual_Layout_20230108.png" />
 </div>
 
-The core unit that performs processing in Ganymede is the [_node_](./nodes/Overview.md).  The _node_ type determines the code within the node, template SQL code, and template Python code.
-
-- **Node**: performs I/O between different systems and the user-defined components of a _node_.  Depending on the _node_, data may be retrieved from or sent to 
+Depending on the node, data may be retrieved from or sent to 
   - a SQL database
   - cloud storage 
   - third-party API 
   - flat files
+
+When flows are saved, whether from the flow editor or from a node specific to a notebook, associated code changes are stored in a git repository and deployed to a cloud-native workflow orchestration platform for executing code.  
   
-In the layout shown above, the execute function node retrieves input data in the `userSQL()` call based on the user-defined SQL query and uploads processed data to the Ganymede data lake in the `storeDataFrame(res)` call.  
-
-:::note
-
-Node attributes specified on _nodes_ on the Flow Editor page are interpreted by the node logic within a _node_.
-
-:::
-
-- **Node SQL code**: User-modifiable SQL query that specifies the data to deliver as input to the user-defined _function_ within a _node_.  This component exists for _nodes_ that take tabular data as input.
-- **Node Python code**: User-modifiable Python code for the processing performed on data.  Nodes inherently start with template code to provide a starting point for users; for example, the template code for the CSV read _node_) reads in a CSV file into a Pandas DataFrame.
-
-### Behind the scenes
-
-As _flows_ and _nodes_ are saved, both the _flow_ structure and modified code are saved to a Git repository.  Updated code is uploaded to a cloud-based workflow orchestration platform, which provides the environment to execute _flows_.  Data inputs and outputs are timestamped upon each run and are accessible via the Data Explorer within Ganymede.
-
-The cloud infrastructure supporting data storage and workflow orchestration are unique per tenant instance of Ganymede.
-
-:::info running in parallel
-
-By separating code into distinct _nodes_, different _nodes_ can be run in parallel.  _Edges_ between _nodes_ specify the order by which different _nodes_ are run.
-
-:::
-
-
-<br />
-Features of Ganymede that interact with users' file system are not compatible with Mozilla Firefox or Internet Explorer.
