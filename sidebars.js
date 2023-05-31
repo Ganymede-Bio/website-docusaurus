@@ -18,6 +18,11 @@ module.exports = {
       label: 'Quickstart',
     },
     {
+      type: 'doc',
+      id: 'DashboardQuickstartGuide',
+      label: 'Dashboard Quickstart Guide',
+    },
+    {
       type: 'category',
       label: 'Processing Data',
       collapsed: false,
