@@ -14,8 +14,8 @@ module.exports = {
     },
     {
       type: 'doc',
-      id: 'Quickstart',
-      label: 'Quickstart',
+      id: 'QuickstartBuildFlow',
+      label: 'QuickstartBuildFlow',
     },
     {
       type: 'category',
