@@ -70,7 +70,7 @@ UNPIVOT (value for run IN (run1, run2))
 WHERE field in ('Time [s]', 'Temp. [°C]', 'Cycle Nr.')
 ```
 
-## Step 3. Creating charts from the plate reader tables
+## Step 3. Create run parameters pivot table
 
 Navigate to the Datasets tab in the top bar and search for "Quickstart" to find the virtual datasets you created.
 
@@ -87,12 +87,46 @@ Click on the <u>View All Charts</u> text in the middle of the screen and select 
 <img alt="Dashboard Quickstart run parameters select pivot chart" src="https://ganymede-bio.mo.cloudinary.net/dashboard/Quickstart_RunParametersChart20230531.png" />
 &nbsp;
 
-Assemble the pivot table by dragging the fields in the virtual table into the Query section and typing in Run Parameters as the title.
+Assemble the pivot table by dragging the fields in the virtual table into the Query section.  Name the chart "Run Parameters" as shown below.
 
 <img alt="Dashboard Quickstart run parameters assembled pivot chart" src="https://ganymede-bio.mo.cloudinary.net/dashboard/Quickstart_RunParametersChartAssembled20230531.png" />
 &nbsp;
 
-Click <div className="button purple_button_dashboard"><SaveOutlined /> SAVE</div> to save the chart and add to a new dashboard named "Plate Reader Quickstart."
+Click <div className="button purple_button_dashboard"><SaveOutlined /> SAVE</div> to save the chart and add to a new dashboard named "Absorbance Analytics."
 
 <img alt="Dashboard Quickstart save run parameters" src="https://ganymede-bio.mo.cloudinary.net/dashboard/Quickstart_SaveRunParametersChart20230531.png" />
 &nbsp;
+
+## Step 4. Create plate reader heat map
+
+Navigate to the Datasets tab in the top bar and select the "Quickstart_Absorbance_Change_Absolute_Differences" virtual dataset created earlier.
+
+<img alt="Dashboard Quickstart datasets" src="https://ganymede-bio.mo.cloudinary.net/dashboard/Quickstart_Datasets20230531.png" />
+&nbsp;
+
+Click on <u>View All Charts</u> and select "Heatmap" as the visualization type.
+
+<img alt="Dashboard Quickstart select heat map" src="https://ganymede-bio.mo.cloudinary.net/dashboard/Quickstart_PlateReaderSelectHeatMap20230531.png" />
+&nbsp;
+
+Assemble the heat map as shown below, and name the chart "Plate Absorbance Change."
+
+<img alt="Dashboard Quickstart assembled heat map" src="https://ganymede-bio.mo.cloudinary.net/dashboard/Quickstart_HeatMapAssembly20230531.png" />
+&nbsp;
+
+Click <div className="button purple_button_dashboard"><SaveOutlined /> SAVE</div> to save the chart and add the chart to the "Absorbance Analytics" dashboard created in Step 3.
+
+<img alt="Dashboard Quickstart save run parameters" src="https://ganymede-bio.mo.cloudinary.net/dashboard/Quickstart_SaveRunParametersChart20230531.png" />
+
+## Step 5. Orienting the dashboard
+
+Click on the Dashboards button in the top bar and select the Absorbance Analytics dashboard.
+
+<img alt="Selecting the Absorbance Analytics dashboard" src="https://ganymede-bio.mo.cloudinary.net/dashboard/Quickstart_DashboardsScreen20230531.png" />
+&nbsp;
+
+Arrange the dashboard by clicking on the <div className="button purple_button_dashboard">EDIT DASHBOARD</div> button in the top right hand corner of the screen.  In the edit mode, tables and graphs can be resized and moved to different rows.
+
+<img alt="Arranging the Absorbance Analytics dashboard" src="https://ganymede-bio.mo.cloudinary.net/dashboard/Quickstart_AbsorbanceAnalytics20230531.png" />
+
+When you're satisfied with the arrangement, click SAVE.  You've just built your first dashboard in Ganymede!
