@@ -5,10 +5,10 @@ sidebar_label: Create a Dashboard
 displayed_sidebar: webUiSidebar
 ---
 
-import { AreaChartOutlined, PlusOutlined } from '@ant-design/icons';
+import { AreaChartOutlined, PlusOutlined, DownOutlined, SaveOutlined } from '@ant-design/icons';
 import DashboardFilterIcon from '@site/static/img/dashboard_filter_icon.svg';
 
-This guide walks you through creating a dashboard to visualize plate reader data ingested into Ganymede. This dashboard will leverage the same data ingested and processed in the [Build a Flow guide](./QuickstartBuildFlow). By the time you're finished, you'll have converted raw data to a dashboard that looks like this:
+This guide walks you through creating a dashboard to compare the output data from a plate reader at two different timepoints, which has been ingested into Ganymede.  This dashboard leverages the same data processed in the [Build a Flow guide](./QuickstartBuildFlow). By the time you're finished, you'll have converted raw data to a dashboard that looks like this:
 
 <div class="text--center">
 <img width="800" alt="Absorbance Analytics Dashboard" src="https://ganymede-bio.mo.cloudinary.net/apiServer/AbsorbanceAnalyticsDashboard_20230531.png"/>
@@ -20,7 +20,7 @@ To do this we'll proceed through the following steps:
 - Build charts from those virtual datasets
 - Add those charts to a dashboard
 
-### Step 1: Sign into Ganymede
+## Step 1: Sign into Ganymede
 
 The <div className="button gray_button"><UserOutlined /> Sign In</div> button should be available once authentication is configured for your tenant, which is generally going to be a web address accessible via any web browser with the URL [https://<your_tenant\>.ganymede.bio](https://<your_tenant>.ganymede.bio).
 
@@ -28,95 +28,71 @@ The <div className="button gray_button"><UserOutlined /> Sign In</div> button sh
   <img width="400" alt="Ganymede sign-in" src="https://ganymede-bio.mo.cloudinary.net/apiServer/GanymedeSignIn_20230110.png"/>
 </div>
 
-### Step 2. Create the necessary virtual datasets for this visualization
+## Step 2. Create virtual dataset for this visualization
 
-In order to create our dashboard we'll need to load two datasets into the dashboard environment, a **Quickstart_Absorbance_Change_Absolute_Differences** dataset and a **Quickstart_Absorbance_Change_Run_Parameters** dataset. To load a dataset, navigate to dashboards, hover over **Data**, and click **Dataset**.
+In order to create our dashboard we'll need to create two datasets for displaying, a **Quickstart_Absorbance_Change_Absolute_Differences** dataset and a **Quickstart_Absorbance_Change_Run_Parameters** dataset.  
+
+**Quickstart_Absorbance_Change_Absolute_Differences** is a table containing absorbance measurements from two different plates; **Quickstart_Absorbance_Change_Run_Parameters** contains temperature and timepoint metadata associated with each plate.
+
+### Step 2a. Load plate reader data for charting
 
 Hover over SQL Lab in the top menu bar and click on SQL Editor.  This should bring you to a SQL editor that lets you preview tables, and results of SQL queries:
 
 <img alt="Dashboard - SQL Editor" src="https://ganymede-bio.mo.cloudinary.net/dashboard/SQL_Lab20230531.png" />
 &nbsp;
 
-Fill in the SQL Editor with the query below, select an appropriate number of rows to observe, and click <div className="button darkblue_button">**RUN**</div> to execute SQL.
+Fill in the SQL Editor with the query below and click <div className="button darkblue_button">**RUN**</div> to execute SQL.
 
 ```sql
+-- Quickstart_Absorbance_Change_Run_Parameters table
 SELECT field, run_diff, left(field, 1) as row, cast(right(field, length(field)-1) as int64) as column
 FROM Quickstart_Absorbance_Change_Transform_py_analysis 
 UNPIVOT (value for run IN (run1, run2))
 WHERE field not in ('Time [s]', 'Temp. [°C]', 'Cycle Nr.')
+ORDER BY row, column
 ```
-<img alt="Dashboard - SQL Editor Query" src="https://ganymede-bio.mo.cloudinary.net/dashboard/SQL_Query_Quickstart_Absorbance_Change_Absolute_Differences.png" />
 
-Save a virtual dataset by clicking on the **Create Chart** button, which should bring up the following modal:
+After doing so, the SQL editor should return the results of the query:
 
-<img alt="Dashboard - Add Virtual Dataset" src="https://ganymede-bio.mo.cloudinary.net/dashboard/Add_Virtual_Dataset20230415.png" />
+<img alt="Dashboard - SQL Editor after execution" src="https://ganymede-bio.mo.cloudinary.net/dashboard/Quickstart_Sample_Execution_Ordered20230531.png" />
 
-Make sure **Save as new** is checked and give your dataset the name "Quickstart_Absorbance_Change_Absolute_Differences".
+Save a virtual dataset to make it available for graphing by clicking on the <div className="button purple_button_dashboard"><DownOutlined /></div> to the right of the <div className="button purple_button_dashboard">SAVE</div> button. Save the dataset as **Quickstart_Absorbance_Change_Absolute_Differences**.
 
-Navigate back to the SQL Editor and repeat this process with the below query, saving it as "Quickstart_Absorbance_Change_Run_Parameters". Now you've created the datasets you'll need to build your dashboard.
+### Step 2b. Load plate reader metadata for charting
 
+Navigate back to the SQL Editor and repeat step 2a with the query below, saving the output virtual dataset as **Quickstart_Absorbance_Change_Run_Parameters**. 
 
-## Step 3. Creating charts to visualize data
+```sql
+-- Quickstart_Absorbance_Change_Absolute_Differences table
+SELECT field, value, trim(run, 'run') as run_number
+FROM Quickstart_Absorbance_Change_Excel_Read_results 
+UNPIVOT (value for run IN (run1, run2))
+WHERE field in ('Time [s]', 'Temp. [°C]', 'Cycle Nr.')
+```
 
-Charts can be created from physical or virtual datasets.  
+## Step 3. Creating charts from the plate reader tables
 
-To create a chart:
+Navigate to the Datasets tab in the top bar and search for "Quickstart" to find the virtual datasets you created.
 
-- Hover over Data in the top menu bar and click on Datasets.  Then, click on one of the listed datasets, which should bring up the following pane:
+<img alt="Dashboard Quickstart datasets" src="https://ganymede-bio.mo.cloudinary.net/dashboard/Quickstart_Datasets20230531.png" />
+&nbsp;
 
-<img alt="Dashboard - Create Chart" src="https://ganymede-bio.mo.cloudinary.net/dashboard/Create_Chart20230415.png" />
+Click on the **Quickstart_Absorbance_Change_Run_Parameters** table.  This should bring you to a page for assembling a chart:
 
-The DATA tab has controls for specifying chart type and pivoting/aggregating data from the selected table.  The customize tab has functionality for annotating axis labels, specifying axis format, and chart title.
+<img alt="Dashboard Quickstart run parameters chart assembly" src="https://ganymede-bio.mo.cloudinary.net/dashboard/Quickstart_RunParametersChartAssembly20230531.png" />
+&nbsp;
 
-### Saving charts to dashboards
+Click on the <u>View All Charts</u> text in the middle of the screen and select the Pivot Table chart type.
 
-- Once the created chart looks satisfactory, add a chart to a dashboard by clicking on **SAVE** in the upper-right hand corner of the screen to bring up this modal:
+<img alt="Dashboard Quickstart run parameters select pivot chart" src="https://ganymede-bio.mo.cloudinary.net/dashboard/Quickstart_RunParametersChart20230531.png" />
+&nbsp;
 
-<img alt="Dashboard - Save Chart" src="https://ganymede-bio.mo.cloudinary.net/dashboard/Save_Chart20230415.png" />
+Assemble the pivot table by dragging the fields in the virtual table into the Query section and typing in Run Parameters as the title.
 
-### Calculated columns
+<img alt="Dashboard Quickstart run parameters assembled pivot chart" src="https://ganymede-bio.mo.cloudinary.net/dashboard/Quickstart_RunParametersChartAssembled20230531.png" />
+&nbsp;
 
-Calculated columns can be added to the dataset, which can be handy for correcting data for visualization.  Some example use cases are:
+Click <div className="button purple_button_dashboard"><SaveOutlined /> SAVE</div> to save the chart and add to a new dashboard named "Plate Reader Quickstart."
 
-- Taking the floor or ceiling of a variable to truncate data outside of a desired range
-- Performing string manipulations on a field to categorize or subset data
-- Extracting values from a string for aggregation
-
-To create a calculated column:
-
-- Hover over the three dots to the right of the dataset on the Chart Creation page and click Edit Dataset.
-
-<img alt="Dashboard - Edit Dataset" src="https://ganymede-bio.mo.cloudinary.net/dashboard/Edit_Dataset20230415.png" />
-
-- Select the Calculated Columns tab to add new columns to the dataset.  Specify the field definition using a SQL expression.
-
-:::tip Calculated Column flexibility
-
-Calculated columns are more flexible than what is found in other BI tools offering similar functionality.  Beyond aggregation, these fields 
-can be filtered on, sorted by, and/or used to categorize data.
-
-:::
-
-<img alt="Dashboard - Calculated Column" src="https://ganymede-bio.mo.cloudinary.net/dashboard/Calculated_Column20230415.png" />
-
-:::info Permissions for editing datasets
-
-Dashboards can only be edited by their owner.  One method for multiple users to avoid conflicting dataset modifications would be for
-users of shared datasets to create virtual datasets for their own use.
-
-:::
-
-## Editing dashboards
-
-To edit a dashboard, select **Dashboards** from the top menu bar and navigate to the desired dashboard.  Clicking on <div className="button purple_button_dashboard">**EDIT DASHBOARD**</div> allows users
-to resize and rearrange the layout of different charts.
-
-Data backing the graphs can be filtered by clicking on the <DashboardFilterIcon /> icon on the left side of the dashboard, selecting <div className="button superset_button"><PlusOutlined /> Add filters and dividers</div> and selecting the SCOPING panel.
-
-:::tip Tables referenced by dashboard filter
-
-The SCOPING tab on the filters modal allows users to specify which graphs the filter applies to.
-Note that if 2 charts are backed by different datasets which share a field name, a single filter can 
-be used to manipulate both tables simultaneously. 
-
-:::
+<img alt="Dashboard Quickstart save run parameters" src="https://ganymede-bio.mo.cloudinary.net/dashboard/Quickstart_SaveRunParametersChart20230531.png" />
+&nbsp;
