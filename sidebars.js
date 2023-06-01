@@ -20,7 +20,7 @@ module.exports = {
       },
       {
         type: 'category',
-        label: 'Walkthroughs',
+        label: 'Quickstart Guides',
         collapsed: false,
         items: [
           {
