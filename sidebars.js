@@ -14,19 +14,26 @@ module.exports = {
         label: 'Welcome',
       },
       {
+        type: 'doc',
+        id: 'Concepts',
+        label: 'Concepts'
+      },
+      {
         type: 'category',
-        label: 'Getting Started',
+        label: 'Quickstart Guides',
         collapsed: false,
         items: [
           {
             type: 'doc',
-            id: 'Concepts',
-            label: 'Concepts'},
+            id: 'QuickstartCreateDashboard',
+            label: 'QuickstartCreateDashboard'
+          },
           {
             type: 'doc',
             id: 'QuickstartBuildFlow',
             label: 'QuickstartBuildFlow'
-        }]
+          },
+        ]
       },
       
       {
@@ -57,7 +64,7 @@ module.exports = {
         type: 'category',
         label: 'Observing Data',
         collapsed: false,
-        items: ['Dashboards', 'Files', 'AnalysisNotebook', 'DataExplorer']
+        items: ['Files', 'Dashboards', 'AnalysisNotebook', 'DataExplorer']
       },
       {
         type: 'doc',
