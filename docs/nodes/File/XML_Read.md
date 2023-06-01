@@ -13,7 +13,7 @@ table in Ganymede data lake
 
 ### Node Attributes
 - **input_file_xml**
-  - File extension on XML file
+  - File extension for valid XML files submitted.  For example, filling in this attribute with "*.xml" will only allow files with the extension .xml to be uploaded.
 - **output_table_results**
   - Table name where parsed XML data will be stored.
 ## User-Defined Python

@@ -14,7 +14,7 @@ uploaded to the Ganymede data lake.
 
 ### Node Attributes
 - **input_file_excel**
-  - File extension on excel file
+  - File extension for valid Excel files submitted.  For example, filling in this attribute with "*.xls*" will allow any file containing extension .xls, .xlsx, .xlsm, and .xlsb to be uploaded.
 - **output_table_results**
   - Data lake table to write to
 ## User-Defined Python

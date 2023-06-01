@@ -13,7 +13,7 @@ function is stored in Ganymede cloud storage.
 
 ### Node Attributes
 - **input_file_hdf5**
-  - Glob pattern for HDF5 input file
+  - File extension for valid HDF5 files submitted.  For example, filling in this attribute with "*.hdf" will only allow files with the extension .hdf to be uploaded.
 - **output_data**
   - Name of file to write processed data to
 
