@@ -15,9 +15,9 @@ ganymede_sdk.io provides functions for listing available data and retrieving dat
 
 ### function _retrieve_sql_
 
-_retrieve_sql_ allows users to retrieve tabular data from the Ganymede data lake.  Input can either be a semicolon-delimited string containing a set of queries to run.
+_retrieve_sql_ allows users to retrieve tabular data from the Ganymede data lake.  Input can either be single SQL query, or a semicolon-delimited string containing a set of queries to run.
 
-If the input is submitted as a semicolon-delimited string, the results are returned as a DataFrame if singular or a list of Pandas DataFrames if multiple queries are submitted.
+The results are returned as a DataFrame in Python if a single DataFrame is specified, or a list of Pandas DataFrames if multiple queries are submitted.
 
 - _param_ **query_str**: str - Semicolon-delimited query string(s) to retrieve.
 - _param_ **context**: Optional[GanymedeContext] - Context object used for rendering Jinja template variables in query
@@ -81,7 +81,7 @@ _retrieve_files_ allows users to retrieve files from Ganymede cloud storage.  By
 
 - _param_ **context**: GanymedeContext - GanymedeContext to use for pulling file(s)
 - _param_ **file_names**: Union[str, List[str]] - File or list of files to retrieve
-- _param_ **input_or_output_bucket**: str, by default "input" - Either "input" or "output" - to reference bucket to retrieve files from
+- _param_ **input_or_output_bucket**: str, by default "output" - Either "input" or "output" - to reference bucket to retrieve files from
 - _param_ **current_flow_flag**: bool, by default True - Whether to filter for files associated with current flow or not
 - _param_ **run_id**: Optional[int], by default None - If set, filters for results with specified run_id; if not specified, retrieve file(s) associated with most recent run ID
 

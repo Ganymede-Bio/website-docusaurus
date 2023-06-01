@@ -4,7 +4,7 @@ title: S3_Write
 displayed_sidebar: nodeSidebar
 ---
 
-### Node Operator
+### Node Description
 Sync GCS bucket -> S3 bucket
 
 

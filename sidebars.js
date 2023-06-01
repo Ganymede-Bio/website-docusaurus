@@ -6,58 +6,73 @@ nodeTag = require('./docs/nodes/Tag/sidebar.json')
 nodeTest = require('./docs/nodes/Test/sidebar.json')
 
 module.exports = {
-  webUiSidebar: [
-    {
-      type: 'doc',
-      id: 'Welcome',
-      label: 'Welcome',
-    },
-    {
-      type: 'doc',
-      id: 'Quickstart',
-      label: 'Quickstart',
-    },
-    {
-      type: 'doc',
-      id: 'DashboardQuickstartGuide',
-      label: 'Dashboard Quickstart Guide',
-    },
-    {
-      type: 'category',
-      label: 'Processing Data',
-      collapsed: false,
-      items: [{
-        type: 'category',
-        label: 'Running Flows',
-        collapsed: true,
-        items: ['Home', 'FlowView']
+  webUiSidebar:
+    [
+      {
+        type: 'doc',
+        id: 'Welcome',
+        label: 'Welcome',
+      },
+      {
+        type: 'doc',
+        id: 'Concepts',
+        label: 'Concepts'
       },
       {
         type: 'category',
-        label: 'Editing Flows',
-        collapsed: true,
-        items: ['FlowEditor', 'NodeEditor', 'FlowMetadata'],
+        label: 'Walkthroughs',
+        collapsed: false,
+        items: [
+          {
+            type: 'doc',
+            id: 'QuickstartCreateDashboard',
+            label: 'QuickstartCreateDashboard'
+          },
+          {
+            type: 'doc',
+            id: 'QuickstartBuildFlow',
+            label: 'QuickstartBuildFlow'
+          },
+        ]
+      },
+      
+      {
+        type: 'category',
+        label: 'Processing Data',
+        collapsed: false,
+        items: [{
+          type: 'category',
+          label: 'Running Flows',
+          collapsed: true,
+          items: ['Home', 'FlowView']
+        },
+        {
+          type: 'category',
+          label: 'Editing Flows',
+          collapsed: true,
+          items: ['FlowEditor', 'NodeEditor'],
+        },
+        {
+          type: 'category',
+          label: 'Monitoring Flows',
+          collapsed: true,
+          items: ['FlowRuns', 'Notifications']
+        },
+        ]
       },
       {
         type: 'category',
-        label: 'Monitoring Flows',
-        collapsed: true,
-        items: ['FlowRuns', 'Notifications']
+        label: 'Observing Data',
+        collapsed: false,
+        items: ['Files', 'Dashboards', 'AnalysisNotebook', 'DataExplorer']
       },
-      ]
-    },
-    {
-      type: 'category',
-      label: 'Observing Data',
-      collapsed: false,
-      items: ['Dashboards', 'Files', 'AnalysisNotebook', 'DataExplorer']
-    },
-    {
-      type: 'doc',
-      id: 'AdminControls',
-      label: 'Environment Administration'
-    },
-  ],
+      {
+        type: 'doc',
+        id: 'AdminControls',
+        label: 'Environment Administration'
+      },
+    ]
+  ,
   nodeSidebar: [
     {
       type: 'doc',
@@ -68,7 +83,8 @@ module.exports = {
       type: 'category',
       label: 'Node Category',
       collapsed: false,
-      items: [nodeAnalysis,
+      items: [
+        nodeAnalysis,
         nodeApp,
         nodeFile,
         nodeInstrument,
@@ -81,6 +97,11 @@ module.exports = {
       type: 'doc',
       id: 'sdk/GanymedeSDKOverview',
       label: 'Overview'
+    },
+    {
+      type: 'doc',
+      id: 'FlowMetadata',
+      label: 'Flow Context & Metadata'
     },
     {
       type: 'category',
@@ -110,7 +131,7 @@ module.exports = {
       type: 'category',
       label: '2023',
       collapsed: false,
-      items: ['releases/202304', 'releases/202303', 'releases/202302', 'releases/202301']
+      items: ['releases/202305', 'releases/202304', 'releases/202303', 'releases/202302', 'releases/202301']
     },
     {
       type: 'category',

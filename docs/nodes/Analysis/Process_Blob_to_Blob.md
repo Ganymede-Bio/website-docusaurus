@@ -4,7 +4,7 @@ title: Process_Blob_to_Blob
 displayed_sidebar: nodeSidebar
 ---
 
-### Node Operator
+### Node Description
 Retrieves blob data, processes via user-defined function, and writes to storage.
 
 

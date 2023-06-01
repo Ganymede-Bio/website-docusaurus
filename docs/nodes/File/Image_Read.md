@@ -4,7 +4,7 @@ title: Image_Read
 displayed_sidebar: nodeSidebar
 ---
 
-### Node Operator
+### Node Description
 Ingests and processes an image file
 
 Takes an image as input, processes via user-defined function, and stores a dict of processed

@@ -4,7 +4,7 @@ title: CSV_Read
 displayed_sidebar: nodeSidebar
 ---
 
-### Node Operator
+### Node Description
 Reads contents of a CSV file into data lake
 
 The contents of CSV file are passed to the user-defined function, which

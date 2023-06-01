@@ -4,7 +4,7 @@ title: Profilometer_Read
 displayed_sidebar: nodeSidebar
 ---
 
-### Node Operator
+### Node Description
 Parse profilometer data from Mx Software and upload contents to data lake.
 
 

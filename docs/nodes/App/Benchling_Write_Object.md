@@ -4,7 +4,7 @@ title: Benchling_Write_Object
 displayed_sidebar: nodeSidebar
 ---
 
-### Node Operator
+### Node Description
 Writes data stored in Ganymede cloud storage to Benchling custom entity, as specified by input
 object names and SQL query
 

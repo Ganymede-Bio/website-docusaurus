@@ -4,7 +4,7 @@ title: CSV_Read_Multi
 displayed_sidebar: nodeSidebar
 ---
 
-### Node Operator
+### Node Description
 Reads contents of multiple CSV files into data lake
 
 The contents of the CSV files are passed to the user-defined function, which

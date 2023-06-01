@@ -4,7 +4,7 @@ title: Transform_py
 displayed_sidebar: nodeSidebar
 ---
 
-### Node Operator
+### Node Description
 Runs user-defined Python function on results of query on Ganymede data lake.
 
 Retrieves table(s) from Ganymede data lake, processes via user-defined Python function,

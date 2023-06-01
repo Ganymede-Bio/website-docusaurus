@@ -1,0 +1,22 @@
+---
+id: TableStructureEditor
+title: Table Structure Editor
+displayed_sidebar: webUiSidebar
+---
+
+import { DeleteOutlined } from '@ant-design/icons';
+
+The Table Structure Editor is accessed via the  <img className="inline-img" src="img/data/editButton.png"/> button in the Data Explorer **Fields** tab.
+
+In Edit mode, you can edit the table description, and add fields and change some of the field information. 
+
+You _can't_ delete existing fields, or change their datatype, or change a non-required field to required, so many options are disabled. This reflects consistency rules enforced by the data lake.
+
+<img alt="Table Structure Editor" src="img/data/schemaEditor.png"/>
+
+
+Add fields with the <img className="inline-img" src="img/data/newFieldButton.png"/> button. This will add a blank row to the end of the list of fields. Fields that have not been saved can be deleted with the <DeleteOutlined/> icon. When you are done editing, click  <img className="inline-img" alt="Save" src="img/data/saveButton.png"/> to save your changes, or <img className="inline-img" alt="Cancel" src="img/data/cancelButton.png"/> to discard them.
+
+
+
+

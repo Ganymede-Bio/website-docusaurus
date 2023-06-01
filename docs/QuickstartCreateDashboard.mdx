@@ -1,16 +1,17 @@
 ---
-id: DashboardQuickstartGuide
-title: Dashboard Quickstart Guide
+id: QuickstartCreateDashboard
+title: Create a Dashboard
+sidebar_label: Create a Dashboard
 displayed_sidebar: webUiSidebar
 ---
 
 import { AreaChartOutlined, PlusOutlined } from '@ant-design/icons';
 import DashboardFilterIcon from '@site/static/img/dashboard_filter_icon.svg';
 
-This guide walks you through creating a _dashboard_ to visualize plate reader data ingested into Ganymede. This dashboard will leverage the same data ingested and processed in the original [Quickstart guide](https://docs.ganymede.bio/Quickstart). By the time you're finished, you'll have converted raw data to a dashboard that looks like this:
+This guide walks you through creating a dashboard to visualize plate reader data ingested into Ganymede. This dashboard will leverage the same data ingested and processed in the [Build a Flow guide](./QuickstartBuildFlow). By the time you're finished, you'll have converted raw data to a dashboard that looks like this:
 
 <div class="text--center">
-<img width="800" alt="Absorbance Analytics Dashboard" src="https://ganymede-bio.mo.cloudinary.net/dashboard/absorbance_analytics_dashboard.png"/>
+<img width="800" alt="Absorbance Analytics Dashboard" src="https://ganymede-bio.mo.cloudinary.net/apiServer/AbsorbanceAnalyticsDashboard_20230531.png"/>
 </div>
 
 To do this we'll proceed through the following steps:
@@ -24,20 +25,21 @@ To do this we'll proceed through the following steps:
 The <div className="button gray_button"><UserOutlined /> Sign In</div> button should be available once authentication is configured for your tenant, which is generally going to be a web address accessible via any web browser with the URL [https://<your_tenant\>.ganymede.bio](https://<your_tenant>.ganymede.bio).
 
 <div class="text--center">
-<img width="400" alt="Ganymede sign-in" src="https://ganymede-bio.mo.cloudinary.net/apiServer/GanymedeSignIn_20230110.png"/>
+  <img width="400" alt="Ganymede sign-in" src="https://ganymede-bio.mo.cloudinary.net/apiServer/GanymedeSignIn_20230110.png"/>
 </div>
 
 ### Step 2. Create the necessary virtual datasets for this visualization
 
-In order to create our dashboard we'll need two datasets, a **Quickstart_Absorbance_Change_Absolute_Differences** dataset and a **Quickstart_Absorbance_Change_Run_Parameters** dataset. To create a dataset, navigate to dashboards, hover over **Data**, and click **Dataset**.
+In order to create our dashboard we'll need to load two datasets into the dashboard environment, a **Quickstart_Absorbance_Change_Absolute_Differences** dataset and a **Quickstart_Absorbance_Change_Run_Parameters** dataset. To load a dataset, navigate to dashboards, hover over **Data**, and click **Dataset**.
 
 Hover over SQL Lab in the top menu bar and click on SQL Editor.  This should bring you to a SQL editor that lets you preview tables, and results of SQL queries:
 
-<img alt="Dashboard - SQL Editor" src="https://ganymede-bio.mo.cloudinary.net/dashboard/Navigate_to_SQL_Editor.png" />
+<img alt="Dashboard - SQL Editor" src="https://ganymede-bio.mo.cloudinary.net/dashboard/SQL_Lab20230531.png" />
+&nbsp;
 
 Fill in the SQL Editor with the query below, select an appropriate number of rows to observe, and click <div className="button darkblue_button">**RUN**</div> to execute SQL.
 
-```
+```sql
 SELECT field, run_diff, left(field, 1) as row, cast(right(field, length(field)-1) as int64) as column
 FROM Quickstart_Absorbance_Change_Transform_py_analysis 
 UNPIVOT (value for run IN (run1, run2))

@@ -4,7 +4,7 @@ title: AVI_Read_Multi
 displayed_sidebar: nodeSidebar
 ---
 
-### Node Operator
+### Node Description
 Reads contents of multiple avi files into data lake
 
 The contents of the avi files are passed to the user-defined function, which

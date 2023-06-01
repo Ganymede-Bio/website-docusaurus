@@ -4,7 +4,7 @@ title: Process_Blob_to_Table
 displayed_sidebar: nodeSidebar
 ---
 
-### Node Operator
+### Node Description
 Retrieves blob data, processes data via user-defined function, and writes output table(s)
 to data lake.
 

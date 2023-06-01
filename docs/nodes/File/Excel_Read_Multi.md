@@ -4,7 +4,7 @@ title: Excel_Read_Multi
 displayed_sidebar: nodeSidebar
 ---
 
-### Node Operator
+### Node Description
 Reads contents of multiple excel files into data lake
 
 The contents of the excel files are passed to the user-defined function, which

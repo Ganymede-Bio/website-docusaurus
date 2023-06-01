@@ -1,1 +1,1 @@
-{"type": "category", "label": "Analysis", "items": ["nodes/Analysis/Transform_py", "nodes/Analysis/Transform_SQL", "nodes/Analysis/Process_Blob_to_Blob", "nodes/Analysis/Process_Blob_to_Table", "nodes/Analysis/Table_to_Blob", "nodes/Analysis/Great_Expectations"]}
+{"type": "category", "label": "Analysis", "items": ["nodes/Analysis/Transform_py", "nodes/Analysis/Python", "nodes/Analysis/Transform_SQL", "nodes/Analysis/Process_Blob_to_Blob", "nodes/Analysis/Process_Blob_to_Table", "nodes/Analysis/Table_to_Blob"]}

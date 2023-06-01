@@ -4,7 +4,7 @@ title: BMG_Clariostar_CSV
 displayed_sidebar: nodeSidebar
 ---
 
-### Node Operator
+### Node Description
 Reads Clariostar instrument data as input CSV file and writes results to Ganymede data lake.
 
 

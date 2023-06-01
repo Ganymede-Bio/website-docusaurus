@@ -4,7 +4,7 @@ title: Read_Trios_Rheometer_Excel
 displayed_sidebar: nodeSidebar
 ---
 
-### Node Operator
+### Node Description
 Reads Trios Rheometer output data tables and uploads files to data lake.
 
 Reads Trios data output in Excel format, with data for each run stored as a tab on an excel

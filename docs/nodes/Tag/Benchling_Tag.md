@@ -4,7 +4,7 @@ title: Benchling_Tag
 displayed_sidebar: nodeSidebar
 ---
 
-### Node Operator
+### Node Description
 Associates a Benchling run tag with a Flow run
 
 

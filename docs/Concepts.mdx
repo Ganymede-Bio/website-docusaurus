@@ -1,0 +1,30 @@
+---
+id: Concepts
+title: Ganymede Concepts
+sidebar_label: Concepts
+displayed_sidebar: webUiSidebar
+---
+
+![Ganymede example flow](https://ganymede-bio.mo.cloudinary.net/apiServer/FlowImageExpanded_20230531.png)
+
+Developers author **flows**, which are functions comprised of user-editable **nodes**.
+
+- **Flow**: a set of nodes that processes data; the diagram above shows a flow named _ganymede_documentation_.  Flows are executed top-to-bottom, with edges describing execution dependencies between different nodes.  
+- [**Node**](./nodes/Overview.md): core unit of processing in Ganymede which performs I/O between different systems and the user-defined components of a node.  The diagram above contains four nodes: Read_CSV, LIMS_Read, Associate_Data, Excel_Write.
+- **Node Attribute**: parameters passed into a node.  The Read_CSV node above has two node attributes: `csv` and `results`.
+- **Table Head**: a preview of a table output from the node; in the flow above, example_results is the table head for the Read_CSV node.
+
+Each node consists of an Operator and, if customizable, user-defined SQL and/or user-defined Python to enable customization as shown in the conceptual diagram below:
+
+<div class="text--center">
+  <img width="400" alt="Example node layout" src="https://ganymede-bio.mo.cloudinary.net/apiServer/Operator_Conceptual_Layout_20230108.png" />
+</div>
+
+Depending on the node, data may be retrieved from or sent to 
+  - a SQL database
+  - cloud storage 
+  - third-party API 
+  - flat files
+
+When flows are saved, whether from the flow editor or from a node specific to a notebook, associated code changes are stored in a git repository and deployed to a cloud-native workflow orchestration platform for executing code.  
+  

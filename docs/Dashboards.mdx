@@ -4,7 +4,7 @@ title: Dashboards
 displayed_sidebar: webUiSidebar
 ---
 
-import { AreaChartOutlined, PlusOutlined } from '@ant-design/icons';
+import { AreaChartOutlined, PlusOutlined, DownOutlined } from '@ant-design/icons';
 import DashboardFilterIcon from '@site/static/img/dashboard_filter_icon.svg';
 
 The <div className="button darkblue_button"><AreaChartOutlined /> **Dashboard**</div> page offers charts and dashboard visualizations based on data stored within Ganymede.  
@@ -20,43 +20,41 @@ To assemble a dashboard:
 
 ## Adding a Dataset
 
-Datasets must be added from the environment prior to charting, either chosen from the environment ([Physical Datasets](#adding-physical-datasets)) or created via an ANSI SQL query ([Virtual Datasets](#adding-virtual-datasets)).  
-
-In the parlance of other database systems, virtual datasets are sometimes referred to as _views_, while physical datasets are referred to as _tables_.
+Datasets must be added from the environment prior to charting, either chosen from the environment ([Physical Datasets](#adding-physical-datasets)) or created via an ANSI SQL query ([Virtual Datasets](#adding-virtual-datasets)) based prior to charting.
 
 ### Adding Physical Datasets
 
-To make an existing dataset available for use:
+Physical datasets are tables outputted from flows.  To add a physical dataset:
 
-- Hover over Data in the menu bar at the top and click on Datasets.
+- Click on the Datasets button in the top bar:
 
-<img alt="Dashboard - Select Dataset" src="https://ganymede-bio.mo.cloudinary.net/dashboard/Select_Dataset20230415.png" />
+<img alt="Dashboard - Select Dataset" src="https://ganymede-bio.mo.cloudinary.net/dashboard/Select_Dataset20230531.png" />
 
-- Click on <div className="button darkblue_button"><PlusOutlined /> **DATASET**</div> and select a table to make it available for charting.
+- Select a database, schema, and table to add and click <div className="button darkblue_button">**CREATE DATASET AND CREATE CHART**</div>.
 
-<img alt="Dashboard - Add Physical Dataset" src="https://ganymede-bio.mo.cloudinary.net/dashboard/Add_Physical_Dataset20230415.png" />
+<img alt="Dashboard - Add Physical Dataset" src="https://ganymede-bio.mo.cloudinary.net/dashboard/Add_Dataset20230531.png" />
 
 ### Adding Virtual Datasets
 
-Virtual datasets are created by ANSI SQL query; for a list of available functions and syntax guidance, please reference the [SQL in BigQuery documentation](https://cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax).
+Virtual datasets for the dashboard environment are constructed by querying existing tables.
 
-To create a virtual dataset:
+- Hover over SQL in the top menu bar and click on SQL Lab.  This should bring you to a SQL editor that lets you preview tables, and results of SQL queries:
 
-- Hover over SQL Lab in the top menu bar and click on SQL Editor.  This should bring you to a SQL editor that lets you preview tables, and results of SQL queries:
-
-<img alt="Dashboard - SQL Editor" src="https://ganymede-bio.mo.cloudinary.net/dashboard/SQL_Editor20230415.png" />
+<img alt="Dashboard - SQL Editor" src="https://ganymede-bio.mo.cloudinary.net/dashboard/SQL_Editor20230531.png" />
 
 - Fill in the SQL Editor with a query string, select an appropriate number of rows to observe, and click <div className="button darkblue_button">**RUN**</div> to execute SQL.
 
-<img alt="Dashboard - SQL Editor Query" src="https://ganymede-bio.mo.cloudinary.net/dashboard/SQL_Editor_Query20230415.png" />
+<img alt="Dashboard - SQL Editor Query" src="https://ganymede-bio.mo.cloudinary.net/dashboard/SQL_Editor_Query20230531.png" />
 
-- Save a virtual dataset by clicking on the **Create Chart** button, which should bring up the following modal:
+- Save a virtual dataset by clicking on the <div className="button purple_button_dashboard"><DownOutlined /></div> next to the <div className="button purple_button_dashboard">SAVE</div> button, and clicking on <div className="button jupyter_button">Save Dataset</div>.
 
-<img alt="Dashboard - Add Virtual Dataset" src="https://ganymede-bio.mo.cloudinary.net/dashboard/Add_Virtual_Dataset20230415.png" />
+<img alt="Dashboard - Add Virtual Dataset" src="https://ganymede-bio.mo.cloudinary.net/dashboard/SQL_Editor_Save_Dataset20230531.png" />
 
-:::info Saving queries
+For a list of available functions and syntax guidance, please reference the [SQL in BigQuery documentation](https://cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax).
 
-The **SAVE** button saves SQL queries for future edits, but does not register a query as a virtual dataset.
+:::tip Saving queries
+
+The <div className="button purple_button_dashboard">SAVE</div> button saves SQL queries for future edits, but does not register a query as a virtual dataset.
 
 :::
 

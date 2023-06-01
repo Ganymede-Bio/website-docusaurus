@@ -4,7 +4,7 @@ title: Transform_SQL
 displayed_sidebar: nodeSidebar
 ---
 
-### Node Operator
+### Node Description
 Runs SQL query on data lake
 
 
