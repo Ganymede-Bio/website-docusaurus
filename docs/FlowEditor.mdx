@@ -66,7 +66,7 @@ The Run Queue Bar located at the bottom of the screen contains buttons for execu
 
 To create a new _flow_, click the <div className="button darkblue_button">**Manage <SettingOutlined />**</div> button in the upper right hand corner of the screen. Then click the <div className="button black_button"><PlusOutlined /> Add New Flow</div> button on the sidebar.  This action exposes a modal for naming and describing the _flow_.  
 
-<img alt="Add new flow" src="https://ganymede-bio.mo.cloudinary.net/apiServer/AddNewFlow_20230424.png"/>
+<img alt="Add new flow" src="https://ganymede-bio.mo.cloudinary.net/apiServer/AddNewFlow_20230601.png"/>
 
 #### Configuring Retries
 
@@ -77,6 +77,12 @@ Retries and email notifications associated with the _flow_ can be specified in t
 Email notifications are sent to specified users upon _flow_ failure; an example email for this is shown below.
 
 <img alt="Email notifications" src="https://ganymede-bio.mo.cloudinary.net/apiServer/FlowEmail_20230424.png"/>
+
+#### Configuring Auto Run Trigger for Flow Runs
+
+Flows can be configured to automatically run on a schedule. The schedule is set by selecting from the dropdowns show below and can be configured in intervals of months, weeks, days, hours, and minutes. Note the schedule is set in UTC time.
+
+<img alt="Cron flows" src="https://ganymede-bio.mo.cloudinary.net/apiServer/CronFlow.png" width="470" height="190"/>
 
 &nbsp;
 
