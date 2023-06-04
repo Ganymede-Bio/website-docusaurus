@@ -35,7 +35,18 @@ module.exports = {
           },
         ]
       },
-      
+      {
+        type: 'category',
+        label: 'Connecting Instruments',
+        collapsed: false,
+        items: [
+          {
+            type: 'doc',
+            id: 'connectivity/Agent',
+            label: 'Agent'
+          }
+        ]
+      },
       {
         type: 'category',
         label: 'Processing Data',
