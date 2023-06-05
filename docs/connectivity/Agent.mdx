@@ -33,7 +33,7 @@ In the navigation pane, there is a new “Connections” tab. All agent connecti
 
 **TODO**: insert image for creating new agent
 
-A new page, shown below, will appear for configuring the agent.  Once this form is submitted, Ganymede Cloud starts building Windows and Linux executables in the application.  When ready, these executables can be downloaded from the Ganymede application.
+A new page, shown below, will appear for configuring the agent.  Once completed, click Submit to start building Windows and Linux executables.  When ready, the Agent (i.e. - the configured executables) can be downloaded from the Ganymede application by selecting the corresponding Agent from the Connections tab.
 
 :::tip
 
@@ -43,27 +43,78 @@ Generally, building the executable takes around 10 minutes to complete.
 
 **TODO**: insert image for identification, listener, action
 
-- **Identification**: The display name for the Agent.  Once specified, an agent ID is generated from the display name which uniquely identifies the Agent. Once created, the Agent ID is fixed, though the display name can be changed.
-- **Select Listener**: Takes on one of four possible configurations:
-    - **File Watcher**: Monitor specified directory on the local file system for files to process and execute upon observing new files matching specified pattern
-        - `Check Period`: Frequency with which Agent will poll local directory for new files
-        - `Glob to Parameter Mapping`: A set of input pairs; the left member of the input pair is a [glob pattern](https://en.wikipedia.org/wiki/Glob_(programming)) to match files against, and the member on the right is the input parameter associated with the flow to associated captured files with.  Multiple pairs can be specified, directing files matching different glob patterns to different nodes.
-        For example, if the instrument outputs an XML file called lc_metadata{'<YYYYMMDD\>'}.abc which is to be ingested by [XML_Read node](./nodes/File/XML_Read.md) called "Ingest_LC_Metadata", an appropriate configuration would be "lc_metadata*.abc" for the left input box and "Ingest_LC_Metadata.xml" for the right node.
-    - **Cron**: Periodically execute agent based on a preset schedule
-    - **Cloud Watcher**: Monitor specified directory in Ganymede Cloud Storage for new files, and execute upon observing new files matching specified pattern
-    - **Manual**: Upon Agent launch, the Agent code executes once and then exits.
-- **Select Action**:
-    - **Upload File**: Uploads file(s) to Ganymede Cloud Storage in the agent directory.  This data can be found in the File Explorer under "/_agents/<agent id\>/"
-    - **Run Flow**: Run a flow based on the input provided and as mediated by the flow input requirements. 
-    - **No-Op**: Complete Agent execution without performing an Action
+The identification input is used to specify the display name for the Agent.  Once specified, an agent ID is generated from the display name which uniquely identifies the Agent. Once created, the Agent ID is fixed, though the display name can be changed.
 
+### Listener Modes
 
+The Listener takes on one of four possible configurations:
+
+- **File Watcher**: Monitor specified directory on the local file system for files to process and execute upon observing new files matching specified pattern
+  - `Check Period`: Frequency with which Agent will poll local directory for new files
+  - `Glob to Parameter Mapping`: A set of input pairs; the left member of the input pair is a [glob pattern](https://en.wikipedia.org/wiki/Glob_(programming)) to match files against, and the member on the right is the input parameter associated with the flow to associated captured files with.  Multiple pairs can be specified, directing files matching different glob patterns to different nodes.
+  
+    For example, if the instrument outputs an XML file called lc_metadata{'<YYYYMMDD\>'}.abc which is to be ingested by [XML_Read node](./nodes/File/XML_Read.md) called "Ingest_LC_Metadata", an appropriate configuration would be "lc_metadata*.abc" for the left input box and "Ingest_LC_Metadata.xml" for the right node.
+
+TODO: Insert image of file watcher configuration
+
+#### Example use case for File Watcher mode
+
+An instrument outputs files to a directory each time it completes a run, which serve as inputs for a Ganymede flow. 
+
+- **Cron**: Periodically execute agent based on a preset schedule
+
+TODO: Insert image of cron configuration
+
+#### Example use case for Cron mode
+
+A local script (the Normalizer) must be run once a day to poll and capture updates from telemetry devices for further processing in a Ganymede flow.
+
+- **Cloud Watcher**: Monitor specified directory in Ganymede Cloud Storage for new files, and execute upon observing new files matching specified pattern
+
+#### Example use case for Cloud Watcher mode
+
+Output data from a Ganymede flow is retrieved and cross-checked against instrument data to verify that the lab machine is producing expected results.
+
+- **Manual**: Upon Agent launch, the Agent code executes once and then exits.
+
+### Action
+
+Actions are executed after the Listener and Normalizer (user-defined Python) have completed.
+
+- **Upload File**: Uploads file(s) to Ganymede Cloud Storage in the agent directory.  This data can be found in the File Explorer under "/_agents/<agent id\>/"
+
+#### Example use case for Upload File Action
+
+Files output by an instrument are stored in Ganymede as a source of truth.
+
+- **Run Flow**: Run a flow based on the input provided and as mediated by the flow input requirements. 
+
+#### Example use case for Run Flow Action
+
+An instrument outputs files to a directory as it completes runs, which are processed in Ganymede Cloud. 
+
+- **No-Op**: Complete Agent execution without performing an Action
+
+## Installing Agents
+
+To install an Agent, open the Ganymede application in a browser window and navigate to the Connection tab in the left sidebar.  Select the desired agent by name and download the relevant Windows/Linux installation file.
+
+:::note
+
+Both Linux and Windows versions of the Agent are built using x86_64 architecture.  The Linux executable is Ubuntu-based and the Windows executable is Windows Server 2022.
+
+:::
+
+After downloading the Agent, launch the installation file and complete the configuration
+
+- **Connection name** is the name seen by users in the instrument computer and in the Ganymede UI
+- **Variable definitions** are strings in the format "var_name=var_value", which allows users to set context variables to be used in the Normalizer
+- **Label* is a string that can be used to identify and group connections within Ganymede.  The label is visible in the Connections UI
 
 ## Agent Glossary
 
-- **Agent**: A combination of a listener, processor, and action configuration to move data from a remote user device into Ganymede. It can be helpful to think of an Agent as a class which is instantiated for each new connection. 
-- **Agent Connection**: A running instance of the agent on a unique machine that has previously or is currently connected to Ganymede. The instance is listening for the configured trigger and will perform the action defined by the Agent configuration.
-- **Listener**: A process that watches for new files and initiates the rest of the agent pipeline based on a preconfigured change or event
-- **Processor**: User-defined Python code that normalizes data captured by a Listener
-- **Action**: An interaction with Ganymede's cloud or application that will move data output from the processor into the configured location.
-- **Pipeline**: A data flow of Listener -> Processor -> Action
+- **Agent**: A combination of a Listener, Processor, and Action configuration to move data from a remote user device into Ganymede. It can be helpful to think of an Agent as a class which is instantiated for each new connection. 
+- **Agent Connection**: A running instance of the agent on a unique machine that has previously or is currently connected to Ganymede. The instance is listening for the configured trigger and will perform the Action configured for the Agent.
+- **Listener**: A process that watches for new files and initiates the rest of the agent pipeline based on a preconfigured change or event.
+- **Normalizer**: User-defined Python code that normalizes data captured by a Listener
+- **Action**: An interaction with Ganymede's cloud or application that will move data output from the Normalizer into the specified location.
