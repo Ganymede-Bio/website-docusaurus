@@ -13,7 +13,7 @@ images to the storage bucket
 
 ### Node Attributes
 - **input_multi_image**
-  - file extension of image files
+  - File extension for valid image files submitted.  For example, filling in this attribute with "*.bmp" will only allow files with the extension .bmp to be uploaded.
 - **output_table_image_info**
   - table to write metadata into
 ## User-Defined Python

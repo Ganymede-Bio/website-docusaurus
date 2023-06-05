@@ -13,7 +13,7 @@ return one or more tables for storage in Ganymede data lake.
 
 ### Node Attributes
 - **input_multi_excel**
-  - File extension on excel file used for specifying valid file extensions
+  - File extension for valid Excel files submitted.  For example, filling in this attribute with "*.xls*" will allow any file containing extension .xls, .xlsx, .xlsm, and .xlsb to be uploaded.
 - **output_table_results**
   - Table to display on Table Head in Flow Editor
 ## User-Defined Python

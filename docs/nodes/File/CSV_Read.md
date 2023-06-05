@@ -13,7 +13,7 @@ return one or more tables for storage in Ganymede data lake.
 
 ### Node Attributes
 - **input_file_csv**
-  - File extension on CSV file used for specifying valid file extensions
+  - File extension for valid CSV files submitted.  For example, filling in this attribute with "*.csv" will only allow files with the extension .csv to be uploaded.
 - **output_table_results**
   - Table to display on Table Head in Flow Editor
 ## User-Defined Python

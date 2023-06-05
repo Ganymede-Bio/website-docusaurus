@@ -11,9 +11,9 @@ result to Ganymede cloud storage.
 
 ### Node Attributes
 - **input_file_object**
-  - Data to be written to storage bucket
+  - Filename pattern for specifying valid input files.  For example, filling in this attribute with "exp_*.xml" will only allow files with the prefix "exp_" and the extension ".xml" to be uploaded.
 - **output_data**
-  - Filename to be written to storage bucket
+  - Name of file to be written to storage bucket
 ## User-Defined Python
 Processes blob data for saving in cloud storage
 

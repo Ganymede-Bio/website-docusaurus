@@ -14,7 +14,7 @@ which are written to the Ganymede data lake.
 
 ### Node Attributes
 - **input_file_zip**
-  - File extension on zip file
+  - File extension for valid zip files submitted.  For example, filling in this attribute with "*.zip" will only allow files with the extension .zip to be uploaded.
 - **output_table_results**
   - Data lake table to write metadata to
 ## User-Defined Python
