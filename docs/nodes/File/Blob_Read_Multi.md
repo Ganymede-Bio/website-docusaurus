@@ -13,7 +13,7 @@ return one or more blobs for storage in Ganymede data lake.
 
 ### Node Attributes
 - **input_multi_object**
-  - File extension on object file used for specifying valid file extensions
+  - Filename pattern for specifying valid input files.  For example, filling in this attribute with "exp_*.xml" will only allow files with the prefix "exp_" and the extension ".xml" to be uploaded.
 - **output_data**
   - Filename to be written to storage bucket
 ## User-Defined Python

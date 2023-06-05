@@ -14,7 +14,8 @@ An Airflow operator class that reads data from an Agilent HPLC file and writes t
 - **output_table_metadata**
   - The name of the output table in the Ganymede data lake where the metadata from the Agilent file will be written.
 - **input_file_agilent**
-  - The extension of the Agilent file to be read. This can be .uv, .ms, .ch, or .bin.
+  - The extension of the Agilent file to be read. This can be .uv, .ms, .ch, or .bin.  For example, filling in this attribute with "*.uv" will only allow files with the extension .uv to be uploaded; this field can be left blank if no filtering is desired.
+
 ## User-Defined Python
 Function to convert a datafile object into a dictionary of pandas DataFrame, one for the data
 and another for the metadata.

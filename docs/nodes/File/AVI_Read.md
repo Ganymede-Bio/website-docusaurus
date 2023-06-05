@@ -13,7 +13,7 @@ return one or more tables for storage in Ganymede data lake.
 
 ### Node Attributes
 - **input_file_avi**
-  - File extension on avi file used for specifying valid file extensions
+  - File extension for valid avi files submitted.  For example, filling in this attribute with "*.avi" will only allow files with the extension .avi to be uploaded.
 - **output_table_results**
   - Table to display on Table Head referencing table output from node in Flow Editor
 - **output_table_blob_metadata**
