@@ -236,6 +236,21 @@
   color: white;
 }
 
+.button.blue_button {
+  border-radius: 8px;
+  padding-left: 10px;
+  padding-right: 10px;
+  background-color: #387fd3;
+  color: white;
+  font-weight: 400;
+}
+
+.button.red_button {
+  background-color: red;
+  color: white;
+}
+
+
 .filter-white{
   filter: brightness(0) invert(1);
 }

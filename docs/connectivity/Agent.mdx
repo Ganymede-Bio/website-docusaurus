@@ -4,7 +4,8 @@ title: Instrument Agents
 displayed_sidebar: webUiSidebar
 ---
 
-import { PlusCircleOutlined
+import { PlusCircleOutlined, 
+         SelectOutlined
        } from '@ant-design/icons';
 
 The Ganymede Agent is an executable that can be installed on lab instruments running Windows or Linux to capture instrument data systematically.  The agent can
@@ -45,7 +46,7 @@ Doing so opens up the pop-up box shown below, which contains configuration input
 </div>
 &nbsp;
 
-After filling out this form, click <div className="button light_blue_button">Submit</div> to start building Windows and Linux executables.  When the build is complete, the Agent (i.e. - the configured executables) can be downloaded from the Ganymede application by selecting the corresponding Agent from the Connections tab.
+After filling out this form, click <div className="button blue_button">Submit</div> to start building Windows and Linux executables.  When the build is complete, the Agent (i.e. - the configured executables) can be downloaded from the Ganymede application by selecting the corresponding Agent from the Connections tab.
 
 :::tip
 
@@ -139,11 +140,69 @@ Both Linux and Windows versions of the Agent are built using x86_64 architecture
 
 :::
 
-After downloading the Agent, launch the installation file and complete the configuration
+### Windows Installation
+
+After downloading the Agent, launch the installation file to complete Agent configuration
+
+<div class="text--center">
+  <img alt="Windows Agent installation"
+      src="https://ganymede-bio.mo.cloudinary.net/agent/Agent_Windows_Setup20230605.png"
+      width="500" />
+</div>
+&nbsp;
 
 - **Connection name** is the name seen by users in the instrument computer and in the Ganymede UI
 - **Variable definitions** are strings in the format "var_name=var_value", which allows users to set context variables to be used in the Normalizer
 - **Label** is a string that can be used to identify and group connections within Ganymede.  The label is visible in the Connections UI
+
+TODO: clarify how to specify variable definitions and label with examples
+
+### Linux Installation
+
+TODO: Add Linux installation instructions using systemd
+
+TODO: Describe how to set up outbound traffic firewalls requirements
+
+## Configuring the Normalizer
+
+To modify user-defined code executed by the Agent, select the Agent in the Ganymede app and then click on the <div className="button gray_button"><SelectOutlined />Code</div> button.  Doing so opens a notebook for the user to modify the Normalizer, which is executed after the Trigger and before the Action.
+
+<div class="text--center">
+  <img alt="Agent update configuration"
+      src="https://ganymede-bio.mo.cloudinary.net/agent/Agent_Update_Zoomed_In20230605.png"
+      width="500" />
+</div>
+&nbsp;
+
+<div class="text--center">
+  <img alt="Agent Normalizer"
+      src="https://ganymede-bio.mo.cloudinary.net/agent/Agent_Normalizer_ZoomedIn20230605.png"
+      width="800" />
+</div>
+&nbsp;
+
+## Updating Agents
+
+To modify Agent settings after creation, select the desired Agent in the Connections tab to update the Agent.  Upon clicking <div className="button blue_button">Update</div>, the Agent will be built and then made available for download.
+
+<div class="text--center">
+  <img alt="Agent update configuration"
+      src="https://ganymede-bio.mo.cloudinary.net/agent/Agent_Update20230605.png"
+      width="500" />
+</div>
+&nbsp;
+
+Agents can also be archived or disabled.  Archived Agents cannot be updated, but can still communicate with Ganymede Cloud.  Disabled agents cannot be updated or communicate with Ganymede Cloud.
+
+:::note
+
+Listener and Action types cannot be updated once an Agent's configuration is set.
+
+:::
+
+## Viewing Build History
+
+Each iteration of the Agent’s build can be viewed in the History tab of the agent. This view provides context for each change, either in the form of a log of the configuration change or through a custom commit message from the Agent notebook.
 
 ## Agent Glossary
 
