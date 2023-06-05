@@ -206,6 +206,15 @@
   color: var(--ifm-color-black);
 }
 
+.button.system_button {
+  border-radius: 3px;
+  padding-left: 6px;
+  padding-right: 3px;
+  background-color:var(--ifm-color-gray-lighter);
+  border-color: var(--ifm-color-black);
+  color: var(--ifm-color-black);
+}
+
 .button.run_queue_button {
   border-radius: 3px;
   padding-left: 6px;

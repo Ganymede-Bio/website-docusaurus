@@ -4,6 +4,9 @@ title: Instrument Agents
 displayed_sidebar: webUiSidebar
 ---
 
+import { PlusCircleOutlined
+       } from '@ant-design/icons';
+
 The Ganymede Agent is an executable that can be installed on lab instruments running Windows or Linux to capture instrument data systematically.  The agent can
 
 - filter and designate how to process data
@@ -27,25 +30,34 @@ These questions are answered by the 3 components of an Agent, which function in 
 - A **Normalizer**, which is a user-defined Python snippet that normalizes captured files into a desired, standardized format
 - An **Action**, which is the action to be performed with the normalized data.  The Agent can be configured to upload a data file, start a flow, or complete execution without communicating with Ganymede Cloud.
 
-## Agent Creation
+## Building an Agent
 
-In the navigation pane, there is a new “Connections” tab. All agent connections will be visible here. To create a new agent, click the New button on the right side of the Connections page.
+To create a new agent, click the <div className="button system_button"><PlusCircleOutlined /> New</div> button on the upper-right side of the Connections page.
 
-**TODO**: insert image for creating new agent
+<img alt="Agent Front page" src="https://ganymede-bio.mo.cloudinary.net/agent/Agent_Connections_Front_Page20230605.png" />
 
-A new page, shown below, will appear for configuring the agent.  Once completed, click Submit to start building Windows and Linux executables.  When ready, the Agent (i.e. - the configured executables) can be downloaded from the Ganymede application by selecting the corresponding Agent from the Connections tab.
+Doing so opens up the pop-up box shown below, which contains configuration inputs for the Listener and Action; the Normalizer is configured after Agent creation.
+
+<div class="text--center">
+  <img alt="New Agent configuration" 
+      src="https://ganymede-bio.mo.cloudinary.net/agent/New_Agent_Configuration20230605.png"
+      width="400" />
+</div>
+&nbsp;
+
+After filling out this form, click <div className="button light_blue_button">Submit</div> to start building Windows and Linux executables.  When the build is complete, the Agent (i.e. - the configured executables) can be downloaded from the Ganymede application by selecting the corresponding Agent from the Connections tab.
 
 :::tip
 
-Generally, building the executable takes around 10 minutes to complete.
+Typically, building an executable takes around 10 minutes to complete.
 
 :::
 
-**TODO**: insert image for identification, listener, action
+### Build Config: Identification
 
-The identification input is used to specify the display name for the Agent.  Once specified, an agent ID is generated from the display name which uniquely identifies the Agent. Once created, the Agent ID is fixed, though the display name can be changed.
+The identification input is used to specify the display name for the Agent.  Once the identification is specified, an agent ID is generated from the display name which uniquely identifies the Agent. The Agent ID is locked for a given agent after generation, though its display name can be changed.
 
-### Listener Modes
+### Build Config: Listener
 
 The Listener takes on one of four possible configurations:
 
@@ -53,17 +65,39 @@ The Listener takes on one of four possible configurations:
   - `Check Period`: Frequency with which Agent will poll local directory for new files
   - `Glob to Parameter Mapping`: A set of input pairs; the left member of the input pair is a [glob pattern](https://en.wikipedia.org/wiki/Glob_(programming)) to match files against, and the member on the right is the input parameter associated with the flow to associated captured files with.  Multiple pairs can be specified, directing files matching different glob patterns to different nodes.
   
-    For example, if the instrument outputs an XML file called lc_metadata{'<YYYYMMDD\>'}.abc which is to be ingested by [XML_Read node](../nodes/File/XML_Read.md) called "Ingest_LC_Metadata", an appropriate configuration would be "lc_metadata*.abc" for the left input box and "Ingest_LC_Metadata.xml" for the right node.
+    For example, if the instrument outputs an XML file called "lc_metadata<YYYYMMDD\>.abc" which is to be ingested by [XML_Read node](../nodes/File/XML_Read.md) called "Ingest_LC_Metadata", an appropriate configuration would be "lc_metadata*.abc" for the left input box and "Ingest_LC_Metadata.xml" for the right node.
 
-TODO: Insert image of file watcher configuration
+<div class="text--center">
+  <img alt="Agent configuration - File Watcher" 
+      src="https://ganymede-bio.mo.cloudinary.net/agent/Agent_File_Watcher_Config20230605.png"
+      width="500" />
+</div>
+&nbsp;
+
+:::info Viewing flow input parameters
+
+Input parameters to populate on a Flow can be viewed by selecting "Run Flow" for Action and then selecting the desired flow from the dropdown menu.
+
+<div class="text--center">
+  <img alt="Example agent configuration - File Watcher with Flow Run" 
+      src="https://ganymede-bio.mo.cloudinary.net/agent/Example_File_Watcher_Config20230605.png"
+      width="500" />
+</div>
+
+:::
 
 #### Example use case for File Watcher mode
 
 An instrument outputs files to a directory each time it completes a run, which serve as inputs for a Ganymede flow. 
 
-- **Cron**: Periodically execute agent based on a preset schedule
+- **Cron**: Run Action on a pre-set schedule
 
-TODO: Insert image of cron configuration
+<div class="text--center">
+  <img alt="Agent configuration - Cron" 
+      src="https://ganymede-bio.mo.cloudinary.net/agent/Agent_Cron_Config20230605.png"
+      width="500" />
+</div>
+&nbsp;
 
 #### Example use case for Cron mode
 
@@ -77,7 +111,7 @@ Output data from a Ganymede flow is retrieved and cross-checked against instrume
 
 - **Manual**: Upon Agent launch, the Agent code executes once and then exits.
 
-### Action
+### Build Config: Action
 
 Actions are executed after the Listener and Normalizer (user-defined Python) have completed.
 
@@ -97,7 +131,7 @@ An instrument outputs files to a directory as it completes runs, which are proce
 
 ## Installing Agents
 
-To install an Agent, open the Ganymede application in a browser window and navigate to the Connection tab in the left sidebar.  Select the desired agent by name and download the relevant Windows/Linux installation file.
+To install an Agent, open the Ganymede application in a browser window and navigate to the Connection tab in the left sidebar.  Select the desired Agent by name and download the relevant Windows/Linux installation file.
 
 :::note
 
@@ -109,7 +143,7 @@ After downloading the Agent, launch the installation file and complete the confi
 
 - **Connection name** is the name seen by users in the instrument computer and in the Ganymede UI
 - **Variable definitions** are strings in the format "var_name=var_value", which allows users to set context variables to be used in the Normalizer
-- **Label* is a string that can be used to identify and group connections within Ganymede.  The label is visible in the Connections UI
+- **Label** is a string that can be used to identify and group connections within Ganymede.  The label is visible in the Connections UI
 
 ## Agent Glossary
 
