@@ -1,0 +1,58 @@
+---
+id: Overview
+title: Connecting Instruments
+displayed_sidebar: webUiSidebar
+---
+
+## Overview
+
+Connectivity serves as the base for ensuring that lab data is methodically captured, and so sits at the foundation of the Ganymede offering.  Ganymede offers three ways to capture instrument files and data:
+
+- By [manually drag-and-dropping files](../FlowView.mdx) into the Ganymede app and processed via flows
+- With a [Ganymede Agent](./Agent.mdx), a Linux or Windows-based executable which captures instrument files for storage and/or processing
+- With a [browser-based file watcher](./FileWatcher.mdx), which captures and associates files with specific flows
+- Via event-driven processing - for example, Ganymede can be configured to listen for new files written to an S3 bucket.
+
+## Drag-and-Drop
+
+Instrument files can be drag-and-dropped into file inputs associated with a specific flow.  No setup is required; this method of data ingestion is available as soon as your Ganymede tenant is configured.
+
+### When to use drag-and-drop
+
+Drag-and-drop fits best when there are relatively few instrument files to be processed.  Compared with other methods, this approach involves the least effort to set up, but the greatest amount of effort to use.  Once captured, previously processed files can be referred to by name, obviating the need to upload the same file going forward.
+
+Users can specify input parameters upon flow execution, giving greater flexibility to flows for which execution needs to vary based on user-specified input.
+
+Drag-and-drop becomes less appropriate if instrument runs generate many files, such that the operational overhead of specifying files to be executed becomes cumbersome.
+
+## Ganymede Agent
+
+An installable program is configured in the Ganymede app and downloaded to relevant instrument PCs.  Once executed, the program runs in the background, robust to computer restart.
+
+### When to use Ganymede Agent
+
+Ganymede agents offer a robust solution for capturing files without user input.  The solution runs in the background on the instrument PC, limiting the chance that the listener would be inadvertently shut down.
+
+Agents require installing software on an instrument PC, and so would not be appropriate if there is sensitivity to loading third-party software on an instrument PC.  Since the agent does not require login to capture files, the agent is unable to distinguish between different users if login is shared on a computer.
+
+## Browser-based File Watcher
+
+Input nodes on a Flow can be configured to watch for files that appear in a specific directory on the instrument PC.  As with drag-and-drop, no setup is required other than enabling the Ganymede app.  
+
+### When to use browser-based file-watcher
+
+This primary benefits of this approach are that it automates data capture without user input, no executable needs to be installed on a local machine, and no cloud infra configuration is required to get started.  
+
+On the other hand, the file-watcher is susceptible to the browser window running Ganymede getting closed; an example of when this would happen would be if the computer hosting the lab instrument is shut down.
+
+Since the file watcher passively collects files without requiring user login, the approach is not appropriate if the user that executed a flow needs to be captured.  
+
+## Event-Driven Processing
+
+Ganymede can be configured to listen for and trigger flows based on AWS and Benchling events.  This method requires credentialing Ganymede to capture relevant events.
+
+### When to use Event-Driven Processing
+
+The use cases for event-driven processing depend on the system emitting events.  
+
+AWS events are most useful in cases where many files are being generated from a given lab instrument and a preexisting method exists to write these files to S3 in a structured manner.

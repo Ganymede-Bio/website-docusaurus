@@ -20,13 +20,18 @@ module.exports = {
       },
       {
         type: 'category',
-        label: 'Quickstart Guides',
+        label: 'Quickstarts',
         collapsed: false,
         items: [
           {
             type: 'doc',
             id: 'QuickstartCreateDashboard',
             label: 'QuickstartCreateDashboard'
+          },
+          {
+            type: 'doc',
+            id: 'QuickstartConnectAgent',
+            label: 'QuickstartConnectAgent'
           },
           {
             type: 'doc',
@@ -38,19 +43,29 @@ module.exports = {
       {
         type: 'category',
         label: 'Connecting Instruments',
-        collapsed: false,
+        collapsed: true,
         items: [
           {
             type: 'doc',
+            id: 'connectivity/Overview',
+            label: 'Ways to Capture Data'
+          },
+          {
+            type: 'doc',
             id: 'connectivity/Agent',
-            label: 'Agent'
+            label: 'Capture Files with Agents'
+          },
+          {
+            type: 'doc',
+            id: 'connectivity/FileWatcher',
+            label: 'Capture Files with Browser'
           }
         ]
       },
       {
         type: 'category',
         label: 'Processing Data',
-        collapsed: false,
+        collapsed: true,
         items: [{
           type: 'category',
           label: 'Running Flows',
@@ -74,7 +89,7 @@ module.exports = {
       {
         type: 'category',
         label: 'Observing Data',
-        collapsed: false,
+        collapsed: true,
         items: ['Files', 'Dashboards', 'AnalysisNotebook', 'DataExplorer']
       },
       {

@@ -4,10 +4,23 @@ title: Local Agent
 displayed_sidebar: webUiSidebar
 ---
 
-## Overview
+The Ganymede Agent is an executable that can be installed on lab instruments running Windows or Linux to capture instrument data systematically.  The agent can
 
-The Ganymede agent is an executable that can be installed on lab instruments running Windows or Linux to capture instrument data systematically. 
+- filter and designate how to process data
+- interact with connected instruments
+- upload files into Ganymede Cloud
+- initiate data processing pipelines
+
+By installing Agents, your lab machines become an integrated part of the Ganymede system, enhancing the data management and processing capabilities in your lab.
+
+## 
 
 
+## Agent Glossary
 
-The agent can optionally further utilize the data within Ganymede’s capabilities. 
+- **Agent**: A combination of a trigger, processor, and action configuration to move data from a remote user device into Ganymede. It can be helpful to think of an Agent as a class which is instantiated for each new connection. 
+- **Agent Connection**: A running instance of the agent on a unique machine that has previously or is currently connected to Ganymede. The instance is listening for the configured trigger and will perform the action defined by the Agent configuration.
+- **Trigger**: A configured listener to kick off the remaining agent pipeline based on a particular change or event
+- **Processor**: User defined code that converts whatever data is produced from a trigger into data that can be handled by the action in the end form appropriate for the use case.
+- **Action**: An interaction with Ganymede's cloud or application that will move data output from the processor into the configured location.
+- **Pipeline**: A data flow of trigger -> processor -> action
