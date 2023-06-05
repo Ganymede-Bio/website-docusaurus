@@ -30,11 +30,6 @@ module.exports = {
           },
           {
             type: 'doc',
-            id: 'QuickstartConnectAgent',
-            label: 'QuickstartConnectAgent'
-          },
-          {
-            type: 'doc',
             id: 'QuickstartBuildFlow',
             label: 'QuickstartBuildFlow'
           },

@@ -13,14 +13,57 @@ The Ganymede Agent is an executable that can be installed on lab instruments run
 
 By installing Agents, your lab machines become an integrated part of the Ganymede system, enhancing the data management and processing capabilities in your lab.
 
-## 
+## What does an Agent consist of?
+
+Each Agent has 3 questions to answer:
+
+- What files are relevant for capture?
+- How should files (from potentially different instruments) be standardized for consumption (by a common flow)?
+- Where should the standardized file be directed?
+
+These questions are answered by the 3 components of an Agent, which function in sequence:
+
+- A **Listener**, which looks for relevant, new files appearing on an instrument computer
+- A **Normalizer**, which is a user-defined Python snippet that normalizes captured files into a desired, standardized format
+- An **Action**, which is the action to be performed with the normalized data.  The Agent can be configured to upload a data file, start a flow, or complete execution without communicating with Ganymede Cloud.
+
+## Agent Creation
+
+In the navigation pane, there is a new “Connections” tab. All agent connections will be visible here. To create a new agent, click the New button on the right side of the Connections page.
+
+**TODO**: insert image for creating new agent
+
+A new page, shown below, will appear for configuring the agent.  Once this form is submitted, Ganymede Cloud starts building Windows and Linux executables in the application.  When ready, these executables can be downloaded from the Ganymede application.
+
+:::tip
+
+Generally, building the executable takes around 10 minutes to complete.
+
+:::
+
+**TODO**: insert image for identification, listener, action
+
+- **Identification**: The display name for the Agent.  Once specified, an agent ID is generated from the display name which uniquely identifies the Agent. Once created, the Agent ID is fixed, though the display name can be changed.
+- **Select Listener**: Takes on one of four possible configurations:
+    - **File Watcher**: Monitor specified directory on the local file system for files to process and execute upon observing new files matching specified pattern
+        - `Check Period`: Frequency with which Agent will poll local directory for new files
+        - `Glob to Parameter Mapping`: A set of input pairs; the left member of the input pair is a [glob pattern](https://en.wikipedia.org/wiki/Glob_(programming)) to match files against, and the member on the right is the input parameter associated with the flow to associated captured files with.  Multiple pairs can be specified, directing files matching different glob patterns to different nodes.
+        For example, if the instrument outputs an XML file called lc_metadata{'<YYYYMMDD\>'}.abc which is to be ingested by [XML_Read node](./nodes/File/XML_Read.md) called "Ingest_LC_Metadata", an appropriate configuration would be "lc_metadata*.abc" for the left input box and "Ingest_LC_Metadata.xml" for the right node.
+    - **Cron**: Periodically execute agent based on a preset schedule
+    - **Cloud Watcher**: Monitor specified directory in Ganymede Cloud Storage for new files, and execute upon observing new files matching specified pattern
+    - **Manual**: Upon Agent launch, the Agent code executes once and then exits.
+- **Select Action**:
+    - **Upload File**: Uploads file(s) to Ganymede Cloud Storage in the agent directory.  This data can be found in the File Explorer under "/_agents/<agent id\>/"
+    - **Run Flow**: Run a flow based on the input provided and as mediated by the flow input requirements. 
+    - **No-Op**: Complete Agent execution without performing an Action
+
 
 
 ## Agent Glossary
 
-- **Agent**: A combination of a trigger, processor, and action configuration to move data from a remote user device into Ganymede. It can be helpful to think of an Agent as a class which is instantiated for each new connection. 
+- **Agent**: A combination of a listener, processor, and action configuration to move data from a remote user device into Ganymede. It can be helpful to think of an Agent as a class which is instantiated for each new connection. 
 - **Agent Connection**: A running instance of the agent on a unique machine that has previously or is currently connected to Ganymede. The instance is listening for the configured trigger and will perform the action defined by the Agent configuration.
-- **Trigger**: A configured listener to kick off the remaining agent pipeline based on a particular change or event
-- **Processor**: User defined code that converts whatever data is produced from a trigger into data that can be handled by the action in the end form appropriate for the use case.
+- **Listener**: A process that watches for new files and initiates the rest of the agent pipeline based on a preconfigured change or event
+- **Processor**: User-defined Python code that normalizes data captured by a Listener
 - **Action**: An interaction with Ganymede's cloud or application that will move data output from the processor into the configured location.
-- **Pipeline**: A data flow of trigger -> processor -> action
+- **Pipeline**: A data flow of Listener -> Processor -> Action
