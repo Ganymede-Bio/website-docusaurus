@@ -4,11 +4,17 @@ title: Watching Files with Browsers
 displayed_sidebar: webUiSidebar
 ---
 
-
+import {
+  HomeOutlined,
+  NodeIndexOutlined,
+  PlusCircleOutlined,
+  FolderViewOutlined,
+  UserOutlined
+} from '@ant-design/icons';
 
 ## Watching directories for new files
 
-An alternative way to load files into Ganymede flows is to watch a directory.  This feature enables users to define a directory that is monitored for new file additions or modifications.  New files that appear in the directory are queued, enabling hands-free usage of Ganymede. 
+With File Watcher, the Ganymede web application can be configured to watch for new files for processing.  This feature enables users to define a directory that is monitored for new file additions or modifications.  New files that appear in the directory are queued, enabling hands-free usage of Ganymede. 
 
 To setup a directory watcher, open up a _flow_ on the <div className="button darkblue_button"><HomeOutlined /> **Home**</div> page or via the <div className="button darkblue_button"><NodeIndexOutlined /> **Flow Editor**</div> page. The <div className="button dark_gray_button"><PlusCircleOutlined className="tree_node_icon"/> **Flow_Inputs**</div> *node* consists of a form input for all input types that have been defined for the _flow_.  Inputs that take files have a <div className="button light_blue_button"><FolderViewOutlined /></div> icon that is used to select which directory needs to be watched.
 

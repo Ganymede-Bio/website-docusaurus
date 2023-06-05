@@ -1,6 +1,6 @@
 ---
 id: Agent
-title: Local Agent
+title: Instrument Agents
 displayed_sidebar: webUiSidebar
 ---
 
@@ -53,7 +53,7 @@ The Listener takes on one of four possible configurations:
   - `Check Period`: Frequency with which Agent will poll local directory for new files
   - `Glob to Parameter Mapping`: A set of input pairs; the left member of the input pair is a [glob pattern](https://en.wikipedia.org/wiki/Glob_(programming)) to match files against, and the member on the right is the input parameter associated with the flow to associated captured files with.  Multiple pairs can be specified, directing files matching different glob patterns to different nodes.
   
-    For example, if the instrument outputs an XML file called lc_metadata{'<YYYYMMDD\>'}.abc which is to be ingested by [XML_Read node](./nodes/File/XML_Read.md) called "Ingest_LC_Metadata", an appropriate configuration would be "lc_metadata*.abc" for the left input box and "Ingest_LC_Metadata.xml" for the right node.
+    For example, if the instrument outputs an XML file called lc_metadata{'<YYYYMMDD\>'}.abc which is to be ingested by [XML_Read node](../nodes/File/XML_Read.md) called "Ingest_LC_Metadata", an appropriate configuration would be "lc_metadata*.abc" for the left input box and "Ingest_LC_Metadata.xml" for the right node.
 
 TODO: Insert image of file watcher configuration
 
