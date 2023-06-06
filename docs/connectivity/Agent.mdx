@@ -5,7 +5,8 @@ displayed_sidebar: webUiSidebar
 ---
 
 import { PlusCircleOutlined, 
-         SelectOutlined
+         SelectOutlined,
+         DiffOutlined
        } from '@ant-design/icons';
 
 The Ganymede Agent is an executable that can be installed on lab instruments running Windows or Linux to capture instrument data systematically.  The agent can
@@ -181,7 +182,39 @@ To modify user-defined code executed by the Agent, select the Agent in the Ganym
 </div>
 &nbsp;
 
-## Updating Agents
+Previously built agents remain available for download in Ganymede.
+
+## Maintaining Agents
+
+### Viewing Logs
+
+Logs can be found on the Logs tab for each Agent.  These logs contain status check-ins and information regarding the Agent's trigger.
+
+TODO: put in image for logs
+
+### Monitoring Agent Connections
+
+Agents with Action types of Upload File and Run Flow communicate with Ganymede Cloud to upload files and run flows, respectively.  These communications can be monitored by observing status updates and logs in the Ganymede web app UI.
+
+The Connections page shows an overview of all connections that have ever been made and their latest status in addition to other metadata made available from their last status ping.
+
+<div class="text--center">
+  <img alt="Agent Status"
+      src="https://ganymede-bio.mo.cloudinary.net/agent/Agent_Status20230605.png"
+      width="400" />
+</div>
+&nbsp;
+
+The Agent page displays a list of all connections instantiated from a specific Agent. This provides the user quick and easy access to the running executables associated with a specific Agent configuration.
+
+<div class="text--center">
+  <img alt="Agent Connection Status"
+      src="https://ganymede-bio.mo.cloudinary.net/agent/Agent_Connection_Status20230605.png"
+      width="400" />
+</div>
+&nbsp;
+
+### Updating Agents
 
 To modify Agent settings after creation, select the desired Agent in the Connections tab to update the Agent.  Upon clicking <div className="button blue_button">Update</div>, the Agent will be built and then made available for download.
 
@@ -200,9 +233,34 @@ Listener and Action types cannot be updated once an Agent's configuration is set
 
 :::
 
-## Viewing Build History
+### Viewing Build History
 
-Each iteration of the Agent’s build can be viewed in the History tab of the agent. This view provides context for each change, either in the form of a log of the configuration change or through a custom commit message from the Agent notebook.
+Each iteration of Agent build can be viewed in the History tab of the agent. This view provides context for each change, either in the form of a log of the configuration change or through a custom commit message from the Agent notebook.
+
+<div class="text--center">
+  <img alt="Agent build history"
+       src="https://ganymede-bio.mo.cloudinary.net/agent/Agent_Build_History20230605.png" 
+       width="800"
+  />
+</div>
+&nbsp;
+
+Configuration differences between two agent builds can be viewed for audit or debugging purposes by clicking <div className="keystroke blue_keystroke"><DiffOutlined /></div> button.
+
+<div class="text--center">
+  <img alt="Agent build history detail"
+      src="https://ganymede-bio.mo.cloudinary.net/agent/Agent_Build_History_Detail20230605.png" 
+      width="800"
+      />
+</div>
+
+### Uninstalling Agents
+
+#### Windows
+
+The Agent can be uninstalled and associated service removed through the “Add or Remove Programs” panel from the Control Panel.
+
+TODO: add screenshot showing removal
 
 ## Agent Glossary
 

@@ -245,6 +245,12 @@
   font-weight: 400;
 }
 
+.button.blue_keystroke {
+  display: inline-block;
+  background-color: #669ff4;
+  color: #387fd3;
+}
+
 .button.red_button {
   background-color: red;
   color: white;
