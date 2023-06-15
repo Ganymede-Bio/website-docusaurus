@@ -62,23 +62,32 @@ The Run Queue Bar located at the bottom of the screen contains buttons for execu
 
 ## Flows
 
-### Creating Flows
-
 To create a new _flow_, click the <div className="button darkblue_button">**Manage <SettingOutlined />**</div> button in the upper right hand corner of the screen. Then click the <div className="button black_button"><PlusOutlined /> Add New Flow</div> button on the sidebar.  This action exposes a modal for naming and describing the _flow_.  
 
-<img alt="Add new flow" src="https://ganymede-bio.mo.cloudinary.net/apiServer/AddNewFlow_20230424.png"/>
+<img alt="Add new flow" src="https://ganymede-bio.mo.cloudinary.net/apiServer/AddNewFlow_20230601.png"/>
 
-#### Configuring Retries
+### Scheduling Flow Execution
 
-Retries and email notifications associated with the _flow_ can be specified in this modal.  Retries is the number of times a node run within the flow is retried before processing is considered to have failed.  
+Flows can be configured to automatically run on a schedule. The schedule is set by selecting from the dropdowns shown below and can be configured in intervals of months, weeks, days, hours, and minutes.
 
-#### Configuring Email Notifications
+<img alt="Cron flows" src="https://ganymede-bio.mo.cloudinary.net/apiServer/CronFlow.png" width="470" height="190"/>
+&nbsp;
+
+:::note
+
+Scheduled jobs are specified in UTC time.
+
+:::
+
+### Configuring Email Notifications
 
 Email notifications are sent to specified users upon _flow_ failure; an example email for this is shown below.
 
 <img alt="Email notifications" src="https://ganymede-bio.mo.cloudinary.net/apiServer/FlowEmail_20230424.png"/>
 
-&nbsp;
+### Configuring Retries
+
+Retries and email notifications associated with the _flow_ can be specified in this modal.  Retries is the number of times that a node run within the flow is retried before processing is considered to have failed.  
 
 ### Loading and Saving Flows
 
