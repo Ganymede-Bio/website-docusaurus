@@ -20,7 +20,7 @@ module.exports = {
       },
       {
         type: 'category',
-        label: 'Quickstarts',
+        label: 'Quickstart Guides',
         collapsed: false,
         items: [
           {
