@@ -23,63 +23,64 @@ The table below lists available nodes.
 - **Is Multi** indicates that the node can accept multiple inputs.
 
 | [Category](#node-categories)   | Name                   | [Input Types](#node-inputoutput-types)                                                           | [Output Types](#node-inputoutput-types)                                | Is Editable   | Is Multi   |
-|------------|------------------------|-----------------------------------------------------------------------|---------------------------------------------|---------------|------------|
-| Analysis   | Process_Blob_to_Blob   | FileAny and Optional[Table or List[Table]]                            | Dict[FileAny]                               | True          | False      |
-| Analysis   | Process_Blob_to_Table  | FileAny and Optional[Table or List[Table]]                            | Table or Dict[Table]                        | True          | False      |
-| Analysis   | Python                 | Table(s) and/or File(s)                                               | Table(s) and/or File(s)                     | True          | False      |
-| Analysis   | Table_to_Blob          | Table or List[Table]                                                  | Dict[FileAny]                               | True          | False      |
-| Analysis   | Transform_SQL          | Table                                                                 | Table                                       | True          | False      |
-| Analysis   | Transform_py           | Table or List[Table]                                                  | Table or Dict[Table]                        | True          | False      |
-| App        | AirtableExport         | Table                                                                 | API                                         | True          | False      |
-| App        | AirtableImport         | API                                                                   | Table                                       | False         | False      |
-| App        | Azure_Query            | API                                                                   | Table or Dict[Table]                        | True          | False      |
-| App        | Azure_Read             | API                                                                   | FileAny                                     | False         | False      |
-| App        | Azure_Read_Multi       | API                                                                   | FileAny                                     | False         | True       |
-| App        | Azure_Write            | FileAny                                                               | API                                         | False         | False      |
-| App        | Benchling_Api          | API                                                                   | Table                                       | True          | False      |
-| App        | Benchling_Event        | App                                                                   | FileAny                                     | True          | False      |
-| App        | Benchling_Read         | API                                                                   | Table                                       | True          | False      |
-| App        | Benchling_Read_Object  | API                                                                   | Table                                       | True          | False      |
-| App        | Benchling_Write        | Table                                                                 | API                                         | True          | False      |
-| App        | Benchling_Write_Object | Optional[FileAny or List[FileAny]] and Optional[Table or List[Table]] | API                                         | True          | False      |
-| App        | Coda_Write             | Table                                                                 | API                                         | True          | False      |
-| App        | ELabNext_Write         | Table                                                                 | API                                         | True          | False      |
-| App        | S3_Event               | App                                                                   | FileAny                                     | True          | False      |
-| App        | S3_Read                | API                                                                   | FileAny                                     | False         | False      |
-| App        | S3_Write               | FileAny                                                               | API                                         | False         | False      |
-| App        | SciNote_Write          | Table                                                                 | API                                         | True          | False      |
-| App        | Smartsheet_Read        | API                                                                   | Table                                       | True          | False      |
-| App        | Snowflake_Write        | Table                                                                 | API                                         | False         | False      |
-| File       | AVI_Read               | FileAVI                                                               | Table or Dict[Table]                        | True          | False      |
-| File       | AVI_Read_Multi         | Set[FileAVI]                                                          | Table or Dict[Table]                        | True          | True       |
-| File       | Agilent_HPLC_Read      | File                                                                  | Dict[Table]                                 | True          | False      |
-| File       | Blob_Read              | FileAny                                                               | FileAny                                     | True          | False      |
-| File       | Blob_Read_Multi        | Set[FileAny]                                                          | Dict[FileAny]                               | True          | True       |
-| File       | CSV_Read               | FileCSV                                                               | Table or Dict[Table]                        | True          | False      |
-| File       | CSV_Read_Multi         | Set[FileCSV]                                                          | Table or Dict[Table]                        | True          | True       |
-| File       | CSV_Write              | Table or List[Table]                                                  | FileCSV                                     | True          | False      |
-| File       | Excel_Read             | FileExcel                                                             | Table or Dict[Table]                        | True          | False      |
-| File       | Excel_Read_Multi       | Set[FileExcel]                                                        | Table or Dict[Table]                        | True          | True       |
-| File       | Excel_Write            | Table or List[Table]                                                  | FileExcel                                   | True          | False      |
-| File       | FCS_Extract_Load       | FileFCS                                                               | Dict[Table]                                 | True          | False      |
-| File       | FCS_Extract_Load_Multi | Set[FileFCS]                                                          | Dict[Table]                                 | True          | True       |
-| File       | HDF5_Read              | FileHDF5                                                              | FileAny                                     | True          | False      |
-| File       | Image_Read             | FileImage                                                             | Dict[FileAny]                               | True          | False      |
-| File       | Image_Read_Multi       | List[FileImage]                                                       | Dict[FileAny]                               | True          | True       |
-| File       | Image_Write            | Table or List[Table]                                                  | Dict[FileAny]                               | True          | False      |
-| File       | PDF_Read               | FilePDF                                                               | Table or Dict[Table], Optional[Dict[bytes]] | True          | False      |
-| File       | PDF_Read_Multi         | Set[FilePDF]                                                          | Table or Dict[Table], Optional[Dict[bytes]] | True          | True       |
-| File       | Powerpoint_Write       | Table or List[Table]                                                  | Dict[FileAny]                               | True          | False      |
-| File       | XML_Read               | FileXML                                                               | Table                                       | True          | False      |
-| File       | Zip_Read               | FileZip                                                               | Dict[FileAny]                               | True          | False      |
-| Instrument | Instron_Tensile_Read   | FileIsTens                                                            | Dict[Table]                                 | True          | False      |
-| Instrument | Profilometer_Read      | FileHDF5                                                              | FileHDF5                                    | True          | False      |
-| Instrument | Synergy_Read           | FileTxt                                                               | Dict[Table]                                 | True          | False      |
-| Instrument | Synergy_Read_Multi     | Set[FileTxt]                                                          | Dict[Table]                                 | True          | True       |
-| Tag        | Benchling_Tag          | TagBenchling                                                          | string                                      | False         | False      |
-| Tag        | Input_Param            | string                                                                | string                                      | False         | False      |
-| Test       | GanymedeEcho           |                                                                       |                                             | False         | False      |
-| Test       | Placeholder            |                                                                       |                                             | False         | False      |
+|------------|------------------------|-----------------------------------------------------------------------|---------------------------------------------|---------------|
+| Analysis   | Process_Blob_to_Blob   | FileAny and Optional[Table or List[Table]]                            | Dict[FileAny]                               | True          |
+| Analysis   | Process_Blob_to_Table  | FileAny and Optional[Table or List[Table]]                            | Table or Dict[Table]                        | True          |
+| Analysis   | Python                 | Table(s) and/or File(s)                                               | Table(s) and/or File(s)                     | True          |
+| Analysis   | RunContainer           |                                                                       |                                             | True          |
+| Analysis   | Table_to_Blob          | Table or List[Table]                                                  | Dict[FileAny]                               | True          |
+| Analysis   | Transform_SQL          | Table                                                                 | Table                                       | True          |
+| Analysis   | Transform_py           | Table or List[Table]                                                  | Table or Dict[Table]                        | True          |
+| App        | AirtableExport         | Table                                                                 | API                                         | True          |
+| App        | AirtableImport         | API                                                                   | Table                                       | False         |
+| App        | Azure_Query            | API                                                                   | Table or Dict[Table]                        | True          |
+| App        | Azure_Read             | API                                                                   | FileAny                                     | False         |
+| App        | Azure_Read_Multi       | API                                                                   | FileAny                                     | False         |
+| App        | Azure_Write            | FileAny                                                               | API                                         | False         |
+| App        | Benchling_Api          | API                                                                   | Table                                       | True          |
+| App        | Benchling_Event        | App                                                                   | FileAny                                     | True          |
+| App        | Benchling_Read         | API                                                                   | Table                                       | True          |
+| App        | Benchling_Read_Object  | API                                                                   | Table                                       | True          |
+| App        | Benchling_Write        | Table                                                                 | API                                         | True          |
+| App        | Benchling_Write_Object | Optional[FileAny or List[FileAny]] and Optional[Table or List[Table]] | API                                         | True          |
+| App        | Coda_Write             | Table                                                                 | API                                         | True          |
+| App        | ELabNext_Write         | Table                                                                 | API                                         | True          |
+| App        | S3_Event               | App                                                                   | FileAny                                     | True          |
+| App        | S3_Read                | API                                                                   | FileAny                                     | False         |
+| App        | S3_Write               | FileAny                                                               | API                                         | False         |
+| App        | SciNote_Write          | Table                                                                 | API                                         | True          |
+| App        | Smartsheet_Read        | API                                                                   | Table                                       | True          |
+| App        | Snowflake_Write        | Table                                                                 | API                                         | False         |
+| File       | AVI_Read               | FileAVI                                                               | Table or Dict[Table]                        | True          |
+| File       | AVI_Read_Multi         | Set[FileAVI]                                                          | Table or Dict[Table]                        | True          |
+| File       | Agilent_HPLC_Read      | File                                                                  | Dict[Table]                                 | True          |
+| File       | Blob_Read              | FileAny                                                               | FileAny                                     | True          |
+| File       | Blob_Read_Multi        | Set[FileAny]                                                          | Dict[FileAny]                               | True          |
+| File       | CSV_Read               | FileCSV                                                               | Table or Dict[Table]                        | True          |
+| File       | CSV_Read_Multi         | Set[FileCSV]                                                          | Table or Dict[Table]                        | True          |
+| File       | CSV_Write              | Table or List[Table]                                                  | FileCSV                                     | True          |
+| File       | Excel_Read             | FileExcel                                                             | Table or Dict[Table]                        | True          |
+| File       | Excel_Read_Multi       | Set[FileExcel]                                                        | Table or Dict[Table]                        | True          |
+| File       | Excel_Write            | Table or List[Table]                                                  | FileExcel                                   | True          |
+| File       | FCS_Extract_Load       | FileFCS                                                               | Dict[Table]                                 | True          |
+| File       | FCS_Extract_Load_Multi | Set[FileFCS]                                                          | Dict[Table]                                 | True          |
+| File       | HDF5_Read              | FileHDF5                                                              | FileAny                                     | True          |
+| File       | Image_Read             | FileImage                                                             | Dict[FileAny]                               | True          |
+| File       | Image_Read_Multi       | List[FileImage]                                                       | Dict[FileAny]                               | True          |
+| File       | Image_Write            | Table or List[Table]                                                  | Dict[FileAny]                               | True          |
+| File       | PDF_Read               | FilePDF                                                               | Table or Dict[Table], Optional[Dict[bytes]] | True          |
+| File       | PDF_Read_Multi         | Set[FilePDF]                                                          | Table or Dict[Table], Optional[Dict[bytes]] | True          |
+| File       | Powerpoint_Write       | Table or List[Table]                                                  | Dict[FileAny]                               | True          |
+| File       | XML_Read               | FileXML                                                               | Table                                       | True          |
+| File       | Zip_Read               | FileZip                                                               | Dict[FileAny]                               | True          |
+| Instrument | Instron_Tensile_Read   | FileIsTens                                                            | Dict[Table]                                 | True          |
+| Instrument | Profilometer_Read      | FileHDF5                                                              | FileHDF5                                    | True          |
+| Instrument | Synergy_Read           | FileTxt                                                               | Dict[Table]                                 | True          |
+| Instrument | Synergy_Read_Multi     | Set[FileTxt]                                                          | Dict[Table]                                 | True          |
+| Tag        | Benchling_Tag          | TagBenchling                                                          | string                                      | False         |
+| Tag        | Input_Param            | string                                                                | string                                      | False         |
+| Test       | GanymedeEcho           |                                                                       |                                             | False         |
+| Test       | Placeholder            |                                                                       |                                             | False         |
 
 #### Node Categories
 
@@ -135,6 +136,7 @@ The _execute_ function may call classes and functions found within the User-Defi
 | Analysis   | Process_Blob_to_Blob   | Process blob data; write results to data store                               |
 | Analysis   | Process_Blob_to_Table  | Process data; write tabular data results to data lake                        |
 | Analysis   | Python                 | Process data with python                                                     |
+| Analysis   | RunContainer           | Run container node                                                           |
 | Analysis   | Table_to_Blob          | Process tabular data; write data results to data lake                        |
 | Analysis   | Transform_SQL          | SQL analysis Function                                                        |
 | Analysis   | Transform_py           | Manipulate data with python                                                  |
@@ -188,3 +190,4 @@ The _execute_ function may call classes and functions found within the User-Defi
 | Tag        | Input_Param            | Input parameter into Flow                                                    |
 | Test       | GanymedeEcho           | Echo command for Ganymede                                                    |
 | Test       | Placeholder            | Function for planning Flow                                                   |
+
