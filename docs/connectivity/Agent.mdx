@@ -9,12 +9,14 @@ import { PlusCircleOutlined,
          DiffOutlined
        } from '@ant-design/icons';
 
-The Ganymede Agent is an executable that can be installed on lab instruments running Windows or Linux to capture instrument data systematically.  The agent can
+The Ganymede Agent is software installed on PCs attached to lab instruments which systematically captures and processes instrument data.  The agent can
 
 - filter and designate how to process data
-- interact with connected instruments
 - upload files into Ganymede Cloud
-- initiate data processing pipelines
+- initiate data processing pipelines, which can be based
+  - upon specific files being written to the local machine by the instrument
+  - upon specific files being written to a cloud storage bucket
+  - on a scheduled cadence
 
 By installing Agents, your lab machines become an integrated part of the Ganymede system, enhancing the data management and processing capabilities in your lab.
 
@@ -29,8 +31,8 @@ Each Agent has 3 questions to answer:
 These questions are answered by the 3 components of an Agent, which function in sequence:
 
 - A **Listener**, which looks for relevant, new files appearing on an instrument computer
-- A **Normalizer**, which is a user-defined Python snippet that normalizes captured files into a desired, standardized format
-- An **Action**, which is the action to be performed with the normalized data.  The Agent can be configured to upload a data file, start a flow, or complete execution without communicating with Ganymede Cloud.
+- A **Normalizer**, which is a user-defined Python snippet that normalizes captured files into a desired, standardized format, if desired.
+- An **Action**, which is the action to be performed with the normalized data.  The Agent can be configured to upload a data file to Ganymede Cloud or to start a flow, if desired.
 
 ## Building an Agent
 
