@@ -10,14 +10,14 @@ Connectivity serves as the base for ensuring that lab data is methodically captu
 
 - By [manually drag-and-dropping files](../FlowView.mdx) into the Ganymede app and processed via flows
 - With a [Ganymede Agent](./Agent.mdx), a Linux or Windows-based executable which captures instrument files for storage and/or processing
-- With a [browser-based file watcher](./FileWatcher.mdx), which captures and associates files with specific flows
+- With a [Browser-based File Watcher](./FileWatcher.mdx), which captures and associates files with specific flows
 - Via event-driven processing - for example, Ganymede can be configured to listen for new files written to an S3 bucket.
 
-## Drag-and-Drop
+## Drag-and-drop
 
 Instrument files can be drag-and-dropped into file inputs associated with a specific flow.  No setup is required; this method of data ingestion is available as soon as your Ganymede tenant is configured.
 
-### When to use drag-and-drop
+### When to use Drag-and-drop
 
 Drag-and-drop fits best when there are relatively few instrument files to be processed.  Compared with other methods, this approach involves the least effort to set up, but the greatest amount of effort to use.  Once captured, previously processed files can be referred to by name, obviating the need to upload the same file going forward.
 
@@ -39,7 +39,7 @@ Agents require installing software on an instrument PC, and so would not be appr
 
 Input nodes on a Flow can be configured to watch for files that appear in a specific directory on the instrument PC.  As with drag-and-drop, no setup is required other than enabling the Ganymede app.  
 
-### When to use browser-based file-watcher
+### When to use Browser-based File Watcher
 
 This primary benefits of this approach are that it automates data capture without user input, no executable needs to be installed on a local machine, and no cloud infra configuration is required to get started.  
 

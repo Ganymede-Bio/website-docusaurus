@@ -25,7 +25,7 @@ By installing Agents, your lab machines become an integrated part of the Ganymed
 Each Agent has 3 questions to answer:
 
 - What files are relevant for capture?
-- How should files (from potentially different instruments) be standardized for consumption (by a common flow)?
+- How should files (from different instrument instances) be standardized for consumption (by a common flow)?
 - Where should the standardized file be directed?
 
 These questions are answered by the 3 components of an Agent, which function in sequence:
@@ -39,6 +39,7 @@ These questions are answered by the 3 components of an Agent, which function in 
 To create a new agent, click the <div className="button system_button"><PlusCircleOutlined /> New</div> button on the upper-right side of the Connections page.
 
 <img alt="Agent Front page" src="https://ganymede-bio.mo.cloudinary.net/agent/Agent_Connections_Front_Page20230605.png" />
+&nbsp;
 
 Doing so opens up the pop-up box shown below, which contains configuration inputs for the Listener and Action; the Normalizer is configured after Agent creation.
 
@@ -192,7 +193,13 @@ Previously built agents remain available for download in Ganymede.
 
 Logs can be found on the Logs tab for each Agent.  These logs contain status check-ins and information regarding the Agent's trigger.
 
-TODO: put in image for logs
+<div class="text--center">
+  <img alt="Agent logs"
+      src="https://ganymede-bio.mo.cloudinary.net/agent/Agent_Logs_Page20230615.png" 
+      width="500"
+      />
+</div>
+
 
 ### Monitoring Agent Connections
 
@@ -262,7 +269,13 @@ Configuration differences between two agent builds can be viewed for audit or de
 
 The Agent can be uninstalled and associated service removed through the “Add or Remove Programs” panel from the Control Panel.
 
-TODO: add screenshot showing removal
+<div class="text--center">
+  <img alt="Agent uninstall"
+      src="https://ganymede-bio.mo.cloudinary.net/agent/Agent_Uninstall20230615.png" 
+      width="500"
+      />
+</div>
+
 
 #### Linux
 
