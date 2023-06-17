@@ -159,7 +159,12 @@ After downloading the Agent, launch the installation file to complete Agent conf
 - **Variable definitions** are strings in the format "var_name=var_value", which allows users to set context variables to be used in the Normalizer
 - **Label** is a string that can be used to identify and group connections within Ganymede.  The label is visible in the Connections UI
 
-TODO: clarify how to specify variable definitions and label with examples
+For File Watcher agents, the directory watched is specified in the Additional Params input box:
+
+```shell
+# note that forward slashes must be used to specify path
+-v 'input_path=/absolute/path'
+```
 
 ### Linux Installation
 
