@@ -108,7 +108,7 @@ if __name__ == "__main__":
         operator_data = "### Node Description\n" + "\n".join(operator_data_list)
 
         action_data = ""
-        if "action" in desc:
+        if "action" in desc and name != "RunContainer":
             action_file = desc["action"].split("/")[-1]
 
             if "action" in desc and not action_file.endswith(".sql"):
@@ -144,12 +144,16 @@ if __name__ == "__main__":
         sidebar = dict()
         sidebar["type"] = "category"
         sidebar["label"] = operator_type
+
+        sorted_keys = list(operators.keys())
+        sorted_keys.sort()
+
         sidebar["items"] = [
             f"nodes/{operator_type}/{k}"
-            for k, v in operators.items()
-            if v["path"].split(".")[-2] not in missing_files
-            and v["type"] == operator_type
-            and not ("dev" in v and v["dev"])
+            for k in sorted_keys
+            if operators[k]["path"].split(".")[-2] not in missing_files
+            and operators[k]["type"] == operator_type
+            and not ("dev" in operators[k] and operators[k]["dev"])
         ]
         with open(os.path.join(markdown_dir, operator_type, "sidebar.json"), "w") as json_file:
             json_file.write(json.dumps(sidebar))
