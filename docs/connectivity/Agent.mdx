@@ -1,15 +1,15 @@
 ---
 id: Agent
-title: Instrument Agents
+title: Agents for File Capture
 displayed_sidebar: webUiSidebar
 ---
 
-import { PlusCircleOutlined, 
+import { PlusOutlined, 
          SelectOutlined,
          DiffOutlined
        } from '@ant-design/icons';
 
-The Ganymede Agent is software installed on PCs attached to lab instruments which systematically captures and processes instrument data.  The agent can
+The Ganymede Agent is software installed on lab instrument PCs that systematically capture and process instrument data.  Agents can
 
 - filter and designate how to process data
 - upload files into Ganymede Cloud
@@ -18,39 +18,25 @@ The Ganymede Agent is software installed on PCs attached to lab instruments whic
   - upon specific files being written to a cloud storage bucket
   - on a scheduled cadence
 
-By installing Agents, your lab machines become an integrated part of the Ganymede system, enhancing the data management and processing capabilities in your lab.
-
-## What does an Agent consist of?
-
-Each Agent has 3 questions to answer:
-
-- What files are relevant for capture?
-- How should files (from different instrument instances) be standardized for consumption (by a common flow)?
-- Where should the standardized file be directed?
-
-These questions are answered by the 3 components of an Agent, which function in sequence:
-
-- A **Listener**, which looks for relevant, new files appearing on an instrument computer
-- A **Normalizer**, which is a user-defined Python snippet that normalizes captured files into a desired, standardized format, if desired.
-- An **Action**, which is the action to be performed with the normalized data.  The Agent can be configured to upload a data file to Ganymede Cloud or to start a flow, if desired.
+Users specify which of the above actions to take by configuring the Agent in the Ganymede app.  Doing so creates Linux and Windows executables corresponding to the specified configuration, which users then install on instrument PCs.  Once installed, users can optionally configure a Python script associated with the Agent to process captured files on the instrument PC.
 
 ## Building an Agent
 
-To create a new agent, click the <div className="button system_button"><PlusCircleOutlined /> New</div> button on the upper-right side of the Connections page.
+To create a new Agent, click the <div className="button system_button"><PlusOutlined /> New Agent</div> button on the upper-left corner of the Connections page.
 
-<img alt="Agent Front page" src="https://ganymede-bio.mo.cloudinary.net/agent/Agent_Connections_Front_Page20230605.png" />
+<img alt="Agent Front page" src="https://ganymede-bio.mo.cloudinary.net/agent/Agent_Connections_Front_Page20230626.png" />
 &nbsp;
 
-Doing so opens up the pop-up box shown below, which contains configuration inputs for the Listener and Action; the Normalizer is configured after Agent creation.
+The left side of the configuration panel is used to specify the Agent's configuration; Agent parameters relevant to selected configuration are displayed.  The right side of the configuration panel shows the default Python script associated with the Agent, which can be modified after Agent installation.
 
 <div class="text--center">
   <img alt="New Agent configuration" 
-      src="https://ganymede-bio.mo.cloudinary.net/agent/New_Agent_Configuration20230605.png"
-      width="400" />
+      src="https://ganymede-bio.mo.cloudinary.net/agent/New_Agent_Configuration20230626.png"
+  />
 </div>
 &nbsp;
 
-After filling out this form, click <div className="button blue_button">Submit</div> to start building Windows and Linux executables.  When the build is complete, the Agent (i.e. - the configured executables) can be downloaded from the Ganymede application by selecting the corresponding Agent from the Connections tab.
+After filling out this form, click <div className="button darkblue_button_icon">Create</div> to start building Windows and Linux executables.  When the build is complete, the Agent (i.e. - the configured executables) can be downloaded from the Ganymede application by selecting the corresponding Agent from the Connections tab.
 
 :::tip
 
@@ -58,15 +44,19 @@ Typically, building an executable takes around 10 minutes to complete.
 
 :::
 
-### Build Config: Identification
+### Build Config: Name
 
-The identification input is used to specify the display name for the Agent.  Once the identification is specified, an agent ID is generated from the display name which uniquely identifies the Agent. The Agent ID is locked for a given agent after generation, though its display name can be changed.
+The Name input is used to specify the display name for the Agent.  Once the identification is specified, an agent ID is generated from the display name which uniquely identifies the Agent. The Agent ID is locked for a given agent after generation, though its display name can be changed.
 
-### Build Config: Listener
+### Build Config: Configuration
 
-The Listener takes on one of four possible configurations:
+The Agent can take on one of five possible configurations:
 
-- **File Watcher**: Monitor specified directory on the local file system for files to process and execute upon observing new files matching specified pattern
+  - **Watch for files locally then run flow**: Monitor specified directory on the local file system for files to process and execute upon observing new files matching specified pattern
+  
+
+
+#### Watch for files locally then run flow: Monitor specified directory on the local file system for files to process and execute upon observing new files matching specified pattern
   - `Check Period`: Frequency with which Agent will poll local directory for new files
   - `Glob to Parameter Mapping`: A set of input pairs; the left member of the input pair is a [glob pattern](https://en.wikipedia.org/wiki/Glob_(programming)) to match files against, and the member on the right is the input parameter associated with the flow to associated captured files with.  Multiple pairs can be specified, directing files matching different glob patterns to different nodes.
   

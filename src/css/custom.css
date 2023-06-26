@@ -119,9 +119,9 @@
 }
 
 .button.darkblue_button_icon {
-  padding-left: 3px;
-  padding-right: 3px;
-  padding-top: 4px;
+  padding-left: 8px;
+  padding-right: 8px;
+  padding-top: 1px;
   padding-bottom: 1px;
   background-color: var(--ifm-color-blue-dark);
   color: var(--ifm-color-gray-lighter);
