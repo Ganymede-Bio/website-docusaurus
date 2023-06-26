@@ -50,11 +50,13 @@ The Name input is used to specify the display name for the Agent.  Once the iden
 
 ### Build Config: Configuration
 
-The Agent can take on one of five possible configurations:
+The Agent can take on the following configurations, which are described in detail below:
 
-  - **Watch for files locally then run flow**: Monitor specified directory on the local file system for files to process and execute upon observing new files matching specified pattern
-  
-
+- **Watch for files locally then run flow**: Monitor specified directory on the local file system for files to process and execute upon observing new files matching specified pattern
+- **Set a cron job to run flows periodically**: Periodically observe local directory for files and deliver those files to Ganymede Cloud for processing
+- **Watch for files locally and upload**: Monitor specified directory on the local file system and upload files to Ganymede Cloud upon observation.
+- **Watch for flow outputs then save locally**: Monitor specified directory in Ganymede Cloud Storage for new files, and capture + process files on local instrument PC upon observation
+- **Load local files into Ganymede with a custom filter**: Send specified files on local instrument PC and process on Ganymede Cloud
 
 #### Watch for files locally then run flow: Monitor specified directory on the local file system for files to process and execute upon observing new files matching specified pattern
   - `Check Period`: Frequency with which Agent will poll local directory for new files
