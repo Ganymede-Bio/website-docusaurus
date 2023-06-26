@@ -58,7 +58,10 @@ The Agent can take on the following configurations, which are described in detai
 - **Watch for flow outputs then save locally**: Monitor specified directory in Ganymede Cloud Storage for new files, and capture + process files on local instrument PC upon observation
 - **Load local files into Ganymede with a custom filter**: Send specified files on local instrument PC and process on Ganymede Cloud
 
-#### Watch for files locally then run flow: Monitor specified directory on the local file system for files to process and execute upon observing new files matching specified pattern
+#### Watch for files locally then run flow
+
+##### Input Parameters
+
   - `Check Period`: Frequency with which Agent will poll local directory for new files
   - `Glob to Parameter Mapping`: A set of input pairs; the left member of the input pair is a [glob pattern](https://en.wikipedia.org/wiki/Glob_(programming)) to match files against, and the member on the right is the input parameter associated with the flow to associated captured files with.  Multiple pairs can be specified, directing files matching different glob patterns to different nodes.
   
