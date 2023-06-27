@@ -164,7 +164,7 @@ After downloading the Agent, launch the installation file to complete Agent conf
 &nbsp;
 
 - **Connection name** is the name seen by users in the instrument computer and in the Ganymede UI
-- **Variable definitions** are strings in the format "var_name=var_value", which allows users to set context variables to be used in the Normalizer
+- **Variable definitions** are strings in the format "var_name=var_value", which allows users to set context variables to be used in the user-defined Python
 - **Label** is a string that can be used to identify and group connections within Ganymede.  The label is visible in the Connections UI
 
 For Agents that reference local directories, the directory watched is specified in the Additional Params input box:
@@ -176,7 +176,7 @@ For Agents that reference local directories, the directory watched is specified 
 
 ## Configuring user-defined Python
 
-To modify user-defined code executed by the Agent, select the Agent in the Ganymede app and then click on the <div className="button gray_button"><SelectOutlined />Code</div> button.  Doing so opens a notebook for the user to modify the Normalizer, which is executed after the Trigger and before the Action.
+To modify user-defined code executed by the Agent, select the Agent in the Ganymede app and then click on the <div className="button gray_button"><SelectOutlined />Code</div> button.  Doing so opens a notebook for the user to modify user-defined code, which is executed on observed files prior to transfer.
 
 <div class="text--center">
   <img alt="Agent update configuration"
@@ -186,7 +186,7 @@ To modify user-defined code executed by the Agent, select the Agent in the Ganym
 &nbsp;
 
 <div class="text--center">
-  <img alt="Agent Normalizer"
+  <img alt="Agent User-Defined Python"
       src="https://ganymede-bio.mo.cloudinary.net/agent/Agent_Normalizer_ZoomedIn20230605.png"
       width="800" />
 </div>
@@ -198,7 +198,7 @@ Previously built agents remain available for download in Ganymede.
 
 ### Viewing Logs
 
-Logs can be found on the Logs tab for each Agent.  These logs contain status check-ins and information regarding the Agent's trigger.
+Logs can be found on the Logs tab for each Agent.  These logs contain status check-ins and information regarding Agent activity.
 
 <div class="text--center">
   <img alt="Agent logs"
@@ -242,12 +242,6 @@ To modify Agent settings after creation, select the desired Agent in the Connect
 &nbsp;
 
 Agents can also be archived or disabled.  Archived Agents cannot be updated, but can still communicate with Ganymede Cloud.  Disabled agents cannot be updated or communicate with Ganymede Cloud.
-
-:::note
-
-Listener and Action types cannot be updated once an Agent's configuration is set.
-
-:::
 
 ### Viewing Build History
 
