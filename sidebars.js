@@ -35,11 +35,32 @@ module.exports = {
           },
         ]
       },
-      
+      {
+        type: 'category',
+        label: 'Acquiring Data',
+        collapsed: true,
+        items: [
+          {
+            type: 'doc',
+            id: 'connectivity/Overview',
+            label: 'Ways to Capture Data'
+          },
+          {
+            type: 'doc',
+            id: 'connectivity/Agent',
+            label: 'Capture Files with Agents'
+          },
+          {
+            type: 'doc',
+            id: 'connectivity/FileWatcher',
+            label: 'Capture Files with Browser'
+          }
+        ]
+      },
       {
         type: 'category',
         label: 'Processing Data',
-        collapsed: false,
+        collapsed: true,
         items: [{
           type: 'category',
           label: 'Running Flows',
@@ -63,7 +84,7 @@ module.exports = {
       {
         type: 'category',
         label: 'Observing Data',
-        collapsed: false,
+        collapsed: true,
         items: ['Files', 'Dashboards', 'AnalysisNotebook', 'DataExplorer']
       },
       {

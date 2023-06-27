@@ -119,9 +119,9 @@
 }
 
 .button.darkblue_button_icon {
-  padding-left: 3px;
-  padding-right: 3px;
-  padding-top: 4px;
+  padding-left: 8px;
+  padding-right: 8px;
+  padding-top: 1px;
   padding-bottom: 1px;
   background-color: var(--ifm-color-blue-dark);
   color: var(--ifm-color-gray-lighter);
@@ -206,6 +206,15 @@
   color: var(--ifm-color-black);
 }
 
+.button.system_button {
+  border-radius: 3px;
+  padding-left: 6px;
+  padding-right: 3px;
+  background-color:var(--ifm-color-gray-lighter);
+  border-color: var(--ifm-color-black);
+  color: var(--ifm-color-black);
+}
+
 .button.run_queue_button {
   border-radius: 3px;
   padding-left: 6px;
@@ -226,6 +235,27 @@
   background-color: #669ff4;
   color: white;
 }
+
+.button.blue_button {
+  border-radius: 8px;
+  padding-left: 10px;
+  padding-right: 10px;
+  background-color: #387fd3;
+  color: white;
+  font-weight: 400;
+}
+
+.button.blue_keystroke {
+  display: inline-block;
+  background-color: #669ff4;
+  color: #387fd3;
+}
+
+.button.red_button {
+  background-color: red;
+  color: white;
+}
+
 
 .filter-white{
   filter: brightness(0) invert(1);
