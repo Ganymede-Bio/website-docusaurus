@@ -6,12 +6,12 @@ displayed_sidebar: webUiSidebar
 
 ## Overview
 
-Connectivity serves as the base for ensuring that lab data is methodically captured, and so sits at the foundation of the Ganymede offering.  Ganymede offers three ways to capture instrument files and data:
+Connectivity serves as the base for ensuring that lab data is methodically captured, and so sits at the foundation of the Ganymede offering.  Ganymede offers four ways to capture instrument files and data:
 
 - By [manually drag-and-dropping files](../FlowView.mdx) into the Ganymede app and processed via flows
 - With a [Ganymede Agent](./Agent.mdx), a Linux or Windows-based executable which can be used to capture instrument files for storage and processing, or to be captured by instrument PCs upon file generation in cloud storage
 - With a [Browser-based File Watcher](./FileWatcher.mdx), which captures and associates files with specific flows
-- Via [event-driven processing](#event-driven-processing) - for example, Ganymede can be configured to listen for new files written to an S3 bucket.
+- Via [event-driven processing](#event-driven-processing) - for example, Ganymede can be configured to listen for and process files written to an S3 bucket
 
 ## Drag-and-drop
 
@@ -19,7 +19,7 @@ Instrument files can be drag-and-dropped into file inputs associated with a spec
 
 ### When to use Drag-and-drop
 
-Drag-and-drop fits best where manual input is typical, and there are relatively few instrument files that need to be processed.  Compared with other methods, this approach involves the least effort to set up, but the greatest amount of effort to use.  Once captured, previously processed files can be referred to by name, obviating the need to upload the same file going forward.
+Drag-and-drop fits best where manual input is typical, and there are relatively few instrument files that need to be processed.  Compared with other methods, this approach involves the least effort to set up, but the greatest amount of effort to use.  Once captured, previously processed files can be browsed for on Ganymede, obviating the need to upload the same file going forward.
 
 Users can specify input parameters upon flow execution, giving greater flexibility to flows for which execution needs to vary based on user-specified input.
 
@@ -27,13 +27,17 @@ The drag-and-drop method of file acquisition can be cumbersome for instruments t
 
 ## Ganymede Agent
 
-An installable program is configured in the Ganymede app and downloaded to relevant instrument PCs.  Once executed, the program runs in the background, robust to computer restart.
+The Ganymede Agent are an installable program that captures, transfers, and processes files, either locally or online.  Agents are configured in the Ganymede app and downloaded to Windows and Linux instrument PCs.  Once started, Agents runs as a service in the background, robust to computer restart.
 
 ### When to use Ganymede Agent
 
-Ganymede agents offer a robust solution for capturing files without user input.  The solution runs in the background on the instrument PC, making the listener more durable to computer restarts and inadvertent shutdowns.
+Ganymede Agents offer a robust solution for capturing files without user input.  This solution runs in the background on the instrument PC, making it more durable to computer restarts and inadvertent shutdowns.
 
-Agents require installing software on an instrument PC, and so would not be appropriate if there is sensitivity to loading third-party software on an instrument PC.  Since the agent does not require login to capture files, the Agent is unable to distinguish between different users if login is shared on a computer.
+Ganymede Agents enable developers to write code that executes on the instrument PC to define behavior, enabling greater flexibility in how files are captured and processed.
+
+### When Ganymede Agents are not appropriate
+
+Agents require installing software on an instrument PC, and so would not be appropriate if there is sensitivity to loading third-party software on an instrument PC.  Since the Agent does not require login to capture files, the Agent is unable to distinguish between different users if login is shared on a computer.
 
 ## Browser-based File Watcher
 
@@ -45,11 +49,13 @@ This primary benefits of this approach are that it automates data capture withou
 
 The file watcher will stop running whenever that Ganymede tab is closed in the browser. This can happen inadvertently when the instrument PC is shut down or restarts to perform updates.
 
+### When not to use Browser-based File Watcher
+
 Since the file watcher passively collects files without requiring user login, the approach is not appropriate if the user that executed a flow needs to be captured.  
 
 ## Event-Driven Processing
 
-Ganymede can be configured to listen for and trigger flows based on AWS and Benchling events.  This method requires credentialing Ganymede to capture relevant events.
+Ganymede can be configured to listen for and trigger Flows based on AWS and Benchling events.  This method requires credentialing Ganymede to capture relevant events.
 
 ### When to use Event-Driven Processing
 
