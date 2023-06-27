@@ -9,7 +9,7 @@ import { PlusOutlined,
          DiffOutlined
        } from '@ant-design/icons';
 
-The Ganymede Agent is software installed on lab instrument PCs that systematically capture and process instrument data.  Agents can
+Ganymede Agents are a class of programs that can run directly on an instrument PC in the lab. They are a combination of user-defined code and configuration, which allows for maximum flexibility in capturing files.  Agents can
 
 - filter and designate how to process data
 - upload files into Ganymede Cloud
@@ -48,11 +48,11 @@ The _Name_ input is used to specify the display name for the Agent.
 
 The _Configuration_ input specifies the action performed by the Agent, chosen from the following options:
 
-- **Watch for files locally then run flow**: Monitor specified directory on the local file system for files to process and execute upon observing new files matching specified pattern
-- **Set a cron job to run flows periodically**: Periodically observe local directory for files and deliver those files to Ganymede Cloud for processing
-- **Watch for files locally and upload**: Monitor specified directory on the local file system and upload files to Ganymede Cloud upon observation.
-- **Watch for flow outputs then save locally**: Monitor specified directory in Ganymede Cloud Storage for new files, and capture + process files on local instrument PC upon observation
-- **Load local files into Ganymede with a custom filter**: Send specified files on local instrument PC and process on Ganymede Cloud
+- [**Watch for files locally then run flow**](#watch-for-files-locally-then-run-flow): Monitor specified directory on the local file system for files to process and execute upon observing new files matching specified pattern
+- [**Set a cron job to run flows periodically**](#set-a-cron-job-to-run-flows-periodically): Periodically observe local directory for files and deliver those files to Ganymede Cloud for processing
+- [**Watch for files locally and upload**](#watch-for-files-locally-and-upload): Monitor specified directory on the local file system and upload files to Ganymede Cloud upon observation.
+- [**Watch for flow outputs then save locally**](#watch-for-flow-outputs-then-save-locally): Monitor specified directory in Ganymede Cloud Storage for new files, and capture + process files on local instrument PC upon observation
+- [**Load local files into Ganymede with a custom filter**](#load-local-files-into-ganymede-with-a-custom-filter): Send specified files on local instrument PC and process on Ganymede Cloud
 
 ## Configuration Options
 

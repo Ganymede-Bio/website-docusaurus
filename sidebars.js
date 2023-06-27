@@ -37,7 +37,7 @@ module.exports = {
       },
       {
         type: 'category',
-        label: 'Connecting Instruments',
+        label: 'Acquiring Data',
         collapsed: true,
         items: [
           {
