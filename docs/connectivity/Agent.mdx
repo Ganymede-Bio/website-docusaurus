@@ -18,9 +18,9 @@ The Ganymede Agent is software installed on lab instrument PCs that systematical
   - upon specific files being written to a cloud storage bucket
   - on a scheduled cadence
 
-Users specify which of the above actions to take by configuring the Agent in the Ganymede app.  Doing so creates Linux and Windows executables corresponding to the specified configuration, which users then install on instrument PCs.  Once installed, users can optionally configure a Python script associated with the Agent to process captured files on the instrument PC.
+Users specify which of the above actions to take by configuring the Agent in the Ganymede app.  Doing so creates a Linux binary and Windows executable corresponding to the specified configuration, which users can then install on instrument PCs.  Once created, users can optionally [configure a user-defined Python script](#configuring-user-defined-python) associated with the Agent.
 
-## Building an Agent
+## Building an Agent Overview
 
 To create a new Agent, click the <div className="button system_button"><PlusOutlined /> New Agent</div> button on the upper-left corner of the Connections page.
 
@@ -36,21 +36,17 @@ The left side of the configuration panel is used to specify the Agent's configur
 </div>
 &nbsp;
 
-After filling out this form, click <div className="button darkblue_button_icon">Create</div> to start building Windows and Linux executables.  When the build is complete, the Agent (i.e. - the configured executables) can be downloaded from the Ganymede application by selecting the corresponding Agent from the Connections tab.
+After filling out this form, click <div className="button darkblue_button_icon">Create</div> to start building Windows and Linux executables.  When the build is complete, the Agent (i.e. - the configured executables) can be downloaded from the Ganymede application by selecting the corresponding Agent from the Connections tab.  
 
-:::tip
+Building an executable typically takes around 10 minutes to complete.  Once built, the Agent can be downloaded onto the instrument PC from the Connections tab of the Ganymede web app and installed.
 
-Typically, building an executable takes around 10 minutes to complete.
+## Configuring Agents
 
-:::
+All Agents have two required input parameters, _Name_ and _Configuration_.  
 
-### Build Config: Name
+The _Name_ input is used to specify the display name for the Agent.  
 
-The Name input is used to specify the display name for the Agent.  Once the identification is specified, an agent ID is generated from the display name which uniquely identifies the Agent. The Agent ID is locked for a given agent after generation, though its display name can be changed.
-
-### Build Config: Configuration
-
-The Agent can take on the following configurations, which are described in detail below:
+The _Configuration_ input specifies the action performed by the Agent, chosen from the following options:
 
 - **Watch for files locally then run flow**: Monitor specified directory on the local file system for files to process and execute upon observing new files matching specified pattern
 - **Set a cron job to run flows periodically**: Periodically observe local directory for files and deliver those files to Ganymede Cloud for processing
@@ -58,76 +54,93 @@ The Agent can take on the following configurations, which are described in detai
 - **Watch for flow outputs then save locally**: Monitor specified directory in Ganymede Cloud Storage for new files, and capture + process files on local instrument PC upon observation
 - **Load local files into Ganymede with a custom filter**: Send specified files on local instrument PC and process on Ganymede Cloud
 
-#### Watch for files locally then run flow
+## Configuration Options
 
-##### Input Parameters
+### Watch for files locally then run flow
 
-  - `Check Period`: Frequency with which Agent will poll local directory for new files
-  - `Glob to Parameter Mapping`: A set of input pairs; the left member of the input pair is a [glob pattern](https://en.wikipedia.org/wiki/Glob_(programming)) to match files against, and the member on the right is the input parameter associated with the flow to associated captured files with.  Multiple pairs can be specified, directing files matching different glob patterns to different nodes.
+#### Input Parameters
+
+- `Flow Name`: Flow to run upon observing new files matching specified pattern
+- `Check Period (seconds)`: Frequency with which Agent will poll local directory for new files
+- `If a discovered filename exists in storage`: Whether to use the file in storage or the observed file in the local directory
+- `File pattern to parameter mapping`: For the selected Flow, the [glob pattern](https://en.wikipedia.org/wiki/Glob_(programming)) to associate with the input parameter(s).
   
-    For example, if the instrument outputs an XML file called "lc_metadata<YYYYMMDD\>.abc" which is to be ingested by [XML_Read node](../nodes/File/XML_Read.md) called "Ingest_LC_Metadata", an appropriate configuration would be "lc_metadata*.abc" for the left input box and "Ingest_LC_Metadata.xml" for the right node.
+For example, if the instrument outputs a CSV file called "lc_output<YYYYMMDD\>.csv" which is to be ingested by a [CSV_Read node](../nodes/File/CSV_Read.md) called "Ingest_Data", an appropriate configuration would be "lc_output*.csv" for the input box associated with the "Ingest_Data.csv" node.
 
 <div class="text--center">
   <img alt="Agent configuration - File Watcher" 
-      src="https://ganymede-bio.mo.cloudinary.net/agent/Agent_File_Watcher_Config20230605.png"
+      src="https://ganymede-bio.mo.cloudinary.net/agent/Agent_File_Watcher_Config20230626_2.png"
       width="500" />
 </div>
 &nbsp;
 
-:::info Viewing flow input parameters
+#### Example use case
 
-Input parameters to populate on a Flow can be viewed by selecting "Run Flow" for Action and then selecting the desired flow from the dropdown menu.
+An instrument outputs files to a directory as it completes runs, which are processed in Ganymede Cloud.
 
-<div class="text--center">
-  <img alt="Example agent configuration - File Watcher with Flow Run" 
-      src="https://ganymede-bio.mo.cloudinary.net/agent/Example_File_Watcher_Config20230605.png"
-      width="500" />
-</div>
+### Set a cron job to run flows periodically
 
-:::
+#### Input Parameters
 
-#### Example use case for File Watcher mode
-
-An instrument outputs files to a directory each time it completes a run, which serve as inputs for a Ganymede flow. 
-
-- **Cron**: Run Action on a pre-set schedule
+- `Flow Name`: Flow to run upon observing new files matching specified pattern
+- `Time Interval`: Frequency and times with which to run flow, based on UTC time
 
 <div class="text--center">
   <img alt="Agent configuration - Cron" 
-      src="https://ganymede-bio.mo.cloudinary.net/agent/Agent_Cron_Config20230605.png"
+      src="https://ganymede-bio.mo.cloudinary.net/agent/Agent_Cron_Config20230626_3.png"
       width="500" />
 </div>
 &nbsp;
 
-#### Example use case for Cron mode
+#### Example use case
 
-A local script (the Normalizer) must be run once a day to poll and capture updates from telemetry devices for further processing in a Ganymede flow.
+User-defined must be run once a day to poll and capture updates from telemetry devices for further processing in a Ganymede flow.
 
-- **Cloud Watcher**: Monitor specified directory in Ganymede Cloud Storage for new files, and execute upon observing new files matching specified pattern
+### Watch for files locally and upload
 
-#### Example use case for Cloud Watcher mode
+#### Input Parameters
 
-Output data from a Ganymede flow is retrieved and cross-checked against instrument data to verify that the lab machine is producing expected results.
+- `Flow Name`: Flow to run upon observing new files matching specified pattern
+- `Check Period (seconds)`: Frequency with which Agent will poll local directory for new files
+- `If a discovered filename exists in storage`: Whether to use the file in storage or the observed file in the local directory
+- `File pattern to parameter mapping`: For the selected Flow, the [glob pattern](https://en.wikipedia.org/wiki/Glob_(programming)) to associate with the input parameter(s).
 
-- **Manual**: Upon Agent launch, the Agent code executes once and then exits.
+<div class="text--center">
+  <img alt="Agent configuration - Cron" 
+      src="https://ganymede-bio.mo.cloudinary.net/agent/Agent_File_Capture_Config20230626_2.png"
+      width="500" />
+</div>
+&nbsp;
 
-### Build Config: Action
+#### Example use case
 
-Actions are executed after the Listener and Normalizer (user-defined Python) have completed.
+Multiple flow cytometers are used to observe cell populations for a related set of experiments, which are collated by Ganymede Agents configured to systematically capture these runs.
 
-- **Upload File**: Uploads file(s) to Ganymede Cloud Storage in the agent directory.  This data can be found in the File Explorer under "/_agents/<agent id\>/"
+### Watch for flow outputs then save locally
 
-#### Example use case for Upload File Action
+<div class="text--center">
+  <img alt="Agent configuration - Download" 
+      src="https://ganymede-bio.mo.cloudinary.net/agent/Agent_Download_Config20230626.png"
+      width="500" />
+</div>
+&nbsp;
 
-Files output by an instrument are stored in Ganymede as a source of truth.
+#### Example use case
 
-- **Run Flow**: Run a flow based on the input provided and as mediated by the flow input requirements. 
+Instructions for lab execution are generated on Ganymede Cloud and downloaded to the instrument PC for execution.
 
-#### Example use case for Run Flow Action
+### Load local files into Ganymede with a custom filter
 
-An instrument outputs files to a directory as it completes runs, which are processed in Ganymede Cloud. 
+<div class="text--center">
+  <img alt="Agent configuration - Download" 
+      src="https://ganymede-bio.mo.cloudinary.net/agent/Agent_Filtered_Load_Config20230626.png"
+      width="500" />
+</div>
+&nbsp;
 
-- **No-Op**: Complete Agent execution without performing an Action
+#### Example use case
+
+A selected subset of key instrument output files are captured on Ganymede Cloud.
 
 ## Installing Agents
 
@@ -154,20 +167,14 @@ After downloading the Agent, launch the installation file to complete Agent conf
 - **Variable definitions** are strings in the format "var_name=var_value", which allows users to set context variables to be used in the Normalizer
 - **Label** is a string that can be used to identify and group connections within Ganymede.  The label is visible in the Connections UI
 
-For File Watcher agents, the directory watched is specified in the Additional Params input box:
+For Agents that reference local directories, the directory watched is specified in the Additional Params input box:
 
 ```shell
-# note that forward slashes must be used to specify path
+# note that forward slashes must be used to specify path, for both Windows and Linux Agents
 -v "input_path=/absolute/path"
 ```
 
-### Linux Installation
-
-TODO: Add Linux installation instructions using systemd
-
-TODO: Describe how to set up outbound traffic firewalls requirements
-
-## Configuring the Normalizer
+## Configuring user-defined Python
 
 To modify user-defined code executed by the Agent, select the Agent in the Ganymede app and then click on the <div className="button gray_button"><SelectOutlined />Code</div> button.  Doing so opens a notebook for the user to modify the Normalizer, which is executed after the Trigger and before the Action.
 
@@ -276,18 +283,4 @@ The Agent can be uninstalled and associated service removed through the “Add o
       />
 </div>
 
-TODO: note that the service is not removed from the system upon uninstallation.
-
 After uninstalling the Agent, the Ganymede folder will remain in the Program Files directory.  This folder can be deleted if desired.
-
-#### Linux
-
-TODO: add instructions for uninstalling Linux agents
-
-## Agent Glossary
-
-- **Agent**: A combination of a Listener, Processor, and Action configuration to move data from a remote user device into Ganymede. It can be helpful to think of an Agent as a class which is instantiated for each new connection. 
-- **Agent Connection**: A running instance of the agent on a unique machine that has previously or is currently connected to Ganymede. The instance is listening for the configured trigger and will perform the Action configured for the Agent.
-- **Listener**: A process that watches for new files and initiates the rest of the agent pipeline based on a preconfigured change or event.
-- **Normalizer**: User-defined Python code that normalizes data captured by a Listener
-- **Action**: An interaction with Ganymede's cloud or application that will move data output from the Normalizer into the specified location.
