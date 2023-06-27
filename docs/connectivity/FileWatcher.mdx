@@ -1,0 +1,38 @@
+---
+id: FileWatcher
+title: Browser-based File Watcher
+displayed_sidebar: webUiSidebar
+---
+
+import {
+  HomeOutlined,
+  NodeIndexOutlined,
+  PlusCircleOutlined,
+  FolderViewOutlined,
+  UserOutlined
+} from '@ant-design/icons';
+
+## Watching directories for new files
+
+With File Watcher, the Ganymede web application can be configured to watch for new files for processing.  This feature enables users to define a directory that is monitored for new file additions or modifications.  New files that appear in the directory are queued, enabling hands-free usage of Ganymede. 
+
+To setup a directory watcher, open up a _flow_ on the <div className="button darkblue_button"><HomeOutlined /> **Home**</div> page or via the <div className="button darkblue_button"><NodeIndexOutlined /> **Flow Editor**</div> page. The <div className="button dark_gray_button"><PlusCircleOutlined className="tree_node_icon"/> **Flow_Inputs**</div> *node* consists of a form input for all input types that have been defined for the _flow_.  Inputs that take files have a <div className="button light_blue_button"><FolderViewOutlined /></div> icon that is used to select which directory needs to be watched.
+
+<img width="1152" alt="image" src="https://user-images.githubusercontent.com/111307862/209197862-f5da2518-710c-4cc6-bd8f-fa6353c49154.png" />
+&nbsp;
+
+#### Configuring directory watching
+
+The watcher can be configured by clicking on the gear icon.  This produces a modal with two settings, the observation mode and the write mode.
+
+The observation mode specifies which files are captured:
+ - **Differential mode** detects files that are created or modified in a directory after the watcher is started.
+ - **Cumulative mode** queues any files incorporate any files that already exist in the directory, and proceeds to look for any new files created or modified in the selected directory.
+
+The write mode describes how Ganymede Cloud handles observed files.  When the watcher detects a file, it will upload to our system independent of its mode. If a detected file has the same file name as one that already exists in our system for a given flow and input, there are two ways the watcher can move forward. The first is to queue the file already in our system to run. The second is to upload the file into our system with a unique name.
+
+<div class="text--center">
+<img width="516" alt="image" src="https://user-images.githubusercontent.com/111307862/208987244-9fddd32f-5584-4979-9694-e9c8d8383777.png" />
+</div>
+
+Once the watcher is configured, close out of the modal and click the file icon to select directory. The watcher will now continue to observe that directory until a user refreshes or closes the site or select the 'X' icon that appears when watching a file.
