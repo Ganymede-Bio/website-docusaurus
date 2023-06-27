@@ -9,7 +9,7 @@ import { PlusOutlined,
          DiffOutlined
        } from '@ant-design/icons';
 
-Ganymede Agents are a class of programs that can run directly on an instrument PC in the lab. They are a combination of user-defined code and configuration, which allows for maximum flexibility in capturing files.  Agents can
+Ganymede Agents are a class of programs that can run directly on an instrument computer in the lab.  They are a combination of user-defined code and Ganymede configuration, which allows for maximum flexibility in capturing files and interacting with the Ganymede ecosystem.  Agents can
 
 - filter and designate how to process data
 - upload files into Ganymede Cloud
@@ -42,7 +42,7 @@ Building an executable typically takes around 10 minutes to complete.  Once buil
 
 ## Configuring Agents
 
-All Agents have two required input parameters, _Name_ and _Configuration_.  
+All Agents have two required input parameters, _Name_ and _Configuration_.  Once the Configuration is selected, Input Paramaters specific to the Configuration may appear. 
 
 The _Name_ input is used to specify the display name for the Agent.  
 
@@ -63,7 +63,7 @@ The _Configuration_ input specifies the action performed by the Agent, chosen fr
 - `Flow Name`: Flow to run upon observing new files matching specified pattern
 - `Check Period (seconds)`: Frequency with which Agent will poll local directory for new files
 - `If a discovered filename exists in storage`: Whether to use the file in storage or the observed file in the local directory
-- `File pattern to parameter mapping`: For the selected Flow, the [glob pattern](https://en.wikipedia.org/wiki/Glob_(programming)) to associate with the input parameter(s).
+- `File pattern to parameter mapping`: For the selected Flow, the [glob pattern](https://en.wikipedia.org/wiki/Glob_(programming)) to associate with the input parameter(s)
   
 For example, if the instrument outputs a CSV file called "lc_output<YYYYMMDD\>.csv" which is to be ingested by a [CSV_Read node](../nodes/File/CSV_Read.md) called "Ingest_Data", an appropriate configuration would be "lc_output*.csv" for the input box associated with the "Ingest_Data.csv" node.
 
@@ -192,7 +192,7 @@ To modify user-defined code executed by the Agent, select the Agent in the Ganym
 </div>
 &nbsp;
 
-Previously built Agents remain available for download in Ganymede.
+Previously built Agents remain available for download in Ganymede in the [History tab](#viewing-build-history)
 
 ## Maintaining Agents
 
@@ -210,7 +210,7 @@ Logs can be found on the Logs tab for each Agent.  These logs contain status che
 
 ### Monitoring Agent Connections
 
-Agents with Action types of Upload File and Run Flow communicate with Ganymede Cloud to upload files and run flows, respectively.  These communications can be monitored by observing status updates and logs in the Ganymede web app UI.
+Agents are capable of communicating with Ganymede Cloud to upload files and run flows.  These communications can be monitored by observing status updates and logs in the Ganymede web app UI.
 
 The Connections page shows an overview of all connections that have ever been made and their latest status in addition to other metadata made available from their last status ping.
 
@@ -241,7 +241,7 @@ To modify Agent settings after creation, select the desired Agent in the Connect
 </div>
 &nbsp;
 
-Agents can also be archived or disabled.  Archived Agents cannot be updated, but can still communicate with Ganymede Cloud.  Disabled Agents cannot be updated or communicate with Ganymede Cloud.
+Agents can also be archived or disabled.  Archived Agents cannot be updated, but the Agent's connections can still communicate with Ganymede Cloud.  Disabled Agents cannot be updated and its connections can no longer communicate with Ganymede Cloud.
 
 ### Viewing Build History
 
