@@ -19,7 +19,7 @@ ex: {"<desired_spreadsheet_name>": <spreadsheet_contents>}
 - **output_spreadsheet_name**
   - spreadsheet name to write to storage bucket
 ## User-Defined Python
-Graphs table(s) from SQL query and stores graphs in cloud storage.
+Write table(s) from SQL query and stores Excel sheet in cloud storage.
 
 
 ### Parameters
@@ -30,5 +30,5 @@ Graphs table(s) from SQL query and stores graphs in cloud storage.
 
 
 ### Returns
-`Dict[str, bytes]`
-  - Plot images to store in cloud storage, indexed by image name
+`bytes`
+  - Excel file to store in cloud storage

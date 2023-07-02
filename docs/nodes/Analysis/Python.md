@@ -28,4 +28,5 @@ is written to the output bucket.
 
 ### Returns
 `NodeReturn`
-  - Table(s) and File(s) to store in Ganymede
+  - Table(s) and File(s) to store in Ganymede.  To write to the table referenced on the node,
+  - return
