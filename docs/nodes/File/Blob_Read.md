@@ -19,8 +19,8 @@ Processes blob data for saving in cloud storage
 
 
 ### Parameters
-- **blob_data** : `bytes`
-    - Bytes object to process
+- **blob_data** : `Dict[str, bytes]`
+    - Bytes object to process, indexed by filename
 - **ganymede_context** : `GanymedeContext`
     - Ganymede context variable, which stores flow run metadata
 

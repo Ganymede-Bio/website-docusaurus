@@ -22,7 +22,7 @@ Specify semicolon-delimited tables to sync to Snowflake
 ### Notes
 Prior to usage, the following secrets must be configured in your Ganymede environment:
 - **snowflake_user**: Snowflake user name
-- **snowflake_pass**: Snowflake password
+- **snowflake_password**: Snowflake password
 - **snowflake_account**: Snowflake account identifier
 - **snowflake_role**: Snowflake role
 - **snowflake_warehouse**: Snowflake warehouse
