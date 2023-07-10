@@ -187,7 +187,7 @@ StartLimitIntervalSec=10
 
 [Service]
 Type=simple
-# Restart=always
+Restart=always
 RestartSec=1
 User=jane_doe
 ExecStart=/path/to/agent/executable -l linux -l service -n CWService
@@ -199,7 +199,7 @@ WantedBy=multi-user.target
 ```
 
 - **Description**: field to identify the Agent in logs
-- **Restart**: uncomment to restart the Agent if it crashes
+- **Restart**: set to restart the Agent if it crashes
 - **User**: user to associate Agent runs with
 - **ExecStart**: path to the Agent executable
 - **StandardOutput**: log file for Agent output
