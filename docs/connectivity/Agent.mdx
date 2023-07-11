@@ -174,6 +174,55 @@ For Agents that reference local directories, the directory watched is specified 
 -v "input_path=/absolute/path"
 ```
 
+### Linux Installation
+
+After downloading the agent, create a [systemd service file](https://www.freedesktop.org/software/systemd/man/systemd.service.html) similar to what is shown below:
+
+```shell
+[Unit]
+Description=Ganymede Example Agent
+After=network.target
+StartLimitBurst=5
+StartLimitIntervalSec=10
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+User=jane_doe
+ExecStart=/path/to/agent/executable -l linux -l service -n CWService
+StandardOutput=append:/var/log/ganymede/CWService.log
+StandardError=append:/var/log/ganymede/CWService_err.log
+
+[Install]
+WantedBy=multi-user.target
+```
+
+- **Description**: field to identify the Agent in logs
+- **Restart**: set to restart the Agent if it crashes
+- **User**: user to associate Agent runs with
+- **ExecStart**: path to the Agent executable
+- **StandardOutput**: log file for Agent output
+- **StandardError**: log file for Agent errors
+
+Once the service file is created, the Agent can be started by running:
+
+Save this file to /etc/systemd/system/ and set permissions to 644.  For example, if the systemd service file were named *ganymede_example_agent.service*, this could be accomplished by running:
+
+```shell
+sudo chmod 644 /etc/systemd/system/ganymede_example_agent.service
+```
+
+To interact with this service, you can use the following commands:
+
+```shell
+# to start the Agent service
+sudo systemctl start ganymede_example_agent.service
+
+# to observe status of the Agent service
+sudo systemctl status ganymede_example_agent.service
+```
+
 ## Configuring User-Defined Python
 
 To modify user-defined code executed by the Agent, select the Agent in the Ganymede app and then click on the <div className="button gray_button"><SelectOutlined />Code</div> button.  Doing so opens a notebook for the user to modify user-defined code, which is executed on observed files prior to transfer.
@@ -278,3 +327,7 @@ The Agent can be uninstalled and associated service removed through the “Add o
 </div>
 
 After uninstalling the Agent, the Ganymede folder will remain in the Program Files directory.  This folder can be deleted if desired.
+
+#### Linux
+
+To uninstall the Agent, stop the systemd service associated with the Agent and remove the service file from /etc/systemd/system/
