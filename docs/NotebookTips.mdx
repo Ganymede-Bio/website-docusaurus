@@ -15,7 +15,7 @@ Notebooks come with a number of features that facilitate code prototyping and de
 
 ### Reading function signature and docstring
 
-Functions can be introspected by pressing `Shift`+`TAB` after the function name in a notebook cell, or by typing `?` before the function name in a notebook cell.  This will display the function signature and docstring.  
+Functions can be introspected by pressing `Shift`+`TAB` after the function name in a notebook cell, or by typing `?` after the function name in a notebook cell.  This will display the function signature and docstring.  
 
 ```python
 from ganymede_sdk.io import retrieve_sql
@@ -24,7 +24,7 @@ from ganymede_sdk.io import retrieve_sql
 retrieve_sql<Shift+TAB>
 
 # alternative method to show function signature and docstring in a pane at the bottom of the screen
-?retrieve_sql
+retrieve_sql?
 ```
 
 <img alt="Explore documentation" 
@@ -37,8 +37,10 @@ retrieve_sql<Shift+TAB>
 The source code for a function can be observed by typing `??` after the function name in a notebook cell.  This will display the function signature and source code.
 
 ```python
+from ganymede_sdk.io import retrieve_sql
+
 # shows function signature and source code (image below truncated for brevity)
-??retrieve_sql
+retrieve_sql??
 ```
 
 <img alt="Explore source code" 
