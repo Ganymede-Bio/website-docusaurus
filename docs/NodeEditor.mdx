@@ -171,52 +171,6 @@ df = execute({'test_file': BytesIO(file_uploader.value[0].content.tobytes())})
 display(df)
 ```
 
-### Notebook Tips - Function Help and Tab Completion
-
-Functions can be introspected by typing ? or ?? before the function name in a notebook cell.  For example:
-
-#### Tip 1: Reading function signature and docstring
-
-```python
-from ganymede_sdk.io import retrieve_sql
-
-# shows function signature and docstring 
-?retrieve_sql
-```
-
-<img alt="Explore documentation" 
-      src="https://ganymede-bio.mo.cloudinary.net/apiServer/Example_Function_Docstring20230712.png"
-      />
-&nbsp;
-
-#### Tip 2: Reading function signature and source code
-
-```python
-# shows function signature and source code (image below truncated for brevity)
-??retrieve_sql
-```
-
-<img alt="Explore source code" 
-      src="https://ganymede-bio.mo.cloudinary.net/apiServer/Example_Function_Source_Narrow20230712.png"
-      />
-&nbsp;
-
-#### Tip 3: Tab completion for object exploration
-
-Pressing <TAB\> key enables exploration of objects, modules, and namespaces.
-
-```python
-from ganymede_sdk.editor import MockGanymedeContext
-mock_ganymede_context = MockGanymedeContext()
-mock_ganymede_context.<TAB>
-```
-
-
-<img alt="Observe object methods" 
-      src="https://ganymede-bio.mo.cloudinary.net/apiServer/Example_Tab_Completion20230712.png"
-      width="600"
-      />
-
 
 ## Adding flow inputs
 
