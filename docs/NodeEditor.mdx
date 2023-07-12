@@ -42,7 +42,7 @@ A full listing of available nodes and their key characteristics can be found on 
 
 Editable nodes contain a pencil icon (<EditOutlined className="button darkblue_button"/>) in their upper right hand corner that opens up the notebook backing the node upon button click.  This section walks through the code associated with such a node to discuss its functionality.
 
-### Notebook: User-defined SQL
+### User-defined SQL
 
 ```python
 from ganymede_sdk.editor import query
@@ -63,7 +63,7 @@ Available tables and their associated schemas can be observed in the [Data Explo
 More than 1 query can be specified as input; to do so, specify multiple queries as semicolon-delimited query strings.  These are passed as a parameter to the user-defined Python function as a list of tables.
 
 
-### Notebook: User-defined Python
+### User-defined Python
 
 ```python
 import pandas as pd
@@ -112,7 +112,7 @@ This allows users to conduct testing in other cells prior to committing and load
 
 :::
 
-### Notebook: Save Pipeline Code cell
+### Save Pipeline Code cell
 
 ```python
 # Save the updated query and python function to the pipeline
@@ -124,7 +124,7 @@ save(files)
 
 Running this cell commits any code changes to the Git repository associated with the tenant and uploads the code to the workflow management system for executing code.
 
-### Notebook: Testing Section
+### Testing Section
 
 ```python
 # Example 1: Testing section for Transform_Py node
@@ -170,6 +170,7 @@ mock_ganymede_context = MockGanymedeContext()
 df = execute({'test_file': BytesIO(file_uploader.value[0].content.tobytes())})
 display(df)
 ```
+
 
 ## Adding flow inputs
 

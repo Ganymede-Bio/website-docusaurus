@@ -1,0 +1,58 @@
+---
+id: NotebookTips
+title: Notebook Tips
+displayed_sidebar: webUiSidebar
+---
+
+import {
+  EditOutlined
+} from '@ant-design/icons';
+
+
+## Summary
+
+Notebooks come with a number of features that facilitate code prototyping and development.  
+
+Functions can be introspected by typing ? or ?? before the function name in a notebook cell.  For example:
+
+### Reading function signature and docstring
+
+```python
+from ganymede_sdk.io import retrieve_sql
+
+# shows function signature and docstring 
+?retrieve_sql
+```
+
+<img alt="Explore documentation" 
+      src="https://ganymede-bio.mo.cloudinary.net/apiServer/Example_Function_Docstring20230712.png"
+      />
+&nbsp;
+
+### Reading function signature and source code
+
+```python
+# shows function signature and source code (image below truncated for brevity)
+??retrieve_sql
+```
+
+<img alt="Explore source code" 
+      src="https://ganymede-bio.mo.cloudinary.net/apiServer/Example_Function_Source_Narrow20230712.png"
+      />
+&nbsp;
+
+### Tab completion for object exploration
+
+Pressing <TAB\> key enables exploration of objects, modules, and namespaces.
+
+```python
+from ganymede_sdk.editor import MockGanymedeContext
+mock_ganymede_context = MockGanymedeContext()
+mock_ganymede_context.<TAB>
+```
+
+
+<img alt="Observe object methods" 
+      src="https://ganymede-bio.mo.cloudinary.net/apiServer/Example_Tab_Completion20230712.png"
+      width="600"
+      />

@@ -89,6 +89,11 @@ module.exports = {
       },
       {
         type: 'doc',
+        id: 'NotebookTips',
+        label: 'Notebook Tips'
+      },
+      {
+        type: 'doc',
         id: 'AdminControls',
         label: 'Environment Administration'
       },
