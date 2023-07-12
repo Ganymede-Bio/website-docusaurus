@@ -13,15 +13,18 @@ import {
 
 Notebooks come with a number of features that facilitate code prototyping and development.  
 
-Functions can be introspected by typing ? or ?? before the function name in a notebook cell.  For example:
-
 ### Reading function signature and docstring
+
+Functions can be introspected by pressing `Shift`+`TAB` after the function name in a notebook cell, or by typing `?` after the function name in a notebook cell.  This will display the function signature and docstring.  
 
 ```python
 from ganymede_sdk.io import retrieve_sql
 
-# shows function signature and docstring 
-?retrieve_sql
+# shows function signature and docstring in a popup modal
+retrieve_sql<Shift+TAB>
+
+# alternative method to show function signature and docstring in a pane at the bottom of the screen
+retrieve_sql?
 ```
 
 <img alt="Explore documentation" 
@@ -31,9 +34,13 @@ from ganymede_sdk.io import retrieve_sql
 
 ### Reading function signature and source code
 
+The source code for a function can be observed by typing `??` after the function name in a notebook cell.  This will display the function signature and source code.
+
 ```python
+from ganymede_sdk.io import retrieve_sql
+
 # shows function signature and source code (image below truncated for brevity)
-??retrieve_sql
+retrieve_sql??
 ```
 
 <img alt="Explore source code" 
@@ -43,7 +50,7 @@ from ganymede_sdk.io import retrieve_sql
 
 ### Tab completion for object exploration
 
-Pressing <TAB\> key enables exploration of objects, modules, and namespaces.
+Pressing `TAB` key enables exploration of objects, modules, and namespaces.
 
 ```python
 from ganymede_sdk.editor import MockGanymedeContext
