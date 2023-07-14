@@ -173,6 +173,14 @@ After downloading the Agent, launch the installation file to complete Agent conf
 - **Variable definitions** are strings in the format "var_name=var_value", which allows users to set context variables to be used in the user-defined Python
 - **Label** is a string that can be used to identify and group connections within Ganymede.  The label is visible in the Connections UI
 
+Variables and labels can be referenced in your user-defined code by extracting the values from `kwargs`:
+
+```python
+labels: list[str] = kwargs.get('labels', [])
+# -- OR --
+vars: dict[str, str] = kwargs.get('vars', [])
+```
+
 For Agents that reference local directories, the directory watched is specified in the Additional Params input box:
 
 ```shell
