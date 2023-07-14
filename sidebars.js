@@ -3,7 +3,6 @@ nodeApp = require('./docs/nodes/App/sidebar.json')
 nodeFile = require('./docs/nodes/File/sidebar.json')
 nodeInstrument = require('./docs/nodes/Instrument/sidebar.json')
 nodeTag = require('./docs/nodes/Tag/sidebar.json')
-nodeTest = require('./docs/nodes/Test/sidebar.json')
 
 module.exports = {
   webUiSidebar:
