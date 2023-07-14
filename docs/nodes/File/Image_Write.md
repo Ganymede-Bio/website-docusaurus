@@ -9,11 +9,6 @@ Parse table data and writes to storage.  Useful for storing graphs created from 
 
 Retrieves table(s) from Ganymede data lake, processes table(s) via user-defined function,
 and stores result in cloud storages
-
-
-### Node Attributes
-- **output_table_metadata**
-  - Table describing objects created
 ## User-Defined Python
 Process image data into a dictionary of images indexed by filename to save in cloud storage
 

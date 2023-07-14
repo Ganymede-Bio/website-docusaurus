@@ -114,8 +114,7 @@ module.exports = {
         nodeApp,
         nodeFile,
         nodeInstrument,
-        nodeTag,
-        nodeTest]
+        nodeTag]
     }
   ],
   SDKSidebar: [
