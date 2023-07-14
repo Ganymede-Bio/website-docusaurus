@@ -4,20 +4,39 @@ title: File Browser
 displayed_sidebar: webUiSidebar
 ---
 
+import useBaseUrl from '@docusaurus/useBaseUrl';
 import {
-  CheckCircleOutlined
+  FolderOutlined,
+  FilterFilled,
+  LinkOutlined,
+  CheckCircleOutlined,
+  ApiOutlined,
 } from '@ant-design/icons';
 
-import { FolderOutlined } from '@ant-design/icons';
+The <div className="button darkblue_button"><FolderOutlined /> **Files**</div> page provides access to all of the files uploaded to Ganymede and all files created in Ganymede by Flow Runs for the current environment.  Files can be browsed and searched for using various metadata fields, including file name, file type, tag, file origin and Flows that the file was used in.
 
-The <div className="button darkblue_button"><FolderOutlined /> **Files**</div> page provides access to all of the data uploaded to Ganymede and all of your results from actions taken in the Flow Editor, organized by _flow_.
-
-<img width="1249" alt="Files" src="https://user-images.githubusercontent.com/46538575/225719095-f45c79ac-13c7-41ea-b81d-f0c23755e329.png"/>
+![Files](https://ganymede-bio.mo.cloudinary.net/apiServer/Files-2023-07-13.png)
 &nbsp;
 
-Input files can be found under the Uploaded Files section.   _Flow_ outputs can be found in the Results section of the Files page.
+## Finding files
 
-To view other flows that have run the same file, click the "Details" button next to a file and a modal will open with that information. 
-To navigate to a particular run in the [<div className="button darkblue_button"><CheckCircleOutlined /> **Flow Runs**</div>](./FlowRuns.mdx), click on the Flow Run Id.
+To search for a file by name, type a query in the search box in the upper left of the page.  To filter files by other properties, click the filter icon ( <FilterFilled /> ) next to supported column titles in the table header, select the desired values, and click OK.
 
-<img width="1249" alt="Files2" src="https://user-images.githubusercontent.com/46538575/225719151-ac781bc9-de68-4074-8b37-141ce558bc42.png"/>
+![Files (filtered)](https://ganymede-bio.mo.cloudinary.net/apiServer/Files-Filtered-2023-07-13.png)
+
+## Downloading files
+
+To download a file, click the file's name in the _File name_ column.
+
+## Linking to files
+
+Click the link icon ( <LinkOutlined /> ) next to a file's name in the _File name_ column to copy a link to that file to the clipboard.  This link can be shared with other users in the same Ganymede environment.  Visiting the link will open the <div className="button darkblue_button"><FolderOutlined /> **Files**</div> page filtered to show only the linked file.
+
+![Files (copying link)](https://ganymede-bio.mo.cloudinary.net/apiServer/Files-Copying-Link-2023-07-13.png)
+![Files (single-file view)](https://ganymede-bio.mo.cloudinary.net/apiServer/Files-Single-File-View-2023-07-13.png)
+
+## Viewing related entities
+
+For each file, the <div className="button darkblue_button"><FolderOutlined /> **Files**</div> page shows the ID of the Flow or Agent that originated the file (_Origin_) along with the IDs of all Flows and Flow Runs that the file was used in (_Usage_), as applicable.  Click any Flow ID, Agent ID or Flow Run ID to view details for that entity in the <div className="button darkblue_button"><img src={useBaseUrl('/img/flows_icon.svg')} className="filter-white" /> **Flow View**</div>, <div className="button darkblue_button"><ApiOutlined /> **Connections**</div>, and <div className="button darkblue_button"><CheckCircleOutlined /> **Flow Runs**</div> pages, respectively.
+
+![Files (usage)](https://ganymede-bio.mo.cloudinary.net/apiServer/Files-Usage-2023-07-13.png)
