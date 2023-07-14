@@ -24,11 +24,9 @@ The table below lists available nodes.
 
 | [Category](#node-categories)   | Name                   | [Input Types](#node-inputoutput-types)                                                           | [Output Types](#node-inputoutput-types)                                | Is Editable   | Is Multi   |
 |------------|------------------------|-----------------------------------------------------------------------|---------------------------------------------|---------------|
-| Analysis   | Process_Blob_to_Blob   | FileAny and Optional[Table or List[Table]]                            | Dict[FileAny]                               | True          |
 | Analysis   | Process_Blob_to_Table  | FileAny and Optional[Table or List[Table]]                            | Table or Dict[Table]                        | True          |
 | Analysis   | Python                 | Table(s) and/or File(s)                                               | Table(s) and/or File(s)                     | True          |
 | Analysis   | RunContainer           |                                                                       |                                             | True          |
-| Analysis   | Table_to_Blob          | Table or List[Table]                                                  | Dict[FileAny]                               | True          |
 | Analysis   | Transform_SQL          | Table                                                                 | Table                                       | True          |
 | Analysis   | Transform_py           | Table or List[Table]                                                  | Table or Dict[Table]                        | True          |
 | App        | AirtableExport         | Table                                                                 | API                                         | True          |
@@ -63,7 +61,6 @@ The table below lists available nodes.
 | File       | Excel_Read_Multi       | Set[FileExcel]                                                        | Table or Dict[Table]                        | True          |
 | File       | Excel_Write            | Table or List[Table]                                                  | FileExcel                                   | True          |
 | File       | FCS_Extract_Load       | FileFCS                                                               | Dict[Table]                                 | True          |
-| File       | FCS_Extract_Load_Multi | Set[FileFCS]                                                          | Dict[Table]                                 | True          |
 | File       | HDF5_Read              | FileHDF5                                                              | FileAny                                     | True          |
 | File       | Image_Read             | FileImage                                                             | Dict[FileAny]                               | True          |
 | File       | Image_Read_Multi       | List[FileImage]                                                       | Dict[FileAny]                               | True          |
@@ -133,11 +130,9 @@ The _execute_ function may call classes and functions found within the User-Defi
 
 | [Category](#node-categories)   | Name                   | Brief Description                                                            |
 |------------|------------------------|------------------------------------------------------------------------------|
-| Analysis   | Process_Blob_to_Blob   | Process blob data; write results to data store                               |
 | Analysis   | Process_Blob_to_Table  | Process data; write tabular data results to data lake                        |
 | Analysis   | Python                 | Process data with python                                                     |
 | Analysis   | RunContainer           | Run container node                                                           |
-| Analysis   | Table_to_Blob          | Process tabular data; write data results to data lake                        |
 | Analysis   | Transform_SQL          | SQL analysis Function                                                        |
 | Analysis   | Transform_py           | Manipulate data with python                                                  |
 | App        | AirtableExport         | Export data from Ganymede data lake to Airtable                              |
@@ -172,7 +167,6 @@ The _execute_ function may call classes and functions found within the User-Defi
 | File       | Excel_Read_Multi       | Read Excel spreadsheets                                                      |
 | File       | Excel_Write            | Write Excel spreadsheet                                                      |
 | File       | FCS_Extract_Load       | Load FCS file to data lake                                                   |
-| File       | FCS_Extract_Load_Multi | Load multiple FCS files to data lake                                         |
 | File       | HDF5_Read              | Read HDF5 data                                                               |
 | File       | Image_Read             | Process image data; store processed images to data store                     |
 | File       | Image_Read_Multi       | Process image data for multiple images; store processed images to data store |
