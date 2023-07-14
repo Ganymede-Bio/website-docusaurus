@@ -85,6 +85,9 @@ if __name__ == "__main__":
     with open(os.path.join(operators_dir, "operators.yaml"), "r") as operators_yaml:
         operators = yaml.safe_load(operators_yaml)
 
+        # remove dev flag nodes from documentation
+        operators = {k: v for k, v in operators.items() if "dev" not in v or not v["dev"]}
+
     for path in os.listdir(markdown_dir):
         if os.path.isdir(path):
             shutil.rmtree(os.path.join(markdown_dir, path))
@@ -92,9 +95,6 @@ if __name__ == "__main__":
     # copy markdown files to subdirectory by operator type
     missing_files = []
     for name, desc in operators.items():
-        if "dev" in desc and desc["dev"]:
-            continue
-
         operator_filename = (
             os.path.join(operators_dir, "/".join(desc["path"].split(".")[1:-1])) + ".py"
         )
