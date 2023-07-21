@@ -16,6 +16,18 @@ Please ensure your internal corporate policies allow for GPT usage following [Op
 
 :::
 
+### Initial Configuration
+Navigate to the Environment Administration Panel by clicking on the gear icon in the top right corner of the Ganymede UI.
+
+<img alt="OpenAI configuration" src="https://ganymede-bio.mo.cloudinary.net/apiServer/OpenAISecretPanelConfig20230721.png"/>
+&nbsp;
+
+Enter in the secrets shown above, which can be found by signing up for [OpenAI API access](https://platform.openai.com/account/api-keys).  
+
+- **openai_api_key**: API Key for OpenAI access; should be a string starting with `sk-`.
+- **openai_organization**: API Key for OpenAI access; should be a string starting with `org-`.
+
+
 ### Basic question and answering
 Calling GPT with no parameters initializes the API with a default persona.  The _render_ function renders the output from GPT in markdown.  By default, `gpt-3.5-turbo` is used; [model version](https://platform.openai.com/docs/models/overview) can be passed as a keyword parameter upon initialization.
 
