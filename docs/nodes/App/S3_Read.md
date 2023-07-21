@@ -13,9 +13,6 @@ Sync S3 bucket -> Ganymede data lake bucket
   - Name of S3 bucket to read files from
 - **src_s3_prefix**
   - Prefix pattern to match for files to copy from S3 bucket
-- **dest_input_or_output_bucket**
-  - Specify "input" or "output" for the Ganymede cloud storage bucket to sync to.
-  - "input" contains files ingested into a flow; "output" contains processed data.
 
 
 ### Notes

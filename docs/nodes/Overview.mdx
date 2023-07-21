@@ -26,7 +26,7 @@ The table below lists available nodes.
 |------------|------------------------|-----------------------------------------------------------------------|---------------------------------------------|---------------|
 | Analysis   | Process_Blob_to_Table  | FileAny and Optional[Table or List[Table]]                            | Table or Dict[Table]                        | True          |
 | Analysis   | Python                 | Table(s) and/or File(s)                                               | Table(s) and/or File(s)                     | True          |
-| Analysis   | RunContainer           |                                                                       |                                             | True          |
+| Analysis   | RunContainer           | FileAny                                                               | FileAny                                     | True          |
 | Analysis   | Transform_SQL          | Table                                                                 | Table                                       | True          |
 | Analysis   | Transform_py           | Table or List[Table]                                                  | Table or Dict[Table]                        | True          |
 | App        | AirtableExport         | Table                                                                 | API                                         | True          |
@@ -42,11 +42,11 @@ The table below lists available nodes.
 | App        | Benchling_Write        | Table                                                                 | API                                         | True          |
 | App        | Benchling_Write_Object | Optional[FileAny or List[FileAny]] and Optional[Table or List[Table]] | API                                         | True          |
 | App        | Coda_Write             | Table                                                                 | API                                         | True          |
-| App        | ELabNext_Write         | Table                                                                 | API                                         | True          |
+| App        | ELabNext_Write         | Table                                                                 | Table                                       | True          |
 | App        | S3_Event               | App                                                                   | FileAny                                     | True          |
 | App        | S3_Read                | API                                                                   | FileAny                                     | False         |
 | App        | S3_Write               | FileAny                                                               | API                                         | False         |
-| App        | SciNote_Write          | Table                                                                 | API                                         | True          |
+| App        | SciNote_Write          | Table                                                                 | Table                                       | True          |
 | App        | Smartsheet_Read        | API                                                                   | Table                                       | True          |
 | App        | Snowflake_Write        | Table                                                                 | API                                         | False         |
 | File       | AVI_Read               | FileAVI                                                               | Table or Dict[Table]                        | True          |
@@ -76,7 +76,6 @@ The table below lists available nodes.
 | Instrument | Synergy_Read_Multi     | Set[FileTxt]                                                          | Dict[Table]                                 | True          |
 | Tag        | Benchling_Tag          | TagBenchling                                                          | string                                      | False         |
 | Tag        | Input_Param            | string                                                                | string                                      | False         |
-
 
 #### Node Categories
 

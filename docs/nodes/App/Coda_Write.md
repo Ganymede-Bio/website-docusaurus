@@ -39,5 +39,10 @@ Example demonstrating submission of user-defined SQL query into Coda
     - Ganymede context variable, which stores flow run metadata
 
 
+### Returns
+`List[str]`
+  - List of Coda table IDs written to
+
+
 ### Notes
 See [Coda API](https://coda.io/developers/apis/) for more details on API usage.
