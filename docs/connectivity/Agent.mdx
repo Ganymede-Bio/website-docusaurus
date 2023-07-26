@@ -64,6 +64,8 @@ The _Configuration_ input specifies the action performed by the Agent, chosen fr
 - `Check Period (seconds)`: Frequency with which Agent will poll local directory for new files
 - `If a discovered filename exists in storage`: Whether to use the file in storage or the observed file in the local directory
 - `File pattern to parameter mapping`: For the selected Flow, the [glob pattern](https://en.wikipedia.org/wiki/Glob_(programming)) to associate with the input parameter(s)
+
+Whenever a file matches a glob pattern, it will be uploaded to Ganymede storage, even if it's not used in a flow. Files that are written to the watched directory can be ignored by ensuring that they do not match any of the glob patterns for the parameter inputs.
   
 For example, if the instrument outputs a CSV file called "lc_output<YYYYMMDD\>.csv" which is to be ingested by a [CSV_Read node](../nodes/File/CSV_Read.md) called "Ingest_Data", an appropriate configuration would be "lc_output*.csv" for the input box associated with the "Ingest_Data.csv" node.
 
@@ -73,6 +75,19 @@ For example, if the instrument outputs a CSV file called "lc_output<YYYYMMDD\>.c
       width="500" />
 </div>
 &nbsp;
+
+Patterns can also be matched against subdirectories using `*` for single level subdirectories and `**` for any level subdirectories.
+
+For example, if your instrument writes out files in a directory like:
+```shell
+├── experiment_id_1
+│   ├── configuration.xml
+│   └── results.csv
+└── experiment_id_2
+    ├── configuration.xml
+    └── results.csv
+```
+You would use parameters like `*/configuration.xml` and `*/results.csv` to upload the files and submit them to a flow. 
 
 #### Example use case
 
