@@ -110,6 +110,13 @@
   color: var(--ifm-color-gray-lighter);
 }
 
+.button.darkblue_inverted_button {
+  border-color: var(--ifm-color-blue-dark);
+  background-color: white;
+  color: var(--ifm-color-blue-dark);
+  font-weight: normal;
+}
+
 .button.darkblue_button_mui {
   border-color: var(--ifm-color-black);
   background-color: var(--ifm-color-blue-dark);
