@@ -14,7 +14,7 @@ The Roles panel shown below enables adminstrators to specify access levels for d
 
 <img width="1228" alt="Admin - Access Panel" src="https://user-images.githubusercontent.com/46538575/225719236-4a5681c2-e883-4acd-9302-ab2925f09eac.png"/>
 
-There are four levels of access, and are set at the tenant level.  These access levels are shown below in order from least to most restrictive. Roles that are higher in the list contain all the access of roles beneath them.  For example, users with Writer privilege have all the privileges of a Runner in addition to the ability to create _flows_.
+There are five levels of access, and are set at the environment level.  These access levels are shown below in order from least to most restrictive. Roles that are higher in the list contain all the access of roles beneath them.  For example, users with Writer privilege have all the privileges of a Runner in addition to the ability to create _flows_.
 
 **Admin**:
     Manage the environment settings, able to manage access of others. Admins are able to create, modify, and execute _flows_.
@@ -26,7 +26,10 @@ There are four levels of access, and are set at the tenant level.  These access 
     Can execute _flows_, but cannot modify or create new _flows_.
 
 **Reader**:
-    Can observe _flows_ and observe environment settings, but not permitted to execute or alter _flows_.
+    Can observe _flows_, read data, and observe environment settings, but not permitted to execute or alter _flows_.
+
+**None**:
+    Cannot see the environment as an option in the dropdown menu.  This is relevant for providing access to a specific environment; for example, a user may have **Runner** permission for prod but **None** permission for dev if that user is not involved in development.
 
 ### Environment Secrets
 
