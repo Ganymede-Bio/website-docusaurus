@@ -53,6 +53,7 @@ The _Configuration_ input specifies the action performed by the Agent, chosen fr
 - [**Watch for files locally and upload**](#watch-for-files-locally-and-upload): Monitor specified directory on the local file system and upload files to Ganymede Cloud upon observation.
 - [**Watch for flow outputs then save locally**](#watch-for-flow-outputs-then-save-locally): Monitor specified directory in Ganymede Cloud Storage for new files, and capture + process files on local instrument PC upon observation
 - [**Load local files into Ganymede with a custom filter**](#load-local-files-into-ganymede-with-a-custom-filter): Send specified files on local instrument PC and process on Ganymede Cloud
+- [**Set a cron job to upload files periodically**](#set-a-cron-job-to-upload-files-periodically): Periodically deliver files to Ganymede Cloud
 
 ## Configuration Options
 
@@ -158,6 +159,25 @@ Instructions for lab execution are generated on Ganymede Cloud and downloaded to
       width="500" />
 </div>
 &nbsp;
+
+### Set a cron job to upload files periodically
+
+#### Input Parameters
+
+- `Time Interval`: Frequency and times with which to upload files, based on UTC time
+
+<div class="text--center">
+  <img alt="Agent configuration - Cron" 
+      src="https://ganymede-bio.mo.cloudinary.net/agent/Agent_Cron_Upload_Config20230727.png"
+      width="500" />
+</div>
+&nbsp;
+
+#### Example use case
+
+A local file is modified on regular intervals and needs to uploaded to Ganymede Cloud after each modification.
+
+
 
 #### Example use case
 
