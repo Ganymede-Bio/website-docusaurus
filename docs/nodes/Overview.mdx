@@ -64,6 +64,8 @@ The table below lists available nodes.
 | File       | Image_Read             | FileImage                                                             | Dict[FileAny]                               | True          |
 | File       | Image_Read_Multi       | List[FileImage]                                                       | Dict[FileAny]                               | True          |
 | File       | Image_Write            | Table or List[Table]                                                  | Dict[FileAny]                               | True          |
+| File       | Input_File             | FileAny                                                               | Table(s) and/or File(s)                     | True          |
+| File       | Input_File_Multi       | Set[FileAny]                                                          | Table(s) and/or File(s)                     | True          |
 | File       | PDF_Read               | FilePDF                                                               | Table or Dict[Table], Optional[Dict[bytes]] | True          |
 | File       | PDF_Read_Multi         | Set[FilePDF]                                                          | Table or Dict[Table], Optional[Dict[bytes]] | True          |
 | File       | Powerpoint_Write       | Table or List[Table]                                                  | Dict[FileAny]                               | True          |
@@ -168,6 +170,8 @@ The _execute_ function may call classes and functions found within the User-Defi
 | File       | Image_Read             | Process image data; store processed images to data store                     |
 | File       | Image_Read_Multi       | Process image data for multiple images; store processed images to data store |
 | File       | Image_Write            | Process tabular data; write an image to data lake                            |
+| File       | Input_File             | Read data file and process in Ganymede                                       |
+| File       | Input_File_Multi       | Read data files and process in Ganymede                                      |
 | File       | PDF_Read               | Read in contents of an PDF file to a table                                   |
 | File       | PDF_Read_Multi         | Read in contents of multiple pdf files to a table                            |
 | File       | Powerpoint_Write       | Process tabular data; write a powerpoint presentation to data lake           |
