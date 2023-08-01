@@ -147,8 +147,8 @@ def execute(file_data: Dict[str, bytes], ganymede_context=None) -> NodeReturn:
     )
 ```
 
-:::tip non-tabular data
-Non-tabular data can be stored by returning a dictionary of files to upload in the `files_to_upload` key of the `NodeReturn` object.  For more information, type `?NodeReturn` into a cell in the editor notebook.
+:::info non-tabular data
+Non-tabular data can be stored by returning a dictionary of files to upload in the `files_to_upload` key of the `NodeReturn` object.
 :::
 
 Run the User-Defined Function cell by selecting the cell and then clicking on the <div className="button jupyter_button">▶️ Run</div> button in the header.  Save and deploy changes made to the Python node by running the Save Pipeline Code cell below **AND** saving the notebook. To save the notebook, click on <div className="button jupyter_button">**File**</div> -> <div className="button jupyter_button">Save and Checkpoint</div> in the menu.
@@ -257,7 +257,137 @@ from Quickstart_Absorbance_Change_data
 order by left(field, 1), cast(right(field, length(field)-1) as int)
 ```
 
-Yields the following results:
+yields the results shown below:
 
 <img alt="Querying results" src="https://ganymede-bio.mo.cloudinary.net/apiServer/QuickstartDataExplorer_20230731.png"/>
 
+### Exploring additional features
+
+#### Schema validation
+
+You may have noticed a Pandera snippet in the User-Defined Function cell of the Python node.  This is a schema validation library that can be used to validate the structure of the data returned by the User-Defined Function.
+An example for validating that output only contains plate reader data with measurements (i.e. - no metadata) is shown below:
+
+```python
+import pandas as pd
+from ganymede_sdk.io import NodeReturn
+from typing import Union, Dict, List
+
+from pandera import Column, DataFrameSchema, Check
+import re
+
+schema = DataFrameSchema(
+    {
+        "field": Column(str,
+                        Check.str_matches(r'\w\d\d?'),
+                        required=True,
+                        nullable=False
+                       ),
+        "run1": Column(float, required=True, nullable=False),
+        "run2": Column(float, required=True, nullable=False)
+    }
+)
+
+def execute(
+    df_sql_result: Union[pd.DataFrame, List[pd.DataFrame]], ganymede_context=None
+) -> Union[pd.DataFrame, Dict[str, pd.DataFrame]]:
+
+    # remove fields that do not contain well measurements
+    df_out = df_sql_result[~df_sql_result['field'].isin(['Cycle Nr.', 'Time [s]', 'Temp. [°C]'])].copy()    
+    
+    # calculate absorbance difference
+    df_out['run_diff'] = df_out['run2'] - df_out['run1']
+
+    schema.validate(df_out)
+
+    return NodeReturn(
+        tables_to_upload={'Quickstart_Absorbance_Change_data': df_out},
+    )
+```
+
+#### Code Explanation
+
+If [configured](./sdk/GPT.mdx), you can use GPT as a coding assistant.  To observe available commands, return to the Python node, scroll to the bottom, and initiate the GPT object:
+
+```python
+from ganymede_sdk.editor import GPT
+gpt = GPT()
+gpt
+```
+
+<img alt="GPT available commands" src="https://ganymede-bio.mo.cloudinary.net/apiServer/QuickstartGPT_20230731.png"/>
+&nbsp;
+
+For example, you can generate a docstring by using the "generate_docstring" command, passing in the execute function as an argument:
+
+```python
+gpt.ask(execute, 'generate_docstring')
+```
+
+<img alt="GPT available commands" src="https://ganymede-bio.mo.cloudinary.net/apiServer/QuickstartGPT_Docstring_20230731.png"/>
+&nbsp;
+
+Putting this together, with the schema validation above results in a robust, well-documented piece of code:
+
+```python
+import pandas as pd
+from ganymede_sdk.io import NodeReturn
+from typing import Union, Dict, List
+
+from pandera import Column, DataFrameSchema, Check
+import re
+
+schema = DataFrameSchema(
+    {
+        "field": Column(str,
+                        Check.str_matches(r'\w\d\w'),
+                        required=True,
+                        nullable=False
+                       ),
+        "run1": Column(float, required=True, nullable=False),
+        "run2": Column(float, required=True, nullable=False)
+    }
+)
+
+def execute(
+    df_sql_result: Union[pd.DataFrame, List[pd.DataFrame]], ganymede_context=None
+) -> Union[pd.DataFrame, Dict[str, pd.DataFrame]]:
+    """
+    This function takes a SQL result dataframe as input and performs the following operations:
+    
+    1. Removes fields that do not contain well measurements from the input dataframe.
+    2. Calculates the absorbance difference by subtracting the 'run1' column from the 'run2' column.
+    3. Returns a NodeReturn object with the modified dataframe as a value in the 'tables_to_upload' dictionary.
+    
+    Parameters
+    ----------
+    - df_sql_result: Union[pd.DataFrame, List[pd.DataFrame]]
+        - The input dataframe or list of dataframes obtained from a SQL query.
+    - ganymede_context: Any, optional
+        - The Ganymede context object, which can be used to pass additional information if needed.
+    
+    Returns
+    -------
+    - Union[pd.DataFrame, Dict[str, pd.DataFrame]]
+        - If the input is a single dataframe, the modified dataframe is returned.
+        - If the input is a list of dataframes, a dictionary is returned with the modified dataframe as a value, 
+          where the key is 'Quickstart_Absorbance_Change_data'.
+    
+    Notes
+    -----
+    - The function assumes that the input dataframe has columns named 'field', 'run1', and 'run2'.
+    - The function modifies the input dataframe in-place and returns it.
+    """
+
+    # remove fields that do not contain well measurements
+    df_out = df_sql_result[~df_sql_result['field'].isin(['Cycle Nr.', 'Time [s]', 'Temp. [°C]'])].copy()    
+    
+    # calculate absorbance difference
+    df_out['run_diff'] = df_out['run2'] - df_out['run1']
+
+    schema.validate(df_out)
+
+    return NodeReturn(
+        tables_to_upload={'Quickstart_Absorbance_Change_data': df_out},
+    )
+```
