@@ -1,0 +1,209 @@
+---
+id: Benchling
+title: Benchling in Ganymede
+displayed_sidebar: SDKSidebar
+---
+
+import NodeChip from '@site/src/components/NodeChip.js'
+
+# Overview
+
+ganymede_sdk.api.benchling provides functions and classes for reading and writing to benchling
+using benchling api. 
+
+## *class* ganymede_sdk.api.benchling.benchling.Benchling(benchling_context: BenchlingContext, ganymede_context: GanymedeContext)
+
+Bases: `object`
+
+Benchling object to interact with Benchling API through read and write type methods.
+
+### Attributes
+
+benchling_context
+: Benchling context variable, which stores Benchling connection information
+
+ganymede_context
+: Ganymede context to get run attributes
+
+run_tag
+: Tag associated with flow run
+
+### create_assay_results_from_dataframe(data: DataFrame | List[DataFrame], schema_id: str, project_id: str, \*\*kwargs)
+
+Processes input DataFrame(s) for upload to Benchling.
+
+#### Parameters
+
+data
+: Tabular result(s) of data to send to Benchling. Converted to list of dictionaries for
+  each row.
+
+schema_id
+: Benchling schema id
+
+project_id
+: Benchling project id
+
+file_names: Optional[list]
+: File names to associate with the data to upload to Benchling.
+
+kwargs
+: drop_na : Optional[bool]
+
+#### Returns
+
+List[AssayResultCreate]
+: List of AssayResultCreate’s to be uploaded to Benchling
+
+### create_assay_results_from_files(file_names: list, file_contents: List[bytes] | List[DataFrame])
+
+Upload blob files to Benchling
+
+#### Parameters
+
+file_name: List[str]
+: File names to associate to file content
+
+file_content: Union[List[bytes], List[pd.DataFrame]]
+: Blob or data content to upload
+
+#### Returns
+
+Dict[str, Union[Unset, str]]:
+: Returns a dictionary of IDs from benchling_sdk.models.Blob
+
+### create_custom_entity(entity_name: str, folder_id: str, schema_id: str, registry_id: str)
+
+Return the id of the custom entity. If the entity does not exist, first create it.
+
+#### Parameters
+
+entity\_name: str
+: Name of new entity to be created
+
+folder\_id: str
+: Folder ID containing Benchling entity to be created. This should be a string starting with lib\_
+
+input\_schema\_id: str
+: Input schema ID Tag. schema associated with Benchling entity to be created This should
+  be a string starting with ts\_
+
+registry\_id: str
+: Project associated with custom entity.  This identifies the registry that your run
+  entity will be registered to.  This can be found by clicking on Avatar -> Feature
+  Settings -> Registry Settings, and you will be able to find it in the URL.  This should
+  be a string starting with src\_
+
+#### Returns
+
+Dict[str, str]
+: Dictionary of entity name, custom entity id pair
+
+### get_benchling_value(object_id: str, field_name: str)
+
+Returns the benchling value for a given entity ID and field name.
+
+#### Parameters
+
+object_id
+: ID used in Benchling API (e.g. - entity schema ID or notebook entry ID)
+
+field_name: str
+: Parameter passed to benchling
+  conn.custom_entities.get_by_id().fields.additional_properties.get(field_name)
+
+#### Returns
+
+str:
+: Benchling value associated with field name and id
+
+### get_entity_name_from_context(flow_node_name_for_benchling: str, flow_node_param_for_benchling: str)
+
+### get_id_from_dropdown_name(dropdown_name: str)
+
+Get dropdown id from dropdown summary info identified by name. Can pass a dropdown id look
+up within the corresponding dropdown summary.
+
+#### Paramters
+
+dropdown_name: str
+: Dropdown name to identify id for
+
+args:
+: Optional positional arguments to pass to list method of benchling_sdk dropdown service
+
+kwargs:
+: dropdown_id: Optional[str]
+  : Optional benchling dropdown id. If none, list all dropdowns. If given, list all
+    dropdowns of that id.
+  <br/>
+  Optional keyword arguments to pass to list method of benchling_sdk dropdown service
+
+#### Returns
+
+str:
+: dropdown id associated with dropdown name. Raises an error if dropdown id is not found
+
+### retrieve_benchling_input_tag(node_name: str, display_tag: str)
+
+Retrieve benchling_input_tag
+
+#### Parameters
+
+display_tag: str
+: Display tag
+
+#### Returns
+
+FlowInputParam
+
+### retrieve_flow_input_file(entity_id: str, benchling_field: str, node_name: str, param_name: str, file_extention: str | None = None)
+
+Retrieve file based on Benchling field name
+
+#### Parameters
+
+entity_id: str
+: Benchling entity id for retrieving file
+
+benchling_field: str
+: Name of Benchling field to retrieve blob data from
+
+param_name: str
+: Parameter for node in triggered flow
+
+file_extension: Optional[str]
+: File extension (if different from what is param name)
+
+#### Returns
+
+events.FlowInputFile
+
+### retrieve_flow_input_param(entity_id: str, field_name: str, node_name: str, param_name: str)
+
+Retrieve input param based on Benchling field name, entity_id
+
+#### Parameters
+
+entity_id: str
+: Benchling entity id for retrieving file
+
+field_name: str
+: Parameter passed to benchling
+
+param_name: str
+: Parameter for node in triggered flow
+
+#### Returns
+
+FlowInputParam
+
+### upload_results(benchling_results: List[AssayResultCreate] | Dict[str, Unset | str])
+
+Batch upload results to Benchling
+
+#### Parameters
+
+benchling_results: Union[List[AssayResultCreate], Dict[str, Union[Unset, str]]]
+: Results to upload to Benchling
+
