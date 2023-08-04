@@ -4,6 +4,24 @@ title: July 2023
 displayed_sidebar: releaseSideBar
 ---
 
+### July 28 2023
+**Features/Updates**
+- Agents now support the ability to periodically upload files via a cron job, without running a Flow.
+- The file browser now loads much quicker and includes a refresh button. A date range filter was added to the Created Date column, as well as a file size filter for the Size column.
+- Admins can now set a user’s role to “None” in an environment, so that the user will no longer see the environment.
+
+**Improvements**
+- The Notifications table now displays a more granular status, with Agent and Flow saves displaying their progress as Building, Deploying, or Completed.
+- Status check-ins have been removed from the Agent logs, to make logs more readable.
+- To enable more thorough logs, an agent connection can be deployed with a “-v debug=True” flag set.
+- Benchling Custom Entity tags are now displayed in purple on the file browser.
+
+**Bug Fixes**
+- An issue that prevented new users from getting assigned a role has been resolved.
+- SQL queries no longer have additional new lines when saved.
+- The Flow View and Settings pages will now update when a different environment is selected.
+- Historical saves that are still in progress will now be marked as Completed once a more recent save completes.
+
 ### July 20 2023
 **Improvements**
 - The Notifications page now includes status related to Agent builds.
