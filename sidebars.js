@@ -24,14 +24,14 @@ module.exports = {
         items: [
           {
             type: 'doc',
-            id: 'QuickstartCreateDashboard',
-            label: 'QuickstartCreateDashboard'
-          },
-          {
-            type: 'doc',
             id: 'QuickstartBuildFlow',
             label: 'QuickstartBuildFlow'
           },
+          {
+            type: 'doc',
+            id: 'QuickstartCreateDashboard',
+            label: 'QuickstartCreateDashboard'
+          }
         ]
       },
       {
