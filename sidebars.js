@@ -147,6 +147,11 @@ module.exports = {
           id: 'sdk/GPT',
           label: 'GPT'
         },
+        {
+          type: 'doc',
+          id: 'sdk/Benchling',
+          label: 'Benchling'
+        },
       ]
   }
   ],
