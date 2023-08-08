@@ -155,7 +155,7 @@ module.exports = {
       type: 'category',
       label: '2023',
       collapsed: false,
-      items: ['releases/202307', 'releases/202306', 'releases/202305', 'releases/202304', 'releases/202303', 'releases/202302', 'releases/202301']
+      items: ['releases/202308', 'releases/202307', 'releases/202306', 'releases/202305', 'releases/202304', 'releases/202303', 'releases/202302', 'releases/202301']
     },
     {
       type: 'category',
