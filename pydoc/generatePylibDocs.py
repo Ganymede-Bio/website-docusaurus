@@ -24,6 +24,8 @@ def dir_files_docstrings_to_markdown_files(_dir, save_path, sidebar):
         for file in files:
             if not re.search(".py$", file) or re.search("__init__", file):
                 continue
+            if "benchling" not in path:
+                continue
             file_path = os.path.join(path, file)
 
             header = re.sub(f'.*?({PKG})', r'\1', file_path)
