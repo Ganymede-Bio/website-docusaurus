@@ -118,7 +118,7 @@ Get output file id for blob created from bytes.
 ###  Parameters
 - **benchling_context** : `Benchling Context object`
     - Benchling context object to get connection
-- **file_name** : `str`
+- **blob_name** : `str`
     - File name to associate with data
 - **blob** : `bytes`
     - Blob to upload as a file.
@@ -128,7 +128,8 @@ Get output file id for blob created from bytes.
     - Returns the id of benchling_sdk.models.Blob
 
 ###  Notes
-- The file type is necessary to upload to benchling which is guessed using the mimetypes package.
+- The file type is necessary to upload to benchling which is guessed based on the blob_name using
+- the mimetypes package.
 
 
 ##  `function` create_assay_results_from_dataframe
