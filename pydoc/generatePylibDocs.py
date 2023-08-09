@@ -13,6 +13,9 @@ displayed_sidebar: SDKSidebar
 """
 
 PKG = "ganymede_sdk"
+PYLIB_PATH = f"./pylib/src/{PKG}"
+SAVE_PATH = "./docs/sdk/sdk_markdowns"
+sidebar = {"type": "category", "label": "API", "items": []}
 
 keywords = [
     "Parameters", "Returns", "Notes", "Note", "Example", "Examples", "Attributes",
@@ -188,9 +191,6 @@ def example_fields_to_markdown(markdown):
 
 
 if __name__ == "__main__":
-    pylib_path = f"./pylib/src/{PKG}"
-    save_path = "./docs/sdk/sdk_markdowns"
-    sidebar = {"type": "category", "label": "ganymede_sdk", "items": []}
-    dir_files_docstrings_to_markdown_files(pylib_path, save_path, sidebar)
-    with open(os.path.join(save_path, "sidebar.json"), "w") as sb_file:
+    dir_files_docstrings_to_markdown_files(PYLIB_PATH, SAVE_PATH, sidebar)
+    with open(os.path.join(SAVE_PATH, "sidebar.json"), "w") as sb_file:
         json.dump(sidebar, sb_file)
