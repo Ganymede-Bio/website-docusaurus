@@ -30,3 +30,8 @@ Processes file data for saving in cloud storage
   - Table(s) and File(s) to store in Ganymede.  To write to the table referenced on the node,
   - return a DataFrame in the "results" key of the tables_to_upload dictionary.  For more info,
   - type '?NodeReturn' into a cell in the editor notebook.
+
+
+### Notes
+Files can also be retrieved and processed using the list_files and retrieve_files functions.
+Documentation on these functions can be found at https://docs.ganymede.bio/sdk/ModuleIO
