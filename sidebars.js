@@ -3,6 +3,7 @@ nodeApp = require('./docs/nodes/App/sidebar.json')
 nodeFile = require('./docs/nodes/File/sidebar.json')
 nodeInstrument = require('./docs/nodes/Instrument/sidebar.json')
 nodeTag = require('./docs/nodes/Tag/sidebar.json')
+nodeSDK = require('./docs/sdk/sdk_markdowns/sidebar.json')
 
 module.exports = {
   webUiSidebar:
@@ -130,6 +131,7 @@ module.exports = {
       label: 'SDK', 
       collapsed: false,
       items: [
+        nodeSDK,
         {
           type: 'doc',
           id: 'sdk/ModuleEditor',
