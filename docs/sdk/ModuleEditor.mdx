@@ -54,12 +54,64 @@ df_output = execute(df_input, ganymede_context=mock_ganymede_context)
 *compare_df_to_table* allows users to compare the columns and schema on a Pandas DataFrame to a corresponding table in the Ganymede database.
 The function returns differences in column names and data types between the DataFrame and the table, and can be used to validate that the DataFrame matches the table schema before writing the DataFrame to the table.
 
+###  Parameters
+- **ganymede_context** : `GanymedeContext`
+    - Ganymede context to get run attributes
+- **df** : `pd.DataFrame`
+    - Pandas DataFrame to validate
+- **table** : `str`
+    - Name of table to compare DataFrame to
+- **diffs_only**: `bool, optional, default=True`
+    - If True, only return columns and schemas differences between DataFrame and table (rather than all columns and schemas in DataFrame and table)
+
 ```python
 from ganymede_sdk.editor import GanymedeContext, compare_df_to_table
 
 # use ganymede_context param if compare_df_to_table accessed inside of execute function
 mock_ganymede_context = MockGanymedeContext()
 
+# returns a Pandas DataFrame with schema and column
 res = compare_df_to_table(mock_ganymede_context, df, 'ganymede_table_name')
 ```
 
+The following examples are outputs from the *compare_df_to_table* function:
+
+**Example:**
+
+Pandas DataFrame named _df_plate_ with the following values:
+
+| *well* | *run1* | *run2* |
+|--------|--------|--------|
+| A1     | 2.5    | 3.7    |
+...
+
+Table in Ganymede data lake named _plate_reader_run_ with the following values:
+
+| *well* | *run1* | *run2* | *run_diff* |
+|--------|--------|--------|------------|
+| A1     | 2.5    | 4      | 1.5        |
+...
+
+Would result in the following DataFrames:
+
+```python
+# One column difference and one schema difference between DataFrame and table
+compare_df_to_table(mock_ganymede_context, result_dfs, 'Example_Quickstart_Absorbance_Change_Python_results')
+```
+
+| *well* | *table_df* | *table_bq* | *diff* |
+|--------|--------|--------|-----|
+| run2     | FLOAT    | INT    | diff    |
+| run_diff     | NaN    | FLOAT    | diff    |
+
+```python
+# Full set of schema and column differences between DataFrame and table returned
+compare_df_to_table(mock_ganymede_context, result_dfs, 'Example_Quickstart_Absorbance_Change_Python_results', diffs_only=False)
+```
+
+| *well* | *table_df* | *table_bq* | *diff* |
+|--------|--------|--------|-----|
+| well     | STRING    | STRING    |   |
+| run1     | FLOAT    | FLOAT    |   |
+| run2     | FLOAT    | INT    | diff  |
+| run_diff | NaN    | FLOAT    | diff   |
