@@ -127,26 +127,19 @@ module.exports = {
       label: 'Flow Context & Metadata'
     },
     {
-      type: 'category',
-      label: 'SDK', 
-      collapsed: false,
-      items: [
-        nodeSDK,
-        {
-          type: 'doc',
-          id: 'sdk/ModuleEditor',
-        },
-        {
-          type: 'doc',
-          id: 'sdk/ModuleIO',
-        },
-        {
-          type: 'doc',
-          id: 'sdk/GPT',
-          label: 'GPT'
-        },
-      ]
-  }
+      type: 'doc',
+      id: 'sdk/ModuleIO',
+    },
+    {
+      type: 'doc',
+      id: 'sdk/ModuleEditor',
+    },
+    nodeSDK,
+    {
+      type: 'doc',
+      id: 'sdk/GPT',
+      label: 'GPT'
+    }
   ],
   releaseSideBar: [
     {
