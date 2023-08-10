@@ -123,11 +123,6 @@ module.exports = {
     },
     {
       type: 'doc',
-      id: 'FlowMetadata',
-      label: 'Flow Context & Metadata'
-    },
-    {
-      type: 'doc',
       id: 'sdk/ModuleIO',
     },
     {
