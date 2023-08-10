@@ -102,7 +102,6 @@ module.exports = {
     {
       type: 'doc',
       id: 'nodes/NodeOverview',
-      label: 'Overview'
     },
     {
       type: 'category',
@@ -120,7 +119,6 @@ module.exports = {
     {
       type: 'doc',
       id: 'sdk/GanymedeSDKOverview',
-      label: 'Overview'
     },
     {
       type: 'doc',
@@ -135,12 +133,10 @@ module.exports = {
         {
           type: 'doc',
           id: 'sdk/ModuleEditor',
-          label: 'Context Variables'
         },
         {
           type: 'doc',
           id: 'sdk/ModuleIO',
-          label: 'Accessing Data'
         },
         {
           type: 'doc',

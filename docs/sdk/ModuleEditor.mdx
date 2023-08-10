@@ -1,6 +1,6 @@
 ---
 id: ModuleEditor
-title: ganymede_sdk.editor
+title: Pipeline Validation
 displayed_sidebar: SDKSidebar
 ---
 
@@ -9,9 +9,9 @@ import NodeChip from '@site/src/components/NodeChip.js'
 
 ## Overview
 
-**ganymede_sdk.editor** contains classes for mimicking pipeline environment to facilitate debugging.
+**ganymede_sdk.editor** contains classes for mimicking pipeline environment to facilitate debugging and to validate data schemas.
 
-### class MockGanymedeContext
+### `class` MockGanymedeContext
 
 **GanymedeContext** stores _flow_ metadata such as user ID, input filenames, input parameters, and execution timestamp upon _flow_ execution.
 
@@ -49,17 +49,17 @@ df_input = retrieve_sql(query_sql)
 df_output = execute(df_input, ganymede_context=mock_ganymede_context)
 ```
 
-### class MockBenchlingContext
+### `function` compare_df_to_table
 
-**MockBenchlingContext** retrieves Benchling connection information from the environment so users can make calls to their configured Benchling tenant in Jupyter notebooks.  If client ID and client secret are configured for the environment, declaring **MockBenchlingContext()** retrieves a Benchling connection.
-
-Alternatively, _url_ and _api_key_ keyword parameters can be passed on initialization for authentication.  For more detail, see [Access the Benchling Developer Platform](https://help.benchling.com/hc/en-us/articles/9714802977805-Access-the-Benchling-Developer-Platform).
+*compare_df_to_table* allows users to compare the columns and schema on a Pandas DataFrame to a corresponding table in the Ganymede database.
+The function returns differences in column names and data types between the DataFrame and the table, and can be used to validate that the DataFrame matches the table schema before writing the DataFrame to the table.
 
 ```python
-from ganymede_sdk.editor import MockBenchlingContext
+from ganymede_sdk.editor import GanymedeContext, compare_df_to_table
 
-# Retrieve Benchling connection information from environment
-mock_benchling_context = MockBenchlingContext()
-print(mock_benchling_context.conn)
+# use ganymede_context param if compare_df_to_table accessed inside of execute function
+mock_ganymede_context = MockGanymedeContext()
+
+res = compare_df_to_table(mock_ganymede_context, df, 'ganymede_table_name')
 ```
 

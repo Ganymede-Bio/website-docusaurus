@@ -1,6 +1,6 @@
 ---
 id: ModuleIO
-title: ganymede_sdk.io
+title: Accessing Data and Files
 displayed_sidebar: SDKSidebar
 ---
 
@@ -13,7 +13,7 @@ ganymede_sdk.io provides functions for listing available data and retrieving dat
 
 ## Functions for accessing tables
 
-### function _retrieve_sql_
+### `function` retrieve_sql
 
 _retrieve_sql_ allows users to retrieve tabular data from the Ganymede data lake.  Input can either be single SQL query, or a semicolon-delimited string containing a set of queries to run.
 
@@ -32,7 +32,7 @@ query_sql = 'SELECT * FROM (SELECT "sample", "query"); SELECT * FROM (SELECT "sa
 df_query1, df_query2 = retrieve_sql(query_sql)
 ```
 
-### function _list_tables_
+### `function` list_tables
 
 _list_tables_ returns a listing of tables, column names, and associated _flows_ as a Pandas DataFrame.  By default, the function retrieves tables associated with the current _flow_.
 
@@ -55,19 +55,19 @@ for table_name in list_tables(context, current_flow_flag=False):
   print(table_name)
 ```
 
-### function _list_tables_current_run_
+### `function` list_tables_current_run
 
 _list_tables_current_run_ returns a listing of all tables associated with the current flow and run ID as a Pandas DataFrame.
 
 - _param_ **context**: GanymedeContext - GanymedeContext to use for pulling table listing
 
-### function _list_tables_current_flow_
+### `function` list_tables_current_flow
 
 _list_tables_current_flow_ returns a listing of all tables associated with the current flow and run ID as a Pandas DataFrame.
 
 - _param_ **context**: GanymedeContext - GanymedeContext to use for pulling table listing
 
-### function _list_tables_all_
+### `function` list_tables_all
 
 _list_tables_all_ returns a listing of all tables associated with the current environment as a Pandas DataFrame.
 
@@ -75,7 +75,7 @@ _list_tables_all_ returns a listing of all tables associated with the current en
 
 ## Functions for accessing files
 
-### function _retrieve_files_
+### `function` retrieve_files
 
 _retrieve_files_ allows users to retrieve files from Ganymede cloud storage.  By default, the most recent file associated with current run is retrieved.
 
@@ -99,7 +99,7 @@ output_files = retrieve_files(mock_ganymede_context, ['sample_output.xlsx', 'sam
                               input_or_output_bucket="output", current_flow_flag=False)
 ```
 
-### function _list_files_
+### `function` list_files
 
 _list_files_ lists files in the environment
 
@@ -124,21 +124,21 @@ df_output_files = list_files(mock_ganymede_context, input_or_output_bucket="outp
 display(df_output_files)
 ```
 
-### function _list_files_current_run_
+### `function` list_files_current_run
 
 _list_files_current_run_ returns a listing of available files in the specified bucket associated with the run ID provided by Ganymede context
 
 - _param_ **context**: GanymedeContext - GanymedeContext to use for pulling file(s)
 - _param_ **input_or_output_bucket**: str, by default "input" - Either "input" or "output" - to reference whether to observe the input or output bucket of the _flow_
 
-### function _list_files_current_flow_
+### `function` list_files_current_flow
 
 _list_files_current_flow_ returns a listing of available files in the specified bucket associated with the current _flow_ provided by Ganymede context
 
 - _param_ **context**: GanymedeContext - GanymedeContext to use for pulling file(s)
 - _param_ **input_or_output_bucket**: str, by default "input" - Either "input" or "output" - to reference whether to observe the input or output bucket of the _flow_
 
-### function _list_files_all_
+### `function` list_files_all
 
 _list_files_all_ returns a listing of all files in the specified bucket in the environment
 
