@@ -103,7 +103,6 @@ module.exports = {
     {
       type: 'doc',
       id: 'nodes/NodeOverview',
-      label: 'Overview'
     },
     {
       type: 'category',
@@ -121,36 +120,21 @@ module.exports = {
     {
       type: 'doc',
       id: 'sdk/GanymedeSDKOverview',
-      label: 'Overview'
     },
     {
       type: 'doc',
-      id: 'FlowMetadata',
-      label: 'Flow Context & Metadata'
+      id: 'sdk/ModuleIO',
     },
     {
-      type: 'category',
-      label: 'SDK', 
-      collapsed: false,
-      items: [
-        nodeSDK,
-        {
-          type: 'doc',
-          id: 'sdk/ModuleEditor',
-          label: 'Context Variables'
-        },
-        {
-          type: 'doc',
-          id: 'sdk/ModuleIO',
-          label: 'Accessing Data'
-        },
-        {
-          type: 'doc',
-          id: 'sdk/GPT',
-          label: 'GPT'
-        },
-      ]
-  }
+      type: 'doc',
+      id: 'sdk/ModuleEditor',
+    },
+    nodeSDK,
+    {
+      type: 'doc',
+      id: 'sdk/GPT',
+      label: 'GPT'
+    }
   ],
   releaseSideBar: [
     {
