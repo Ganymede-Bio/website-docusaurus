@@ -13,8 +13,8 @@ displayed_sidebar: SDKSidebar
 """
 
 PKG = "ganymede_sdk"
-PYLIB_PATH = f"./pylib/src/{PKG}"
-SAVE_PATH = "./docs/sdk/sdk_markdowns"
+PYLIB_PATH = f"../pylib/src/{PKG}"
+SAVE_PATH = "../docs/sdk/sdk_markdowns"
 sidebar = {"type": "category", "label": "API", "items": []}
 
 keywords = [
@@ -137,8 +137,9 @@ def add_hashtags_to_function_fields(docstring):
 def remove_dashed_lines_from_docstring(docstring):
     new_lines = []
     for line in docstring.split("\n"):
-        if len(line.strip("-")) > 0:
-            new_lines.append(line)
+        if not set(line).difference("-"):
+            line = ""
+        new_lines.append(line)
     docstring = "\n".join(new_lines)
     return docstring
 

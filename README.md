@@ -113,6 +113,7 @@ git submodule update --recursive --remote --init
 pushd pydoc
 source env/bin/activate
 python generateOperatorDocs.py
+python generatePylibDocs.py
 deactivate
 popd
 ```
