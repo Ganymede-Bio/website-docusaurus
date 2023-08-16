@@ -13,7 +13,9 @@ displayed_sidebar: SDKSidebar
 Get dropdown id from dropdown summary info identified by name. Can pass a dropdown id look up
 within the corresponding dropdown summary.
 
+
 ###  Parameters
+
 - **dropdown_name** : `str`
     - Dropdown name to identify id for
 - **benchling_context** : `BenchlingContext`
@@ -24,7 +26,9 @@ within the corresponding dropdown summary.
     - Optional keyword arguments to pass to get_dropdown_summary_list such as dropdown_id (int)
     - and arguments to pass to benchling_sdk dropdown service
 
+
 ###  Returns
+
 - `str`
     - dropdown id associated with dropdown name. Raises an error if dropdown id is not found
 
@@ -33,7 +37,9 @@ within the corresponding dropdown summary.
 Get dropdown summary info for each page in benchling_context.conn.dropdowns.list().
 A page is of the form: benchling_sdk.helpers.pagination_helpers.PageIterator
 
+
 ###  Parameters
+
 - **benchling_context** : `BenchlingContext`
     - Benchling context object
 - **\*args**
@@ -44,7 +50,9 @@ A page is of the form: benchling_sdk.helpers.pagination_helpers.PageIterator
 - ***\*kwargs**
     - Optional keyword arguments to pass to list method of benchling_sdk dropdown service
 
+
 ###  Returns
+
 - `List[dict]`
     - Flattened list of dropdown summaries converted to dicts from
     - benchling_sdk.models.DropdownSummary

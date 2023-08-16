@@ -18,12 +18,15 @@ Any files stored in /app/output/ are saved to Ganymede cloud storage.
 
 
 ### Node Attributes
-- **container_name**
-  - Name of the container to execute
+- **num_cpu: int**
+  - Number of vCPUs to allocate to the container.
+- **gb_memory: int**
+  - Number of GB of memory to allocate to the container.
+- **gb_ephemeral_storage: int**
+  - Number of GB of ephemeral storage to allocate to the container.  If more than 10 GB
+  - allocated, then ephemeral storage is allocated via a persistent volume claim.
 
 
 ### Notes
 Prior to usage, the following secrets must be configured in your Ganymede environment:
 - **artifact_registry**: Container registry associated with the container
-
-Prior to usage, the specified container needs to be built.

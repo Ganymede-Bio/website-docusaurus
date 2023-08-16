@@ -11,6 +11,7 @@ displayed_sidebar: SDKSidebar
 
 ##  `function` FlowInputs.__init__
 Representation of all inputs for a flow
+
 files: Optional[List[FlowInputFile]]
     list of files for flow
 params: Optional[List[FlowInputFile]]
@@ -22,7 +23,9 @@ tags_benchling: Optional[List[FlowInputFile]]
 ##  `function` retrieve_flow_input_param
 Retrieve input param based on Benchling field name, entity_id
 
+
 ###  Parameters
+
 - **benchling_context** : `BenchlingContext`
     - Benchling context to access the connection
 - **entity_id** : `str`
@@ -34,14 +37,18 @@ Retrieve input param based on Benchling field name, entity_id
 - **triggered_param_name** : `str`
     - Parameter for node in triggered flow
 
+
 ###  Returns
+
 - `FlowInputParam`
 
 
 ##  `function` retrieve_flow_input_file
 Retrieve file based on Benchling field name
 
+
 ###  Parameters
+
 - **benchling_context** : `BenchlingContext`
     - Benchling context to access the connection
 - **entity_id** : `str`
@@ -55,14 +62,18 @@ Retrieve file based on Benchling field name
 - **file_extension** : `Optional[str]`
     - File extension (if different from what is param name)
 
+
 ###  Returns
+
 - `FlowInputFile`
 
 
 ##  `function` get_benchling_value
 Returns the benchling value for a given entity ID and field name.
 
+
 ###  Parameters
+
 - **benchling_context** : `BenchlingContext`
     - Benchling context object
 - **object_id** : `str`
@@ -71,6 +82,8 @@ Returns the benchling value for a given entity ID and field name.
     - Parameter passed to benchling
     - conn.custom_entities.get_by_id().fields.additional_properties.get(field_name)
 
+
 ###  Returns
+
 - `str`
     - Benchling value associatec with field name and id
