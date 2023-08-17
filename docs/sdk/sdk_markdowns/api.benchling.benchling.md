@@ -12,7 +12,9 @@ displayed_sidebar: SDKSidebar
 ##  `class` Benchling
 Benchling object to interact with Benchling API through read and write type methods.
 
+
 ###  Attributes
+
 - **ganymede_context** : `GanymedeContext`
     - Ganymede context to get run attributes
 - **benchling_context** : `BenchlingContext`
@@ -24,17 +26,21 @@ Benchling object to interact with Benchling API through read and write type meth
 ##  `function` Benchling.__init__
 Set up the Benchling object
 
+
 ###  Parameters
+
 - **ganymede_context** : `GanymedeContext`
     - Ganymede context to get run attributes
 - **benchling_context** : `Optional[BenchlingContext]`
     - Benchling context variable, which stores Benchling connection information
 
 
-##  `function` Benchling.create_custom_entity
-Return the id of the custom entity. If the entity does not exist, first create it.
+##  `function` Benchling.create_or_update_custom_entity
+Creates custom entity in Benchling.  If the entity does not exist, first create it.
+
 
 ###  Parameters
+
 - **entity_name** : `str`
     - Name of new entity to be created
 - **folder_id** : `str`
@@ -48,22 +54,32 @@ Return the id of the custom entity. If the entity does not exist, first create i
     - entity will be registered to.  This can be found by clicking on Avatar -> Feature
     - Settings -> Registry Settings, and you will be able to find it in the URL.  This should
     - be a string starting with "src_"
+- **custom_entity_fields** : `Optional[Dict]`
+    - Dictionary of field names and values to associate with custom entity
+- **author_id** : `Optional[str]`
+    - Author ID to associate with custom entity. Should be a string starting with "ent_"
+- **if_exists** : `str`
+    - Either "fail" or "update". If "fail", will raise an error if the entity already exists.
+
 
 ###  Returns
+
 - Dict[str, str]
-    - Dictionary of entity name, custom entity id pair
+    - Dictionary with custom entity name as key and custom entity ID as value
 
 
 ##  `function` Benchling.create_assay_results_from_files
 Upload blob files to Benchling
 
+
 ###  Parameters
-- **file_name** : `List[str]`
-    - File names to associate to file content
-- **file_content** : `Union[List[bytes], List[pd.DataFrame]]`
-    - Blob or data content to upload
+
+- **files** : `Dict[str, bytes]`
+    - Files to upload to Benchling
+
 
 ###  Returns
+
 - Dict[str, Union[Unset, str]]
     - Returns a dictionary of IDs from benchling_sdk.models.Blob
 
@@ -71,7 +87,9 @@ Upload blob files to Benchling
 ##  `function` Benchling.create_assay_results_from_dataframe
 Processes input DataFrame(s) for upload to Benchling.
 
+
 ###  Parameters
+
 - **data** : `Union[pd.DataFrame, List[pd.DataFrame]]`
     - Tabular result(s) of data to send to Benchling. Converted to list of dictionaries for
     - each row.
@@ -85,7 +103,9 @@ Processes input DataFrame(s) for upload to Benchling.
     - Keyward args to pass to create_assay_result_from_dict
     - drop_na (Optional[bool])
 
+
 ###  Returns
+
 - `List[AssayResultCreate]`
     - List of AssayResultCreate's to be uploaded to Benchling
 
@@ -93,7 +113,9 @@ Processes input DataFrame(s) for upload to Benchling.
 ##  `function` Benchling.upload_results
 Batch upload results to Benchling
 
+
 ###  Parameters
+
 - **benchling_results** : `Union[List[AssayResultCreate], Dict[str, Union[Unset, str]]]`
     - Results to upload to Benchling
 
@@ -102,7 +124,9 @@ Batch upload results to Benchling
 Get dropdown id from dropdown summary info identified by name. Can pass a dropdown id look
 up within the corresponding dropdown summary.
 
+
 ###  Parameters
+
 - **dropdown_name** : `str`
     - Dropdown name to identify id for
 - **\*args**
@@ -112,7 +136,9 @@ up within the corresponding dropdown summary.
     - of that id. Also accepts other optional keyword arguments to pass to list method of
     - benchling_sdk dropdown service
 
+
 ###  Returns
+
 - `str`
     - dropdown id associated with dropdown name. Raises an error if dropdown id is not found
 
@@ -120,18 +146,24 @@ up within the corresponding dropdown summary.
 ##  `function` Benchling.retrieve_benchling_input_tag
 Retrieve benchling_input_tag
 
+
 ###  Parameters
+
 - **display_tag** : `str`
     - Display tag
 
+
 ###  Returns
+
 - `FlowInputParam`
 
 
 ##  `function` Benchling.retrieve_flow_input_param
 Retrieve input param based on Benchling field name, entity_id
 
+
 ###  Parameters
+
 - **entity_id** : `str`
     - Benchling entity id for retrieving file
 - **field_name** : `str`
@@ -139,14 +171,18 @@ Retrieve input param based on Benchling field name, entity_id
 - **param_name** : `str`
     - Parameter for node in triggered flow
 
+
 ###  Returns
+
 - `FlowInputParam`
 
 
 ##  `function` Benchling.retrieve_flow_input_file
 Retrieve file based on Benchling field name
 
+
 ###  Parameters
+
 - **entity_id** : `str`
     - Benchling entity id for retrieving file
 - **benchling_field** : `str`
@@ -156,21 +192,27 @@ Retrieve file based on Benchling field name
 - **file_extension** : `Optional[str]`
     - File extension (if different from what is param name)
 
+
 ###  Returns
+
 - `events.FlowInputFile`
 
 
 ##  `function` Benchling.get_benchling_value
 Returns the benchling value for a given entity ID and field name.
 
+
 ###  Parameters
+
 - **object_id** : `str`
     - ID used in Benchling API (e.g. - entity schema ID or notebook entry ID)
 - **field_name** : `str`
     - Parameter passed to benchling
     - conn.custom_entities.get_by_id().fields.additional_properties.get(field_name)
 
+
 ###  Returns
+
 - **str**
     - Benchling value associated with field name and id
 
@@ -178,13 +220,17 @@ Returns the benchling value for a given entity ID and field name.
 ##  `function` Benchling.get_custom_entity_to_schema_id_map
 Get a dictionary mapping custom entity IDs to schema IDs.
 
+
 ###  Parameters
+
 - `\*args`
     - Arguments to pass to benchling.conn.custom_entities_list()
 - `*\*kwargs`
     - Keyword arguments to pass to benchling.conn.custom_entities_list()
 
+
 ###  Returns
+
 - `dict`
     - A dictionary mapping custom entity IDs to schema IDs.
 
@@ -192,11 +238,15 @@ Get a dictionary mapping custom entity IDs to schema IDs.
 ##  `function` Benchling.get_assay_results_to_schema_id_map
 Get a dictionary mapping assay result IDs to schema IDs.
 
+
 ###  Parameters
+
 - **assay_result_columns** : `dict`
     - A dictionary mapping result schema IDs to assay result columns.
 
+
 ###  Returns
+
 - `dict`
     - A dictionary mapping assay result IDs to schema IDs.
 
@@ -205,13 +255,17 @@ Get a dictionary mapping assay result IDs to schema IDs.
 Get a pandas dataframe of assay result data. Will raise a BenchlingError if the bulk get
 fails.
 
+
 ###  Parameters
+
 - **entry_id** : `str`
     - Entry id to match to results from assay_results.bulk_get
 - **assay_results_map** : `dict`
     - A dictionary of assay results keys
 
+
 ###  Returns
+
 - `pd.DataFrame`
     - A dataframe of records returned from assay_results.bulk_get
 
@@ -220,12 +274,60 @@ fails.
 Get a pandas dataframe of custom_entity data. Will raise a BenchlingError if the bulk_get
 fails
 
+
 ###  Parameters
+
 - **ts_id** : `str`
     - Benchling timeseries id
 - **custom_entity_map** : `dict`
     - A dictionary to get custom_entity keys from
 
+
 ###  Returns
+
 - `pd.DataFrame`
     - A dataframe of records returned from custom_entities.bulk_get
+
+
+##  `function` Benchling.list_available_services
+List available Benchling services
+
+
+###  Returns
+
+- `List[str]`
+    - List of available Benchling services
+
+
+##  `function` Benchling.get
+Get all Benchling objects of a specific type, optionally filtered by object attributes
+
+
+###  Parameters
+
+- **service** : `str`
+    - Benchling object service (e.g. - 'custom_entities', 'plates', 'entries')
+- **as_dict** : `bool`
+    - Whether to return each Benchling object as a dictionary. Default is True.
+- **benchling_filter** : `Optional[Dict]`
+    - Filter to apply to the list of Benchling objects
+
+
+### Examples
+```python
+
+from ganymede_sdk.api.benchling import Benchling
+from ganymede_sdk.editor import MockGanymedeContext
+
+mock_ganymede_context = MockGanymedeContext()
+b = Benchling(mock_ganymede_context)
+
+# retrieve all custom_entities
+custom_entities = b.get('custom_entities')
+
+# retrieve plate named "my_plate_name"
+test_plate = b.get('plates', benchling_filter={'name': 'my_plate_name'})[0]
+
+# to get a list of available services (e.g. - plates, custom_entities, etc.)
+b.list_available_services()
+```

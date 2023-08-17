@@ -12,7 +12,9 @@ displayed_sidebar: SDKSidebar
 ##  `function` upload_results
 Batch upload results to Benchling
 
+
 ###  Parameters
+
 - **benchling_context** : `BenchlingContext`
     - Benchling context variable, which stores Benchling connection information
 - **results_to_upload** : `pd.DataFrame`

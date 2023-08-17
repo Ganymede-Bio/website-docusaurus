@@ -4,3 +4,6 @@
 [submodule "core-dev-operators"]
 	path = core-dev-operators
 	url = git@github.com:Ganymede-Bio/core-dev-operators.git
+[submodule "pylib"]
+	path = pylib
+	url = git@github.com:Ganymede-Bio/pylib.git
