@@ -16,6 +16,6 @@ Batch upload results to Benchling
 ###  Parameters
 
 - **benchling_context** : `BenchlingContext`
-    - Benchling context variable, which stores Benchling connection information
+    - Benchling context variable, which stores Benchling connection information  
 - **results_to_upload** : `pd.DataFrame`
-    - Table to upload to Benchling
+    - Table to upload to Benchling  

@@ -166,11 +166,22 @@ def add_dashes_to_function_fields(input_text):
                 text = f"`{text}`" if len(text) > 1 else text
             else:
                 text = text
-            num_spaces = len(re.match(r'^\s*', text).group())
-            if len(text) > 1 and text.strip(" ") not in keywords:
-                text = num_spaces * " " + "- " + text.lstrip(" ")
             new_field.append(text)
         new_field = '\n'.join(new_field)
+        formatted_lines = [
+            f"- {line}" if not re.search(r"^\s|^$", line) and
+            not re.search("|".join(keywords), line) else line
+            for line in new_field.split("\n")
+        ]
+        i = 1
+        while i < len(formatted_lines):
+            cur_line = formatted_lines[i]
+            prev_line = formatted_lines[i - 1]
+            if prev_line.startswith("-"):
+                spaces = re.search(r"^\s*", cur_line).group()
+                formatted_lines[i] = f"{spaces}- {cur_line.strip()}  "
+            i += 1
+        new_field = "\n".join(formatted_lines)
         new_fields.append("### " + new_field if len(new_field) > 1 else new_field)
     new_fields = "\n".join(new_fields)
     return new_fields
@@ -181,7 +192,7 @@ def example_fields_to_markdown(markdown):
     new_markdown = []
     for line in markdown:
         if "Example" in line:
-            line = "\n".join([textwrap.dedent(_.lstrip("-")).lstrip("-").lstrip(" ") for _ in
+            line = "\n".join([_.lstrip("-").lstrip("-") for _ in
                               line.split("\n")])
             line = re.sub("Examples\n|Example\n", " Examples\n```python\n", line)
             line += "\n```"

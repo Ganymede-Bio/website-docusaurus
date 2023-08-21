@@ -17,20 +17,20 @@ within the corresponding dropdown summary.
 ###  Parameters
 
 - **dropdown_name** : `str`
-    - Dropdown name to identify id for
+    - Dropdown name to identify id for  
 - **benchling_context** : `BenchlingContext`
-    - Benchling context object
+    - Benchling context object  
 - **\*args**
-    - Optional positional arguments to pass to list method of benchling_sdk dropdown service
+    - Optional positional arguments to pass to list method of benchling_sdk dropdown service  
 - ***\*kwargs**
-    - Optional keyword arguments to pass to get_dropdown_summary_list such as dropdown_id (int)
-    - and arguments to pass to benchling_sdk dropdown service
+    - Optional keyword arguments to pass to get_dropdown_summary_list such as dropdown_id (int)  
+    and arguments to pass to benchling_sdk dropdown service
 
 
 ###  Returns
 
 - `str`
-    - dropdown id associated with dropdown name. Raises an error if dropdown id is not found
+    - dropdown id associated with dropdown name. Raises an error if dropdown id is not found  
 
 
 ##  `function` get_dropdown_summary_list
@@ -41,18 +41,18 @@ A page is of the form: benchling_sdk.helpers.pagination_helpers.PageIterator
 ###  Parameters
 
 - **benchling_context** : `BenchlingContext`
-    - Benchling context object
+    - Benchling context object  
 - **\*args**
-    - Optional positional arguments to pass to list method of benchling_sdk dropdown service
+    - Optional positional arguments to pass to list method of benchling_sdk dropdown service  
 - **dropdown_id** : `Optional[str]`
-    - Optional benchling dropdown id. If none, list all dropdowns. If given, list all dropdowns of
-    - that id.
+    - Optional benchling dropdown id. If none, list all dropdowns. If given, list all dropdowns of  
+    that id.
 - ***\*kwargs**
-    - Optional keyword arguments to pass to list method of benchling_sdk dropdown service
+    - Optional keyword arguments to pass to list method of benchling_sdk dropdown service  
 
 
 ###  Returns
 
 - `List[dict]`
-    - Flattened list of dropdown summaries converted to dicts from
-    - benchling_sdk.models.DropdownSummary
+    - Flattened list of dropdown summaries converted to dicts from  
+    benchling_sdk.models.DropdownSummary
