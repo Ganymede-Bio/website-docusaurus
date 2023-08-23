@@ -35,6 +35,24 @@ Set up the Benchling object
     - Benchling context variable, which stores Benchling connection information  
 
 
+##  `function` Benchling.get_entity_name_from_context
+Get the entity name from the Ganymede context parameters.
+
+
+###  Parameters
+
+- **flow_node_name_for_benchling** : `str`
+    - The name of the flow node for Benchling.  
+- **flow_node_param_for_benchling** : `str`
+    - The parameter of the flow node for Benchling.  
+
+
+###  Returns
+
+- `str`
+    - The entity name.  
+
+
 ##  `function` Benchling.create_or_update_custom_entity
 Creates custom entity in Benchling.  If the entity does not exist, first create it.
 
