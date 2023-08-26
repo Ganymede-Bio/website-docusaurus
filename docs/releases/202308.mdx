@@ -4,6 +4,21 @@ title: August 2023
 displayed_sidebar: releaseSideBar
 ---
 
+### August 24 2023
+**Features/Updates**
+- The new file browser is now available when selecting input files from Ganymede Storage to kick off a Flow.
+- Flows can now be run when an assayRun.created or assayRun.updated event is received from Benchling.
+
+**Improvements**
+- Ganymede URLs have been updated to reflect parameters selected on pages. These routing improvements mean that a user can navigate back/forward in their browser.
+- Saving a Flow that has a container node will now provide updates about the container build and deploy progress. Users will be able to run the Flow once the container has been built and deployed. Progress can be tracked on the Notifications page, where updates have an entity type of “Container”.
+- Editor notebooks now have a python formatting cell, which runs Black. Once that cell is run, formatting will be automatically applied to cells that are subsequently run in the notebook.
+- Editor notebooks now have a cell that can be run for linting the notebook. Linting will also run automatically when the notebook is saved.
+
+**Bug Fixes**
+- The Find and Replace function in editor notebooks is now working as expected.
+- Multiple Agent connections can now be set up for Agents that watch for Flow outputs.
+
 ### August 17 2023
 **Features/Updates**
 - A new Agent configuration is now available for loading local files and triggering a Flow.
