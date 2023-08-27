@@ -48,5 +48,10 @@ Example demonstrating submission of user-defined SQL query into eLabNext
     - Ganymede context variable, which stores flow run metadata
 
 
+### Returns
+`NodeReturn`
+  Object containing data to store in data lake and/or file storage
+
+
 ### Notes
 See [eLabNext API](https://www.elabjournal.com/docs/api/index) for more details on API usage.

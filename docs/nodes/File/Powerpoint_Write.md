@@ -21,5 +21,5 @@ Processes table(s) from user-defined SQL query into Powerpoint output
 
 
 ### Returns
-`Dict[str, bytes]`
-  - Dictionary of Powerpoint objects, indexed by filename
+`NodeReturn`
+  Object containing data to store in data lake and/or file storage

@@ -35,4 +35,4 @@ Calls AWS to get data for flow to trigger
 
 ### Returns
 `FlowInputs`
-  - FlowInputs class for kicking off subsequent Flow
+  FlowInputs class for kicking off subsequent Flow

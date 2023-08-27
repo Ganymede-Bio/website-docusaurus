@@ -29,4 +29,4 @@ Parse XML file into table for storage in data lake
 
 ### Returns
 `pd.DataFrame`
-  - Table for storage in Ganymede data lake
+  Table for storage in Ganymede data lake

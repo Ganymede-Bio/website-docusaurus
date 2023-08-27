@@ -33,5 +33,10 @@ stored in data lake
 
 
 ### Returns
-`Dict[str, pd.DataFrame]`
-  - Tables to store in data lake
+`NodeReturn`
+  Object containing data to store in data lake and/or file storage.  NodeReturn object takes
+  2 parameters:
+  - tables_to_upload: Dict[str, pd.DataFrame]
+    keys are table names, values are pandas DataFrames to upload
+  - files_to_upload: Dict[str, bytes]
+    keys are file names, values are file data to upload

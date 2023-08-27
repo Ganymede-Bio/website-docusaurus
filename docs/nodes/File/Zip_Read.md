@@ -30,4 +30,4 @@ Reads Zip file and stores extracted files in the data lake.
 
 ### Returns
 `Dict[str, bytes]`
-  - Files to store in data lake
+  Files to store in data lake

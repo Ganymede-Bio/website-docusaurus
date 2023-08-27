@@ -28,8 +28,8 @@ Reads Excel file and stores processed table(s) in data lake.
 
 
 ### Returns
-`Union[pd.DataFrame, Dict[str, pd.DataFrame]]`
-  - Table(s) to store in data lake
+`NodeReturn`
+  Object containing data to store in data lake and/or file storage
 
 
 ### Notes

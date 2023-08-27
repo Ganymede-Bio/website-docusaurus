@@ -29,4 +29,4 @@ Processes Synergy text file(s) into data tables stored in data lake
 
 ### Returns
 `Dict[str, pd.DataFrame]`
-  - Tables to store in data lake
+  Tables to store in data lake

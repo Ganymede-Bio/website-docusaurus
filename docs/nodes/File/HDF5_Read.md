@@ -32,5 +32,5 @@ Processes HDF5 data
 
 
 ### Returns
-`dict[str, object]`
-  - Processed dictionary to store in cloud storage
+`NodeReturn`
+  Object containing data to store in data lake and/or file storage

@@ -14,11 +14,15 @@ run tag.
 
 
 ### Notes
+Usage requires configuration of a
+[Benchling application](https://docs.benchling.com/docs/getting-started-benchling-apps#getting-started)
+in the relevant Benchling tenant.
+
 Prior to usage, the secrets below must be configured in your Ganymede environment.  More information
 on acquiring these credentials can be found [here](https://docs.benchling.com/docs/authentication).
 - **benchling_url**: URL for Benchling tenant
-- **benchling_app_client_id**: Client_ID
-- **benchling_client_secret**: Client_Secret
+- **benchling_app_client_id**: Client_ID; has form xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+- **benchling_client_secret**: Client_Secret; has form cs_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 Secrets can be configured by clicking on the gear icon in the upper-right hand of the Ganymede
 application, then selecting Settings and navigating to the Settings tab.  If you need
@@ -34,3 +38,8 @@ Processes input DataFrame for upload to Benchling
     - Benchling context variable, which stores Benchling connection information
 - **ganymede_context** : `GanymedeContext`
     - Ganymede context variable, which stores flow run metadata
+
+
+### Returns
+`NodeReturn`
+  Object containing data to store in data lake and/or file storage
