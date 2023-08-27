@@ -114,6 +114,7 @@ def execute(
     Documentation on these functions can be found at https://docs.ganymede.bio/sdk/ModuleIO
     """
 
+    # Retrieve single table from SQL query into a dictionary
     if isinstance(df_sql_result, pd.DataFrame):
         dict_df_out = {"results": df_sql_result.copy()}
         table_out = df_sql_result
@@ -121,11 +122,17 @@ def execute(
         dict_df_out = {str(k): df for k, df in enumerate(df_sql_result)}
         table_out = df_sql_result[0]
 
+    # Writes contents of table to CSV file
     bio = BytesIO()
     table_out.to_csv(bio)
     bio.seek(0)
     files_out = {"demo_file": bio.read()}
 
+    # Return object containing data to store in data lake and/or file storage
+    # files_to_upload is a dictionary of file names and file data to upload
+    # tables_to_upload is a dictionary of table names and pandas DataFrames to upload
+    # 
+    # For more information on the NodeReturn object, type ?NodeReturn or ??NodeReturn in a cell
     return NodeReturn(
         files_to_upload=files_out,
         tables_to_upload=dict_df_out,
@@ -160,23 +167,23 @@ Running this cell commits any code changes to the Git repository associated with
 
 ```python
 # Example 1: Testing section for Python node
-from ganymede_sdk.editor import mock_ganymede_context
-from ganymede_sdk.io import retrieve_sql
+from ganymede_sdk import Ganymede
+
+# Declare Ganymede object, which retrieves Ganymede context object from prior run to enable mimicking the execution environment of the most recent pipeline run
+g = Ganymede()
 
 # Load jupyter_black, which formats cells using black when they are run
 import jupyter_black
 jupyter_black.load(line_length=100)
 
-# Retrieve Ganymede context object from prior run, to mimic the execution environment of most recent pipeline run
-mock_ganymede_context = MockGanymedeContext()
-
 # Retrieve dataframes to process; the context object enables rendering of Jinja template variables used in data retrieval
 # More detail can be found on the Flow Context & Metadata page of this documentation, under the Template Variables section
-result_dfs = retrieve_sql(query_sql, context=mock_ganymede_context)
+result_dfs = g.retrieve_sql(query_sql)
 result_dfs
 
 # Run user-defined python on retrieved data
-execute(result_dfs, ganymede_context=mock_ganymede_context)
+res = execute(result_dfs, ganymede_context=g.ganymede_context)
+res
 ```
 
 The testing section enables users to test pipeline code prior to deployment.  In the example above, the testing code executes _query_sql_ and sends the result to the _execute_ function.  
@@ -193,21 +200,23 @@ import ipywidgets as widgets
 import jupyter_black
 jupyter_black.load(line_length=100)
 
+# Create file upload widget
 file_uploader = widgets.FileUpload(
     multiple=False,
 )
 display(file_uploader)
 
 # Retrieve context variable from most recent run
-from ganymede_sdk.editor import MockGanymedeContext
+from ganymede_sdk import Ganymede
+g = Ganymede()
 
-mock_ganymede_context = MockGanymedeContext()
+# Assemble file uploaded into dictionary keyed by filename
 f = file_uploader.value[0]
 input_file = {f.name: f.content.tobytes()}
 print("\nInput file: \n" + "\n".join(input_file.keys()))
 
 # Run user-defined Python on uploaded file
-res = execute(input_file, ganymede_context=mock_ganymede_context)
+res = execute(input_file, ganymede_context=g.ganymede_context)
 res
 ```
 
