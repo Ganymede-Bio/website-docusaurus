@@ -50,7 +50,7 @@ Example demonstrating submission of user-defined SQL query into eLabNext
 
 ### Returns
 `NodeReturn`
-  Object containing data to store in data lake and/or file storage
+  Object containing data to store in data lake and/or file storage.
 
 
 ### Notes

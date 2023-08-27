@@ -33,7 +33,7 @@ are populated, with the doc_id from the generated document returned.
 
 ### Returns
 `NodeReturn`
-  NodeReturn object containing tables to upload to Ganymede data lake.
+  Object containing data to store in data lake and/or file storage.
 
 
 ### Notes

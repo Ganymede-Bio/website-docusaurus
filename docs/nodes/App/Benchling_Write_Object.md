@@ -52,4 +52,4 @@ If new custom entities are created, returns DataFrame associated with custom ent
 
 ### Returns
 `NodeReturn`
-  Object containing data to store in data lake and/or file storage
+  Object containing data to store in data lake and/or file storage.

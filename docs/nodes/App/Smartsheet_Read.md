@@ -28,5 +28,10 @@ Process Smartsheet table
     - File-like CSV object containing contents of Smartsheet sheet
 
 
+### Returns
+`NodeReturn`
+  Object containing data to store in data lake and/or file storage.
+
+
 ### Notes
 See [Smartsheet API documentation](https://smartsheet.redoc.ly/) for more details on API usage.

@@ -28,4 +28,4 @@ Process table(s) resulting from user-defined SQL query into CSV file
 
 ### Returns
 `NodeReturn`
-  Object containing data to store in data lake and/or file storage
+  Object containing data to store in data lake and/or file storage.

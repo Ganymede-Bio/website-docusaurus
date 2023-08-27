@@ -29,5 +29,5 @@ Reads Zip file and stores extracted files in the data lake.
 
 
 ### Returns
-`Dict[str, bytes]`
-  Files to store in data lake
+`NodeReturn`
+  Object containing data to store in data lake and/or file storage.

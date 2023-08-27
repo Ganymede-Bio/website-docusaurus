@@ -28,5 +28,5 @@ Parse XML file into table for storage in data lake
 
 
 ### Returns
-`pd.DataFrame`
-  Table for storage in Ganymede data lake
+`NodeReturn`
+  Object containing data to store in data lake and/or file storage.
