@@ -172,7 +172,7 @@ Processes input DataFrame for upload to Benchling.
     - Arguments to pass to create_assay_result_from_dict  
     schema_id (str)
     project_id (str)
-- ***\*kwargs**
+- **\*\*kwargs**
     - Keyward args to pass to create_assay_result_from_dict  
     drop_na (Optional[bool])
 

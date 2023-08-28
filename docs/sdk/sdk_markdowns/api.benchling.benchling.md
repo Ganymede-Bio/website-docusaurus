@@ -72,7 +72,7 @@ Creates custom entity in Benchling.  If the entity does not exist, first create 
 
 ##  `function` Benchling.create_benchling_ids_from_files
 Upload blob files to Benchling and return a dictionary of
-{<blob name\>: <blob ID from Benchling\>}
+{<blob name>: <blob ID from Benchling>}
 
 
 ###  Parameters
@@ -90,6 +90,7 @@ Upload blob files to Benchling and return a dictionary of
 
 ###   Examples
 ```python
+
 from ganymede_sdk.api.benchling import Benchling
 from ganymede_sdk.editor import MockGanymedeContext
 import pandas as pd
@@ -130,6 +131,7 @@ Process input DataFrame into assay results for upload to Benchling.
 
 ###   Examples
 ```python
+
 from ganymede_sdk.api.benchling import Benchling
 from ganymede_sdk.editor import MockGanymedeContext
 
@@ -148,7 +150,7 @@ dropdown_ids = {dropdown["name"]: dropdown["id"] for dropdown in b.get("dropdown
 
 # Use pandas.DataFrame.replace to link entries in your dataframe with Benchling IDs
 # or manually add IDs to the dataframe.
-dataframe = dataframe.replace({*\*custom_entity_id, *\*file_ids, *\*dropdown_ids})
+dataframe = dataframe.replace({**custom_entity_id, **file_ids, **dropdown_ids})
 
 # Upload dataframe to Benchling as Assay Results
 assay_results = b.create_assay_results_from_files(
@@ -168,7 +170,7 @@ up within the corresponding dropdown summary.
     - Dropdown name to identify id for  
 - **\*args**
     - Optional positional arguments to pass to list method of benchling_sdk dropdown service  
-- ***\*kwargs**
+- **\*\*kwargs**
     - dropdown_id (Optional[str]). If none, list all dropdowns. If given, list all dropdowns  
     of that id. Also accepts other optional keyword arguments to pass to list method of
     benchling_sdk dropdown service
@@ -206,21 +208,23 @@ results data.
 - **\*\*kwargs**
     - Optional keyword arguments to pass to list methods of the benchling service  
 
-### Raises
-
-- `ValueError`  
+- `Raises`
+-   
+- - `ValueError`  
     - Raise an error if the service argument is not a valid method of benchling_context.conn  
+- `ValueError`
     - Raise an error if fields is not an attribute of of the service results.  
 
 
 ###  Returns
 
 - `pd.DataFrame`
-    - A dataframe of records returned benchling_context.conn.<service\>.list(_...)  
+    - A dataframe of records returned benchling_context.conn.<service>.list(_...)  
 
 
 ###   Examples
 ```python
+
 from ganymede_sdk.api.benchling import Benchling
 from ganymede_sdk.editor import MockGanymedeContext
 
@@ -250,12 +254,15 @@ Get all Benchling objects of a specific type, optionally filtered by object attr
 - **\*\*kwargs**
     - Optional keyword arguments to pass to list methods of the benchling service  
 
-- `ValueError`  
+- `Raises`
+-   
+- - `ValueError`  
     - Raise an error if the service argument is not a valid method of benchling_context.conn  
 
 
 ###   Examples
 ```python
+
 from ganymede_sdk.api.benchling import Benchling
 from ganymede_sdk.editor import MockGanymedeContext
 
@@ -284,7 +291,8 @@ used in conjuction with Genchling.get()
 ###  Parameters
 
 - **benchling_service_results** : `str`
-    - **Results of the form \{id: name\}
+- - **Results of the form [{"id"** : `<id>, "name"`  
+    - method  
 - **keys** : `str`
     - The key name of the inner dictionaries in the list used to set the key in the returned  
     dictionary.
@@ -300,8 +308,8 @@ used in conjuction with Genchling.get()
 
 
 ###   Examples
-
 ```python
+
 from ganymede_sdk.api.benchling import Benchling
 from ganymede_sdk.editor import MockGanymedeContext
 
