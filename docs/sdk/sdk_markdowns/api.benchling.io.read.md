@@ -19,7 +19,7 @@ Get a dictionary mapping custom entity IDs to schema IDs.
     - The Benchling context object.  
 - **\*args**
     - Arguments to pass to benchling.conn.custom_entities_list()  
-- ***\*kwargs**
+- **\*\*kwargs**
     - Keyword arguments to pass to benchling.conn.custom_entities_list()  
 
 

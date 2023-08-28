@@ -121,9 +121,6 @@ def docstring_to_markdown(method, docstring):
 
     docstring = remove_dashed_lines_from_docstring(docstring)
 
-    docstring = re.sub(r"\*([A-Za-z])", r"\\*\1", docstring)
-    docstring = re.sub(r"\*\*([A-Za-z])", r"\\*\\*\1", docstring)
-
     markdown = add_dashes_to_function_fields(docstring)
     markdown = example_fields_to_markdown(markdown)
 
@@ -160,8 +157,11 @@ def add_dashes_to_function_fields(input_text):
         if re.search("Example|Examples", field):
             new_fields.append(f"### {field}")
             continue
+        field = re.sub(r"\*", r"\\*", field)
         new_field = []
         for text in field.split("\n"):
+            if "*" in text and ":" not in text:
+                text = text + ":"
             if ":" in text:
                 params = [val.strip() for val in text.split(":")]
                 text = (
