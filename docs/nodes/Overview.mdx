@@ -8,7 +8,7 @@ sidebar_label: Node Overview
 _Nodes_ provide template structure for performing data extraction, processing, and API communication. The diagram below shows how a node performs a base function, but exposes an interface for user-defined code to enable tailoring.
 
 <div style={{textAlign: 'center'}}>
-  <img width="400" alt="Example node layout" src="https://ganymede-bio.mo.cloudinary.net/apiServer/Operator_Conceptual_Layout_20230108.png"
+  <img width="400" alt="Example node layout" src="https://ganymede-bio.mo.cloudinary.net/apiServer/Operator_Conceptual_Layout_20230828.png"
   />
 </div>
 
@@ -23,6 +23,143 @@ The table below lists available nodes.
 - **Is Multi** indicates that the node can accept multiple inputs.
 
 | [Category](#node-categories)   | Name                   | [Input Types](#node-inputoutput-types)                                                           | [Output Types](#node-inputoutput-types)                                | Is Editable   | Is Multi   |
+|------------|------------------------|-----------------------------------------------------------------------|----------------|---------------|------------|
+| Analysis   | Python                 | Table(s) and/or File(s)                                               | NodeReturn     | True          | False      |
+| Analysis   | RunContainer           | FileAny                                                               | FileAny        | True          | False      |
+| Analysis   | Transform_SQL          | Table                                                                 | Table          | True          | False      |
+| Analysis   | Transform_py           | Table or List[Table]                                                  | NodeReturn     | True          | False      |
+| App        | AirtableExport         | Table                                                                 | API            | True          | False      |
+| App        | AirtableImport         | API                                                                   | NodeReturn     | False         | False      |
+| App        | Azure_Query            | API                                                                   | NodeReturn     | True          | False      |
+| App        | Azure_Read             | API                                                                   | FileAny        | False         | False      |
+| App        | Azure_Read_Multi       | API                                                                   | FileAny        | False         | True       |
+| App        | Azure_Write            | FileAny                                                               | API            | False         | False      |
+| App        | Benchling_Api          | API                                                                   | NodeReturn     | True          | False      |
+| App        | Benchling_Event        | App                                                                   | FileAny        | True          | False      |
+| App        | Benchling_Read         | API                                                                   | NodeReturn     | True          | False      |
+| App        | Benchling_Read_Object  | API                                                                   | NodeReturn     | True          | False      |
+| App        | Benchling_Write        | Table                                                                 | NodeReturn     | True          | False      |
+| App        | Benchling_Write_Object | Optional[FileAny or List[FileAny]] and Optional[Table or List[Table]] | NodeReturn     | True          | False      |
+| App        | Coda_Write             | Table                                                                 | NodeReturn     | True          | False      |
+| App        | ELabNext_Write         | Table                                                                 | NodeReturn     | True          | False      |
+| App        | Load_Parquet_to_Table  | API                                                                   | FileAny        | False         | False      |
+| App        | S3_Event               | App                                                                   | FileAny        | True          | False      |
+| App        | S3_Read                | API                                                                   | FileAny        | False         | False      |
+| App        | S3_Write               | FileAny                                                               | API            | False         | False      |
+| App        | SciNote_Write          | Table                                                                 | NodeReturn     | True          | False      |
+| App        | Smartsheet_Read        | API                                                                   | NodeReturn     | True          | False      |
+| App        | Snowflake_Write        | Table                                                                 | NodeReturn     | False         | False      |
+| File       | AVI_Read               | FileAVI                                                               | NodeReturn     | True          | False      |
+| File       | AVI_Read_Multi         | Set[FileAVI]                                                          | NodeReturn     | True          | True       |
+| File       | CSV_Read               | FileCSV                                                               | NodeReturn     | True          | False      |
+| File       | CSV_Read_Multi         | Set[FileCSV]                                                          | NodeReturn     | True          | True       |
+| File       | CSV_Write              | Table or List[Table]                                                  | NodeReturn     | True          | False      |
+| File       | Excel_Read             | FileExcel                                                             | NodeReturn     | True          | False      |
+| File       | Excel_Read_Multi       | Set[FileExcel]                                                        | NodeReturn     | True          | True       |
+| File       | Excel_Write            | Table or List[Table]                                                  | NodeReturn     | True          | False      |
+| File       | FCS_Extract_Load       | FileFCS                                                               | NodeReturn     | True          | False      |
+| File       | HDF5_Read              | FileHDF5                                                              | NodeReturn     | True          | False      |
+| File       | Image_Read             | FileImage                                                             | NodeReturn     | True          | False      |
+| File       | Image_Read_Multi       | List[FileImage]                                                       | NodeReturn     | True          | True       |
+| File       | Image_Write            | Table or List[Table]                                                  | NodeReturn     | True          | False      |
+| File       | Input_File             | FileAny                                                               | NodeReturn     | True          | False      |
+| File       | Input_File_Multi       | Set[FileAny]                                                          | NodeReturn     | True          | True       |
+| File       | PDF_Read               | FilePDF                                                               | NodeReturn     | True          | False      |
+| File       | PDF_Read_Multi         | Set[FilePDF]                                                          | NodeReturn     | True          | True       |
+| File       | Powerpoint_Write       | Table or List[Table]                                                  | NodeReturn     | True          | False      |
+| File       | XML_Read               | FileXML                                                               | NodeReturn     | True          | False      |
+| File       | Zip_Read               | FileZip                                                               | NodeReturn     | True          | False      |
+| Instrument | Agilent_HPLC_Read      | File                                                                  | NodeReturn     | True          | False      |
+| Instrument | Instron_Tensile_Read   | FileIsTens                                                            | NodeReturn     | True          | False      |
+| Instrument | Profilometer_Read      | FileHDF5                                                              | NodeReturn     | True          | False      |
+| Instrument | Synergy_Read           | FileTxt                                                               | NodeReturn     | True          | False      |
+| Instrument | Synergy_Read_Multi     | List[FileTxt]                                                         | NodeReturn     | True          | True       |
+| Tag        | Benchling_Tag          | TagBenchling                                                          | string         | False         | False      |
+| Tag        | Input_Param            | string                                                                | string         | False         | False      |
+
+#### Node Categories
+
+- **App**: Accesses third-party APIs for processing; in many cases, key exchange between third-party and Ganymede are necessary for functionality
+- **Analysis**: Performs Python / SQL manipulations
+- **Instrument**: Lab instrument-specific functions
+- **File**: For ETL operations on data of specified type into Ganymede cloud
+- **Tag**: For specifying parameters at _flow_ runtime
+
+#### Node Input/Output Types
+
+Input/output types are split into the following categories:
+- **NodeReturn**: Object holding tables and files to return from Node.  Initializing a NodeReturn object involves passing the following parameters:
+  - **tables_to_upload**: Dictionary of Pandas DataFrames keyed by table name to store in Ganymede
+  - **files_to_upload**: Dictionary of files (bytes objects) keyed by file name to store in Ganymede
+
+:::note example
+
+Running the following in a cell in the editor notebook
+
+```python
+import pandas as pd
+
+def execute():
+    message = "Message to store in file"
+    byte_message = bytes(message, "utf-8")
+
+    df = pd.DataFrame({"col1": [1, 2, 3], "col2": [4, 5, 6]})
+
+    # upload a table named 'my_table' and a file named 'my_file'
+    return NodeReturn(files_to_upload={"my_file": message}, tables_to_upload={"my_table": df})
+
+execute()
+```
+
+returns the following summary of the NodeReturn object:
+
+<div style={{textAlign: 'center'}}>
+  <img width="400" alt="Rendered NodeReturn object" src="https://ganymede-bio.mo.cloudinary.net/apiServer/NodeReturn_Rendered_20230827.png"
+  />
+</div>
+
+Docstrings and source code can be viewed by typing `?NodeReturn` and `??NodeReturn` respectively in a cell in the editor notebook.
+
+:::
+
+- **Table**: Tabular data retrieved from or passed to tenant-specific Ganymede data lake.  Tables are retrieved from Ganymede data lake via ANSI SQL queries, and are passed to Ganymede data lake as pandas DataFrames
+- **API**: access via third-party API
+- **File-related inputs/outputs**: File of specified type.  
+  - **FileAVI**: AVI file
+  - **FileCSV**: CSV file
+  - **FileExcel**: Excel file (xls, xlsx, ..)
+  - **FileImage**: Image file (png, bmp, ..)
+  - **FileHDF5**: HDF5 file
+  - **FileXML**: XML file
+  - **FileZip**: Zip file
+  - **FileAny**: generic data file, which may be unstructured
+- **TagBenchling**: Benchling run tag
+- **string**: String parameter
+
+**Set**, **List**, and **Dict** correspond to Python sets, lists, and dictionaries respectively.
+
+**Optional** indicates that the input or output is optional.
+
+### User-editable Nodes
+
+User-editable nodes present an interface for modifying and testing code that is executed by the workflow management system.  These Jupyter notebooks are split into the following sections:
+- **Node Description**: A short blurb about the node that the user-editable function corresponds to
+- **Node Input Data**: For nodes that retrieve tabular data from the data lake as input, the query string in this cell specifies the query (-ies) that are executed and presented to the user-defined function for processing.  
+- **User-Defined Function**: The _execute_ function within this cell processes data.  The workflow management system calls the _execute_ function within this cell during _flow_ execution.
+
+:::info
+
+The _execute_ function may call classes and functions found within the User-Defined Function cell.
+
+:::
+
+- **Save Pipeline Code**: This cell stores any changes to the **Node Input Data** (if present) and **User-Defined Function** cells.
+
+- **Testing Section**: The cells in this section can be used for testing modifications to the SQL query and user-defined python function.  This enables rapid iteration on user-defined code; after necessary edits are made, changes can be saved in by running the **Save Pipeline Code** cell.
+
+## List of Available Nodes
+
+| [Category](#node-categories)   | Name                   | Brief Description                                                            |
 |------------|------------------------|------------------------------------------------------------------------------|
 | Analysis   | Python                 | Process data with python                                                     |
 | Analysis   | RunContainer           | Run container node                                                           |

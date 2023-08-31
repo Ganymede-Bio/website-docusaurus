@@ -51,5 +51,5 @@ If new custom entities are created, returns DataFrame associated with custom ent
 
 
 ### Returns
-`Optional[List[CustomEntity]]`
-  - List of Benchling custom entity ids if created within flow, otherwise None
+`NodeReturn`
+  Object containing data to store in data lake and/or file storage.

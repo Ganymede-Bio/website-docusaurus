@@ -25,5 +25,5 @@ Processes h5data into bytes object for saving in cloud storage
 
 
 ### Returns
-`bytes`
-  - Binary object for storing in cloud storage
+`NodeReturn`
+  Object containing data to store in data lake and/or file storage

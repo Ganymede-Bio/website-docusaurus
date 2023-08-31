@@ -10,7 +10,14 @@ import {
 
 ## Node Overview
 
-_Nodes_ are customizable blocks of code with default functionality specified by its type.
+_Nodes_ are customizable blocks of code that execute a single task within a _flow_.  Selecting a _node_ provides template code for defining and testing pipeline logic.
+
+<div style={{textAlign: 'center'}}>
+  <img width="400" alt="Example node layout" src="https://ganymede-bio.mo.cloudinary.net/apiServer/Operator_Conceptual_Layout_20230828.png"
+  />
+</div>
+
+On the Flow Editor page, nodes are rendered as a box with a header that contains the node name.  The node name can be edited by clicking the <div className="button dark_gray_button">Edit</div> button in the upper right hand corner of the node.  
 
 <div class="text--center">
 <img width="300" alt="image" src="https://ganymede-bio.mo.cloudinary.net/apiServer/EditNodeBefore_20230522.png"/>
@@ -23,12 +30,17 @@ The image above shows how _nodes_ are represented on the Flow Editor page; each 
 - **Node Attribute(s)**: if present, the attributes associated with the _node_ that are processed by the node.  In the image above, the node attributes 'csv' and 'results' have values '.csv' and 'example_results' respectively.
 - **Edit Button**: the <div className="button dark_gray_button">Edit</div> button that unlocks the _node_ for modifying _node_ name, changing _node_ attributes, or deleting the _node_
 
-Notebooks that back nodes are laid out in the following order:
+For nodes with editable components, notebooks that back nodes have the following structure:
 
 - **User-defined SQL** for retrieving tabular data to be processed by the node
 - **User-defined Python** for processing input
-- **Save Pipeline Code** for saving and deploying user-defined SQL and Python snippets to the workflow management system, enabling users to run flows
+- **Save Pipeline Code** for saving and deploying user-defined SQL and Python pipeline code.  Upon save, linting is conducted.
 - **Testing Section** for testing changes to user-defined SQL and Python
+- **Linting Section** for linting user-defined SQL and Python, using ruff
+
+The user-defined SQL and Python cells contain code that is executed by the workflow management system.  Executing the Save Pipeline Code cell commits the contents of these cells to a repo and deploys the contents of these cells to the workflow management system.  
+
+The Testing and Linting Sections enable users to test changes to the user-defined SQL and Python prior to committing and deploying code.
 
 A full listing of available nodes and their key characteristics can be found on the [Node Overview](./nodes/NodeOverview) page.
 
@@ -67,42 +79,69 @@ More than 1 query can be specified as input; to do so, specify multiple queries 
 
 ```python
 import pandas as pd
-from typing import Union, Dict, List
+from typing import Union, List
+from io import BytesIO
+from ganymede_sdk.io import NodeReturn
 
-def execute(df_sql_result: Union[pd.DataFrame, List[pd.DataFrame]], ganymede_context=None) -> Union[pd.DataFrame, Dict[str, pd.DataFrame]]:
+
+def execute(
+    df_sql_result: Union[pd.DataFrame, List[pd.DataFrame]], ganymede_context=None
+) -> NodeReturn:
     """
-    Process dataframe(s) resulting from SQL query using python
+    Process tabular data from user-defined SQL query, writing results back to data lake.  Data
+    is written to the output bucket.
 
     Parameters
     ----------
-    df_sql_result: DataFrame or List[DataFrame]
-      Data input from SQL output of query_str string
-
-    ganymede_context: GanymedeContext (optional)
-      Context variable for flow runs; contains input file name(s) and flow run timestamp.
+    df_sql_result : Union[pd.DataFrame, List[pd.DataFrame]]
+        Table(s) or list of tables retrieved from user-defined SQL query
+    ganymede_context : GanymedeContext
+        Ganymede context variable, which stores flow run metadata
 
     Returns
     -------
-    DataFrame or Dict[str, DataFrame]
-      If a pandas DataFrame is returned, the table name that the data is stored to within the Ganymede data lake corresponds to the 'analysis' value on the node.
+    NodeReturn
+        Object containing data to store in data lake and/or file storage.  NodeReturn object takes
+        2 parameters:
+        - tables_to_upload: Dict[str, pd.DataFrame]
+            keys are table names, values are pandas DataFrames to upload
+        - files_to_upload: Dict[str, bytes]
+            keys are file names, values are file data to upload
 
-      If a dictionary is returned, keys are table names in the Ganymede data lake.  The DataFrame with the keyword 'analysis' as the key will be saved to the Ganymede data lake as specified by the 'analysis' variable on the node.
+    Notes
+    -----
+    Files can also be retrieved and processed using the list_files and retrieve_files functions.
+    Documentation on these functions can be found at https://docs.ganymede.bio/sdk/ModuleIO
     """
 
+    # Retrieve single table from SQL query into a dictionary
     if isinstance(df_sql_result, pd.DataFrame):
-        df_out = df_sql_result.copy()
+        dict_df_out = {"results": df_sql_result.copy()}
+        table_out = df_sql_result
     else:
-        df_out = {k: df for k, df in enumerate(df_sql_result)}
+        dict_df_out = {str(k): df for k, df in enumerate(df_sql_result)}
+        table_out = df_sql_result[0]
 
-    return df_out
+    # Writes contents of table to CSV file
+    bio = BytesIO()
+    table_out.to_csv(bio)
+    bio.seek(0)
+    files_out = {"demo_file": bio.read()}
+
+    # Return object containing data to store in data lake and/or file storage
+    # files_to_upload is a dictionary of file names and file data to upload
+    # tables_to_upload is a dictionary of table names and pandas DataFrames to upload
+    # 
+    # For more information on the NodeReturn object, type ?NodeReturn or ??NodeReturn in a cell
+    return NodeReturn(
+        files_to_upload=files_out,
+        tables_to_upload=dict_df_out,
+    )
 ```
 
-The _execute_ function can be viewed analogous to the _main_ function in Python; it is the starting point for execution by the workflow manager when user-defined Python is executed.
+In this example, the _execute_ function takes the results of 1 or more tables as input, presented as either a pandas DataFrame or list of pandas DataFrames.  
 
-In this example, the _execute_ function takes the results of 1 or more tables as input, presented as either a pandas DataFrame or list of pandas DataFrames.  The execute function returns either a pandas DataFrame or a dictionary of pandas DataFrames with table names as keys.
-
-By default, if only 1 DataFrame is returned, it would be displayed in the table head associated with the node.  If multiple DataFrames are returned, the table displayed corresponds to table name specified on the node parameter.  In the example above, the dataframe correponding to **sql_result** key would be the one displayed if multiple tables were returned from the _execute_ function.
-
+A single table is retrieved from df_sql_result, and the results are written to both the tabular database and as a CSV file to the file storage system.
 
 :::caution
 
@@ -122,26 +161,29 @@ files = { 'query.sql': query_sql }
 save(files)
 ```
 
-Running this cell commits any code changes to the Git repository associated with the tenant and uploads the code to the workflow management system for executing code.
+Running this cell commits any code changes to the Git repository associated with the tenant and uploads the code to the workflow management system for executing code.  Upon save, linting is conducted.
 
 ### Testing Section
 
 ```python
-# Example 1: Testing section for Transform_Py node
+# Example 1: Testing section for Python node
+from ganymede_sdk import Ganymede
 
-from ganymede_sdk.io import retrieve_sql
-from ganymede_sdk.editor import MockGanymedeContext
+# Declare Ganymede object, which retrieves Ganymede context object from prior run to enable mimicking the execution environment of the most recent pipeline run
+g = Ganymede()
 
-# Retrieve Ganymede context object from prior run, to mimic the execution environment of most recent pipeline run
-mock_ganymede_context = MockGanymedeContext()
+# Load jupyter_black, which formats cells using black when they are run
+import jupyter_black
+jupyter_black.load(line_length=100)
 
 # Retrieve dataframes to process; the context object enables rendering of Jinja template variables used in data retrieval
 # More detail can be found on the Flow Context & Metadata page of this documentation, under the Template Variables section
-result_dfs = retrieve_sql(query_sql, context=mock_ganymede_context)
+result_dfs = g.retrieve_sql(query_sql)
 result_dfs
 
 # Run user-defined python on retrieved data
-execute(result_dfs, ganymede_context=mock_ganymede_context)
+res = execute(result_dfs, ganymede_context=g.ganymede_context)
+res
 ```
 
 The testing section enables users to test pipeline code prior to deployment.  In the example above, the testing code executes _query_sql_ and sends the result to the _execute_ function.  
@@ -149,26 +191,33 @@ The testing section enables users to test pipeline code prior to deployment.  In
 _Nodes_ that load data use a file upload widget so that a file can be uploaded prior to processing.  Running the code below yields a button that allows users to submit a CSV file.  Data associated with the code can be accessed by the execute function as shown in the 2nd code snippet below.
 
 ```python
-# Example 2: Testing section for Read_CSV node
+# Example 2: Testing section for Input_File node
 
-# Create widget for uploading CSV for testing node operation
+# Load Jupyter black, and create widget for uploading CSV for testing node operation
 from IPython.display import display
-from io import BytesIO
 import ipywidgets as widgets
 
+import jupyter_black
+jupyter_black.load(line_length=100)
+
+# Create file upload widget
 file_uploader = widgets.FileUpload(
-    accept='.csv',
     multiple=False,
 )
 display(file_uploader)
 
 # Retrieve context variable from most recent run
-from ganymede_sdk.editor import MockGanymedeContext
-mock_ganymede_context = MockGanymedeContext()
+from ganymede_sdk import Ganymede
+g = Ganymede()
+
+# Assemble file uploaded into dictionary keyed by filename
+f = file_uploader.value[0]
+input_file = {f.name: f.content.tobytes()}
+print("\nInput file: \n" + "\n".join(input_file.keys()))
 
 # Run user-defined Python on uploaded file
-df = execute({'test_file': BytesIO(file_uploader.value[0].content.tobytes())})
-display(df)
+res = execute(input_file, ganymede_context=g.ganymede_context)
+res
 ```
 
 
@@ -181,12 +230,3 @@ _Flows_ can be configured to accept user inputs at the start of each run by sele
 - Tag inputs (e.g. - TagBenchling)
 
 A list of available _nodes_ and their associated categories can be found on the [table listing of node characteristics](./nodes/Overview.mdx#table-listing-of-node-characteristics)  More detail can be found on the [Node documentation page](./nodes/Overview.mdx).
-
-### Table Heads
-
-<div class="text--center">
-<img width="400" alt="image" src="https://ganymede-bio.mo.cloudinary.net/apiServer/TableHead_20230522.png"/>
-</div>
-
-The _table head_ exists for _nodes_ that produce an output table.  For this subset of _nodes_, the _table head_ shows 5 records of the primary table produced by its associated _node_.  This table can facilitate the development of downstream _flow_ components.
-

@@ -85,5 +85,5 @@ Process FCS data/metadata file
 
 
 ### Returns
-`Dict[str, pd.DataFrame]`
-  - Tables containing data and metadata parsed from FCS file
+`NodeReturn`
+  Object containing data to store in data lake and/or file storage

@@ -55,8 +55,8 @@ conjunction with the Benchling_Tag node.
 
 
 ### Returns
-`Union[Dict[str, pd.DataFrame], pd.DataFrame]`
-  - Table or dictionary of tables indexed by table name to store in data lake
+`NodeReturn`
+  Object containing data to store in data lake and/or file storage
 
 
 ### Notes

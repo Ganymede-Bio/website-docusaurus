@@ -68,6 +68,8 @@ def extract_docstring(filename: str, search_str: str = "class", python_spaces: s
                             docstring_line = table_record[1].strip()
                     elif current_table == "Node Attributes" and num_spaces == 0:
                         docstring_line = num_spaces * "  " + "- **" + table_record[1].strip() + "**"
+                    elif current_table == "Returns":
+                        docstring_line = max(num_spaces, 0) * "  " + table_record[1]
                     else:
                         docstring_line = max(num_spaces, 0) * "  " + "- " + table_record[1]
                     docstrings.append(docstring_line)
@@ -80,7 +82,7 @@ if __name__ == "__main__":
     """Generates sidebars for nodes"""
 
     markdown_dir = "../docs/nodes"
-    operators_dir = "../core-operators"
+    operators_dir = "../core-dev-operators"
 
     with open(os.path.join(operators_dir, "operators.yaml"), "r") as operators_yaml:
         operators = yaml.safe_load(operators_yaml)

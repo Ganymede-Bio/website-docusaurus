@@ -27,9 +27,7 @@ Processes file data for saving in cloud storage
 
 ### Returns
 `NodeReturn`
-  - Table(s) and File(s) to store in Ganymede.  To write to the table referenced on the node,
-  - return a DataFrame in the "results" key of the tables_to_upload dictionary.  For more info,
-  - type '?NodeReturn' into a cell in the editor notebook.
+  Object containing data to store in data lake and/or file storage
 
 
 ### Notes

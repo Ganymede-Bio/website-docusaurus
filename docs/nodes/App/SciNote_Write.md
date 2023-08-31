@@ -56,5 +56,10 @@ Example demonstrating submission of user-defined SQL query into SciNote
     - Ganymede context variable, which stores flow run metadata
 
 
+### Returns
+`NodeReturn`
+  Object containing data to store in data lake and/or file storage.
+
+
 ### Notes
 See [SciNote API](https://scinote-eln.github.io/scinote-api-v1-docs/) for more details on API usage.

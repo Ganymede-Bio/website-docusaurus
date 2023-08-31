@@ -28,9 +28,12 @@ is written to the output bucket.
 
 ### Returns
 `NodeReturn`
-  - Table(s) and File(s) to store in Ganymede.  To write to the table referenced on the node,
-  - return a DataFrame in the "results" key of the tables_to_upload dictionary.  For more info,
-  - type '?NodeReturn' into a cell in the editor notebook.
+  Object containing data to store in data lake and/or file storage.  NodeReturn object takes
+  2 parameters:
+  - tables_to_upload: Dict[str, pd.DataFrame]
+    keys are table names, values are pandas DataFrames to upload
+  - files_to_upload: Dict[str, bytes]
+    keys are file names, values are file data to upload
 
 
 ### Notes
