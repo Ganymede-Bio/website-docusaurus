@@ -127,7 +127,7 @@ module.exports = {
     },
     {
       type: 'doc',
-      id: 'sdk/ModuleEditor',
+      id: 'sdk/ContextVariables',
     },
     nodeSDK,
     {
