@@ -123,7 +123,7 @@ module.exports = {
     },
     {
       type: 'doc',
-      id: 'sdk/ModuleIO',
+      id: 'sdk/GanymedeClass',
     },
     {
       type: 'doc',

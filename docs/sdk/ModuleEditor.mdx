@@ -7,11 +7,17 @@ displayed_sidebar: SDKSidebar
 import NodeChip from '@site/src/components/NodeChip.js'
 
 
-**ganymede_sdk.editor** contains classes for mimicking pipeline environment to facilitate debugging and to validate data schemas.
-
 ## `class` GanymedeContext
 
-**GanymedeContext** stores _flow_ metadata such as user ID, input filenames, input parameters, and execution timestamp upon _flow_ execution.
+**GanymedeContext** stores _flow_ metadata such as user ID, input filenames, input parameters, and execution timestamp upon _flow_ execution.  This object is generated in pipeline runs by the workflow management system.  The **GanymedeContext** object from the most recent run can be mimicked in testing code via the **Ganymede** object.
+
+```python
+from ganymede_sdk import Ganymede
+g = Ganymede()
+
+# Access GanymedeContext object with parameters from most recent run
+display(g.ganymede_context)
+```
 
 ### Attributes
 
@@ -50,46 +56,21 @@ def execute(
     return df_out
 ```
 
-## `class` MockGanymedeContext
-
-**MockGanymedeContext** is used within editor notebooks to replicate the behavior of **GanymedeContext** in Editor notebooks, enabling users to test the behavior of code changes on data from prior runs.  When no parameters are passed into the object, calling **MockGanymedeContext()** with no parameters retrieves metadata from the most recent execution of the corresponding _flow_.  **MockGanymedeContext** has the same attributes as **GanymedeContext**.
-
-### Example
-
-```python
-import pandas as pd
-from ganymede_sdk.editor import GanymedeContext, MockGanymedeContext
-from ganymede_sdk.io import retrieve_sql
-
-query_sql = "SELECT * FROM input_table"
-
-# User-editable Python function for node
-def execute(df: pd.DataFrame, ganymede_context: GanymedeContext = None) -> pd.DataFrame:
-  df['run_id'] = ganymede_context.run_id
-  return df
-
-# Use MockGanymedeContext object from most recent run in execute function
-mock_ganymede_context = MockGanymedeContext()
-df_input = retrieve_sql(query_sql)
-df_output = execute(df_input, ganymede_context=mock_ganymede_context)
-```
 
 ### Jinja templating for SQL Queries
 
-Variables from the **GanymedeContext** can be used in SQL queries by using [Jinja templating](https://jinja.palletsprojects.com/en/3.0.x/templates/).  The full set of variables available for Jinja templates can be found in the params attribute of either the **GanymedeContext** or **MockGanymedeContext** objects.
+Variables from the **Ganymede** object can be used in SQL queries by using [Jinja templating](https://jinja.palletsprojects.com/en/3.0.x/templates/).  The full set of variables available for Jinja templates can be found in the params attribute of either the **GanymedeContext** or **MockGanymedeContext** objects.
 
-The following example demonstrates how to use the **MockGanymedeContext** to retrieve data from the most recent run of a _flow_.
+The following example demonstrates how to retrieve data from the most recent run of a _flow_.
 
 ```python
-from ganymede_sdk.editor import MockGanymedeContext
-from ganymede_sdk.io import retrieve_sql
+from ganymede_sdk import Ganymede
 
-# Create MockGanymedeContext with inputs from most recent run
-mock_ganymede_context = MockGanymedeContext()
+g = Ganymede()
 
 # Retrieve dataframe with run_id from most recent run
 query_sql = "SELECT * FROM tbl WHERE LEFT(run_id, 26) = FORMAT_TIMESTAMP("%Y-%m-%dT%R:%E6S", TIMESTAMP_MILLIS({{run_id}}))"
-result = retrieve_sql(query_sql, context=mock_ganymede_context)
+result = g.retrieve_sql(query_sql)
 ```
 
 ## `function` compare_df_to_table
@@ -108,13 +89,13 @@ The function returns differences in column names and data types between the Data
     - If True, only return columns and schemas differences between DataFrame and table (rather than all columns and schemas in DataFrame and table)
 
 ```python
-from ganymede_sdk.editor import GanymedeContext, compare_df_to_table
+from ganymede_sdk import Ganymede
+from ganymede_sdk.editor import compare_df_to_table
 
-# use ganymede_context param if compare_df_to_table accessed inside of execute function
-mock_ganymede_context = MockGanymedeContext()
+g = Ganymede()
 
 # returns a Pandas DataFrame with schema and column
-res = compare_df_to_table(mock_ganymede_context, df, 'ganymede_table_name')
+res = compare_df_to_table(g.ganymede_context, df, 'ganymede_table_name')
 ```
 
 The following examples are outputs from the *compare_df_to_table* function:
@@ -139,7 +120,7 @@ Would result in the following DataFrames:
 
 ```python
 # One column difference and one schema difference between DataFrame and table
-compare_df_to_table(mock_ganymede_context, result_dfs, 'Example_Quickstart_Absorbance_Change_Python_results')
+compare_df_to_table(g.ganymede_context, result_dfs, 'Example_Quickstart_Absorbance_Change_Python_results')
 ```
 
 | *well* | *table_df* | *table_bq* | *diff* |
@@ -149,7 +130,7 @@ compare_df_to_table(mock_ganymede_context, result_dfs, 'Example_Quickstart_Absor
 
 ```python
 # Full set of schema and column differences between DataFrame and table returned
-compare_df_to_table(mock_ganymede_context, result_dfs, 'Example_Quickstart_Absorbance_Change_Python_results', diffs_only=False)
+compare_df_to_table(g.ganymede_context, result_dfs, 'Example_Quickstart_Absorbance_Change_Python_results', diffs_only=False)
 ```
 
 | *well* | *table_df* | *table_bq* | *diff* |

@@ -30,15 +30,16 @@ The image above shows how _nodes_ are represented on the Flow Editor page; each 
 - **Node Attribute(s)**: if present, the attributes associated with the _node_ that are processed by the node.  In the image above, the node attributes 'csv' and 'results' have values '.csv' and 'example_results' respectively.
 - **Edit Button**: the <div className="button dark_gray_button">Edit</div> button that unlocks the _node_ for modifying _node_ name, changing _node_ attributes, or deleting the _node_
 
-For nodes with editable components, notebooks that back nodes have the following structure:
+For nodes with editable components, notebooks follow a common structure.  The sections of the notebook are described below.
 
-- **User-defined SQL** for retrieving tabular data to be processed by the node
-- **User-defined Python** for processing input
-- **Save Pipeline Code** for saving and deploying user-defined SQL and Python pipeline code.  Upon save, linting is conducted.
+#### Sections that are saved upon executing the Save Pipeline Code cell:
+- **User-defined SQL** for retrieving tabular data to be processed by the node.  This code is executed by the workflow management system.
+- **User-defined Python** for processing input.  This code is executed by the workflow management system.
+
+#### Sections that are discarded upon notebook close:
+- **Save Pipeline Code** for saving and deploying user-defined SQL and Python pipeline code.  Upon save, linting is conducted using [ruff](https://github.com/astral-sh/ruff) on the code found in the **User-defined Python** cell.
 - **Testing Section** for testing changes to user-defined SQL and Python
-- **Linting Section** for linting user-defined SQL and Python, using ruff
-
-The user-defined SQL and Python cells contain code that is executed by the workflow management system.  Executing the Save Pipeline Code cell commits the contents of these cells to a repo and deploys the contents of these cells to the workflow management system.  
+- **Linting Section** for linting user-defined SQL and Python, using [ruff](https://github.com/astral-sh/ruff)
 
 The Testing and Linting Sections enable users to test changes to the user-defined SQL and Python prior to committing and deploying code.
 
@@ -52,13 +53,38 @@ A full listing of available nodes and their key characteristics can be found on 
 </div>
 
 
-Editable nodes contain a pencil icon (<EditOutlined className="button darkblue_button"/>) in their upper right hand corner that opens up the notebook backing the node upon button click.  This section walks through the code associated with such a node to discuss its functionality.
+Editable nodes contain a pencil icon (<EditOutlined className="button darkblue_button"/>) in their upper right hand corner that opens up the notebook backing the node upon button click.
+These notebooks format code upon cell execution using [black](https://black.readthedocs.io/en/stable/), and perform type checking, hinting, and code diagnostics using [Jupyter LSP](https://github.com/jupyter-lsp/jupyterlab-lsp) configured with [PyRight](https://github.com/microsoft/pyright).  
+
+#### Hover over an underlined piece of code to see warnings and errors from the LSP:
+
+<div style={{textAlign: 'center'}}>
+  <img width="500" alt="Ganymede notebook hover warning"
+       src="https://ganymede-bio.mo.cloudinary.net/apiServer/Notebook_Hover_Warning_20230906.png" 
+        />
+</div>
+
+#### Hover over a class or method and click `Ctrl` to display a tooltip with the class or method signature:
+
+<div style={{textAlign: 'center'}}>
+  <img alt="Ganymede notebook tooltip"
+      src="https://ganymede-bio.mo.cloudinary.net/apiServer/Notebook_Tooltip_20230906.png" />
+</div>
+
+#### Right click on a variable and select "Rename Symbol" to rename all instances of that variable:
+
+<div style={{textAlign: 'center'}}>
+  <img alt="Ganymede notebook rename symbol"
+      src="https://ganymede-bio.mo.cloudinary.net/apiServer/Notebook_Rename_Symbol_20230906.png" />
+</div>
+
+
+
+## Pipeline Code Notebook Sections
 
 ### User-defined SQL
 
 ```python
-from ganymede_sdk.editor import query
-
 query_sql = """
   SELECT * FROM demo_file;
 """
@@ -171,10 +197,6 @@ from ganymede_sdk import Ganymede
 
 # Declare Ganymede object, which retrieves Ganymede context object from prior run to enable mimicking the execution environment of the most recent pipeline run
 g = Ganymede()
-
-# Load jupyter_black, which formats cells using black when they are run
-import jupyter_black
-jupyter_black.load(line_length=100)
 
 # Retrieve dataframes to process; the context object enables rendering of Jinja template variables used in data retrieval
 # More detail can be found on the Flow Context & Metadata page of this documentation, under the Template Variables section
