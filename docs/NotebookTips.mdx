@@ -18,13 +18,16 @@ Notebooks come with a number of features that facilitate code prototyping and de
 Functions can be introspected by pressing `Shift`+`TAB` after the function name in a notebook cell, or by typing `?` after the function name in a notebook cell.  This will display the function signature and docstring.  
 
 ```python
-from ganymede_sdk.io import retrieve_sql
+from ganymede_sdk import Ganymede
+
+# instantiate Ganymede object
+g = Ganymede()
 
 # shows function signature and docstring in a popup modal
-retrieve_sql<Shift+TAB>
+g.retrieve_sql<Shift+TAB>
 
 # alternative method to show function signature and docstring in a pane at the bottom of the screen
-retrieve_sql?
+g.retrieve_sql?
 ```
 
 <img alt="Explore documentation" 
@@ -37,29 +40,16 @@ retrieve_sql?
 The source code for a function can be observed by typing `??` after the function name in a notebook cell.  This will display the function signature and source code.
 
 ```python
-from ganymede_sdk.io import retrieve_sql
+from ganymede_sdk import Ganymede
+
+# instantiate Ganymede object
+g = Ganymede()
 
 # shows function signature and source code (image below truncated for brevity)
-retrieve_sql??
+g.retrieve_sql??
 ```
 
 <img alt="Explore source code" 
       src="https://ganymede-bio.mo.cloudinary.net/apiServer/Example_Function_Source_Narrow20230712.png"
       />
 &nbsp;
-
-### Tab completion for object exploration
-
-Pressing `TAB` key enables exploration of objects, modules, and namespaces.
-
-```python
-from ganymede_sdk.editor import MockGanymedeContext
-mock_ganymede_context = MockGanymedeContext()
-mock_ganymede_context.<TAB>
-```
-
-
-<img alt="Observe object methods" 
-      src="https://ganymede-bio.mo.cloudinary.net/apiServer/Example_Tab_Completion20230712.png"
-      width="600"
-      />
