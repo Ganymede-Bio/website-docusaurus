@@ -294,6 +294,10 @@ For Agents that reference local directories, the directory watched is specified 
 ```shell
 # note that forward slashes must be used to specify path, for both Windows and Linux Agents
 -v "input_path=/absolute/path"
+
+# If the directory is in a network drive, be sure to use the UNC path like so:
+-v "input_path=//server/share/path"
+# where `server` is the name of the server and `share` is the name of the shared folder
 ```
 
 ### Linux Installation
