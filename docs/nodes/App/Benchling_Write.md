@@ -24,8 +24,8 @@ on acquiring these credentials can be found [here](https://docs.benchling.com/do
 - **benchling_app_client_id**: Client_ID; has form xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
 - **benchling_client_secret**: Client_Secret; has form cs_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
-Secrets can be configured by clicking on the gear icon in the upper-right hand of the Ganymede
-application, then selecting Settings and navigating to the Settings tab.  If you need
+Secrets can be configured by clicking on your username in the upper-right hand of the Ganymede
+application, then selecting Environment Settings and navigating to the Secrets tab. If you need
 assistance, please don't hesitate to reach out to Ganymede.
 ## User-Defined Python
 Processes input DataFrame for upload to Benchling

@@ -26,8 +26,8 @@ Prior to usage, the following secrets must be configured in your Ganymede enviro
 - **azure_aad_authority**: App Azure Active Directory (AAD) Authority
 - **azure_sql_odbc_driver**: Azure SQL ODBC Driver to reference
 
-Secrets can be configured by clicking on the gear icon in the upper-right hand of the Ganymede
-application, then selecting Settings and navigating to the Settings tab.  If you need
+Secrets can be configured by clicking on your username in the upper-right hand of the Ganymede
+application, then selecting Environment Settings and navigating to the Secrets tab. If you need
 assistance, please don't hesitate to reach out to Ganymede.
 
 On the Ganymede end - make sure that the relevant MSSQL ODBC Driver is availed for

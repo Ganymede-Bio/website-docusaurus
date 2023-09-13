@@ -16,8 +16,8 @@ the specified Coda.io page.
 Prior to usage, the following secrets must be configured in your Ganymede environment:
 - **coda_api_key**: Coda API Key
 
-Secrets can be configured by clicking on the gear icon in the upper-right hand of the Ganymede
-application, then selecting Settings and navigating to the Settings tab.  If you need
+Secrets can be configured by clicking on your username in the upper-right hand of the Ganymede
+application, then selecting Environment Settings and navigating to the Secrets tab. If you need
 assistance, please don't hesitate to reach out to Ganymede.
 ## User-Defined Python
 Submits tables and files to Coda.io.  A document is generated from a template, and tables
