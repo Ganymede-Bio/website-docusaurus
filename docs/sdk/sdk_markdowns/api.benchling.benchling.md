@@ -49,12 +49,12 @@ Creates custom entity in Benchling.  If the entity does not exist, first create 
     - Folder ID containing Benchling entity to be created. This should be a string starting  
     with "lib_"
 - **input_schema_id** : `str`
-    - Input schema ID Tag. schema associated with Benchling entity to be created This should  
+    - Input schema ID Tag. schema associated with Benchling entity to be created. This should  
     be a string starting with "ts_"
 - **registry_id** : `str`
     - Project associated with custom entity.  This identifies the registry that your run  
-    entity will be registered to.  This can be found by clicking on Avatar -> Feature
-    Settings -> Registry Settings, and you will be able to find it in the URL.  This should
+    entity will be registered to.  This can be found by clicking on Avatar - Feature
+    Settings - Registry Settings, and you will be able to find it in the URL.  This should
     be a string starting with "src_"
 - **custom_entity_fields** : `Optional[Dict]`
     - Dictionary of field names and values to associate with custom entity  
@@ -72,13 +72,16 @@ Creates custom entity in Benchling.  If the entity does not exist, first create 
 
 ##  `function` Benchling.create_benchling_ids_from_files
 Upload blob files to Benchling and return a dictionary of
-{<blob name>: <blob ID from Benchling>}
+{blob name: blob ID from Benchling}
 
 
 ###  Parameters
 
 - **files** : `Dict[str, bytes]`
     - Files to upload to Benchling  
+- **process_file_names** : `bool`
+    - Use to process file_name for benchling by converting string to lowercase and removing  
+    periods. Default is False.
 
 
 ###  Returns
@@ -92,14 +95,21 @@ Upload blob files to Benchling and return a dictionary of
 ```python
 
 from ganymede_sdk.api.benchling import Benchling
-from ganymede_sdk.editor import MockGanymedeContext
+from ganymede_sdk import Ganymede
 import pandas as pd
 
-mock_ganymede_context = MockGanymedeContext()
-b = Benchling(mock_ganymede_context)
+g = Ganymede()
+b = Benchling(g.ganymede_context)
 
 # Get the IDs for two files that are uploaded to Benchling
-file_ids = b.create_benchling_ids_from_files({"filename1": file1, "filename2": file2})
+
+file_ids = b.create_benchling_ids_from_files(
+    {"Filename1.csv": file1, "Filename2.csv": file2}, process_file_names=True
+) # where file_ids.keys() = ['filename1csv', 'filename2csv']"
+
+file_ids = b.create_benchling_ids_from_files(
+    {"Filename1.csv": file1, "Filename2.csv": file2}
+) # where file_ids.keys() = ['Filename1.csv', 'Filename2.csv']"
 ```
 
 
@@ -113,9 +123,22 @@ Process input DataFrame into assay results for upload to Benchling.
     - Tabular result(s) of data to send to Benchling. Converted to list of dictionaries for  
     each row.
 - **schema_id** : `str`
-    - Benchling schema id  
+    - ID should contain the Benchling schema ID to write to.  This should be a string starting  
+    with "assaysch_"
 - **project_id** : `str`
-    - Benchling project id  
+    - ID that results will be recorded against.  This should be a string starting with "src_".  
+
+    The members of your organization that have access to this project will also have
+    visibility to the results that this integration generates.  You can find this ID by
+    right clicking on the Project that you have selected, and click on "Copy API ID".
+    If you don't see "Copy API ID" as an option, click on your avatar, click Settings,
+    and scroll to the bottom and verify that
+    "Enable Copy API ID button" is checked.
+- **replace_special_characters** : `bool`
+    - Replace special characters in column names with underscores to mimic Benchling behavior.  
+    Default is True.
+- **ignore_na** : `bool`
+    - Drop columns that only have null values prior to upload. Default is True.  
 - **upload** : `bool`
     - Whether to upload List[AssayResults] to Benchling  
 - **\*\*kwargs**
@@ -133,10 +156,10 @@ Process input DataFrame into assay results for upload to Benchling.
 ```python
 
 from ganymede_sdk.api.benchling import Benchling
-from ganymede_sdk.editor import MockGanymedeContext
+from ganymede_sdk import Ganymede
 
-mock_ganymede_context = MockGanymedeContext()
-b = Benchling(mock_ganymede_context)
+g = Ganymede()
+b = Benchling(g.ganymede_context)
 
 # Create or update the entity
 custom_entity_id = b.create_or_update_custom_entity(
@@ -160,8 +183,8 @@ assay_results = b.create_assay_results_from_files(
 
 
 ##  `function` Benchling.get_id_from_dropdown_name
-Get dropdown id from dropdown summary info identified by name. Can pass a dropdown id look
-up within the corresponding dropdown summary.
+Get a dictionary of dropdown name - dropdown id from dropdown summary info identified by
+name. Can pass a dropdown id to look up the id of an option of a dropdown
 
 
 ###  Parameters
@@ -170,16 +193,35 @@ up within the corresponding dropdown summary.
     - Dropdown name to identify id for  
 - **\*args**
     - Optional positional arguments to pass to list method of benchling_sdk dropdown service  
+- **dropdown_id** : `Optional[str]`
+    - If supplied, get the ID of an option in the dropdown specified by the dropdown_name. The  
+    default is None.
 - **\*\*kwargs**
-    - dropdown_id (Optional[str]). If none, list all dropdowns. If given, list all dropdowns  
-    of that id. Also accepts other optional keyword arguments to pass to list method of
-    benchling_sdk dropdown service
+    - Optional keyword arguments to pass to list method of benchling_sdk dropdown service  
 
 
 ###  Returns
 
-- `str`
-    - dropdown id associated with dropdown name. Raises an error if dropdown id is not found  
+- Dict[str, str]
+    - Dictionary of dropdown name - dropdown id for a specified dropdown name. Raises an  
+    error if dropdown id is not found
+
+
+###   Examples
+```python
+
+from ganymede_sdk.api.benchling import Benchling
+from ganymede_sdk import Ganymede
+
+g = Ganymede()
+b = Benchling(g.ganymede_context)
+
+dropdown_id = get_id_from_dropdown_name(
+    "option_name",
+    b.benchling_context,
+    dropdown_id=get_id_from_dropdown_name("Dropdown Name", b.benchling_context),
+)
+```
 
 
 ##  `function` Benchling.list_available_services
@@ -208,9 +250,10 @@ results data.
 - **\*\*kwargs**
     - Optional keyword arguments to pass to list methods of the benchling service  
 
-- `Raises`
--   
-- - `ValueError`  
+
+###  Raises
+
+- `ValueError`
     - Raise an error if the service argument is not a valid method of benchling_context.conn  
 - `ValueError`
     - Raise an error if fields is not an attribute of of the service results.  
@@ -219,17 +262,17 @@ results data.
 ###  Returns
 
 - `pd.DataFrame`
-    - A dataframe of records returned benchling_context.conn.<service>.list(_...)  
+    - A dataframe of records returned benchling_context.conn.service.list(_...)  
 
 
 ###   Examples
 ```python
 
 from ganymede_sdk.api.benchling import Benchling
-from ganymede_sdk.editor import MockGanymedeContext
+from ganymede_sdk import Ganymede
 
-mock_ganymede_context = MockGanymedeContext()
-b = Benchling(mock_ganymede_context)
+g = Ganymede()
+b = Benchling(g.ganymede_context)
 
 # Get data frame of fields returned from custom entities and assay_results
 df_custom_entity_fields = b.get_fields_data("custom_entity")
@@ -254,9 +297,10 @@ Get all Benchling objects of a specific type, optionally filtered by object attr
 - **\*\*kwargs**
     - Optional keyword arguments to pass to list methods of the benchling service  
 
-- `Raises`
--   
-- - `ValueError`  
+
+###  Raises
+
+- `ValueError`
     - Raise an error if the service argument is not a valid method of benchling_context.conn  
 
 
@@ -264,16 +308,19 @@ Get all Benchling objects of a specific type, optionally filtered by object attr
 ```python
 
 from ganymede_sdk.api.benchling import Benchling
-from ganymede_sdk.editor import MockGanymedeContext
+from ganymede_sdk import Ganymede
 
-mock_ganymede_context = MockGanymedeContext()
-b = Benchling(mock_ganymede_context)
+g = Ganymede()
+b = Benchling(g.ganymede_context)
 
 # retrieve all custom entities
 custom_entities = b.get('custom_entities')
 
 # retrieve custom entities with names "ent1" and "ent2"
 custom_entities = b.get('custom_entities', ['ent1', 'ent2'])
+
+# retrieve custom entities by Benchling IDs
+custom_entities = b.get('custom_entities', ids=['bfi_1234', 'bfi_5678'])
 
 # retrieve plate named "my_plate_name"
 test_plate = b.get('plates', benchling_filter={'name': 'my_plate_name'})[0]
@@ -291,8 +338,8 @@ used in conjuction with Genchling.get()
 ###  Parameters
 
 - **benchling_service_results** : `str`
-- - **Results of the form [{"id"** : `<id>, "name"`  
-    - method  
+    - Results of the form List[dict] returned from get() where "id" and "name" are common keys  
+    in the dict.
 - **keys** : `str`
     - The key name of the inner dictionaries in the list used to set the key in the returned  
     dictionary.
@@ -311,15 +358,73 @@ used in conjuction with Genchling.get()
 ```python
 
 from ganymede_sdk.api.benchling import Benchling
-from ganymede_sdk.editor import MockGanymedeContext
+from ganymede_sdk import Ganymede
 
-mock_ganymede_context = MockGanymedeContext()
-b = Benchling(mock_ganymede_context)
+g = Ganymede()
+b = Benchling(g.ganymede_context)
 
-# Get the dropdowns of the form [{"id": <id>, "name": <name>}]
+# Get the dropdowns of the form [{"id": id, "name": name}]
 results = b.get("dropdowns")
 
 # Convert list of dictionaries to dictionary where name is the key and id are the values
-# of the form {<name>: <value>}
+# of the form {name: value}
 dropdown_names_to_ids = b.get_model_to_map(results, keys='name', values='id')
 ```
+
+
+##  `function` Benchling.validate_assay_result_schema_names
+Validate column names in a DataFrame against an assay result schema.
+
+
+###  Parameters
+
+- **df** : `pd.DataFrame`
+    - The DataFrame containing data to be validated against the assay result schema.  
+- **assay_result_id** : `str`
+    - The unique identifier of the assay result schema in Benchling.  
+
+
+###  Returns
+
+- `set`
+    - A set of matched field names between the DataFrame and the assay result schema.  
+
+
+###  Raises
+
+- `SchemaError`
+    - If there are unmatched fields between the DataFrame and the assay result schema.  
+
+
+##  `function` Benchling.get_assay_result_schema_table
+Retrieve the schema table for an assay result using its ID.
+
+
+###  Parameters
+
+- **assay_result_id** : `str`
+    - The unique identifier of the assay result.  
+
+
+###  Returns
+
+- `pd.DataFrame`
+    - A DataFrame containing the field definitions of the assay result schema.  
+
+
+###   Examples
+```python
+
+from ganymede_sdk import Ganymede
+from ganymede_sdk.api.benchling import Benchling
+
+g = Ganymede()
+b = Benchling(g.ganymede_context)
+
+result_id = "example_result_id"
+schema_table = b.get_assay_result_schema_table(result_id)
+```
+
+
+##  `class` SchemaError
+Raised when the assay result trying to be created does not match the table schema in Benchling
