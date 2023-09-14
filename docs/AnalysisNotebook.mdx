@@ -39,9 +39,10 @@ Additional packages can be installed using pip magic.  For example, the followin
 Tables in the environment can be accessed via the Ganymede SDK.  For example, the code below lists available tables in the environment:
 
 ```python
-from ganymede_sdk.editor import list_tables
+from ganymede_sdk import Ganymede
 
-tables = list_tables()
+g = Ganymede()
+tables = g.list_tables()
 for table in tables:
     print(table.table_id)
 ```
@@ -52,8 +53,9 @@ A query can be run by passing a SQL snippet following [ANSI SQL syntax](https://
 q = 'select * from ganymede_demo.demo_table'
 ```
 ```python
-from ganymede_sdk.io import retrieve_sql
-retrieve_sql(query_sql)
+from ganymede_sdk import Ganymede
+
+g.retrieve_sql(query_sql)
 ```
 
 ### Saving notebooks

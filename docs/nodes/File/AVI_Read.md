@@ -31,12 +31,8 @@ data tables stored in the data lake
 
 
 ### Returns
-`Union[`
-  - Union[pd.DataFrame, Dict[str, pd.DataFrame]],
-  - Tuple[Union[pd.DataFrame, Dict[str, pd.DataFrame]], Dict[str, bytes]],
-- ]
-  - Either table(s) or
-  - Tuple of table(s) and blob(s) to store in data lake
+`NodeReturn`
+  Object containing data to store in data lake and/or file storage
 
 
 ### Notes

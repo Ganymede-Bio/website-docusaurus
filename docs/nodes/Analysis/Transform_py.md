@@ -26,12 +26,5 @@ Process tabular data from user-defined SQL query, writing results back to data l
 
 
 ### Returns
-`Union[pd.DataFrame, Dict[str, pd.DataFrame]]`
-  - Table(s) to store in data lake
-
-
-### Notes
-If a DataFrame is returned, the table name corresponds to the **results** parameter of the node.
-
-If a dict is returned, the keys of the dict are used as table names for the corresponding
-DataFrames to store.  The table with **results** as its key is displayed on the Flow Editor.
+`NodeReturn`
+  Object containing data to store in data lake and/or file storage

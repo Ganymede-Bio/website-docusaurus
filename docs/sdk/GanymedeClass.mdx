@@ -1,6 +1,6 @@
 ---
-id: ModuleIO
-title: Accessing Tables and Files
+id: GanymedeClass
+title: Ganymede Class
 displayed_sidebar: SDKSidebar
 ---
 
@@ -9,140 +9,168 @@ import NodeChip from '@site/src/components/NodeChip.js'
 
 ## Overview
 
-ganymede_sdk.io provides functions for listing available data and retrieving data from Ganymede cloud storage and data lake when using editor and analysis notebooks.
+The **Ganymede** object is used within editor notebooks to access data in Editor notebooks, enabling users to test the behavior of code changes on data from prior runs.
 
-## Functions for accessing tables
+```python
+import pandas as pd
+from ganymede_sdk import Ganymede
 
-### `function` retrieve_sql
+g = Ganymede()
+```
+
+#### Display Ganymede SDK version and run context parameters
+```python
+display(g)
+```
+
+<img width="600" alt="Ganymede object display" 
+      src="https://ganymede-bio.mo.cloudinary.net/apiServer/Ganymede_Version_and_Context_Upd20230906.png"
+      />
+
+
+#### Access run context parameters
+```python
+print(g['runId'])
+
+# Returns "1693156227387"
+```
+
+#### In the execute function, the Ganymede object can be created from the ganymede_context parameter
+```python
+def execute(ganymede_context: GanymedeContext):
+  g = Ganymede(ganymede_context)
+```
+
+## Methods for accessing tables
+
+### `method` retrieve_sql
 
 _retrieve_sql_ allows users to retrieve tabular data from the Ganymede data lake.  Input can either be single SQL query, or a semicolon-delimited string containing a set of queries to run.
 
 The results are returned as a DataFrame in Python if a single DataFrame is specified, or a list of Pandas DataFrames if multiple queries are submitted.
 
 - _param_ **query_str**: str - Semicolon-delimited query string(s) to retrieve.
-- _param_ **context**: Optional[GanymedeContext] - Context object used for rendering Jinja template variables in query
 - _param_ **render_dict**: Optional[Dict[str, str]] - Dictionary used for rendering Jinja template variables in query.  Not used if context is provided.
 
 ```python
-from ganymede_sdk.io import retrieve_sql
+from ganymede_sdk import Ganymede
 
 query_sql = 'SELECT * FROM (SELECT "sample", "query"); SELECT * FROM (SELECT "sample", "query2")'
-}
 
-df_query1, df_query2 = retrieve_sql(query_sql)
+df_query1, df_query2 = g.retrieve_sql(query_sql)
 ```
 
-### `function` list_tables
+### `method` list_tables
 
-_list_tables_ returns a listing of tables, column names, and associated _flows_ as a Pandas DataFrame.  By default, the function retrieves tables associated with the current _flow_.
+_list_tables_ returns a listing of tables, column names, and associated _flows_ as a Pandas DataFrame.  By default, the method retrieves tables associated with the current _flow_.
 
-- _param_ **context**: GanymedeContext - GanymedeContext to use for pulling table listing
 - _param_ **current_flow_flag**: bool, by default True - Whether to filter for tables associated with current flow or not
 - _param_ **current_run_id**: Optional[int], by default None - If set to specific run ID, filter to include records for specified run ID.
 
 ```python
-from ganymede_sdk.editor import MockGanymedeContext
-from ganymede_sdk.io import list_tables
+from ganymede_sdk import Ganymede
 
-mock_ganymede_context = MockGanymedeContext()
+g = Ganymede()
 
 # retrieves tables associated with flow
-tables_in_current_flow = list_tables(context):
+tables_in_current_flow = g.list_tables(context):
 print(tables_in_current_flow)
 
 # retrieves all tables in environment
-for table_name in list_tables(context, current_flow_flag=False):
+for table_name in g.list_tables(context, current_flow_flag=False):
   print(table_name)
 ```
 
-### `function` list_tables_current_run
+### `method` list_tables_current_run
 
 _list_tables_current_run_ returns a listing of all tables associated with the current flow and run ID as a Pandas DataFrame.
 
-- _param_ **context**: GanymedeContext - GanymedeContext to use for pulling table listing
-
-### `function` list_tables_current_flow
+### `method` list_tables_current_flow
 
 _list_tables_current_flow_ returns a listing of all tables associated with the current flow and run ID as a Pandas DataFrame.
 
-- _param_ **context**: GanymedeContext - GanymedeContext to use for pulling table listing
-
-### `function` list_tables_all
+### `method` list_tables_all
 
 _list_tables_all_ returns a listing of all tables associated with the current environment as a Pandas DataFrame.
 
-- _param_ **context**: GanymedeContext - GanymedeContext to use for pulling table listing
 
-## Functions for accessing files
+## Methods for accessing files
 
-### `function` retrieve_files
+### `method` retrieve_files
 
 _retrieve_files_ allows users to retrieve files from Ganymede cloud storage.  By default, the most recent file associated with current run is retrieved.
 
-- _param_ **context**: GanymedeContext - GanymedeContext to use for pulling file(s)
 - _param_ **file_names**: Union[str, List[str]] - File or list of files to retrieve
 - _param_ **input_or_output_bucket**: str, by default "output" - Either "input" or "output" - to reference bucket to retrieve files from
 - _param_ **current_flow_flag**: bool, by default True - Whether to filter for files associated with current flow or not
 - _param_ **run_id**: Optional[int], by default None - If set, filters for results with specified run_id; if not specified, retrieve file(s) associated with most recent run ID
 
 ```python
-from ganymede_sdk.editor import MockGanymedeContext
-from ganymede_sdk.io import retrieve_files
+from ganymede_sdk import Ganymede
 
-mock_ganymede_context = MockGanymedeContext()
+g = Ganymede()
 
 # Retrieves a file from the input bucket called "sample_test.csv" associated with the current flow
-input_file = retrieve_files(mock_ganymede_context, "sample_test.csv", input_or_output_bucket="input")
+input_file = retrieve_files("sample_test.csv", input_or_output_bucket="input")
 
 # Retrieves 2 files from the output bucket in the environment associated with most recent run of flow
-output_files = retrieve_files(mock_ganymede_context, ['sample_output.xlsx', 'sample_validation.txt'], 
+output_files = retrieve_files(['sample_output.xlsx', 'sample_validation.txt'], 
                               input_or_output_bucket="output", current_flow_flag=False)
 ```
 
-### `function` list_files
+### `method` list_files
 
 _list_files_ lists files in the environment
 
-- _param_ **context**: GanymedeContext - GanymedeContext to use for pulling file(s)
 - _param_ **input_or_output_bucket**: str, by default "input" - Either "input" or "output" - to reference whether to observe the input or output bucket of the _flow_
 - _param_ **flow_name**: str, optional, by default True - Flow name to filter for.  If set to specific flow name, filter to include records based on
 - _param_ **current_flow_flag**: bool, by default True - Whether to filter for files associated with current flow or not
 - _param_ **current_run_id**: Optional[int] - If set, filters for results with specified run_id
 
 ```python
-from ganymede_sdk.editor import MockGanymedeContext
-from ganymede_sdk.io import list_files
+from ganymede_sdk import Ganymede
 
-mock_ganymede_context = MockGanymedeContext()
+g = Ganymede()
 
 # Lists all files in the input bucket of the current flow
-df_cur_flow_input_files = list_files(mock_ganymede_context, input_or_output_bucket="input")
+df_cur_flow_input_files = g.list_files(input_or_output_bucket="input")
 display(df_cur_flow_input_files)
 
 # Lists all files in the output bucket of the environment
-df_output_files = list_files(mock_ganymede_context, input_or_output_bucket="output", current_flow_flag=False):
+df_output_files = g.list_files(input_or_output_bucket="output", current_flow_flag=False):
 display(df_output_files)
 ```
 
-### `function` list_files_current_run
+### `method` list_files_current_run
 
 _list_files_current_run_ returns a listing of available files in the specified bucket associated with the run ID provided by Ganymede context
 
-- _param_ **context**: GanymedeContext - GanymedeContext to use for pulling file(s)
 - _param_ **input_or_output_bucket**: str, by default "input" - Either "input" or "output" - to reference whether to observe the input or output bucket of the _flow_
 
-### `function` list_files_current_flow
+### `method` list_files_current_flow
 
 _list_files_current_flow_ returns a listing of available files in the specified bucket associated with the current _flow_ provided by Ganymede context
 
-- _param_ **context**: GanymedeContext - GanymedeContext to use for pulling file(s)
 - _param_ **input_or_output_bucket**: str, by default "input" - Either "input" or "output" - to reference whether to observe the input or output bucket of the _flow_
 
-### `function` list_files_all
+### `method` list_files_all
 
 _list_files_all_ returns a listing of all files in the specified bucket in the environment
 
-- _param_ **context**: GanymedeContext - GanymedeContext to use for pulling file(s)
 - _param_ **input_or_output_bucket**: str, by default "input" - Either "input" or "output" - to reference whether to observe the input or output bucket of the _flow_
 - _param_ **flow_name**: str, by default None - Flow name to filter for, if input
+
+## Other methods
+
+### `method` get_table_schema
+
+_get_table_schema_ returns the schema of a table in the Ganymede data lake
+
+- _param_ **table_name**: str - Name of table to retrieve schema for
+
+### `method` get_secret
+
+_get_secret_ returns an environment secret, which can be useful for testing API calls that require authentication.
+
+- _param_ **secret_name**: str - Name of secret to retrieve
 

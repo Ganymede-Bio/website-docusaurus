@@ -11,7 +11,7 @@ import DashboardFilterIcon from '@site/static/img/dashboard_filter_icon.svg';
 This guide walks you through creating a dashboard to compare the output data from a plate reader at two different timepoints, which has been ingested into Ganymede.  This dashboard leverages the same data processed in the [Build a Flow guide](./QuickstartBuildFlow). By the time you're finished, you'll have converted raw data to a dashboard that looks like this:
 
 <div class="text--center">
-<img width="800" alt="Absorbance Analytics Dashboard" src="https://ganymede-bio.mo.cloudinary.net/apiServer/AbsorbanceAnalyticsDashboard_20230531.png"/>
+<img width="800" alt="Absorbance Analytics Dashboard" src="https://ganymede-bio.mo.cloudinary.net/apiServer/AbsorbanceAnalyticsDashboard_20230831.png"/>
 </div>
 &nbsp;
 
@@ -39,9 +39,9 @@ In order to create our dashboard we'll need to create two datasets for displayin
 
 ### Step 2a. Load plate reader data for charting
 
-Hover over SQL Lab in the top menu bar and click on SQL Editor.  This should bring you to a SQL editor that lets you preview tables, and results of SQL queries:
+Hover over SQL in the top menu bar and click on SQL Lab.  This should bring you to a SQL editor that lets you preview tables, and results of SQL queries:
 
-<img alt="Dashboard - SQL Editor" src="https://ganymede-bio.mo.cloudinary.net/dashboard/SQL_Lab20230531.png" />
+<img alt="Dashboard - SQL Editor" src="https://ganymede-bio.mo.cloudinary.net/apiServer/SQL_Lab20230831.png" />
 &nbsp;
 
 Fill in the SQL Editor with the query below and click <div className="button darkblue_button">**RUN**</div> to execute SQL.
@@ -49,7 +49,7 @@ Fill in the SQL Editor with the query below and click <div className="button dar
 ```sql
 -- Quickstart_Absorbance_Change_Run_Parameters table
 SELECT field, run_diff, left(field, 1) as row, cast(right(field, length(field)-1) as int64) as column
-FROM Quickstart_Absorbance_Change_Transform_py_analysis 
+FROM Quickstart_Absorbance_Change_Transform_Python_results 
 UNPIVOT (value for run IN (run1, run2))
 WHERE field not in ('Time [s]', 'Temp. [°C]', 'Cycle Nr.')
 ORDER BY row, column
@@ -125,7 +125,7 @@ Click <div className="button purple_button_dashboard"><SaveOutlined /> SAVE</div
 
 Click on the Dashboards button in the top bar and select the Absorbance Analytics dashboard.
 
-<img alt="Selecting the Absorbance Analytics dashboard" src="https://ganymede-bio.mo.cloudinary.net/dashboard/Quickstart_DashboardsScreen20230531.png" />
+<img alt="Selecting the Absorbance Analytics dashboard" src="https://ganymede-bio.mo.cloudinary.net/dashboard/Quickstart_DashboardsScreen20230831.png" />
 &nbsp;
 
 Arrange the dashboard by clicking on the <div className="button purple_button_dashboard">EDIT DASHBOARD</div> button in the top right hand corner of the screen.  In the edit mode, tables and graphs can be resized and moved to different rows.

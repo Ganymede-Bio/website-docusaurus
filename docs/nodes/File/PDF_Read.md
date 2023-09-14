@@ -31,21 +31,5 @@ data tables stored in the data lake
 
 
 ### Returns
-`Union[`
-  - Union[pd.DataFrame, Dict[str, pd.DataFrame]],
-  - Tuple[Union[pd.DataFrame, Dict[str, pd.DataFrame]], Dict[str, bytes]],
-- ]
-  - Either table(s) or
-  - Tuple of table(s) and blob(s) to store in data lake
-
-
-### Notes
-If a DataFrame is returned, the table name corresponds to the **results** parameter of the node.
-
-If a dict of dataframes is returned, the keys of the dict are used as table names
-for the corresponding DataFrames to store.  The table with **results** as its key
-is displayed on the Flow Editor.
-
-If a tuple is returned, the first element is a table or dict of tables, and the second
-element is a dict of blobs. The blob filename will be referenced in the blob_metadata table
-on the Flow Editor.
+`NodeReturn`
+  Object containing data to store in data lake and/or file storage

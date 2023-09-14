@@ -143,7 +143,7 @@ def execute(file_data: Dict[str, bytes], ganymede_context=None) -> NodeReturn:
     df_excel_file = pd.read_excel(excel_file)
 
     return NodeReturn(
-        tables_to_upload={'Quickstart_Absorbance_Change_data': df_out},
+        tables_to_upload={'Quickstart_Absorbance_Change_data': df_excel_file},
     )
 ```
 
@@ -157,7 +157,7 @@ Run the User-Defined Function cell by selecting the cell and then clicking on th
 """
 Save the updated query and python function to the pipeline
 """
-from ganymede.editor import save
+from ganymede_sdk.editor import save
 
 files = { 'query.sql': query_sql }
 save(files)
@@ -181,11 +181,11 @@ Edit the `query_sql` string to query for the output of the <div className="butto
 
 ```python
 query_sql = """
-  SELECT * FROM Quickstart_Absorbance_Change_results
+  SELECT * FROM Quickstart_Absorbance_Change_data
 """
 ```
 
-Since the plate reader file has been ingested in the <div className="button darkblue_button">**Input_File**</div> node, we now can query the results of that node using a SQL query on the table `Quickstart_Absorbance_Change_results`.  The query above simply selects all the data from this table. 
+Since the plate reader file has been ingested in the <div className="button darkblue_button">**Input_File**</div> node, we now can query the results of that node using a SQL query on the table `Quickstart_Absorbance_Change_data`.  The query above simply selects all the data from this table. 
 
 Run this notebook cell by clicking on the <div className="button jupyter_button">▶️ Run</div> button in the header.
 
@@ -244,7 +244,7 @@ When the job is complete, the status of the flow should indicate success:
 
 Click on <div className="button darkblue_button"><FileSearchOutlined /> **Data Explorer**</div> in the left sidebar and look for Quickstart_Absorbance_Change_data in the table browser.
 
-This let's you observe and query the `Quickstart_Absorbance_Change_data` table. 
+This lets you observe and query the `Quickstart_Absorbance_Change_data` table. 
 
 For example, running the following query:
 
@@ -253,7 +253,7 @@ select
     left(field, 1) as well_row, 
     cast(right(field, length(field)-1) as int) as well_column,
     *
-from Quickstart_Absorbance_Change_data 
+from Quickstart_Absorbance_Change_data where field not in ('Cycle Nr.', 'Time [s]', 'Temp. [°C]')
 order by left(field, 1), cast(right(field, length(field)-1) as int)
 ```
 
