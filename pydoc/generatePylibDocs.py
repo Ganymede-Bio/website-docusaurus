@@ -25,6 +25,8 @@ keywords = [
     "Example",
     "Examples",
     "Attributes",
+    "Raises",
+    "Raise",
 ]
 
 
@@ -43,6 +45,8 @@ def dir_files_docstrings_to_markdown_files(_dir, save_path, sidebar):
 
             docstrings_md = file_docstrings_to_markdown(file_path, header=header)
             docstrings_md = SIDEBAR_HEADER.format(header, header) + docstrings_md
+
+            print(docstrings_md)
 
             markdown_file = os.path.join(save_path, f"{header}.md")
             with open(markdown_file, "w") as mf:
@@ -116,6 +120,9 @@ def extract_docstrings(file_path):
 
 def docstring_to_markdown(method, docstring):
     docstring = f"## {method}\n" + docstring.strip("\n")
+
+    pattern = r'(?<!>)>(?!>)|(?<!<)<(?!<)'
+    docstring = re.sub(pattern, "", docstring)
 
     docstring = add_hashtags_to_function_fields(docstring)
 
