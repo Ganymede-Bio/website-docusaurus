@@ -30,5 +30,5 @@ Write table(s) from SQL query and stores Excel sheet in cloud storage.
 
 
 ### Returns
-`bytes`
-  - Excel file to store in cloud storage
+`NodeReturn`
+  Object containing data to store in data lake and/or file storage

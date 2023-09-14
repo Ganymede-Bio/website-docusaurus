@@ -33,7 +33,5 @@ and another for the metadata.
 
 
 ### Returns
-`dict`
-  - A dictionary with two entries:
-  - - "data": A pandas DataFrame, where each row represents a data point.
-  - - "metadata": A pandas DataFrame with a single row that represents the metadata.
+`NodeReturn`
+  Object containing data to store in data lake and/or file storage

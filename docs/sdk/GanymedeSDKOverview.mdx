@@ -8,15 +8,14 @@ sidebar_label: SDK Overview
 import NodeChip from '@site/src/components/NodeChip.js'
 
 
-The Ganymede SDK provides a set of convenience functions for interacting with Ganymede from editor and analysis notebooks.
+The Ganymede SDK provides a methods for interacting with Ganymede from editor and analysis notebooks.
 
 ```python
-import ganymede_sdk.editor
-import ganymede_sdk.io
+from ganymede_sdk import Ganymede
 ```
 
-- [**ganymede_sdk.editor**](./ModuleEditor.mdx) provides the GanymedeContext, used to store runtime data, as well as functions for testing and validating flows
-- [**ganymede_sdk.io**](./ModuleIO.mdx) contains functions for listing and retrieving data stored in Ganymede
+- The [**Ganymede**](./GanymedeClass.mdx) Class contains methods for listing and retrieving data stored in Ganymede
+- [**Context**](./ContextVariables.mdx) objects contain methods for accessing run metadata
 - [**GPT**](./GPT.mdx) is a class found in Ganymede SDK that provides coding assistance for use in Editor notebooks.  Usage requires configuring OpenAI API Key and Organization in your environment.
 
 :::tip
@@ -24,10 +23,12 @@ import ganymede_sdk.io
 Functions can be introspected by typing ? or ?? before the function name in a notebook cell.  For example:
 
 ```python
-from ganymede_sdk.io import retrieve_sql
+from ganymede_sdk import Ganymede
+
+g = Ganymede()
 
 # shows function signature and docstring 
-?retrieve_sql
+?g.retrieve_sql
 ```
 
 <div style={{textAlign: 'center'}}>
@@ -39,6 +40,6 @@ from ganymede_sdk.io import retrieve_sql
 
 ```python
 # shows function signature and source code
-??retrieve_sql
+??g.retrieve_sql
 ```
 :::

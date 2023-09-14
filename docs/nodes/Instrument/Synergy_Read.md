@@ -28,5 +28,5 @@ Processes Synergy text file(s) into data tables stored in data lake
 
 
 ### Returns
-`Dict[str, pd.DataFrame]`
-  - Tables to store in data lake
+`NodeReturn`
+  Object containing data to store in data lake and/or file storage.
