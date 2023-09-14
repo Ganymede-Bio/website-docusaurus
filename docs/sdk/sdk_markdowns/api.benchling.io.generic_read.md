@@ -22,7 +22,7 @@ within the corresponding dropdown summary.
     - Benchling context object  
 - **\*args**
     - Optional positional arguments to pass to list method of benchling_sdk dropdown service  
-- ***\*kwargs**
+- **\*\*kwargs**
     - Optional keyword arguments to pass to get_dropdown_summary_list such as dropdown_id (int)  
     and arguments to pass to benchling_sdk dropdown service
 
@@ -47,7 +47,7 @@ A page is of the form: benchling_sdk.helpers.pagination_helpers.PageIterator
 - **dropdown_id** : `Optional[str]`
     - Optional benchling dropdown id. If none, list all dropdowns. If given, list all dropdowns of  
     that id.
-- ***\*kwargs**
+- **\*\*kwargs**
     - Optional keyword arguments to pass to list method of benchling_sdk dropdown service  
 
 

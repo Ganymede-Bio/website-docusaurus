@@ -27,7 +27,7 @@ Creates and returns the id of the custom entity.
     a string starting with "ts_"
 - **registry_id** : `str`
     - Project associated with custom entity.  This identifies the registry that your run entity  
-    will be registered to.  This can be found by clicking on Avatar -> Feature Settings ->
+    will be registered to.  This can be found by clicking on Avatar - Feature Settings -
     Registry Settings, and you will be able to find it in the URL.  This should be a string
     starting with "src_"
 - **custom_entity_fields** : `Optional[Dict]`
@@ -60,7 +60,7 @@ Updates custom entity
     a string starting with "ts_"
 - **registry_id** : `str`
     - Project associated with custom entity.  This identifies the registry that your run entity  
-    will be registered to.  This can be found by clicking on Avatar -> Feature Settings ->
+    will be registered to.  This can be found by clicking on Avatar - Feature Settings -
     Registry Settings, and you will be able to find it in the URL.  This should be a string
     starting with "src_"
 - **custom_entity_fields** : `Optional[Dict]`
@@ -74,7 +74,8 @@ Updates custom entity
 
 
 ##  `function` create_benchling_ids_from_files
-Upload blob files to Benchling
+Upload blob files to Benchling and return a dictionary where the keys are the file names and the
+values are the benchling IDs
 
 
 ###  Parameters
@@ -85,6 +86,9 @@ Upload blob files to Benchling
     - File names to associate to file content  
 - **file_content** : `Union[List[bytes], List[pd.DataFrame]]`
     - Blob or data content to upload  
+- **keys_as_benchling-name** : `bool`
+    - Use to process file_name for benchling by converting string to lowercase and removing  
+    periods. Default is False.
 
 
 ###  Returns
@@ -121,7 +125,7 @@ Get output file id for blob created from bytes.
 
 - **benchling_context** : `Benchling Context object`
     - Benchling context object to get connection  
-- **file_name_for_benchling** : `str`
+- **file_name** : `str`
     - File name to associate with data  
 - **df** : `pd.DataFrame`
     - Data frame to upload as a file  
@@ -155,8 +159,8 @@ Get output file id for blob created from bytes.
 
 ###  Notes
 
-- The file type is necessary to upload to benchling which is guessed based on the blob_name using
-- - the mimetypes package.  
+The file type is necessary to upload to benchling which is guessed based on the blob_name using
+the mimetypes package.
 
 
 ##  `function` create_assay_results_from_dataframe
@@ -168,11 +172,24 @@ Processes input DataFrame for upload to Benchling.
 - **data** : `pd.DataFrame`
     - Tabular result(s) of data to send to Benchling. Converted to list of dictionaries for each  
     row.
-- **\*args**
-    - Arguments to pass to create_assay_result_from_dict  
-    schema_id (str)
-    project_id (str)
-- ***\*kwargs**
+- **schema_id** : `str`
+    - ID should contain the Benchling schema ID to write to.  This should be a string starting  
+    with "assaysch_"
+- **project_id** : `str`
+    - ID that results will be recorded against.  This should be a string starting with "src_".  
+
+    The members of your organization that have access to this project will also have
+    visibility to the results that this integration generates.  You can find this ID by
+    right clicking on the Project that you have selected, and click on "Copy API ID".
+    If you don't see "Copy API ID" as an option, click on your avatar, click Settings,
+    and scroll to the bottom and verify that
+    "Enable Copy API ID button" is checked.
+- **replace_special_characters** : `bool`
+    - Replace special characters in column names with underscores to mimic Benchling behavior.  
+    Default is True.
+- **ignore_na** : `bool`
+    - If True, drop columns with only nulls prior to upload. Default is True.  
+- **\*\*kwargs**
     - Keyward args to pass to create_assay_result_from_dict  
     drop_na (Optional[bool])
 

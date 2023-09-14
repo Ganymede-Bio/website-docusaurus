@@ -25,6 +25,9 @@ keywords = [
     "Example",
     "Examples",
     "Attributes",
+    "Raises",
+    "Raise",
+    "Methods",
 ]
 
 
@@ -33,7 +36,7 @@ def dir_files_docstrings_to_markdown_files(_dir, save_path, sidebar):
         for file in files:
             if not re.search(".py$", file) or re.search("__init__", file):
                 continue
-            if "benchling" not in path and "coda" not in path:
+            if not re.search("benchling|coda|analytics", path):
                 continue
             file_path = os.path.join(path, file)
 
@@ -117,12 +120,12 @@ def extract_docstrings(file_path):
 def docstring_to_markdown(method, docstring):
     docstring = f"## {method}\n" + docstring.strip("\n")
 
+    pattern = r'(?<!>)>(?!>)|(?<!<)<(?!<)'
+    docstring = re.sub(pattern, "", docstring)
+
     docstring = add_hashtags_to_function_fields(docstring)
 
     docstring = remove_dashed_lines_from_docstring(docstring)
-
-    docstring = re.sub(r"\*([A-Za-z])", r"\\*\1", docstring)
-    docstring = re.sub(r"\*\*([A-Za-z])", r"\\*\\*\1", docstring)
 
     markdown = add_dashes_to_function_fields(docstring)
     markdown = example_fields_to_markdown(markdown)
@@ -157,11 +160,14 @@ def add_dashes_to_function_fields(input_text):
         if re.search("`class`|`function`", field):
             new_fields.append(f"## {field}")
             continue
-        if re.search("Example|Examples", field):
+        if re.search("Example|Examples|Notes", field):
             new_fields.append(f"### {field}")
             continue
+        field = re.sub(r"\*", r"\\*", field)
         new_field = []
         for text in field.split("\n"):
+            if "*" in text and ":" not in text:
+                text = text + ":"
             if ":" in text:
                 params = [val.strip() for val in text.split(":")]
                 text = (
