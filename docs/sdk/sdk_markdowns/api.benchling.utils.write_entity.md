@@ -159,8 +159,8 @@ Get output file id for blob created from bytes.
 
 ###  Notes
 
-- The file type is necessary to upload to benchling which is guessed based on the blob_name using
-- - the mimetypes package.  
+The file type is necessary to upload to benchling which is guessed based on the blob_name using
+the mimetypes package.
 
 
 ##  `function` create_assay_results_from_dataframe

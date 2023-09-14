@@ -46,8 +46,6 @@ def dir_files_docstrings_to_markdown_files(_dir, save_path, sidebar):
             docstrings_md = file_docstrings_to_markdown(file_path, header=header)
             docstrings_md = SIDEBAR_HEADER.format(header, header) + docstrings_md
 
-            print(docstrings_md)
-
             markdown_file = os.path.join(save_path, f"{header}.md")
             with open(markdown_file, "w") as mf:
                 mf.write(docstrings_md)
@@ -161,7 +159,7 @@ def add_dashes_to_function_fields(input_text):
         if re.search("`class`|`function`", field):
             new_fields.append(f"## {field}")
             continue
-        if re.search("Example|Examples", field):
+        if re.search("Example|Examples|Notes", field):
             new_fields.append(f"### {field}")
             continue
         field = re.sub(r"\*", r"\\*", field)
