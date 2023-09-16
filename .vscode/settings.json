@@ -5,4 +5,8 @@
     "editor.tabSize": 4,
     "editor.formatOnSave": true,
   },
+  "black-formatter.args": [
+    "--line-length",
+    "100"
+  ],
 }

@@ -29,12 +29,12 @@ in the relevant Benchling tenant.
 
 Prior to usage, the secrets below must be configured in your Ganymede environment.  More information
 on acquiring these credentials can be found [here](https://docs.benchling.com/docs/authentication).
-- **benchling_url**: URL for Benchling tenant; has form https://[tenant].benchling.com/
+- **benchling_url**: URL for Benchling tenant; has form https://<tenant\>.benchling.com
 - **benchling_app_client_id**: Client_ID; has form xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
 - **benchling_client_secret**: Client_Secret; has form cs_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 Secrets can be configured by clicking on your username in the upper-right hand of the Ganymede
-application, then selecting Environment Settings and navigating to the Secrets tab. If you need
+application, then selecting Environment Settings and navigating to the Secrets tab.  If you need
 assistance, please don't hesitate to reach out to Ganymede.
 
 If a DataFrame is returned, the table name corresponds to the output_table_results parameter

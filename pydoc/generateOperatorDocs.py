@@ -61,11 +61,14 @@ def extract_docstring(filename: str, search_str: str = "class", python_spaces: s
                         num_spaces -= 1
 
                     if current_table == "Notes":
-                        if re.search(r"^\w+: \w+", table_record[1].strip()):
-                            secrets = [v.strip() for v in table_record[1].split(":")]
+                        table_record = "".join(table_record[1:]).strip()
+                        if re.search(r"^\w+: \w+", table_record):
+                            secrets = [
+                                v.strip().replace(">", "\>") for v in table_record.split(":", 1)
+                            ]
                             docstring_line = f"- **{secrets[0]}**: {secrets[1]}"
                         else:
-                            docstring_line = table_record[1].strip()
+                            docstring_line = table_record
                     elif current_table == "Node Attributes" and num_spaces == 0:
                         docstring_line = num_spaces * "  " + "- **" + table_record[1].strip() + "**"
                     elif current_table == "Returns":
