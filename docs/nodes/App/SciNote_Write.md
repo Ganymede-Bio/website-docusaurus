@@ -37,7 +37,7 @@ To get the SciNote Auth Code:
 3. Run get_auth_code.py and paste URL into your browser
 
 Secrets can be configured by clicking on your username in the upper-right hand of the Ganymede
-application, then selecting Environment Settings and navigating to the Secrets tab. If you need
+application, then selecting Environment Settings and navigating to the Secrets tab.  If you need
 assistance, please don't hesitate to reach out to Ganymede.
 ## User-Defined Python
 Example demonstrating submission of user-defined SQL query into SciNote
