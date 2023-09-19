@@ -15,9 +15,13 @@ displayed_sidebar: SDKSidebar
 PKG = "ganymede_sdk"
 PYLIB_PATH = f"../pylib/src/{PKG}"
 SAVE_PATH = "../docs/sdk/sdk_markdowns"
-sidebar = {"type": "category", "label": "API", "items": []}
 
-keywords = [
+sidebar_dict = {
+    "api": {"type": "category", "label": "API", "collapsed": True, "items": []},
+    "analytics": {"type": "category", "label": "Analytics", "collapsed": True, "items": []},
+}
+
+KEYWORDS = "|".join([
     "Parameters",
     "Returns",
     "Notes",
@@ -27,11 +31,11 @@ keywords = [
     "Attributes",
     "Raises",
     "Raise",
-    "Methods",
-]
+    "Method",
+])
 
 
-def dir_files_docstrings_to_markdown_files(_dir, save_path, sidebar):
+def dir_files_docstrings_to_markdown_files(_dir, save_path):
     for path, subdirs, files in os.walk(_dir):
         for file in files:
             if not re.search(".py$", file) or re.search("__init__", file):
@@ -44,6 +48,9 @@ def dir_files_docstrings_to_markdown_files(_dir, save_path, sidebar):
             header = re.sub(r"/", ".", header).replace(".py", "")
             header = re.sub(f"{PKG}\\.", "", header)
 
+            md_key = header.split(".")[0]
+            header = ".".join(header.split(".")[1:])
+
             docstrings_md = file_docstrings_to_markdown(file_path, header=header)
             docstrings_md = SIDEBAR_HEADER.format(header, header) + docstrings_md
 
@@ -51,7 +58,7 @@ def dir_files_docstrings_to_markdown_files(_dir, save_path, sidebar):
             with open(markdown_file, "w") as mf:
                 mf.write(docstrings_md)
 
-            sidebar["items"].append(f"sdk/sdk_markdowns/{header}")
+            sidebar_dict[md_key]["items"].append(f"sdk/sdk_markdowns/{header}")
 
 
 def file_docstrings_to_markdown(file_path, header=None):
@@ -60,7 +67,7 @@ def file_docstrings_to_markdown(file_path, header=None):
     markdowns = [f"# {header}\n"] if header else []
 
     for key, val in (docstrings_dict).items():
-        markdowns.append("\n" + docstring_to_markdown(key, val))
+        markdowns.append("\n" + convert_docstring_to_markdown(key, val))
 
     return "\n".join(markdowns)
 
@@ -117,105 +124,93 @@ def extract_docstrings(file_path):
     return docstrings_dict
 
 
-def docstring_to_markdown(method, docstring):
-    docstring = f"## {method}\n" + docstring.strip("\n")
+def convert_docstring_to_markdown(method, docstring):
+    docstring = textwrap.dedent(docstring)
 
+    # Remove single uses of > and < since they throw HTML errors
     pattern = r'(?<!>)>(?!>)|(?<!<)<(?!<)'
     docstring = re.sub(pattern, "", docstring)
 
-    docstring = add_hashtags_to_function_fields(docstring)
+    # Replace the section headers with markdown headings
+    docstring = re.sub(r"([A-Z][a-z]+)\n-{3,}", r"### \1\n", docstring)
 
-    docstring = remove_dashed_lines_from_docstring(docstring)
+    field_splits = re.split("###", docstring)
 
-    markdown = add_dashes_to_function_fields(docstring)
-    markdown = example_fields_to_markdown(markdown)
+    docstring = "###".join(
+        [convert_fields_to_markdown(field) for field in field_splits]
+    )
 
-    return markdown
+    # Keep new line structure on markdown view
+    docstring = re.sub(r"\n", r"  \n", docstring)
 
+    docstring = f"## {method}\n{docstring}"
 
-def add_hashtags_to_function_fields(docstring):
-    new_lines = []
-    for line in docstring.split("\n"):
-        if line.strip(" ") in keywords:
-            line = "### " + line
-        new_lines.append(line)
-    docstring = "\n".join(new_lines)
     return docstring
 
 
-def remove_dashed_lines_from_docstring(docstring):
-    new_lines = []
-    for line in docstring.split("\n"):
-        if not set(line).difference("-"):
-            line = ""
-        new_lines.append(line)
-    docstring = "\n".join(new_lines)
+def convert_fields_to_markdown(docstring):
+    docstring = convert_parameters_to_markdown(docstring)
+    docstring = convert_examples_to_markdown(docstring)
+    docstring = fix_indents(docstring)
+
     return docstring
 
 
-def add_dashes_to_function_fields(input_text):
-    new_fields = []
-    fields = re.split("###|##", input_text)
-    for field in fields:
-        if re.search("`class`|`function`", field):
-            new_fields.append(f"## {field}")
+def convert_parameters_to_markdown(docstring):
+    if not re.search("^Method|^Parameter|^Attribute|^Return|^Raise", docstring.strip()):
+        return docstring
+    patterns = [
+        r"(\w+\[.+\])\s?:?\s?",
+        r"(\w+\(.+\))\s?:?\s?",
+        r"(\*{0,2}\w+\.?\w+)\s?:\s?(.+)",
+        r"(\*{0,2}\w+\.?\w+)\s?",
+    ]
+    pattern = "|".join(patterns)
+    new_lines = []
+    for line in docstring.split("\n"):
+        if (
+            line.strip() == "" or
+            re.search(KEYWORDS, line) or
+            re.search(r"^-|^\s{1,4}", line)
+        ):
+            new_lines.append(line)
             continue
-        if re.search("Example|Examples|Notes", field):
-            new_fields.append(f"### {field}")
-            continue
-        field = re.sub(r"\*", r"\\*", field)
-        new_field = []
-        for text in field.split("\n"):
-            if "*" in text and ":" not in text:
-                text = text + ":"
-            if ":" in text:
-                params = [val.strip() for val in text.split(":")]
-                text = (
-                    f"**{params[0]}**" + " : " + f"`{params[1]}`"
-                    if params[1] != ""
-                    else f"**{params[0]}**"
-                )
-            elif len(text.split(" ")) == 1 and not re.search("|".join(keywords), text):
-                text = f"`{text}`" if len(text) > 1 else text
-            else:
-                text = text
-            new_field.append(text)
-        new_field = "\n".join(new_field)
-        formatted_lines = [
-            f"- {line}"
-            if not re.search(r"^\s|^$", line) and not re.search("|".join(keywords), line)
-            else line
-            for line in new_field.split("\n")
-        ]
-        i = 1
-        while i < len(formatted_lines):
-            cur_line = formatted_lines[i]
-            prev_line = formatted_lines[i - 1]
-            if prev_line.startswith("-"):
-                spaces = re.search(r"^\s*", cur_line).group()
-                formatted_lines[i] = f"{spaces}- {cur_line.strip()}  "
-            i += 1
-        new_field = "\n".join(formatted_lines)
-        new_fields.append("### " + new_field if len(new_field) > 1 else new_field)
-    new_fields = "\n".join(new_fields)
-    return new_fields
+        line = re.sub(r"-", "_", line)
+
+        matches = re.search(pattern, line)
+        matches = [match.replace("*", r"\*") for match in matches.groups() if match]
+        if len(matches) > 1:
+            matches = list(map(lambda x, y: y + x + y, matches, ["**", "`"]))
+        elif re.search("Return", docstring):
+            matches = list(map(lambda x, y: y + x + y, matches, ["`"]))
+        else:
+            matches = list(map(lambda x, y: y + x + y, matches, ["**"]))
+        new_lines.append(" : ".join(matches))
+    docstring = "\n".join(new_lines)
+
+    return docstring
 
 
-def example_fields_to_markdown(markdown):
-    markdown = markdown.split("###")
-    new_markdown = []
-    for line in markdown:
-        if "Example" in line:
-            line = "\n".join([_.lstrip("-").lstrip("-") for _ in line.split("\n")])
-            line = re.sub("Examples\n|Example\n", " Examples\n```python\n", line)
-            line += "\n```"
-        new_markdown.append(line)
+def convert_examples_to_markdown(docstring):
+    if not re.search("^Example", docstring.strip()):
+        return docstring
 
-    markdown = "###".join(new_markdown)
-    return markdown
+    pattern = r"^(\s*Examples?)+\n"
+    repl = r"\1\n\n```python"
+    docstring = re.sub(pattern, repl, docstring, flags=re.MULTILINE) + "```"
+
+    return docstring
+
+
+def fix_indents(docstring):
+    if re.search("^Example", docstring.strip()):
+        return docstring
+    docstring = re.sub(r"  ", 2 * r"&nbsp; ", docstring)
+    return docstring
 
 
 if __name__ == "__main__":
-    dir_files_docstrings_to_markdown_files(PYLIB_PATH, SAVE_PATH, sidebar)
-    with open(os.path.join(SAVE_PATH, "sidebar.json"), "w") as sb_file:
-        json.dump(sidebar, sb_file)
+    dir_files_docstrings_to_markdown_files(PYLIB_PATH, SAVE_PATH)
+    for key, val in sidebar_dict.items():
+        with open(os.path.join(SAVE_PATH, f"sidebar_{key}.json"), "w") as sb_file:
+            json.dump(val, sb_file)

@@ -3,7 +3,8 @@ nodeApp = require('./docs/nodes/App/sidebar.json')
 nodeFile = require('./docs/nodes/File/sidebar.json')
 nodeInstrument = require('./docs/nodes/Instrument/sidebar.json')
 nodeTag = require('./docs/nodes/Tag/sidebar.json')
-nodeSDK = require('./docs/sdk/sdk_markdowns/sidebar.json')
+nodeSDKApi = require('./docs/sdk/sdk_markdowns/sidebar_api.json')
+nodeSDKAnalytics = require('./docs/sdk/sdk_markdowns/sidebar_analytics.json')
 
 module.exports = {
   webUiSidebar:
@@ -127,13 +128,24 @@ module.exports = {
     },
     {
       type: 'doc',
+      id: 'sdk/BenchlingClass',
+    },
+    {
+      type: 'doc',
       id: 'sdk/ContextVariables',
     },
-    nodeSDK,
     {
       type: 'doc',
       id: 'sdk/GPT',
       label: 'GPT'
+    },
+    {
+        type: 'category',
+        label: 'SDK',
+        collapsed: true,
+        items: [
+            nodeSDKApi,
+            nodeSDKAnalytics]
     }
   ],
   releaseSideBar: [
