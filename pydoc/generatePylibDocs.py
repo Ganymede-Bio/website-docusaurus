@@ -31,6 +31,7 @@ KEYWORDS = "|".join([
     "Attributes",
     "Raises",
     "Raise",
+    "Method",
 ])
 
 

@@ -23,5 +23,5 @@ Prior to usage, the following secrets must be configured in your Ganymede enviro
 - **azure_aad_authority**: App Azure Active Directory (AAD) Authority
 
 Secrets can be configured by clicking on your username in the upper-right hand of the Ganymede
-application, then selecting Environment Settings and navigating to the Secrets tab. If you need
+application, then selecting Environment Settings and navigating to the Secrets tab.  If you need
 assistance, please don't hesitate to reach out to Ganymede.
