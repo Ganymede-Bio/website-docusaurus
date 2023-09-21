@@ -85,7 +85,7 @@ if __name__ == "__main__":
     """Generates sidebars for nodes"""
 
     markdown_dir = "../docs/nodes"
-    operators_dir = "../core-dev-operators"
+    operators_dir = "../core-operators"
 
     with open(os.path.join(operators_dir, "operators.yaml"), "r") as operators_yaml:
         operators = yaml.safe_load(operators_yaml)

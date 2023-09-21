@@ -12,6 +12,8 @@ _Nodes_ provide template structure for performing data extraction, processing, a
   />
 </div>
 
+In Jupyter notebooks associated backing editable nodes, user-defined SQL and user-defined Python cells share a light blue background and are committed to a repo + deployed to a workflow orchestrator upon running the **Save Pipeline Code** cell at the bottom of the notebook, or by pressing `Cmd+Shift+S` or `Ctrl+Shift+S` (Windows/Linux).
+
 ## Key Node Characteristics
 
 A useful way to interact with _nodes_ is to consider how _nodes_ interact with other systems, their input and output types, and whether or not they contain a user-editable component.  The table below shows the full list of available _nodes_, along with whether there is a user-editable component associated with the node.
@@ -46,7 +48,7 @@ The table below lists available nodes.
 | App        | S3_Event               | App                                                                   | FileAny        | True          | False      |
 | App        | S3_Read                | API                                                                   | FileAny        | False         | False      |
 | App        | S3_Write               | FileAny                                                               | API            | False         | False      |
-| App        | SciNote_Write          | Table                                                                 | NodeReturn     | True          | False      |
+| App        | SciNote_API            | Table                                                                 | NodeReturn     | True          | False      |
 | App        | Smartsheet_Read        | API                                                                   | NodeReturn     | True          | False      |
 | App        | Snowflake_Write        | Table                                                                 | NodeReturn     | False         | False      |
 | File       | AVI_Read               | FileAVI                                                               | NodeReturn     | True          | False      |
@@ -183,7 +185,7 @@ The _execute_ function may call classes and functions found within the User-Defi
 | App        | S3_Event               | Capture events from AWS S3 for triggering flows                              |
 | App        | S3_Read                | Ingest data into Ganymede data storage from AWS S3 storage                   |
 | App        | S3_Write               | Write data to an S3 bucket                                                   |
-| App        | SciNote_Write          | Create and write SciNote entry                                               |
+| App        | SciNote_API            | Create and write SciNote entry                                               |
 | App        | Smartsheet_Read        | Read sheet from Smartsheet                                                   |
 | App        | Snowflake_Write        | Sync tables in Ganymede data lake to Snowflake                               |
 | File       | AVI_Read               | Read in contents of an AVI file to a table                                   |
