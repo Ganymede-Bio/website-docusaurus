@@ -30,16 +30,20 @@ The image above shows how _nodes_ are represented on the Flow Editor page; each 
 - **Node Attribute(s)**: if present, the attributes associated with the _node_ that are processed by the node.  In the image above, the node attributes 'csv' and 'results' have values '.csv' and 'example_results' respectively.
 - **Edit Button**: the <div className="button dark_gray_button">Edit</div> button that unlocks the _node_ for modifying _node_ name, changing _node_ attributes, or deleting the _node_
 
-For nodes with editable components, notebooks follow a common structure.  The sections of the notebook are described below.
+For nodes with editable components, notebooks follow a common structure.
 
-#### Sections that are saved upon executing the Save Pipeline Code cell:
+#### Sections that are saved upon executing the Save Pipeline Code cell or typing `Cmd+Shift+S` (Mac) or `Ctrl+Shift+S` (Windows/Linux):
 - **User-defined SQL** for retrieving tabular data to be processed by the node.  This code is executed by the workflow management system.
 - **User-defined Python** for processing input.  This code is executed by the workflow management system.
 
+These cells have a light blue background.
+
 #### Sections that are discarded upon notebook close:
-- **Save Pipeline Code** for saving and deploying user-defined SQL and Python pipeline code.  Upon save, linting is conducted using [ruff](https://github.com/astral-sh/ruff) on the code found in the **User-defined Python** cell.
 - **Testing Section** for testing changes to user-defined SQL and Python
 - **Linting Section** for linting user-defined SQL and Python, using [ruff](https://github.com/astral-sh/ruff)
+- **Save Pipeline Code** for saving and deploying user-defined SQL and Python pipeline code.  Upon save, linting is conducted using [ruff](https://github.com/astral-sh/ruff) on the code found in the **User-defined Python** cell.
+
+These cells have a light gray background.
 
 The Testing and Linting Sections enable users to test changes to the user-defined SQL and Python prior to committing and deploying code.
 
@@ -49,7 +53,7 @@ A full listing of available nodes and their key characteristics can be found on 
 
 <div style={{textAlign: 'center'}}>
   <img alt="Ganymede notebook"
-      src="https://ganymede-bio.mo.cloudinary.net/apiServer/GanymedeNotebook_20230531.png" />
+      src="https://ganymede-bio.mo.cloudinary.net/apiServer/GanymedeNotebook_20230920.png" />
 </div>
 
 
@@ -68,16 +72,8 @@ These notebooks format code upon cell execution using [black](https://black.read
 
 <div style={{textAlign: 'center'}}>
   <img alt="Ganymede notebook tooltip"
-      src="https://ganymede-bio.mo.cloudinary.net/apiServer/Notebook_Tooltip_20230906.png" />
+      src="https://ganymede-bio.mo.cloudinary.net/apiServer/Notebook_Tooltip_20230920.png" />
 </div>
-
-#### Right click on a variable and select "Rename Symbol" to rename all instances of that variable:
-
-<div style={{textAlign: 'center'}}>
-  <img alt="Ganymede notebook rename symbol"
-      src="https://ganymede-bio.mo.cloudinary.net/apiServer/Notebook_Rename_Symbol_20230906.png" />
-</div>
-
 
 
 ## Pipeline Code Notebook Sections
@@ -177,18 +173,6 @@ This allows users to conduct testing in other cells prior to committing and load
 
 :::
 
-### Save Pipeline Code cell
-
-```python
-# Save the updated query and python function to the pipeline
-from ganymede_sdk.editor import save
-
-files = { 'query.sql': query_sql }
-save(files)
-```
-
-Running this cell commits any code changes to the Git repository associated with the tenant and uploads the code to the workflow management system for executing code.  Upon save, linting is conducted.
-
 ### Testing Section
 
 ```python
@@ -241,6 +225,17 @@ print("\nInput file: \n" + "\n".join(input_file.keys()))
 res = execute(input_file, ganymede_context=g.ganymede_context)
 res
 ```
+
+### Save Pipeline Code cell
+
+```python
+# Save the updated query and python function to the pipeline
+
+save()
+```
+
+Running this cell commits any code changes to the Git repository associated with the tenant and uploads the code to the workflow management system for executing code.  Upon save, linting is conducted.
+
 
 
 ## Adding flow inputs
