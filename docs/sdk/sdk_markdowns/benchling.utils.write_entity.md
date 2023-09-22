@@ -48,8 +48,8 @@ Updates custom entity
   
 **benchling_context** : `BenchlingContext`  
 &nbsp; &nbsp; &nbsp; &nbsp; Benchling Context object  
-**existing_entity_id** : `str`  
-&nbsp; &nbsp; &nbsp; &nbsp; ID of custom entity to be updated  
+**existing_entity** : `benchling_api_client.v2.stable.models.custom_entity.CustomEntity`  
+&nbsp; &nbsp; &nbsp; &nbsp; Existing custom entity to be updated  
 **folder_id** : `str`  
 &nbsp; &nbsp; &nbsp; &nbsp; Folder ID containing Benchling entity to be created. This should be a string starting with  
 &nbsp; &nbsp; &nbsp; &nbsp; "lib_"  
