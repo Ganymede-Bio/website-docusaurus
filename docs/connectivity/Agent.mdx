@@ -328,17 +328,10 @@ To do so, follow the steps below:
      - Create matching local (if cross-domain) or domain (if on the same domain, e.g. AD) user accounts on both the remote and local systems.
 2. **Check Network**:
    - Ensure both systems can communicate using tools like `ping`.
-3. **Share Folder**:
-   - On the remote system, right-click the desired folder > `Properties` > `Sharing` > `Advanced Sharing`. Set permissions for the user.
-4. **Map Drive**:
-   - On the local system, use:
-     ```
-     net use Z: \\<remote-IP>\folder /user:<username> <password>
-     ```
-5. **Service Configuration**:
+3. **Service Configuration**:
    - Open `services.msc` on the local system.
    - Find and right-click the Ganymede service > `Properties` > `Log On`. Use the local user account.
-6. **Restart Service**:
+4. **Restart Service**:
    - In `Services`, right-click the service and select `Restart`.
 
 **Note**: Use IP if systems are on different domains.
