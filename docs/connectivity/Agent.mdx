@@ -4,12 +4,9 @@ title: Agents for File Capture
 displayed_sidebar: webUiSidebar
 ---
 
-import { PlusOutlined, 
-         SelectOutlined,
-         DiffOutlined
-       } from '@ant-design/icons';
+import { PlusOutlined, SelectOutlined, DiffOutlined } from "@ant-design/icons";
 
-Ganymede Agents are a class of programs that can run directly on an instrument computer in the lab.  They are a combination of user-defined code and Ganymede configuration, which allows for maximum flexibility in capturing files and interacting with the Ganymede ecosystem.  Agents can
+Ganymede Agents are a class of programs that can run directly on an instrument computer in the lab. They are a combination of user-defined code and Ganymede configuration, which allows for maximum flexibility in capturing files and interacting with the Ganymede ecosystem. Agents can
 
 - filter and designate how to process data
 - upload files into Ganymede Cloud
@@ -18,33 +15,37 @@ Ganymede Agents are a class of programs that can run directly on an instrument c
   - upon specific files being written to a cloud storage bucket
   - on a scheduled cadence
 
-Users specify which of the above actions to take by configuring the Agent in the Ganymede app.  Doing so creates a Linux binary and Windows executable corresponding to the specified configuration, which users can then install on instrument PCs.  Once created, users can optionally [configure a user-defined Python script](#configuring-user-defined-python) associated with the Agent.
+Users specify which of the above actions to take by configuring the Agent in the Ganymede app. Doing so creates a Linux binary and Windows executable corresponding to the specified configuration, which users can then install on instrument PCs. Once created, users can optionally [configure a user-defined Python script](#configuring-user-defined-python) associated with the Agent.
 
 ## Building an Agent Overview
 
 To create a new Agent, click the <div className="button system_button"><PlusOutlined /> New Agent</div> button on the upper-left corner of the Connections page.
 
-<img alt="Agent Front page" src="https://ganymede-bio.mo.cloudinary.net/agent/Agent_Connections_Front_Page20230626.png" />
+<img
+  alt="Agent Front page"
+  src="https://ganymede-bio.mo.cloudinary.net/agent/Agent_Connections_Front_Page20230626.png"
+/>
 &nbsp;
 
-The left side of the configuration panel is used to specify the Agent's configuration; Agent parameters relevant to selected configuration are displayed.  The right side of the configuration panel shows the default Python script associated with the Agent, which can be modified after Agent installation.
+The left side of the configuration panel is used to specify the Agent's configuration; Agent parameters relevant to selected configuration are displayed. The right side of the configuration panel shows the default Python script associated with the Agent, which can be modified after Agent installation.
 
 <div class="text--center">
-  <img alt="New Agent configuration" 
-      src="https://ganymede-bio.mo.cloudinary.net/agent/New_Agent_Configuration20230626.png"
+  <img
+    alt="New Agent configuration"
+    src="https://ganymede-bio.mo.cloudinary.net/agent/New_Agent_Configuration20230626.png"
   />
 </div>
 &nbsp;
 
-After filling out this form, click <div className="button darkblue_button_icon">Create</div> to start building Windows and Linux executables.  When the build is complete, the Agent (i.e. - the configured executables) can be downloaded from the Ganymede application by selecting the corresponding Agent from the Connections tab.  
+After filling out this form, click <div className="button darkblue_button_icon">Create</div> to start building Windows and Linux executables. When the build is complete, the Agent (i.e. - the configured executables) can be downloaded from the Ganymede application by selecting the corresponding Agent from the Connections tab.
 
-Building an executable typically takes around 10 minutes to complete.  Once built, the Agent can be downloaded onto the instrument PC from the Connections tab of the Ganymede web app and installed.
+Building an executable typically takes around 10 minutes to complete. Once built, the Agent can be downloaded onto the instrument PC from the Connections tab of the Ganymede web app and installed.
 
 ## Configuring Agents
 
-All Agents have two required input parameters, _Name_ and _Configuration_.  Once the Configuration is selected, Input Paramaters specific to the Configuration may appear. 
+All Agents have two required input parameters, _Name_ and _Configuration_. Once the Configuration is selected, Input Parameters specific to the Configuration may appear.
 
-The _Name_ input is used to specify the display name for the Agent.  
+The _Name_ input is used to specify the display name for the Agent.
 
 The _Configuration_ input specifies the action performed by the Agent, chosen from the following options:
 
@@ -64,12 +65,12 @@ The _Configuration_ input specifies the action performed by the Agent, chosen fr
 - `Flow Name`: Flow to run upon observing new files matching specified pattern
 - `Check Period (seconds)`: Frequency with which Agent will poll local directory for new files
 - `If a discovered filename exists in storage`: Whether to use the file in storage or the observed file in the local directory
-- `File pattern to parameter mapping`: For the selected Flow, the [glob pattern](https://en.wikipedia.org/wiki/Glob_(programming)) to associate with the input parameter(s)
+- `File pattern to parameter mapping`: For the selected Flow, the [glob pattern](<https://en.wikipedia.org/wiki/Glob_(programming)>) to associate with the input parameter(s)
   - This option is only available on create. Further configuration updates will occur inside the notebook, not inside the agent configuration
 
 The corresponding user-defined code will be generated to map those file patterns to parameters.
-  
-For example, if the instrument outputs a CSV file called "{id}_lc_output<YYYYMMDD\>.csv" which is to be ingested by a [CSV_Read node](../nodes/File/CSV_Read.md) called "Ingest_Data", an appropriate configuration would be "{id}_lc_output*.csv" for the input box associated with the "Ingest_Data.csv" node. The following user-defined code would be generated.
+
+For example, if the instrument outputs a CSV file called "{id}\_lc_output<YYYYMMDD\>.csv" which is to be ingested by a [CSV_Read node](../nodes/File/CSV_Read.md) called "Ingest_Data", an appropriate configuration would be "{id}\_lc_output\*.csv" for the input box associated with the "Ingest_Data.csv" node. The following user-defined code would be generated.
 
 ```python
 from ganymede_sdk.agent.models import TriggerFlowParams, FileWatcherResult
@@ -113,7 +114,7 @@ def execute(flow_params_fw: FileWatcherResult) -> TriggerFlowParams:
     )
 ```
 
-If a second parameter is added, such as an [Excel_Read node](../nodes/File/Excel_Read.md) called "Experiment_Context" that accepted files of the pattern "{experiment_id}_context.xlsx", then the get_param_mapping function would later have to be modified to include that param like so:
+If a second parameter is added, such as an [Excel_Read node](../nodes/File/Excel_Read.md) called "Experiment_Context" that accepted files of the pattern "{experiment_id}\_context.xlsx", then the get_param_mapping function would later have to be modified to include that param like so:
 
 ```python
 # Must return a dictionary where key is the parameter
@@ -136,24 +137,28 @@ def get_param_mapping(
 ```
 
 This would not only ensure the files that match the parameters are sent to the correct flow node, but also only group files of the same id together. If three files came were ingested in the following order:
+
 - experiment626_lc_output072623.csv
 - experiment627_context.xlsx
 - experiment626_context.xlsx
 
-Instead of starting the flow after the first two files, which do fulfill the parameter file patterns, the experiment ids will be grouped together so that the flow is only started when all experiment626 files are ready. 
+Instead of starting the flow after the first two files, which do fulfill the parameter file patterns, the experiment ids will be grouped together so that the flow is only started when all experiment626 files are ready.
 
 Whenever a file matches a glob pattern, it will be uploaded to Ganymede storage, even if it's not used in a flow. Files that are written to the watched directory can be ignored by ensuring that they do not match any of the glob patterns for the parameter inputs.
 
 <div class="text--center">
-  <img alt="Agent configuration - File Watcher" 
-      src="https://ganymede-bio.mo.cloudinary.net/agent/Agent_File_Watcher_Config20230626_2.png"
-      width="500" />
+  <img
+    alt="Agent configuration - File Watcher"
+    src="https://ganymede-bio.mo.cloudinary.net/agent/Agent_File_Watcher_Config20230626_2.png"
+    width="500"
+  />
 </div>
 &nbsp;
 
 Patterns can also be matched against subdirectories using `*` for single level subdirectories and `**` for any level subdirectories.
 
 For example, if your instrument writes out files in a directory like:
+
 ```shell
 ├── experiment_id_1
 │   ├── configuration.xml
@@ -162,7 +167,8 @@ For example, if your instrument writes out files in a directory like:
     ├── configuration.xml
     └── results.csv
 ```
-You would use parameters like `*/configuration.xml` and `*/results.csv` to upload the files and submit them to a flow. 
+
+You would use parameters like `*/configuration.xml` and `*/results.csv` to upload the files and submit them to a flow.
 
 #### Example use case
 
@@ -176,9 +182,11 @@ An instrument outputs files to a directory as it completes runs, which are proce
 - `Time Interval`: Frequency and times with which to run flow, based on UTC time
 
 <div class="text--center">
-  <img alt="Agent configuration - Cron" 
-      src="https://ganymede-bio.mo.cloudinary.net/agent/Agent_Cron_Config20230626_3.png"
-      width="500" />
+  <img
+    alt="Agent configuration - Cron"
+    src="https://ganymede-bio.mo.cloudinary.net/agent/Agent_Cron_Config20230626_3.png"
+    width="500"
+  />
 </div>
 &nbsp;
 
@@ -193,12 +201,14 @@ A user-defined script must be run once a day to poll and capture updates from te
 - `Flow Name`: Flow to run upon observing new files matching specified pattern
 - `Check Period (seconds)`: Frequency with which Agent will poll local directory for new files
 - `If a discovered filename exists in storage`: Whether to use the file in storage or the observed file in the local directory
-- `File pattern to parameter mapping`: For the selected Flow, the [glob pattern](https://en.wikipedia.org/wiki/Glob_(programming)) to associate with the input parameter(s).
+- `File pattern to parameter mapping`: For the selected Flow, the [glob pattern](<https://en.wikipedia.org/wiki/Glob_(programming)>) to associate with the input parameter(s).
 
 <div class="text--center">
-  <img alt="Agent configuration - Cron" 
-      src="https://ganymede-bio.mo.cloudinary.net/agent/Agent_File_Capture_Config20230727.png"
-      width="500" />
+  <img
+    alt="Agent configuration - Cron"
+    src="https://ganymede-bio.mo.cloudinary.net/agent/Agent_File_Capture_Config20230727.png"
+    width="500"
+  />
 </div>
 &nbsp;
 
@@ -211,13 +221,14 @@ Multiple flow cytometers are used to observe cell populations for a related set 
 #### Input Parameters
 
 - `Flow Name`: Flow from which to download output files. This will autopopulate the glob pattern matching field correspondingly.
-- `Glob pattern matching`: the [glob patterns](https://en.wikipedia.org/wiki/Glob_(programming)) that output files must match in order to download.
-
+- `Glob pattern matching`: the [glob patterns](<https://en.wikipedia.org/wiki/Glob_(programming)>) that output files must match in order to download.
 
 <div class="text--center">
-  <img alt="Agent configuration - Download" 
-      src="https://ganymede-bio.mo.cloudinary.net/agent/Agent_Download_Config202307113.png"
-      width="500" />
+  <img
+    alt="Agent configuration - Download"
+    src="https://ganymede-bio.mo.cloudinary.net/agent/Agent_Download_Config202307113.png"
+    width="500"
+  />
 </div>
 &nbsp;
 
@@ -228,9 +239,11 @@ Instructions for lab execution are generated on Ganymede Cloud and downloaded to
 ### Load local files into Ganymede with a custom filter
 
 <div class="text--center">
-  <img alt="Agent configuration - Download" 
-      src="https://ganymede-bio.mo.cloudinary.net/agent/Agent_Filtered_Load_Config20230626.png"
-      width="500" />
+  <img
+    alt="Agent configuration - Download"
+    src="https://ganymede-bio.mo.cloudinary.net/agent/Agent_Filtered_Load_Config20230626.png"
+    width="500"
+  />
 </div>
 &nbsp;
 
@@ -245,9 +258,11 @@ A selected subset of key instrument output files are captured on Ganymede Cloud.
 - `Time Interval`: Frequency and times with which to upload files, based on UTC time
 
 <div class="text--center">
-  <img alt="Agent configuration - Cron" 
-      src="https://ganymede-bio.mo.cloudinary.net/agent/Agent_Cron_Upload_Config20230727.png"
-      width="500" />
+  <img
+    alt="Agent configuration - Cron"
+    src="https://ganymede-bio.mo.cloudinary.net/agent/Agent_Cron_Upload_Config20230727.png"
+    width="500"
+  />
 </div>
 &nbsp;
 
@@ -255,14 +270,13 @@ A selected subset of key instrument output files are captured on Ganymede Cloud.
 
 A local file is modified on regular intervals and needs to uploaded to Ganymede Cloud after each modification.
 
-
 ## Installing Agents
 
-To install an Agent, open the Ganymede application in a browser window and navigate to the Connection tab in the left sidebar.  Select the desired Agent by name and download the relevant Windows/Linux installation file.
+To install an Agent, open the Ganymede application in a browser window and navigate to the Connection tab in the left sidebar. Select the desired Agent by name and download the relevant Windows/Linux installation file.
 
 :::note
 
-Both Linux and Windows versions of the Agent are built using x86_64 architecture.  The Linux executable is Ubuntu-based and the Windows executable is Windows Server 2022.
+Both Linux and Windows versions of the Agent are built using x86_64 architecture. The Linux executable is Ubuntu-based and the Windows executable is Windows Server 2022.
 
 :::
 
@@ -271,15 +285,17 @@ Both Linux and Windows versions of the Agent are built using x86_64 architecture
 After downloading the Agent, launch the installation file to complete Agent configuration
 
 <div class="text--center">
-  <img alt="Windows Agent installation"
-      src="https://ganymede-bio.mo.cloudinary.net/agent/Agent_Windows_Setup20230605.png"
-      width="500" />
+  <img
+    alt="Windows Agent installation"
+    src="https://ganymede-bio.mo.cloudinary.net/agent/Agent_Windows_Setup20230605.png"
+    width="500"
+  />
 </div>
 &nbsp;
 
 - **Connection name** is the name seen by users in the instrument computer and in the Ganymede UI
 - **Variable definitions** are strings in the format "var_name=var_value", which allows users to set context variables to be used in the user-defined Python
-- **Label** is a string that can be used to identify and group connections within Ganymede.  The label is visible in the Connections UI
+- **Label** is a string that can be used to identify and group connections within Ganymede. The label is visible in the Connections UI
 
 Variables and labels can be referenced in your user-defined code by extracting the values from `kwargs`:
 
@@ -295,10 +311,37 @@ For Agents that reference local directories, the directory watched is specified 
 # note that forward slashes must be used to specify path, for both Windows and Linux Agents
 -v "input_path=/absolute/path"
 
-# If the directory is in a network drive, be sure to use the UNC path like so:
+# If the directory is in a network drive, be sure to use the UNC path or IP like so:
 -v "input_path=//server/share/path"
 # where `server` is the name of the server and `share` is the name of the shared folder
 ```
+
+:::note
+
+Because Windows services use the Local System User, which does not have network privileges by default, you may need to ensure the service is running on a user which can access the network drive.
+
+To do so, follow the steps belwo:
+
+1. **Setup Local User Accounts**:
+   - Create matching local (if cross-domain) or domain (if on the same domain, e.g. AD) user accounts on both the remote and local systems.
+2. **Check Network**:
+   - Ensure both systems can communicate using tools like `ping`.
+3. **Share Folder**:
+   - On the remote system, right-click the desired folder > `Properties` > `Sharing` > `Advanced Sharing`. Set permissions for the user.
+4. **Map Drive**:
+   - On the local system, use:
+     ```
+     net use Z: \\<remote-IP>\folder /user:<username> <password>
+     ```
+5. **Service Configuration**:
+   - Open `services.msc` on the local system.
+   - Find and right-click the Ganymede service > `Properties` > `Log On`. Use the local user account.
+6. **Restart Service**:
+   - In `Services`, right-click the service and select `Restart`.
+
+**Note**: Use IP if systems are on different domains.
+
+:::
 
 ### Linux Installation
 
@@ -333,7 +376,7 @@ WantedBy=multi-user.target
 
 Once the service file is created, the Agent can be started by running:
 
-Save this file to /etc/systemd/system/ and set permissions to 644.  For example, if the systemd service file were named *ganymede_example_agent.service*, this could be accomplished by running:
+Save this file to /etc/systemd/system/ and set permissions to 644. For example, if the systemd service file were named _ganymede_example_agent.service_, this could be accomplished by running:
 
 ```shell
 sudo chmod 644 /etc/systemd/system/ganymede_example_agent.service
@@ -351,19 +394,23 @@ sudo systemctl status ganymede_example_agent.service
 
 ## Configuring User-Defined Python
 
-To modify user-defined code executed by the Agent, select the Agent in the Ganymede app and then click on the <div className="button gray_button"><SelectOutlined />Code</div> button.  Doing so opens a notebook for the user to modify user-defined code, which is executed on observed files prior to transfer.
+To modify user-defined code executed by the Agent, select the Agent in the Ganymede app and then click on the <div className="button gray_button"><SelectOutlined />Code</div> button. Doing so opens a notebook for the user to modify user-defined code, which is executed on observed files prior to transfer.
 
 <div class="text--center">
-  <img alt="Agent update configuration"
-      src="https://ganymede-bio.mo.cloudinary.net/agent/Agent_Update_Zoomed_In20230726.png"
-      width="500" />
+  <img
+    alt="Agent update configuration"
+    src="https://ganymede-bio.mo.cloudinary.net/agent/Agent_Update_Zoomed_In20230726.png"
+    width="500"
+  />
 </div>
 &nbsp;
 
 <div class="text--center">
-  <img alt="Agent User-Defined Python"
-      src="https://ganymede-bio.mo.cloudinary.net/agent/Agent_Processor_Zoomed_In20230726.png"
-      width="800" />
+  <img
+    alt="Agent User-Defined Python"
+    src="https://ganymede-bio.mo.cloudinary.net/agent/Agent_Processor_Zoomed_In20230726.png"
+    width="800"
+  />
 </div>
 &nbsp;
 
@@ -373,59 +420,66 @@ Previously built Agents remain available for download in Ganymede in the [Histor
 
 ### Viewing Logs
 
-Logs can be found on the Logs tab for each Agent.  These logs contain status check-ins and information regarding Agent activity.
+Logs can be found on the Logs tab for each Agent. These logs contain status check-ins and information regarding Agent activity.
 
 <div class="text--center">
-  <img alt="Agent logs"
-      src="https://ganymede-bio.mo.cloudinary.net/agent/Agent_Logs_Page20230726.png" 
-      width="500"
-      />
+  <img
+    alt="Agent logs"
+    src="https://ganymede-bio.mo.cloudinary.net/agent/Agent_Logs_Page20230726.png"
+    width="500"
+  />
 </div>
-
 
 ### Monitoring Agent Connections
 
-Agents are capable of communicating with Ganymede Cloud to upload files and run flows.  These communications can be monitored by observing status updates and logs in the Ganymede web app UI.
+Agents are capable of communicating with Ganymede Cloud to upload files and run flows. These communications can be monitored by observing status updates and logs in the Ganymede web app UI.
 
 The Connections page shows an overview of all connections that have ever been made and their latest status in addition to other metadata made available from their last status ping.
 
 <div class="text--center">
-  <img alt="Agent Status"
-      src="https://ganymede-bio.mo.cloudinary.net/agent/Agent_Connection_Status_Overview20230726.png"
-      width="400" />
+  <img
+    alt="Agent Status"
+    src="https://ganymede-bio.mo.cloudinary.net/agent/Agent_Connection_Status_Overview20230726.png"
+    width="400"
+  />
 </div>
 &nbsp;
 
 The Agent page displays a list of all connections instantiated from a specific Agent. This provides the user quick and easy access to the running executables associated with a specific Agent configuration.
 
 <div class="text--center">
-  <img alt="Agent Connection Status"
-      src="https://ganymede-bio.mo.cloudinary.net/agent/Agent_Status20230726.png"
-      width="400" />
+  <img
+    alt="Agent Connection Status"
+    src="https://ganymede-bio.mo.cloudinary.net/agent/Agent_Status20230726.png"
+    width="400"
+  />
 </div>
 &nbsp;
 
 ### Updating Agents
 
-To modify Agent settings after creation, select the desired Agent in the Connections tab to update the Agent.  Upon clicking <div className="button blue_button">Update</div>, the Agent will be built and then made available for download.
+To modify Agent settings after creation, select the desired Agent in the Connections tab to update the Agent. Upon clicking <div className="button blue_button">Update</div>, the Agent will be built and then made available for download.
 
 <div class="text--center">
-  <img alt="Agent update configuration"
-      src="https://ganymede-bio.mo.cloudinary.net/agent/Agent_Update_Configuration20230726.png"
-      width="500" />
+  <img
+    alt="Agent update configuration"
+    src="https://ganymede-bio.mo.cloudinary.net/agent/Agent_Update_Configuration20230726.png"
+    width="500"
+  />
 </div>
 &nbsp;
 
-Agents can also be archived or disabled.  Archived Agents cannot be updated, but the Agent's connections can still communicate with Ganymede Cloud.  Disabled Agents cannot be updated and its connections can no longer communicate with Ganymede Cloud.
+Agents can also be archived or disabled. Archived Agents cannot be updated, but the Agent's connections can still communicate with Ganymede Cloud. Disabled Agents cannot be updated and its connections can no longer communicate with Ganymede Cloud.
 
 ### Viewing Build History
 
 Each iteration of Agent build can be viewed in the History tab of the Agent. This view provides context for each change, either in the form of a log of the configuration change or through a custom commit message from the Agent notebook.
 
 <div class="text--center">
-  <img alt="Agent build history"
-       src="https://ganymede-bio.mo.cloudinary.net/agent/Agent_History20230726.png" 
-       width="800"
+  <img
+    alt="Agent build history"
+    src="https://ganymede-bio.mo.cloudinary.net/agent/Agent_History20230726.png"
+    width="800"
   />
 </div>
 &nbsp;
@@ -433,10 +487,11 @@ Each iteration of Agent build can be viewed in the History tab of the Agent. Thi
 Configuration differences between two Agent builds can be viewed for audit or debugging purposes by clicking <div className="keystroke blue_keystroke"><DiffOutlined /></div> button.
 
 <div class="text--center">
-  <img alt="Agent build history detail"
-      src="https://ganymede-bio.mo.cloudinary.net/agent/Agent_History_Diff20230726.png" 
-      width="800"
-      />
+  <img
+    alt="Agent build history detail"
+    src="https://ganymede-bio.mo.cloudinary.net/agent/Agent_History_Diff20230726.png"
+    width="800"
+  />
 </div>
 
 ### Uninstalling Agents
@@ -446,13 +501,14 @@ Configuration differences between two Agent builds can be viewed for audit or de
 The Agent can be uninstalled and associated service removed through the “Add or Remove Programs” panel from the Control Panel.
 
 <div class="text--center">
-  <img alt="Agent uninstall"
-      src="https://ganymede-bio.mo.cloudinary.net/agent/Agent_Uninstall20230615.png" 
-      width="500"
-      />
+  <img
+    alt="Agent uninstall"
+    src="https://ganymede-bio.mo.cloudinary.net/agent/Agent_Uninstall20230615.png"
+    width="500"
+  />
 </div>
 
-After uninstalling the Agent, the Ganymede folder will remain in the Program Files directory.  This folder can be deleted if desired.
+After uninstalling the Agent, the Ganymede folder will remain in the Program Files directory. This folder can be deleted if desired.
 
 #### Linux
 
