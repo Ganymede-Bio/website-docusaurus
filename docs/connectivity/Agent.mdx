@@ -320,10 +320,12 @@ For Agents that reference local directories, the directory watched is specified 
 
 Because Windows services use the Local System User, which does not have network privileges by default, you may need to ensure the service is running on a user which can access the network drive.
 
-To do so, follow the steps belwo:
+To do so, follow the steps below:
 
-1. **Setup Local User Accounts**:
-   - Create matching local (if cross-domain) or domain (if on the same domain, e.g. AD) user accounts on both the remote and local systems.
+1. **Set Up Authentication**:
+   - There are two options for authenticating to a remote system:
+     - Use Windows Credential Manager to store the remote user's credentials on the local system.
+     - Create matching local (if cross-domain) or domain (if on the same domain, e.g. AD) user accounts on both the remote and local systems.
 2. **Check Network**:
    - Ensure both systems can communicate using tools like `ping`.
 3. **Share Folder**:
