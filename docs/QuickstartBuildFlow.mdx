@@ -151,22 +151,11 @@ def execute(file_data: Dict[str, bytes], ganymede_context=None) -> NodeReturn:
 Non-tabular data can be stored by returning a dictionary of files to upload in the `files_to_upload` key of the `NodeReturn` object.
 :::
 
-Run the User-Defined Function cell by selecting the cell and then clicking on the <div className="button jupyter_button">▶️ Run</div> button in the header.  Save and deploy changes made to the Python node by running the Save Pipeline Code cell below **AND** saving the notebook. To save the notebook, click on <div className="button jupyter_button">**File**</div> -> <div className="button jupyter_button">Save and Checkpoint</div> in the menu.
+Run the User-Defined Function cell by selecting the cell and then clicking on the <div className="button jupyter_button">▶️ Run</div> button in the header.  Save and deploy changes made to the Python node by running the Save Pipeline Code cell at the bottom of the notebook, or by pressing `Cmd+Shift+S` (Mac) or `Ctrl+Shift+S` (Windows/Linux).
 
-```python
-"""
-Save the updated query and python function to the pipeline
-"""
-from ganymede_sdk.editor import save
-
-files = { 'query.sql': query_sql }
-save(files)
-```
-
-Upon doing so, the response in the Save Pipeline Cell should say `Commit completed successfully`.
 
 :::tip
-Near the bottom of the notebook you'll find the **Testing Section**. Here, you can upload a test input file and test the processing performed by the User-Defined Function interactively.  This is a great way to debug your code before deploying the flow.
+Below the User-Defined Function cell in the notebook, you'll find the **Testing Section**. Here, you can upload a test input file and test the processing performed by the User-Defined Function interactively.  This is a great way to debug your code before deploying the flow.
 :::
 
 
