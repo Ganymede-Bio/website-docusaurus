@@ -1,6 +1,6 @@
 ---
-sidebar_label: SciNote_Write
-title: SciNote_Write
+sidebar_label: SciNote_API
+title: SciNote_API
 displayed_sidebar: nodeSidebar
 ---
 
@@ -30,28 +30,30 @@ Prior to usage, the following secrets must be configured in your Ganymede enviro
 - **scinote_redirect_uri**: Scinote Redirect URI
 - **scinote_auth_code**: SciNote Auth Code
 
+- **scinote_access_token**: SciNote Access Token
+- **scinote_refresh_token**: SciNote Refresh Token
+- **scinote_access_token_created_at**: SciNote Access Token Created At
+- **scinote_access_token_expires_in**: SciNote Access Token Expires In
+
 All secrets listed above other than the SciNote Auth should be provided by SciNote.
 To get the SciNote Auth Code:
 1. Clone the [SciNote Python API Client repo](https://github.com/scinote-eln/scinote-python-api-client-example)
-2. Update settings.json in the repo with your configuration.
-3. Run get_auth_code.py and paste URL into your browser
+2. Update settings.json in the repo with your configuration, which should contain server_url,
+api_uid, api_secret, and redirect_uri.
+3. Run get_auth_code.py and paste URL into your browser to get scinote_auth_code
+4. Run get_access_token.py to get scinote_access_token, scinote_refresh_token,
+scinote_access_token_created_at, and scinote_access_token_expires_in
 
 Secrets can be configured by clicking on your username in the upper-right hand of the Ganymede
 application, then selecting Environment Settings and navigating to the Secrets tab.  If you need
 assistance, please don't hesitate to reach out to Ganymede.
 ## User-Defined Python
-Example demonstrating submission of user-defined SQL query into SciNote
+Example demonstrating access to SciNote API
 
 
 ### Parameters
 - **df_sql_result** : `Union[pd.DataFrame, List[pd.DataFrame]]`
     - Table(s) to retrieve from data lake
-- **data_input** : `Dict[str, bytes]`
-    - Objects to retrieve from cloud storage
-- **base_url** : `str`
-    - Base URL for SciNote to retrieve data from / post data to
-- **token** : `str`
-    - token used for API access
 - **ganymede_context** : `GanymedeContext`
     - Ganymede context variable, which stores flow run metadata
 

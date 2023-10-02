@@ -48,7 +48,7 @@ The table below lists available nodes.
 | App        | S3_Event               | App                                                                   | FileAny        | True          | False      |
 | App        | S3_Read                | API                                                                   | FileAny        | False         | False      |
 | App        | S3_Write               | FileAny                                                               | API            | False         | False      |
-| App        | SciNote_Write          | Table                                                                 | NodeReturn     | True          | False      |
+| App        | SciNote_API            | Table                                                                 | NodeReturn     | True          | False      |
 | App        | Smartsheet_Read        | API                                                                   | NodeReturn     | True          | False      |
 | App        | Snowflake_Write        | Table                                                                 | NodeReturn     | False         | False      |
 | File       | AVI_Read               | FileAVI                                                               | NodeReturn     | True          | False      |
@@ -185,7 +185,7 @@ The _execute_ function may call classes and functions found within the User-Defi
 | App        | S3_Event               | Capture events from AWS S3 for triggering flows                              |
 | App        | S3_Read                | Ingest data into Ganymede data storage from AWS S3 storage                   |
 | App        | S3_Write               | Write data to an S3 bucket                                                   |
-| App        | SciNote_Write          | Create and write SciNote entry                                               |
+| App        | SciNote_API            | Create and write SciNote entry                                               |
 | App        | Smartsheet_Read        | Read sheet from Smartsheet                                                   |
 | App        | Snowflake_Write        | Sync tables in Ganymede data lake to Snowflake                               |
 | File       | AVI_Read               | Read in contents of an AVI file to a table                                   |

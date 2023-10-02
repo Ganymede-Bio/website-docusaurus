@@ -174,6 +174,16 @@ assay_results = b.create_assay_results_from_files(
 )  
 ```
 
+## `function` Benchling.is_automated_test
+  
+Checks if the current test is an automated test.  
+  
+### Returns  
+  
+`bool`  
+&nbsp; &nbsp; &nbsp; &nbsp; True if the test is automated, False otherwise.  
+
+
 ## `function` Benchling.get_id_from_dropdown_name
   
 Get a dictionary of dropdown name - dropdown id from dropdown summary info identified by  
