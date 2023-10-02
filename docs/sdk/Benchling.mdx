@@ -134,7 +134,7 @@ b = Benchling(g.ganymede_context)
 custom_entities = b.get('custom_entities')
 
 # retrieve custom entities with names "ent1" and "ent2"
-custom_entities = b.get('custom_entities', ['ent1', 'ent2'])
+custom_entities = b.get('custom_entities', names_any_of=['ent1', 'ent2'])
 
 # retrieve custom entities by Benchling IDs
 custom_entities = b.get('custom_entities', ids=['bfi_1234', 'bfi_5678'])

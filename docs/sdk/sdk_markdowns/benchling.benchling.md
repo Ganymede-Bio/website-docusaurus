@@ -47,7 +47,7 @@ Creates custom entity in Benchling.&nbsp; &nbsp; If the entity does not exist, f
 **folder_id** : `str`  
 &nbsp; &nbsp; &nbsp; &nbsp; Folder ID containing Benchling entity to be created. This should be a string starting  
 &nbsp; &nbsp; &nbsp; &nbsp; with "lib_"  
-**input_schema_id** : `str`  
+**schema_id** : `str`  
 &nbsp; &nbsp; &nbsp; &nbsp; Input schema ID Tag. schema associated with Benchling entity to be created. This should  
 &nbsp; &nbsp; &nbsp; &nbsp; be a string starting with "ts_"  
 **registry_id** : `str`  
@@ -55,6 +55,8 @@ Creates custom entity in Benchling.&nbsp; &nbsp; If the entity does not exist, f
 &nbsp; &nbsp; &nbsp; &nbsp; entity will be registered to.&nbsp; &nbsp; This can be found by clicking on Avatar - Feature  
 &nbsp; &nbsp; &nbsp; &nbsp; Settings - Registry Settings, and you will be able to find it in the URL.&nbsp; &nbsp; This should  
 &nbsp; &nbsp; &nbsp; &nbsp; be a string starting with "src_"  
+**naming_strategy** : `NamingStrategy`  
+&nbsp; &nbsp; &nbsp; &nbsp; Naming strategy to use when creating new entities. See NamingStrategy for more details.  
 **custom_entity_fields** : `Optional[Dict]`  
 &nbsp; &nbsp; &nbsp; &nbsp; Dictionary of field names and values to associate with custom entity  
 **author_id** : `Optional[str]`  
@@ -132,12 +134,10 @@ Process input DataFrame into assay results for upload to Benchling.
 **replace_special_characters** : `bool`  
 &nbsp; &nbsp; &nbsp; &nbsp; Replace special characters in column names with underscores to mimic Benchling behavior.  
 &nbsp; &nbsp; &nbsp; &nbsp; Default is True.  
-**ignore_na** : `bool`  
-&nbsp; &nbsp; &nbsp; &nbsp; Drop columns that only have null values prior to upload. Default is True.  
 **upload** : `bool`  
 &nbsp; &nbsp; &nbsp; &nbsp; Whether to upload List[AssayResults] to Benchling  
 **\*\*kwargs**  
-&nbsp; &nbsp; &nbsp; &nbsp; Keyward args to pass to create_assay_result_from_dict  
+&nbsp; &nbsp; &nbsp; &nbsp; Keyword args to pass to create_assay_result_from_dict  
 &nbsp; &nbsp; &nbsp; &nbsp; drop_na (Optional[bool])  
   
 ### Returns  
@@ -169,7 +169,7 @@ dropdown_ids = {dropdown["name"]: dropdown["id"] for dropdown in b.get("dropdown
 dataframe = dataframe.replace({**custom_entity_id, **file_ids, **dropdown_ids})  
   
 # Upload dataframe to Benchling as Assay Results  
-assay_results = b.create_assay_results_from_files(  
+assay_results = b.create_assay_results_from_dataframe(  
     dataframe, schema_id, project_id, drop_na=True, upload=True  
 )  
 ```
@@ -311,7 +311,7 @@ b = Benchling(g.ganymede_context)
 custom_entities = b.get('custom_entities')  
   
 # retrieve custom entities with names "ent1" and "ent2"  
-custom_entities = b.get('custom_entities', ['ent1', 'ent2'])  
+custom_entities = b.get('custom_entities', names_any_of=['ent1', 'ent2'])  
   
 # retrieve custom entities by Benchling IDs  
 custom_entities = b.get('custom_entities', ids=['bfi_1234', 'bfi_5678'])  
@@ -326,7 +326,7 @@ b.list_available_services()
 ## `function` Benchling.get_models_to_map
   
 Get a dictionary mapping names to Benchling IDs from a list of dictionaries. This can be  
-used in conjuction with Genchling.get()  
+used in conjunction with Benchling.get()  
   
 ### Parameters  
   
