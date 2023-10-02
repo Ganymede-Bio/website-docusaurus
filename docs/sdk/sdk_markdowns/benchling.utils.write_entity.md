@@ -8,6 +8,12 @@ displayed_sidebar: SDKSidebar
 # benchling.utils.write_entity
 
 
+## `class` NamingStrategy
+  
+Different options for handling naming when creating custom entities.  
+See: https://help.benchling.com/hc/en-us/articles/9684227098893-Choose-a-naming-option-for-your-Registry-schema  
+
+
 ## `function` create_custom_entity
   
 Creates and returns the id of the custom entity.  
@@ -33,6 +39,8 @@ Creates and returns the id of the custom entity.
 &nbsp; &nbsp; &nbsp; &nbsp; Fields associated with Benchling entity  
 **author_id** : `Optional[str]`  
 &nbsp; &nbsp; &nbsp; &nbsp; Author ID to associate with custom entity. Should be a string starting with "ent_"  
+**naming_strategy** : `NamingStrategy`  
+&nbsp; &nbsp; &nbsp; &nbsp; Strategy to use for naming the entity.&nbsp; &nbsp; See NamingStrategy for more details.  
   
 ### Returns  
   
@@ -182,7 +190,7 @@ Processes input DataFrame for upload to Benchling.
 **ignore_na** : `bool`  
 &nbsp; &nbsp; &nbsp; &nbsp; If True, drop columns with only nulls prior to upload. Default is True.  
 **\*\*kwargs**  
-&nbsp; &nbsp; &nbsp; &nbsp; Keyward args to pass to create_assay_result_from_dict  
+&nbsp; &nbsp; &nbsp; &nbsp; Keyword args to pass to create_assay_result_from_dict  
 &nbsp; &nbsp; &nbsp; &nbsp; drop_na (Optional[bool])  
   
 ### Returns  

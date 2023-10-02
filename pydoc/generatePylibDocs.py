@@ -18,21 +18,28 @@ SAVE_PATH = "../docs/sdk/sdk_markdowns"
 
 sidebar_dict = {
     "api": {"type": "category", "label": "API", "collapsed": True, "items": []},
-    "analytics": {"type": "category", "label": "Analytics", "collapsed": True, "items": []},
+    "analytics": {
+        "type": "category",
+        "label": "Analytics",
+        "collapsed": True,
+        "items": [],
+    },
 }
 
-KEYWORDS = "|".join([
-    "Parameters",
-    "Returns",
-    "Notes",
-    "Note",
-    "Example",
-    "Examples",
-    "Attributes",
-    "Raises",
-    "Raise",
-    "Method",
-])
+KEYWORDS = "|".join(
+    [
+        "Parameters",
+        "Returns",
+        "Notes",
+        "Note",
+        "Example",
+        "Examples",
+        "Attributes",
+        "Raises",
+        "Raise",
+        "Method",
+    ]
+)
 
 
 def dir_files_docstrings_to_markdown_files(_dir, save_path):
@@ -52,6 +59,11 @@ def dir_files_docstrings_to_markdown_files(_dir, save_path):
             header = ".".join(header.split(".")[1:])
 
             docstrings_md = file_docstrings_to_markdown(file_path, header=header)
+
+            if docstrings_md is None:
+                print(f"{file_path} is empty")
+                continue
+
             docstrings_md = SIDEBAR_HEADER.format(header, header) + docstrings_md
 
             markdown_file = os.path.join(save_path, f"{header}.md")
@@ -63,6 +75,9 @@ def dir_files_docstrings_to_markdown_files(_dir, save_path):
 
 def file_docstrings_to_markdown(file_path, header=None):
     docstrings_dict = extract_docstrings(file_path)
+
+    if len(docstrings_dict) < 1:
+        return None
 
     markdowns = [f"# {header}\n"] if header else []
 
@@ -106,7 +121,9 @@ def extract_docstrings(file_path):
                     and isinstance(item.body[0].value, ast.Str)
                 ):
                     class_docstring = item.body[0].value.s
-                    docstrings_dict[f"`class` {current_class}"] = textwrap.dedent(class_docstring)
+                    docstrings_dict[f"`class` {current_class}"] = textwrap.dedent(
+                        class_docstring
+                    )
                 for class_item in item.body:
                     if isinstance(class_item, ast.FunctionDef):
                         if (
@@ -114,7 +131,9 @@ def extract_docstrings(file_path):
                             and isinstance(class_item.body[0], ast.Expr)
                             and isinstance(class_item.body[0].value, ast.Str)
                         ):
-                            function_key = f"`function` {current_class}.{class_item.name}"
+                            function_key = (
+                                f"`function` {current_class}.{class_item.name}"
+                            )
                             if function_key not in docstrings_dict:
                                 docstring = class_item.body[0].value.s
                                 formatted_docstring = textwrap.dedent(docstring)
@@ -128,7 +147,7 @@ def convert_docstring_to_markdown(method, docstring):
     docstring = textwrap.dedent(docstring)
 
     # Remove single uses of > and < since they throw HTML errors
-    pattern = r'(?<!>)>(?!>)|(?<!<)<(?!<)'
+    pattern = r"(?<!>)>(?!>)|(?<!<)<(?!<)"
     docstring = re.sub(pattern, "", docstring)
 
     # Replace the section headers with markdown headings
@@ -169,9 +188,9 @@ def convert_parameters_to_markdown(docstring):
     new_lines = []
     for line in docstring.split("\n"):
         if (
-            line.strip() == "" or
-            re.search(KEYWORDS, line) or
-            re.search(r"^-|^\s{1,4}", line)
+            line.strip() == ""
+            or re.search(KEYWORDS, line)
+            or re.search(r"^-|^\s{1,4}", line)
         ):
             new_lines.append(line)
             continue
