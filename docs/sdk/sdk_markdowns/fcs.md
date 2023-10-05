@@ -106,6 +106,64 @@ Gate FCS file using a limit
 A class to parse a FlowJo WSP file following the Gating-ML 2.0 standard.  
 
 
+## `function` WSP._get_population_flowjo_helper
+  
+Get counts directly from FlowJo  
+  
+### Parameters  
+  
+**node** : `etree.Element`  
+&nbsp; &nbsp; &nbsp; &nbsp; Node containing counts  
+**parent_name** : `str, optional`  
+&nbsp; &nbsp; &nbsp; &nbsp; Name of parent class, by default ""  
+  
+### Returns  
+  
+`Dict[str, int]`  
+&nbsp; &nbsp; &nbsp; &nbsp; Dictionary containing counts  
+
+
+## `function` WSP.get_table_output_structure
+  
+Retrieve table structure as specified in Table Editor of FlowJo  
+  
+### Parameters  
+  
+**node** : `etree.Element`  
+&nbsp; &nbsp; &nbsp; &nbsp; Node to search for table editor, typically root node  
+  
+### Returns  
+  
+`pd.DataFrame`  
+&nbsp; &nbsp; &nbsp; &nbsp; DataFrame consisting of gate and tables  
+
+
+## `function` WSP.apply_table_output_structure
+  
+Apply table structure as specified in Table Editor of FlowJo to get population proportions  
+  
+### Parameters  
+  
+**df_population_counts** : `pd.DataFrame`  
+&nbsp; &nbsp; &nbsp; &nbsp; DataFrame containing gating counts; Should contain the following fields  
+&nbsp; &nbsp; &nbsp; &nbsp; gate (series of gates applied to determine population)  
+&nbsp; &nbsp; &nbsp; &nbsp; count (number of events for population)  
+&nbsp; &nbsp; &nbsp; &nbsp; unique_id (name of identifier for well)  
+**unique_id** : `str`  
+&nbsp; &nbsp; &nbsp; &nbsp; Unique identifier for well  
+  
+### Returns  
+  
+`pd.DataFrame`  
+&nbsp; &nbsp; &nbsp; &nbsp; DataFrame containing population proportions with the following fields  
+&nbsp; &nbsp; &nbsp; &nbsp; table_name (name of table)  
+&nbsp; &nbsp; &nbsp; &nbsp; unique_id (unique identifier for well; name will vary depending on chosen identifier)  
+&nbsp; &nbsp; &nbsp; &nbsp; statistic_name (name of statistic (e.g. CD3, CD4, CD8))  
+&nbsp; &nbsp; &nbsp; &nbsp; statistic_type (type of statistic (e.g. freqof, freqofparent, freqofgrandparent))  
+&nbsp; &nbsp; &nbsp; &nbsp; statistic_value (value of statistic)  
+  
+
+
 ## `function` WSP.get_gating_order
   
 Convenience method to get the order in which gating was conducted from the list of gates  
@@ -138,25 +196,27 @@ Retrieve gate structure as a nested dict from a WSP file
 ### Parameters  
   
 **node** : `etree.Element`  
-&nbsp; &nbsp; &nbsp; &nbsp; XML node to start traversal in  
+&nbsp; &nbsp; &nbsp; &nbsp; XML node to start traversal in, typically node corresponding to well  
 
 
 ## `function` WSP.get_populations
   
-Retrieve populations for a given well from a WSP file  
+Retrieve populations for a given well from a WSP file.&nbsp; &nbsp; To use this method, loop through the  
+wells in the WSP file and pass the node corresponding to the well to this method, making  
+sure to capture the unique identifier for each well in the loop.  
   
 ### Parameters  
   
 **node** : `node`  
-&nbsp; &nbsp; &nbsp; &nbsp; Node to start looking in  
+&nbsp; &nbsp; &nbsp; &nbsp; Node to start looking in, typically node corresponding to well  
   
 ### Returns  
   
 `pd.DataFrame`  
-&nbsp; &nbsp; &nbsp; &nbsp; DataFrame containing population information  
+&nbsp; &nbsp; &nbsp; &nbsp; DataFrame containing population information for specified well  
 
 
-## `function` WSP._get_population_helper
+## `function` WSP._get_population_actual_helper
   
 Recursively retrieve populations for a given well from a WSP file  
   
@@ -221,7 +281,7 @@ Adjust flow cytometry data for compensation
 
 ## `function` WSP.get_population_counts
   
-Get population counts from gates DataFrame, using compensation matrix  
+Get population counts from events DataFrame, using compensation matrix  
   
 ### Parameters  
   

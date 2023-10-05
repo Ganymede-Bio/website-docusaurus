@@ -310,11 +310,30 @@ b = Benchling(g.ganymede_context)
 # retrieve all custom entities  
 custom_entities = b.get('custom_entities')  
   
-# retrieve custom entities with names "ent1" and "ent2"  
+# retrieve all custom entities with specific entity schema  
+custom_entities = b.get('custom_entities', schema_id='ts_1234')  
+  
+# retrieve custom entities with names "ent1" and "ent2" (with alternatives)  
 custom_entities = b.get('custom_entities', names_any_of=['ent1', 'ent2'])  
+custom_entities = b.get('custom_entities', names_any_of_case_sensitive=['eNt1', 'eNt2'])  
+custom_entities = b.get('custom_entities', name_includes='ent')  
   
 # retrieve custom entities by Benchling IDs  
 custom_entities = b.get('custom_entities', ids=['bfi_1234', 'bfi_5678'])  
+  
+# retrieve all custom entities with specific entity schema  
+# note that author IDs also start with "ent_", like other custom entities  
+custom_entities = b.get('custom_entities', author_idsany_of=['ent_1234'])  
+  
+# get a list of entities filtered by schema fields (in this case, a lab instrument)  
+b.get(  
+    "custom_entities",  
+    schema_id=INSTRUMENT_SCHEMA_ID,  
+    schema_fields={"Serial #": instrument_serial_number},  
+)  
+  
+# get specific notebook entry by ID  
+b.get('entries', id='etr_1234')  
   
 # retrieve plate named "my_plate_name"  
 test_plate = b.get('plates', benchling_filter={'name': 'my_plate_name'})[0]  
