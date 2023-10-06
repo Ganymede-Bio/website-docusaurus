@@ -26,11 +26,11 @@ The table below lists available nodes.
 
 | [Category](#node-categories)   | Name                   | [Input Types](#node-inputoutput-types)                                                           | [Output Types](#node-inputoutput-types)                                | Is Editable   | Is Multi   |
 |------------|------------------------|-----------------------------------------------------------------------|----------------|---------------|------------|
-| API        | APINode                |                                                                       | NodeReturn     | True          | False      |
 | Analysis   | Python                 | Table(s) and/or File(s)                                               | NodeReturn     | True          | False      |
 | Analysis   | RunContainer           | FileAny                                                               | FileAny        | True          | False      |
 | Analysis   | Transform_SQL          | Table                                                                 | Table          | True          | False      |
 | Analysis   | Transform_py           | Table or List[Table]                                                  | NodeReturn     | True          | False      |
+| App        | APINode                |                                                                       | NodeReturn     | True          | False      |
 | App        | AirtableExport         | Table                                                                 | API            | True          | False      |
 | App        | AirtableImport         | API                                                                   | NodeReturn     | False         | False      |
 | App        | Azure_Query            | API                                                                   | NodeReturn     | True          | False      |
@@ -162,11 +162,11 @@ The _execute_ function may call classes and functions found within the User-Defi
 
 | [Category](#node-categories)   | Name                   | Brief Description                                                            |
 |------------|------------------------|------------------------------------------------------------------------------|
-| API        | APINode                | Generic API Access Node                                                      |
 | Analysis   | Python                 | Process data with python                                                     |
 | Analysis   | RunContainer           | Run container node                                                           |
 | Analysis   | Transform_SQL          | SQL analysis Function                                                        |
 | Analysis   | Transform_py           | Manipulate data with python                                                  |
+| App        | APINode                | Generic API Access Node                                                      |
 | App        | AirtableExport         | Export data from Ganymede data lake to Airtable                              |
 | App        | AirtableImport         | Import data from Airtable into Ganymede data lake                            |
 | App        | Azure_Query            | Query data from Azure SQL Server                                             |
