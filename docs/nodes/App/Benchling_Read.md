@@ -60,7 +60,7 @@ conjunction with the Benchling_Tag node.
 
 
 ### Notes
-This template shows how a target plate could be pulled via the Benchling API
+This template shows how a target plate could be pulled via the Benchling object
 Documentation for the Benchling API can be found here: https://benchling.com/api/reference
 
 benchling_context is an object of class BenchlingContext, consisting of

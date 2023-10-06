@@ -58,7 +58,6 @@ Calls Benchling to get data for flow to trigger
 
 
 ### Notes
-This template shows how a target plate could be pulled via the Benchling API
 Documentation for the Benchling API can be found here: https://benchling.com/api/reference
 Reference for Benchling events can be found here: https://docs.benchling.com/docs/events-reference
 

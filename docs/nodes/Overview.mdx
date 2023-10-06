@@ -30,6 +30,7 @@ The table below lists available nodes.
 | Analysis   | RunContainer           | FileAny                                                               | FileAny        | True          | False      |
 | Analysis   | Transform_SQL          | Table                                                                 | Table          | True          | False      |
 | Analysis   | Transform_py           | Table or List[Table]                                                  | NodeReturn     | True          | False      |
+| App        | APINode                |                                                                       | NodeReturn     | True          | False      |
 | App        | AirtableExport         | Table                                                                 | API            | True          | False      |
 | App        | AirtableImport         | API                                                                   | NodeReturn     | False         | False      |
 | App        | Azure_Query            | API                                                                   | NodeReturn     | True          | False      |
@@ -66,8 +67,6 @@ The table below lists available nodes.
 | File       | Image_Write            | Table or List[Table]                                                  | NodeReturn     | True          | False      |
 | File       | Input_File             | FileAny                                                               | NodeReturn     | True          | False      |
 | File       | Input_File_Multi       | Set[FileAny]                                                          | NodeReturn     | True          | True       |
-| File       | PDF_Read               | FilePDF                                                               | NodeReturn     | True          | False      |
-| File       | PDF_Read_Multi         | Set[FilePDF]                                                          | NodeReturn     | True          | True       |
 | File       | Powerpoint_Write       | Table or List[Table]                                                  | NodeReturn     | True          | False      |
 | File       | XML_Read               | FileXML                                                               | NodeReturn     | True          | False      |
 | File       | Zip_Read               | FileZip                                                               | NodeReturn     | True          | False      |
@@ -167,6 +166,7 @@ The _execute_ function may call classes and functions found within the User-Defi
 | Analysis   | RunContainer           | Run container node                                                           |
 | Analysis   | Transform_SQL          | SQL analysis Function                                                        |
 | Analysis   | Transform_py           | Manipulate data with python                                                  |
+| App        | APINode                | Generic API Access Node                                                      |
 | App        | AirtableExport         | Export data from Ganymede data lake to Airtable                              |
 | App        | AirtableImport         | Import data from Airtable into Ganymede data lake                            |
 | App        | Azure_Query            | Query data from Azure SQL Server                                             |
@@ -203,8 +203,6 @@ The _execute_ function may call classes and functions found within the User-Defi
 | File       | Image_Write            | Process tabular data; write an image to data lake                            |
 | File       | Input_File             | Read data file and process in Ganymede                                       |
 | File       | Input_File_Multi       | Read data files and process in Ganymede                                      |
-| File       | PDF_Read               | Read in contents of an PDF file to a table                                   |
-| File       | PDF_Read_Multi         | Read in contents of multiple pdf files to a table                            |
 | File       | Powerpoint_Write       | Process tabular data; write a powerpoint presentation to data lake           |
 | File       | XML_Read               | Read XML file into data lake                                                 |
 | File       | Zip_Read               | Extract Zip file                                                             |
