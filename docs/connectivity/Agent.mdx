@@ -131,6 +131,10 @@ def get_param_mapping(
         return {}
     id = id_group.group()
     return {
+        # The keys in the dict below take the form "<node name>.<parameter name>"
+        # For example, the default Input_File node is called "Input_File"
+        # and has a parameter called "file_pattern", so the key would be
+        # "Input_File.file_pattern"
         "Ingest_Data.csv": fp(watch_dir, parent_dir, f"{id}_lc_output*.csv"),
         "Experiment_Context.excel": fp(watch_dir, parent_dir, f"{id}_context.xlsx"),
     }
