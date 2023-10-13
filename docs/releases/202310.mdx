@@ -5,3 +5,17 @@ displayed_sidebar: releaseSideBar
 ---
 
 ### October 5 2023
+**Features/Updates**
+- Benchling nodes now include the Benchling class of the Ganymede SDK. This class makes it more straightforward to interface with Benchling’s API.
+- A generic API node was added to the node library.
+
+**Improvements**
+- A WSP class was added to the Ganymede SDK for handling flow cytometry workspace files from FlowJo. This class can:
+    - Extract cell counts and statistics from gated populations
+    - Extract a table structure from the table editor
+    - Extract a compensation matrix (or matrices)
+    - Capture the structure of gates
+    - Apply compensation to event data
+- GPT template code was added to the Image_Write node.
+- The timeout period of file uploads from Agents was extended, so that large files can be captured by Agents.
+- Agent download dropdowns are now disabled while an Agent builds, so that previous versions are not inadvertently downloaded.
