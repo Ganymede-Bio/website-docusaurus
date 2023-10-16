@@ -114,6 +114,7 @@ pushd pydoc
 source env/bin/activate
 python generateOperatorDocs.py
 python generatePylibDocs.py
+python generateAllotropeDocs.py
 deactivate
 popd
 ```
