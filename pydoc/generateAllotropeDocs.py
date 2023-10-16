@@ -68,5 +68,5 @@ df_reactor_FTIR = automated_reactors_schema.FTIR_profile.validate(df_reactor_FTI
                     f.write(f"#### `table` {document_name}\n\n")
 
                     for column_name, column_type in columns.items():
-                        f.write(f"- {column_name}: {column_type}\n")
+                        f.write(f"- **{column_name}**: {column_type}\n")
                     f.write("\n")
