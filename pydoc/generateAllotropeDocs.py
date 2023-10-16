@@ -44,7 +44,18 @@ if __name__ == "__main__":
         f.write("## Allotrope Validation Schemas\n\n\n")
 
         f.write(
-            """This page contains the validation schemas for the Allotrope SDK.\n\n
+            """This page contains the validation schemas for the Allotrope SDK.  These schemas can be used to validate Pandas DataFrames as shown below.\n\n
+
+```python
+from ganymede_sdk.validation.allotrope import *
+automated_reactors_schema = AutomatedReactorsSchema()
+
+# Validate data types of an example DataFrame called df_reactor_FTIR
+# which contains the FTIR document from the Automated Reactors schema
+# 
+# For more information, check out the [Pandera documentation](https://pandera.readthedocs.io/en/stable/index.html)
+df_reactor_FTIR = automated_reactors_schema.FTIR_profile.validate(df_reactor_FTIR)
+```
                 """
         )
         f.write("\n\n")
