@@ -131,8 +131,19 @@ module.exports = {
       id: 'sdk/BenchlingClass',
     },
     {
-      type: 'doc',
-      id: 'sdk/ContextVariables',
+      type: 'category',
+      label: 'Context and Validation',
+      items: [
+        {
+          type: 'doc',
+          id: 'sdk/ContextVariables',
+        },
+        {
+          type: 'doc',
+          id: 'sdk/sdk_markdowns/allotrope_schema',
+          label: 'Allotrope'
+        }
+      ]
     },
     {
       type: 'doc',
@@ -143,9 +154,10 @@ module.exports = {
         type: 'category',
         label: 'SDK',
         collapsed: true,
-        items: [
+          items: [
             nodeSDKApi,
-            nodeSDKAnalytics]
+            nodeSDKAnalytics
+          ]
     }
   ],
   releaseSideBar: [
