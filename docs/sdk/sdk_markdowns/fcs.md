@@ -10,7 +10,28 @@ displayed_sidebar: SDKSidebar
 
 ## `class` WSP
   
-A class to parse a FlowJo WSP file following the Gating-ML 2.0 standard.  
+A class to parse a FlowJo WSP file following the Gating-ML 2.0 standard.&nbsp; &nbsp; Contains methods  
+for extracting gates, table output structure, population statistics, and compensation  
+matrices from WSP file.  
+  
+>>> wsp = WSP(wsp_bytes)  
+  
+# View gates  
+>>> wsp.gates  
+  
+# View population statistics computed in FlowJo  
+>>> wsp.stats_flowjo  
+  
+# View table output structure, as configured in Table Editor in FlowJo  
+>>> wsp.table_output_structure  
+  
+# Generate output table based on table output structure and FlowJo population statistics  
+>>> WSP.apply_table_output_structure(  
+&nbsp; &nbsp; &nbsp; &nbsp; wsp.table_output_structure[["gate", "Table"]].dropna(), wsp.stats_flowjo  
+&nbsp; &nbsp; &nbsp; &nbsp; )  
+  
+With corresponding FCS files, you can calculate population counts from FCS events data using  
+the _apply_compensation_ and _calculate_population_counts_ methods.  
 
 
 ## `function` WSP.__init__
@@ -75,6 +96,8 @@ Get population statistics directly from workspace file
 &nbsp; &nbsp; &nbsp; &nbsp; Node containing counts  
 **parent_name** : `str, optional`  
 &nbsp; &nbsp; &nbsp; &nbsp; Name of parent class, by default ""  
+**population_name** : `str, optional`  
+&nbsp; &nbsp; &nbsp; &nbsp; Name of population to override default in file  
   
 ### Returns  
   
@@ -179,6 +202,8 @@ Recursively retrieve populations for a given well from a WSP file
 &nbsp; &nbsp; &nbsp; &nbsp; Node to start traversal in  
 **gate_parent_name** : `str, optional`  
 &nbsp; &nbsp; &nbsp; &nbsp; Name of parent node(s), by default ""  
+**population_name** : `str, optional`  
+&nbsp; &nbsp; &nbsp; &nbsp; Name of population to override default in file  
   
 ### Returns  
   

@@ -5,9 +5,10 @@ displayed_sidebar: nodeSidebar
 ---
 
 ### Node Description
+
 Runs SQL query on data lake
 
-
 ### Node Attributes
+
 - **output_table_sql_result**
   - Table name where the query results will be stored.

@@ -5,10 +5,11 @@ displayed_sidebar: nodeSidebar
 ---
 
 ### Node Description
+
 Sync GCS bucket -> S3 bucket
 
-
 ### Node Attributes
+
 - **src_input_or_output_bucket**
   - Specify "input" or "output" for the Ganymede cloud storage bucket to sync from.
   - "input" contains files ingested into a flow; "output" contains processed data.
@@ -17,8 +18,8 @@ Sync GCS bucket -> S3 bucket
 - **dest_s3_key**
   - destination S3 key to write to
 
-
 ### Notes
+
 Prior to usage, the following secrets must be configured in the environment:
 - **aws_s3_role_arn**: AWS Service Account Name
 

@@ -5,17 +5,18 @@ displayed_sidebar: nodeSidebar
 ---
 
 ### Node Description
+
 Read files from Azure Blob Storage into data lake.
 
-
 ### Node Attributes
+
 - **azure_storage_uri**
   - Windows Azure Storage Blob (WASB) URI to set URL for blob service endpoint
 - **src_azure_container_name**
   - Azure container name to pull from
 
-
 ### Notes
+
 Prior to usage, the following secrets must be configured in your Ganymede environment:
 - **azure_client_id**: App client ID
 - **azure_tenant_id**: App tenant ID

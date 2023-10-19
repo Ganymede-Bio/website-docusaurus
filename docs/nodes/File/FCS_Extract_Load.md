@@ -5,12 +5,13 @@ displayed_sidebar: nodeSidebar
 ---
 
 ### Node Description
+
 Function for reading Flow Cytometry Standard (FCS) files into Ganymede data lake
 
 The fcsparser python package is used to parse FCS files into metadata and data
 
-
 ### Node Attributes
+
 - **input_file_fcs**
   - file extension of FCS file
 - **output_table_data**
@@ -24,8 +25,8 @@ The fcsparser python package is used to parse FCS files into metadata and data
   - table containing flow cytometer channel metadata
   - (e.g. - fluoresence marker, amplifier gain, FSC vs. SSC)
 
-
 ### Notes
+
 *data* contains a record for each flow cytometer detection event
 (generally passage of single cell past detector); for each event, a value is recorded for
 each channel
@@ -71,11 +72,13 @@ analysis end: byte offset to the last byte of the ANALYSIS segment
 - **PnB**: number of bits reserved for parameter n
 
 - **channel_names**: names for each channel
+
 ## User-Defined Python
+
 Process FCS data/metadata file
 
-
 ### Parameters
+
 - **metadata** : `Dict[str, pd.DataFrame]|Dict[Dict[str, pd.DataFrame]]`
     - Metadata from FCS file
 - **data** : `pd.DataFrame`
@@ -83,7 +86,7 @@ Process FCS data/metadata file
 - **ganymede_context** : `GanymedeContext`
     - Ganymede context variable, which stores flow run metadata
 
-
 ### Returns
+
 `NodeReturn`
   Object containing data to store in data lake and/or file storage

@@ -10,7 +10,7 @@ displayed_sidebar: SDKSidebar
 
 ## `class` LC
   
-Reads LC runs in CDF format from Agilent HPLC systems and stores as dataframes  
+Reads liquid chromatography runs in CDF format from Agilent LC systems and stores as dataframes  
 
 
 ## `function` LC.__init__

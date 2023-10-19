@@ -5,12 +5,13 @@ displayed_sidebar: nodeSidebar
 ---
 
 ### Node Description
+
 Sync Ganymede data lake tables to Snowflake
 
 Specify semicolon-delimited tables to sync to Snowflake
 
-
 ### Node Attributes
+
 - **data_lake_tables**
   - Ganymede data lake tables to sync
 - **snowflake_database**
@@ -18,8 +19,8 @@ Specify semicolon-delimited tables to sync to Snowflake
 - **snowflake_schema**
   - Schema within snowflake database to write to
 
-
 ### Notes
+
 Prior to usage, the following secrets must be configured in your Ganymede environment:
 - **snowflake_user**: Snowflake user name
 - **snowflake_password**: Snowflake password
