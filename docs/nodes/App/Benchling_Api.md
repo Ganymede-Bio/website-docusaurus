@@ -5,17 +5,18 @@ displayed_sidebar: nodeSidebar
 ---
 
 ### Node Description
+
 Reads Benchling data.
 
 Uploads tabular output from user-defined function to Ganymede data lake.
 
-
 ### Node Attributes
+
 - **output_table_results**
   - Table to display on Table Head in Flow Editor
 
-
 ### Notes
+
 Usage requires configuration of a
 [Benchling application](https://docs.benchling.com/docs/getting-started-benchling-apps#getting-started)
 in the relevant Benchling tenant.
@@ -35,22 +36,24 @@ of the node.
 
 If a dict is returned, the keys of the dict are used as table names for the corresponding
 DataFrames to store. The table with output_table_results as its key is displayed on the Flow Editor.
+
 ## User-Defined Python
+
 Reads Benchling data based on input parameter.  This node should be used in
 conjunction with the Input_Param node.
 
-
 ### Parameters
+
 - **benchling_context** : `BenchlingContext`
     - Benchling context variable, which stores Benchling connection information
 - **ganymede_context** : `GanymedeContext`
     - Ganymede context variable, which stores flow run metadata
 
-
 ### Returns
+
 `NodeReturn`
   Object containing data to store in data lake and/or file storage
 
-
 ### Notes
+
 Documentation for the Benchling API can be found here: https://benchling.com/api/reference

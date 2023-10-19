@@ -10,7 +10,7 @@ displayed_sidebar: SDKSidebar
 
 ## `class` MSD
   
-A class to represent a MSD file.  
+A class to represent a Mesoscale Discovery (MSD) file.  
   
 ### Attributes  
   
@@ -46,5 +46,5 @@ Parse MSD data from bytes and return as pandas DataFrame
 `pd.DataFrame`  
 &nbsp; &nbsp; &nbsp; &nbsp; Header data - dataframe of keys and values from metadata in file header  
 `pd.DataFrame`  
-&nbsp; &nbsp; &nbsp; &nbsp; MSD data - dataframe with multiindex of Rows (A, B, C, etc.) and Columns   
+&nbsp; &nbsp; &nbsp; &nbsp; MSD data - dataframe with multiindex of Rows (A, B, C, etc.) and Columns  
 &nbsp; &nbsp; &nbsp; &nbsp; (1, 2, 3, etc.), with separate columns for each microwell  

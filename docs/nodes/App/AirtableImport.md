@@ -5,10 +5,11 @@ displayed_sidebar: nodeSidebar
 ---
 
 ### Node Description
+
 Retrieves Airtable table and uploads data to Ganymede data lake.
 
-
 ### Node Attributes
+
 - **airtable_base_id**
   - Base ID used in Airtable API
 - **airtable_id**
@@ -16,8 +17,8 @@ Retrieves Airtable table and uploads data to Ganymede data lake.
 - **output_table_ganymede_table**
   - Table in Ganymede data lake to store results of pulling Airtable table
 
-
 ### Notes
+
 Prior to usage, the following secrets must be configured in your Ganymede environment:
 - **airtable_api_key**: API key from Airtable
 

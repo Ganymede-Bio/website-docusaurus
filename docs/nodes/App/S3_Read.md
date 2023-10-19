@@ -5,17 +5,18 @@ displayed_sidebar: nodeSidebar
 ---
 
 ### Node Description
+
 Sync S3 bucket -> Ganymede data lake bucket
 
-
 ### Node Attributes
+
 - **src_s3_bucket**
   - Name of S3 bucket to read files from
 - **src_s3_prefix**
   - Prefix pattern to match for files to copy from S3 bucket
 
-
 ### Notes
+
 Prior to usage, the following secrets must be configured in the environment:
 - **aws_s3_role_arn**: AWS Service Account Name
 

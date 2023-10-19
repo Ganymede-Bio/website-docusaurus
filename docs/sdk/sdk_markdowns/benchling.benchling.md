@@ -430,6 +430,18 @@ result_id = "example_result_id"
 schema_table = b.get_assay_result_schema_table(result_id)  
 ```
 
+## `function` Benchling.archive_custom_entity
+  
+Unregisters and Archives a custom entity that has been registered in Benchling Registry.  
+  
+### Parameters  
+  
+**custom_entity_name** : `str`  
+&nbsp; &nbsp; &nbsp; &nbsp; Name of custom entity to archive  
+**reason** : `EntityArchiveReason, optional`  
+&nbsp; &nbsp; &nbsp; &nbsp; Reason to archive custom entity, by default "Other"  
+
+
 ## `class` SchemaError
   
 Raised when the assay result trying to be created does not match the table schema in Benchling  

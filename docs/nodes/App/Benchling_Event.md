@@ -5,6 +5,7 @@ displayed_sidebar: nodeSidebar
 ---
 
 ### Node Description
+
 Copies data from Benchling to Ganymede
 
 Listens for Benchling events, which are shared for processing by the user-defined _execute_
@@ -15,15 +16,15 @@ Ganymede's AWS account.
 See [Benchling docs](https://docs.benchling.com/docs/events-getting-started#setting-up-a-subscription)
 and [Benchling events reference](https://docs.benchling.com/docs/events-reference)
 
-
 ### Node Attributes
+
 - **input_filter_path**
   - Input JSONPath used for applying filtering logic
 - **input_trigger_flow_name**
   - Input Ganymede flow to trigger from captured event
 
-
 ### Notes
+
 Usage requires configuration of a
 [Benchling application](https://docs.benchling.com/docs/getting-started-benchling-apps#getting-started)
 in the relevant Benchling tenant.
@@ -37,11 +38,13 @@ on acquiring these credentials can be found [here](https://docs.benchling.com/do
 Secrets can be configured by clicking on your username in the upper-right hand of the Ganymede
 application, then selecting Environment Settings and navigating to the Secrets tab.  If you need
 assistance, please don't hesitate to reach out to Ganymede.
+
 ## User-Defined Python
+
 Calls Benchling to get data for flow to trigger
 
-
 ### Parameters
+
 - **object_id** : `str`
     - ID used in Benchling API (e.g. - entity schema ID or notebook entry ID)
 - **event_type** : `str`
@@ -51,13 +54,13 @@ Calls Benchling to get data for flow to trigger
 - **ganymede_context** : `Optional[GanyemdeContext]`
     - Ganymede context variable, which stores flow run metadata
 
-
 ### Returns
+
 `FlowInputs`
   FlowInputs class for kicking off subsequent Flow
 
-
 ### Notes
+
 Documentation for the Benchling API can be found here: https://benchling.com/api/reference
 Reference for Benchling events can be found here: https://docs.benchling.com/docs/events-reference
 

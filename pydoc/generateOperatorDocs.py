@@ -35,7 +35,7 @@ def extract_docstring(filename: str, search_str: str = "class", python_spaces: s
             break
         elif prev_line.strip() in keywords and line.strip() == "-" * len(prev_line.strip()):
             cleaned_docstring = prev_line[python_spaces:].strip()
-            docstrings[-1] = f"\n### {cleaned_docstring}"
+            docstrings[-1] = f"### {cleaned_docstring}\n"
             current_table = cleaned_docstring
         elif is_comment:
             if re.search(r"^\w+ : .+$", line.strip()):
@@ -110,7 +110,7 @@ if __name__ == "__main__":
             os.makedirs(dest_dir)
 
         operator_data_list = extract_docstring(operator_filename, search_str="class")
-        operator_data = "### Node Description\n" + "\n".join(operator_data_list)
+        operator_data = "### Node Description\n\n" + "\n".join(operator_data_list)
 
         action_data = ""
         if "action" in desc and name != "RunContainer":
@@ -130,7 +130,7 @@ if __name__ == "__main__":
                 print(f"processing {action_filename}...")
 
                 action_data_list = extract_docstring(action_filename, search_str="def execute(")
-                action_data = "\n## User-Defined Python\n" + "\n".join(action_data_list)
+                action_data = "\n\n## User-Defined Python\n\n" + "\n".join(action_data_list)
 
         with open(os.path.join(dest_dir, f"{name}.md"), "w") as dest_file:
             header = (

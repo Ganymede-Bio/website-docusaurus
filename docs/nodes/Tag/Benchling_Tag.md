@@ -5,15 +5,16 @@ displayed_sidebar: nodeSidebar
 ---
 
 ### Node Description
+
 Associates a Benchling run tag with a Flow run
 
-
 ### Node Attributes
+
 - **input_tag_benchling**
   - Benchling run tag to associate with flow run
 
-
 ### Notes
+
 Usage requires configuration of a
 [Benchling application](https://docs.benchling.com/docs/getting-started-benchling-apps#getting-started)
 in the relevant Benchling tenant.

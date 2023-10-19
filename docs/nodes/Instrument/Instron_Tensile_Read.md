@@ -5,13 +5,14 @@ displayed_sidebar: nodeSidebar
 ---
 
 ### Node Description
+
 Reads contents of a is_tens file into data lake
 
 The contents of is_tens file are passed to the user-defined function, which
 return one or more tables for storage in Ganymede data lake.
 
-
 ### Node Attributes
+
 - **input_file_is_tens**
   - File extension on is_tens file
 - **output_table_key**
@@ -20,18 +21,20 @@ return one or more tables for storage in Ganymede data lake.
   - Table with the raw metadata
 - **output_table_dimensions**
   - Table with the material dimensions
+
 ## User-Defined Python
+
 Processes is_tens file (passed to function as BytesIO file-like objects) into data tables
 stored in data lake
 
-
 ### Parameters
+
 - **is_tens_file** : `Dict[str, BytesIO]`
     - is_tens file, indexed by file name
 - **ganymede_context** : `GanymedeContext`
     - Ganymede context variable, which stores flow run metadata
 
-
 ### Returns
+
 `NodeReturn`
   Object containing data to store in data lake and/or file storage.
