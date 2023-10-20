@@ -4,6 +4,21 @@ title: October 2023
 displayed_sidebar: releaseSideBar
 ---
 
+### October 20 2023
+**Features/Updates**
+- Agents can now automatically deploy updates to existing Connections. For this functionality to be enabled, the core Agent version must be upgraded to at least v1.0.0 and the Deployment Setting must be set to “auto-deploy”.
+- A Branch_Python node type is now available - this node type enables logic that determines whether a Flow should stop or trigger a subset of downstream nodes.
+
+**Improvements**
+- The status of each Agent is now displayed on the Connections page, alongside the status of each Connection.
+- Deployment Settings and Core Agent Updates are now displayed independently from the Agent configuration.
+- Connections will now shut down automatically when the backing Agent is disabled or deleted.
+- Agents will now attempt retries when they fail to trigger a Flow Run.
+- A method for unregistering and archiving specified custom entities was added to the Benchling Class in Ganymede SDK.
+
+**Bug Fixes**
+- The Agent build history is no longer truncated and now displays the full history.
+
 ### October 12 2023
 **Features/Updates**
 - [Allotrope ADM validation schemas](../sdk/sdk_markdowns/allotrope_schema.md) are now available in the Ganymede SDK.
