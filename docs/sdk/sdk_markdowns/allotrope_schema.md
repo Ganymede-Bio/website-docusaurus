@@ -29,6 +29,7 @@ df_reactor_FTIR = automated_reactors_schema.FTIR_profile.validate(df_reactor_FTI
 
 #### `table` FTIR_profile
 
+- **probe type**: str
 - **radiation source type**: str
 - **spectrometer type**: str
 - **detector type**: str
@@ -36,19 +37,62 @@ df_reactor_FTIR = automated_reactors_schema.FTIR_profile.validate(df_reactor_FTI
 #### `table` NIR_profile
 
 - **measurement device identifier**: str
+- **probe identifier**: str
+- **probe type**: str
+- **radiation source type**: str
+- **spectrometer type**: str
+- **detector type**: str
 
 #### `table` RAMAN_profile
 
+- **measuring device identifier**: str
+- **probe identifier**: str
+- **probe type**: str
+- **radiation source type**: str
 - **excitation laser power setting**: float64
 - **dark background correction active**: bool
+- **spectrometer type**: str
+- **detector type**: str
 
 #### `table` UV_Vis_profile
 
+- **measuring device identifier**: str
+- **probe identifier**: str
+- **probe type**: str
 - **cell path length**: float64
+- **detector type**: str
 
 #### `table` analyte_document
 
 - **analyte name**: str
+- **m/z setting**: float64
+
+#### `table` analyte_name
+
+- **analyte name**: str
+- **m/z setting**: float64
+
+#### `table` angular_velocity_profile
+
+- **description**: str
+- **device identifier**: str
+- **Data Cube**: str
+
+#### `table` background_document
+
+- **resolution**: float64
+- **detector gain setting**: float64
+- **optical velocity**: float64
+- **aperture size setting**: float64
+- **number of averages**: int64
+- **integration time**: float64
+- **apodization name**: str
+- **phase correction**: str
+- **zero filling factor**: float64
+- **excitation laser power setting**: float64
+- **dark background correction active**: bool
+- **baseline**: str
+- **slit width setting**: float64
 
 #### `table` chemical_document
 
@@ -62,11 +106,25 @@ df_reactor_FTIR = automated_reactors_schema.FTIR_profile.validate(df_reactor_FTI
 
 #### `table` chord_length_distibution_profile
 
+- **measuring device identifier**: str
+- **probe identifier**: str
+- **probe type**: str
+- **calibration time**: datetime64[ns]
 - **laser rotation speed setting**: float64
 - **chord selection setting**: str
 - **stuck particle correction enable setting**: bool
 - **measured laser rotation speed data cube**: str
 - **Chord Length Distribution Data Cube**: str
+
+#### `table` concentration_profile
+
+- **measuring device identifier**: str
+- **probe identifier**: str
+- **probe type**: str
+- **analyte name**: str
+- **calibration assessment**: str
+- **calibration time**: datetime64[ns]
+- **Data Cube**: str
 
 #### `table` document
 
@@ -76,15 +134,65 @@ df_reactor_FTIR = automated_reactors_schema.FTIR_profile.validate(df_reactor_FTI
 - **batch identifier**: str
 - **device identifier**: str
 - **baseline**: str
+- **mass spectrum**: str
+
+#### `table` flow_rate_profile
+
+- **device identifier**: str
+- **description**: str
+- **Data Cube**: str
+
+#### `table` heat_flow__profile
+
+- **description**: str
+- **device identifier**: str
+- **Data Cube**: str
+
+#### `table` heat_flow_profile
+
+- **description**: str
+- **device identifier**: str
+- **Data Cube**: str
+
+#### `table` heating_or_cooling_rate_profile
+
+- **description**: str
+- **device identifier**: str
+- **Data Cube**: str
 
 #### `table` impedance_scan_profile
 
+- **measuring device identifier**: str
+- **probe identifier**: str
+- **probe type**: str
 - **impedance scan data cube**: str
 - **impedance spectrum data cube**: str
 
 #### `table` jacket_temperature_profile
 
+- **description**: str
+- **device identifier**: str
 - **jacket temperature Data Cube**: str
+
+#### `table` log_entry
+
+- **observation**: str
+- **scalar timestamp datum**: datetime64[ns]
+- **elapsed time**: float64
+
+#### `table` mass_profile
+
+- **description**: str
+- **device identifier**: str
+- **Data Cube**: str
+
+#### `table` mass_spectrometry_document
+
+- **equipment serial number**: str
+- **emission current setting**: float64
+- **electron energy setting**: float64
+- **mass spectrometry tune file**: str
+- **mass spectrum**: str
 
 #### `table` measurement_document
 
@@ -93,7 +201,7 @@ df_reactor_FTIR = automated_reactors_schema.FTIR_profile.validate(df_reactor_FTI
 - **optical velocity**: float64
 - **aperture size setting**: float64
 - **number of averages**: int64
-- **integration time**: float64
+- **integration time**: int64
 - **apodization name**: str
 - **phase correction**: str
 - **zero filling factor**: float64
@@ -104,8 +212,14 @@ df_reactor_FTIR = automated_reactors_schema.FTIR_profile.validate(df_reactor_FTI
 - **slit width setting**: float64
 - **three-dimensional ultraviolet spectrum**: str
 
+#### `table` observation
+
+- **scalar timestamp datum**: datetime64[ns]
+
 #### `table` overhead_stirring_rate_profile
 
+- **description**: str
+- **device identifier**: str
 - **stirring rate data cube**: str
 
 #### `table` pH_profile
@@ -115,25 +229,60 @@ df_reactor_FTIR = automated_reactors_schema.FTIR_profile.validate(df_reactor_FTI
 - **probe type**: str
 - **pH Data Cube**: str
 
+#### `table` profile
+
+- **description**: str
+- **device identifier**: str
+- **Data Cube**: str
+
 #### `table` purge_gas_flow_rate_profile
 
+- **device identifier**: str
+- **description**: str
 - **purge gas type**: str
 - **Purge Gas Flow Data Cube**: str
 
 #### `table` reaction_temperature_profile
 
+- **description**: str
+- **device identifier**: str
 - **reaction temperature Data Cube**: str
+
+#### `table` sample_document
+
+- **sample identifier**: str
+- **description**: str
+- **scalar timestamp datum**: datetime64[ns]
+- **elapsed time**: float64
+
+#### `table` scalar_timestamp_datum
+
+- **elapsed time**: float64
 
 #### `table` standard_aggregate_document
 
 - **pH calibration slope**: float64
 - **calibration assessment**: str
+- **calibration time**: datetime64[ns]
 
 #### `table` standard_document
 
+- **batch identifier**: str
 - **temperature**: float64
 - **standard nominal value**: float64
 - **standard measured value**: float64
+
+#### `table` temperature_profile
+
+- **description**: str
+- **device identifier**: str
+- **Data Cube**: str
+
+#### `table` volume_profile
+
+- **device identifier**: str
+- **description**: str
+- **Data Cube**: str
 
 ### `instrument` BalanceSchema
 
@@ -174,6 +323,7 @@ df_reactor_FTIR = automated_reactors_schema.FTIR_profile.validate(df_reactor_FTI
 #### `table` intermediate_tapped_density_document
 
 - **cumulative count datum**: int64
+- **volume**: float64
 - **cumulative count**: int64
 
 #### `table` loose_density_document
@@ -269,6 +419,14 @@ df_reactor_FTIR = automated_reactors_schema.FTIR_profile.validate(df_reactor_FTI
 
 ### `instrument` CellCultureAnalyzerSchema
 
+#### `table` ammonium_analysis_document_cell_culture
+
+- **molar concentration**: float64
+
+#### `table` calcium_analysis_document_cell_culture
+
+- **molar concentration**: float64
+
 #### `table` document
 
 - **measurement identifier**: str
@@ -289,6 +447,30 @@ df_reactor_FTIR = automated_reactors_schema.FTIR_profile.validate(df_reactor_FTI
 - **mass concentration**: float64
 
 #### `table` glutamate_analysis_document_cell_culture
+
+- **molar concentration**: float64
+
+#### `table` glutamine_analysis_document_cell_culture
+
+- **molar concentration**: float64
+
+#### `table` lactate_analysis_document_cell_culture
+
+- **mass concentration**: float64
+
+#### `table` lactate_dehydrogenase_analysis_document_cell_culture
+
+- **molar concentration**: float64
+
+#### `table` phosphate_analysis_document_cell_culture
+
+- **molar concentration**: float64
+
+#### `table` potassium_analysis_document_cell_culture
+
+- **molar concentration**: float64
+
+#### `table` sodium_analysis_document_cell_culture
 
 - **molar concentration**: float64
 
@@ -321,6 +503,7 @@ df_reactor_FTIR = automated_reactors_schema.FTIR_profile.validate(df_reactor_FTI
 
 #### `table` device_acquisition_method
 
+- **method name**: str
 - **purge gas type**: str
 - **maximum run time setting**: float64
 - **change rate end point setting**: float64
@@ -347,12 +530,16 @@ df_reactor_FTIR = automated_reactors_schema.FTIR_profile.validate(df_reactor_FTI
 #### `table` measurement_document
 
 - **sample role type**: str
+- **measurement identifier**: str
+- **measurement time**: datetime64[ns]
 - **method name**: str
+- **analyst**: str
 - **vial location identifier**: str
 - **balance identifier**: str
 - **sample weight**: float64
 - **sample identifier**: str
 - **batch identifier**: str
+- **assay identifier**: str
 - **absolute water content**: float64
 - **expiry time prescription**: datetime64[ns]
 - **water mass concentration**: float64
@@ -381,8 +568,16 @@ df_reactor_FTIR = automated_reactors_schema.FTIR_profile.validate(df_reactor_FTI
 - **container type**: str
 - **container state description**: str
 
+#### `table` endothermic_peak
+
+- **transition assignment**: str
+- **peak onset temperature**: float64
+- **peak temperature**: float64
+- **transition enthalpy**: float64
+
 #### `table` exothermic_peak
 
+- **transition assignment**: str
 - **peak onset temperature**: float64
 - **peak temperature**: float64
 - **transition enthalpy**: float64
@@ -407,6 +602,7 @@ df_reactor_FTIR = automated_reactors_schema.FTIR_profile.validate(df_reactor_FTI
 - **measurement identifier**: str
 - **end time**: datetime64[ns]
 - **measurement time**: datetime64[ns]
+- **device method identifier**: str
 - **sample temperature setting**: float64
 - **maximum run time setting**: float64
 - **disintegration apparatus disc type**: str
@@ -417,8 +613,12 @@ df_reactor_FTIR = automated_reactors_schema.FTIR_profile.validate(df_reactor_FTI
 - **minimum value**: float64
 - **maximum value**: float64
 - **batch identifier**: str
+- **material suitability specification**: str
 - **relative standard deviation**: float64
 - **quantity range**: float64
+- **position**: str
+- **elapsed time**: float64
+- **specification assessment**: bool
 
 #### `table` solvent_identifier
 
@@ -450,7 +650,14 @@ df_reactor_FTIR = automated_reactors_schema.FTIR_profile.validate(df_reactor_FTI
 
 #### `table` device_control_document
 
+- **device type**: str
+- **device identifier**: str
+- **detection type**: str
 - **product manufactuer**: str
+- **brand name**: str
+- **equipment serial number**: str
+- **model number**: str
+- **firmware version**: str
 - **detector distance setting (plate reader)**: float64
 - **integration time**: float64
 - **number of averages**: float64
@@ -466,6 +673,12 @@ df_reactor_FTIR = automated_reactors_schema.FTIR_profile.validate(df_reactor_FTI
 #### `table` device_document
 
 - **device type**: str
+- **device identifier**: str
+- **model number**: str
+- **product manufacturer**: str
+- **brand name**: str
+- **equipment serial number**: str
+- **firmware version**: str
 
 #### `table` device_system_document
 
@@ -484,6 +697,7 @@ df_reactor_FTIR = automated_reactors_schema.FTIR_profile.validate(df_reactor_FTI
 
 #### `table` diagnostic_trace_document
 
+- **description**: str
 - **data cube**: str
 
 #### `table` measurement_aggregate_document
@@ -514,6 +728,7 @@ df_reactor_FTIR = automated_reactors_schema.FTIR_profile.validate(df_reactor_FTI
 
 #### `table` sample_document
 
+- **description**: str
 - **sample identifier**: str
 - **batch identifier**: str
 - **sample role type**: str
@@ -535,6 +750,14 @@ df_reactor_FTIR = automated_reactors_schema.FTIR_profile.validate(df_reactor_FTI
 
 #### `table` device_control_document
 
+- **device type**: str
+- **device identifier**: str
+- **detection type**: str
+- **product manufactuer**: str
+- **brand name**: str
+- **equipment serial number**: str
+- **model number**: str
+- **firmware version**: str
 - **maximum row setting (foam height)**: float64
 - **foam detection sensitivity setting**: float64
 - **smoothing window setting**: int64
@@ -542,7 +765,12 @@ df_reactor_FTIR = automated_reactors_schema.FTIR_profile.validate(df_reactor_FTI
 #### `table` device_document
 
 - **device type**: str
+- **device identifier**: str
+- **model number**: str
 - **product manufactuer**: str
+- **brand name**: str
+- **equipment serial number**: str
+- **firmware version**: str
 
 #### `table` device_system_document
 
@@ -561,6 +789,7 @@ df_reactor_FTIR = automated_reactors_schema.FTIR_profile.validate(df_reactor_FTI
 
 #### `table` diagnostic_trace_document
 
+- **description**: str
 - **data cube**: str
 
 #### `table` foam_height_document
@@ -603,6 +832,7 @@ df_reactor_FTIR = automated_reactors_schema.FTIR_profile.validate(df_reactor_FTI
 
 #### `table` sample_document
 
+- **description**: str
 - **sample identifier**: str
 - **batch identifier**: str
 - **sample role type**: str
@@ -612,7 +842,14 @@ df_reactor_FTIR = automated_reactors_schema.FTIR_profile.validate(df_reactor_FTI
 
 #### `table` device_control_document
 
+- **device type**: str
+- **device identifier**: str
+- **detection type**: str
 - **product manufactuer**: str
+- **brand name**: str
+- **equipment serial number**: str
+- **model number**: str
+- **firmware version**: str
 - **detector distance setting (foam qualification)**: float64
 - **measurement delay setting**: float64
 - **detection duration setting**: float64
@@ -621,6 +858,12 @@ df_reactor_FTIR = automated_reactors_schema.FTIR_profile.validate(df_reactor_FTI
 #### `table` device_document
 
 - **device type**: str
+- **device identifier**: str
+- **model number**: str
+- **product manufacturer**: str
+- **brand name**: str
+- **equipment serial number**: str
+- **firmware version**: str
 
 #### `table` device_system_document
 
@@ -639,6 +882,7 @@ df_reactor_FTIR = automated_reactors_schema.FTIR_profile.validate(df_reactor_FTI
 
 #### `table` diagnostic_trace_document
 
+- **description**: str
 - **data cube**: str
 
 #### `table` foam_qualification_document
@@ -680,6 +924,7 @@ df_reactor_FTIR = automated_reactors_schema.FTIR_profile.validate(df_reactor_FTI
 
 #### `table` sample_document
 
+- **description**: str
 - **sample identifier**: str
 - **batch identifier**: str
 - **sample role type**: str
@@ -701,16 +946,30 @@ df_reactor_FTIR = automated_reactors_schema.FTIR_profile.validate(df_reactor_FTI
 - **column inner diameter**: float64
 - **chromatography column chemistry type**: str
 - **chromatography column particle size**: float64
+- **product manufactuer**: str
 
 #### `table` device_control_document
 
+- **device type**: str
+- **device identifier**: str
+- **detection type**: str
+- **product manufactuer**: str
+- **brand name**: str
+- **equipment serial number**: str
+- **model number**: str
+- **firmware version**: str
 - **detector offset setting**: float64
 - **detector sampling rate setting**: float64
 
 #### `table` device_document
 
 - **device type**: str
+- **device identifier**: str
+- **model number**: str
 - **product manufactuer**: str
+- **brand name**: str
+- **equipment serial number**: str
+- **firmware version**: str
 
 #### `table` device_system_document
 
@@ -731,10 +990,12 @@ df_reactor_FTIR = automated_reactors_schema.FTIR_profile.validate(df_reactor_FTI
 
 #### `table` diagnostic_trace_document
 
+- **description**: str
 - **data cube**: str
 
 #### `table` gradient_segment_document
 
+- **description**: str
 - **start time**: float64
 - **end time**: float64
 
@@ -758,6 +1019,7 @@ df_reactor_FTIR = automated_reactors_schema.FTIR_profile.validate(df_reactor_FTI
 #### `table` peak
 
 - **identifier**: str
+- **written name**: str
 - **peak width at 5% of height**: float64
 - **peak width at baseline**: float64
 - **peak width at half height**: float64
@@ -784,12 +1046,21 @@ df_reactor_FTIR = automated_reactors_schema.FTIR_profile.validate(df_reactor_FTI
 
 #### `table` sample_document
 
+- **description**: str
 - **sample identifier**: str
 - **batch identifier**: str
 - **sample role type**: str
 - **written name**: str
 
 ### `instrument` FtirSchema
+
+#### `table` background_document
+
+- **number of averages**: float64
+- **resolution**: float64
+- **detector gain setting**: float64
+- **optical velocity setting**: float64
+- **aperture size setting**: float64
 
 #### `table` document
 
@@ -830,17 +1101,31 @@ df_reactor_FTIR = automated_reactors_schema.FTIR_profile.validate(df_reactor_FTI
 - **column inner diameter**: float64
 - **chromatography column chemistry type**: str
 - **chromatography column particle size**: float64
+- **product manufacturer**: str
 - **chromatography column fill type**: str
 
 #### `table` device_control_document
 
+- **device type**: str
+- **device identifier**: str
+- **detection type**: str
+- **product manufactuer**: str
+- **brand name**: str
+- **equipment serial number**: str
+- **model number**: str
+- **firmware version**: str
 - **detector offset setting**: float64
 - **detector sampling rate setting**: float64
 
 #### `table` device_document
 
 - **device type**: str
+- **device identifier**: str
+- **model number**: str
 - **product manufactuer**: str
+- **brand name**: str
+- **equipment serial number**: str
+- **firmware version**: str
 
 #### `table` device_system_document
 
@@ -861,6 +1146,7 @@ df_reactor_FTIR = automated_reactors_schema.FTIR_profile.validate(df_reactor_FTI
 
 #### `table` diagnostic_trace_document
 
+- **description**: str
 - **data cube**: str
 
 #### `table` gas_chromatography_document
@@ -884,6 +1170,7 @@ df_reactor_FTIR = automated_reactors_schema.FTIR_profile.validate(df_reactor_FTI
 #### `table` peak
 
 - **identifier**: str
+- **written name**: str
 - **peak width at 5% of height**: float64
 - **peak width at baseline**: float64
 - **peak width at half height**: float64
@@ -910,6 +1197,7 @@ df_reactor_FTIR = automated_reactors_schema.FTIR_profile.validate(df_reactor_FTI
 
 #### `table` sample_document
 
+- **description**: str
 - **sample identifier**: str
 - **batch identifier**: str
 - **sample role type**: str
@@ -918,10 +1206,26 @@ df_reactor_FTIR = automated_reactors_schema.FTIR_profile.validate(df_reactor_FTI
 
 ### `instrument` GlossSchema
 
+#### `table` device_control_document
+
+- **device type**: str
+- **device identifier**: str
+- **detection type**: str
+- **product manufactuer**: str
+- **brand name**: str
+- **equipment serial number**: str
+- **model number**: str
+- **firmware version**: str
+
 #### `table` device_document
 
 - **device type**: str
+- **device identifier**: str
+- **model number**: str
 - **product manufactuer**: str
+- **brand name**: str
+- **equipment serial number**: str
+- **firmware version**: str
 
 #### `table` device_system_document
 
@@ -940,7 +1244,13 @@ df_reactor_FTIR = automated_reactors_schema.FTIR_profile.validate(df_reactor_FTI
 
 #### `table` diagnostic_trace_document
 
+- **description**: str
 - **data cube**: str
+
+#### `table` gloss_change_document
+
+- **gloss change**: float64
+- **angle**: float64
 
 #### `table` gloss_document
 
@@ -957,6 +1267,7 @@ df_reactor_FTIR = automated_reactors_schema.FTIR_profile.validate(df_reactor_FTI
 
 - **detection type**: str
 - **measurement identifier**: str
+- **measurement time**: datetime64[ns]
 - **coated material description**: str
 
 #### `table` processed_data_aggregate_document
@@ -965,6 +1276,7 @@ df_reactor_FTIR = automated_reactors_schema.FTIR_profile.validate(df_reactor_FTI
 
 #### `table` sample_document
 
+- **description**: str
 - **sample identifier**: str
 - **batch identifier**: str
 - **sample role type**: str
@@ -972,13 +1284,20 @@ df_reactor_FTIR = automated_reactors_schema.FTIR_profile.validate(df_reactor_FTI
 
 #### `table` sample_preparation_document
 
+- **sample preparation description**: str
 - **abrasion cycle count**: int64
 - **abrasion weight**: float64
+- **abrasion source description**: str
 - **abrading material description**: str
 - **duration**: float64
 - **temperature**: float64
 - **humidity**: float64
 - **coating gap height**: float64
+
+#### `table` specular_reflection_document
+
+- **gloss**: float64
+- **angle**: float64
 
 ### `instrument` HotTackSchema
 
@@ -986,11 +1305,20 @@ df_reactor_FTIR = automated_reactors_schema.FTIR_profile.validate(df_reactor_FTI
 
 - **measurement time**: datetime64[ns]
 - **method identifier**: str
+- **description**: str
 - **ambient temperature**: float64
 - **experiment identifier**: str
 
 #### `table` device_control_document
 
+- **device type**: str
+- **device identifier**: str
+- **detection type**: str
+- **product manufactuer**: str
+- **brand name**: str
+- **equipment serial number**: str
+- **model number**: str
+- **firmware version**: str
 - **relative location**: str
 - **temperature setting**: float64
 - **grip pressure setting**: float64
@@ -1001,7 +1329,12 @@ df_reactor_FTIR = automated_reactors_schema.FTIR_profile.validate(df_reactor_FTI
 #### `table` device_document
 
 - **device type**: str
+- **device identifier**: str
+- **model number**: str
 - **product manufactuer**: str
+- **brand name**: str
+- **equipment serial number**: str
+- **firmware version**: str
 
 #### `table` device_system_document
 
@@ -1020,6 +1353,7 @@ df_reactor_FTIR = automated_reactors_schema.FTIR_profile.validate(df_reactor_FTI
 
 #### `table` diagnostic_trace_document
 
+- **description**: str
 - **data cube**: str
 
 #### `table` hot_tack_document
@@ -1038,6 +1372,7 @@ df_reactor_FTIR = automated_reactors_schema.FTIR_profile.validate(df_reactor_FTI
 
 #### `table` sample_document
 
+- **description**: str
 - **sample identifier**: str
 - **batch identifier**: str
 - **sample role type**: str
@@ -1087,6 +1422,14 @@ df_reactor_FTIR = automated_reactors_schema.FTIR_profile.validate(df_reactor_FTI
 
 #### `table` device_control_document
 
+- **device type**: str
+- **device identifier**: str
+- **detection type**: str
+- **product manufactuer**: str
+- **brand name**: str
+- **equipment serial number**: str
+- **model number**: str
+- **firmware version**: str
 - **detector offset setting**: float64
 - **detector sampling rate setting**: float64
 - **detector relative offset setting**: float64
@@ -1101,6 +1444,12 @@ df_reactor_FTIR = automated_reactors_schema.FTIR_profile.validate(df_reactor_FTI
 #### `table` device_document
 
 - **device type**: str
+- **device identifier**: str
+- **model number**: str
+- **product manufacturer**: str
+- **brand name**: str
+- **equipment serial number**: str
+- **firmware version**: str
 
 #### `table` device_system_document
 
@@ -1121,6 +1470,7 @@ df_reactor_FTIR = automated_reactors_schema.FTIR_profile.validate(df_reactor_FTI
 
 #### `table` diagnostic_trace_document
 
+- **description**: str
 - **data cube**: str
 
 #### `table` injection_document
@@ -1143,6 +1493,7 @@ df_reactor_FTIR = automated_reactors_schema.FTIR_profile.validate(df_reactor_FTI
 #### `table` peak
 
 - **identifier**: str
+- **written name**: str
 - **peak width at 5% of height**: float64
 - **peak width at baseline**: float64
 - **peak width at half height**: float64
@@ -1163,6 +1514,8 @@ df_reactor_FTIR = automated_reactors_schema.FTIR_profile.validate(df_reactor_FTI
 - **chromatographic peak resolution using peak width at half-height**: float64
 - **chromatographic peak resolution using statistical moments**: float64
 - **peak width**: float64
+- **mass**: float64
+- **m/z**: float64
 
 #### `table` processed_data_aggregate_document
 
@@ -1174,6 +1527,7 @@ df_reactor_FTIR = automated_reactors_schema.FTIR_profile.validate(df_reactor_FTI
 
 #### `table` sample_document
 
+- **description**: str
 - **sample identifier**: str
 - **batch identifier**: str
 - **sample role type**: str
@@ -1221,16 +1575,30 @@ df_reactor_FTIR = automated_reactors_schema.FTIR_profile.validate(df_reactor_FTI
 - **column inner diameter**: float64
 - **chromatography column chemistry type**: str
 - **chromatography column particle size**: float64
+- **product manufactuer**: str
 
 #### `table` device_control_document
 
+- **device type**: str
+- **device identifier**: str
+- **detection type**: str
+- **product manufactuer**: str
+- **brand name**: str
+- **equipment serial number**: str
+- **model number**: str
+- **firmware version**: str
 - **detector offset setting**: float64
 - **detector sampling rate setting**: float64
 
 #### `table` device_document
 
 - **device type**: str
+- **device identifier**: str
+- **model number**: str
 - **product manufactuer**: str
+- **brand name**: str
+- **equipment serial number**: str
+- **firmware version**: str
 
 #### `table` device_system_document
 
@@ -1251,6 +1619,7 @@ df_reactor_FTIR = automated_reactors_schema.FTIR_profile.validate(df_reactor_FTI
 
 #### `table` diagnostic_trace_document
 
+- **description**: str
 - **data cube**: str
 
 #### `table` injection_document
@@ -1273,6 +1642,7 @@ df_reactor_FTIR = automated_reactors_schema.FTIR_profile.validate(df_reactor_FTI
 #### `table` peak
 
 - **identifier**: str
+- **written name**: str
 - **peak width at 5% of height**: float64
 - **peak width at baseline**: float64
 - **peak width at half height**: float64
@@ -1299,6 +1669,7 @@ df_reactor_FTIR = automated_reactors_schema.FTIR_profile.validate(df_reactor_FTI
 
 #### `table` sample_document
 
+- **description**: str
 - **sample identifier**: str
 - **batch identifier**: str
 - **sample role type**: str
@@ -1339,7 +1710,14 @@ df_reactor_FTIR = automated_reactors_schema.FTIR_profile.validate(df_reactor_FTI
 
 #### `table` device_control_document
 
+- **device type**: str
+- **device identifier**: str
+- **detection type**: str
 - **product manufactuer**: str
+- **brand name**: str
+- **equipment serial number**: str
+- **model number**: str
+- **firmware version**: str
 - **detector distance setting (plate reader)**: float64
 - **integration time**: float64
 - **number of averages**: float64
@@ -1352,6 +1730,12 @@ df_reactor_FTIR = automated_reactors_schema.FTIR_profile.validate(df_reactor_FTI
 #### `table` device_document
 
 - **device type**: str
+- **device identifier**: str
+- **model number**: str
+- **product manufacturer**: str
+- **brand name**: str
+- **equipment serial number**: str
+- **firmware version**: str
 
 #### `table` device_system_document
 
@@ -1370,6 +1754,7 @@ df_reactor_FTIR = automated_reactors_schema.FTIR_profile.validate(df_reactor_FTI
 
 #### `table` diagnostic_trace_document
 
+- **description**: str
 - **data cube**: str
 
 #### `table` measurement_aggregate_document
@@ -1400,6 +1785,7 @@ df_reactor_FTIR = automated_reactors_schema.FTIR_profile.validate(df_reactor_FTI
 
 #### `table` sample_document
 
+- **description**: str
 - **sample identifier**: str
 - **batch identifier**: str
 - **sample role type**: str
@@ -1443,6 +1829,7 @@ df_reactor_FTIR = automated_reactors_schema.FTIR_profile.validate(df_reactor_FTI
 #### `table` peak
 
 - **identifier**: str
+- **written name**: str
 - **peak width at 5% of height**: float64
 - **peak width at baseline**: float64
 - **peak width at half height**: float64
@@ -1553,15 +1940,28 @@ df_reactor_FTIR = automated_reactors_schema.FTIR_profile.validate(df_reactor_FTI
 - **method identifier**: str
 - **description**: str
 
+#### `table` measurement_document
+
+- **data cube**: str
+
 #### `table` statistics_document
 
 - **pH**: float64
+- **statistical feature**: str
 - **temperature**: float64
 
 ### `instrument` PlateReaderSchema
 
 #### `table` device_control_document
 
+- **device type**: str
+- **device identifier**: str
+- **detection type**: str
+- **product manufactuer**: str
+- **brand name**: str
+- **equipment serial number**: str
+- **model number**: str
+- **firmware version**: str
 - **detector distance setting (plate reader)**: float64
 - **integration time**: float64
 - **number of averages**: float64
@@ -1572,7 +1972,12 @@ df_reactor_FTIR = automated_reactors_schema.FTIR_profile.validate(df_reactor_FTI
 #### `table` device_document
 
 - **device type**: str
+- **device identifier**: str
+- **model number**: str
 - **product manufactuer**: str
+- **brand name**: str
+- **equipment serial number**: str
+- **firmware version**: str
 
 #### `table` device_system_document
 
@@ -1591,6 +1996,7 @@ df_reactor_FTIR = automated_reactors_schema.FTIR_profile.validate(df_reactor_FTI
 
 #### `table` diagnostic_trace_document
 
+- **description**: str
 - **data cube**: str
 
 #### `table` measurement_aggregate_document
@@ -1620,6 +2026,7 @@ df_reactor_FTIR = automated_reactors_schema.FTIR_profile.validate(df_reactor_FTI
 
 #### `table` sample_document
 
+- **description**: str
 - **sample identifier**: str
 - **batch identifier**: str
 - **sample role type**: str
@@ -1651,9 +2058,14 @@ df_reactor_FTIR = automated_reactors_schema.FTIR_profile.validate(df_reactor_FTI
 - **method identifier**: str
 - **description**: str
 
+#### `table` measurement_document
+
+- **data cube**: str
+
 #### `table` statistics_document
 
 - **pressure**: float64
+- **statistical feature**: str
 - **temperature**: float64
 
 ### `instrument` PsdSchema
@@ -1719,6 +2131,30 @@ df_reactor_FTIR = automated_reactors_schema.FTIR_profile.validate(df_reactor_FTI
 
 ### `instrument` QnmrSchema
 
+#### `table` NMR_multiplet
+
+- **peak position**: float64
+- **analyte name**: str
+- **peak assignment target**: str
+- **associated nuclei count**: int64
+- **peak area**: float64
+
+#### `table` analyte_document
+
+- **analyte name**: str
+- **analysis material role type**: str
+- **batch identifier**: str
+- **molecular mass**: float64
+- **SMILES molecular structure**: str
+- **InChI molecular structure**: str
+- **InChIKey molecular structure**: str
+- **Molfile molecular structure**: str
+- **qNMR purity result**: float64
+- **standard deviation**: float64
+- **calculation description**: str
+- **analyte molar ratio**: float64
+- **reference identifier**: float64
+
 #### `table` document
 
 - **measurement identifier**: str
@@ -1738,12 +2174,24 @@ df_reactor_FTIR = automated_reactors_schema.FTIR_profile.validate(df_reactor_FTI
 - **batch identifier**: str
 - **material identifier**: str
 - **conformance assessment**: bool
+- **reference identifier**: str
 
 #### `table` sample_preparation_document
 
 - **balance identifier**: str
+- **tare weight**: float64
+- **gross weight**: float64
 - **sample weight**: float64
 - **solvent identifier**: str
+
+#### `table` standard_document
+
+- **reference material identifier**: str
+- **balance identifier**: str
+- **tare weight**: float64
+- **gross weight**: float64
+- **reference material weight**: float64
+- **purity result**: float64
 
 ### `instrument` QpcrSchema
 
@@ -1784,7 +2232,9 @@ df_reactor_FTIR = automated_reactors_schema.FTIR_profile.validate(df_reactor_FTI
 #### `table` device_control_document
 
 - **device type**: str
+- **device identifier**: str
 - **detection type**: str
+- **measurement method identifier**: str
 - **total cycle number setting**: float64
 - **denaturing temperature setting**: float64
 - **denaturing duration setting**: float64
@@ -1866,6 +2316,25 @@ df_reactor_FTIR = automated_reactors_schema.FTIR_profile.validate(df_reactor_FTI
 - **assay data identifier**: str
 - **measurement identifier**: str
 - **measurement time**: datetime64[ns]
+- **electron energy setting**: float64
+- **beam deceleration voltage setting**: float64
+- **current setting**: float64
+- **detector type**: str
+- **image format**: str
+- **image height**: float64
+- **image width**: float64
+- **magnification setting**: float64
+- **identifier**: str
+- **pressure**: float64
+- **assay comment**: str
+- **condenser lens voltage setting**: float64
+- **electron beam working distance**: float64
+- **micron marker setting**: float64
+- **x-coordinate**: float64
+- **y-coordinate**: float64
+- **incident radiation angle**: float64
+- **z-coordinate**: float64
+- **scan speed setting (electron microscopy)**: float64
 - **particle shape characterization**: str
 - **association state**: str
 - **experimental data identifier**: str
@@ -1900,7 +2369,11 @@ df_reactor_FTIR = automated_reactors_schema.FTIR_profile.validate(df_reactor_FTI
 
 #### `table` measurement_document
 
+- **solvent identifier**: str
+- **cell path length**: float64
+- **sample temperature**: float64
 - **mass concentration**: float64
+- **angle of optical rotation**: float64
 - **specific rotation**: float64
 
 ### `instrument` StirringSchema
@@ -1925,9 +2398,14 @@ df_reactor_FTIR = automated_reactors_schema.FTIR_profile.validate(df_reactor_FTI
 - **description**: str
 - **ambient temperature**: float64
 
+#### `table` measurement_document
+
+- **data cube**: str
+
 #### `table` statistics_document
 
 - **rotational speed**: float64
+- **statistical feature**: str
 - **torque**: float64
 
 ### `instrument` SurfaceAreaAnalysisSchema
@@ -1937,6 +2415,7 @@ df_reactor_FTIR = automated_reactors_schema.FTIR_profile.validate(df_reactor_FTI
 - **relative pressure (BET)**: float64
 - **pressure**: float64
 - **adsorbed volume at STP**: float64
+- **saturation vapor pressure**: float64
 - **elapsed time**: float64
 
 #### `table` document
@@ -1959,6 +2438,7 @@ df_reactor_FTIR = automated_reactors_schema.FTIR_profile.validate(df_reactor_FTI
 - **evacuation rate setting**: float64
 - **evacuation time setting**: float64
 - **measurement chamber free space volume**: float64
+- **saturation vapor pressure**: float64
 - **equilibration time**: float64
 
 #### `table` reference_material_document
@@ -2032,20 +2512,38 @@ df_reactor_FTIR = automated_reactors_schema.FTIR_profile.validate(df_reactor_FTI
 - **method identifier**: str
 - **description**: str
 
+#### `table` measurement_document
+
+- **data cube**: str
+
 #### `table` statistics_document
 
 - **temperature**: float64
+- **statistical feature**: str
 
 ### `instrument` TensileTestSchema
 
 #### `table` chord_modulus_document
 
 - **chord modulus**: float64
+- **start strain point**: float64
+- **end strain point**: float64
+
+#### `table` description
+
+- **secant modulus**: float64
+- **strain**: float64
+- **data cube**: str
 
 #### `table` device_document
 
 - **device type**: str
+- **device identifier**: str
+- **model number**: str
 - **product manufactuer**: str
+- **brand name**: str
+- **equipment serial number**: str
+- **firmware version**: str
 
 #### `table` device_system_document
 
@@ -2060,6 +2558,14 @@ df_reactor_FTIR = automated_reactors_schema.FTIR_profile.validate(df_reactor_FTI
 
 #### `table` device_type
 
+- **device type**: str
+- **device identifier**: str
+- **detection type**: str
+- **product manufactuer**: str
+- **brand name**: str
+- **equipment serial number**: str
+- **model number**: str
+- **firmware version**: str
 - **grip velocity setting**: float64
 - **grip distance setting**: float64
 
@@ -2081,6 +2587,7 @@ df_reactor_FTIR = automated_reactors_schema.FTIR_profile.validate(df_reactor_FTI
 - **peak load force**: float64
 - **fracture energy**: float64
 - **Young modulus**: float64
+- **stress-strain data cube**: str
 
 #### `table` processed_data_aggregate_document
 
@@ -2088,6 +2595,7 @@ df_reactor_FTIR = automated_reactors_schema.FTIR_profile.validate(df_reactor_FTI
 
 #### `table` sample_document
 
+- **description**: str
 - **sample identifier**: str
 - **batch identifier**: str
 - **sample role type**: str
@@ -2097,9 +2605,14 @@ df_reactor_FTIR = automated_reactors_schema.FTIR_profile.validate(df_reactor_FTI
 - **sample thickness**: float64
 - **sample width**: float64
 
+#### `table` secant_modulus_aggregate_document
+
+- **description**: str
+
 #### `table` secant_modulus_document
 
 - **secant modulus**: float64
+- **strain**: float64
 - **diagnostic trace document**: str
 - **data cube**: str
 
@@ -2162,7 +2675,14 @@ df_reactor_FTIR = automated_reactors_schema.FTIR_profile.validate(df_reactor_FTI
 
 #### `table` device_control_aggregate_document
 
+- **device type**: str
+- **device identifier**: str
+- **detection type**: str
 - **product manufactuer**: str
+- **brand name**: str
+- **equipment serial number**: str
+- **model number**: str
+- **firmware version**: str
 - **detector distance setting (plate reader)**: float64
 - **integration time**: float64
 - **number of averages**: float64
@@ -2178,6 +2698,12 @@ df_reactor_FTIR = automated_reactors_schema.FTIR_profile.validate(df_reactor_FTI
 #### `table` device_document
 
 - **device type**: str
+- **device identifier**: str
+- **model number**: str
+- **product manufacturer**: str
+- **brand name**: str
+- **equipment serial number**: str
+- **firmware version**: str
 
 #### `table` device_system_document
 
@@ -2196,10 +2722,12 @@ df_reactor_FTIR = automated_reactors_schema.FTIR_profile.validate(df_reactor_FTI
 
 #### `table` diagnostic_trace_document
 
+- **description**: str
 - **data cube**: str
 
 #### `table` electronic_absorbance_reference_wavelength_setting
 
+- **description**: str
 - **sample identifier**: str
 - **batch identifier**: str
 - **sample role type**: str
