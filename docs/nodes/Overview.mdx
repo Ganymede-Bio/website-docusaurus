@@ -31,6 +31,7 @@ The table below lists available nodes.
 | Analysis   | RunContainer           | FileAny                                                               | FileAny        | True          | False      |
 | Analysis   | Transform_SQL          | Table                                                                 | Table          | True          | False      |
 | Analysis   | Transform_py           | Table or List[Table]                                                  | NodeReturn     | True          | False      |
+| Analysis   | Trigger_Python         | Table(s) and/or File(s)                                               | FileAny        | True          | False      |
 | App        | APINode                | API                                                                   | NodeReturn     | True          | False      |
 | App        | AirtableExport         | Table                                                                 | API            | True          | False      |
 | App        | AirtableImport         | API                                                                   | NodeReturn     | False         | False      |
@@ -168,6 +169,7 @@ The _execute_ function may call classes and functions found within the User-Defi
 | Analysis   | RunContainer           | Run container node                                                           |
 | Analysis   | Transform_SQL          | SQL analysis Function                                                        |
 | Analysis   | Transform_py           | Manipulate data with python                                                  |
+| Analysis   | Trigger_Python         | Process data with Python and trigger subsequent flow                         |
 | App        | APINode                | Generic API Access Node                                                      |
 | App        | AirtableExport         | Export data from Ganymede data lake to Airtable                              |
 | App        | AirtableImport         | Import data from Airtable into Ganymede data lake                            |
