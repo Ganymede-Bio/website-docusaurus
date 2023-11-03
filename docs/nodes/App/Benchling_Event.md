@@ -51,7 +51,7 @@ Calls Benchling to get data for flow to trigger
     - Type of Benchling event
 - **benchling_context** : `Optional[BenchlingContext]`
     - Benchling context variable, which stores Benchling connection information
-- **ganymede_context** : `Optional[GanyemdeContext]`
+- **ganymede_context** : `Optional[GanymedeContext]`
     - Ganymede context variable, which stores flow run metadata
 
 ### Returns

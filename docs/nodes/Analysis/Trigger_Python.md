@@ -24,7 +24,7 @@ Calls Benchling to get data for flow to trigger
 
 - **df_sql_result** : `Union[pd.DataFrame, List[pd.DataFrame]]`
     - Table(s) or list of tables retrieved from user-defined SQL query
-- **ganymede_context** : `Optional[GanyemdeContext]`
+- **ganymede_context** : `Optional[GanymedeContext]`
     - Ganymede context variable, which stores flow run metadata
 
 ### Returns
