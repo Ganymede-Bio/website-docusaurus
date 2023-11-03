@@ -271,7 +271,9 @@ g = Ganymede()
 b = Benchling(g.ganymede_context)  
   
 # Get data frame of fields returned from custom entities and assay_results  
-df_custom_entity_fields = b.get_fields_data("custom_entity")  
+df_custom_entity_fields = b.get_fields_data(  
+    "custom_entities", ids=['bfi_1234', 'bfi_5678']  
+)  
 df_assay_result_fields = b.get_fields_data("assay_results", "assaysch_1234")  
   
 ```
