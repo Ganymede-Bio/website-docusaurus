@@ -28,11 +28,12 @@
     "@mui/material": "^5.11.16",
     "algoliasearch": "^4.14.3",
     "classnames": "^2.2.6",
-    "docusaurus-theme-search-typesense": "^0.12.0",
+    "docusaurus-theme-search-typesense": "^0.13.1",
     "prop-types": "^15.8.1",
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
     "react-loadable": "^5.5.0",
+    "react-player": "^2.13.0",
     "ts-node": "^10.9.1"
   },
   "devDependencies": {
