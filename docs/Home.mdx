@@ -4,6 +4,8 @@ sidebar_label: Home
 displayed_sidebar: webUiSidebar
 ---
 
+import ReactPlayer from 'react-player'
+
 import {
   HomeOutlined,
   NodeIndexOutlined,
@@ -18,11 +20,21 @@ import {
   SettingOutlined
 } from '@ant-design/icons';
 
-The <div className="button darkblue_button"><HomeOutlined /> **Home**</div> page contains links to available _flows_ in an environment.  Clicking on any listed _flow_ brings you to the <div className="button darkblue_button"><HomeOutlined /> **Flow View**</div> page, from which the user can run the selected _flow_ and view historical runs.
+The <div className="button darkblue_button"><HomeOutlined /> **Home**</div> page contains links to _flows_ in the environment.  
 
 <img width="1302" alt="Home" src="https://storage.googleapis.com/ganymede-bio-website/public/apiServer/HomeScreen_20231106.png"/>
+<br /><br /> 
 
-The My Flows tab contains flows relevant to the user, and can be assigned by selecting the appropriate _flow_ from the [<div className="button darkblue_button"><BranchesOutlined /> **Flow Editor**</div>](./FlowEditor.mdx) page.  
+The My Flows tab contains flows relevant to you, while the All Flows tab contains all flows in the environment.
+<ReactPlayer playing={true} loop={true} url="https://storage.googleapis.com/ganymede-bio-website/public/apiServer/my_flows-all_flows20231106.mp4" />
+<br /><br /> 
+
+To assign a flow to yourself, select the All Flows tab and star the relevant _flows_.
+<ReactPlayer playing={true} loop={true} url="https://storage.googleapis.com/ganymede-bio-website/public/apiServer/my_flows-self-assign_flow20231106.mp4" />
+<br /><br /> 
+
+[Admins](./AdminControls.mdx) can also assign users to flows from the [<div className="button darkblue_button"><BranchesOutlined /> **Flow Editor**</div>](./FlowEditor.mdx) page.
+<ReactPlayer playing={true} loop={true} url="https://storage.googleapis.com/ganymede-bio-website/public/apiServer/assign_user_to_flow20231106.mp4" />
 
 ## NavBars
 
