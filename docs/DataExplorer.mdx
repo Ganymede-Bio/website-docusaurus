@@ -16,12 +16,17 @@ The <div className="button darkblue_button"><TableOutlined /> **Data Explorer**<
 - The rest of the window has various tabs that let you view or modify the selected table.
   - The **Fields** tab lets you view and edit the table structure (the defined columns of the table, aka schema) and other table metadata, including a description.
 
+  <img alt="Data Explorer - Fields" src="https://ganymede-bio.mo.cloudinary.net/apiServer/DataExplorerFields_20231108.png" />
+
     - Fields have a name, a datatype (STRING by default), a flag for whether they are required, and an optional description.
     - You can edit a schema with the [Table Structure Editor](TableStructureEditor) <img className="inline-img" src="img/data/editButton.png"/> button. In Edit mode, you can edit the table description, and add fields and change some of the field information. 
 
   - The **Preview** tab displays the first 10 data rows of the selected table.
+  <img alt="Data Explorer - Preview" src="https://ganymede-bio.mo.cloudinary.net/apiServer/DataExplorerPreview_20231108.png" />
 
   - The **Query** tab allows you to do SQL queries on the table.
+
+  <img alt="Data Explorer - Query" src="https://ganymede-bio.mo.cloudinary.net/apiServer/DataExplorerQuery_20231108.png" />
 
     - You specify the query in **Query Editor** pane, which is preloaded with a default query for the selected table.  In the query, table names should be surrounded with backticks. (Why?) Only `SELECT` statements are allowed.
     
@@ -29,4 +34,4 @@ The <div className="button darkblue_button"><TableOutlined /> **Data Explorer**<
 
   - The **Flows** tab shows Ganymede Flows that are associated with this table. Clicking on the links in the Flow Id column will take you to the appropriate page.
 
-  
+  <img alt="Data Explorer - Flows" src="https://ganymede-bio.mo.cloudinary.net/apiServer/DataExplorerFlows_20231108.png" />
