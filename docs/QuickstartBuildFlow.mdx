@@ -112,7 +112,7 @@ Of course, we want data processing to flow from the <div className="button darkb
 
 Expand the <div className="button darkblue_button">**Input_File**</div> node by clicking on the downward-pointing carat <DownOutlined className="button darkblue_button_icon"/> in the corner of the node.  Click on the command prompt icon <CodeOutlined className="button darkblue_button_icon"/> in the upper-right-hand corner of the node to edit the Python code associated with node.
 
-Output the contents of the plate reader spreadsheet into the table `Quickstart_Absorbance_Change_results` by modifying the contents of the User-Defined Function cell as shown below:
+We will output the contents of the plate reader spreadsheet into a cloud database table called `Quickstart_Absorbance_Change_data` by modifying the contents of the User-Defined Function cell as shown below. Simply copy and paste all the code below into the notebook cell.
 
 ```python
 from typing import Dict
@@ -151,7 +151,10 @@ def execute(file_data: Dict[str, bytes], ganymede_context=None) -> NodeReturn:
 Non-tabular data can be stored by returning a dictionary of files to upload in the `files_to_upload` key of the `NodeReturn` object.
 :::
 
-Run the User-Defined Function cell by selecting the cell and then clicking on the <div className="button jupyter_button">▶️ Run</div> button in the header.  Save and deploy changes made to the Python node by running the Save Pipeline Code cell at the bottom of the notebook, or by pressing `Cmd+Shift+S` (Mac) or `Ctrl+Shift+S` (Windows/Linux).
+Run the User-Defined Function cell by selecting the cell and then clicking on the <div className="button jupyter_button">▶️ Run</div> button in the header.  In the "Testing" section below, you can test out uploading our original plate reader excel file and passing it into the User-Defined Function.  This is a great way to debug your code before deploying the flow.
+
+
+Save and deploy changes made to the Python node by running the Save Pipeline Code cell at the bottom of the notebook, or by pressing `Cmd+Shift+S` (Mac) or `Ctrl+Shift+S` (Windows/Linux).
 
 
 :::tip
