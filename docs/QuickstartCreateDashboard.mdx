@@ -49,7 +49,7 @@ Fill in the SQL Editor with the query below and click <div className="button dar
 ```sql
 -- Quickstart_Absorbance_Change_Run_Parameters table
 SELECT field, run_diff, left(field, 1) as row, cast(right(field, length(field)-1) as int64) as column
-FROM Quickstart_Absorbance_Change_Transform_Python_results 
+FROM Quickstart_Absorbance_Change_data
 UNPIVOT (value for run IN (run1, run2))
 WHERE field not in ('Time [s]', 'Temp. [°C]', 'Cycle Nr.')
 ORDER BY row, column
