@@ -69,6 +69,8 @@ The table below lists available nodes.
 | File       | Image_Write            | Table or List[Table]                                                  | NodeReturn     | True          | False      |
 | File       | Input_File             | FileAny                                                               | NodeReturn     | True          | False      |
 | File       | Input_File_Multi       | Set[FileAny]                                                          | NodeReturn     | True          | True       |
+| File       | PDF_Read               | FilePDF                                                               | NodeReturn     | True          | False      |
+| File       | PDF_Read_Multi         | Set[FilePDF]                                                          | NodeReturn     | True          | True       |
 | File       | Powerpoint_Write       | Table or List[Table]                                                  | NodeReturn     | True          | False      |
 | File       | XML_Read               | FileXML                                                               | NodeReturn     | True          | False      |
 | File       | Zip_Read               | FileZip                                                               | NodeReturn     | True          | False      |
@@ -207,6 +209,8 @@ The _execute_ function may call classes and functions found within the User-Defi
 | File       | Image_Write            | Process tabular data; write an image to data lake                            |
 | File       | Input_File             | Read data file and process in Ganymede                                       |
 | File       | Input_File_Multi       | Read data files and process in Ganymede                                      |
+| File       | PDF_Read               | Read in contents of an PDF file to a table                                   |
+| File       | PDF_Read_Multi         | Read in contents of multiple pdf files to a table                            |
 | File       | Powerpoint_Write       | Process tabular data; write a powerpoint presentation to data lake           |
 | File       | XML_Read               | Read XML file into data lake                                                 |
 | File       | Zip_Read               | Extract Zip file                                                             |

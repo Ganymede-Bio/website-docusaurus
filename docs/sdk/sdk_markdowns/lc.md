@@ -10,12 +10,24 @@ displayed_sidebar: SDKSidebar
 
 ## `class` LC
   
-Reads liquid chromatography runs in CDF format from Agilent LC systems and stores as dataframes  
+Reads liquid chromatography runs in CDF format  
+  
+### Methods  
+  
+**from_cdf(cdf_data: bytes)**  
+&nbsp; &nbsp; &nbsp; &nbsp; Reads in CDF data from Agilent LC and stores it in the class  
+**get_elution_peaks(chromatogram: pd.Series, peak_prominence_threshold=10, num_peaks_to_find=None)**  
+&nbsp; &nbsp; &nbsp; &nbsp; Get elution peaks from raw chromatogram data  
 
 
 ## `function` LC.__init__
   
-LC class to read in CDF data and store as dataframes  
+Initialize LC class  
+
+
+## `function` LC.from_cdf
+  
+Reads in CDF data from Agilent LC and stores it in the class  
   
 ### Parameters  
   
@@ -29,6 +41,8 @@ Get elution peaks from raw chromatogram data
   
 ### Parameters  
   
+**chromatogram** : `pd.DataFrame`  
+&nbsp; &nbsp; &nbsp; &nbsp; Pandas Series with time as index  
 **peak_prominence_threshold** : `int, optional`  
 &nbsp; &nbsp; &nbsp; &nbsp; Minimum prominence of peaks to be considered, by default 10  
 **num_peaks_to_find** : `int, optional`  
