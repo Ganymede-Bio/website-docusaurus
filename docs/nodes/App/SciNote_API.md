@@ -42,7 +42,7 @@ To get the SciNote Auth Code:
 2. Update settings.json in the repo with your configuration, which should contain server_url,
 api_uid, api_secret, and redirect_uri.
 3. Run get_auth_code.py and paste URL into your browser to get scinote_auth_code
-4. Run get_access_token.py to get scinote_access_token, scinote_refresh_token,
+4. Run example_list_projects.py to get scinote_access_token, scinote_refresh_token,
 scinote_access_token_created_at, and scinote_access_token_expires_in
 
 Secrets can be configured by clicking on your username in the upper-right hand of the Ganymede
