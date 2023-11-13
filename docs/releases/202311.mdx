@@ -8,6 +8,18 @@ import {
   HomeOutlined
 } from '@ant-design/icons';
 
+
+### November 9 2023
+**Improvements**
+- All URLs now include the environment name for specificity.
+- Zip files for bulk downloads are now named with the current datetime.
+- PDF parsing node types (PDF_Read and PDF_Read_Multi) are available for use again.
+- A retrieve_tables method was added to the Ganymede SDK, which can retrieve a list of tables from Ganymede Context and set data types if they are known. 
+
+**Bug Fixes**
+- In the file browser, changing environments will now clear the current selection.
+- Connections no longer appear to be disconnected when there is a mismatch between a lab PC time and UTC.
+
 ### November 2 2023
 **Features/Updates**
 - Flows can now be assigned to specific users so that a curated list of My Flows appears on the [<div className="button darkblue_button"><HomeOutlined /> **Home**</div>](../Home.mdx) page. Admins can assign Flows to users from the Flow settings panel, or users can self-assign Flows from the All Flows tab.
