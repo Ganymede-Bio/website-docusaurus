@@ -45,7 +45,7 @@ def execute(ganymede_context: GanymedeContext):
 
 ### `method` retrieve_sql
 
-_retrieve_sql_ allows users to retrieve tabular data from the Ganymede data lake.  Input can either be single SQL query, or a semicolon-delimited string containing a set of queries to run.
+_retrieve_sql_ allows users to query tabular data from the Ganymede data lake.  Input can either be single SQL query, or a semicolon-delimited string containing a set of queries to run.
 
 The results are returned as a DataFrame in Python if a single DataFrame is specified, or a list of Pandas DataFrames if multiple queries are submitted.
 
@@ -58,6 +58,20 @@ from ganymede_sdk import Ganymede
 query_sql = 'SELECT * FROM (SELECT "sample", "query"); SELECT * FROM (SELECT "sample", "query2")'
 
 df_query1, df_query2 = g.retrieve_sql(query_sql)
+```
+
+### `method` retrieve_tables
+
+_retrieve_sql_ allows users to retrieve tabular data from the Ganymede data lake, preserving field names with special characters.
+
+The results are returned as a Dict of DataFrames in Python, keyed by table name.  Returned DataFrames contain the entire contents of the specified table(s).
+
+- _param_ **table_names**: Union[str, List[str]] - Table or list of tables to retrieve
+
+```python
+from ganymede_sdk import Ganymede
+
+df_query1 = g.retrieve_sql(['table1', 'table2'])
 ```
 
 ### `method` list_tables
