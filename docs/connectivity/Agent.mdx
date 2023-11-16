@@ -342,6 +342,16 @@ To do so, follow the steps below:
 
 :::
 
+
+:::note
+
+For Cloud Watcher agents that download files from Ganymede Cloud, you can specify that they watch for flow _inputs_ (instead of the flow outputs) by adding the following to the Additional Params input box:
+
+```shell
+-v "input_bucket=true" 
+```
+:::
+
 ### Linux Installation
 
 After downloading the agent, create a [systemd service file](https://www.freedesktop.org/software/systemd/man/systemd.service.html) similar to what is shown below:
