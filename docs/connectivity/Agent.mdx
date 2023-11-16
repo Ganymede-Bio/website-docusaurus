@@ -53,6 +53,17 @@ The _Configuration_ input specifies the action performed by the Agent, chosen fr
 - [**Set a cron job to run flows periodically**](#set-a-cron-job-to-run-flows-periodically): Periodically observe local directory for files and deliver those files to Ganymede Cloud for processing
 - [**Watch for files locally and upload**](#watch-for-files-locally-and-upload): Monitor specified directory on the local file system and upload files to Ganymede Cloud upon observation.
 - [**Watch for flow outputs then save locally**](#watch-for-flow-outputs-then-save-locally): Monitor specified directory in Ganymede Cloud Storage for new files, and capture + process files on local instrument PC upon observation
+
+:::note
+
+For Cloud Watcher agents that download files from Ganymede Cloud, you can specify that they watch for flow _inputs_ (instead of the flow outputs) by adding the following to the Additional Params input box:
+
+```shell
+-v "input_bucket=true" 
+```
+:::
+
+
 - [**Load local files into Ganymede with a custom filter**](#load-local-files-into-ganymede-with-a-custom-filter): Send specified files on local instrument PC and process on Ganymede Cloud
 - [**Set a cron job to upload files periodically**](#set-a-cron-job-to-upload-files-periodically): Periodically deliver files to Ganymede Cloud
 
@@ -340,16 +351,6 @@ To do so, follow the steps below:
 
 **Note**: Use IP if systems are on different domains.
 
-:::
-
-
-:::note
-
-For Cloud Watcher agents that download files from Ganymede Cloud, you can specify that they watch for flow _inputs_ (instead of the flow outputs) by adding the following to the Additional Params input box:
-
-```shell
--v "input_bucket=true" 
-```
 :::
 
 ### Linux Installation
