@@ -31,9 +31,6 @@ module.exports = {
       // Optional
       contextualSearch: true,
     },
-    prism: {
-      theme: require('prism-react-renderer/themes/github'),
-    },
     navbar: {
       title: 'Ganymede',
       logo: {
