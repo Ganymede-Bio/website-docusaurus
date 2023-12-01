@@ -13,7 +13,7 @@ and writes output to specified Excel spreadsheet. If output_spreadsheet_name is 
 "override_spreadsheet_name", return a dict where the key is the desired spreadsheet name,
 and value is the spreadsheet contents.
 
-ex: {"<desired_spreadsheet_name>": <spreadsheet_contents>}
+ex: \{"\<desired_spreadsheet_name\>": \<spreadsheet_contents\>\}
 
 ### Node Attributes
 

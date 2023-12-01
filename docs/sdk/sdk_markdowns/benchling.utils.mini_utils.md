@@ -44,9 +44,9 @@ Removes empty values from a dictionary.
 ### Example  
   
 ```python  
->>> data = {'name': 'John', 'age': 30, 'city': ''}  
+>>> data = \{'name': 'John', 'age': 30, 'city': ''\}  
 >>> remove_empties_from_result_dict(data)  
-{'name': 'John', 'age': 30}  
+\{'name': 'John', 'age': 30\}  
 ```
 
 ## `function` clean_df_for_benchling
@@ -82,3 +82,64 @@ Serialize dictionary for transmission to Benchling
   
 `Union[benchling_sdk.helpers.serialization_helpers.D, Unset]`  
 &nbsp; &nbsp; &nbsp; &nbsp; Serialized dictionary  
+
+
+## `function` check_if_exists
+  
+Check if an entity exists in Benchling  
+  
+### Parameters  
+  
+**benchling_context** : `BenchlingContext`  
+&nbsp; &nbsp; &nbsp; &nbsp; Benchling context object  
+**name** : `str`  
+&nbsp; &nbsp; &nbsp; &nbsp; Name of the entity to check  
+**type** : `str`  
+&nbsp; &nbsp; &nbsp; &nbsp; Type of entity to check, default is "custom_entity"  
+  
+### Returns  
+  
+`Optional`  
+`benchling_sdk.models`  
+&nbsp; &nbsp; &nbsp; &nbsp; The entity if it exists, otherwise None  
+  
+  
+
+
+## `function` check_task_status
+  
+Check the status of a task in Benchling  
+  
+### Parameters  
+  
+**benchling_context** : `BenchlingContext`  
+&nbsp; &nbsp; &nbsp; &nbsp; Benchling context object  
+**task_id** : `str`  
+&nbsp; &nbsp; &nbsp; &nbsp; ID of the task to check  
+  
+### Returns  
+  
+`str`  
+&nbsp; &nbsp; &nbsp; &nbsp; Status of the task  
+
+
+## `function` divide_list_into_chunks
+  
+Divide a list into chunks of size n  
+  
+### Parameters  
+  
+**list_to_chunk** : `list`  
+&nbsp; &nbsp; &nbsp; &nbsp; List to divide  
+**int**  
+&nbsp; &nbsp; &nbsp; &nbsp; Size of the chunks  
+  
+### Returns  
+  
+`Iterator[List]`  
+&nbsp; &nbsp; &nbsp; &nbsp; Iterator of lists of size n  
+
+
+## `class` ChemicalStructure
+  
+Custom ChemicalStructure class to allow Benchling to call to_dict on a dictionary  

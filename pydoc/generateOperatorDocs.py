@@ -63,9 +63,7 @@ def extract_docstring(filename: str, search_str: str = "class", python_spaces: s
                     if current_table == "Notes":
                         table_record = "".join(table_record[1:]).strip()
                         if re.search(r"^\w+: \w+", table_record):
-                            secrets = [
-                                v.strip().replace(">", "\>") for v in table_record.split(":", 1)
-                            ]
+                            secrets = [v.strip() for v in table_record.split(":", 1)]
                             docstring_line = f"- **{secrets[0]}**: {secrets[1]}"
                         else:
                             docstring_line = table_record
@@ -111,6 +109,12 @@ if __name__ == "__main__":
 
         operator_data_list = extract_docstring(operator_filename, search_str="class")
         operator_data = "### Node Description\n\n" + "\n".join(operator_data_list)
+        operator_data = (
+            operator_data.replace("{", "\{")
+            .replace("}", "\}")
+            .replace(">", "\>")
+            .replace("<", "\<")
+        )
 
         action_data = ""
         if "action" in desc and name != "RunContainer":

@@ -9,7 +9,7 @@ displayed_sidebar: nodeSidebar
 
 def do_branch(
 self, context: Context, branches_to_execute: Union[str, Iterable[str]]
-) -> Union[str, Iterable[str]]:
+) -\> Union[str, Iterable[str]]:
 self.log.info("Branch into %s", branches_to_execute)
 self.skip_all_except(context["ti"], branches_to_execute)
 return branches_to_execute

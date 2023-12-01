@@ -218,3 +218,99 @@ Set up AssayResultCreate from dictionary
   
 `AssayResultCreate`  
 &nbsp; &nbsp; &nbsp; &nbsp; Assay results to be uploaded to Benchling  
+
+
+## `function` create_custom_entity_obj
+  
+Create a custom entity object to create in Benchling  
+  
+### Parameters  
+  
+**entity_name** : `str`  
+&nbsp; &nbsp; &nbsp; &nbsp; Name of the entity to create  
+**folder_id** : `str`  
+&nbsp; &nbsp; &nbsp; &nbsp; ID of the folder to create the entity in  
+**input_schema_id** : `str`  
+&nbsp; &nbsp; &nbsp; &nbsp; ID of the entity schema to use  
+**registry_id** : `str`  
+&nbsp; &nbsp; &nbsp; &nbsp; ID of the registry to use  
+**fields** : `Optional[Dict]`  
+&nbsp; &nbsp; &nbsp; &nbsp; Dictionary of fields to add to the entity  
+**author_id** : `Optional[str]`  
+&nbsp; &nbsp; &nbsp; &nbsp; ID of the author to assign to the entity  
+**naming_strategy** : `NamingStrategy`  
+&nbsp; &nbsp; &nbsp; &nbsp; Naming strategy to use for the entity, by default NamingStrategy.NEW_IDS  
+  
+### Returns  
+  
+**entity_item** : `CustomEntityBulkCreate`  
+&nbsp; &nbsp; &nbsp; &nbsp; Custom entity object to create in Benchling  
+  
+
+
+## `function` create_custom_entities_bulk
+  
+Create custom entities in Benchling  
+  
+### Parameters  
+  
+**benchling_context** : `BenchlingContext`  
+&nbsp; &nbsp; &nbsp; &nbsp; Benchling context object  
+**custom_entities_objs** : `List`  
+&nbsp; &nbsp; &nbsp; &nbsp; List of custom entity objects to create  
+**custom_entity_service** : `CustomEntityService`  
+&nbsp; &nbsp; &nbsp; &nbsp; Initiated custom entity service object  
+**wait** : `bool`  
+&nbsp; &nbsp; &nbsp; &nbsp; Whether to wait for the task to complete. Defaults to True.  
+  
+### Returns  
+  
+**custom_entity_task_ids** : `List`  
+&nbsp; &nbsp; &nbsp; &nbsp; List of task ids for the custom entities created  
+  
+
+
+## `function` update_custom_entities_bulk
+  
+Update custom entities in Benchling  
+  
+### Parameters  
+  
+**benchling_context** : `BenchlingContext`  
+&nbsp; &nbsp; &nbsp; &nbsp; Benchling context object  
+**custom_entities_objs** : `List`  
+&nbsp; &nbsp; &nbsp; &nbsp; List of custom entity objects to update  
+**custom_entity_service** : `CustomEntityService`  
+&nbsp; &nbsp; &nbsp; &nbsp; Initiated custom entity service object  
+**wait** : `bool`  
+&nbsp; &nbsp; &nbsp; &nbsp; Whether to wait for the task to complete. Defaults to True.  
+  
+### Returns  
+  
+**custom_entity_ids** : `List`  
+&nbsp; &nbsp; &nbsp; &nbsp; List of task ids for the custom entities updated  
+  
+
+
+## `function` update_custom_entity_obj
+  
+Create a custom entity object to update in Benchling  
+  
+### Parameters  
+  
+**existing_entity** : `CustomEntity`  
+&nbsp; &nbsp; &nbsp; &nbsp; Existing custom entity to update  
+**folder_id** : `str`  
+&nbsp; &nbsp; &nbsp; &nbsp; ID of the folder to create the entity in  
+**input_schema_id** : `str`  
+&nbsp; &nbsp; &nbsp; &nbsp; ID of the entity schema to use  
+**fields** : `Optional[Dict]`  
+&nbsp; &nbsp; &nbsp; &nbsp; Dictionary of fields to add to the entity  
+**author_id** : `Optional[str]`  
+&nbsp; &nbsp; &nbsp; &nbsp; ID of the author to assign to the entity  
+  
+### Returns  
+  
+**new_entity_param** : `CustomEntityBulkUpdate`  
+&nbsp; &nbsp; &nbsp; &nbsp; Custom entity object to update in Benchling  
+  

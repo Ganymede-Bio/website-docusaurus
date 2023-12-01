@@ -6,7 +6,7 @@ displayed_sidebar: nodeSidebar
 
 ### Node Description
 
-Sync GCS bucket -> S3 bucket
+Sync GCS bucket -\> S3 bucket
 
 ### Node Attributes
 

@@ -22,6 +22,10 @@ Benchling object to interact with Benchling API through read and write type meth
 &nbsp; &nbsp; &nbsp; &nbsp; The benchling connection object  
 **run_tag** : `str`  
 &nbsp; &nbsp; &nbsp; &nbsp; Tag associated with flow run  
+**custom_entity_service** : `CustomEntityService`  
+&nbsp; &nbsp; &nbsp; &nbsp; Benchling custom entity service to create or update custom entities  
+**molecule_service** : `MoleculeService _ defaults to None, initialized when first used`  
+&nbsp; &nbsp; &nbsp; &nbsp; Benchling molecule service to create or update molecules  
 
 
 ## `function` Benchling.__init__
@@ -70,10 +74,106 @@ Creates custom entity in Benchling.&nbsp; &nbsp; If the entity does not exist, f
 &nbsp; &nbsp; &nbsp; &nbsp; Dictionary with custom entity name as key and custom entity ID as value  
 
 
+## `function` Benchling.create_or_update_custom_entities_bulk
+  
+Bulk creates custom entities in Benchling.&nbsp; &nbsp; If the entity does not exist, first create it.  
+  
+### Parameters  
+  
+**custom_entities_dataframe** : `pd.DataFrame`  
+&nbsp; &nbsp; &nbsp; &nbsp; Dataframe containing custom entities to be created  
+&nbsp; &nbsp; &nbsp; &nbsp; Columns should include name_field and all fields in schema  
+**name_field** : `str`  
+&nbsp; &nbsp; &nbsp; &nbsp; Name of column in custom_entities_dataframe containing entity names  
+**folder_id** : `str`  
+&nbsp; &nbsp; &nbsp; &nbsp; Folder ID containing Benchling entity to be created. This should be a string starting  
+&nbsp; &nbsp; &nbsp; &nbsp; with "lib_"  
+**schema_id** : `str`  
+&nbsp; &nbsp; &nbsp; &nbsp; Input schema ID Tag. schema associated with Benchling entity to be created. This should  
+&nbsp; &nbsp; &nbsp; &nbsp; be a string starting with "ts_"  
+**registry_id** : `str`  
+&nbsp; &nbsp; &nbsp; &nbsp; Project associated with custom entity.&nbsp; &nbsp; This identifies the registry that your run  
+&nbsp; &nbsp; &nbsp; &nbsp; entity will be registered to.  
+**wait** : `bool`  
+&nbsp; &nbsp; &nbsp; &nbsp; Whether to wait for the task to complete before returning  
+  
+### Returns  
+  
+`Dict[str, List[str]]`  
+&nbsp; &nbsp; &nbsp; &nbsp; Dictionary with keys "created" and "updated" and values of lists of custom entity IDs  
+  
+  
+
+
+## `function` Benchling.create_or_update_molecule
+  
+Creates molecule in Benchling.&nbsp; &nbsp; If the entity does not exist, first create it.  
+  
+### Parameters  
+  
+**entity_name** : `str`  
+&nbsp; &nbsp; &nbsp; &nbsp; Name of new entity to be created  
+**folder_id** : `str`  
+&nbsp; &nbsp; &nbsp; &nbsp; Folder ID containing Benchling entity to be created. This should be a string starting  
+&nbsp; &nbsp; &nbsp; &nbsp; with "lib_"  
+**schema_id** : `str`  
+&nbsp; &nbsp; &nbsp; &nbsp; Input schema ID Tag. schema associated with Benchling entity to be created. This should  
+&nbsp; &nbsp; &nbsp; &nbsp; be a string starting with "ts_"  
+**registry_id** : `str`  
+&nbsp; &nbsp; &nbsp; &nbsp; Project associated with custom entity.&nbsp; &nbsp; This identifies the registry that your run  
+&nbsp; &nbsp; &nbsp; &nbsp; entity will be registered to.&nbsp; &nbsp; This can be found by clicking on Avatar - Feature  
+&nbsp; &nbsp; &nbsp; &nbsp; Settings - Registry Settings, and you will be able to find it in the URL.&nbsp; &nbsp; This should  
+&nbsp; &nbsp; &nbsp; &nbsp; be a string starting with "src_"  
+**naming_strategy** : `NamingStrategy`  
+&nbsp; &nbsp; &nbsp; &nbsp; Naming strategy to use when creating new entities. See NamingStrategy for more details.  
+**custom_entity_fields** : `Optional[Dict]`  
+&nbsp; &nbsp; &nbsp; &nbsp; Dictionary of field names and values to associate with custom entity  
+**author_id** : `Optional[str]`  
+&nbsp; &nbsp; &nbsp; &nbsp; Author ID to associate with custom entity. Should be a string starting with "ent_"  
+**molecule_fields** : `Optional[Dict]`  
+&nbsp; &nbsp; &nbsp; &nbsp; Dictionary of field names and values to associate with molecule  
+**if_exists** : `str`  
+&nbsp; &nbsp; &nbsp; &nbsp; Either "fail" or "update". If "fail", will raise an error if the entity already exists.  
+  
+### Returns  
+  
+**molecule** : `Molecule`  
+&nbsp; &nbsp; &nbsp; &nbsp; Created molecule object  
+
+
+## `function` Benchling.create_or_update_molecules_bulk
+  
+Bulk creates molecules in Benchling.&nbsp; &nbsp; If the entity does not exist, first create it.  
+  
+### Parameters  
+  
+**molecules_dataframe** : `pd.DataFrame`  
+&nbsp; &nbsp; &nbsp; &nbsp; Dataframe containing molecules to be created  
+&nbsp; &nbsp; &nbsp; &nbsp; Columns should include name_field and all fields in schema  
+**name_field** : `str`  
+&nbsp; &nbsp; &nbsp; &nbsp; Name of column in molecules_dataframe containing entity names  
+**folder_id** : `str`  
+&nbsp; &nbsp; &nbsp; &nbsp; Folder ID containing Benchling entity to be created. This should be a string starting  
+&nbsp; &nbsp; &nbsp; &nbsp; with "lib_"  
+**schema_id** : `str`  
+&nbsp; &nbsp; &nbsp; &nbsp; Input schema ID Tag. schema associated with Benchling entity to be created. This should  
+&nbsp; &nbsp; &nbsp; &nbsp; be a string starting with "ts_"  
+**registry_id** : `str`  
+&nbsp; &nbsp; &nbsp; &nbsp; Project associated with custom entity.&nbsp; &nbsp; This identifies the registry that your run  
+&nbsp; &nbsp; &nbsp; &nbsp; entity will be registered to.  
+**wait** : `bool`  
+&nbsp; &nbsp; &nbsp; &nbsp; Whether to wait for the task to complete before returning  
+  
+### Returns  
+  
+`Dict[str, List[str]]`  
+&nbsp; &nbsp; &nbsp; &nbsp; Dictionary with keys "created" and "updated" and values of lists of molecule IDs  
+
+
 ## `function` Benchling.create_benchling_ids_from_files
   
 Upload blob files to Benchling and return a dictionary of  
-{blob name: blob ID from Benchling}  
+\{blob name: blob ID from Benchling\}  
   
 ### Parameters  
   
@@ -102,11 +202,11 @@ b = Benchling(g.ganymede_context)
 # Get the IDs for two files that are uploaded to Benchling  
   
 file_ids = b.create_benchling_ids_from_files(  
-    {"Filename1.csv": file1, "Filename2.csv": file2}, process_file_names=True  
+    \{"Filename1.csv": file1, "Filename2.csv": file2\}, process_file_names=True  
 ) # where file_ids.keys() = ['filename1csv', 'filename2csv']"  
   
 file_ids = b.create_benchling_ids_from_files(  
-    {"Filename1.csv": file1, "Filename2.csv": file2}  
+    \{"Filename1.csv": file1, "Filename2.csv": file2\}  
 ) # where file_ids.keys() = ['Filename1.csv', 'Filename2.csv']"  
 ```
 
@@ -161,12 +261,12 @@ custom_entity_id = b.create_or_update_custom_entity(
 )  
   
 # Create file IDs and get dropdown IDs  
-file_ids = b.create_benchling_ids_from_files({"filename1": file1, "filename2": file2})  
-dropdown_ids = {dropdown["name"]: dropdown["id"] for dropdown in b.get("dropdowns")}  
+file_ids = b.create_benchling_ids_from_files(\{"filename1": file1, "filename2": file2\})  
+dropdown_ids = \{dropdown["name"]: dropdown["id"] for dropdown in b.get("dropdowns")\}  
   
 # Use pandas.DataFrame.replace to link entries in your dataframe with Benchling IDs  
 # or manually add IDs to the dataframe.  
-dataframe = dataframe.replace({**custom_entity_id, **file_ids, **dropdown_ids})  
+dataframe = dataframe.replace(\{**custom_entity_id, **file_ids, **dropdown_ids\})  
   
 # Upload dataframe to Benchling as Assay Results  
 assay_results = b.create_assay_results_from_dataframe(  
@@ -331,14 +431,14 @@ custom_entities = b.get('custom_entities', author_idsany_of=['ent_1234'])
 b.get(  
     "custom_entities",  
     schema_id=INSTRUMENT_SCHEMA_ID,  
-    schema_fields={"Serial #": instrument_serial_number},  
+    schema_fields=\{"Serial #": instrument_serial_number\},  
 )  
   
 # get specific notebook entry by ID  
 b.get('entries', id='etr_1234')  
   
 # retrieve plate named "my_plate_name"  
-test_plate = b.get('plates', benchling_filter={'name': 'my_plate_name'})[0]  
+test_plate = b.get('plates', benchling_filter=\{'name': 'my_plate_name'\})[0]  
   
 # to get a list of available services (e.g. - plates, custom_entities, etc.)  
 b.list_available_services()  
@@ -375,11 +475,11 @@ from ganymede_sdk import Ganymede
 g = Ganymede()  
 b = Benchling(g.ganymede_context)  
   
-# Get the dropdowns of the form [{"id": id, "name": name}]  
+# Get the dropdowns of the form [\{"id": id, "name": name\}]  
 results = b.get("dropdowns")  
   
 # Convert list of dictionaries to dictionary where name is the key and id are the values  
-# of the form {name: value}  
+# of the form \{name: value\}  
 dropdown_names_to_ids = b.get_model_to_map(results, keys='name', values='id')  
 ```
 

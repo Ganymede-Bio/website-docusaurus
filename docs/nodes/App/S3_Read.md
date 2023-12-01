@@ -6,7 +6,7 @@ displayed_sidebar: nodeSidebar
 
 ### Node Description
 
-Sync S3 bucket -> Ganymede data lake bucket
+Sync S3 bucket -\> Ganymede data lake bucket
 
 ### Node Attributes
 

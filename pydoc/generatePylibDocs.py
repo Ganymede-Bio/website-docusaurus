@@ -43,7 +43,7 @@ KEYWORDS = "|".join(
 
 
 def dir_files_docstrings_to_markdown_files(_dir, save_path):
-    for path, subdirs, files in os.walk(_dir):
+    for path, _, files in os.walk(_dir):
         for file in files:
             if not re.search(".py$", file) or re.search("__init__", file):
                 continue
@@ -68,7 +68,7 @@ def dir_files_docstrings_to_markdown_files(_dir, save_path):
 
             markdown_file = os.path.join(save_path, f"{header}.md")
             with open(markdown_file, "w") as mf:
-                mf.write(docstrings_md)
+                mf.write(docstrings_md.replace("{", "\{").replace("}", "\}"))
 
             sidebar_dict[md_key]["items"].append(f"sdk/sdk_markdowns/{header}")
 
@@ -121,9 +121,7 @@ def extract_docstrings(file_path):
                     and isinstance(item.body[0].value, ast.Str)
                 ):
                     class_docstring = item.body[0].value.s
-                    docstrings_dict[f"`class` {current_class}"] = textwrap.dedent(
-                        class_docstring
-                    )
+                    docstrings_dict[f"`class` {current_class}"] = textwrap.dedent(class_docstring)
                 for class_item in item.body:
                     if isinstance(class_item, ast.FunctionDef):
                         if (
@@ -131,9 +129,7 @@ def extract_docstrings(file_path):
                             and isinstance(class_item.body[0], ast.Expr)
                             and isinstance(class_item.body[0].value, ast.Str)
                         ):
-                            function_key = (
-                                f"`function` {current_class}.{class_item.name}"
-                            )
+                            function_key = f"`function` {current_class}.{class_item.name}"
                             if function_key not in docstrings_dict:
                                 docstring = class_item.body[0].value.s
                                 formatted_docstring = textwrap.dedent(docstring)
@@ -155,9 +151,7 @@ def convert_docstring_to_markdown(method, docstring):
 
     field_splits = re.split("###", docstring)
 
-    docstring = "###".join(
-        [convert_fields_to_markdown(field) for field in field_splits]
-    )
+    docstring = "###".join([convert_fields_to_markdown(field) for field in field_splits])
 
     # Keep new line structure on markdown view
     docstring = re.sub(r"\n", r"  \n", docstring)
@@ -187,11 +181,7 @@ def convert_parameters_to_markdown(docstring):
     pattern = "|".join(patterns)
     new_lines = []
     for line in docstring.split("\n"):
-        if (
-            line.strip() == ""
-            or re.search(KEYWORDS, line)
-            or re.search(r"^-|^\s{1,4}", line)
-        ):
+        if line.strip() == "" or re.search(KEYWORDS, line) or re.search(r"^-|^\s{1,4}", line):
             new_lines.append(line)
             continue
         line = re.sub(r"-", "_", line)
