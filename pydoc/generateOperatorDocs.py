@@ -28,6 +28,9 @@ def extract_docstring(filename: str, search_str: str = "class", python_spaces: s
         if not search_str_found:
             continue
 
+        if "branch" in filename.lower():
+            print(line)
+
         if prev_line.strip().endswith(":") and line_stripped.startswith('"""'):
             is_comment = True
         elif line_stripped.endswith('"""') and is_comment:
@@ -107,7 +110,8 @@ if __name__ == "__main__":
         if not os.path.exists(dest_dir):
             os.makedirs(dest_dir)
 
-        operator_data_list = extract_docstring(operator_filename, search_str="class")
+        search_str = "class" if name != "Branch_Python" else "class BranchPythonNode"
+        operator_data_list = extract_docstring(operator_filename, search_str=search_str)
         operator_data = "### Node Description\n\n" + "\n".join(operator_data_list)
         operator_data = (
             operator_data.replace("{", "\{")
