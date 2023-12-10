@@ -542,6 +542,39 @@ Unregisters and Archives a custom entity that has been registered in Benchling R
 &nbsp; &nbsp; &nbsp; &nbsp; Name of custom entity to archive  
 **reason** : `EntityArchiveReason, optional`  
 &nbsp; &nbsp; &nbsp; &nbsp; Reason to archive custom entity, by default "Other"  
+  
+### Raises  
+  
+**ValueError**  
+&nbsp; &nbsp; &nbsp; &nbsp; Error if method is called in pipeline execution.&nbsp; &nbsp; The method is only supported  
+&nbsp; &nbsp; &nbsp; &nbsp; in editor and analysis notebooks.  
+
+
+## `function` Benchling.archive_assay_result
+  
+Archives assay results based on assay result schema and condition.  
+  
+### Parameters  
+  
+**assay_result_schema_id** : `str`  
+&nbsp; &nbsp; &nbsp; &nbsp; Assay result schema ID to archive; should start with 'assaysch_'  
+**app_name** : `str, optional`  
+&nbsp; &nbsp; &nbsp; &nbsp; Creator of assay result to filter by, by default "Ganymede App"  
+**filter_fields** : `Dict[str, str], optional`  
+&nbsp; &nbsp; &nbsp; &nbsp; Fields on assay result to filter by, specified as a dictionary of field name to field display value  
+**execute** : `bool`  
+&nbsp; &nbsp; &nbsp; &nbsp; Whether to execute the archive.&nbsp; &nbsp; If False, will return assay results to archive.  
+  
+### Raises  
+  
+**ValueError**  
+&nbsp; &nbsp; &nbsp; &nbsp; Error if method is called in pipeline execution.&nbsp; &nbsp; The method is only supported  
+&nbsp; &nbsp; &nbsp; &nbsp; in editor and analysis notebooks.  
+  
+### Returns  
+  
+`List[Dict]`  
+&nbsp; &nbsp; &nbsp; &nbsp; List of assay results to archive  
 
 
 ## `class` SchemaError
