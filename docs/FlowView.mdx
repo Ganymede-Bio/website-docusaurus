@@ -4,14 +4,9 @@ title: Flow View
 displayed_sidebar: webUiSidebar
 ---
 
-import { CaretRightOutlined,
-         HomeOutlined,
-         NodeIndexOutlined,
-         FolderViewOutlined,
-         PlusCircleOutlined,
+import { HomeOutlined,
          PlayCircleOutlined
        } from '@ant-design/icons';
-// import FlowsIcon from '@site/static/img/flows_icon.svg';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 
 The <div className="button darkblue_button"><img src={useBaseUrl('/img/flows_icon.svg')} className="filter-white" /> **Flow View**</div> page provides access to running _flows_ and viewing run history.  This page can be accessed by clicking on a _flow_ on the <div className="button darkblue_button"><HomeOutlined /> **Home**</div> page.
@@ -53,3 +48,21 @@ Some common values for colors that you will see are:
   - ![#FFA500](https://placehold.co/2x2/FFA500/FFA500.png) **Orange**: dependency for node has failed, preventing this node from being run
 
 Logs associated with each _flow_ step can be accessed by clicking on the corresponding colored box.
+
+#### Error Attribution
+
+Developers on the platform are able to throw specify an error type and message associated with a failed _node_, as shown
+in the example code below, which would live within a node.  The type is displayed on the status tag of the Run History table.
+
+```python
+from ganymede_sdk.flow_runtime import GanymedeException
+
+# available exception types are: Validation, Connection, Function
+raise GanymedeException(message=”Peaks not detected in results”, exception_type=”Function”)
+```
+
+Categories of errors are:
+
+- **Validation**: Schema validation errors; an example use case would be a Pandas DataFrame failing to validate against a Pandera schema.
+- **Connection**: Errors related to connecting to external services.  Check for errors related to authentication, service availability, and how the service is being accessed.
+- **Function**: Errors related to function logic; an example use case would be a failed function call to a Python package.
