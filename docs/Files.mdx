@@ -37,7 +37,20 @@ Click the link icon ( <LinkOutlined /> ) next to a file's name in the _File name
 ![Files (copying link)](https://ganymede-bio.mo.cloudinary.net/apiServer/Files-Copying-Link-2023-08-31.png)
 &nbsp;
 ![Files (single-file view)](https://ganymede-bio.mo.cloudinary.net/apiServer/Files-Single-File-View-2023-08-31.png)
-&nbsp;
+
+### Generating URLs for files
+
+URLs for files can be generated using the get_file_url function in the Ganymede SDK by calling the `get_file_url` method.
+
+```python
+from ganymede_sdk.storage import get_file_url
+
+bucket = 'input' # or 'output'
+filename = 'sample_file_name.txt'
+file_url = get_file_url(filename, bucket)
+```
+
+This can be useful for referencing files in Ganymede from other applications.
 
 ## Viewing related entities
 
