@@ -5,7 +5,15 @@ import shutil
 import re
 from typing import List
 
-keywords = ["Parameters", "Notes", "Returns", "Yields", "Raises", "Node Attributes"]
+keywords = [
+    "Parameters",
+    "Notes",
+    "Returns",
+    "Yields",
+    "Raises",
+    "Node Attributes",
+    "Examples",
+]
 
 
 def extract_docstring(filename: str, search_str: str = "class", python_spaces: str = 4) -> List:
@@ -72,7 +80,7 @@ def extract_docstring(filename: str, search_str: str = "class", python_spaces: s
                             docstring_line = table_record
                     elif current_table == "Node Attributes" and num_spaces == 0:
                         docstring_line = num_spaces * "  " + "- **" + table_record[1].strip() + "**"
-                    elif current_table == "Returns":
+                    elif current_table in ("Returns", "Examples", "Yields"):
                         docstring_line = max(num_spaces, 0) * "  " + table_record[1]
                     else:
                         docstring_line = max(num_spaces, 0) * "  " + "- " + table_record[1]
