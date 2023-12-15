@@ -154,7 +154,11 @@ module.exports = {
         type: 'category',
         label: 'SDK',
         collapsed: true,
-          items: [
+        items: [
+          {
+            type: 'doc',
+            id: 'sdk/sdk_markdowns/AgentDataModels',
+          },
             nodeSDKApi,
             nodeSDKAnalytics
           ]

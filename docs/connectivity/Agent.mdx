@@ -79,9 +79,13 @@ For Cloud Watcher agents that download files from Ganymede Cloud, you can specif
 - `File pattern to parameter mapping`: For the selected Flow, the [glob pattern](<https://en.wikipedia.org/wiki/Glob_(programming)>) to associate with the input parameter(s)
   - This option is only available on create. Further configuration updates will occur inside the notebook, not inside the agent configuration
 
-The corresponding user-defined code will be generated to map those file patterns to parameters.
+The corresponding user-defined code will be generated to map those file patterns to parameters.  There are 2 functions that could require modification in the user-defined code during configuration:
 
-For example, if the instrument outputs a CSV file called "\{id\}\_lc_output\<YYYYMMDD\>.csv" which is to be ingested by a [CSV_Read node](../nodes/File/CSV_Read.md) called "Ingest_Data", an appropriate configuration would be "\{id\}\_lc_output\*.csv" for the input box associated with the "Ingest_Data.csv" node. The following user-defined code would be generated.
+- `get_param_mapping`: This function is called whenever a file is added or modified in the watch directory.  Modify this function to specify the files you want to look for prior to triggering a flow.
+- `execute`: Called when all glob patterns specified by `get_param_mapping` have been matched, this object returned by this function specifies the inputs to the flow that is executed when all files are observed.
+- `fp`: This function returns a function that performs pattern matching against a file path.  Use this function as a template for matching files.
+
+For example, if the instrument outputs a CSV file called "\{id\}\_lc_output\<YYYYMMDD\>.csv" which is to be ingested by a [CSV_Read node](../nodes/File/CSV_Read.md) called "Ingest_Data", an appropriate configuration would be "\{id\}\_lc_output\*.csv" for the input box associated with the "Ingest_Data.csv" node.  The corresponding user-defined code would be:
 
 ```python
 from ganymede_sdk.agent.models import TriggerFlowParams, FileWatcherResult
@@ -92,14 +96,23 @@ import os
 
 
 def fp(watch_dir: str, parent_dir: str, pattern: str) -> Callable[[str], bool]:
+    """
+    This function returns a function that performs pattern matching against a file path.
+    Use this function as a template for creating your own pattern matching functions, which
+    you can then use in the values of the return object in the get_param_mapping function.
+
+    Returns
+    -------
+    Callable[[str], bool]
+        Function that takes a file as input and returns True if the file matches the pattern.
+    """
+
     def fp_res(x: str):
         return x in glob.glob(os.path.join(watch_dir, pattern), recursive=True)
 
     return fp_res
 
 
-# Must return a dictionary where key is the parameter
-# and value is the lambda for files that match that parameter
 def get_param_mapping(
     watch_dir: str,
     parent_dir: str = "",
@@ -107,6 +120,15 @@ def get_param_mapping(
     modified_time: str = "",
     body: bytes = bytes(),
 ) -> Dict[str, Callable[[str], bool]]:
+    """
+    This function is called when a file is added or modified in the watch directory.
+    Modify this function to capture the files you want to trigger the flow;
+    the function should return a dictionary where the keys are <node name>.<param name>
+    and values are functions for performing pattern matching against the target file.
+
+    For nodes that accept multiple inputs, specify a list of functions to match against;
+    each specified function should uniquely match 1 file.
+    """
     id_group = re.search(r"^(\w+)", file_name)
     if id_group == None:
         return {}
@@ -117,6 +139,14 @@ def get_param_mapping(
 
 
 def execute(flow_params_fw: FileWatcherResult) -> TriggerFlowParams:
+    """
+    Called when all glob patterns specified by get_param_mapping have been matched.
+
+    Parameters
+    ----------
+    flow_params_fw : FileWatcherResult
+        Dict of FileParam objects indexed by <node name>.<param name>
+    """
     return TriggerFlowParams(
         single_file_params=flow_params_fw.files,
         multi_file_params=None,
@@ -128,8 +158,6 @@ def execute(flow_params_fw: FileWatcherResult) -> TriggerFlowParams:
 If a second parameter is added, such as an [Excel_Read node](../nodes/File/Excel_Read.md) called "Experiment_Context" that accepted files of the pattern "\{experiment_id\}\_context.xlsx", then the get_param_mapping function would later have to be modified to include that param like so:
 
 ```python
-# Must return a dictionary where key is the parameter
-# and value is the lambda for files that match that parameter
 def get_param_mapping(
     watch_dir: str,
     parent_dir: str = "",
@@ -137,6 +165,15 @@ def get_param_mapping(
     modified_time: str = "",
     body: bytes = bytes(),
 ) -> Dict[str, Callable[[str], bool]]:
+    """
+    This function is called when a file is added or modified in the watch directory.
+    Modify this function to capture the files you want to trigger the flow;
+    the function should return a dictionary where the keys are <node name>.<param name>
+    and values are functions for performing pattern matching against the target file.
+
+    For nodes that accept multiple inputs, specify a list of functions to match against;
+    each specified function should uniquely match 1 file.
+    """
     id_group = re.search(r"^(\w+)", file_name)
     if id_group == None:
         return {}
@@ -184,6 +221,8 @@ For example, if your instrument writes out files in a directory like:
 ```
 
 You would use parameters like `*/configuration.xml` and `*/results.csv` to upload the files and submit them to a flow.
+
+Documentation on the objects used in the user-defined code for these agents can be found on the [Agent Data Models](../sdk/sdk_markdowns/AgentDataModels.mdx) page.
 
 #### Example use case
 
