@@ -90,16 +90,20 @@ The table below lists available nodes.
 - **File**: For ETL operations on data of specified type into Ganymede cloud
 - **Tag**: For specifying parameters at _flow_ runtime
 
-#### Node Input/Output Types
+### Node Types, NodeReturn Object
 
-Input/output types are split into the following categories:
-- **NodeReturn**: Object holding tables and files to return from Node.  Initializing a NodeReturn object involves passing the following parameters:
-  - **tables_to_upload**: Dictionary of Pandas DataFrames keyed by table name to store in Ganymede
-  - **files_to_upload**: Dictionary of files (bytes objects) keyed by file name to store in Ganymede
+Many nodes return a **NodeReturn** object, which contain tables and files to store in the Ganymede data lake.  
+
+Initializing a NodeReturn object involves passing the following parameters:
+  - _param_ **tables_to_upload**: Optional[Dict[str, pd.DataFrame]] - Tables keyed by name to store in Ganymede
+  - _param_ **files_to_upload**: Optional[Dict[str, bytes]] - Files keyed by filename to store in Ganymede
+  - _param_ **if_exists**: str - String indicating whether to overwrite or append to existing tables in Ganymede data lake.  Valid values are "replace", "append", or "fail"; defaults to "replace".
+  - _param_ **tables_measurement_units**: Optional[str, pd.DataFrame] - if provided, the measurement units for columns; keys are table names, values are
+    pandas DataFrames with "column_name" and "unit" as columns
 
 :::note example
 
-Running the following in a cell in the editor notebook
+The contents of a NodeReturn object can be viewed in the notebook; transposed table heads and list of files are displayed when the object is observed.  For example, running the following code in an editor notebook
 
 ```python
 import pandas as pd
@@ -127,6 +131,8 @@ Docstrings and source code can be viewed by typing `?NodeReturn` and `??NodeRetu
 
 :::
 
+Some other input and output types characteristic to nodes are:
+
 - **Table**: Tabular data retrieved from or passed to tenant-specific Ganymede data lake.  Tables are retrieved from Ganymede data lake via ANSI SQL queries, and are passed to Ganymede data lake as pandas DataFrames
 - **API**: access via third-party API
 - **File-related inputs/outputs**: File of specified type.  
@@ -144,6 +150,7 @@ Docstrings and source code can be viewed by typing `?NodeReturn` and `??NodeRetu
 **Set**, **List**, and **Dict** correspond to Python sets, lists, and dictionaries respectively.
 
 **Optional** indicates that the input or output is optional.
+
 
 ### User-editable Nodes
 

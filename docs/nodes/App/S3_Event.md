@@ -9,7 +9,7 @@ displayed_sidebar: nodeSidebar
 ### Node Attributes
 
 - **input_filter_path**
-  - Input JSONPath used for applying filtering logic
+  - Input [JSONPath](https://jsonpath.com) used for applying filtering logic
 - **input_trigger_flow_name**
   - Input Ganymede flow to trigger from captured event
 

@@ -132,6 +132,19 @@ output_files = retrieve_files(['sample_output.xlsx', 'sample_validation.txt'],
                               input_or_output_bucket="output", current_flow_flag=False)
 ```
 
+### `method` get_last_run_input_files
+
+_get_last_run_input_files_ retrieves files uploaded to Ganymede cloud storage during the most recent flow execution.
+
+```python
+from ganymede_sdk import Ganymede
+
+g = Ganymede()
+
+# Returns a dictionary of the files uploaded during the most recent flow execution
+most_recent_input_files = g.get_last_run_input_files()
+```
+
 ### `method` list_files
 
 _list_files_ lists files in the environment
