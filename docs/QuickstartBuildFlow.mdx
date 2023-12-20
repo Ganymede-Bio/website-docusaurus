@@ -13,7 +13,7 @@ import { UserOutlined,
          PlayCircleOutlined,
          CodeOutlined,
          DownOutlined,
-         FileSearchOutlined,
+         TableOutlined,
          CheckCircleOutlined,
          FolderOutlined } from '@ant-design/icons';
 
@@ -102,7 +102,7 @@ Upon doing so, the <div className="button darkblue_button"><BranchesOutlined/> *
 
 <img alt="Quickstart Flow Init" src="https://ganymede-bio.mo.cloudinary.net/apiServer/QuickstartTwoNodesUnconnected2_20230731.png"/>
 
-Of course, we want data processing to flow from the <div className="button darkblue_button">**Excel_Read**</div> node to the <div className="button darkblue_button">**Python**</div> node.  To effectuate this, click on the <div className="button darkblue_button">**Input_File**</div> node's bottom attachment point and drag the connection to the top of the <div className="button darkblue_button">**Python**</div> node. Then click <div className="button darkblue_button_mui">**Save**<SaveOutlined className="white_icon" /></div>.
+Of course, we want data processing to flow from the <div className="button darkblue_button">**Input_File**</div> node to the <div className="button darkblue_button">**Python**</div> node.  To effectuate this, click on the <div className="button darkblue_button">**Input_File**</div> node's bottom attachment point and drag the connection to the top of the <div className="button darkblue_button">**Python**</div> node. Then click <div className="button darkblue_button_mui">**Save**<SaveOutlined className="white_icon" /></div>.
 
 ### Step 5: Modify the Input File node to store results in a table
 
@@ -147,7 +147,7 @@ def execute(file_data: Dict[str, bytes], ganymede_context=None) -> NodeReturn:
 Non-tabular data can be stored by returning a dictionary of files to upload in the `files_to_upload` key of the `NodeReturn` object.
 :::
 
-Run the User-Defined Function cell by selecting the cell and then clicking on the <div className="button jupyter_button">▶️ Run</div> button in the header.  In the "Testing" section below, you can test out uploading our original plate reader excel file and passing it into the User-Defined Function.  This is a great way to debug your code before deploying the flow.
+Run the User-Defined Function cell by selecting the cell and then clicking on the <div className="button jupyter_button">▶️ Run</div> button in the header, which runs the selected cell.  In the "Testing" section below, you can test out uploading our original plate reader excel file and passing it into the User-Defined Function.  This is a great way to debug your code before deploying the flow.
 
 
 Save and deploy changes made to the Python node by running the Save Pipeline Code cell at the bottom of the notebook, or by pressing `Cmd+Shift+S` (Mac) or `Ctrl+Shift+S` (Windows/Linux).
@@ -230,11 +230,11 @@ When the job is complete, the status of the flow should indicate success:
 
 ### Step 8: Observe results in Data Explorer
 
-Click on <div className="button darkblue_button"><FileSearchOutlined /> **Data Explorer**</div> in the left sidebar and look for Quickstart_Absorbance_Change_data in the table browser.
+Click on <div className="button darkblue_button"><TableOutlined /> **Data Explorer**</div> in the left sidebar and look for Quickstart_Absorbance_Change_data in the table browser.
 
 This lets you observe and query the `Quickstart_Absorbance_Change_data` table. 
 
-For example, running the following query:
+For example, clicking on the Query tab and running the query below:
 
 ```sql
 select 
@@ -245,7 +245,7 @@ from Quickstart_Absorbance_Change_data where field not in ('Cycle Nr.', 'Time [s
 order by left(field, 1), cast(right(field, length(field)-1) as int)
 ```
 
-yields the results shown below:
+yields a view of the plate reader results submitted:
 
 <img alt="Querying results" src="https://ganymede-bio.mo.cloudinary.net/apiServer/QuickstartDataExplorer_20230731.png"/>
 
