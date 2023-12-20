@@ -40,6 +40,39 @@ Set up the Benchling object
 &nbsp; &nbsp; &nbsp; &nbsp; Benchling context variable, which stores Benchling connection information  
 
 
+## `function` Benchling.list_schemas
+  
+Lists schemas, filtered by type if provided  
+  
+### Parameters  
+  
+**type** : `Optional[str]`  
+&nbsp; &nbsp; &nbsp; &nbsp; Schema type - potential values are "custom_entity", "assay_result", "molecule", "plate",  
+&nbsp; &nbsp; &nbsp; &nbsp; "aa_sequence", "box", "container", "entry", "location", "mixture", "workflow_task", etc.  
+  
+### Returns  
+  
+`List[Dict]`  
+&nbsp; &nbsp; &nbsp; &nbsp; list of schemas  
+
+
+## `function` Benchling.get_schema_id_by_name
+  
+Get schema by name  
+  
+### Parameters  
+  
+**schema_name** : `str`  
+&nbsp; &nbsp; &nbsp; &nbsp; Schema name  
+**type** : `Optional[str]`  
+&nbsp; &nbsp; &nbsp; &nbsp; Subset search by schema type - potential values are "custom_entity", "assay_result", etc.  
+  
+### Returns  
+  
+`str`  
+&nbsp; &nbsp; &nbsp; &nbsp; Schema ID for specified schema  
+
+
 ## `function` Benchling.create_or_update_custom_entity
   
 Creates custom entity in Benchling.&nbsp; &nbsp; If the entity does not exist, first create it.  
@@ -50,7 +83,8 @@ Creates custom entity in Benchling.&nbsp; &nbsp; If the entity does not exist, f
 &nbsp; &nbsp; &nbsp; &nbsp; Name of new entity to be created  
 **folder_id** : `str`  
 &nbsp; &nbsp; &nbsp; &nbsp; Folder ID containing Benchling entity to be created. This should be a string starting  
-&nbsp; &nbsp; &nbsp; &nbsp; with "lib_"  
+&nbsp; &nbsp; &nbsp; &nbsp; with "lib_".&nbsp; &nbsp; If updating a custom entity, specifying the folder ID is optional (if specified,  
+&nbsp; &nbsp; &nbsp; &nbsp; moves the custom entity to the specified folder).  
 **schema_id** : `str`  
 &nbsp; &nbsp; &nbsp; &nbsp; Input schema ID Tag. schema associated with Benchling entity to be created. This should  
 &nbsp; &nbsp; &nbsp; &nbsp; be a string starting with "ts_"  
@@ -85,9 +119,10 @@ Bulk creates custom entities in Benchling.&nbsp; &nbsp; If the entity does not e
 &nbsp; &nbsp; &nbsp; &nbsp; Columns should include name_field and all fields in schema  
 **name_field** : `str`  
 &nbsp; &nbsp; &nbsp; &nbsp; Name of column in custom_entities_dataframe containing entity names  
-**folder_id** : `str`  
+**folder_id** : `Optional[str]`  
 &nbsp; &nbsp; &nbsp; &nbsp; Folder ID containing Benchling entity to be created. This should be a string starting  
-&nbsp; &nbsp; &nbsp; &nbsp; with "lib_"  
+&nbsp; &nbsp; &nbsp; &nbsp; with "lib_".&nbsp; &nbsp; If updating a custom entity, specifying the folder ID is optional (if specified,  
+&nbsp; &nbsp; &nbsp; &nbsp; moves the custom entity to the specified folder).  
 **schema_id** : `str`  
 &nbsp; &nbsp; &nbsp; &nbsp; Input schema ID Tag. schema associated with Benchling entity to be created. This should  
 &nbsp; &nbsp; &nbsp; &nbsp; be a string starting with "ts_"  
@@ -101,8 +136,6 @@ Bulk creates custom entities in Benchling.&nbsp; &nbsp; If the entity does not e
   
 `Dict[str, List[str]]`  
 &nbsp; &nbsp; &nbsp; &nbsp; Dictionary with keys "created" and "updated" and values of lists of custom entity IDs  
-  
-  
 
 
 ## `function` Benchling.create_or_update_molecule
