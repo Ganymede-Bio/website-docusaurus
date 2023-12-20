@@ -5,8 +5,7 @@ sidebar_label: Create a Dashboard
 displayed_sidebar: webUiSidebar
 ---
 
-import { AreaChartOutlined, PlusOutlined, DownOutlined, SaveOutlined, UserOutlined } from '@ant-design/icons';
-import DashboardFilterIcon from '@site/static/img/dashboard_filter_icon.svg';
+import { DownOutlined, SaveOutlined, UserOutlined } from '@ant-design/icons';
 
 This guide walks you through creating a dashboard to compare the output data from a plate reader at two different timepoints, which has been ingested into Ganymede.  This dashboard leverages the same data processed in the [Build a Flow guide](./QuickstartBuildFlow). By the time you're finished, you'll have converted raw data to a dashboard that looks like this:
 
@@ -33,15 +32,16 @@ You may need to enable pop-ups for Ganymede or disable any ad-blocking software 
 
 ## Step 2. Create virtual dataset for this visualization
 
-In order to create our dashboard we'll need to create two datasets for displaying, a **Quickstart_Absorbance_Change_Absolute_Differences** dataset and a **Quickstart_Absorbance_Change_Run_Parameters** dataset.  
+In order to create our dashboard we'll need to create two datasets for displaying:
 
-**Quickstart_Absorbance_Change_Absolute_Differences** is a table containing absorbance measurements from two different plates; **Quickstart_Absorbance_Change_Run_Parameters** contains temperature and timepoint metadata associated with each plate.
+- **Quickstart_Absorbance_Change_Absolute_Differences** dataset - a table containing absorbance measurements from two different plates
+- **Quickstart_Absorbance_Change_Run_Parameters** dataset - a table containing temperature and timepoint metadata associated with each plate
 
 ### Step 2a. Load plate reader data for charting
 
 Hover over SQL in the top menu bar and click on SQL Lab.  This should bring you to a SQL editor that lets you preview tables, and results of SQL queries:
 
-<img alt="Dashboard - SQL Editor" src="https://ganymede-bio.mo.cloudinary.net/apiServer/SQL_Lab20230831.png" />
+<img alt="Dashboard - SQL Editor" src="https://ganymede-bio.mo.cloudinary.net/apiServer/SQL_Lab_Annotated20231220.png" />
 &nbsp;
 
 Fill in the SQL Editor with the query below and click <div className="button darkblue_button">**RUN**</div> to execute SQL.
@@ -82,10 +82,10 @@ Navigate to the Datasets tab in the top bar and search for "Quickstart" to find 
 
 Click on the **Quickstart_Absorbance_Change_Run_Parameters** table.  This should bring you to a page for assembling a chart:
 
-<img alt="Dashboard Quickstart run parameters chart assembly" src="https://ganymede-bio.mo.cloudinary.net/dashboard/Quickstart_RunParametersChartAssembly20230531.png" />
+<img alt="Dashboard Quickstart run parameters chart assembly" src="https://ganymede-bio.mo.cloudinary.net/dashboard/Quickstart_RunParametersChartAssembly_Annotated20231220.png" />
 &nbsp;
 
-Click on the <u>View All Charts</u> text in the middle of the screen and select the Pivot Table chart type.
+Click on the <u>View All Charts</u> within the Data tab of the middle section (highlighted in red above), and select the Pivot Table chart type.
 
 <img alt="Dashboard Quickstart run parameters select pivot chart" src="https://ganymede-bio.mo.cloudinary.net/dashboard/Quickstart_RunParametersChart20230531.png" />
 &nbsp;
