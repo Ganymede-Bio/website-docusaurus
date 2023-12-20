@@ -25,62 +25,62 @@ The table below lists available nodes.
 - **Is Multi** indicates that the node can accept multiple inputs.
 
 | [Category](#node-categories)   | Name                   | [Input Types](#node-inputoutput-types)                                                           | [Output Types](#node-inputoutput-types)                                | Is Editable   | Is Multi   |
-|------------|------------------------|-----------------------------------------------------------------------|----------------|---------------|------------|
-| Analysis   | Branch_Python          | Table(s) and/or File(s)                                               | NodeReturn     | True          | False      |
-| Analysis   | Python                 | Table(s) and/or File(s)                                               | NodeReturn     | True          | False      |
-| Analysis   | RunContainer           | FileAny                                                               | FileAny        | True          | False      |
-| Analysis   | Transform_SQL          | Table                                                                 | Table          | True          | False      |
-| Analysis   | Transform_py           | Table or List[Table]                                                  | NodeReturn     | True          | False      |
-| Analysis   | Trigger_Python         | Table(s) and/or File(s)                                               | FileAny        | True          | False      |
-| App        | APINode                | API                                                                   | NodeReturn     | True          | False      |
-| App        | AirtableExport         | Table                                                                 | API            | True          | False      |
-| App        | AirtableImport         | API                                                                   | NodeReturn     | False         | False      |
-| App        | Azure_Query            | API                                                                   | NodeReturn     | True          | False      |
-| App        | Azure_Read             | API                                                                   | FileAny        | False         | False      |
-| App        | Azure_Read_Multi       | API                                                                   | FileAny        | False         | True       |
-| App        | Azure_Write            | FileAny                                                               | API            | False         | False      |
-| App        | Benchling_Api          | API                                                                   | NodeReturn     | True          | False      |
-| App        | Benchling_Event        | App                                                                   | FileAny        | True          | False      |
-| App        | Benchling_Read         | API                                                                   | NodeReturn     | True          | False      |
-| App        | Benchling_Read_Object  | API                                                                   | NodeReturn     | True          | False      |
-| App        | Benchling_Write        | Table                                                                 | NodeReturn     | True          | False      |
-| App        | Benchling_Write_Object | Optional[FileAny or List[FileAny]] and Optional[Table or List[Table]] | NodeReturn     | True          | False      |
-| App        | Coda_Write             | Table                                                                 | NodeReturn     | True          | False      |
-| App        | ELabNext_Write         | Table                                                                 | NodeReturn     | True          | False      |
-| App        | Load_Parquet_to_Table  | API                                                                   | FileAny        | False         | False      |
-| App        | S3_Event               | App                                                                   | FileAny        | True          | False      |
-| App        | S3_Read                | API                                                                   | FileAny        | False         | False      |
-| App        | S3_Write               | FileAny                                                               | API            | False         | False      |
-| App        | SciNote_API            | Table                                                                 | NodeReturn     | True          | False      |
-| App        | Smartsheet_Read        | API                                                                   | NodeReturn     | True          | False      |
-| App        | Snowflake_Write        | Table                                                                 | NodeReturn     | False         | False      |
-| File       | AVI_Read               | FileAVI                                                               | NodeReturn     | True          | False      |
-| File       | AVI_Read_Multi         | Set[FileAVI]                                                          | NodeReturn     | True          | True       |
-| File       | CSV_Read               | FileCSV                                                               | NodeReturn     | True          | False      |
-| File       | CSV_Read_Multi         | Set[FileCSV]                                                          | NodeReturn     | True          | True       |
-| File       | CSV_Write              | Table or List[Table]                                                  | NodeReturn     | True          | False      |
-| File       | Excel_Read             | FileExcel                                                             | NodeReturn     | True          | False      |
-| File       | Excel_Read_Multi       | Set[FileExcel]                                                        | NodeReturn     | True          | True       |
-| File       | Excel_Write            | Table or List[Table]                                                  | NodeReturn     | True          | False      |
-| File       | FCS_Extract_Load       | FileFCS                                                               | NodeReturn     | True          | False      |
-| File       | HDF5_Read              | FileHDF5                                                              | NodeReturn     | True          | False      |
-| File       | Image_Read             | FileImage                                                             | NodeReturn     | True          | False      |
-| File       | Image_Read_Multi       | List[FileImage]                                                       | NodeReturn     | True          | True       |
-| File       | Image_Write            | Table or List[Table]                                                  | NodeReturn     | True          | False      |
-| File       | Input_File             | FileAny                                                               | NodeReturn     | True          | False      |
-| File       | Input_File_Multi       | Set[FileAny]                                                          | NodeReturn     | True          | True       |
-| File       | PDF_Read               | FilePDF                                                               | NodeReturn     | True          | False      |
-| File       | PDF_Read_Multi         | Set[FilePDF]                                                          | NodeReturn     | True          | True       |
-| File       | Powerpoint_Write       | Table or List[Table]                                                  | NodeReturn     | True          | False      |
-| File       | XML_Read               | FileXML                                                               | NodeReturn     | True          | False      |
-| File       | Zip_Read               | FileZip                                                               | NodeReturn     | True          | False      |
-| Instrument | Agilent_HPLC_Read      | File                                                                  | NodeReturn     | True          | False      |
-| Instrument | Instron_Tensile_Read   | FileIsTens                                                            | NodeReturn     | True          | False      |
-| Instrument | Profilometer_Read      | FileHDF5                                                              | NodeReturn     | True          | False      |
-| Instrument | Synergy_Read           | FileTxt                                                               | NodeReturn     | True          | False      |
-| Instrument | Synergy_Read_Multi     | List[FileTxt]                                                         | NodeReturn     | True          | True       |
-| Tag        | Benchling_Tag          | TagBenchling                                                          | string         | False         | False      |
-| Tag        | Input_Param            | string                                                                | string         | False         | False      |
+|------------|------------------------|-------------------------|----------------|---------------|------------|
+| Analysis   | Branch_Python          | Table(s) and/or File(s) | NodeReturn     | True          | False      |
+| Analysis   | Python                 | Table(s) and/or File(s) | NodeReturn     | True          | False      |
+| Analysis   | RunContainer           | FileAny                 | FileAny        | True          | False      |
+| Analysis   | Transform_SQL          | Table(s)                | Table          | True          | False      |
+| Analysis   | Transform_py           | Table(s)                | NodeReturn     | True          | False      |
+| Analysis   | Trigger_Python         | Table(s) and/or File(s) | FlowInputs     | True          | False      |
+| App        | APINode                | API                     | NodeReturn     | True          | False      |
+| App        | AirtableExport         | Table                   | API            | True          | False      |
+| App        | AirtableImport         | API                     | NodeReturn     | False         | False      |
+| App        | Azure_Query            | API                     | NodeReturn     | True          | False      |
+| App        | Azure_Read             | API                     | FileAny        | False         | False      |
+| App        | Azure_Read_Multi       | API                     | FileAny        | False         | True       |
+| App        | Azure_Write            | FileAny                 | API            | False         | False      |
+| App        | Benchling_Api          | API                     | NodeReturn     | True          | False      |
+| App        | Benchling_Event        | Event                   | FlowInputs     | True          | False      |
+| App        | Benchling_Read         | API                     | NodeReturn     | True          | False      |
+| App        | Benchling_Read_Object  | API                     | NodeReturn     | True          | False      |
+| App        | Benchling_Write        | Table                   | NodeReturn     | True          | False      |
+| App        | Benchling_Write_Object | Table(s) and/or File(s) | NodeReturn     | True          | False      |
+| App        | Coda_Write             | Table                   | NodeReturn     | True          | False      |
+| App        | ELabNext_Write         | Table                   | NodeReturn     | True          | False      |
+| App        | Load_Parquet_to_Table  | API                     | FileAny        | False         | False      |
+| App        | S3_Event               | Event                   | FlowInputs     | True          | False      |
+| App        | S3_Read                | API                     | FileAny        | False         | False      |
+| App        | S3_Write               | FileAny                 | API            | False         | False      |
+| App        | SciNote_API            | Table                   | NodeReturn     | True          | False      |
+| App        | Smartsheet_Read        | API                     | NodeReturn     | True          | False      |
+| App        | Snowflake_Write        | Table                   | NodeReturn     | False         | False      |
+| File       | AVI_Read               | FileAVI                 | NodeReturn     | True          | False      |
+| File       | AVI_Read_Multi         | Set[FileAVI]            | NodeReturn     | True          | True       |
+| File       | CSV_Read               | FileCSV                 | NodeReturn     | True          | False      |
+| File       | CSV_Read_Multi         | Set[FileCSV]            | NodeReturn     | True          | True       |
+| File       | CSV_Write              | Table(s)                | NodeReturn     | True          | False      |
+| File       | Excel_Read             | FileExcel               | NodeReturn     | True          | False      |
+| File       | Excel_Read_Multi       | Set[FileExcel]          | NodeReturn     | True          | True       |
+| File       | Excel_Write            | Table(s)                | NodeReturn     | True          | False      |
+| File       | FCS_Extract_Load       | FileFCS                 | NodeReturn     | True          | False      |
+| File       | HDF5_Read              | FileHDF5                | NodeReturn     | True          | False      |
+| File       | Image_Read             | FileImage               | NodeReturn     | True          | False      |
+| File       | Image_Read_Multi       | Set[FileImage]          | NodeReturn     | True          | True       |
+| File       | Image_Write            | Table(s)                | NodeReturn     | True          | False      |
+| File       | Input_File             | FileAny                 | NodeReturn     | True          | False      |
+| File       | Input_File_Multi       | Set[FileAny]            | NodeReturn     | True          | True       |
+| File       | PDF_Read               | FilePDF                 | NodeReturn     | True          | False      |
+| File       | PDF_Read_Multi         | Set[FilePDF]            | NodeReturn     | True          | True       |
+| File       | Powerpoint_Write       | Table(s)                | NodeReturn     | True          | False      |
+| File       | XML_Read               | FileXML                 | NodeReturn     | True          | False      |
+| File       | Zip_Read               | FileZip                 | NodeReturn     | True          | False      |
+| Instrument | Agilent_HPLC_Read      | File                    | NodeReturn     | True          | False      |
+| Instrument | Instron_Tensile_Read   | FileIsTens              | NodeReturn     | True          | False      |
+| Instrument | Profilometer_Read      | FileHDF5                | NodeReturn     | True          | False      |
+| Instrument | Synergy_Read           | FileTxt                 | NodeReturn     | True          | False      |
+| Instrument | Synergy_Read_Multi     | Set[FileTxt]            | NodeReturn     | True          | True       |
+| Tag        | Benchling_Tag          | TagBenchling            | string         | False         | False      |
+| Tag        | Input_Param            |                         | string         | False         | False      |
 
 #### Node Categories
 
@@ -156,7 +156,7 @@ Initializing a `FlowInputs` object involves passing the following parameters, wh
   - _param_ **display_tag**: str - Value displayed in the dropdown in Ganymede UI.  For Benchling_Tag _nodes_, this is the name of the tag displayed in the dropdown in Flow View / Flow Editor.
   - _param_ **run_tag**: str - Underlying value of the tag.  For Benchling_Tag _nodes_, this is the Benchling ID associated with the value selected in the dropdown.
 
-#### Other output types
+#### Other input/output types
 
 Some other input and output types characteristic to nodes are:
 
