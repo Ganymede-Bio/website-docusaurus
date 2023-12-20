@@ -90,17 +90,17 @@ The table below lists available nodes.
 - **File**: For ETL operations on data of specified type into Ganymede cloud
 - **Tag**: For specifying parameters at _flow_ runtime
 
-### Node Types
+### Return Types for Nodes
 
 #### NodeReturn Object
 
-Many nodes return a **NodeReturn** object, which contain tables and files to store in the Ganymede data lake.  
+Many nodes return a `NodeReturn` object, which contain tables and files to store in the Ganymede data lake.  
 
 Initializing a NodeReturn object involves passing the following parameters:
   - _param_ **tables_to_upload**: Optional[Dict[str, pd.DataFrame]] - Tables keyed by name to store in Ganymede
   - _param_ **files_to_upload**: Optional[Dict[str, bytes]] - Files keyed by filename to store in Ganymede
   - _param_ **if_exists**: str - String indicating whether to overwrite or append to existing tables in Ganymede data lake.  Valid values are "replace", "append", or "fail"; defaults to "replace".
-  - _param_ **tables_measurement_units**: Optional[str, pd.DataFrame] - if provided, the measurement units for columns; keys are table names, values are
+  - _param_ **tables_measurement_units**: Optional[Dict[str, pd.DataFrame]] - if provided, the measurement units for columns; keys are table names, values are
     pandas DataFrames with "column_name" and "unit" as columns
 
 :::note example
@@ -134,9 +134,9 @@ Docstrings and source code can be viewed by typing `?NodeReturn` and `??NodeRetu
 
 #### FlowInputs object
 
-Nodes that trigger other flows return a FlowInputs object, which specifies the inputs to the triggered flow.  
+Nodes that trigger other flows return a `FlowInputs` object, which specifies the inputs to the triggered flow.  
 
-Initializing a Flowinputs object involves passing the following parameters, which are found in ganymede_sdk.io:
+Initializing a `FlowInputs` object involves passing the following parameters, which are found in ganymede_sdk.io:
   - _param_ **files**: Optional[List[FlowInputFile]] - Name of flow to trigger
   - _param_ **params**: Optional[List[FlowInputParam]] - Inputs to pass to triggered flow
   - _param_ **tags**: Optional[List[Tag]] - Tags to pass to triggered flow
@@ -156,7 +156,7 @@ Initializing a Flowinputs object involves passing the following parameters, whic
   - _param_ **display_tag**: str - Value displayed in the dropdown in Ganymede UI.  For Benchling_Tag _nodes_, this is the name of the tag displayed in the dropdown in Flow View / Flow Editor.
   - _param_ **run_tag**: str - Underlying value of the tag.  For Benchling_Tag _nodes_, this is the Benchling ID associated with the value selected in the dropdown.
 
-#### Other outputs
+#### Other output types
 
 Some other input and output types characteristic to nodes are:
 
