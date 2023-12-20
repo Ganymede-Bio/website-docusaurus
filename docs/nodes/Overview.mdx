@@ -16,7 +16,7 @@ In Jupyter notebooks associated backing editable nodes, user-defined SQL and use
 
 ## Key Node Characteristics
 
-A useful way to interact with _nodes_ is to consider how _nodes_ interact with other systems, their input and output types, and whether or not they contain a user-editable component.  The table below shows the full list of available _nodes_, along with whether there is a user-editable component associated with the node.
+A useful way to interact with _nodes_ is to consider how _nodes_ interact with files and APIs, their input and output types, and whether or not they contain a user-editable component.  The table below shows the full list of available _nodes_, along with whether there is a user-editable component associated with the node.
 
 ### Available Nodes with Key Characteristics
 
@@ -90,7 +90,9 @@ The table below lists available nodes.
 - **File**: For ETL operations on data of specified type into Ganymede cloud
 - **Tag**: For specifying parameters at _flow_ runtime
 
-### Node Types, NodeReturn Object
+### Node Types
+
+#### NodeReturn Object
 
 Many nodes return a **NodeReturn** object, which contain tables and files to store in the Ganymede data lake.  
 
@@ -128,8 +130,33 @@ returns the following summary of the NodeReturn object:
 </div>
 
 Docstrings and source code can be viewed by typing `?NodeReturn` and `??NodeReturn` respectively in a cell in the editor notebook.
-
 :::
+
+#### FlowInputs object
+
+Nodes that trigger other flows return a FlowInputs object, which specifies the inputs to the triggered flow.  
+
+Initializing a Flowinputs object involves passing the following parameters, which are found in ganymede_sdk.io:
+  - _param_ **files**: Optional[List[FlowInputFile]] - Name of flow to trigger
+  - _param_ **params**: Optional[List[FlowInputParam]] - Inputs to pass to triggered flow
+  - _param_ **tags**: Optional[List[Tag]] - Tags to pass to triggered flow
+
+`FlowInputFile` is a dataclass used to pass file(s) into a node.  It has the following attributes:
+  - _param_ **node_name**: str - Name of node within triggered flow to pass file(s) into
+  - _param_ **param_name**: str - Node parameter in the triggered flow node that is used to specify the string pattern that the filename must match (e.g. - "csv" for the CSV_Read _node_)
+  - _param_ **files**: Dict[str, bytes] - Files to pass into node
+
+`FlowInputParam` is a dataclass used to pass parameters into a node.  It has the following attributes:
+  - _param_ **node_name**: str - Name of node within triggered flow to pass parameter(s) into
+  - _param_ **param_name**: str - Node parameter in the triggered flow node that is used to specify the string pattern that the parameter must match ("param" for the Input_Param _node_)
+  - _param_ **param_value**: str - Value to pass into node
+
+`Tag` is a dataclass used to pass tags into a node.  It has the following attributes:
+  - _param_ **node_name**: str - Name of node within triggered flow to pass tag(s) into
+  - _param_ **display_tag**: str - Value displayed in the dropdown in Ganymede UI.  For Benchling_Tag _nodes_, this is the name of the tag displayed in the dropdown in Flow View / Flow Editor.
+  - _param_ **run_tag**: str - Underlying value of the tag.  For Benchling_Tag _nodes_, this is the Benchling ID associated with the value selected in the dropdown.
+
+#### Other outputs
 
 Some other input and output types characteristic to nodes are:
 
