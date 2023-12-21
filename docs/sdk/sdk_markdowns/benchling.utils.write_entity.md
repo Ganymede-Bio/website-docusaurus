@@ -62,7 +62,7 @@ Updates custom entity
 &nbsp; &nbsp; &nbsp; &nbsp; Folder ID containing Benchling entity to be created. This should be a string starting with  
 &nbsp; &nbsp; &nbsp; &nbsp; "lib_"  
 **input_schema_id** : `str`  
-&nbsp; &nbsp; &nbsp; &nbsp; Input schema ID Tag. schema associated with Benchling entity to be created This should be  
+&nbsp; &nbsp; &nbsp; &nbsp; Input schema ID Tag. schema associated with Benchling entity to be updated. This should be  
 &nbsp; &nbsp; &nbsp; &nbsp; a string starting with "ts_"  
 **registry_id** : `str`  
 &nbsp; &nbsp; &nbsp; &nbsp; Project associated with custom entity.&nbsp; &nbsp; This identifies the registry that your run entity  
@@ -294,14 +294,14 @@ Update custom entities in Benchling
 
 ## `function` update_custom_entity_obj
   
-Create a custom entity object to update in Benchling  
+Update a custom entity object to update in Benchling  
   
 ### Parameters  
   
 **existing_entity** : `CustomEntity`  
 &nbsp; &nbsp; &nbsp; &nbsp; Existing custom entity to update  
-**folder_id** : `str`  
-&nbsp; &nbsp; &nbsp; &nbsp; ID of the folder to create the entity in  
+**folder_id** : `Optional[str]`  
+&nbsp; &nbsp; &nbsp; &nbsp; ID of the folder to move the custom entity to (if specified)  
 **input_schema_id** : `str`  
 &nbsp; &nbsp; &nbsp; &nbsp; ID of the entity schema to use  
 **fields** : `Optional[Dict]`  
