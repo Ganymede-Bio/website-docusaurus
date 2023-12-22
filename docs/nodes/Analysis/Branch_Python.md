@@ -38,6 +38,7 @@ is written to the output bucket.
       keys are table names, values are pandas DataFrames to upload
     - files_to_upload: Dict[str, bytes]
       keys are file names, values are file data to upload
+
   Second parameter:
     Boolean or string indicating whether to continue to next node in flow.  If False,
     the flow will stop at this node.  If True, the flow will continue to the next node(s).
