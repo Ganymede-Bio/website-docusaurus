@@ -55,6 +55,11 @@ module.exports = {
             type: 'doc',
             id: 'connectivity/FileWatcher',
             label: 'Capture Files with Browser'
+          },
+          {
+            type: 'doc',
+            id: 'connectivity/Tags',
+            label: 'Tagging Files'
           }
         ]
       },

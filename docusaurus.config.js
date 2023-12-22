@@ -1,3 +1,5 @@
+import { themes as prismThemes } from 'prism-react-renderer';
+
 require('dotenv').config()
 
 module.exports = {
@@ -10,6 +12,10 @@ module.exports = {
   projectName: 'website-docusaurus',
   themes: ['docusaurus-theme-search-typesense'],
   themeConfig: {
+    prism: {
+      additionalLanguages: ['python'],
+      theme: prismThemes.nightOwl
+    },
     typesense: {
       typesenseCollectionName: process.env.TYPESENSE_COLLECTION_NAME,
 
