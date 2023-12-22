@@ -56,16 +56,22 @@ To tag a file within a flow, use the `add_file_tag` function in the `ganymede_sd
 - _param_ **bucket**: Optional[str] - The bucket to tag the file in; either "input" or "output".  If not specified, the full path to the file in storage must be provided.
 
 ```python
-from ganymede_sdk.file_tag import add_file_tag, get_file_tags
+from typing import Dict
+
+from ganymede_sdk.file_tag import add_file_tag
+from ganymede_sdk.io import NodeReturn
+
 
 def execute(file_data: Dict[str, bytes], ganymede_context) -> NodeReturn:
-  for filename, file in file_data.items():
-    add_file_tag(
-        input_file_path=filename,
-        tag_type_id="benchling_entry_id", 
-        display_value=entry_name, 
-        bucket="input"
-    )
+    entry_name = "test_entry"
+
+    for filename in file_data.keys():
+        add_file_tag(
+            input_file_path=filename,
+            tag_type_id="benchling_entry_id",
+            display_value=entry_name,
+            bucket="input",
+        )
 ```
 
 #### Tagging Files in Agents
@@ -79,7 +85,13 @@ To tag a file within an agent, use the `add_file_tag_to_fileparam` function in t
 - _param_ **url**: str - URL to associate with the tag, if applicable.
 
 ```python
-from ganymede_sdk.agent import add_file_tag_to_fileparam
+from ganymede_sdk.agent import (
+    FileParam,
+    FileWatcherResult,
+    MultiFileParam,
+    TriggerFlowParams,
+    add_file_tag_to_fileparam,
+)
 
 def execute(flow_params_fw: FileWatcherResult, **kwargs) -> TriggerFlowParams:
     """
@@ -110,9 +122,15 @@ def execute(flow_params_fw: FileWatcherResult, **kwargs) -> TriggerFlowParams:
 
 Files are passed to and from Virtualization environments using agents, so files passed to and from virtualization environments can be tagged as well.
 
-The example code below shows a Virtualization cleanup agent that tags all files transitting to Ganymede cloud storage with the Benchling Entry ID that was inputted to the session.
-
 ```python
+import json
+from pathlib import Path
+
+from ganymede_sdk.agent import FileWatcherResult, NoOpFileTagParams, add_file_tag_to_fileparam
+from ganymede_sdk.file_tag import get_file_tags
+
+
+# Virtualization agent example for that tagging all files sent to Ganymede cloud storage with a notebook entry ID.
 def execute(flow_params_fw: FileWatcherResult, **kwargs) -> NoOpFileTagParams:
     file_params = list(flow_params_fw.files.values())
     SESSION_JSON_PATH = Path("C:/Program Files/Ganymede/session.json")
@@ -123,23 +141,23 @@ def execute(flow_params_fw: FileWatcherResult, **kwargs) -> NoOpFileTagParams:
     session_dict = json.loads(session_json)
     input_files = session_dict["input_files"]
     entry_tags = []
-    BENCHLING_ENTRY_TAG_TYPE_ID = "benchling_entry_id"
+    NOTEBOOK_ENTRY_TAG_TYPE_ID = "notebook_entry_id"
 
     for file in input_files:
         tags = get_file_tags(file)
         if tags is None:
             continue
         for tag in tags:
-            if tag["tag_type_id"] == BENCHLING_ENTRY_TAG_TYPE_ID:
+            if tag["tag_type_id"] == NOTEBOOK_ENTRY_TAG_TYPE_ID:
                 entry_tags.append(tag)
 
     if len(entry_tags):
         entry_tag = entry_tags[0]
-        
+
         for file_param in file_params:
-            add_file_tag(
+            add_file_tag_to_fileparam(
                 file_param=file_param,
-                tag_type_id=BENCHLING_ENTRY_TAG_TYPE_ID,
+                tag_type_id=NOTEBOOK_ENTRY_TAG_TYPE_ID,
                 display_value=entry_tag["display_value"],
                 url=entry_tag["url"],
             )
