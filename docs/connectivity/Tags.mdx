@@ -113,34 +113,37 @@ Files are passed to and from Virtualization environments using agents, so files 
 The example code below shows a Virtualization cleanup agent that tags all files transitting to Ganymede cloud storage with the Benchling Entry ID that was inputted to the session.
 
 ```python
-from ganymede_sdk.agent import add_file_tag_to_fileparam
-
 def execute(flow_params_fw: FileWatcherResult, **kwargs) -> NoOpFileTagParams:
-  file_params = list(flow_params_fw.files.values())
-  SESSION_JSON_PATH = Path("C:/Program Files/Ganymede/session.json")
-  with open(SESSION_JSON_PATH, "r") as f:
-      session_json = f.read()
-  session_dict = json.loads(session_json)
-  input_files = session_dict["input_files"]
-  BENCHLING_ENTRY_TAG_TYPE_ID = "benchling_entry_id"
+    file_params = list(flow_params_fw.files.values())
+    SESSION_JSON_PATH = Path("C:/Program Files/Ganymede/session.json")
 
-  for file in input_files:
-    tags = get_file_tags(file)
+    with open(SESSION_JSON_PATH, "r") as f:
+        session_json = f.read()
 
-    if not tags:
-      continue
+    session_dict = json.loads(session_json)
+    input_files = session_dict["input_files"]
+    entry_tags = []
+    BENCHLING_ENTRY_TAG_TYPE_ID = "benchling_entry_id"
 
-    entry_tag = [tag for tag in tags if tag["tag_type_id"] == BENCHLING_ENTRY_TAG_TYPE_ID].pop()
-      
-  if entry_tag:
-    for file_param in file_params:
-      add_file_tag_to_fileparam(
-        file_param=file_param,
-        tag_type_id=BENCHLING_ENTRY_TAG_TYPE_ID,
-        display_value=entry_tag["display_value"],
-        url=entry_tag["url"],
-      )
+    for file in input_files:
+        tags = get_file_tags(file)
+        if tags is None:
+            continue
+        for tag in tags:
+            if tag["tag_type_id"] == BENCHLING_ENTRY_TAG_TYPE_ID:
+                entry_tags.append(tag)
 
-  return NoOpFileTagParams(files=file_params)
+    if len(entry_tags):
+        entry_tag = entry_tags[0]
+        
+        for file_param in file_params:
+            add_file_tag(
+                file_param=file_param,
+                tag_type_id=BENCHLING_ENTRY_TAG_TYPE_ID,
+                display_value=entry_tag["display_value"],
+                url=entry_tag["url"],
+            )
+
+    return NoOpFileTagParams(files=file_params)
 ```
 :::
