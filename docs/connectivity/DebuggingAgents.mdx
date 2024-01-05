@@ -1,0 +1,48 @@
+---
+id: DebuggingAgents
+title: Debugging Agents
+displayed_sidebar: webUiSidebar
+sidebar_class_name: hidden
+---
+
+import { PlusOutlined, SelectOutlined, DiffOutlined } from "@ant-design/icons";
+
+This page describes a set of common issues associated with configuring agents.
+
+#### Issue: I am unable to install the agent on Windows; the installer is failing at the final step.
+
+Ensure that you are running the installer as an administrator.  
+
+Then, ensure that there is not an existing installation that is conflicting with the current installation.  To do so, open up the Task Manager and navigate to the Services tab.  Look for any service that starts with "GanymedeAgent-" and stop the service by right clicking on it and selecting "Stop".  Open up "Add or Remove Programs" and uninstall any existing Ganymede Agent installations.  Then, try installing the Agent again.
+
+#### Issue: The Agent is not actively running.  How do I check?
+
+On Windows, check that the installed agent is running by opening up Task Manager and navigating to the Services tab.  Look for the agent of interest (will be a service with a name starting with "GanymedeAgent-") and verify that its current status is Running.  
+
+On Linux, check that the installed agent is running by opening up a terminal and running the following command:
+
+```bash
+sudo systemctl status GanymedeAgent-<agent_name>
+```
+
+If you do not see it, ensure that the Agent is installed.
+
+If you see that the Agent is present but is not running, right click on the service and select "Start".  This should start the Agent.  Note that, by default, Agents are configured to start upon reboot.
+
+### Issue: The flow is failing to trigger when files are being dropped
+
+Verify that the watch folder is specified correctly.  This is configured upon [Agent installation](./Agent#windows-installation); note that the input path must be specified with forward slashes for both Windows and Linux installations.
+
+#### All files are present in the directory watched.  In the logs within the app, files are shown as being collected in two different waiting groups, causing a failure upon flow trigger.  How do I ensure that all files appear in the same waiting group?
+
+A: Unquote the string referenced within the fp function.  An example is shown below:
+
+```python
+def fp(watch_dir: str, parent_dir: str, pattern: str) -> Callable[[str], bool]:
+    def fp_res(x: str):
+        x = parse.unquote(x)
+        return x in glob.glob(os.path.join(watch_dir, pattern), recursive=True)
+
+    return fp_res
+```
+
