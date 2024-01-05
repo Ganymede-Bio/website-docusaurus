@@ -2,7 +2,6 @@
 id: DebuggingAgents
 title: Debugging Agents
 displayed_sidebar: webUiSidebar
-sidebar_class_name: hidden
 ---
 
 import { PlusOutlined, SelectOutlined, DiffOutlined } from "@ant-design/icons";
@@ -32,6 +31,12 @@ If you see that the Agent is present but is not running, right click on the serv
 #### Issue: The flow is failing to trigger when files are being dropped
 
 Verify that the watch folder is specified correctly.  This is configured upon [Agent installation](./Agent#windows-installation); note that the input path must be specified with forward slashes for both Windows and Linux installations.
+
+For example, to watch a folder on the Desktop named "watch_folder" specify the following on installation, with \<username\> replaced with the appropriate user name:
+
+```bash
+-v "input_path=C:/Users/<username>/Desktop/watch_folder"
+```
 
 #### Issue: All files are present in the directory watched.  In the logs within the app, files are shown as being collected in two different waiting groups, causing a failure upon flow trigger.  How do I ensure that all files appear in the same waiting group?
 
