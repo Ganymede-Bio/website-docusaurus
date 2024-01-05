@@ -38,7 +38,7 @@ For example, to watch a folder on the Desktop named "watch_folder" specify the f
 -v "input_path=C:/Users/<username>/Desktop/watch_folder"
 ```
 
-#### Issue: All files are present in the directory watched.  In the logs within the app, files are shown as being collected in two different waiting groups, causing a failure upon flow trigger.  How do I ensure that all files appear in the same waiting group?
+#### Issue: All files are present in the directory watched.  In the logs within the app, files are shown as being collected in two different waiting groups, so the flow does not trigger.  How do I ensure that all files appear in the same waiting group?
 
 A: Unquote the string referenced within the fp function, which specifies which filename patterns the Agent should watch for.  An example is shown below:
 
