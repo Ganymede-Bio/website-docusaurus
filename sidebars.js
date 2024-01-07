@@ -61,6 +61,12 @@ module.exports = {
             id: 'connectivity/Tags',
             label: 'Tagging Files'
           }
+          ,
+          {
+            type: 'doc',
+            id: 'connectivity/DebuggingAgents',
+            label: 'Troubleshooting Agents'
+          }
         ]
       },
       {
