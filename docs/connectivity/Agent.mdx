@@ -373,7 +373,13 @@ For Agents that reference local directories, the directory watched is specified 
 # where `server` is the name of the server and `share` is the name of the shared folder
 ```
 
-:::note
+:::info Sleep status
+
+Agents may be unable to run if the computer enters a sleep state; this is particularly relevant for cron flows. To prevent this, ensure that the computer is not set to sleep when the flow is expected to execute.
+
+:::
+
+:::note Network privileges
 
 Because Windows services use the Local System User, which does not have network privileges by default, you may need to ensure the service is running on a user which can access the network drive.
 
