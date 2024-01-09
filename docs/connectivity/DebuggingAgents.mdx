@@ -4,8 +4,6 @@ title: Debugging Agents
 displayed_sidebar: webUiSidebar
 ---
 
-import { PlusOutlined, SelectOutlined, DiffOutlined } from "@ant-design/icons";
-
 This page describes a set of common issues associated with configuring agents.
 
 #### Issue: I am unable to install the agent on Windows; the installer is failing at the final step.
@@ -30,7 +28,9 @@ If you see that the Agent is present but is not running, right click on the serv
 
 #### Issue: Agent is showing as disconnected after the Agent has been running for a while
 
-On Windows, ensure that the current system time is properly sync'd; if the time is not inaccurate, the Agent will show as disconnected.  To do so, right click on the time in the bottom right corner of the screen and select "Adjust date/time".  Ensure that the "Set time automatically" option is enabled, and click "Sync now".
+On Windows, ensure that the PC that the Agent is installed on is not asleep.  In particular, PCs with cron Agents should be configured to never sleep.  To do so, open up the Control Panel and navigate to "Hardware and Sound" -> "Power Options".  Select "Change when the computer sleeps" and set "Put the computer to sleep" to "Never".
+
+Also, ensure that the current system time is properly sync'd; if the time is not inaccurate, the Agent will show as disconnected.  To do so, right click on the time in the bottom right corner of the screen and select "Adjust date/time".  Ensure that the "Set time automatically" option is enabled, and click "Sync now".
 
 #### Issue: The flow is failing to trigger when files are being dropped
 
@@ -42,7 +42,7 @@ For example, to watch a folder on the Desktop named "watch_folder" specify the f
 -v "input_path=C:/Users/<username>/Desktop/watch_folder"
 ```
 
-:::note
+:::note Take care when copying and pasting commands
 One common gotcha is that the quote character `"` somehow gets replaced with the left or right quotes (`“` or `”`) when copying and pasting commands from documents (which can be hard to spot).  Always ensure that the single quote character `"` is used. 
 :::
 
