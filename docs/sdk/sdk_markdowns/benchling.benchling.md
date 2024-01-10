@@ -307,6 +307,27 @@ assay_results = b.create_assay_results_from_dataframe(
 )  
 ```
 
+## `function` Benchling.create_lab_auto_result_from_dataframe
+  
+Creates lab auto result from DataFrame.  
+  
+### Parameters  
+  
+**df** : `pd.DataFrame`  
+&nbsp; &nbsp; &nbsp; &nbsp; DataFrame to create lab auto assay result from.&nbsp; &nbsp; A typical use case is to upload a DataFrame with 1 row,  
+&nbsp; &nbsp; &nbsp; &nbsp; consisting of IDs associated with uploaded images and raw files to associate.  
+**assay_run_id** : `str`  
+&nbsp; &nbsp; &nbsp; &nbsp; Assay Run ID to associate with assay result.&nbsp; &nbsp; This should be a UUID of the form "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",  
+&nbsp; &nbsp; &nbsp; &nbsp; and exists in the event payload for the v2.assayRun.created and v2.assayRun.updated.fields Benchling events.  
+**result_table_name** : `str`  
+&nbsp; &nbsp; &nbsp; &nbsp; Name of result table associated with lab auto processor of interest.  
+  
+### Returns  
+  
+`AsyncTaskLink`  
+&nbsp; &nbsp; &nbsp; &nbsp; Link to async task result for assay result creation related to lab auto  
+
+
 ## `function` Benchling.is_automated_test
   
 Checks if the current test is an automated test.  
