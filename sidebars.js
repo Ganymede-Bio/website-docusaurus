@@ -92,10 +92,9 @@ module.exports = {
           items: ['FlowRuns', 'Notifications']
         },
         {
-          type: 'category',
-          label: 'Troubleshooting Flows',
-          collapsed: false,
-          items: ['DebuggingFlows']
+          type: 'doc',
+          id: 'DebuggingFlows',
+          label: 'Troubleshooting Flows'
         }
         ]
       },
