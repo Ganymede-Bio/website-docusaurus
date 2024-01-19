@@ -8,7 +8,8 @@ This page describes a set of common issues associated with flow development and 
 
 #### Issue: The Run button is disabled and greyed out, preventing run execution for an extended period of time (more than 1 minute).  
 
-There are two possibilities:
+There are three possibilities:
 
 1. A flow save has triggered a rebuild of the workflow execution system.  This occurs when there are updates to the requirements to the environment, which comes from using new nodes in the environment, with package dependencies that did not exist prior to the node being used.  Typically, environment rebuilds take around 10 minutes to complete; flows should be runnable once the save is complete.
 2. Flow saves in rapid succession can result in race conditions; typically, the notifications page would show multiple concurrent saves in this case.  To clear the condition, modify the editor notebook associated with any flow and save the change to clear this state.
+3. Your role is not set to runner.
