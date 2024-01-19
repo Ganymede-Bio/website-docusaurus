@@ -91,6 +91,12 @@ module.exports = {
           collapsed: true,
           items: ['FlowRuns', 'Notifications']
         },
+        {
+          type: 'category',
+          label: 'Troubleshooting Flows',
+          collapsed: false,
+          items: ['DebuggingFlows']
+        }
         ]
       },
       {
