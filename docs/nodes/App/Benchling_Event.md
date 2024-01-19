@@ -48,7 +48,7 @@ Calls Benchling to get data for flow to trigger
 - **object_id** : `str`
     - ID used in Benchling API (e.g. - entity schema ID or notebook entry ID)
 - **event_type** : `str`
-    - Type of Benchling event
+    - Type of Benchling event (e.g. - v2.entity.registered)
 - **benchling_context** : `Optional[BenchlingContext]`
     - Benchling context variable, which stores Benchling connection information
 - **ganymede_context** : `Optional[GanymedeContext]`
