@@ -122,3 +122,67 @@ Note that if 2 charts are backed by different datasets which share a field name,
 be used to manipulate both tables simultaneously. 
 
 :::
+
+## Tips and tricks
+
+#### How do you create bar plots with proportions and percentages?
+
+In the chart editor page
+
+1. Click the `+ Drop columns/metrics here or click` in the metrics
+section of the query. 
+2. Move to the **CUSTOM SQL** tab
+3. Enter the following formula in the editor space 
+
+```sql
+COUNTIF(my_column = 'my_value') / COUNT(*)
+```
+
+#### I added a new column but I do not see it in the columns side bar in the editor chart page.
+In the chart editor page
+
+1. Click the **⋮** in the `Chart Source` side bar
+2. Click editor `Edit dataset`
+3. Click the **COLUMNS** tab
+4. Click `SYNC COLUMNS FROM SOURCE`
+5. Save
+
+#### I do not see the full range of values on the x-axis of my line plot
+
+This could be due to there being to many digits in the data being displayed, which can be fixed by
+rounding the data.
+
+1. Click the column of interest in `X-AXIS` Query section
+2. Click the **CUSTOM SQL** tab
+3. Modify the sql command to be 
+```sql
+ROUND(my_column, 2)
+```
+4. Update chart
+
+
+#### I am creating a line chart but the line is patchy and not full connected
+
+If the spacing between adjacent data points is too large, superset will have trouble connecting the
+points together. You can fill in the data in the chart editor page
+
+1. Expand the `Advanced analytics` section in the **DATA** tab
+2. Select an option in the `RULE` such as 1 hourly frequency
+3. Select the `FILL METHOD` such as Linear interpolation
+4. Update chart
+
+Another approach might be to increase the `ROW LIMIT` in the **DATA** tab if you have a large
+dataset. 
+
+#### Including headers, text, dividers, and tabs to dashboard
+
+1. In the dashboard page, click `EDIT DASHBOARD` 
+2. On the right side of the page, click the **LAYOUT ELEMENTS** tab
+3. Drag and drop tabs, text boxes, headers, etc
+
+These can be used to add descriptions to your dashboard. The text boxes and headers are markdown
+editors which can include hyperlinks that can point to flow pages or other dashboards. The tabs
+allow you to separate out charts into different tabs to group relevant charts together. Filters can
+be configured to work with different tabs. Filters that are not relevant to the specific tab you are
+on will be hidden under a dropdown and classified as out of scope. Tabs act as their own mini
+dashboards with unique links that will point to that tab in the dashboard.
