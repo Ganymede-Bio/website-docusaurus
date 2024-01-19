@@ -1,0 +1,22 @@
+---
+id: DebuggingFlows
+title: Troubleshooting Flows
+displayed_sidebar: webUiSidebar
+---
+
+This page describes a set of common issues associated with flow development and execution.
+
+#### Issue: The Run button is disabled and greyed out, preventing run execution for an extended period of time (more than 1 minute).  
+
+There are three possibilities:
+
+1. A flow save has triggered a rebuild of the workflow execution system.  This occurs when there are updates to the requirements to the environment, which comes from using new nodes in the environment, with package dependencies that did not exist prior to the node being used.  Typically, environment rebuilds take around 10 minutes to complete; flows should be runnable once the save is complete.
+2. Flow saves in rapid succession can result in race conditions; typically, the notifications page would show multiple concurrent saves in this case.  To clear the condition, modify the editor notebook associated with any flow and save the change to clear this state.
+3. Your role is not set to runner.
+
+#### Issue: I received a 400 status code while saving a notebook.
+
+Error committing file 400 - \{“statusCode”: 400, “message”: “Creating a file with this API is prohibited, attempted to create dags/…/function.py\}
+
+This error occurs when you try to save a notebook after modifying the name of the respective node in
+the flow. You can copy and paste your new code into a reopened notebook to save the changes.

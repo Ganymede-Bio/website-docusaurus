@@ -249,7 +249,7 @@ Adjust flow cytometry data for compensation
 **compensation_matrix** : `pd.DataFrame`  
 &nbsp; &nbsp; &nbsp; &nbsp; DataFrame containing compensation matrix; rows are from, columns are to  
 **compensation_channels** : `List[str]`  
-&nbsp; &nbsp; &nbsp; &nbsp; Fluoresent channels to adjust for compensation  
+&nbsp; &nbsp; &nbsp; &nbsp; Fluorescent channels to adjust for compensation  
   
 ### Returns  
   

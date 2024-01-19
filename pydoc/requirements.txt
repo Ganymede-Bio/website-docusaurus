@@ -9,7 +9,7 @@ docspec==2.0.2
 docspec-python==2.0.2
 docstring-parser==0.11
 idna==3.3
-Jinja2==3.1.2
+Jinja2==3.1.3
 MarkupSafe==2.1.1
 nr.util==0.8.12
 pandera
@@ -19,7 +19,7 @@ requests
 tomli==2.0.1
 tomli_w==1.0.0
 typing_extensions==4.3.0
-urllib3==1.26.12
+urllib3==1.26.18
 watchdog==2.1.9
 wrapt==1.14.1
 yapf==0.32.0
