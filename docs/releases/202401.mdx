@@ -4,6 +4,14 @@ title: January 2024
 displayed_sidebar: releaseSideBar
 ---
 
+### January 19 2024
+**Improvements**
+- The file browser now loads files in chunks, which increases the speed of the page load. Progress is shown on the Refresh button in the bottom left corner.
+- Core Agents were updated to version 3.0.4. In this version:
+    - Connections run network checks before starting, to ensure that access is sufficient.
+    - Auto-updates are prevented when a major version of the Core Agent is present.
+    - Agents can read secrets from an environment, using ganymede_sdk.get_secret().
+
 ### January 12 2024
 **Features/Updates**
 - Users can now chat directly with the Ganymede support team via an in-app messenger. Navigate to the Help menu, and then select “Contact Ganymede Support” to chat with our team.
