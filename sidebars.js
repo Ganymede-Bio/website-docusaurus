@@ -116,8 +116,8 @@ module.exports = {
       },
       {
         type: 'doc',
-        id: 'Help',
-        label: 'In-App Help'
+        id: 'Support',
+        label: 'Support'
       },
     ]
   ,
