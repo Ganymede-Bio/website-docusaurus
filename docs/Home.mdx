@@ -1,35 +1,39 @@
 ---
+id: Home
 title: Home
-sidebar_label: Home
 displayed_sidebar: webUiSidebar
 ---
 
-import ReactPlayer from 'react-player'
-
 import {
-  HomeOutlined,
-  NodeIndexOutlined,
-  UserOutlined,
-  FileTextOutlined,
-  CheckCircleOutlined,
-  SubnodeOutlined,
-  FolderOutlined,
   BellOutlined,
-  FileSearchOutlined,
   BranchesOutlined,
-  SettingOutlined
+  CheckCircleOutlined,
+  FileSearchOutlined,
+  FileTextOutlined,
+  FolderOutlined,
+  HomeOutlined,
+  SettingOutlined,
+  UserOutlined
 } from '@ant-design/icons';
 
-The <div className="button darkblue_button"><HomeOutlined /> **Home**</div> page contains links to _flows_ in the environment.  
+import ReactPlayer from 'react-player';
 
-<img width="1302" alt="Home" src="https://storage.googleapis.com/ganymede-bio-website/public/apiServer/HomeScreen_20231106.png"/>
+
+The <div className="button darkblue_button"><HomeOutlined /> **Home**</div> page contains links to flows in the environment.  
+
+<img width="1302" alt="Home" src="https://storage.googleapis.com/ganymede-bio-website/public/apiServer/HomeScreen_20240122.png"/>
 <br /><br /> 
+
+Clicking on the ellipsis in the upper-right hand corner of a flow card allows you to edit, run, or update the associated flow image associated with a flow.
+<img width="1302" alt="Home" src="https://storage.googleapis.com/ganymede-bio-website/public/apiServer/HomeScreenEditFlow_20240122.png"/>
+<br /><br /> 
+
 
 The My Flows tab contains flows relevant to you, while the All Flows tab contains all flows in the environment.
 <ReactPlayer playing={true} controls={true} url="https://storage.googleapis.com/ganymede-bio-website/public/apiServer/my_flows-all_flows20231106.mp4" />
 <br /><br /> 
 
-To assign a flow to yourself, select the All Flows tab and star the relevant _flows_.
+To assign a flow to yourself, select the All Flows tab and star the relevant flows.
 <ReactPlayer playing={true} controls={true} url="https://storage.googleapis.com/ganymede-bio-website/public/apiServer/my_flows-self-assign_flow20231106.mp4" />
 <br /><br /> 
 
@@ -40,17 +44,17 @@ To assign a flow to yourself, select the All Flows tab and star the relevant _fl
 
 ### Collapsible Sidebar
 
-The navigation sidebar contains pages for building and running flows, as well as observing data processed by _flows_.
+The navigation sidebar contains pages for building and running flows, as well as observing data processed by flows.
 
-[<div className="button darkblue_button"><HomeOutlined /> **Home**</div>](./Home.mdx) - Home screen used to access _flows_ to run
+[<div className="button darkblue_button"><HomeOutlined /> **Home**</div>](./Home.mdx) - Home screen used to access flows to run
 
-[<div className="button darkblue_button"><BranchesOutlined /> **Flow Editor**</div>](./FlowEditor.mdx) - Editor for modifying _flows_ and their underlying code
+[<div className="button darkblue_button"><BranchesOutlined /> **Flow Editor**</div>](./FlowEditor.mdx) - Editor for modifying flows and their underlying code
 
 [<div className="button darkblue_button"><CheckCircleOutlined /> **Flow Runs**</div>](./FlowRuns.mdx) - Table for tracking status of current and prior _flow_ runs
 
-[<div className="button darkblue_button"><FileSearchOutlined /> **Data Explorer**</div>](./DataExplorer.mdx) - Tools for querying and managing tabular data created by _flows_
+[<div className="button darkblue_button"><FileSearchOutlined /> **Data Explorer**</div>](./DataExplorer.mdx) - Tools for querying and managing tabular data created by flows
 
-[<div className="button darkblue_button"><FolderOutlined /> **Files**</div>](./Files.mdx) - File browser for accessing snapshotted input and output data processed through _flows_
+[<div className="button darkblue_button"><FolderOutlined /> **Files**</div>](./Files.mdx) - File browser for accessing snapshotted input and output data processed through flows
 
 ### Environment Selector
 

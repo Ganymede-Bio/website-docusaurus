@@ -24,14 +24,14 @@ import {
 
 import NotebookIcon from '../static/img/notebook.png';
 
-The <div className="button darkblue_button"><BranchesOutlined /> **Flow Editor**</div> page is the starting point for creating and modifying _flows_.  
+The <div className="button darkblue_button"><BranchesOutlined /> **Flow Editor**</div> page is the starting point for creating and modifying flows.  
 
 <img alt="Node status indicator" src="https://ganymede-bio.mo.cloudinary.net/apiServer/FlowEditor_20230831.png" />
 
 
 ## Header Bar
 
-The header bar contains buttons for creating _flows_ and monitoring _flow_ runs.
+The header bar contains buttons for creating flows and monitoring _flow_ runs.
 
 <img alt="Flow Editor header" src="https://ganymede-bio.mo.cloudinary.net/apiServer/FlowEditorHeader_20230405.png" />
 &nbsp;
@@ -43,7 +43,7 @@ The header bar contains buttons for creating _flows_ and monitoring _flow_ runs.
 * **Runs**: Opens right sidebar showing statuses of historical runs for the selected _flow_.  The [<div className="button darkblue_button"><CheckCircleOutlined /> **Flow Runs**</div>](FlowRuns.mdx) page contains greater detail about the contents of this tab.
 
 * **Save**: Button to save _flow_ layout to git repo and deploy code to workflow management system.
-* **Manage**: Opens right sidebar to create new _flows_ or delete existing ones. When a flow is selected, we can apply new configurations to the flow.
+* **Manage**: Opens right sidebar to create new flows or delete existing ones. When a flow is selected, we can apply new configurations to the flow.
   * Owner - Owner of the flow. Does not affect how the flow runs.
   * Retries - How many times the flow would retry to execute a node, in case of an error or a timeout.
 
@@ -96,12 +96,12 @@ To load a _flow_, specify the _flow_ to load in the <div className="button datal
 <img width="1241" alt="FlowEditor" src="https://user-images.githubusercontent.com/46538575/225718730-7e2dd267-e6ec-49c6-b77b-bd1183788022.png"/>
 &nbsp;
 
-After saving a _flow_, the entire environment (which contains all _flows_) is saved and deployed. When this save and deploy is taking place, users are temporarily restricted from running _flows_. A tooltip will be displayed to the user if they try to run a _flow_ during this time. Users can observe the status of environment updates on the [<div className="button darkblue_button"><NotificationOutlined /> **Notifications**</div>](Notifications.mdx) page.
+After saving a _flow_, the entire environment (which contains all flows) is saved and deployed. When this save and deploy is taking place, users are temporarily restricted from running flows. A tooltip will be displayed to the user if they try to run a _flow_ during this time. Users can observe the status of environment updates on the [<div className="button darkblue_button"><NotificationOutlined /> **Notifications**</div>](Notifications.mdx) page.
 
 
 ### Running Flows
 
-To select input files for _flows_, users can click <div className="button light_blue_button">**Browse**</div> to choose a file or drag-and-drop a file into the box labeled "Upload file here".  If <div className="button light_blue_button">**Browse**</div> is clicked, users have the option to either select an input file to process from the local computer or from Ganymede Cloud Storage (for files previously executed on _flows_ in Ganymede).  
+To select input files for flows, users can click <div className="button light_blue_button">**Browse**</div> to choose a file or drag-and-drop a file into the box labeled "Upload file here".  If <div className="button light_blue_button">**Browse**</div> is clicked, users have the option to either select an input file to process from the local computer or from Ganymede Cloud Storage (for files previously executed on flows in Ganymede).  
 
 <img width="550" alt="Browse" src="https://ganymede-bio.mo.cloudinary.net/apiServer/RunQueueBar_Browse_20231108.png" />
 
@@ -134,8 +134,8 @@ Edges can be removed by selecting them and pressing "delete" or "backspace" on t
 
 To make two nodes dependent on each other within a run, click and drag between two orbs two different nodes.  _Flow_ dependencies run top-to-bottom (if vertical layout is specified) or left-to-right (if horizontal layout is specified).
 
-In order to delete _flows_, click the <div className="button darkblue_button">**Manage <SettingOutlined />**</div>Button on the Flow Editor page, which opens up the right sidebar offering a button to <div className="button black_button">Delete Flow</div>
+In order to delete flows, click the <div className="button darkblue_button">**Manage <SettingOutlined />**</div>Button on the Flow Editor page, which opens up the right sidebar offering a button to <div className="button black_button">Delete Flow</div>
 
 :::caution
-Deleting _flows_ is not reversible from within the Ganymede UI, so undoing a _flow_ deletion will require restoring code from a prior commit in the git repo corresponding to the Ganymede cloud tenant.
+Deleting flows is not reversible from within the Ganymede UI, so undoing a _flow_ deletion will require restoring code from a prior commit in the git repo corresponding to the Ganymede cloud tenant.
 :::
