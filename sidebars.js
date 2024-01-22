@@ -76,19 +76,19 @@ module.exports = {
         items: [{
           type: 'category',
           label: 'Running Flows',
-          collapsed: true,
+          collapsed: false,
           items: ['Home', 'FlowView']
         },
         {
           type: 'category',
           label: 'Editing Flows',
-          collapsed: true,
+          collapsed: false,
           items: ['FlowEditor', 'NodeEditor'],
         },
         {
           type: 'category',
           label: 'Monitoring Flows',
-          collapsed: true,
+          collapsed: false,
           items: ['FlowRuns', 'Notifications']
         },
         {
@@ -113,6 +113,11 @@ module.exports = {
         type: 'doc',
         id: 'AdminControls',
         label: 'Environment Administration'
+      },
+      {
+        type: 'doc',
+        id: 'Support',
+        label: 'Support'
       },
     ]
   ,
