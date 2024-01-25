@@ -39,10 +39,10 @@ In the left sidebar, navigate to the Connections pane and click on the <div clas
 </div>
 &nbsp;
 
-Fill in the agent with the configuration shown below:
+Fill in the agent with the configuration shown below.  This will create an agent that watches a folder on the local PC for files with a ".xlsx" file extension, and then uploads detected files to the selected Ganymede flow for execution.
 
 <div class="text--center">
-<img alt="Quickstart agent creation filled in" src="https://ganymede-bio.mo.cloudinary.net/agent/AddNewAgentFilledIn_20240125.png"/>
+<img alt="Quickstart agent creation filled in" src="https://ganymede-bio.mo.cloudinary.net/agent/AddnewAgentFilledInExcel_20240125.png"/>
 </div>
 &nbsp;
 
@@ -51,6 +51,12 @@ The agent name can be anything you would like, and the agent configuration can r
 When the Flow Name is specified, the "File pattern to parameter mapping" section will display 1 row for each node that receives an input file.  Populate this field with a [glob pattern](https://en.wikipedia.org/wiki/Glob_(programming)) matching the file path within the directory to be watched.
 
 Click on the <div className="button darkblue_button">Create</div> button to create the agent.  This will initiate the build of an Agent, which will take roughly 20 minutes to complete, and can be monitored by clicking on the <div className="button darkblue_button"><BellOutlined /></div> in the header bar to view the Notifications page.
+
+:::info
+
+Subsequent iterations to the user-defined code within the agent will not require agent rebuild, and so will be much faster.  A typical update will take less than 10 seconds to complete, and will not require agent re-installation.
+
+:::
 
 A completed agent build will look like this on the Notifications page:
 
@@ -68,4 +74,28 @@ When the agent build is complete, the agent will be available for download from 
 &nbsp;
 
 On the local PC where the agent will be installed, sign into your tenant (as described in [step 1](#step-1-sign-into-ganymede)) and download the installer for the agent for your operating system by hovering over the <div className="button dark_gray_button"><DownloadOutlined /> Download</div> button and selecting your OS.  For this demo, we will be using a Windows PC, so we will download the Windows installer.
+
+Once downloaded, run the executable to install the agent.
+
+
+<div class="text--center">
+<img alt="Agent download" src="https://ganymede-bio.mo.cloudinary.net/agent/GanymedeAgentSetup_20240125.png"/>
+</div>
+&nbsp;
+
+<div class="text--center">
+<img alt="Agent download" src="https://ganymede-bio.mo.cloudinary.net/agent/GanymedeAgentInstallationLocation_20240125.png"/>
+</div>
+&nbsp;
+
+
+<div class="text--center">
+<img alt="Agent download" src="https://ganymede-bio.mo.cloudinary.net/agent/GanymedeAgentInstallScreen_20240125.png"/>
+</div>
+&nbsp;
+
+<div class="text--center">
+<img alt="Agent download" src="https://ganymede-bio.mo.cloudinary.net/agent/GanymedeAgentCompleteSetup_20240125.png"/>
+</div>
+&nbsp;
 
