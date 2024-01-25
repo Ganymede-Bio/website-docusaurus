@@ -1,0 +1,71 @@
+---
+id: QuickstartBuildAgent
+title: Build an Agent
+sidebar_label: Build an Agent to Capture Data
+displayed_sidebar: webUiSidebar
+---
+
+import { UserOutlined, PlusOutlined, DownloadOutlined, BellOutlined } from '@ant-design/icons';
+
+This guide walks you through creating an agent to capture data from a local instrument PC and upload it to a Ganymede flow for processing.
+
+<div class="text--center">
+<img alt="Agent" src="https://ganymede-bio.mo.cloudinary.net/agent/AgentFrontPage_20240125.png"/>
+</div>
+&nbsp;
+
+To do this we'll proceed through the following steps:
+- Sign into Ganymede
+- Create a new Agent to watch a folder and pushed files to Ganymede
+- Install the Agent on a local PC
+- Test the Agent by saving a file to the watched folder
+
+### Step 1: Sign into Ganymede
+
+The <div className="button gray_button"><UserOutlined /> Sign In</div> button should be available once authentication is configured for your tenant, which is generally going to be a web address accessible via any web browser with the URL [https://\<your_tenant\>.ganymede.bio](https://<your_tenant>.ganymede.bio).
+
+You may need to enable pop-ups for Ganymede or disable any ad-blocking software for the ganymede.bio domain.
+
+<div class="text--center">
+  <img width="400" alt="Ganymede sign-in" src="https://ganymede-bio.mo.cloudinary.net/apiServer/GanymedeSignIn_20230110.png"/>
+</div>
+
+### Step 2: Create a new Agent
+
+In the left sidebar, navigate to the Connections pane and click on the <div className="button dark_gray_button"><PlusOutlined /> New Agent</div> button.  This opens up a configuration panel for the agent as shown below:
+
+<div class="text--center">
+<img alt="Add new agent" src="https://ganymede-bio.mo.cloudinary.net/agent/AddNewAgent_20240125.png"/>
+</div>
+&nbsp;
+
+Fill in the agent with the configuration shown below:
+
+<div class="text--center">
+<img alt="Quickstart agent creation filled in" src="https://ganymede-bio.mo.cloudinary.net/agent/AddNewAgentFilledIn_20240125.png"/>
+</div>
+&nbsp;
+
+The agent name can be anything you would like, and the agent configuration can remain as "Watch for files locally then run flow".  The Flow Name specifies the flow that is initiated upon file capture; for this Quickstart, we will use the **Example_Quickstart_Absorbance_Change** flow which is pre-configured in every environment.  
+
+When the Flow Name is specified, the "File pattern to parameter mapping" section will display 1 row for each node that receives an input file.  Populate this field with a [glob pattern](https://en.wikipedia.org/wiki/Glob_(programming)) matching the file path within the directory to be watched.
+
+Click on the <div className="button darkblue_button">Create</div> button to create the agent.  This will initiate the build of an Agent, which will take roughly 20 minutes to complete, and can be monitored by clicking on the <div className="button darkblue_button"><BellOutlined /></div> in the header bar to view the Notifications page.
+
+A completed agent build will look like this on the Notifications page:
+
+<div class="text--center">
+<img alt="Agent build notification" src="https://ganymede-bio.mo.cloudinary.net/agent/AgentBuildNotificationsPage_20240125.png"/>
+</div>
+
+### Step 3: Download and install the Agent
+
+When the agent build is complete, the agent will be available for download from the Connections pane.
+
+<div class="text--center">
+<img alt="Agent download" src="https://ganymede-bio.mo.cloudinary.net/agent/AgentDownload_20240125.png"/>
+</div>
+&nbsp;
+
+On the local PC where the agent will be installed, sign into your tenant (as described in [step 1](#step-1-sign-into-ganymede)) and download the installer for the agent for your operating system by hovering over the <div className="button dark_gray_button"><DownloadOutlined /> Download</div> button and selecting your OS.  For this demo, we will be using a Windows PC, so we will download the Windows installer.
+
