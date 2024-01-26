@@ -72,7 +72,13 @@ Right click on the time in the lower right hand corner of the Windows taskbar an
 
 #### Step 3b: Create a folder to watch
 
-Create a new folder on your Desktop by right-clicking no the Desktop and selecting "New" -> "Folder".  Name the folder "watch_folder".
+Create a new folder on your Desktop by right-clicking on the Desktop and selecting "New" -> "Folder".  Name the folder "watch_folder".
+
+:::note
+
+If you choose a pre-existing folder, be aware that the agent will, by default, not process any files that exist in the folder prior to launch.
+
+:::
 
 #### Step 3c: Download the agent
 
@@ -81,31 +87,54 @@ When the agent build is complete, the agent will be available for download from 
 <div class="text--center">
 <img alt="Agent download" src="https://ganymede-bio.mo.cloudinary.net/agent/AgentDownload_20240125.png"/>
 </div>
-&nbsp;
+
 
 On the local PC where the agent will be installed, sign into your tenant (as described in [step 1](#step-1-sign-into-ganymede)) and download the installer for the Windows agent by hovering over the <div className="button dark_gray_button"><DownloadOutlined /> Download</div> button and selecting Windows.
 
-Once downloaded, run the executable to install the agent.
+Once downloaded, run the executable to start the installation process.  Name the connection "Quickstart Agent", and type in the path to the folder created in [step 3b](#step-3b-create-a-folder-to-watch) in the "Watched folder" field.  
+
+:::warning
+
+Take care when configuring the watch folder path, since a configuration error here may be challenging to debug. Specifically:
+* Ensure that forward slashes are used in the path specification.
+* Ensure that the input path is specified correctly.  In the example shown, the Desktop is found within the OneDrive directory because OneDrive is being used to back up files stored on Desktop.  If OneDrive is not being used, the path would typically be be "C:/Users/\<username\>/Desktop/watch_folder".
+
+:::
+
+<div class="text--center">
+<img width="600" alt="Agent connection name" src="https://ganymede-bio.mo.cloudinary.net/agent/GanymedeAgentSetup4_20240125.png"/>
+</div>
+&nbsp;
+
+Specify the desired installation location and click through the installer to complete the installation.
+
+<div class="text--center">
+<img width="600" alt="Agent installation location" src="https://ganymede-bio.mo.cloudinary.net/agent/GanymedeAgentInstallationLocation2_20240125.png"/>
+</div>
+&nbsp;
 
 
 <div class="text--center">
-<img alt="Agent download" src="https://ganymede-bio.mo.cloudinary.net/agent/GanymedeAgentSetup_20240125.png"/>
+<img width="600" alt="Agent installation confirmation" src="https://ganymede-bio.mo.cloudinary.net/agent/GanymedeAgentInstallScreen2_20240125.png"/>
 </div>
 &nbsp;
 
 <div class="text--center">
-<img alt="Agent download" src="https://ganymede-bio.mo.cloudinary.net/agent/GanymedeAgentInstallationLocation_20240125.png"/>
+<img width="600" alt="Agent installation completion" src="https://ganymede-bio.mo.cloudinary.net/agent/GanymedeAgentCompleteSetup2_20240125.png"/>
 </div>
 &nbsp;
 
+The agent will launch automatically after installation is complete.
+
+### Step 4: Test the agent
+
+Drop the [plate reader file](https://github.com/Ganymede-Bio/website-docusaurus/raw/main/PlateReader.xlsx) into the watch folder created in [step 3b](#step-3b-create-a-folder-to-watch).  The agent will detect the file and upload it to the Ganymede flow for processing.
+
+Any window with the environment open will show that the flow has been initiated.  Congrats on creating your first agent!
 
 <div class="text--center">
-<img alt="Agent download" src="https://ganymede-bio.mo.cloudinary.net/agent/GanymedeAgentInstallScreen_20240125.png"/>
+<img alt="Agent installation completion" src="https://ganymede-bio.mo.cloudinary.net/agent/GanymedeAgentFlowLaunch2_20240125.png"/>
 </div>
 &nbsp;
 
-<div class="text--center">
-<img alt="Agent download" src="https://ganymede-bio.mo.cloudinary.net/agent/GanymedeAgentCompleteSetup_20240125.png"/>
-</div>
-&nbsp;
-
+If you run into any challenges with the Quickstart, please visit the [Troubleshooting Agents page](./connectivity/DebuggingAgents.mdx).
