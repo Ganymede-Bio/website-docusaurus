@@ -27,7 +27,7 @@ matrices from WSP file.
   
 # Generate output table based on table output structure and FlowJo population statistics  
 >>> WSP.apply_table_output_structure(  
-&nbsp; &nbsp; &nbsp; &nbsp; wsp.table_output_structure[["gate", "Table"]].dropna(), wsp.stats_flowjo  
+&nbsp; &nbsp; &nbsp; &nbsp; wsp.table_output_structure["Table"][["gate", "value_type", "statistic", "rename"]], wsp.stats_flowjo  
 &nbsp; &nbsp; &nbsp; &nbsp; )  
   
 With corresponding FCS files, you can calculate population counts from FCS events data using  
@@ -127,8 +127,10 @@ Apply table structure as specified in Table Editor of FlowJo to get population p
 ### Parameters  
   
 **df_table_structure** : `pd.DataFrame`  
-&nbsp; &nbsp; &nbsp; &nbsp; DataFrame containing table structure; Should contain the following fields  
+&nbsp; &nbsp; &nbsp; &nbsp; DataFrame containing table structure; Should contain the following fields:  
 &nbsp; &nbsp; &nbsp; &nbsp; gate (series of gates applied to determine population)  
+&nbsp; &nbsp; &nbsp; &nbsp; value_type (type of value (e.g. statistic, keyword, etc.))  
+&nbsp; &nbsp; &nbsp; &nbsp; rename (name of column in output table)  
 &nbsp; &nbsp; &nbsp; &nbsp; table_name (name of table)  
 **df_population_stats** : `pd.DataFrame`  
 &nbsp; &nbsp; &nbsp; &nbsp; DataFrame containing gating stats; Should contain the following fields  
@@ -136,7 +138,8 @@ Apply table structure as specified in Table Editor of FlowJo to get population p
 &nbsp; &nbsp; &nbsp; &nbsp; statistic_name (name of statistic (e.g. count, MFI, etc.))  
 &nbsp; &nbsp; &nbsp; &nbsp; statistic_value (value of statistic)  
 **unique_id** : `Union[List[str], str]`  
-&nbsp; &nbsp; &nbsp; &nbsp; Unique identifier(s) for well  
+&nbsp; &nbsp; &nbsp; &nbsp; Unique identifying column names(s) for single flow run.&nbsp; &nbsp; Commonly, this would be well position,  
+&nbsp; &nbsp; &nbsp; &nbsp; well position + timestamp, or filename.  
   
 ### Returns  
   

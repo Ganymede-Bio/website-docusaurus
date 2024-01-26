@@ -26,6 +26,11 @@ module.exports = {
         items: [
           {
             type: 'doc',
+            id: 'QuickstartBuildAgent',
+            label: 'QuickstartBuildAgent'
+          },
+          {
+            type: 'doc',
             id: 'QuickstartBuildFlow',
             label: 'QuickstartBuildFlow'
           },
