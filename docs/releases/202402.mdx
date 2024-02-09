@@ -4,6 +4,15 @@ title: February 2024
 displayed_sidebar: releaseSideBar
 ---
 
+### February 8 2024
+**Improvements**
+- Node name is now displayed in the editor notebook browser tab.
+- The Benchling class of the Ganymede SDK will now retry to register entities when it encounters an error, and will conditionally error when an empty assay result is returned.
+
+**Bug Fixes**
+- Flow Run param return values were corrected. Previously, multi-param nodes returned no more than 2 params.
+- Scheduled Flow Runs (cron) occasionally displayed an inaccurate run duration, but has been corrected.
+
 ### February 1 2024
 **Improvements**
 - The Ganymede Storage modal, used for selecting Flow Run inputs, now defaults to only showing valid input files for the selected Flow.
