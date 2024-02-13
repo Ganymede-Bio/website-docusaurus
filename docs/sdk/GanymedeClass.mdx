@@ -4,7 +4,6 @@ title: Ganymede Class
 displayed_sidebar: SDKSidebar
 ---
 
-import NodeChip from '@site/src/components/NodeChip.js'
 
 
 ## Overview
@@ -62,7 +61,7 @@ df_query1, df_query2 = g.retrieve_sql(query_sql)
 
 ### `method` retrieve_tables
 
-_retrieve_sql_ allows users to retrieve tabular data from the Ganymede data lake, preserving field names with special characters.
+_retrieve_tables_ allows users to retrieve tabular data from the Ganymede data lake, preserving field names with special characters.
 
 The results are returned as a Dict of DataFrames in Python, keyed by table name.  Returned DataFrames contain the entire contents of the specified table(s).
 
@@ -71,7 +70,7 @@ The results are returned as a Dict of DataFrames in Python, keyed by table name.
 ```python
 from ganymede_sdk import Ganymede
 
-df_query1 = g.retrieve_sql(['table1', 'table2'])
+df_query1 = g.retrieve_tables(['table1', 'table2'])
 ```
 
 ### `method` list_tables
@@ -101,7 +100,7 @@ _list_tables_current_run_ returns a listing of all tables associated with the cu
 
 ### `method` list_tables_current_flow
 
-_list_tables_current_flow_ returns a listing of all tables associated with the current flow and run ID as a Pandas DataFrame.
+_list_tables_current_flow_ returns a listing of all tables associated with the current flow as a Pandas DataFrame.
 
 ### `method` list_tables_all
 
