@@ -14,6 +14,25 @@ Different options for handling naming when creating custom entities.
 See: https://help.benchling.com/hc/en-us/articles/9684227098893-Choose-a-naming-option-for-your-Registry-schema  
 
 
+## `function` register_entity
+  
+Register custom entity to Benchling registry with retry logic  
+  
+### Parameters  
+  
+**benchling_context** : `BenchlingContext`  
+&nbsp; &nbsp; &nbsp; &nbsp; Benchling context object to get connection  
+**entity_id** : `str`  
+&nbsp; &nbsp; &nbsp; &nbsp; ID of the entity to register  
+**registry_id** : `str`  
+&nbsp; &nbsp; &nbsp; &nbsp; ID of the registry to register the entity to  
+  
+### Raises  
+  
+**BenchlingError**  
+&nbsp; &nbsp; &nbsp; &nbsp; Failure to register entity to registry  
+
+
 ## `function` create_custom_entity
   
 Creates and returns the id of the custom entity.  
@@ -189,6 +208,8 @@ Processes input DataFrame for upload to Benchling.
 &nbsp; &nbsp; &nbsp; &nbsp; Default is True.  
 **ignore_na** : `bool`  
 &nbsp; &nbsp; &nbsp; &nbsp; If True, drop columns with only nulls prior to upload. Default is True.  
+**error_on_empty_result** : `bool`  
+&nbsp; &nbsp; &nbsp; &nbsp; If True, raise an error if the DataFrame is empty. Default is True.  
 **\*\*kwargs**  
 &nbsp; &nbsp; &nbsp; &nbsp; Keyword args to pass to create_assay_result_from_dict  
 &nbsp; &nbsp; &nbsp; &nbsp; drop_na (Optional[bool])  
@@ -262,6 +283,8 @@ Create custom entities in Benchling
 &nbsp; &nbsp; &nbsp; &nbsp; Initiated custom entity service object  
 **wait** : `bool`  
 &nbsp; &nbsp; &nbsp; &nbsp; Whether to wait for the task to complete. Defaults to True.  
+**error_on_fail** : `bool`  
+&nbsp; &nbsp; &nbsp; &nbsp; Whether to raise an error if the task fails. Defaults to True.  
   
 ### Returns  
   
@@ -284,6 +307,8 @@ Update custom entities in Benchling
 &nbsp; &nbsp; &nbsp; &nbsp; Initiated custom entity service object  
 **wait** : `bool`  
 &nbsp; &nbsp; &nbsp; &nbsp; Whether to wait for the task to complete. Defaults to True.  
+**error_on_fail** : `bool`  
+&nbsp; &nbsp; &nbsp; &nbsp; Whether to raise an error if the task fails. Defaults to True.  
   
 ### Returns  
   

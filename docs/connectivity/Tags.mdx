@@ -77,6 +77,32 @@ def execute(file_data: Dict[str, bytes], ganymede_context) -> NodeReturn:
         )
 ```
 
+File Tags can also be added to files returned in the NodeReturn object:
+
+```python
+from typing import Dict
+
+from ganymede_sdk.file_tag import add_file_tag
+from ganymede_sdk.io import NodeReturn
+
+
+def execute(file_data: Dict[str, bytes], ganymede_context) -> NodeReturn:
+    entry_name = "test_entry"
+    file_data_bytes = list(file_data.values())[0]
+
+    return NodeReturn(
+        files_to_upload={"output_filename.csv": file_data_bytes},
+
+        # parameters for the add_file_tag function are passed in the tags parameter
+        tags={
+            "output_filename.csv": {
+                "tag_type_id": "benchling_entry_id",
+                "display_value": entry_name
+            }
+        }
+    )
+```
+
 #### Tagging Files in Agents
 
 To tag a file within an agent, use the `add_file_tag_to_fileparam` function in the `ganymede_sdk.agent` module.  This function takes the following arguments:
