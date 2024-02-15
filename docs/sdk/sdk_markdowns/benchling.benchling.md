@@ -129,8 +129,12 @@ Bulk creates custom entities in Benchling.&nbsp; &nbsp; If the entity does not e
 **registry_id** : `str`  
 &nbsp; &nbsp; &nbsp; &nbsp; Project associated with custom entity.&nbsp; &nbsp; This identifies the registry that your run  
 &nbsp; &nbsp; &nbsp; &nbsp; entity will be registered to.  
+**naming_strategy** : `NamingStrategy`  
+&nbsp; &nbsp; &nbsp; &nbsp; Naming strategy to use when creating new entities. See NamingStrategy for more details.  
 **wait** : `bool`  
 &nbsp; &nbsp; &nbsp; &nbsp; Whether to wait for the task to complete before returning  
+**error_on_fail** : `bool`  
+&nbsp; &nbsp; &nbsp; &nbsp; Whether to raise an error if the task fails  
   
 ### Returns  
   
@@ -194,8 +198,12 @@ Bulk creates molecules in Benchling.&nbsp; &nbsp; If the entity does not exist, 
 **registry_id** : `str`  
 &nbsp; &nbsp; &nbsp; &nbsp; Project associated with custom entity.&nbsp; &nbsp; This identifies the registry that your run  
 &nbsp; &nbsp; &nbsp; &nbsp; entity will be registered to.  
+**naming_strategy** : `NamingStrategy`  
+&nbsp; &nbsp; &nbsp; &nbsp; Naming strategy to use when creating new entities. See NamingStrategy for more details.  
 **wait** : `bool`  
 &nbsp; &nbsp; &nbsp; &nbsp; Whether to wait for the task to complete before returning  
+**error_on_fail** : `bool`  
+&nbsp; &nbsp; &nbsp; &nbsp; Whether to raise an error if the task fails  
   
 ### Returns  
   
@@ -267,6 +275,10 @@ Process input DataFrame into assay results for upload to Benchling.
 **replace_special_characters** : `bool`  
 &nbsp; &nbsp; &nbsp; &nbsp; Replace special characters in column names with underscores to mimic Benchling behavior.  
 &nbsp; &nbsp; &nbsp; &nbsp; Default is True.  
+**ignore_na** : `bool`  
+&nbsp; &nbsp; &nbsp; &nbsp; If True, drop columns with only nulls prior to upload. Default is True.  
+**error_on_empty_result** : `bool`  
+&nbsp; &nbsp; &nbsp; &nbsp; If True, raise an error if the DataFrame is empty. Default is True.  
 **upload** : `bool`  
 &nbsp; &nbsp; &nbsp; &nbsp; Whether to upload List[AssayResults] to Benchling  
 **\*\*kwargs**  

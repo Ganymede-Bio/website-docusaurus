@@ -56,6 +56,7 @@ Args:
 &nbsp; &nbsp; &nbsp; &nbsp; molecule_objs (List): A list of molecule objects to create.  
 &nbsp; &nbsp; &nbsp; &nbsp; molecule_service (MoleculeService): The initiated MoleculeService.  
 &nbsp; &nbsp; &nbsp; &nbsp; wait (bool, optional): Whether to wait for the task to complete. Defaults to True.  
+&nbsp; &nbsp; &nbsp; &nbsp; error_on_fail (bool, optional): Whether to raise an error if the task fails. Defaults to True.  
   
 Returns:  
 &nbsp; &nbsp; &nbsp; &nbsp; List[str]: A list of task IDs for each bulk create request.  
@@ -70,6 +71,7 @@ Args:
 &nbsp; &nbsp; &nbsp; &nbsp; molecule_objs (List): A list of molecule objects to update.  
 &nbsp; &nbsp; &nbsp; &nbsp; molecule_service (MoleculeService): The initiated MoleculeService.  
 &nbsp; &nbsp; &nbsp; &nbsp; wait (bool, optional): Whether to wait for the task to complete. Defaults to True.  
+&nbsp; &nbsp; &nbsp; &nbsp; error_on_fail (bool, optional): Whether to raise an error if the task fails. Defaults to True.  
   
 Returns:  
 &nbsp; &nbsp; &nbsp; &nbsp; List: A list of task IDs for the molecule update tasks.  

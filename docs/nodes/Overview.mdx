@@ -25,62 +25,63 @@ The table below lists available nodes.
 - **Is Multi** indicates that the node can accept multiple inputs.
 
 | [Category](#node-categories)   | Name                   | [Input Types](#node-inputoutput-types)                                                           | [Output Types](#node-inputoutput-types)                                | Is Editable   | Is Multi   |
-|------------|------------------------|-------------------------|----------------|---------------|------------|
-| Analysis   | Branch_Python          | Table(s) and/or File(s) | NodeReturn     | True          | False      |
-| Analysis   | Python                 | Table(s) and/or File(s) | NodeReturn     | True          | False      |
-| Analysis   | RunContainer           | FileAny                 | FileAny        | True          | False      |
-| Analysis   | Transform_SQL          | Table(s)                | Table          | True          | False      |
-| Analysis   | Transform_py           | Table(s)                | NodeReturn     | True          | False      |
-| Analysis   | Trigger_Python         | Table(s) and/or File(s) | FlowInputs     | True          | False      |
-| App        | APINode                | API                     | NodeReturn     | True          | False      |
-| App        | AirtableExport         | Table                   | API            | True          | False      |
-| App        | AirtableImport         | API                     | NodeReturn     | False         | False      |
-| App        | Azure_Query            | API                     | NodeReturn     | True          | False      |
-| App        | Azure_Read             | API                     | FileAny        | False         | False      |
-| App        | Azure_Read_Multi       | API                     | FileAny        | False         | True       |
-| App        | Azure_Write            | FileAny                 | API            | False         | False      |
-| App        | Benchling_Api          | API                     | NodeReturn     | True          | False      |
-| App        | Benchling_Event        | Event                   | FlowInputs     | True          | False      |
-| App        | Benchling_Read         | API                     | NodeReturn     | True          | False      |
-| App        | Benchling_Read_Object  | API                     | NodeReturn     | True          | False      |
-| App        | Benchling_Write        | Table                   | NodeReturn     | True          | False      |
-| App        | Benchling_Write_Object | Table(s) and/or File(s) | NodeReturn     | True          | False      |
-| App        | Coda_Write             | Table                   | NodeReturn     | True          | False      |
-| App        | ELabNext_Write         | Table                   | NodeReturn     | True          | False      |
-| App        | Load_Parquet_to_Table  | API                     | FileAny        | False         | False      |
-| App        | S3_Event               | Event                   | FlowInputs     | True          | False      |
-| App        | S3_Read                | API                     | FileAny        | False         | False      |
-| App        | S3_Write               | FileAny                 | API            | False         | False      |
-| App        | SciNote_API            | Table                   | NodeReturn     | True          | False      |
-| App        | Smartsheet_Read        | API                     | NodeReturn     | True          | False      |
-| App        | Snowflake_Write        | Table                   | NodeReturn     | False         | False      |
-| File       | AVI_Read               | FileAVI                 | NodeReturn     | True          | False      |
-| File       | AVI_Read_Multi         | Set[FileAVI]            | NodeReturn     | True          | True       |
-| File       | CSV_Read               | FileCSV                 | NodeReturn     | True          | False      |
-| File       | CSV_Read_Multi         | Set[FileCSV]            | NodeReturn     | True          | True       |
-| File       | CSV_Write              | Table(s)                | NodeReturn     | True          | False      |
-| File       | Excel_Read             | FileExcel               | NodeReturn     | True          | False      |
-| File       | Excel_Read_Multi       | Set[FileExcel]          | NodeReturn     | True          | True       |
-| File       | Excel_Write            | Table(s)                | NodeReturn     | True          | False      |
-| File       | FCS_Extract_Load       | FileFCS                 | NodeReturn     | True          | False      |
-| File       | HDF5_Read              | FileHDF5                | NodeReturn     | True          | False      |
-| File       | Image_Read             | FileImage               | NodeReturn     | True          | False      |
-| File       | Image_Read_Multi       | Set[FileImage]          | NodeReturn     | True          | True       |
-| File       | Image_Write            | Table(s)                | NodeReturn     | True          | False      |
-| File       | Input_File             | FileAny                 | NodeReturn     | True          | False      |
-| File       | Input_File_Multi       | Set[FileAny]            | NodeReturn     | True          | True       |
-| File       | PDF_Read               | FilePDF                 | NodeReturn     | True          | False      |
-| File       | PDF_Read_Multi         | Set[FilePDF]            | NodeReturn     | True          | True       |
-| File       | Powerpoint_Write       | Table(s)                | NodeReturn     | True          | False      |
-| File       | XML_Read               | FileXML                 | NodeReturn     | True          | False      |
-| File       | Zip_Read               | FileZip                 | NodeReturn     | True          | False      |
-| Instrument | Agilent_HPLC_Read      | File                    | NodeReturn     | True          | False      |
-| Instrument | Instron_Tensile_Read   | FileIsTens              | NodeReturn     | True          | False      |
-| Instrument | Profilometer_Read      | FileHDF5                | NodeReturn     | True          | False      |
-| Instrument | Synergy_Read           | FileTxt                 | NodeReturn     | True          | False      |
-| Instrument | Synergy_Read_Multi     | Set[FileTxt]            | NodeReturn     | True          | True       |
-| Tag        | Benchling_Tag          | TagBenchling            | string         | False         | False      |
-| Tag        | Input_Param            |                         | string         | False         | False      |
+|------------|--------------------------|-------------------------|----------------|---------------|------------|
+| Analysis   | Branch_Python            | Table(s) and/or File(s) | NodeReturn     | True          | False      |
+| Analysis   | Python                   | Table(s) and/or File(s) | NodeReturn     | True          | False      |
+| Analysis   | RunContainer             | FileAny                 | FileAny        | True          | False      |
+| Analysis   | Transform_SQL            | Table(s)                | Table          | True          | False      |
+| Analysis   | Transform_py             | Table(s)                | NodeReturn     | True          | False      |
+| Analysis   | Trigger_Python           | Table(s) and/or File(s) | FlowInputs     | True          | False      |
+| App        | APINode                  | API                     | NodeReturn     | True          | False      |
+| App        | AirtableExport           | Table                   | API            | True          | False      |
+| App        | AirtableImport           | API                     | NodeReturn     | False         | False      |
+| App        | Azure_Query              | Table                   | NodeReturn     | True          | False      |
+| App        | Azure_Read               | API                     | FileAny        | False         | False      |
+| App        | Azure_Read_Multi         | API                     | FileAny        | False         | True       |
+| App        | Azure_Write              | FileAny                 | API            | False         | False      |
+| App        | Benchling_Api            | API                     | NodeReturn     | True          | False      |
+| App        | Benchling_Event          | Event                   | FlowInputs     | True          | False      |
+| App        | Benchling_Read           | API                     | NodeReturn     | True          | False      |
+| App        | Benchling_Read_Object    | API                     | NodeReturn     | True          | False      |
+| App        | Benchling_Warehouse_Sync | Table                   | NodeReturn     | True          | False      |
+| App        | Benchling_Write          | Table                   | NodeReturn     | True          | False      |
+| App        | Benchling_Write_Object   | Table(s) and/or File(s) | NodeReturn     | True          | False      |
+| App        | Coda_Write               | Table                   | NodeReturn     | True          | False      |
+| App        | ELabNext_Write           | Table                   | NodeReturn     | True          | False      |
+| App        | Load_Parquet_to_Table    | API                     | FileAny        | False         | False      |
+| App        | S3_Event                 | Event                   | FlowInputs     | True          | False      |
+| App        | S3_Read                  | API                     | FileAny        | False         | False      |
+| App        | S3_Write                 | FileAny                 | API            | False         | False      |
+| App        | SciNote_API              | Table                   | NodeReturn     | True          | False      |
+| App        | Smartsheet_Read          | API                     | NodeReturn     | True          | False      |
+| App        | Snowflake_Write          | Table                   | NodeReturn     | False         | False      |
+| File       | AVI_Read                 | FileAVI                 | NodeReturn     | True          | False      |
+| File       | AVI_Read_Multi           | Set[FileAVI]            | NodeReturn     | True          | True       |
+| File       | CSV_Read                 | FileCSV                 | NodeReturn     | True          | False      |
+| File       | CSV_Read_Multi           | Set[FileCSV]            | NodeReturn     | True          | True       |
+| File       | CSV_Write                | Table(s)                | NodeReturn     | True          | False      |
+| File       | Excel_Read               | FileExcel               | NodeReturn     | True          | False      |
+| File       | Excel_Read_Multi         | Set[FileExcel]          | NodeReturn     | True          | True       |
+| File       | Excel_Write              | Table(s)                | NodeReturn     | True          | False      |
+| File       | FCS_Extract_Load         | FileFCS                 | NodeReturn     | True          | False      |
+| File       | HDF5_Read                | FileHDF5                | NodeReturn     | True          | False      |
+| File       | Image_Read               | FileImage               | NodeReturn     | True          | False      |
+| File       | Image_Read_Multi         | Set[FileImage]          | NodeReturn     | True          | True       |
+| File       | Image_Write              | Table(s)                | NodeReturn     | True          | False      |
+| File       | Input_File               | FileAny                 | NodeReturn     | True          | False      |
+| File       | Input_File_Multi         | Set[FileAny]            | NodeReturn     | True          | True       |
+| File       | PDF_Read                 | FilePDF                 | NodeReturn     | True          | False      |
+| File       | PDF_Read_Multi           | Set[FilePDF]            | NodeReturn     | True          | True       |
+| File       | Powerpoint_Write         | Table(s)                | NodeReturn     | True          | False      |
+| File       | XML_Read                 | FileXML                 | NodeReturn     | True          | False      |
+| File       | Zip_Read                 | FileZip                 | NodeReturn     | True          | False      |
+| Instrument | Agilent_HPLC_Read        | File                    | NodeReturn     | True          | False      |
+| Instrument | Instron_Tensile_Read     | FileIsTens              | NodeReturn     | True          | False      |
+| Instrument | Profilometer_Read        | FileHDF5                | NodeReturn     | True          | False      |
+| Instrument | Synergy_Read             | FileTxt                 | NodeReturn     | True          | False      |
+| Instrument | Synergy_Read_Multi       | Set[FileTxt]            | NodeReturn     | True          | True       |
+| Tag        | Benchling_Tag            | TagBenchling            | string         | False         | False      |
+| Tag        | Input_Param              |                         | string         | False         | False      |
 
 #### Node Categories
 
@@ -102,6 +103,10 @@ Initializing a NodeReturn object involves passing the following parameters:
   - _param_ **if_exists**: str - String indicating whether to overwrite or append to existing tables in Ganymede data lake.  Valid values are "replace", "append", or "fail"; defaults to "replace".
   - _param_ **tables_measurement_units**: Optional[Dict[str, pd.DataFrame]] - if provided, the measurement units for columns; keys are table names, values are
     pandas DataFrames with "column_name" and "unit" as columns
+  - _param_ **file_location**: Optional[str] - Bucket location to output to, either "input" or "output; only need to specify if files_to_upload is not null, by default output
+  - _param_ **wait_for_job**: whether to wait for write to Ganymede data lake before continuing execution to subsequent node, by default False
+  - _param_ **tags**: Optional[Dict[List[Dict] | Dict]]: Dictionary of files to tag; keys are file names, values are dictionaries of
+        keyword parameters to pass into the [add_file_tag function](../connectivity/Tags#tagging-files).
 
 :::note example
 
@@ -199,59 +204,60 @@ The _execute_ function may call classes and functions found within the User-Defi
 ## List of Available Nodes
 
 | [Category](#node-categories)   | Name                   | Brief Description                                                            |
-|------------|------------------------|------------------------------------------------------------------------------|
-| Analysis   | Branch_Python          | Process data with Python and conditionally execute downstream nodes          |
-| Analysis   | Python                 | Process data with python                                                     |
-| Analysis   | RunContainer           | Run container node                                                           |
-| Analysis   | Transform_SQL          | SQL analysis Function                                                        |
-| Analysis   | Transform_py           | Manipulate data with python                                                  |
-| Analysis   | Trigger_Python         | Process data with Python and trigger subsequent flow                         |
-| App        | APINode                | Generic API Access Node                                                      |
-| App        | AirtableExport         | Export data from Ganymede data lake to Airtable                              |
-| App        | AirtableImport         | Import data from Airtable into Ganymede data lake                            |
-| App        | Azure_Query            | Query data from Azure SQL Server                                             |
-| App        | Azure_Read             | Read data from Azure Blob Storage                                            |
-| App        | Azure_Read_Multi       | Read all data from Azure Blob Storage                                        |
-| App        | Azure_Write            | Write data to Azure Blob storage                                             |
-| App        | Benchling_Api          | Read Benchling data into data lake                                           |
-| App        | Benchling_Event        | Capture events from Benchling for triggering flows                           |
-| App        | Benchling_Read         | Read Benchling data into data lake using run tag                             |
-| App        | Benchling_Read_Object  | Read Benchling data into data lake using object ID                           |
-| App        | Benchling_Write        | Write to Benchling                                                           |
-| App        | Benchling_Write_Object | Write object to Benchling                                                    |
-| App        | Coda_Write             | Write Coda tables                                                            |
-| App        | ELabNext_Write         | Create and write eLabNext entry                                              |
-| App        | Load_Parquet_to_Table  | Create datalake table from parquet files                                     |
-| App        | S3_Event               | Capture events from AWS S3 for triggering flows                              |
-| App        | S3_Read                | Ingest data into Ganymede data storage from AWS S3 storage                   |
-| App        | S3_Write               | Write data to an S3 bucket                                                   |
-| App        | SciNote_API            | Create and write SciNote entry                                               |
-| App        | Smartsheet_Read        | Read sheet from Smartsheet                                                   |
-| App        | Snowflake_Write        | Sync tables in Ganymede data lake to Snowflake                               |
-| File       | AVI_Read               | Read in contents of an AVI file to a table                                   |
-| File       | AVI_Read_Multi         | Read in contents of multiple avi files to a table                            |
-| File       | CSV_Read               | Read in contents of a CSV file                                               |
-| File       | CSV_Read_Multi         | Read in contents of multiple CSV files                                       |
-| File       | CSV_Write              | Write table to CSV file                                                      |
-| File       | Excel_Read             | Read Excel spreadsheet                                                       |
-| File       | Excel_Read_Multi       | Read Excel spreadsheets                                                      |
-| File       | Excel_Write            | Write Excel spreadsheet                                                      |
-| File       | FCS_Extract_Load       | Load FCS file to data lake                                                   |
-| File       | HDF5_Read              | Read HDF5 data                                                               |
-| File       | Image_Read             | Process image data; store processed images to data store                     |
-| File       | Image_Read_Multi       | Process image data for multiple images; store processed images to data store |
-| File       | Image_Write            | Process tabular data; write an image to data lake                            |
-| File       | Input_File             | Read data file and process in Ganymede                                       |
-| File       | Input_File_Multi       | Read data files and process in Ganymede                                      |
-| File       | PDF_Read               | Read in contents of an PDF file to a table                                   |
-| File       | PDF_Read_Multi         | Read in contents of multiple pdf files to a table                            |
-| File       | Powerpoint_Write       | Process tabular data; write a powerpoint presentation to data lake           |
-| File       | XML_Read               | Read XML file into data lake                                                 |
-| File       | Zip_Read               | Extract Zip file                                                             |
-| Instrument | Agilent_HPLC_Read      | Read an Agilent HPLC file of type .uv, .ms, .ch, or .bin                     |
-| Instrument | Instron_Tensile_Read   | Load .is_tens file to data lake                                              |
-| Instrument | Profilometer_Read      | Read Mx Profiler data file                                                   |
-| Instrument | Synergy_Read           | Load Synergy text file to data lake                                          |
-| Instrument | Synergy_Read_Multi     | Load multiple Synergy texts file to data lake                                |
-| Tag        | Benchling_Tag          | Read benchling tag                                                           |
-| Tag        | Input_Param            | Input parameter into Flow                                                    |
+|------------|--------------------------|------------------------------------------------------------------------------|
+| Analysis   | Branch_Python            | Process data with Python and conditionally execute downstream nodes          |
+| Analysis   | Python                   | Process data with python                                                     |
+| Analysis   | RunContainer             | Run container node                                                           |
+| Analysis   | Transform_SQL            | SQL analysis Function                                                        |
+| Analysis   | Transform_py             | Manipulate data with python                                                  |
+| Analysis   | Trigger_Python           | Process data with Python and trigger subsequent flow                         |
+| App        | APINode                  | Generic API Access Node                                                      |
+| App        | AirtableExport           | Export data from Ganymede data lake to Airtable                              |
+| App        | AirtableImport           | Import data from Airtable into Ganymede data lake                            |
+| App        | Azure_Query              | Query data from Azure SQL Server                                             |
+| App        | Azure_Read               | Read data from Azure Blob Storage                                            |
+| App        | Azure_Read_Multi         | Read all data from Azure Blob Storage                                        |
+| App        | Azure_Write              | Write data to Azure Blob storage                                             |
+| App        | Benchling_Api            | Read Benchling data into data lake                                           |
+| App        | Benchling_Event          | Capture events from Benchling for triggering flows                           |
+| App        | Benchling_Read           | Read Benchling data into data lake using run tag                             |
+| App        | Benchling_Read_Object    | Read Benchling data into data lake using object ID                           |
+| App        | Benchling_Warehouse_Sync | Sync Benchling Warehouse into Ganymede                                       |
+| App        | Benchling_Write          | Write to Benchling                                                           |
+| App        | Benchling_Write_Object   | Write object to Benchling                                                    |
+| App        | Coda_Write               | Write Coda tables                                                            |
+| App        | ELabNext_Write           | Create and write eLabNext entry                                              |
+| App        | Load_Parquet_to_Table    | Create datalake table from parquet files                                     |
+| App        | S3_Event                 | Capture events from AWS S3 for triggering flows                              |
+| App        | S3_Read                  | Ingest data into Ganymede data storage from AWS S3 storage                   |
+| App        | S3_Write                 | Write data to an S3 bucket                                                   |
+| App        | SciNote_API              | Create and write SciNote entry                                               |
+| App        | Smartsheet_Read          | Read sheet from Smartsheet                                                   |
+| App        | Snowflake_Write          | Sync tables in Ganymede data lake to Snowflake                               |
+| File       | AVI_Read                 | Read in contents of an AVI file to a table                                   |
+| File       | AVI_Read_Multi           | Read in contents of multiple avi files to a table                            |
+| File       | CSV_Read                 | Read in contents of a CSV file                                               |
+| File       | CSV_Read_Multi           | Read in contents of multiple CSV files                                       |
+| File       | CSV_Write                | Write table to CSV file                                                      |
+| File       | Excel_Read               | Read Excel spreadsheet                                                       |
+| File       | Excel_Read_Multi         | Read Excel spreadsheets                                                      |
+| File       | Excel_Write              | Write Excel spreadsheet                                                      |
+| File       | FCS_Extract_Load         | Load FCS file to data lake                                                   |
+| File       | HDF5_Read                | Read HDF5 data                                                               |
+| File       | Image_Read               | Process image data; store processed images to data store                     |
+| File       | Image_Read_Multi         | Process image data for multiple images; store processed images to data store |
+| File       | Image_Write              | Process tabular data; write an image to data lake                            |
+| File       | Input_File               | Read data file and process in Ganymede                                       |
+| File       | Input_File_Multi         | Read data files and process in Ganymede                                      |
+| File       | PDF_Read                 | Read in contents of an PDF file to a table                                   |
+| File       | PDF_Read_Multi           | Read in contents of multiple pdf files to a table                            |
+| File       | Powerpoint_Write         | Process tabular data; write a powerpoint presentation to data lake           |
+| File       | XML_Read                 | Read XML file into data lake                                                 |
+| File       | Zip_Read                 | Extract Zip file                                                             |
+| Instrument | Agilent_HPLC_Read        | Read an Agilent HPLC file of type .uv, .ms, .ch, or .bin                     |
+| Instrument | Instron_Tensile_Read     | Load .is_tens file to data lake                                              |
+| Instrument | Profilometer_Read        | Read Mx Profiler data file                                                   |
+| Instrument | Synergy_Read             | Load Synergy text file to data lake                                          |
+| Instrument | Synergy_Read_Multi       | Load multiple Synergy texts file to data lake                                |
+| Tag        | Benchling_Tag            | Read benchling tag                                                           |
+| Tag        | Input_Param              | Input parameter into Flow                                                    |
