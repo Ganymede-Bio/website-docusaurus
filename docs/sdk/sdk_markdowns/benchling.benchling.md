@@ -319,6 +319,78 @@ assay_results = b.create_assay_results_from_dataframe(
 )  
 ```
 
+## `function` Benchling.write_dataframe_to_benchling_table
+  
+Uploads Pandas DataFrame to Benchling assay results with specified Benchling table.  
+  
+### Parameters  
+  
+**data** : `Union[pd.DataFrame, List[pd.DataFrame]]`  
+&nbsp; &nbsp; &nbsp; &nbsp; Tabular result(s) of data to send to Benchling. Converted to list of dictionaries for  
+&nbsp; &nbsp; &nbsp; &nbsp; each row.  
+**schema_id** : `str`  
+&nbsp; &nbsp; &nbsp; &nbsp; ID should contain the Benchling schema ID to write to.&nbsp; &nbsp; This should be a string starting  
+&nbsp; &nbsp; &nbsp; &nbsp; with "assaysch_"  
+**project_id** : `str`  
+&nbsp; &nbsp; &nbsp; &nbsp; ID that results will be recorded against.&nbsp; &nbsp; This should be a string starting with "src_".  
+  
+&nbsp; &nbsp; &nbsp; &nbsp; The members of your organization that have access to this project will also have  
+&nbsp; &nbsp; &nbsp; &nbsp; visibility to the results that this integration generates.&nbsp; &nbsp; You can find this ID by  
+&nbsp; &nbsp; &nbsp; &nbsp; right clicking on the Project that you have selected, and click on "Copy API ID".  
+&nbsp; &nbsp; &nbsp; &nbsp; If you don't see "Copy API ID" as an option, click on your avatar, click Settings,  
+&nbsp; &nbsp; &nbsp; &nbsp; and scroll to the bottom and verify that  
+&nbsp; &nbsp; &nbsp; &nbsp; "Enable Copy API ID button" is checked.  
+**table_id** : `str`  
+&nbsp; &nbsp; &nbsp; &nbsp; ID of the table to write to.&nbsp; &nbsp; This should be a string starting with "strtbl_"  
+**replace_special_characters** : `bool`  
+&nbsp; &nbsp; &nbsp; &nbsp; Replace special characters in column names with underscores to mimic Benchling behavior.  
+&nbsp; &nbsp; &nbsp; &nbsp; Default is True.  
+**ignore_na** : `bool`  
+&nbsp; &nbsp; &nbsp; &nbsp; If True, drop columns with only nulls prior to upload. Default is True.  
+**error_on_empty_result** : `bool`  
+&nbsp; &nbsp; &nbsp; &nbsp; If True, raise an error if the DataFrame is empty. Default is True.  
+**upload** : `bool`  
+&nbsp; &nbsp; &nbsp; &nbsp; Whether to upload List[AssayResults] to Benchling  
+**wait** : `bool`  
+&nbsp; &nbsp; &nbsp; &nbsp; Whether to wait for the task to complete before returning  
+**\*\*kwargs**  
+&nbsp; &nbsp; &nbsp; &nbsp; Keyword args to pass to create_assay_result_from_dict  
+&nbsp; &nbsp; &nbsp; &nbsp; drop_na (Optional[bool])  
+  
+### Returns  
+  
+`List[AssayResultCreate]`  
+&nbsp; &nbsp; &nbsp; &nbsp; List of AssayResultCreate's to be uploaded to Benchling  
+  
+### Example  
+  
+```python  
+from ganymede_sdk.api.benchling import Benchling  
+from ganymede_sdk import Ganymede  
+  
+g = Ganymede()  
+b = Benchling(g.ganymede_context)  
+  
+# Create or update the entity  
+custom_entity_id = b.create_or_update_custom_entity(  
+    entity_name, folder_id, schema_id, registry_id,  
+    author_id=None, custom_entity_fields=None, if_exists="fail",  
+)  
+  
+# Create file IDs and get dropdown IDs  
+file_ids = b.create_benchling_ids_from_files(\{"filename1": file1, "filename2": file2\})  
+dropdown_ids = \{dropdown["name"]: dropdown["id"] for dropdown in b.get("dropdowns")\}  
+  
+# Use pandas.DataFrame.replace to link entries in your dataframe with Benchling IDs  
+# or manually add IDs to the dataframe.  
+dataframe = dataframe.replace(\{**custom_entity_id, **file_ids, **dropdown_ids\})  
+  
+# Upload dataframe to Benchling as Assay Results  
+assay_results = b.create_assay_results_from_dataframe(  
+    dataframe, schema_id, project_id, drop_na=True, upload=True  
+)  
+```
+
 ## `function` Benchling.create_lab_auto_result_from_dataframe
   
 Creates lab auto result from DataFrame.  
