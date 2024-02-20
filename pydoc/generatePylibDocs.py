@@ -47,7 +47,7 @@ def dir_files_docstrings_to_markdown_files(_dir, save_path):
         for file in files:
             if not re.search(".py$", file) or re.search("__init__", file):
                 continue
-            if not re.search("benchling|coda|analytics", path):
+            if not re.search("benchling|coda|analytics|signals", path):
                 continue
             file_path = os.path.join(path, file)
 
