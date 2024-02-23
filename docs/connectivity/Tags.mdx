@@ -93,7 +93,9 @@ def execute(file_data: Dict[str, bytes], ganymede_context) -> NodeReturn:
     return NodeReturn(
         files_to_upload={"output_filename.csv": file_data_bytes},
 
-        # parameters for the add_file_tag function are passed in the tags parameter
+        # Parameters for the add_file_tag function are passed in the tags parameter
+        # 
+        # Note that the input_file_path parameter within the add_file_tag function does not need to be specified
         tags={
             "output_filename.csv": {
                 "tag_type_id": "benchling_entry_id",

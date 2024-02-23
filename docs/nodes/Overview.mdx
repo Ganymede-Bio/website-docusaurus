@@ -108,7 +108,8 @@ Initializing a NodeReturn object involves passing the following parameters:
   - _param_ **tags**: Optional[Dict[List[Dict] | Dict]]: Dictionary of files to tag; keys are file names, values are dictionaries of
         keyword parameters to pass into the [add_file_tag function](../connectivity/Tags#tagging-files).
 
-:::note example
+
+##### NodeReturn Example
 
 The contents of a NodeReturn object can be viewed in the notebook; transposed table heads and list of files are displayed when the object is observed.  For example, running the following code in an editor notebook
 
@@ -122,7 +123,7 @@ def execute():
     df = pd.DataFrame({"col1": [1, 2, 3], "col2": [4, 5, 6]})
 
     # upload a table named 'my_table' and a file named 'my_file'
-    return NodeReturn(files_to_upload={"my_file": message}, tables_to_upload={"my_table": df})
+    return NodeReturn(files_to_upload={"my_file.txt": message}, tables_to_upload={"my_table": df})
 
 execute()
 ```
@@ -135,7 +136,30 @@ returns the following summary of the NodeReturn object:
 </div>
 
 Docstrings and source code can be viewed by typing `?NodeReturn` and `??NodeReturn` respectively in a cell in the editor notebook.
-:::
+
+##### NodeReturn Example with Tags
+
+The following code demonstrates how to use the `tags` parameter in a `NodeReturn` object:
+
+```python
+import pandas as pd
+
+def execute():
+    message = "Message to store in file"
+    byte_message = bytes(message, "utf-8")
+
+    df = pd.DataFrame({"col1": [1, 2, 3], "col2": [4, 5, 6]})
+
+    # Tags are added to the file 'my_file.txt'
+    # Any parameters that can be passed into the add_file_tag function can be passed into the tags parameter
+    # of the NodeReturn object.  For more information on the add_file_tag function, see the Tags page.
+    # 
+    # Note that the input_file_path parameter within the add_file_tag function does not need to be specified
+    return NodeReturn(files_to_upload={"my_file.txt": message}, tables_to_upload={"my_table": df}, 
+                      tags={"my_file.txt": [{"tag_type_id": "Experiment ID", "display_value": "EXP005"}]})
+
+execute()
+```
 
 #### FlowInputs object
 
