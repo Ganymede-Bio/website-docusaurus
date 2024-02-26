@@ -138,6 +138,12 @@ section of the query.
 COUNTIF(my_column = 'my_value') / COUNT(*)
 ```
 
+More general proportions can be found with 
+
+```sql
+COUNT(*) / SUM(COUNT(*)) OVER (PARTITION BY x_axis_variable)
+```
+
 #### I added a new column but I do not see it in the columns side bar in the editor chart page.
 In the chart editor page
 
