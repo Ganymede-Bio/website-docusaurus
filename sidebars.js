@@ -185,6 +185,10 @@ module.exports = {
             type: 'doc',
             id: 'sdk/sdk_markdowns/AgentDataModels',
           },
+          {
+            type: 'doc',
+            id: 'sdk/sdk_markdowns/EnvironmentDetection',
+          },
             nodeSDKApi,
             nodeSDKAnalytics
           ]
