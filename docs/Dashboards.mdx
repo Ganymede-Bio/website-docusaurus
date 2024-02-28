@@ -125,6 +125,13 @@ be used to manipulate both tables simultaneously.
 
 ## Tips and tricks
 
+#### Dashboard chart shows an error message that the dataset is missing but it does exist and linked to the chart
+
+If the chart was properly displayed in the the `Edit Chart` page but it throws this error in the
+dashboard then this could happen when you have two charts named the same where one has a missing dataset. The
+dashboard could pull in the chart that has the missing dataset. You can fix this by renaming the
+chart to be unique or delete the chart with the missing dataset.
+
 #### How do you create bar plots with proportions and percentages?
 
 In the chart editor page
@@ -136,6 +143,12 @@ section of the query.
 
 ```sql
 COUNTIF(my_column = 'my_value') / COUNT(*)
+```
+
+More general proportions can be found with 
+
+```sql
+COUNT(*) / SUM(COUNT(*)) OVER (PARTITION BY x_axis_variable)
 ```
 
 #### I added a new column but I do not see it in the columns side bar in the editor chart page.
