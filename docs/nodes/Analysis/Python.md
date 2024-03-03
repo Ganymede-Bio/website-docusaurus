@@ -23,7 +23,7 @@ is written to the output bucket.
 
 ### Parameters
 
-- **df_sql_result** : `Union[pd.DataFrame, List[pd.DataFrame]]`
+- **df_sql_result** : `pd.DataFrame | list[pd.DataFrame]`
     - Table(s) or list of tables retrieved from user-defined SQL query
 - **ganymede_context** : `GanymedeContext`
     - Ganymede context variable, which stores flow run metadata
@@ -33,9 +33,9 @@ is written to the output bucket.
 `NodeReturn`
   Object containing data to store in data lake and/or file storage.  NodeReturn object takes
   2 parameters:
-  - tables_to_upload: Dict[str, pd.DataFrame]
+  - tables_to_upload: dict[str, pd.DataFrame]
     keys are table names, values are pandas DataFrames to upload
-  - files_to_upload: Dict[str, bytes]
+  - files_to_upload: dict[str, bytes]
     keys are file names, values are file data to upload
 
 ### Notes

@@ -1,9 +1,8 @@
-import os
 import ast
-import textwrap
-import re
 import json
-
+import os
+import re
+import textwrap
 
 SIDEBAR_HEADER = """---
 sidebar_label: {}
@@ -102,7 +101,8 @@ def extract_docstrings(file_path):
                 if (
                     item.body
                     and isinstance(item.body[0], ast.Expr)
-                    and isinstance(item.body[0].value, ast.Str)
+                    and isinstance(item.body[0].value, ast.Constant)
+                    and not item.name.startswith("_")
                 ):
                     if current_class:
                         function_key = f"`function` {current_class}.{item.name}"
@@ -118,7 +118,7 @@ def extract_docstrings(file_path):
                 if (
                     item.body
                     and isinstance(item.body[0], ast.Expr)
-                    and isinstance(item.body[0].value, ast.Str)
+                    and isinstance(item.body[0].value, ast.Constant)
                 ):
                     class_docstring = item.body[0].value.s
                     docstrings_dict[f"`class` {current_class}"] = textwrap.dedent(class_docstring)
@@ -127,7 +127,14 @@ def extract_docstrings(file_path):
                         if (
                             class_item.body
                             and isinstance(class_item.body[0], ast.Expr)
-                            and isinstance(class_item.body[0].value, ast.Str)
+                            and isinstance(class_item.body[0].value, ast.Constant)
+                            and (
+                                not class_item.name.startswith("_")
+                                or (
+                                    class_item.name.startswith("__")
+                                    and class_item.name.endswith("__")
+                                )
+                            )
                         ):
                             function_key = f"`function` {current_class}.{class_item.name}"
                             if function_key not in docstrings_dict:

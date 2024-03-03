@@ -55,7 +55,7 @@ Example demonstrating access to SciNote API
 
 ### Parameters
 
-- **df_sql_result** : `Union[pd.DataFrame, List[pd.DataFrame]]`
+- **df_sql_result** : `pd.DataFrame | pd.DataFrame`
     - Table(s) to retrieve from data lake
 - **ganymede_context** : `GanymedeContext`
     - Ganymede context variable, which stores flow run metadata

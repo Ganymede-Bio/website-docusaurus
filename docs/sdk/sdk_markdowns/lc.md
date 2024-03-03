@@ -78,3 +78,27 @@ peak info table, and metadata.
   
 `Dict[str, pd.DataFrame]`  
 &nbsp; &nbsp; &nbsp; &nbsp; Dictionary containing dataframes for metadata, peak info, and chromatography data  
+
+
+## `function` LC.compare_aia_files
+  
+Compare 2 AIA files, printing out differences  
+  
+### Parameters  
+  
+**ds_base** : `nc.Dataset`  
+&nbsp; &nbsp; &nbsp; &nbsp; Base AIA file  
+**ds_cmp** : `nc.Dataset`  
+&nbsp; &nbsp; &nbsp; &nbsp; Comparison AIA file  
+
+
+## `function` LC.verify_aia_file
+  
+Verifies AIA fields against spec.&nbsp; &nbsp; E1948-98 is the original spec.  
+  
+### Parameters  
+  
+**ds** : `nc.Dataset`  
+&nbsp; &nbsp; &nbsp; &nbsp; AIA file  
+**spec** : `str`  
+&nbsp; &nbsp; &nbsp; &nbsp; Spec to validate against  

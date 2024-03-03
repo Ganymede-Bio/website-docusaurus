@@ -29,7 +29,7 @@ stored in data lake
 
 ### Parameters
 
-- **is_tens_file** : `Dict[str, BytesIO]`
+- **is_tens_file** : `dict[str, BytesIO]`
     - is_tens file, indexed by file name
 - **ganymede_context** : `GanymedeContext`
     - Ganymede context variable, which stores flow run metadata

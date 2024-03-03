@@ -86,25 +86,6 @@ sure to capture the unique identifier for each well in the loop.
 &nbsp; &nbsp; &nbsp; &nbsp; Dictionary containing single well stats requested  
 
 
-## `function` WSP._get_population_flowjo_helper
-  
-Get population statistics directly from workspace file  
-  
-### Parameters  
-  
-**node** : `etree.Element`  
-&nbsp; &nbsp; &nbsp; &nbsp; Node containing counts  
-**parent_name** : `str, optional`  
-&nbsp; &nbsp; &nbsp; &nbsp; Name of parent class, by default ""  
-**population_name** : `str, optional`  
-&nbsp; &nbsp; &nbsp; &nbsp; Name of population to override default in file  
-  
-### Returns  
-  
-`Dict[str, int]`  
-&nbsp; &nbsp; &nbsp; &nbsp; Dictionary containing counts  
-
-
 ## `function` WSP.get_table_output_structure
   
 Retrieve table structure as specified in Table Editor of FlowJo  
@@ -193,42 +174,6 @@ Retrieve gate structure as a nested dict from a WSP file
   
 **node** : `etree.Element`  
 &nbsp; &nbsp; &nbsp; &nbsp; XML node to start traversal in, typically node corresponding to well  
-
-
-## `function` WSP._get_population_gates_helper
-  
-Recursively retrieve populations for a given well from a WSP file  
-  
-### Parameters  
-  
-**node** : `etree.Element`  
-&nbsp; &nbsp; &nbsp; &nbsp; Node to start traversal in  
-**gate_parent_name** : `str, optional`  
-&nbsp; &nbsp; &nbsp; &nbsp; Name of parent node(s), by default ""  
-**population_name** : `str, optional`  
-&nbsp; &nbsp; &nbsp; &nbsp; Name of population to override default in file  
-  
-### Returns  
-  
-`Dict`  
-&nbsp; &nbsp; &nbsp; &nbsp; Nested dictionary of populations  
-
-
-## `function` WSP._get_gate
-  
-Get population gates; currently only supports PolygonGate and RectangleGate  
-  
-### Parameters  
-  
-**events** : `etree.Element`  
-&nbsp; &nbsp; &nbsp; &nbsp; XML node to start traversal in  
-**population_name** : `str`  
-&nbsp; &nbsp; &nbsp; &nbsp; Name of population to get gates for  
-  
-### Returns  
-  
-`pd.DataFrame`  
-&nbsp; &nbsp; &nbsp; &nbsp; DataFrame containing gate information  
 
 
 ## `function` WSP.get_compensation_matrices
