@@ -39,9 +39,9 @@ Example demonstrating submission of user-defined SQL query into eLabNext
 
 ### Parameters
 
-- **df_sql_result** : `Union[pd.DataFrame, List[pd.DataFrame]]`
+- **df_sql_result** : `pd.DataFrame | list[pd.DataFrame]`
     - Table(s) to retrieve from data lake
-- **data_input** : `Dict[str, bytes]`
+- **data_input** : `dict[str, bytes]`
     - Objects to retrieve from cloud storage
 - **base_url** : `str`
     - Base URL for eLabNext to retrieve data from / post data to

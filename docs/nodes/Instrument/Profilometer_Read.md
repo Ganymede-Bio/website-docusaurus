@@ -21,7 +21,7 @@ Processes h5data into bytes object for saving in cloud storage
 
 ### Parameters
 
-- **h5data** : `Dict`
+- **h5data** : `dict`
     - HDF5 file contents structured as a Python dict
 - **ganymede_context** : `GanymedeContext`
     - Ganymede context variable, which stores flow run metadata

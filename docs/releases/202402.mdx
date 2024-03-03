@@ -4,9 +4,23 @@ title: February 2024
 displayed_sidebar: releaseSideBar
 ---
 
+### February 29 2024
+**Features/Updates**
+- Agent icons feature more prominently on Connections page
+
+**Improvements**
+- Agent executable files now contain agent name and version
+- Benchling class now supports notebook entry creation
+- LC class now supports validating AIA file structure (CDF files enabling transport of data between different chromatography data systems)
+
+**Bug Fixes**
+- Notebook saves now slightly more performant
+- Query latency within orchestration runs modestly improved in environments with many calls
+
+
 ### February 22 2024
 **Features/Updates**
-- [Python 3.11](https://www.python.org/downloads/release/python-3110/) is now supported in all Ganymede environments.
+- [Python 3.11.5](https://www.python.org/downloads/release/python-3115/) is now supported in all Ganymede environments (both notebooks and workflow orchestrator).
 
 **Improvements**
 - The Benchling class in Ganymede SDK now supports bulk assay result creation, which can be used to write results directly to an assay result table in a notebook entry.
@@ -15,7 +29,7 @@ displayed_sidebar: releaseSideBar
 ### February 15 2024
 **Features/Updates**
 - Flow output files can now be used as inputs to downstream Flows.
-- A [Benchling_Warehouse_Sync node type](../nodes/App/Benchling_Warehouse_Sync.md) was added. This node can query the Benchling warehouse directly from the Ganymede SDK.
+- A [Benchling_Warehouse_Query node type](../nodes/App/Benchling_Warehouse_Query.md) was added. This node can query the Benchling warehouse directly from the Ganymede SDK.
 
 **Improvements**
 - File tags can now be applied to [files that are in NodeReturn](../connectivity/Tags.mdx). This prevents the need for downstream nodes that tag files.

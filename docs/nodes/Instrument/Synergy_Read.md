@@ -24,7 +24,7 @@ Processes Synergy text file(s) into data tables stored in data lake
 
 ### Parameters
 
-- **synergy_file** : `Dict[str, bytes]`
+- **synergy_file** : `dict[str, bytes]`
     - Synergy text files, indexed by file name
 - **ganymede_context** : `GanymedeContext`
     - Ganymede context variable, which stores flow run metadata

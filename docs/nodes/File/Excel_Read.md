@@ -25,7 +25,7 @@ Reads Excel file and stores processed table(s) in data lake.
 
 ### Parameters
 
-- **excel_file** : `Union[bytes, Dict[str, bytes]]`
+- **excel_file** : `bytes | dict[str, bytes]`
     - Excel file as a bytes object or as dict indexed by filename
 - **ganymede_context** : `GanymedeContext`
     - Ganymede context variable, which stores flow run metadata

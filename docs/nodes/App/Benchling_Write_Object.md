@@ -43,9 +43,9 @@ If new custom entities are created, returns DataFrame associated with custom ent
 
 ### Parameters
 
-- **data** : `Dict[str, bytes]`
+- **data** : `dict[str, bytes]`
     - Data to retrieve from Ganymede cloud storage
-- **df_sql_results** : `Optional[Union[pd.DataFrame, List[pd.DataFrame]]]`
+- **df_sql_result** : `pd.DataFrame | list[pd.DataFrame]`
     - Tabular results of user-defined SQL query
 - **benchling_context** : `BenchlingContext`
     - Benchling context variable, which stores Benchling connection information

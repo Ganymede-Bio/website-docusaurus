@@ -25,7 +25,7 @@ stored in data lake
 
 ### Parameters
 
-- **csv_file** : `Dict[str, BytesIO]`
+- **csv_file** : `dict[str, BytesIO]`
     - CSV files, indexed by file name
 - **ganymede_context** : `GanymedeContext`
     - Ganymede context variable, which stores flow run metadata

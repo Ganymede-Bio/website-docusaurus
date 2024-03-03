@@ -32,7 +32,8 @@ and another for the metadata.
     - - datafile.detector: A string representing the detector used.
     - - datafile.xlabels: A list of labels for the x-axis.
     - - datafile.ylabels: A list of labels for the y-axis.
-- **ganymede_context** : `object, optional`
+- **ganymede_context** : `GanymedeContext`
+    - Ganymede context variable, which stores flow run metadata
 
 ### Returns
 

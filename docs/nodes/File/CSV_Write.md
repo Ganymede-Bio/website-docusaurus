@@ -23,7 +23,7 @@ Process table(s) resulting from user-defined SQL query into CSV file
 
 ### Parameters
 
-- **df_sql_result** : `Union[pd.DataFrame, List[pd.DataFrame]]`
+- **df_sql_result** : `pd.DataFrame | list[pd.DataFrame]`
     - Table(s) or list of tables retrieved from user-defined SQL query
 - **ganymede_context** : `GanymedeContext`
     - Ganymede context variable, which stores flow run metadata

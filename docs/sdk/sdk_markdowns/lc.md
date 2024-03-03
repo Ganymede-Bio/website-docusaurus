@@ -78,3 +78,69 @@ peak info table, and metadata.
   
 `Dict[str, pd.DataFrame]`  
 &nbsp; &nbsp; &nbsp; &nbsp; Dictionary containing dataframes for metadata, peak info, and chromatography data  
+
+
+## `function` LC.compare_aia_files
+  
+Compare 2 AIA files, printing out differences  
+  
+### Parameters  
+  
+**ds_base** : `nc.Dataset`  
+&nbsp; &nbsp; &nbsp; &nbsp; Base AIA file  
+**ds_cmp** : `nc.Dataset`  
+&nbsp; &nbsp; &nbsp; &nbsp; Comparison AIA file  
+
+
+## `function` LC._verify_tuple_order
+  
+Verifies that the order of cmp_tuple follows the order in base_tuple  
+  
+### Parameters  
+  
+**base_tuple** : `tuple`  
+&nbsp; &nbsp; &nbsp; &nbsp; Tuple that contains the order  
+**cmp_tuple** : `tuple`  
+&nbsp; &nbsp; &nbsp; &nbsp; Tuple to verify  
+**error_msg** : `str, optional`  
+&nbsp; &nbsp; &nbsp; &nbsp; Error message to print if the order is incorrect, by default ""  
+
+
+## `function` LC._verify_attributes
+  
+Verifies that the dataset has the required attributes  
+  
+### Parameters  
+  
+**obj** : `Any`  
+&nbsp; &nbsp; &nbsp; &nbsp; Object to verify (e.g. nc.Dataset)  
+**attributes** : `list`  
+&nbsp; &nbsp; &nbsp; &nbsp; List of attributes that should exist  
+**error_msg** : `str, optional`  
+&nbsp; &nbsp; &nbsp; &nbsp; Error message to print if the order is incorrect  
+
+
+## `function` LC._verify_variables
+  
+Verifies that the dataset has the required variables  
+  
+### Parameters  
+  
+**ds** : `nc.Dataset`  
+&nbsp; &nbsp; &nbsp; &nbsp; Dataset to verify  
+**variables** : `list`  
+&nbsp; &nbsp; &nbsp; &nbsp; List of variables that should exist  
+**error_msg** : `str, optional`  
+&nbsp; &nbsp; &nbsp; &nbsp; Error message to print if the order is incorrect  
+
+
+## `function` LC.verify_aia_file
+  
+Verifies AIA fields against spec.&nbsp; &nbsp; E1948-98 is the original spec.  
+  
+### Parameters  
+  
+**ds** : `nc.Dataset`  
+&nbsp; &nbsp; &nbsp; &nbsp; AIA file  
+**spec** : `str`  
+&nbsp; &nbsp; &nbsp; &nbsp; Spec to validate against  

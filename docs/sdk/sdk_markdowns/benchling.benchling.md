@@ -131,6 +131,8 @@ Bulk creates custom entities in Benchling.&nbsp; &nbsp; If the entity does not e
 &nbsp; &nbsp; &nbsp; &nbsp; entity will be registered to.  
 **naming_strategy** : `NamingStrategy`  
 &nbsp; &nbsp; &nbsp; &nbsp; Naming strategy to use when creating new entities. See NamingStrategy for more details.  
+**check_for_existing** : `bool`  
+&nbsp; &nbsp; &nbsp; &nbsp; Whether or not to check for the existence of the entities in `name_field`. This is useful to turn off when you know you'll be creating new entities (for example with many naming strategies) and want to avoid many api calls for checking existence of custom entities,  
 **wait** : `bool`  
 &nbsp; &nbsp; &nbsp; &nbsp; Whether to wait for the task to complete before returning  
 **error_on_fail** : `bool`  
@@ -257,8 +259,8 @@ Process input DataFrame into assay results for upload to Benchling.
   
 ### Parameters  
   
-**data** : `Union[pd.DataFrame, List[pd.DataFrame]]`  
-&nbsp; &nbsp; &nbsp; &nbsp; Tabular result(s) of data to send to Benchling. Converted to list of dictionaries for  
+**data** : `pd.DataFrame`  
+&nbsp; &nbsp; &nbsp; &nbsp; Tabular results of data to send to Benchling. Converted to list of dictionaries for  
 &nbsp; &nbsp; &nbsp; &nbsp; each row.  
 **schema_id** : `str`  
 &nbsp; &nbsp; &nbsp; &nbsp; ID should contain the Benchling schema ID to write to.&nbsp; &nbsp; This should be a string starting  
@@ -321,12 +323,14 @@ assay_results = b.create_assay_results_from_dataframe(
 
 ## `function` Benchling.write_dataframe_to_benchling_table
   
-Uploads Pandas DataFrame to Benchling assay results with specified Benchling table.  
+Uploads Pandas DataFrame to Benchling assay results with specified Benchling table. Please  
+see https://docs.benchling.com/docs/example-creating-results for more information. Make sure  
+there are appropriate permissions to write to the notebook entry.  
   
 ### Parameters  
   
-**data** : `Union[pd.DataFrame, List[pd.DataFrame]]`  
-&nbsp; &nbsp; &nbsp; &nbsp; Tabular result(s) of data to send to Benchling. Converted to list of dictionaries for  
+**data** : `pd.DataFrame`  
+&nbsp; &nbsp; &nbsp; &nbsp; Tabular results of data to send to Benchling. Converted to list of dictionaries for  
 &nbsp; &nbsp; &nbsp; &nbsp; each row.  
 **schema_id** : `str`  
 &nbsp; &nbsp; &nbsp; &nbsp; ID should contain the Benchling schema ID to write to.&nbsp; &nbsp; This should be a string starting  
@@ -340,8 +344,10 @@ Uploads Pandas DataFrame to Benchling assay results with specified Benchling tab
 &nbsp; &nbsp; &nbsp; &nbsp; If you don't see "Copy API ID" as an option, click on your avatar, click Settings,  
 &nbsp; &nbsp; &nbsp; &nbsp; and scroll to the bottom and verify that  
 &nbsp; &nbsp; &nbsp; &nbsp; "Enable Copy API ID button" is checked.  
-**table_id** : `str`  
-&nbsp; &nbsp; &nbsp; &nbsp; ID of the table to write to.&nbsp; &nbsp; This should be a string starting with "strtbl_"  
+**table_id** : `Optional[str]`  
+&nbsp; &nbsp; &nbsp; &nbsp; ID of the table to write to.&nbsp; &nbsp; This should be a string starting with "strtbl_". You can  
+&nbsp; &nbsp; &nbsp; &nbsp; find this using b.get("entries", id="etr_") or b.get("entries", name="EXP12345678") in  
+&nbsp; &nbsp; &nbsp; &nbsp; the apiId field. The default is None.  
 **replace_special_characters** : `bool`  
 &nbsp; &nbsp; &nbsp; &nbsp; Replace special characters in column names with underscores to mimic Benchling behavior.  
 &nbsp; &nbsp; &nbsp; &nbsp; Default is True.  
@@ -349,8 +355,6 @@ Uploads Pandas DataFrame to Benchling assay results with specified Benchling tab
 &nbsp; &nbsp; &nbsp; &nbsp; If True, drop columns with only nulls prior to upload. Default is True.  
 **error_on_empty_result** : `bool`  
 &nbsp; &nbsp; &nbsp; &nbsp; If True, raise an error if the DataFrame is empty. Default is True.  
-**upload** : `bool`  
-&nbsp; &nbsp; &nbsp; &nbsp; Whether to upload List[AssayResults] to Benchling  
 **wait** : `bool`  
 &nbsp; &nbsp; &nbsp; &nbsp; Whether to wait for the task to complete before returning  
 **\*\*kwargs**  
@@ -359,8 +363,8 @@ Uploads Pandas DataFrame to Benchling assay results with specified Benchling tab
   
 ### Returns  
   
-`List[AssayResultCreate]`  
-&nbsp; &nbsp; &nbsp; &nbsp; List of AssayResultCreate's to be uploaded to Benchling  
+`list`  
+&nbsp; &nbsp; &nbsp; &nbsp; List of task ids for the results uploaded to Benchling.  
   
 ### Example  
   
@@ -386,9 +390,60 @@ dropdown_ids = \{dropdown["name"]: dropdown["id"] for dropdown in b.get("dropdow
 dataframe = dataframe.replace(\{**custom_entity_id, **file_ids, **dropdown_ids\})  
   
 # Upload dataframe to Benchling as Assay Results  
-assay_results = b.create_assay_results_from_dataframe(  
-    dataframe, schema_id, project_id, drop_na=True, upload=True  
+task_ids = b.write_dataframe_to_benchling_table(  
+    dataframe,  
+    schema_id,  
+    project_id,  
+    table_id = "strtbl_",  
+    replace_special_characters = True,  
+    ignore_na = True,  
+    error_on_empty_result = True,  
+    wait = True  
 )  
+  
+```
+
+## `function` Benchling.create_entry
+  
+Create a benchling notebook entry in a given folder. Entries can be created from templates  
+if passed the entry_template_id.  
+  
+### Parameters  
+  
+**folder_id** : `str`  
+&nbsp; &nbsp; &nbsp; &nbsp; The ID of the folder where the entry will be created.  
+**name** : `str`  
+&nbsp; &nbsp; &nbsp; &nbsp; The name of the new entry.  
+**author_ids** : `Union[str, List[str]], optional`  
+&nbsp; &nbsp; &nbsp; &nbsp; The IDs of the authors of the entry.  
+**custom_fields** : `models.CustomFields, optional`  
+&nbsp; &nbsp; &nbsp; &nbsp; Any custom fields to include in the entry.  
+**entry_template_id** : `str, optional`  
+&nbsp; &nbsp; &nbsp; &nbsp; The ID of the template to use for the entry. The API ID can be copied from Template  
+&nbsp; &nbsp; &nbsp; &nbsp; Collections in Feature Settings.  
+**fields** : `models.Fields, optional`  
+&nbsp; &nbsp; &nbsp; &nbsp; The fields to include in the entry.  
+**initial_tables** : `models.InitialTable, optional`  
+&nbsp; &nbsp; &nbsp; &nbsp; The initial tables to include in the entry.  
+**schema_id** : `str, optional`  
+&nbsp; &nbsp; &nbsp; &nbsp; The ID of the schema to use for the entry.  
+  
+### Returns  
+  
+`EntryCreate`  
+&nbsp; &nbsp; &nbsp; &nbsp; The object of the created entry  
+  
+### Example  
+  
+```python  
+b = Benchling(ganymede_context)  
+  
+entry = b.create_entry(  
+    folder_id="lib_",  
+    name="My Entry from Template",  
+    entry_template_id="tmpl_",  
+)  
+  
 ```
 
 ## `function` Benchling.create_lab_auto_result_from_dataframe
