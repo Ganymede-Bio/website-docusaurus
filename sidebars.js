@@ -199,7 +199,7 @@ module.exports = {
       type: 'category',
       label: '2024',
       collapsed: false,
-      items: ['releases/202402', 'releases/202401']
+      items: ['releases/202403', 'releases/202402', 'releases/202401']
     },
     {
       type: 'category',
