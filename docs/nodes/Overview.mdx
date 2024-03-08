@@ -98,14 +98,14 @@ The table below lists available nodes.
 Many nodes return a `NodeReturn` object, which contain tables and files to store in the Ganymede data lake.  
 
 Initializing a NodeReturn object involves passing the following parameters:
-  - _param_ **tables_to_upload**: Optional[Dict[str, pd.DataFrame]] - Tables keyed by name to store in Ganymede
-  - _param_ **files_to_upload**: Optional[Dict[str, bytes]] - Files keyed by filename to store in Ganymede
+  - _param_ **tables_to_upload**: Optional[dict[str, pd.DataFrame]] - Tables keyed by name to store in Ganymede
+  - _param_ **files_to_upload**: Optional[dict[str, bytes]] - Files keyed by filename to store in Ganymede
   - _param_ **if_exists**: str - String indicating whether to overwrite or append to existing tables in Ganymede data lake.  Valid values are "replace", "append", or "fail"; defaults to "replace".
-  - _param_ **tables_measurement_units**: Optional[Dict[str, pd.DataFrame]] - if provided, the measurement units for columns; keys are table names, values are
+  - _param_ **tables_measurement_units**: Optional[dict[str, pd.DataFrame]] - if provided, the measurement units for columns; keys are table names, values are
     pandas DataFrames with "column_name" and "unit" as columns
   - _param_ **file_location**: Optional[str] - Bucket location to output to, either "input" or "output; only need to specify if files_to_upload is not null, by default output
   - _param_ **wait_for_job**: whether to wait for write to Ganymede data lake before continuing execution to subsequent node, by default False
-  - _param_ **tags**: Optional[Dict[List[Dict] | Dict]]: Dictionary of files to tag; keys are file names, values are dictionaries of
+  - _param_ **tags**: Optional[dict[list[dict] | dict]]: Dictionary of files to tag; keys are file names, values are dictionaries of
         keyword parameters to pass into the [add_file_tag function](../connectivity/Tags#tagging-files).
 
 

@@ -23,6 +23,11 @@ Sync GCS bucket -\> S3 bucket
 Prior to usage, the following secrets must be configured in the environment:
 - **aws_s3_role_arn**: AWS Service Account Name
 
-Secrets can be configured by clicking on your username in the upper-right hand of the Ganymede
-application, then selecting Environment Settings and navigating to the Secrets tab.  If you need
-assistance, please don't hesitate to reach out to Ganymede.
+This ARN will be used to enable the Airflow connection to the S3 bucket. Configuring this ARN
+will require the service account ID associated with the workflow orchestrator.  Please reach
+out to the Ganymede team for instructions on configuring access within AWS to enable Ganymede
+connectivity.
+
+Once configured, add the AWS role ARN secret to your environment by clicking on your username in
+the upper-right hand of the Ganymede application, then selecting Environment Settings and
+navigating to the Secrets tab.
