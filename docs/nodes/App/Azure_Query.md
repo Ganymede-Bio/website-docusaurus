@@ -31,7 +31,7 @@ Secrets can be configured by clicking on your username in the upper-right hand o
 application, then selecting Environment Settings and navigating to the Secrets tab.  If you need
 assistance, please don't hesitate to reach out to Ganymede.
 
-On the Ganymede end - make sure that the relevant MSSQL ODBC Driver is availed for
+On the Ganymede end - make sure that the relevant MSSQL ODBC Driver is made available for the
 workflow execution environment.
 artifact_registry should be populated in secrets with the web address hosting the container
 
