@@ -1,10 +1,38 @@
 ---
 id: DebuggingAgents
-title: Debugging Agents
+title: Debugging Agents & FAQ
 displayed_sidebar: webUiSidebar
 ---
 
-This page describes a set of common issues associated with configuring agents.
+This page describes a set of common questions and issues associated with configuring agents.
+
+## FAQ
+
+#### Q: How do I exclude specific files from a watch folder from being uploaded for an agent that uploads files and runs flows?
+
+A: To exclude specific files from being uploaded, you can use the `fp` function to specify which files should be included.  For example, to exclude files that contain the string "exclude" in the filename, you can use the following code:
+
+```python
+    def fp_res(x: str):
+        x = parse.unquote(x)
+
+        # files excluding temp files
+        files_to_capture = [filename in glob.glob(os.path.join(watch_dir, pattern), recursive=True) if not 'exclude' in filename]
+
+        return files_to_capture
+
+    return fp_res
+```
+
+#### Q: How do I capture a file that is periodically overwritten by an instrument?
+
+A: Modified files are captured by the Agent, and so would be uploaded and processed in flows when modified.  Logic can be implemented within flow or agent logic to address intended behavior, depending on whether the instrument appends to or overwrites the file.
+
+#### Q: Can I access environment secrets from the Agent?
+
+A: Yes, you can access environment secrets from the Agent.  To do so, you can reference the [get_secret](../sdk/GanymedeClass#method-get_secret) method.
+
+## Troubleshooting
 
 #### Issue: I am unable to install the agent on Windows; the installer is failing at the final step.
 
@@ -65,4 +93,4 @@ def fp(watch_dir: str, parent_dir: str, pattern: str) -> Callable[[str], bool]:
     return fp_res
 ```
 
-#### Issue: 
+

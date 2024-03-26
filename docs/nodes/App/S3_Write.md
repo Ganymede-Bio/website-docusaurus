@@ -16,7 +16,8 @@ Sync GCS bucket -\> S3 bucket
 - **src_object_prefix**
   - Prefix of data lake object to write
 - **dest_s3_key**
-  - destination S3 key to write to
+  - Destination S3 key to write to.  If this string ends with a '/', it will be treated as a
+  - prefix, and the file will be written with the same name as the source file.
 
 ### Notes
 

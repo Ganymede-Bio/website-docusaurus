@@ -321,6 +321,40 @@ assay_results = b.create_assay_results_from_dataframe(
 )  
 ```
 
+## `function` Benchling.transfer_entities_to_plate
+  
+Transfer entities to a plate in Benchling.  
+  
+### Parameters  
+  
+**plate** : `Plate`  
+&nbsp; &nbsp; &nbsp; &nbsp; Plate to transfer entities to. E.g.  
+&nbsp; &nbsp; &nbsp; &nbsp; ```  
+&nbsp; &nbsp; &nbsp; &nbsp; plate_dict = b.get("plates", ids=["plt_efVi6kBw"])[0]  
+&nbsp; &nbsp; &nbsp; &nbsp; plate = Plate.from_dict(plate_dict)  
+&nbsp; &nbsp; &nbsp; &nbsp; ```  
+&nbsp; &nbsp; &nbsp; &nbsp; or  
+&nbsp; &nbsp; &nbsp; &nbsp; ```  
+&nbsp; &nbsp; &nbsp; &nbsp; plate_create = PlateCreate(PLATE_96_WELL_SCHEMA_ID, plate_barcode, PROJECT_ID, parent_storage_id=FRIDGE_ID)  
+&nbsp; &nbsp; &nbsp; &nbsp; plate = b.conn.plates.create(plate_create)  
+&nbsp; &nbsp; &nbsp; &nbsp; ```  
+**transfer_df** : `pd.DataFrame`  
+&nbsp; &nbsp; &nbsp; &nbsp; DataFrame with the following columns:  
+&nbsp; &nbsp; &nbsp; &nbsp; - entity_id: str  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ID of the entity to transfer  
+&nbsp; &nbsp; &nbsp; &nbsp; - well: str  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Well to transfer entity to. Should be in the format "rowcolumn" (e.g. "A1")  
+&nbsp; &nbsp; &nbsp; &nbsp; - volume: float  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Volume of the entity  
+&nbsp; &nbsp; &nbsp; &nbsp; - volume_units: str  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Units of the volume. See benchling_sdk.models.ContainerQuantityUnits for options  
+&nbsp; &nbsp; &nbsp; &nbsp; - concentration: Optional[float]  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Concentration of the entity  
+&nbsp; &nbsp; &nbsp; &nbsp; - concentration_units: Optional[str]  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Units of the concentration  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Valid units are molar (M), mass (g/L), and count (cells/L) concentration units. Otherwise, use U/L units. See ContainerQuantityUnits for options to use in the form `f"\{mass or count unit\}/\{volume unit\}"`  
+
+
 ## `function` Benchling.write_dataframe_to_benchling_table
   
 Uploads Pandas DataFrame to Benchling assay results with specified Benchling table. Please  
