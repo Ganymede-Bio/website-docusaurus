@@ -66,6 +66,7 @@ _retrieve_tables_ allows users to retrieve tabular data from the Ganymede data l
 The results are returned as a Dict of DataFrames in Python, keyed by table name.  Returned DataFrames contain the entire contents of the specified table(s).
 
 - _param_ **table_names**: Union[str, List[str]] - Table or list of tables to retrieve
+- _param_ **use_cache_in_notebook**: bool, by default False - If set to True, retrieves files from local cache when in editor or analysis notebooks rather than querying Ganymede to expedite development.  Note that flow runs will not reference cached files.  Cache can be cleared by calling the clear_cache() function.
 
 ```python
 from ganymede_sdk import Ganymede
@@ -114,10 +115,11 @@ _list_tables_all_ returns a listing of all tables associated with the current en
 _retrieve_files_ allows users to retrieve files from Ganymede cloud storage.  By default, the most recent file associated with current run is retrieved.
 
 - _param_ **file_names**: Union[str, List[str]] - File or list of files to retrieve
-- _param_ **flow_input_or_output**: str, by default "input" - Either "input" or "output" - to reference whether to retrieve files that are inputs to flows or outputs from flow nodes.
+- _param_ **flow_input_or_output**: str, by default "input" - Either "input" or "output" - to reference whether to retrieve files that are inputs to flows or outputs from flow nodes
 - _param_ **input_or_output_bucket**: str, by default "output" - (Pending deprecation) Either "input" or "output" - to reference bucket to retrieve files from.  
 - _param_ **current_flow_flag**: bool, by default True - Whether to filter for files associated with current flow or not
 - _param_ **run_id**: Optional[int], by default None - If set, filters for results with specified run_id; if not specified, retrieve file(s) associated with most recent run ID
+- _param_ **use_cache_in_notebook**: bool, by default False - If set to True, retrieves files from local cache when in editor or analysis notebooks rather than querying Ganymede to expedite development.  Note that flow runs will not reference cached files.  Cache can be cleared by calling the clear_cache() function.
 
 ```python
 from ganymede_sdk import Ganymede
@@ -149,7 +151,8 @@ most_recent_input_files = g.get_last_run_input_files()
 
 _list_files_ lists files in the environment
 
-- _param_ **input_or_output_bucket**: str, by default "input" - Either "input" or "output" - to reference whether to observe the input or output bucket of the _flow_
+- _param_ **flow_input_or_output**: str, by default "input" - Either "input" or "output" - to reference whether to retrieve files that are inputs to flows or outputs from flow nodes
+- _param_ **input_or_output_bucket**: str, by default "input" - (Pending deprecation) Either "input" or "output" - to reference whether to observe the input or output bucket of the _flow_
 - _param_ **flow_name**: str, optional, by default True - Flow name to filter for.  If set to specific flow name, filter to include records based on
 - _param_ **current_flow_flag**: bool, by default True - Whether to filter for files associated with current flow or not
 - _param_ **current_run_id**: Optional[int] - If set, filters for results with specified run_id
@@ -160,11 +163,11 @@ from ganymede_sdk import Ganymede
 g = Ganymede()
 
 # Lists all files in the input bucket of the current flow
-df_cur_flow_input_files = g.list_files(input_or_output_bucket="input")
+df_cur_flow_input_files = g.list_files(flow_input_or_output="input")
 display(df_cur_flow_input_files)
 
 # Lists all files in the output bucket of the environment
-df_output_files = g.list_files(input_or_output_bucket="output", current_flow_flag=False):
+df_output_files = g.list_files(flow_input_or_output="output", current_flow_flag=False):
 display(df_output_files)
 ```
 
@@ -172,19 +175,22 @@ display(df_output_files)
 
 _list_files_current_run_ returns a listing of available files in the specified bucket associated with the run ID provided by Ganymede context
 
-- _param_ **input_or_output_bucket**: str, by default "input" - Either "input" or "output" - to reference whether to observe the input or output bucket of the _flow_
+- _param_ **flow_input_or_output**: str, by default "input" - Either "input" or "output" - to reference whether to retrieve files that are inputs to flows or outputs from flow nodes
+- _param_ **input_or_output_bucket**: str, by default "input" - (Pending deprecation) Either "input" or "output" - to reference whether to observe the input or output bucket of the _flow_
 
 ### `method` list_files_current_flow
 
 _list_files_current_flow_ returns a listing of available files in the specified bucket associated with the current _flow_ provided by Ganymede context
 
-- _param_ **input_or_output_bucket**: str, by default "input" - Either "input" or "output" - to reference whether to observe the input or output bucket of the _flow_
+- _param_ **flow_input_or_output**: str, by default "input" - Either "input" or "output" - to reference whether to retrieve files that are inputs to flows or outputs from flow nodes
+- _param_ **input_or_output_bucket**: str, by default "input" - (Pending deprecation) Either "input" or "output" - to reference whether to observe the input or output bucket of the _flow_
 
 ### `method` list_files_all
 
 _list_files_all_ returns a listing of all files in the specified bucket in the environment
 
-- _param_ **input_or_output_bucket**: str, by default "input" - Either "input" or "output" - to reference whether to observe the input or output bucket of the _flow_
+- _param_ **flow_input_or_output**: str, by default "input" - Either "input" or "output" - to reference whether to retrieve files that are inputs to flows or outputs from flow nodes
+- _param_ **input_or_output_bucket**: str, by default "input" - (Pending deprecation) Either "input" or "output" - to reference whether to observe the input or output bucket of the _flow_
 - _param_ **flow_name**: str, by default None - Flow name to filter for, if input
 
 ## Sending emails from execute function
@@ -230,3 +236,6 @@ _get_secret_ returns an environment secret, which can be useful for testing API 
 
 - _param_ **secret_name**: str - Name of secret to retrieve
 
+### `method` clear_cache
+
+_clear_cache_ clears files and tables stored in local cache for the editor or analysis notebook that this method is called from.
