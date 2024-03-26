@@ -114,7 +114,8 @@ _list_tables_all_ returns a listing of all tables associated with the current en
 _retrieve_files_ allows users to retrieve files from Ganymede cloud storage.  By default, the most recent file associated with current run is retrieved.
 
 - _param_ **file_names**: Union[str, List[str]] - File or list of files to retrieve
-- _param_ **input_or_output_bucket**: str, by default "output" - Either "input" or "output" - to reference bucket to retrieve files from
+- _param_ **flow_input_or_output**: str, by default "input" - Either "input" or "output" - to reference whether to retrieve files that are inputs to flows or outputs from flow nodes.
+- _param_ **input_or_output_bucket**: str, by default "output" - (Pending deprecation) Either "input" or "output" - to reference bucket to retrieve files from.  
 - _param_ **current_flow_flag**: bool, by default True - Whether to filter for files associated with current flow or not
 - _param_ **run_id**: Optional[int], by default None - If set, filters for results with specified run_id; if not specified, retrieve file(s) associated with most recent run ID
 
@@ -124,11 +125,11 @@ from ganymede_sdk import Ganymede
 g = Ganymede()
 
 # Retrieves a file from the input bucket called "sample_test.csv" associated with the current flow
-input_file = retrieve_files("sample_test.csv", input_or_output_bucket="input")
+input_file = retrieve_files("sample_test.csv", flow_input_or_output="input")
 
 # Retrieves 2 files from the output bucket in the environment associated with most recent run of flow
 output_files = retrieve_files(['sample_output.xlsx', 'sample_validation.txt'], 
-                              input_or_output_bucket="output", current_flow_flag=False)
+                              flow_input_or_output="output", current_flow_flag=False)
 ```
 
 ### `method` get_last_run_input_files

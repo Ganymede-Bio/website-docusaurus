@@ -70,7 +70,7 @@ module.exports = {
           {
             type: 'doc',
             id: 'connectivity/DebuggingAgents',
-            label: 'Troubleshooting Agents'
+            label: 'Agent FAQ and Debugging'
           }
         ]
       },
@@ -99,7 +99,7 @@ module.exports = {
         {
           type: 'doc',
           id: 'DebuggingFlows',
-          label: 'Troubleshooting Flows'
+          label: 'Debugging Agents & FAQ'
         }
         ]
       },
