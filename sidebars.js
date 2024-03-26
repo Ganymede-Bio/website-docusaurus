@@ -99,7 +99,7 @@ module.exports = {
         {
           type: 'doc',
           id: 'DebuggingFlows',
-          label: 'Debugging Agents & FAQ'
+          label: 'Troubleshooting Flows'
         }
         ]
       },
