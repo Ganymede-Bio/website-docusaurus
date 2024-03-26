@@ -100,8 +100,12 @@ module.exports = {
           type: 'doc',
           id: 'DebuggingFlows',
           label: 'Troubleshooting Flows'
-        }
-        ]
+        },
+        {
+          type: 'doc',
+          id: 'SystemMetadata',
+          label: 'System Metadata'
+        }]
       },
       {
         type: 'category',
