@@ -51,7 +51,7 @@ Files can be tagged in user-defined code within flows and agents, but using slig
 
 To tag a file within a flow, use the `add_file_tag` function in the `ganymede_sdk.file_tag` module.  This function takes the following arguments:
 
-- _param_ **input_file_path**: str - The name of the file to tag.
+- _param_ **input_file_path**: str - The name of the file to tag.  The file path can be obtained from the keys in the dictionary returned by the [retrieve_files](../sdk/GanymedeClass#method-retrieve_files) for Ganymede class.
 - _param_ **tag_type_id**: str - The name of the tag type to apply to the file.
 - _param_ **display_value**: str - Value of the tag to display in the file browser.
 - _param_ **tag_id**: Optional[str] - Optional tag ID that can be used to reference tags in code.
