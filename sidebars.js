@@ -172,6 +172,10 @@ module.exports = {
           type: 'doc',
           id: 'sdk/sdk_markdowns/allotrope_schema',
           label: 'Allotrope'
+        },
+        {
+          type: 'doc',
+          id: 'sdk/FileTags',
         }
       ]
     },

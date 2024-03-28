@@ -47,6 +47,8 @@ The strict mode setting, if disabled, allows admins to delete or modify tags.  T
 
 Files can be tagged in user-defined code within flows and agents, but using slightly different methods.  Within flows, files are tagged by passing the path to the file into the `add_file_tag` function.  Within agents, files are tagged by passing the [FileParam](../sdk/sdk_markdowns/AgentDataModels#classes-associated-with-triggering-a-flow-from-an-agent) object into the `add_file_tag_to_fileparam` function.  The FileParam object holds the file that the Agent submits to Ganymede storage (for initiating a flow if the agent is configured to do so).
 
+The full set of methods available for interacting with tags can be found on the [File Tag](../sdk/FileTags.mdx) module in the SDK documentation.
+
 #### Tagging Files in Flows
 
 To tag a file within a flow, use the `add_file_tag` function in the `ganymede_sdk.file_tag` module.  This function takes the following arguments:
@@ -196,3 +198,4 @@ def execute(flow_params_fw: FileWatcherResult, **kwargs) -> NoOpFileTagParams:
     return NoOpFileTagParams(files=file_params)
 ```
 :::
+
