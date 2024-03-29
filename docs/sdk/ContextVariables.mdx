@@ -79,55 +79,6 @@ df_new = new_schema.validate(df)
 ```
 :::
 
-## `class` GanymedeContext
-
-**GanymedeContext** stores _flow_ metadata such as user ID, input filenames, input parameters, and execution timestamp upon _flow_ execution.  This object is generated in pipeline runs by the workflow management system.  The **GanymedeContext** object from the most recent run can be mimicked in testing code via the **Ganymede** object.
-
-```python
-from ganymede_sdk import Ganymede
-g = Ganymede()
-
-# Access GanymedeContext object with parameters from most recent run
-display(g.ganymede_context)
-```
-
-### Attributes
-
-- **run_id**: Timestamp in ms when _flow_ was kicked off for manually triggered flows; guaranteed to be unique per _flow_ run
-- **created**: Timestamp in ms when _flow_ was kicked off for event-triggered flows
-- **dag.dag_id**: name of _flow_
-- **task_id**: type of _node_ (e.g. - <NodeChip text="Input_File" /> or <NodeChip text="Python" />)
-- **params**: Run metadata; dictionary containing run_id, flow initiator, and file inputs to the flow.
-
-### Methods
-
-- **get_param(self, node_name: `str`, parameter_type: `str`) -> `str`**:
-  - Obtain input parameter or input filename in _flow_. Node name can be found in the indigo bar at the top of each node. Parameter type generally references the file extension for nodes that ingest files, and can be found on the Flow Editor as values with green background and white text.
-- **set_param(self, parameter_type: `str`, parameter_value: Any, node_name: `str` = None) -> None**:
-  - Set parameter value
-
-### Example
-
-In the code below, the flow run timestamp, filename uploaded, and experiment_id flow input parameter are incorporated into the input CSV as new columns and written to the data lake.
-
-```python
-import pandas as pd
-from typing import Union, Dict, List
-
-def execute(
-    df_sql_result: Union[pd.DataFrame, List[pd.DataFrame]], ganymede_context=None
-) -> Union[pd.DataFrame, Dict[str, pd.DataFrame]]:
-    """Add run_id and input parameter as columns to Pandas DataFrame
-    """
-
-    df_out = df_sql_result.copy()
-    df_out['__run_id'] = ganymede_context.run_id
-    df_out['__input_file_name'] = ganymede_context.get_param('CSV_Read', 'csv')
-    df_out['experiment_id'] = ganymede_context.get_param('Input_Param', 'param')
-
-    return df_out
-```
-
 
 ### Jinja templating for SQL Queries
 
@@ -216,4 +167,3 @@ compare_df_to_table(g.ganymede_context, result_dfs, 'Example_Quickstart_Absorban
 
 The Ganymede SDK provides a set of functions to validate that a Pandas DataFrame matches the schema of an [Allotrope Data Models](https://www.allotrope.org/product-releases/).
 
-All tabular
