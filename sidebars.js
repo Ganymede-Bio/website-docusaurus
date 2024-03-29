@@ -162,11 +162,11 @@ module.exports = {
     },
     {
       type: 'category',
-      label: 'Context and Validation',
+      label: 'Validation and Tags',
       items: [
         {
           type: 'doc',
-          id: 'sdk/ContextVariables',
+          id: 'sdk/DataValidation',
         },
         {
           type: 'doc',
@@ -177,7 +177,8 @@ module.exports = {
           type: 'doc',
           id: 'sdk/FileTags',
         }
-      ]
+      ],
+      collapsed: false
     },
     {
       type: 'doc',
@@ -199,7 +200,8 @@ module.exports = {
           },
             nodeSDKApi,
             nodeSDKAnalytics
-          ]
+        ],
+        collapsed: false
     }
   ],
   releaseSideBar: [
