@@ -4,6 +4,19 @@ title: March 2024
 displayed_sidebar: releaseSideBar
 ---
 
+### March 28 2024
+**Features/Updates**
+- A Connections Monitor is now the main page for viewing all connections’ statuses in an environment. The connection’s image can be customized by updating the image of the associated agent.
+- The save progress of Flow configuration and code changes are now displayed on the Flow Editor.
+- Dashboards have been updated to Superset 3.1.1 which allows users to download dashboard outputs as a CSV file.
+
+**Improvements**
+- Users can now [add a compensation matrix to a FlowJo workspace file](../sdk/sdk_markdowns/fcs#function-fcscreate_comp_matrix_xml) using the Ganymede SDK.
+- Users can now generate a default pandera schema from a pandas dataframe via the [SchemaValidation class](../sdk/DataValidation#class-schemavalidation) in Ganymede SDK.
+
+**Bug Fixes**
+- File input matching is now case-insensitive for both the case of the matching pattern and the case of the file name.
+
 ### March 21 2024
 **Improvements**
 - Tables and files that are retrieved via the Ganymede SDK can now be cached in an editor notebook or analysis notebook.  To enable this feature, set the *use_cache_in_notebook* parameter to true in the [`retrieve_files`](../sdk/GanymedeClass#method-retrieve_files) or [`retrieve_tables`](../sdk/GanymedeClass#method-retrieve_tables) method of the [Ganymede class](../sdk/GanymedeClass.mdx).  Future runs of the execute function during development iterations will pull from the cached objects instead of querying Ganymede.
