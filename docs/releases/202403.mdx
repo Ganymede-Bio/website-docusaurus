@@ -19,9 +19,12 @@ displayed_sidebar: releaseSideBar
 
 ### March 21 2024
 **Improvements**
-- Tables and files that are retrieved via the Ganymede SDK can now be cached in an editor notebook or analysis notebook. Future runs of the execute function during development iterations will pull from the cached objects instead of querying Ganymede.
-- More functionality for parsing, assembling, and plotting CDF files was added to the LC class in Ganymede SDK.
+- Tables and files that are retrieved via the Ganymede SDK can now be cached in an editor notebook or analysis notebook.  To enable this feature, set the *use_cache_in_notebook* parameter to true in the [`retrieve_files`](../sdk/GanymedeClass#method-retrieve_files) or [`retrieve_tables`](../sdk/GanymedeClass#method-retrieve_tables) method of the [Ganymede class](../sdk/GanymedeClass.mdx).  Future runs of the execute function during development iterations will pull from the cached objects instead of querying Ganymede.
+- More functionality for [parsing, assembling, and plotting CDF files](../sdk/sdk_markdowns/lc.cdf.md) was added to the LC class in Ganymede SDK.
 - A method for adding Benchling entities to a plate was added to the Benchling class in Ganymede SDK.
+
+**Bug Fixes**
+- The left sidebar in the Ganymede App and the flow dropdown on the Flow View/Flow Editor pages are wider to accommodate longer filenames and flow names respectively.
 
 ### March 14 2024
 **Improvements**

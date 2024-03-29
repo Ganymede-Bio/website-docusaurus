@@ -240,6 +240,13 @@ _get_secret_ returns an environment secret, which can be useful for testing API 
 
 _clear_cache_ clears files and tables stored in local cache for the editor or analysis notebook that this method is called from.
 
+### `method` get_file_url
+
+_get_file_url returns an HTTPS URL for referencing files stored in Ganymede cloud storage from external apps.  More documentation on usage can be found on the [deep links section of the File Browser page](../Files#urls-for-accessing-ganymede-files-from-other-apps-deep-links)
+
+### `method` get_gcs_uri
+
+_get_gcs_uri_ returns a Google Cloud Storage URI for referencing files.  This method is useful for referencing files for tags, which is described in further detail on the [Tagging Files page](../connectivity/Tags).
 
 ## `class` GanymedeContext
 
