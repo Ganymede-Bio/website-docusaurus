@@ -329,6 +329,40 @@ Gate FCS file using a limit
 &nbsp; &nbsp; &nbsp; &nbsp; DataFrame containing gated population events  
 
 
+## `function` FCS.create_comp_matrix_xml
+  
+Creates XML representation of compensation matrix  
+  
+### Parameters  
+  
+**df** : `pd.DataFrame`  
+&nbsp; &nbsp; &nbsp; &nbsp; Pandas DataFrame containing compensation matrix.&nbsp; &nbsp; Rows are from, columns are to  
+**comp_matrix_name** : `str`  
+&nbsp; &nbsp; &nbsp; &nbsp; Name of compensation matrix  
+**spillover_mat_attr** : `dict[str, str], optional`  
+&nbsp; &nbsp; &nbsp; &nbsp; spillover matrix definition, by default None  
+  
+### Raises  
+  
+**GanymedeException**  
+&nbsp; &nbsp; &nbsp; &nbsp; If rows and columns are not in the same order  
+  
+### Example  
+  
+```python  
+For a WSP object, insert a compensation matrix into the XML tree by executing the steps shown below:  
+  
+>>>> xml_comp_mat = WSP.create_comp_matrix_xml(df_comp_matrix)  
+>>>> matrix = xml_comp_mat.xpath("./transforms:spilloverMatrix", namespaces=WSP.ns_transforms).pop()  
+>>>> wsp_obj.wsp_root.xpath("./Matrices")[0].append(xml_comp_mat)  
+  
+In this example, df_comp_matrix is a Pandas DataFrame with a format mirroring an element  
+from an item in the 'compensation_matrices' dictionary returned by the 'get_compensation_matrices' method.  
+  
+Writing wsp_obj to a file will now include the added compensation matrix in the WSP file, which  
+can be opened in FlowJo.  
+```
+
 ## `function` parse_fcs
   
 Parse an FCS file and return a dict of metadata and numpy arrays of the data.  

@@ -67,6 +67,27 @@ Post data to Coda API
 &nbsp; &nbsp; &nbsp; &nbsp; Endpoint to retrieve data from  
 **data** : `Dict`  
 &nbsp; &nbsp; &nbsp; &nbsp; Data to post to endpoint  
+**sleep_time** : `float, optional`  
+&nbsp; &nbsp; &nbsp; &nbsp; Time in seconds to wait after posting data before checking response  
+  
+### Returns  
+  
+`Dict`  
+&nbsp; &nbsp; &nbsp; &nbsp; Coda API response  
+
+
+## `function` Coda.put
+  
+Puts data in Coda API  
+  
+### Parameters  
+  
+**endpoint** : `str`  
+&nbsp; &nbsp; &nbsp; &nbsp; Endpoint to push data to  
+**data** : `Dict`  
+&nbsp; &nbsp; &nbsp; &nbsp; Data to post to endpoint  
+**sleep_time** : `float, optional`  
+&nbsp; &nbsp; &nbsp; &nbsp; Time in seconds to wait after putting data before checking response  
   
 ### Returns  
   
