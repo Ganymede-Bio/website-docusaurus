@@ -200,7 +200,8 @@ module.exports = {
           },
             nodeSDKApi,
             nodeSDKAnalytics
-          ]
+        ],
+        collapsed: false
     }
   ],
   releaseSideBar: [
