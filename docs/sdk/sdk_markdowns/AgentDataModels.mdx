@@ -34,7 +34,7 @@ def execute(flow_params_fw: FileWatcherResult) -> TriggerFlowParams:
     pass
 ```
 
-## Classes associated with triggering a flow from an Agent
+## Classes associated with Agent-triggered flows
 
 The FileWatcherResult consists of a dictionary of FileParam objects indexed by `node name`.`param name`.
 - _param_ **files**: Dict[str, fileParam] - Dictionary of FileParam objects indexed by `node name`.`param name`
@@ -83,3 +83,19 @@ The TriggerFlowParams object is used to specify the inputs to the flow that is e
 - _param_ **benchling_tag**: Optional[Tag] - Additional parameters to be passed to flow.  This parameter is used for inputs to the Input_Benchling node.
 - _param_ **additional_params**: Optional[Dict[str, str]] - Additional parameters to be passed to flow.  This parameter is used for inputs to the Input_Param node.
 
+## Utility functions
+
+### Computing file checksums
+
+Ganymede provides two functions for validating the integrity of files, which can be accessed from `ganymede_sdk.agent.utils`.  The code below shows how these values can be accessed; these values can be used to:
+
+- verify the integrity of a file uploaded to cloud storage
+- determine whether a file has been modified
+
+```python
+from ganymede_sdk.agent.utils import calculate_md5, calculate_crc32c
+
+# file_path is the path to a local file
+md5 = calculate_md5(file_path)
+crc32c = calculate_crc32c(file_path)
+```
