@@ -109,7 +109,9 @@ def execute(file_data: Dict[str, bytes], ganymede_context) -> NodeReturn:
 
 #### Tagging Files in Agents
 
-To tag a file within an agent, use the `add_file_tag_to_fileparam` function in the `ganymede_sdk.agent` module.  This function takes the following arguments:
+To tag a file delivered by an Agent to Ganymede, you can configure an agent to tag any files submitted from it using the [File tags parameter in Agent configuration](./Agent).
+
+Tagging can also be performed programmatically using the `add_file_tag_to_fileparam` function in the `ganymede_sdk.agent` module.  This function takes the following arguments:
 
 - _param_ **file_param**: Union[FileParam, MultiFileParam] - The FileParam object to tag.  FileParam objects hold a single file, while MultiFileParam objects hold multiple files (for use in nodes that take in multiple files).  If a MultiFileParam object is specified, the tag is applied to all files within the object.
 - _param_ **tag_type_id**: str - The name of the tag type to apply to the file.

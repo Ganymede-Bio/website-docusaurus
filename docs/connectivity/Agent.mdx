@@ -19,7 +19,7 @@ Users specify which of the above actions to take by configuring the Agent in the
 
 ## Building an Agent Overview
 
-To create a new Agent, click the <div className="button system_button"><PlusOutlined /> New Agent</div> button on the upper-left corner of the Connections page.
+To create a new Agent, click the <div className="button system_button"><PlusOutlined /> New Agent</div> button on the Agents tab of the Connections page.
 
 <img
   alt="Agent Front page"
@@ -32,7 +32,7 @@ The left side of the configuration panel is used to specify the Agent's configur
 <div class="text--center">
   <img
     alt="New Agent configuration"
-    src="https://ganymede-bio.mo.cloudinary.net/agent/New_Agent_Configuration2_20231103.png"
+    src="https://ganymede-bio.mo.cloudinary.net/agent/New_Agent_Configuration2_20240331.png"
   />
 </div>
 &nbsp;
@@ -67,6 +67,8 @@ For Cloud Watcher agents that download files from Ganymede Cloud, you can specif
 - [**Load local files into Ganymede with a custom filter**](#load-local-files-into-ganymede-with-a-custom-filter): Send specified files on local instrument PC and process on Ganymede Cloud
 - [**Set a cron job to upload files periodically**](#set-a-cron-job-to-upload-files-periodically): Periodically deliver files to Ganymede Cloud
 
+Three additional input parameters are available for all configurations:
+
 ## Configuration Options
 
 ### Watch for files locally then run flow
@@ -78,6 +80,9 @@ For Cloud Watcher agents that download files from Ganymede Cloud, you can specif
 - `If a discovered filename exists in storage`: Whether to use the file in storage or the observed file in the local directory
 - `File pattern to parameter mapping`: For the selected Flow, the [glob pattern](<https://en.wikipedia.org/wiki/Glob_(programming)>) to associate with the input parameter(s)
   - This option is only available on create. Further configuration updates will occur inside the notebook, not inside the agent configuration
+- `File Tags`: Tags to associate with the files uploaded to Ganymede Cloud
+- `Image`: Image to associate with agent.  A common use case is to associate an image of the instrument that the agent is running on.
+- `Auto deploy code and configuration changes to Live Connections`: If checked, updates to agent code will be reflected on currently installed agents.
 
 The corresponding user-defined code will be generated to map those file patterns to parameters.  There are 2 functions that could require modification in the user-defined code during configuration:
 
@@ -234,6 +239,9 @@ An instrument outputs files to a directory as it completes runs, which are proce
 
 - `Flow Name`: Flow to run upon observing new files matching specified pattern
 - `Time Interval`: Frequency and times with which to run flow, based on UTC time
+- `File Tags`: Tags to associate with the files uploaded to Ganymede Cloud
+- `Image`: Image to associate with agent.  A common use case is to associate an image of the instrument that the agent is running on.
+- `Auto deploy code and configuration changes to Live Connections`: If checked, updates to agent code will be reflected on currently installed agents.
 
 <div class="text--center">
   <img
@@ -256,6 +264,9 @@ A user-defined script must be run once a day to poll and capture updates from te
 - `Check Period (seconds)`: Frequency with which Agent will poll local directory for new files
 - `If a discovered filename exists in storage`: Whether to use the file in storage or the observed file in the local directory
 - `File pattern to parameter mapping`: For the selected Flow, the [glob pattern](<https://en.wikipedia.org/wiki/Glob_(programming)>) to associate with the input parameter(s).
+- `File Tags`: Tags to associate with the files uploaded to Ganymede Cloud
+- `Image`: Image to associate with agent.  A common use case is to associate an image of the instrument that the agent is running on.
+- `Auto deploy code and configuration changes to Live Connections`: If checked, updates to agent code will be reflected on currently installed agents.
 
 <div class="text--center">
   <img
@@ -276,6 +287,8 @@ Multiple flow cytometers are used to observe cell populations for a related set 
 
 - `Flow Name`: Flow from which to download output files. This will autopopulate the glob pattern matching field correspondingly.
 - `Glob pattern matching`: the [glob patterns](<https://en.wikipedia.org/wiki/Glob_(programming)>) that output files must match in order to download.
+- `Image`: Image to associate with agent.  A common use case is to associate an image of the instrument that the agent is running on.
+- `Auto deploy code and configuration changes to Live Connections`: If checked, updates to agent code will be reflected on currently installed agents.
 
 <div class="text--center">
   <img
@@ -310,6 +323,9 @@ A selected subset of key instrument output files are captured on Ganymede Cloud.
 #### Input Parameters
 
 - `Time Interval`: Frequency and times with which to upload files, based on UTC time
+- `File Tags`: Tags to associate with the files uploaded to Ganymede Cloud
+- `Image`: Image to associate with agent.  A common use case is to associate an image of the instrument that the agent is running on.
+- `Auto deploy code and configuration changes to Live Connections`: If checked, updates to agent code will be reflected on currently installed agents.
 
 <div class="text--center">
   <img

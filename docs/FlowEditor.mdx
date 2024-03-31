@@ -4,48 +4,51 @@ title: Flow Editor
 displayed_sidebar: webUiSidebar
 ---
 
-import { NodeIndexOutlined,
-         CheckCircleOutlined,
-         NotificationOutlined,
-         CaretRightOutlined,
-         SettingOutlined,
-         DownOutlined,
-         BranchesOutlined,
-         PlusOutlined,
-         PlayCircleOutlined,
-         RedoOutlined,
-         PlusCircleOutlined
-       } from '@ant-design/icons';
+import {
+  BranchesOutlined,
+  CaretRightOutlined,
+  CheckCircleOutlined,
+  DownOutlined,
+  NodeIndexOutlined,
+  NotificationOutlined,
+  PlayCircleOutlined,
+  PlusCircleOutlined,
+  PlusOutlined,
+  RedoOutlined,
+  SettingOutlined
+} from '@ant-design/icons';
 
 import {
-    ExpandLessOutlined,
-    DashboardOutlined
-    } from '@mui/icons-material';
+  DashboardOutlined,
+  ExpandLessOutlined
+} from '@mui/icons-material';
 
 import NotebookIcon from '../static/img/notebook.png';
 
 The <div className="button darkblue_button"><BranchesOutlined /> **Flow Editor**</div> page is the starting point for creating and modifying flows.  
 
-<img alt="Node status indicator" src="https://ganymede-bio.mo.cloudinary.net/apiServer/FlowEditor_20230831.png" />
+<img alt="Node status indicator" src="https://ganymede-bio.mo.cloudinary.net/apiServer/FlowEditor_20240331.png" />
 
 
 ## Header Bar
 
 The header bar contains buttons for creating flows and monitoring _flow_ runs.
 
-<img alt="Flow Editor header" src="https://ganymede-bio.mo.cloudinary.net/apiServer/FlowEditorHeader_20230405.png" />
+<img alt="Flow Editor header" src="https://ganymede-bio.mo.cloudinary.net/apiServer/FlowEditorHeader_20240331.png" />
 &nbsp;
 
 * **Choose a Flow**: Selection box for specifying the _flow_ to load.
 * **Node**: Opens right sidebar for selecting new *node* to add.  
 * **View**: Opens right sidebar for specifying whether _flow_ should be laid out horizontally or vertically
 * **Analysis**: Enables access to Jupyter notebooks which can be used for ad-hoc observation and data analysis.  These notebooks are hosted on a virtual machine (VM) separate from the workflow management software running the _flow_.
-* **Runs**: Opens right sidebar showing statuses of historical runs for the selected _flow_.  The [<div className="button darkblue_button"><CheckCircleOutlined /> **Flow Runs**</div>](FlowRuns.mdx) page contains greater detail about the contents of this tab.
 
 * **Save**: Button to save _flow_ layout to git repo and deploy code to workflow management system.
 * **Manage**: Opens right sidebar to create new flows or delete existing ones. When a flow is selected, we can apply new configurations to the flow.
-  * Owner - Owner of the flow. Does not affect how the flow runs.
-  * Retries - How many times the flow would retry to execute a node, in case of an error or a timeout.
+  * **Owner** - Owner of the flow.  The flow will appear on the home page for the owner of a flow.
+  * **Retries** - How many times the flow would retry to execute a node, in case of an error or a timeout.
+  * **Emails** - Emails to notify in case of a failure.
+  * **Auto run trigger** - Times to run the flow automatically if selected.
+  * **Assign Flow to** - Users assigned a flow will have the flow appear on their home page.
 
 ## Run Queue Bar
 
@@ -64,7 +67,7 @@ The Run Queue Bar located at the bottom of the screen contains buttons for execu
 
 To create a new _flow_, click the <div className="button darkblue_button">**Manage <SettingOutlined />**</div> button in the upper right hand corner of the screen. Then click the <div className="button black_button"><PlusOutlined /> Add New Flow</div> button on the sidebar.  This action exposes a modal for naming and describing the _flow_.  
 
-<img alt="Add new flow" src="https://ganymede-bio.mo.cloudinary.net/apiServer/AddNewFlow_20231108.png"/>
+<img alt="Add new flow" src="https://ganymede-bio.mo.cloudinary.net/apiServer/AddNewFlow_20240331.png"/>
 
 ### Scheduling Flow Execution
 
@@ -72,12 +75,6 @@ Flows can be configured to automatically run on a schedule. The schedule is set 
 
 <img alt="Cron flows" src="https://ganymede-bio.mo.cloudinary.net/apiServer/CronFlow.png" width="470" height="190"/>
 &nbsp;
-
-:::note
-
-Scheduled jobs are specified in UTC time.
-
-:::
 
 ### Configuring Email Notifications
 
@@ -93,8 +90,7 @@ Retries and email notifications associated with the _flow_ can be specified in t
 
 To load a _flow_, specify the _flow_ to load in the <div className="button datalist_button">**Choose A Flow <DownOutlined />**</div> selection box.  Upon doing so, the primary pane displays the graphical structure of the _flow_.
 
-<img width="1241" alt="FlowEditor" src="https://user-images.githubusercontent.com/46538575/225718730-7e2dd267-e6ec-49c6-b77b-bd1183788022.png"/>
-&nbsp;
+<img alt="Loading a flow" src="https://ganymede-bio.mo.cloudinary.net/apiServer/LoadFlow2_20240331.png"/>
 
 After saving a _flow_, the entire environment (which contains all flows) is saved and deployed. When this save and deploy is taking place, users are temporarily restricted from running flows. A tooltip will be displayed to the user if they try to run a _flow_ during this time. Users can observe the status of environment updates on the [<div className="button darkblue_button"><NotificationOutlined /> **Notifications**</div>](Notifications.mdx) page.
 
