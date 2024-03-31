@@ -90,7 +90,7 @@ The TriggerFlowParams object is used to specify the inputs to the flow that is e
 Ganymede provides two functions for validating the integrity of files, which can be accessed from `ganymede_sdk.agent.utils`.  The code below shows how these values can be accessed; these values can be used to:
 
 - verify the integrity of a file uploaded to cloud storage
-- determine whether a file has been modified
+- determine whether a file has been modified; depending on use case, using os.path.getmtime to get the last modified time of a file may be preferable
 
 ```python
 from ganymede_sdk.agent.utils import calculate_md5, calculate_crc32c
