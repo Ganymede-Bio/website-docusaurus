@@ -95,7 +95,29 @@ Ganymede provides two functions for validating the integrity of files, which can
 ```python
 from ganymede_sdk.agent.utils import calculate_md5, calculate_crc32c
 
-# file_path is the path to a local file
+file_path = "path/to/local/file"
+
+# either md5 or crc32c can be used to validate the integrity of a file
 md5 = calculate_md5(file_path)
 crc32c = calculate_crc32c(file_path)
 ```
+
+These methods can also be used to calculate the checksum of a file that has been uploaded to Ganymede Cloud.  To do so, create a tempfile.TemporaryFile object and write the file contents to it before calculating the checksum.
+
+```python
+from ganymede_sdk.agent.utils import calculate_md5, calculate_crc32c
+import os
+import tempfile
+
+data = b"Example data to calculate checksum"
+
+with tempfile.NamedTemporaryFile(delete=False) as tmp_file:
+    tmp_file.write(data)
+    tmp_file_name = tmp_file.name
+
+md5 = calculate_md5(tmp_file_name)
+crc32c = calculate_crc32c(tmp_file_name)
+
+os.remove(tmp_file_name)
+```
+
