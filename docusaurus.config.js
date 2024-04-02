@@ -120,6 +120,10 @@ module.exports = {
               label: 'GitHub',
               href: 'https://github.com/Ganymede-Bio/website-docusaurus',
             },
+            {
+              label: 'Contact Us',
+              href: 'mailto:support@ganymede.bio'
+            }
           ],
         },
       ],
