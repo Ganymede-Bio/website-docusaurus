@@ -1,2 +1,6 @@
+# Algolia-Crawler-Verif: ABD5C84194A93069
+
 User-agent: *
 Disallow:
+Sitemap: https://docs.ganymede.bio/sitemap.xml
+
