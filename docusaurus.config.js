@@ -19,7 +19,7 @@ module.exports = {
       appId: 'SMEM8QA2TD',
       apiKey: 'd7fb51ca85e14d48eb21e1fd4e08c1f6',
       indexName: 'ganymede',
-      contextualSearch: true
+      contextualSearch: false
     },
     navbar: {
       title: 'Ganymede',
