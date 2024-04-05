@@ -1670,6 +1670,11 @@
     fs-extra "^11.1.1"
     tslib "^2.6.0"
 
+"@docusaurus/tsconfig@^3.2.1":
+  version "3.2.1"
+  resolved "https://registry.yarnpkg.com/@docusaurus/tsconfig/-/tsconfig-3.2.1.tgz#6bdc0cb46414d09c7334d632b6d5e5472e6eb5a7"
+  integrity sha512-+biUwtsYW3oChLxYezzA+NIgS3Q9KDRl7add/YT54RXs9Q4rKInebxdHdG6JFs5BaTg45gyjDu0rvNVcGeHODg==
+
 "@docusaurus/types@3.2.1":
   version "3.2.1"
   resolved "https://registry.yarnpkg.com/@docusaurus/types/-/types-3.2.1.tgz#88ccd4b8fa236628a29c89b8b0f60f0cc4716b69"
@@ -2289,11 +2294,6 @@
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/@trysound/sax/-/sax-0.2.0.tgz#cccaab758af56761eb7bf37af6f03f326dd798ad"
   integrity sha512-L7z9BgrNEcYyUYtF+HaEfiS5ebkh9jXqbszz7pC0hRBPaatV0XjSD3+eHrpqFemQfgwiFF0QPIarnIihIDn7OA==
-
-"@tsconfig/docusaurus@^1.0.6":
-  version "1.0.7"
-  resolved "https://registry.yarnpkg.com/@tsconfig/docusaurus/-/docusaurus-1.0.7.tgz#a3ee3c8109b3fec091e3d61a61834e563aeee3c3"
-  integrity sha512-ffTXxGIP/IRMCjuzHd6M4/HdIrw1bMfC7Bv8hMkTadnePkpe0lG0oDSdbRpSDZb2rQMAgpbWiR10BvxvNYwYrg==
 
 "@tsconfig/node10@^1.0.7":
   version "1.0.11"
