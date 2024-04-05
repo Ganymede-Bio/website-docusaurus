@@ -78,8 +78,7 @@
             "tags"
           ],
           "model_config": {
-            "model_name": "openai/text-embedding-ada-002",
-            "api_key": "OPENAI_API_KEY"
+            "model_name": "ts/jina-embeddings-v2-base-en"
           }
         }
       }
