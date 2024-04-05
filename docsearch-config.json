@@ -1,28 +1,29 @@
 {
   "index_name": "websiteDocusaurus",
-  "start_urls": ["https://docs.ganymede.bio/"],
-  "sitemap_urls": [
-    "https://docs.ganymede.bio/sitemap.xml"
+  "start_urls": [
+    {
+      "url": "https://docs.ganymede.bio/",
+      "variables": {
+        "version": ["0.25.2"]
+      }
+    }
   ],
-  "sitemap_alternate_links": true,
-  "stop_urls": ["https://docs.ganymede.bio/tags"],
   "selectors": {
-    "lvl0": {
-      "selector": "(//ul[contains(@class,'menu__list')]//a[contains(@class, 'menu__link menu__link--sublist menu__link--active')]/text() | //nav[contains(@class, 'navbar')]//a[contains(@class, 'navbar__link--active')]/text())[last()]",
-      "type": "xpath",
-      "global": true,
-      "default_value": "Documentation"
-    },
-    "lvl1": "header h1",
-    "lvl2": "article h2",
-    "lvl3": "article h3",
-    "lvl4": "article h4",
-    "lvl5": "article h5, article td:first-child",
-    "lvl6": "article h6",
-    "text": "article p, article li, article td:last-child"
+    "default": {
+      "lvl0": ".content__default h1",
+      "lvl1": ".content__default h2",
+      "lvl2": ".content__default h3",
+      "lvl3": ".content__default h4",
+      "lvl4": ".content__default h5",
+      "text": ".content__default p, .content__default ul li, .content__default table tbody tr"
+    }
   },
+  "scrape_start_urls": false,
   "strip_chars": " .,;:#",
+  "nb_hits": 505,
   "custom_settings": {
+    "token_separators": ["_"],
+    "symbols_to_index": ["*"],
     "field_definitions": [
       {"name": "anchor", "type": "string", "optional": true},
       {"name": "content", "type": "string", "optional": true},
@@ -63,9 +64,5 @@
         }
       }
     ]
-  },
-  "conversation_id": [
-    "1535599749"
-  ],
-  "nb_hits": 1329
+  }
 }
