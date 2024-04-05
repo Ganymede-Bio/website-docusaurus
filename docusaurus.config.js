@@ -127,7 +127,7 @@ module.exports = {
           ],
         },
       ],
-      copyright: `Copyright © 2023 Ganymede Bio, Inc.  Built with Docusaurus`,
+      copyright: `Copyright © 2024 Ganymede Bio, Inc.  Built with Docusaurus`,
     },
   },
   presets: [
