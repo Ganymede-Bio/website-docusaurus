@@ -2,10 +2,7 @@
   "index_name": "websiteDocusaurus",
   "start_urls": [
     {
-      "url": "https://docs.ganymede.bio/",
-      "variables": {
-        "version": ["0.25.2"]
-      }
+      "url": "https://docs.ganymede.bio/"
     }
   ],
   "sitemap_urls": ["https://docs.ganymede.bio/sitemap.xml"],
