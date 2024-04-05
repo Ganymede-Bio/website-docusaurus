@@ -1,11 +1,15 @@
 {
   "index_name": "websiteDocusaurus",
-  "start_urls": ["https://docs.ganymede.bio/"],
-  "sitemap_urls": [
-    "https://docs.ganymede.bio/sitemap.xml"
+  "start_urls": [
+    {
+      "url": "https://docs.ganymede.bio/",
+      "variables": {
+        "version": ["0.25.2"]
+      }
+    }
   ],
+  "sitemap_urls": ["https://docs.ganymede.bio/sitemap.xml"],
   "sitemap_alternate_links": true,
-  "stop_urls": ["https://docs.ganymede.bio/tags"],
   "selectors": {
     "lvl0": {
       "selector": "(//ul[contains(@class,'menu__list')]//a[contains(@class, 'menu__link menu__link--sublist menu__link--active')]/text() | //nav[contains(@class, 'navbar')]//a[contains(@class, 'navbar__link--active')]/text())[last()]",
@@ -13,7 +17,7 @@
       "global": true,
       "default_value": "Documentation"
     },
-    "lvl1": "header h1",
+    "lvl1": "article h1, header h1",
     "lvl2": "article h2",
     "lvl3": "article h3",
     "lvl4": "article h4",
@@ -21,7 +25,9 @@
     "lvl6": "article h6",
     "text": "article p, article li, article td:last-child"
   },
+  "scrape_start_urls": false,
   "strip_chars": " .,;:#",
+  "nb_hits": 505,
   "custom_settings": {
     "separatorsToIndex": "_",
     "attributesForFaceting": [
@@ -72,14 +78,11 @@
             "tags"
           ],
           "model_config": {
-            "model_name": "ts/all-MiniLM-L12-v2"
+            "model_name": "openai/text-embedding-ada-002",
+            "api_key": "OPENAI_API_KEY"
           }
         }
       }
     ]
-  },
-  "conversation_id": [
-    "1535599749"
-  ],
-    "nb_hits": 1329
+  }
 }
