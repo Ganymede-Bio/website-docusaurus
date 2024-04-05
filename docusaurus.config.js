@@ -10,38 +10,16 @@ module.exports = {
   favicon: 'img/favicon.png',
   organizationName: 'Ganymede-Bio',
   projectName: 'website-docusaurus',
-  themes: ['docusaurus-theme-search-typesense'],
   themeConfig: {
     prism: {
       additionalLanguages: ['python'],
       theme: prismThemes.nightOwl
     },
-    typesense: {
-      typesenseCollectionName: process.env.TYPESENSE_COLLECTION_NAME,
-
-      typesenseServerConfig: {
-        nodes: [
-          {
-            host: process.env.TYPESENSE_HOST,
-            port: 443,
-            protocol: 'https',
-          }
-        ],
-        apiKey: process.env.TYPESENSE_API_KEY,
-        contextualSearch: true
-      },
-
-      // typesenseSearchParameters: {
-      // },
-
-      typesenseSearchParameters: {
-        query_by:
-          'hierarchy.lvl0,hierarchy.lvl1,hierarchy.lvl2,hierarchy.lvl3,hierarchy.lvl4,hierarchy.lvl5,hierarchy.lvl6,content,embedding',
-        vector_query: 'embedding:([], k: 5, distance_threshold: 1.0, alpha: 0.2)' // Optional vector search fine-tuning
-      },
-
-      // Optional
-      contextualSearch: true,
+    algolia: {
+      appId: 'SMEM8QA2TD',
+      apiKey: 'd7fb51ca85e14d48eb21e1fd4e08c1f6',
+      indexName: 'ganymede',
+      contextualSearch: true
     },
     navbar: {
       title: 'Ganymede',
