@@ -32,6 +32,16 @@ A: Modified files are captured by the Agent, and so would be uploaded and proces
 
 A: Yes, you can access environment secrets from the Agent.  To do so, you can reference the [get_secret](../sdk/GanymedeClass#method-get_secret) method.
 
+#### Q: Can I access an environment variable from a cron Agent?  For example, can I access the `input_path` variable configured upon installation?
+
+A: Yes, this can be done by referencing variables within the `kwargs` dictionary.  For example, to access the `input_path` variable, you can use the following code:
+
+```python
+# .get method for dictionries is used to handle the case where the variable may not be present without erroring out
+# note: assumes DEFAULT_PATH is configured in the agent
+watch_directory = Path(kwargs.get("vars", []).get("input_path", DEFAULT_PATH))
+```
+
 ## Troubleshooting
 
 #### Issue: I am unable to install the agent on Windows; the installer is failing at the final step.
