@@ -125,14 +125,14 @@ be used to manipulate both tables simultaneously.
 
 ## Tips and tricks
 
-#### Dashboard chart shows an error message that the dataset is missing but it does exist and linked to the chart
+### Dashboard chart shows an error message that the dataset is missing but it does exist and linked to the chart
 
 If the chart was properly displayed in the the `Edit Chart` page but it throws this error in the
 dashboard then this could happen when you have two charts named the same where one has a missing dataset. The
 dashboard could pull in the chart that has the missing dataset. You can fix this by renaming the
 chart to be unique or delete the chart with the missing dataset.
 
-#### How do you create bar plots with proportions and percentages?
+### How do you create bar plots with proportions and percentages?
 
 In the chart editor page
 
@@ -151,7 +151,7 @@ More general proportions can be found with
 COUNT(*) / SUM(COUNT(*)) OVER (PARTITION BY x_axis_variable)
 ```
 
-#### I added a new column but I do not see it in the columns side bar in the editor chart page.
+### I added a new column but I do not see it in the columns side bar in the editor chart page.
 In the chart editor page
 
 1. Click the **⋮** in the `Chart Source` side bar
@@ -160,7 +160,7 @@ In the chart editor page
 4. Click `SYNC COLUMNS FROM SOURCE`
 5. Save
 
-#### I do not see the full range of values on the x-axis of my line plot
+### I do not see the full range of values on the x-axis of my line plot
 
 This could be due to there being to many digits in the data being displayed, which can be fixed by
 rounding the data.
@@ -174,7 +174,7 @@ ROUND(my_column, 2)
 4. Update chart
 
 
-#### I am creating a line chart but the line is patchy and not full connected
+### I am creating a line chart but the line is patchy and not full connected
 
 If the spacing between adjacent data points is too large, superset will have trouble connecting the
 points together. You can fill in the data in the chart editor page
@@ -187,7 +187,16 @@ points together. You can fill in the data in the chart editor page
 Another approach might be to increase the `ROW LIMIT` in the **DATA** tab if you have a large
 dataset. 
 
-#### Including headers, text, dividers, and tabs to dashboard
+
+### I am creating a line chart but there are regions of the plot with missing data
+
+Sometimes the superset will have trouble displaying any data in certain regions of the line chart. You
+can confirm that the plot recognizes that point by hovering the mouse in those regions to see if
+a hover box displays with the values. If the data is not time-series, you can try turning on marker
+in the `Chart Options` of the **Customize** tab. This will at least allow you to see the data points
+in the plot.
+
+### Including headers, text, dividers, and tabs to dashboard
 
 1. In the dashboard page, click `EDIT DASHBOARD` 
 2. On the right side of the page, click the **LAYOUT ELEMENTS** tab
@@ -199,3 +208,25 @@ allow you to separate out charts into different tabs to group relevant charts to
 be configured to work with different tabs. Filters that are not relevant to the specific tab you are
 on will be hidden under a dropdown and classified as out of scope. Tabs act as their own mini
 dashboards with unique links that will point to that tab in the dashboard.
+
+### I am creating a line chart with time series but getting a `404 Post Error... Braced constructors are not supported`
+
+This could mean that superset is having trouble recognizing your time series variable as a time stamp
+or datetime variable. You can try creating a calculated variable in the `Edit dataset` from `Chart
+Source` and do
+
+```sql
+CAST(my_time_variable AS TIMESTAMP)
+```
+
+Then set the variable type to DATETIME in the DATA TYPE section.
+
+
+### Creating more meaningful labels for table chart types
+
+Variables are saved with to the database with spaces and special characters replaced with
+underscores. However, you can change the label shown in tables with something more meaningful such
+as adding spaces, units, etc in the `Edit dataset` from `Chart Source`. In the `Columns` tab, click
+the dropdown for the variable you want to add a label to and fill in the LABEL field. For an
+example, if your variable is `my_variable` you can set the label to be `My Variable (units)` and
+this would automically set the column name in your table chart types to this new label.
