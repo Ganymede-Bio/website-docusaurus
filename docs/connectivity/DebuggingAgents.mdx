@@ -34,7 +34,7 @@ A: Yes, you can access environment secrets from the Agent.  To do so, you can re
 
 #### Q: Can I access an environment variable from a cron Agent?  For example, can I access the `input_path` variable configured upon installation?
 
-A: Yes, this can be done by referencing the `input_path` variable within the `kwargs` dictionary.  For example, to access the `input_path` variable, you can use the following code:
+A: Yes, this can be done by referencing variables within the `kwargs` dictionary.  For example, to access the `input_path` variable, you can use the following code:
 
 ```python
 # .get method for dictionries is used to handle the case where the variable may not be present without erroring out
