@@ -18,7 +18,7 @@ and uses result to execute downstream flow
 
 ## User-Defined Python
 
-Calls Benchling to get data for flow to trigger
+Processes data, then triggers downstream flow
 
 ### Parameters
 
