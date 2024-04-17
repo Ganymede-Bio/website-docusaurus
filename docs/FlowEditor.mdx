@@ -135,3 +135,21 @@ In order to delete flows, click the <div className="button darkblue_button">**Ma
 :::caution
 Deleting flows is not reversible from within the Ganymede UI, so undoing a _flow_ deletion will require restoring code from a prior commit in the git repo corresponding to the Ganymede cloud tenant.
 :::
+
+
+### Flow Save Status Indicator
+
+The status of the latest flow save is displayed by an indicator message in the header bar of the Flow Editor page. Flows can’t be run while a flow save is in progress, which can be tracked by this indicator. If no flow is currently saving the status indicator will display the time of the last successful flow save. 
+
+<img width="300" alt="Autorun modal" src="https://ganymede-bio.mo.cloudinary.net/apiServer/FlowSaveSuccess_20240416.png"/>
+
+
+While a flow save is in progress the indicator message will display in sequence "Save in progress", "Build in progress", and "Deploy in progress" depending on which part of the save pipeline that is running. 
+
+<img width="150" alt="Autorun modal" src="https://ganymede-bio.mo.cloudinary.net/apiServer/FlowSaveProgress_20240416.png"/>
+<img width="152" alt="Autorun modal" src="https://ganymede-bio.mo.cloudinary.net/apiServer/FlowBuildProgress_20240416.png"/>
+<img width="162" alt="Autorun modal" src="https://ganymede-bio.mo.cloudinary.net/apiServer/FlowSaveDeploy_20240416.png"/>
+
+If an error is encountered during a flow save then an error message will be displayed.
+
+<img width="130" alt="Autorun modal" src="https://ganymede-bio.mo.cloudinary.net/apiServer/FlowBuildFail_20240416.png"/>
