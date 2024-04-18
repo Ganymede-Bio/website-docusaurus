@@ -169,5 +169,5 @@ The ScanResult object is a dataclass used to store the file paths for files of i
 - _param_ **age_in_minutes**: int - Minimum age in minutes for files to be included in the results
 - _param_ **pattern**: re.Pattern | list[re.Pattern] - Regex pattern to match files against; only files that match against at least one of the specified patterns will be included in results
 
-One example of how these functions can be used is to use `scan_for_finished_files` to scan a directory for files continuously, uploading them to Ganymede Cloud for processing when they are older than a specified number of minutes.  Such a flow would query previously uploaded files to Ganymede using the [list_files](../GanymedeClass.mdx#method-list-files) method to ensure that the same file is not uploaded multiple times.
+One example of how these functions can be used is to use `scan_for_finished_files` to scan a directory for files continuously, uploading them to Ganymede Cloud for processing when they are older than a specified number of minutes.  Such a flow would query previously uploaded files to Ganymede using the [list_files](../GanymedeClass.mdx#method-list_files) method to ensure that the same file is not uploaded multiple times.
 
