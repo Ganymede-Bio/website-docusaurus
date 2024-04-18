@@ -1,6 +1,6 @@
 ---
 id: AgentDataModels
-title: Agent Data Models
+title: Agent Models and Methods
 displayed_sidebar: SDKSidebar
 ---
 
@@ -37,7 +37,7 @@ def execute(flow_params_fw: FileWatcherResult) -> TriggerFlowParams:
 ## Classes associated with Agent-triggered flows
 
 The FileWatcherResult consists of a dictionary of FileParam objects indexed by `node name`.`param name`.
-- _param_ **files**: Dict[str, fileParam] - Dictionary of FileParam objects indexed by `node name`.`param name`
+- _param_ **files**: dict[str, fileParam] - Dictionary of FileParam objects indexed by `node name`.`param name`
 - _param_ **tags**: Optional[List[FileTag]] - List of tags to be applied to all files
 
 TriggerFlowParams is used to specify the inputs to the flow that is executed when all files are observed.  It contains the following parameters:
@@ -67,7 +67,7 @@ The MultiFileParam object is used for submitting multiple files to a single node
 - _param_ **parent_dir**: str - Path within Agent watch directory that contains file.  For example. if C:/Users/username/watch_dir/ is being watched and C:/Users/username/watch_dir/abc/def/my_file.txt is found, then parent_dir would be "abc/def"
 - _param_ **upload_ts**: str - Timestamp string in ISO format of when file was uploaded to Agent watch directory, e.g. "2021-01-01T00:00:00Z"
 - _param_ **upload_paths**: Optional[List[str]] - Path in Ganymede storage where file will be uploaded
-- _param_ **tags*: Optional[List[FileTag]] - List of tags to be applied to file
+- _param_ **tags**: Optional[List[FileTag]] - List of tags to be applied to file
 - _param_ **bucket_name**: str - Bucket associated with file
 
 The MultiFileParam object contains a method for initiation from a list of FileParam objects as shown below.  The content type of the object is assumed to take on the content type of the first item in the list.
@@ -85,12 +85,13 @@ The TriggerFlowParams object is used to specify the inputs to the flow that is e
 
 ## Utility functions
 
+Agent utility functions are provided in `ganymede_sdk.agent.utils`, which can be useful for validating data integrity and interacting with file systems.
+
 ### Computing file checksums
 
 Ganymede provides two functions for validating the integrity of files, which can be accessed from `ganymede_sdk.agent.utils`.  The code below shows how these values can be accessed; these values can be used to:
 
 - verify the integrity of a file uploaded to cloud storage
-- determine whether a file has been modified; depending on use case, using os.path.getmtime to get the last modified time of a file may be preferable
 
 ```python
 from ganymede_sdk.agent.utils import calculate_md5, calculate_crc32c
@@ -120,4 +121,53 @@ crc32c = calculate_crc32c(tmp_file_name)
 
 os.remove(tmp_file_name)
 ```
+
+### File system utilities
+
+`ganymede_sdk.agent.utils` provides a number of convenience functions, which can be helpful to use with cron Agents that involve more complex logic prior to invoking a flow.  Some examples of this are when a file is written to multiple times before being processed, or if there is a variable number of files being processed, such that the trigger for invoking a flow requires more than just the presence of a file.
+
+#### Dataclasses
+
+The ScanResult object is a dataclass used to store the file paths for files of interest.  It contains the following parameters:
+
+- _param_ **file_path**: str - Path to file
+- _param_ **modified_time**: datetime - Datetime of when file was last modified
+
+#### Functions
+
+`list_files_recursive` returns a list of all files in a directory and its subdirectories.
+
+- _param_ **file_path**: str - Path to directory to list files from
+
+`matches_pattern` returns True if a file path matches at least one of the specified regex patterns specified and False otherwise.
+
+- _param_ **filename**: str - Name of file
+- _param_ **pattern**: re.Pattern | list[re.Pattern] - Regex pattern or list of regex patterns to match against
+
+`is_file_ready` returns True if a file has the modified time is within the last **interval_in_seconds** seconds, or if the size of the file has changed in that same timespan.
+
+- _param_ **file_path**: str - Path to file to watch
+- _param_ **threshold_seconds**: int - Number of seconds to wait between checks, by default 0.1
+
+`get_most_recent_access_result` returns a ScanResult object referencing the most recently accessed file in a directory.  Access time is updated when a file is read from or written to.
+
+- _param_ **directory**: str - Path to directory to watch
+
+`filter_by_age` returns a list of files that have not been modified within the last **age_in_minutes** minutes.
+
+- _param_ **scan_results**: List[ScanResult] - List of ScanResult objects
+- _param_ **age_in_minutes**: int - Minimum age in minutes
+
+`zip_directory` creates a zip file of a directory and its contents.
+
+- _param_ **directory**: str - Path to directory to zip
+- _param_ **zip_file**: str - Path to zip file to create
+
+`scan_for_finished_files` scans a directory, returning paths to files with a modified date older than the specified number of minutes
+
+- _param_ **directory**: str - Path to directory to scan
+- _param_ **age_in_minutes**: int - Minimum age in minutes for files to be included in the results
+- _param_ **pattern**: re.Pattern | list[re.Pattern] - Regex pattern to match files against; only files that match against at least one of the specified patterns will be included in results
+
+One example of how these functions can be used is to use `scan_for_finished_files` to scan a directory for files continuously, uploading them to Ganymede Cloud for processing when they are older than a specified number of minutes.  Such a flow would query previously uploaded files to Ganymede using the [list_files](../GanymedeClass.mdx#method-list-files) method to ensure that the same file is not uploaded multiple times.
 
