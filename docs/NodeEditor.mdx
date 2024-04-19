@@ -32,20 +32,18 @@ The image above shows how _nodes_ are represented on the Flow Editor page; each 
 
 For nodes with editable components, notebooks follow a common structure.
 
-#### Sections that are saved upon executing the Save Pipeline Code cell or typing `Cmd+Shift+S` (Mac) or `Ctrl+Shift+S` (Windows/Linux):
+#### Cells that are saved upon running Save Commit and Deploy:
 - **User-defined SQL** for retrieving tabular data to be processed by the node.  This code is executed by the workflow management system.
 - **User-defined Python** for processing input.  This code is executed by the workflow management system.
 
 These cells have a light blue background.
 
-#### Sections that are discarded upon notebook close:
+#### Cells that are discarded upon notebook close:
 - **Testing Section** for testing changes to user-defined SQL and Python
-- **Linting Section** for linting user-defined SQL and Python, using [ruff](https://github.com/astral-sh/ruff)
-- **Save Pipeline Code** for saving and deploying user-defined SQL and Python pipeline code.  Upon save, linting is conducted using [ruff](https://github.com/astral-sh/ruff) on the code found in the **User-defined Python** cell.
 
-These cells have a light gray background.
+Cells in this section have a light gray background.
 
-The Testing and Linting Sections enable users to test changes to the user-defined SQL and Python prior to committing and deploying code.
+The Testing section enables users to test changes to the user-defined SQL and Python prior to committing and deploying code.
 
 A full listing of available nodes and their key characteristics can be found on the [Node Overview](./nodes/NodeOverview) page.
 
@@ -167,7 +165,7 @@ A single table is retrieved from df_sql_result, and the results are written to b
 
 :::caution
 
-The names of the _query_sql_ variable and _execute_ function cannot be modified or moved to different cells in a notebook.  Upon running the save cell in the notebook, the cells that contain the _query_sql_ string and execute function are saved, and the contents of all other cells are discarded.  
+The names of the _query_sql_ variable and _execute_ function cannot be modified or moved to different cells in a notebook.  Upon [saving the notebook](#saving-and-deploying-pipeline-code), the cells that contain the _query_sql_ string and execute function are saved, and the contents of all other cells are discarded.  
 
 This allows users to conduct testing in other cells prior to committing and loading code to the workflow orchestrator.
 
@@ -234,7 +232,7 @@ Saving notebooks can be accomplished in a couple ways:
 - Typing `Cmd+Shift+S` (Mac) or `Ctrl+Shift+S` (Windows/Linux) to save the notebook.
 - Selecting the _Kernel_ menu and then selecting _Save Commit and Deploy_
 
-:::danger
+:::caution
 Typing `Cmd+S` (Mac) or `Ctrl+S` (Windows/Linux) will not commit and deploy pipeline code, and so should not be used to save changes to pipeline code.
 :::
 
