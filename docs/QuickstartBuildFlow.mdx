@@ -5,22 +5,25 @@ sidebar_label: Build a Flow to Process Data
 displayed_sidebar: webUiSidebar
 ---
 
-import { UserOutlined, 
-         BranchesOutlined,
-         SettingOutlined,
-         BellOutlined,
-         PlusCircleOutlined,
-         PlayCircleOutlined,
-         CodeOutlined,
-         DownOutlined,
-         TableOutlined,
-         CheckCircleOutlined,
-         FolderOutlined } from '@ant-design/icons';
+import {
+    BellOutlined,
+    BranchesOutlined,
+    CheckCircleOutlined,
+    CodeOutlined,
+    DownOutlined,
+    FolderOutlined,
+    PlayCircleOutlined,
+    PlusCircleOutlined,
+    SaveFilled,
+    SettingOutlined,
+    TableOutlined,
+    UserOutlined
+} from '@ant-design/icons';
 
 import {
-    SaveOutlined,
-    ExpandLessOutlined
-    } from '@mui/icons-material';
+    ExpandLessOutlined,
+    SaveOutlined
+} from '@mui/icons-material';
 
 This guide walks through building a _flow_ for ingesting plate reader absorbance data captured at two timepoints and computing the difference between the two values.
 
@@ -150,7 +153,7 @@ Non-tabular data can be stored by returning a dictionary of files to upload in t
 Run the User-Defined Function cell by selecting the cell and then clicking on the <div className="button jupyter_button">▶️ Run</div> button in the header, which runs the selected cell.  In the "Testing" section below, you can test out uploading our original plate reader excel file and passing it into the User-Defined Function.  This is a great way to debug your code before deploying the flow.
 
 
-Save and deploy changes made to the Python node by running the Save Pipeline Code cell at the bottom of the notebook, or by pressing `Cmd+Shift+S` (Mac) or `Ctrl+Shift+S` (Windows/Linux).
+Save and deploy changes made to the Python node by clicking on the <SaveFilled className="button dark_gray_button"/>   button in the toolbar, or by pressing `Cmd+Shift+S` (Mac) or `Ctrl+Shift+S` (Windows/Linux).
 
 
 :::tip
