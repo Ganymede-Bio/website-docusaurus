@@ -5,6 +5,10 @@ displayed_sidebar: nodeSidebar
 sidebar_label: Node Overview
 ---
 
+import {
+  SaveFilled,
+} from '@ant-design/icons';
+
 _Nodes_ provide template structure for performing data extraction, processing, and API communication. The diagram below shows how a node performs a base function, but exposes an interface for user-defined code to enable tailoring.
 
 <div style={{textAlign: 'center'}}>
@@ -12,7 +16,7 @@ _Nodes_ provide template structure for performing data extraction, processing, a
   />
 </div>
 
-In Jupyter notebooks associated backing editable nodes, user-defined SQL and user-defined Python cells share a light blue background and are committed to a repo + deployed to a workflow orchestrator upon running the **Save Pipeline Code** cell at the bottom of the notebook, or by pressing `Cmd+Shift+S` or `Ctrl+Shift+S` (Windows/Linux).
+In Jupyter notebooks associated backing editable nodes, user-defined SQL and user-defined Python cells share a light blue background and are committed to a repo + deployed to a workflow orchestrator upon clicking on the <SaveFilled className="button dark_gray_button"/>   button in the toolbar, or by pressing `Cmd+Shift+S` or `Ctrl+Shift+S` (Windows/Linux).
 
 ## Key Node Characteristics
 
@@ -222,9 +226,7 @@ The _execute_ function may call classes and functions found within the User-Defi
 
 :::
 
-- **Save Pipeline Code**: This cell stores any changes to the **Node Input Data** (if present) and **User-Defined Function** cells.
-
-- **Testing Section**: The cells in this section can be used for testing modifications to the SQL query and user-defined python function.  This enables rapid iteration on user-defined code; after necessary edits are made, changes can be saved in by running the **Save Pipeline Code** cell.
+- **Testing Section**: The cells in this section can be used for testing modifications to the SQL query and user-defined python function.  This enables rapid iteration on user-defined code; after necessary edits are made, changes can be saved in by clicking on the <SaveFilled className="button dark_gray_button"/>   button in the toolbar or selecting Save Commit and Deploy from the Kernel menu.
 
 ## List of Available Nodes
 
