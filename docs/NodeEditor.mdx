@@ -5,7 +5,7 @@ displayed_sidebar: webUiSidebar
 ---
 
 import {
-  EditOutlined
+    EditOutlined, SaveFilled
 } from '@ant-design/icons';
 
 ## Node Overview
@@ -226,17 +226,17 @@ res = execute(input_file, ganymede_context=g.ganymede_context)
 res
 ```
 
-### Save Pipeline Code cell
+### Saving and Deploying Pipeline Code
 
-```python
-# Save the updated query and python function to the pipeline
+Saving notebooks can be accomplished in a couple ways:
 
-save()
-```
+- Clicking the <SaveFilled className="button dark_gray_button"/>   button in the upper right hand corner of the notebook.
+- Typing `Cmd+Shift+S` (Mac) or `Ctrl+Shift+S` (Windows/Linux) to save the notebook.
+- Selecting the _Kernel_ menu and then selecting _Save Commit and Deploy_
 
-Running this cell commits any code changes to the Git repository associated with the tenant and uploads the code to the workflow management system for executing code.  Upon save, linting is conducted.
-
-
+:::danger
+Typing `Cmd+S` (Mac) or `Ctrl+S` (Windows/Linux) will not commit and deploy pipeline code, and so should not be used to save changes to pipeline code.
+:::
 
 ## Adding flow inputs
 
