@@ -19,7 +19,8 @@ Sync GCS bucket -\> S3 bucket
   - bucket from the current run
 - **dest_node_name_in_path** : `bool`
   - "true" or "false" - whether to prepend the flow name and node name for specified file in
-  - the S3 bucket path
+  - the S3 bucket path.  If the output bucket is specified, written files will contain
+  - the flow name and the timestamp of the run in that path to the file.
 - **dest_replace_or_append** : `str`
   - "replace" or "append" - whether to replace existing files or only add new files to the
   - destination S3 bucket when a file in the S3 bucket has the same name as the source file
