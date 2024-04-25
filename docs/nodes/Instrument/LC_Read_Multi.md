@@ -1,26 +1,27 @@
 ---
-sidebar_label: LCMS_Read
-title: LCMS_Read
+sidebar_label: LC_Read_Multi
+title: LC_Read_Multi
 displayed_sidebar: nodeSidebar
 ---
 
 ### Node Description
 
-An Airflow operator class that parses data from an LCMS file.
+An Airflow operator class that parses data from an LC file.
 
 ### Node Attributes
 
-- **input_file_lcms**
-  - Glob pattern matching the LCMS file to be read.
+- **input_multi_lc**
+  - Glob pattern matching the LC file to be read.
+
 
 ## User-Defined Python
 
-Function to process LCMS file data
+Function to process LC file data
 
 ### Parameters
 
-- **lcms_file_paths** : `str`
-    - Path to LCMS file to be read
+- **lc_file_paths** : `list[str]`
+    - Paths to LC files to be read
 - **ganymede_context** : `GanymedeContext`
     - Ganymede context variable, which stores flow run metadata
 
