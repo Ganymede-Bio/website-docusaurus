@@ -80,11 +80,15 @@ The table below lists available nodes.
 | File       | Powerpoint_Write          | Table(s)                | NodeReturn     | True          | False      |
 | File       | XML_Read                  | FileXML                 | NodeReturn     | True          | False      |
 | File       | Zip_Read                  | FileZip                 | NodeReturn     | True          | False      |
-| Instrument | Agilent_HPLC_Read         | File                    | NodeReturn     | True          | False      |
 | Instrument | Instron_Tensile_Read      | FileIsTens              | NodeReturn     | True          | False      |
+| Instrument | LCMS_Read                 | File                    | NodeReturn     | True          | False      |
+| Instrument | LCMS_Read_Multi           | File                    | NodeReturn     | True          | True       |
+| Instrument | LC_Read                   | File                    | NodeReturn     | True          | False      |
+| Instrument | LC_Read_Multi             | File                    | NodeReturn     | True          | True       |
 | Instrument | Profilometer_Read         | FileHDF5                | NodeReturn     | True          | False      |
 | Instrument | Synergy_Read              | FileTxt                 | NodeReturn     | True          | False      |
 | Instrument | Synergy_Read_Multi        | Set[FileTxt]            | NodeReturn     | True          | True       |
+| Instrument | WSP_Read                  | FileWSP                 | NodeReturn     | True          | False      |
 | Tag        | Benchling_Tag             | TagBenchling            | string         | False         | False      |
 | Tag        | Input_Param               |                         | string         | False         | False      |
 
@@ -282,10 +286,14 @@ The _execute_ function may call classes and functions found within the User-Defi
 | File       | Powerpoint_Write          | Process tabular data; write a powerpoint presentation to data lake           |
 | File       | XML_Read                  | Read XML file into data lake                                                 |
 | File       | Zip_Read                  | Extract Zip file                                                             |
-| Instrument | Agilent_HPLC_Read         | Read an Agilent HPLC file of type .uv, .ms, .ch, or .bin                     |
 | Instrument | Instron_Tensile_Read      | Load .is_tens file to data lake                                              |
+| Instrument | LCMS_Read                 | Read and process LCMS file in mzML format                                    |
+| Instrument | LCMS_Read_Multi           | Read and process multiple LCMS files                                         |
+| Instrument | LC_Read                   | Read and process an Agilent Chemstation / MassStation HPLC file              |
+| Instrument | LC_Read_Multi             | Read and process multiple Agilent Chemstation / MassStation HPLC files       |
 | Instrument | Profilometer_Read         | Read Mx Profiler data file                                                   |
 | Instrument | Synergy_Read              | Load Synergy text file to data lake                                          |
 | Instrument | Synergy_Read_Multi        | Load multiple Synergy texts file to data lake                                |
+| Instrument | WSP_Read                  | Read FlowJo WSP file into data lake                                          |
 | Tag        | Benchling_Tag             | Read benchling tag                                                           |
 | Tag        | Input_Param               | Input parameter into Flow                                                    |
