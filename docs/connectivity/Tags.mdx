@@ -157,6 +157,8 @@ def execute(flow_params_fw: FileWatcherResult, **kwargs) -> TriggerFlowParams:
 
 Files are passed to and from Virtualization environments using agents, so files passed to and from virtualization environments can be tagged as well.
 
+Note that virtualization stores a json file in the `C:/Program Files/Ganymede/` directory that contains information about the session, including the input files and the current session id.
+
 ```python
 import json
 from pathlib import Path
@@ -164,11 +166,11 @@ from pathlib import Path
 from ganymede_sdk.agent import FileWatcherResult, NoOpFileTagParams, add_file_tag_to_fileparam
 from ganymede_sdk.file_tag import get_file_tags
 
+SESSION_JSON_PATH = Path("C:/Program Files/Ganymede/session.json")
 
 # Virtualization agent example for that tagging all files sent to Ganymede cloud storage with a notebook entry ID.
 def execute(flow_params_fw: FileWatcherResult, **kwargs) -> NoOpFileTagParams:
     file_params = list(flow_params_fw.files.values())
-    SESSION_JSON_PATH = Path("C:/Program Files/Ganymede/session.json")
 
     with open(SESSION_JSON_PATH, "r") as f:
         session_json = f.read()
@@ -176,6 +178,8 @@ def execute(flow_params_fw: FileWatcherResult, **kwargs) -> NoOpFileTagParams:
     session_dict = json.loads(session_json)
     input_files = session_dict["input_files"]
     entry_tags = []
+
+    # A tag type defined in this tenant
     NOTEBOOK_ENTRY_TAG_TYPE_ID = "notebook_entry_id"
 
     for file in input_files:
@@ -183,7 +187,7 @@ def execute(flow_params_fw: FileWatcherResult, **kwargs) -> NoOpFileTagParams:
         if tags is None:
             continue
         for tag in tags:
-            if tag["tag_type_id"] == NOTEBOOK_ENTRY_TAG_TYPE_ID:
+            if tag.tag_type_id == NOTEBOOK_ENTRY_TAG_TYPE_ID:
                 entry_tags.append(tag)
 
     if len(entry_tags):
@@ -193,8 +197,8 @@ def execute(flow_params_fw: FileWatcherResult, **kwargs) -> NoOpFileTagParams:
             add_file_tag_to_fileparam(
                 file_param=file_param,
                 tag_type_id=NOTEBOOK_ENTRY_TAG_TYPE_ID,
-                display_value=entry_tag["display_value"],
-                url=entry_tag["url"],
+                display_value=entry_tag.display_value,
+                url=entry_tag.url,
             )
 
     return NoOpFileTagParams(files=file_params)
