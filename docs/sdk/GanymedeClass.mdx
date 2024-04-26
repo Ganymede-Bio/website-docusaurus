@@ -14,6 +14,7 @@ The **Ganymede** object is used within editor notebooks to access data in Editor
 import pandas as pd
 from ganymede_sdk import Ganymede
 
+# Retrieves the Ganymede object associated with the most recent run
 g = Ganymede()
 ```
 
@@ -32,6 +33,11 @@ display(g)
 print(g['runId'])
 
 # Returns "1693156227387"
+```
+
+#### Retrieve GanymedeContext associated with a specific run ID
+```python
+g = Ganymede(run_id='1693156227387')
 ```
 
 #### In the execute function, the Ganymede object can be created from the ganymede_context parameter
