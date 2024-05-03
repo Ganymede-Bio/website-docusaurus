@@ -1,0 +1,15 @@
+---
+id: 202405
+title: May 2024
+displayed_sidebar: releaseSideBar
+---
+
+### May 2 2024
+**Improvements**
+- Util methods were added to the Ganymede SDK for use by Agents that scan for recently modified files. These methods are particularly useful in cases where a single file is being updated continuously by an instrument.
+- The Ganymede context for a specific historical Flow Run can now be retrieved by instantiating Ganymede context with a run_id set.
+- The Benchling Event operator can now store data and continue running the Flow that it is in.
+
+**Bug Fixes**
+- Changing environments with an active file search will now clear the search parameters.
+- In the advanced search panel, the tag type dropdown now uses tag type display name instead of tag type id.
