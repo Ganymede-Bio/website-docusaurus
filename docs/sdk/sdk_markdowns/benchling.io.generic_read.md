@@ -1,7 +1,7 @@
 ---
 sidebar_label: benchling.io.generic_read
 title: benchling.io.generic_read
-displayed_sidebar: APISidebar
+displayed_sidebar: SDKSidebar
 --- 
 
 

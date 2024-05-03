@@ -47,4 +47,4 @@ is written to the output bucket.
 ### Notes
 
 Files can also be retrieved and processed using the list_files and retrieve_files functions.
-Documentation on these functions can be found at https://docs.ganymede.bio/api/GanymedeClass
+Documentation on these functions can be found at https://docs.ganymede.bio/sdk/GanymedeClass

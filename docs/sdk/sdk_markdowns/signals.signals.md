@@ -1,7 +1,7 @@
 ---
 sidebar_label: signals.signals
 title: signals.signals
-displayed_sidebar: APISidebar
+displayed_sidebar: SDKSidebar
 --- 
 
 

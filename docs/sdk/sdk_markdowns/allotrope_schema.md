@@ -1,7 +1,7 @@
 ---
 sidebar_label: Allotrope Schemas
 title: Allotrope Schemas
-displayed_sidebar: APISidebar
+displayed_sidebar: SDKSidebar
 ---
 
 
