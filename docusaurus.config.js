@@ -14,12 +14,14 @@ module.exports = {
     [
       '@docusaurus/plugin-client-redirects',
       {
-        redirects: [
-          {
-            to: '/api',
-            from: '/sdk',
+        createRedirects(existingPath) {
+          if (existingPath.includes('/sdk')) {
+            return [
+              existingPath.replace('/sdk', '/api'),
+            ];
           }
-        ],
+          return undefined; // Return a falsy value: no redirect created
+        },
       },
     ],
   ],
