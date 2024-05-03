@@ -15,9 +15,9 @@ module.exports = {
       '@docusaurus/plugin-client-redirects',
       {
         createRedirects(existingPath) {
-          if (existingPath.includes('/sdk')) {
+          if (existingPath.includes('/api')) {
             return [
-              existingPath.replace('/sdk', '/api'),
+              existingPath.replace('/api', '/sdk'),
             ];
           }
           return undefined; // Return a falsy value: no redirect created
