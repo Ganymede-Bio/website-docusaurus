@@ -1,7 +1,7 @@
 ---
 sidebar_label: coda.coda
 title: coda.coda
-displayed_sidebar: APISidebar
+displayed_sidebar: SDKSidebar
 --- 
 
 

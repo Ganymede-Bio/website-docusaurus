@@ -1,7 +1,7 @@
 ---
 sidebar_label: benchling.benchling
 title: benchling.benchling
-displayed_sidebar: APISidebar
+displayed_sidebar: SDKSidebar
 --- 
 
 
