@@ -35,7 +35,7 @@ if __name__ == "__main__":
                 "---\n",
                 "sidebar_label: Allotrope Schemas\n",
                 "title: Allotrope Schemas\n",
-                "displayed_sidebar: SDKSidebar\n",
+                "displayed_sidebar: APISidebar\n",
                 "---",
             ]
         )

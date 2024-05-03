@@ -7,7 +7,7 @@ import textwrap
 SIDEBAR_HEADER = """---
 sidebar_label: {}
 title: {}
-displayed_sidebar: SDKSidebar
+displayed_sidebar: APISidebar
 --- \n\n
 """
 
@@ -16,7 +16,7 @@ PYLIB_PATH = f"../pylib/src/{PKG}"
 SAVE_PATH = "../docs/api/markdowns"
 
 sidebar_dict = {
-    "api": {"type": "category", "label": "API", "collapsed": True, "items": []},
+    "api": {"type": "category", "label": "Apps", "collapsed": True, "items": []},
     "analytics": {
         "type": "category",
         "label": "Analytics",
