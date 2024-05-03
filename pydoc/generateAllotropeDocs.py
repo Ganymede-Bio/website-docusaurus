@@ -28,13 +28,13 @@ if __name__ == "__main__":
     allotrope_classes = "../pylib/src/ganymede_sdk/validation/allotrope.py"
     allotrope_schema_dict = get_allotrope_schema_dict(allotrope_classes)
 
-    with open("../docs/sdk/sdk_markdowns/allotrope_schema.md", "w+") as f:
+    with open("../docs/api/markdowns/allotrope_schema.md", "w+") as f:
         f.writelines(
             [
                 "---\n",
                 "sidebar_label: Allotrope Schemas\n",
                 "title: Allotrope Schemas\n",
-                "displayed_sidebar: SDKSidebar\n",
+                "displayed_sidebar: APISidebar\n",
                 "---",
             ]
         )

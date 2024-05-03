@@ -1,7 +1,7 @@
 ---
 sidebar_label: msd
 title: msd
-displayed_sidebar: SDKSidebar
+displayed_sidebar: APISidebar
 --- 
 
 

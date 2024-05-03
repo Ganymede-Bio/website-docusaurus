@@ -1,7 +1,7 @@
 ---
 sidebar_label: benchling.utils.mini_utils
 title: benchling.utils.mini_utils
-displayed_sidebar: SDKSidebar
+displayed_sidebar: APISidebar
 --- 
 
 

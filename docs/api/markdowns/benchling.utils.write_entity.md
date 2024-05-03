@@ -1,7 +1,7 @@
 ---
 sidebar_label: benchling.utils.write_entity
 title: benchling.utils.write_entity
-displayed_sidebar: SDKSidebar
+displayed_sidebar: APISidebar
 --- 
 
 
