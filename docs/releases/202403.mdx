@@ -11,16 +11,16 @@ displayed_sidebar: releaseSideBar
 - Dashboards have been updated to Superset 3.1.1 which allows users to download dashboard outputs as a CSV file.
 
 **Improvements**
-- Users can now [add a compensation matrix to a FlowJo workspace file](../api/markdowns/fcs#function-fcscreate_comp_matrix_xml) using the Ganymede SDK.
-- Users can now generate a default pandera schema from a pandas dataframe via the [SchemaValidation class](../api/DataValidation#class-schemavalidation) in Ganymede SDK.
+- Users can now [add a compensation matrix to a FlowJo workspace file](../sdk/sdk_markdowns/fcs#function-fcscreate_comp_matrix_xml) using the Ganymede SDK.
+- Users can now generate a default pandera schema from a pandas dataframe via the [SchemaValidation class](../sdk/DataValidation#class-schemavalidation) in Ganymede SDK.
 
 **Bug Fixes**
 - File input matching is now case-insensitive for both the case of the matching pattern and the case of the file name.
 
 ### March 21 2024
 **Improvements**
-- Tables and files that are retrieved via the Ganymede SDK can now be cached in an editor notebook or analysis notebook.  To enable this feature, set the *use_cache_in_notebook* parameter to true in the [`retrieve_files`](../api/GanymedeClass#method-retrieve_files) or [`retrieve_tables`](../api/GanymedeClass#method-retrieve_tables) method of the [Ganymede class](../api/GanymedeClass.mdx).  Future runs of the execute function during development iterations will pull from the cached objects instead of querying Ganymede.
-- More functionality for [parsing, assembling, and plotting CDF files](../api/markdowns/lc.cdf.md) was added to the LC class in Ganymede SDK.
+- Tables and files that are retrieved via the Ganymede SDK can now be cached in an editor notebook or analysis notebook.  To enable this feature, set the *use_cache_in_notebook* parameter to true in the [`retrieve_files`](../sdk/GanymedeClass#method-retrieve_files) or [`retrieve_tables`](../sdk/GanymedeClass#method-retrieve_tables) method of the [Ganymede class](../sdk/GanymedeClass.mdx).  Future runs of the execute function during development iterations will pull from the cached objects instead of querying Ganymede.
+- More functionality for [parsing, assembling, and plotting CDF files](../sdk/sdk_markdowns/lc.cdf.md) was added to the LC class in Ganymede SDK.
 - A method for adding Benchling entities to a plate was added to the Benchling class in Ganymede SDK.
 
 **Bug Fixes**
