@@ -1,7 +1,7 @@
 ---
 sidebar_label: fcs
 title: fcs
-displayed_sidebar: SDKSidebar
+displayed_sidebar: APISidebar
 --- 
 
 

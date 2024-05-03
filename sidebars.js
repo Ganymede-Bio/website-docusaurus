@@ -3,8 +3,8 @@ nodeApp = require('./docs/nodes/App/sidebar.json')
 nodeFile = require('./docs/nodes/File/sidebar.json')
 nodeInstrument = require('./docs/nodes/Instrument/sidebar.json')
 nodeTag = require('./docs/nodes/Tag/sidebar.json')
-nodeSDKApi = require('./docs/sdk/sdk_markdowns/sidebar_api.json')
-nodeSDKAnalytics = require('./docs/sdk/sdk_markdowns/sidebar_analytics.json')
+nodeSDKApi = require('./docs/api/markdowns/sidebar_apps.json')
+nodeSDKAnalytics = require('./docs/api/markdowns/sidebar_analytics.json')
 
 module.exports = {
   webUiSidebar:
@@ -147,18 +147,18 @@ module.exports = {
         nodeTag]
     }
   ],
-  SDKSidebar: [
+  APISidebar: [
     {
       type: 'doc',
-      id: 'sdk/GanymedeSDKOverview',
+      id: 'api/GanymedeSDKOverview',
     },
     {
       type: 'doc',
-      id: 'sdk/GanymedeClass',
+      id: 'api/GanymedeClass',
     },
     {
       type: 'doc',
-      id: 'sdk/BenchlingClass',
+      id: 'api/BenchlingClass',
     },
     {
       type: 'category',
@@ -166,23 +166,23 @@ module.exports = {
       items: [
         {
           type: 'doc',
-          id: 'sdk/DataValidation',
+          id: 'api/DataValidation',
         },
         {
           type: 'doc',
-          id: 'sdk/sdk_markdowns/allotrope_schema',
+          id: 'api/markdowns/allotrope_schema',
           label: 'Allotrope'
         },
         {
           type: 'doc',
-          id: 'sdk/FileTags',
+          id: 'api/FileTags',
         }
       ],
       collapsed: false
     },
     {
       type: 'doc',
-      id: 'sdk/GPT',
+      id: 'api/GPT',
       label: 'GPT'
     },
     {
@@ -192,11 +192,11 @@ module.exports = {
         items: [
           {
             type: 'doc',
-            id: 'sdk/sdk_markdowns/AgentDataModels',
+            id: 'api/markdowns/AgentDataModels',
           },
           {
             type: 'doc',
-            id: 'sdk/sdk_markdowns/EnvironmentDetection',
+            id: 'api/markdowns/EnvironmentDetection',
           },
             nodeSDKApi,
             nodeSDKAnalytics
