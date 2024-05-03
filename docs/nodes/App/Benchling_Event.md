@@ -56,8 +56,9 @@ Calls Benchling to get data for flow to trigger
 
 ### Returns
 
-`FlowInputs`
-  FlowInputs class for kicking off subsequent Flow
+`FlowInputs | NodeReturn`
+  if FlowInputs object is returned; flow inputs for kicking off subsequent Flow
+  if NodeReturn object is returned; NodeReturn object for storing data
 
 ### Notes
 

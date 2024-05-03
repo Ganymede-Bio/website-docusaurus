@@ -13,7 +13,7 @@ displayed_sidebar: SDKSidebar
 
 PKG = "ganymede_sdk"
 PYLIB_PATH = f"../pylib/src/{PKG}"
-SAVE_PATH = "../docs/sdk/sdk_markdowns"
+SAVE_PATH = "../docs/api/markdowns"
 
 sidebar_dict = {
     "api": {"type": "category", "label": "API", "collapsed": True, "items": []},
@@ -69,7 +69,7 @@ def dir_files_docstrings_to_markdown_files(_dir, save_path):
             with open(markdown_file, "w") as mf:
                 mf.write(docstrings_md.replace("{", "\{").replace("}", "\}"))
 
-            sidebar_dict[md_key]["items"].append(f"sdk/sdk_markdowns/{header}")
+            sidebar_dict[md_key]["items"].append(f"api/markdowns/{header}")
 
 
 def file_docstrings_to_markdown(file_path, header=None):

@@ -6,9 +6,9 @@ displayed_sidebar: releaseSideBar
 
 ### May 2 2024
 **Improvements**
-- Util methods were added to the Ganymede SDK for use by Agents that scan for recently modified files. These methods are particularly useful in cases where a single file is being updated continuously by an instrument.
-- The Ganymede context for a specific historical Flow Run can now be retrieved by instantiating Ganymede context with a run_id set.
-- The Benchling Event operator can now store data and continue running the Flow that it is in.
+- [Utility methods](../api/markdowns/AgentDataModels#file-system-utilities) were added to the Ganymede SDK for use by Agents that scan for recently modified files. These methods are useful for more granular control over Agent behavior, such as the case where a single file is being updated continuously by an instrument.
+- The [Ganymede context for a specific historical Flow Run](../api/GanymedeClass#retrieve-ganymedecontext-associated-with-a-specific-run-id) can now be retrieved by instantiating Ganymede context with a run_id set.
+- The [Benchling Event operator](../nodes/App/Benchling_Event) can now store data and continue running the Flow that it is in.
 
 **Bug Fixes**
 - Changing environments with an active file search will now clear the search parameters.
