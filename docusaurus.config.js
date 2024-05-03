@@ -16,8 +16,8 @@ module.exports = {
       {
         redirects: [
           {
-            to: '/api/GanymedeSDKOverview',
-            from: '/sdk/GanymedeSDKOverview',
+            to: '/api',
+            from: '/sdk',
           }
         ],
       },
