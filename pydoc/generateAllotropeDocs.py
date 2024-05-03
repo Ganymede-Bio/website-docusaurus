@@ -26,7 +26,6 @@ def get_allotrope_schema_dict(path: str) -> dict:
 
 if __name__ == "__main__":
     allotrope_classes = "../pylib/src/ganymede_sdk/validation/allotrope.py"
-
     allotrope_schema_dict = get_allotrope_schema_dict(allotrope_classes)
 
     with open("../docs/api/markdowns/allotrope_schema.md", "w+") as f:
