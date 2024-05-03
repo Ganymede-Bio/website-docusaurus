@@ -1,7 +1,7 @@
 ---
 sidebar_label: benchling.utils.write_molecule
 title: benchling.utils.write_molecule
-displayed_sidebar: SDKSidebar
+displayed_sidebar: APISidebar
 --- 
 
 

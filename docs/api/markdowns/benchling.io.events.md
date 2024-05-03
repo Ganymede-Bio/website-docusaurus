@@ -1,7 +1,7 @@
 ---
 sidebar_label: benchling.io.events
 title: benchling.io.events
-displayed_sidebar: SDKSidebar
+displayed_sidebar: APISidebar
 --- 
 
 
