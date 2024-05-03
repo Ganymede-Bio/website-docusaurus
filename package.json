@@ -16,6 +16,7 @@
     "@ant-design/icons": "^5.0.0",
     "@babel/runtime": "^7.17.2",
     "@docusaurus/core": "^3.3.2",
+    "@docusaurus/plugin-client-redirects": "^3.3.2",
     "@docusaurus/plugin-ideal-image": "^3.3.2",
     "@docusaurus/preset-classic": "^3.3.2",
     "@docusaurus/theme-common": "^3.3.2",

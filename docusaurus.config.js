@@ -10,6 +10,19 @@ module.exports = {
   favicon: 'img/favicon.png',
   organizationName: 'Ganymede-Bio',
   projectName: 'website-docusaurus',
+  plugins: [
+    [
+      '@docusaurus/plugin-client-redirects',
+      {
+        redirects: [
+          {
+            to: '/api/GanymedeSDKOverview',
+            from: '/sdk/GanymedeSDKOverview',
+          }
+        ],
+      },
+    ],
+  ],
   themeConfig: {
     prism: {
       additionalLanguages: ['python'],
