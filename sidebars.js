@@ -88,7 +88,7 @@ module.exports = {
           type: 'category',
           label: 'Editing Flows',
           collapsed: false,
-          items: ['FlowEditor', 'NodeEditor'],
+          items: ['FlowEditor', 'NodeEditor', 'SystemMetadata', 'DebuggingFlows'],
         },
         {
           type: 'category',
@@ -98,13 +98,8 @@ module.exports = {
         },
         {
           type: 'doc',
-          id: 'DebuggingFlows',
-          label: 'Troubleshooting Flows'
-        },
-        {
-          type: 'doc',
-          id: 'SystemMetadata',
-          label: 'System Metadata'
+          id: 'Virtualization',
+          label: 'Virtualization'
         }]
       },
       {
