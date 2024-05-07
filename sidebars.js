@@ -93,7 +93,7 @@ module.exports = {
         {
           type: 'category',
           label: 'Monitoring Flows',
-          collapsed: false,
+          collapsed: true,
           items: ['FlowRuns', 'Notifications']
         },
         {
