@@ -24,6 +24,14 @@ To search for a file by name, type a query in the search box in the upper left o
 
 ![Files (filtered)](https://ganymede-bio.mo.cloudinary.net/apiServer/Files-Filtered-2024-04-01.png)
 
+### Advanced Search
+
+The advanced search panel allows you to filter files by various file characteristics or [file tags](./connectivity/Tags).  To use this feature, define tag types on the [Manage Tag Types panel](./connectivity/Tags#configuring-file-tag-types), and assign tags to specific files using methods found in the [file_tags module](./api/FileTags) of the Ganymede SDK.
+
+![Advanced Search](https://ganymede-bio.mo.cloudinary.net/apiServer/AdvancedSearch20240507.png)
+
+Searches are evaluated with an AND condition between the different fields and an OR condition within the same field.  For example, if you search for files with the instrument tag "LC" and the tag "MS", the search will return files with either a "LC" or "MS" instrument tag (or both).  If you add a size filter of "greater than 1MB", then only files that have either a "LC" or "MS" instrument tag or both and are greater than 1MB will be returned.
+
 ## Downloading files
 
 To download a file, click the file's name in the _File name_ column.
