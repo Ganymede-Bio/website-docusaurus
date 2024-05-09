@@ -57,6 +57,9 @@ Convert string container position to grid coordinates
 ## `function` Signals.create_container
   
 Create a container in Signals  
+### Notes  
+  
+Container contents cannot be modified once created, except for adjusting amount.  
   
 ### Parameters  
   
@@ -96,6 +99,9 @@ Create a container in Signals
 ## `function` Signals.create_location
   
 Create a location in Signals, including matrix plates  
+### Notes  
+  
+Locations cannot be moved in Signals once created.  
   
 ### Parameters  
   
@@ -149,9 +155,13 @@ Retrieves assets or batches from the Signals API based on the specified asset ty
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; The page limit to retrieve. Defaults to 100, max is 100.  
 &nbsp; &nbsp; &nbsp; &nbsp; sort_by (str, optional)  
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; The field to sort by. Defaults to "createdAt".  
-&nbsp; &nbsp; &nbsp; &nbsp; smiles (bool, optional)  
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Whether to retrieve SMILES data for the assets. Defaults to True.  
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Adds an extra API call per asset if true.  
+&nbsp; &nbsp; &nbsp; &nbsp; drawing (bool, optional)  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Whether to retrieve chemical drawing for the assets. Defaults to True. Adds an extra API call per asset if true.  
+&nbsp; &nbsp; &nbsp; &nbsp; drawing_format (str, optional)  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; What format to retrieve. Defaults to mol-v3000. Options are ["cdxml", "svg", "mol", "mol-v3000", "smiles", "inchi"]  
+&nbsp; &nbsp; &nbsp; &nbsp; validate_drawing (bool, optional)  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Whether to validate the drawing using rdkit.Chem.MolFromMolBlock. Defaults to False.  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Only used if drawing_format is "mol-v3000", will retrieve molfile if drawing is invalid.  
   
 ### Returns  
   
@@ -168,8 +178,12 @@ Args:
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; - The ID of the asset type to retrieve.  
 &nbsp; &nbsp; &nbsp; &nbsp; asset_or_batch (str)  
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; - Either "assets" or "batches", indicating which to retrieve.  
-&nbsp; &nbsp; &nbsp; &nbsp; smiles (bool, optional)  
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; - Whether to include SMILES strings in the returned data. Defaults to False.  
+&nbsp; &nbsp; &nbsp; &nbsp; drawing (bool, optional)  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; - Whether to retrieve chemical drawing for the assets. Defaults to False.  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; - Adds an extra API call per asset if true.  
+&nbsp; &nbsp; &nbsp; &nbsp; drawing_format (str, optional)  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; - What format to retrieve. Defaults to mol-v3000.  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; - Options are ["cdxml", "svg", "mol", "mol-v3000", "smiles", "inchi"]  
 &nbsp; &nbsp; &nbsp; &nbsp; time_start (datetime, optional)  
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; - The start time for the time range to filter by. Defaults to None.  
 &nbsp; &nbsp; &nbsp; &nbsp; time_end (datetime, optional)  
@@ -180,6 +194,16 @@ Args:
 &nbsp; &nbsp; &nbsp; &nbsp; load_all_data (bool, optional):  
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; - Whether to add extra API call for each asset/batch to load full data.  
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; - Defaults to True.  
+&nbsp; &nbsp; &nbsp; &nbsp; validate_drawing (bool, optional)  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; - Whether to validate the drawing using rdkit.Chem.MolFromMolBlock. Defaults to False.  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; - Only used if drawing_format is "mol-v3000", will retrieve molfile if drawing is invalid.  
+&nbsp; &nbsp; &nbsp; &nbsp; max_page_offset (int, optional)  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; - The maximum page offset defined by Signals where the query needs to be adjusted to account for the next start times.  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; - Defaults to 1000. Check Signals' API documentation for the /entities/search endpoint to find the max page offset.  
+&nbsp; &nbsp; &nbsp; &nbsp; sleep_time (int, optional)  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; - Amount of time in seconds to pause when the page offset exceeds the max_page_offset.  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; - Pause is needed to avoid rate limiting.  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; - Defaults to 5.  
   
 Returns:  
 &nbsp; &nbsp; &nbsp; &nbsp; pd.DataFrame: A pandas DataFrame containing all retrieved assets or batches, along with  
@@ -195,11 +219,21 @@ additional data that may be available beyond the initial query limit of 5000 res
   
 &nbsp; &nbsp; &nbsp; &nbsp; asset_type_id (str)  
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; - The ID of the asset type to retrieve.  
-&nbsp; &nbsp; &nbsp; &nbsp; asset_or_batch (str)  
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; - Either "assets" or "batches", indicating which to retrieve.  
-&nbsp; &nbsp; &nbsp; &nbsp; smiles (bool, optional)  
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; - Whether to include SMILES strings in the returned data. Defaults to False.  
-  
+&nbsp; &nbsp; &nbsp; &nbsp; asset_id (str)  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; - The eid of the asset to retrieve associated batches for.  
+&nbsp; &nbsp; &nbsp; &nbsp; drawing (bool, optional)  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; - Whether to retrieve chemical drawing for the assets. Defaults to False.  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; - Adds an extra API call per asset if true.  
+&nbsp; &nbsp; &nbsp; &nbsp; drawing_format (str, optional)  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; - What format to retrieve. Defaults to mol-v3000.  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; - Options are ["cdxml", "svg", "mol", "mol-v3000", "smiles", "inchi"]  
+&nbsp; &nbsp; &nbsp; &nbsp; max_page_offset (int, optional)  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; - The maximum page offset defined by Signals where the query needs to be adjusted to account for the next start times.  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; - Defaults to 1000. Check Signals' API documentation for the /entities/search endpoint to find the max page offset.  
+&nbsp; &nbsp; &nbsp; &nbsp; sleep_time (int, optional)  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; - Amount of time in seconds to pause when the page offset exceeds the max_page_offset.  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; - Pause is needed to avoid rate limiting.  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; - Defaults to 5.  
 ### Returns  
   
 &nbsp; &nbsp; &nbsp; &nbsp; pd.DataFrame  
@@ -230,9 +264,10 @@ Retrieves batches from the Signals API based on the specified asset ID
 &nbsp; &nbsp; &nbsp; &nbsp; The page limit to retrieve. Defaults to 100, max is 100.  
 **sort_by** : `str, optional`  
 &nbsp; &nbsp; &nbsp; &nbsp; The field to sort by. Defaults to "createdAt".  
-**smiles** : `bool, optional`  
-&nbsp; &nbsp; &nbsp; &nbsp; Whether to retrieve SMILES data for the assets. Defaults to True.  
-&nbsp; &nbsp; &nbsp; &nbsp; Adds an extra API call per batch if true.  
+**drawing** : `bool, optional`  
+&nbsp; &nbsp; &nbsp; &nbsp; Whether to retrieve chemical drawing for the assets. Defaults to True. Adds an extra API call per asset if true.  
+**drawing_format** : `str, optional`  
+&nbsp; &nbsp; &nbsp; &nbsp; What format to retrieve. Defaults to mol-v3000. Options are ["cdxml", "svg", "mol", "mol-v3000", "smiles", "inchi"]  
   
 ### Returns  
   
@@ -288,18 +323,20 @@ Query to see if inventory item exists in Signals
   
 **entity_type_str** : `str`  
 &nbsp; &nbsp; &nbsp; &nbsp; Type of entity to query for (e.g. - "container" or "location")  
-**location_type_field_name** : `str`  
-&nbsp; &nbsp; &nbsp; &nbsp; Name of the location type field  
-&nbsp; &nbsp; &nbsp; &nbsp; For containers, this is "container.Container Type"  
-&nbsp; &nbsp; &nbsp; &nbsp; For locations, this is "location.Location Type"  
-**location_type_value** : `str`  
-&nbsp; &nbsp; &nbsp; &nbsp; name to query for in the location_type_field_name field  
-&nbsp; &nbsp; &nbsp; &nbsp; e.g. "96 well Matrix Plate" or "Matrix Tube"  
 **entity_property** : `str`  
 &nbsp; &nbsp; &nbsp; &nbsp; Property of the entity to query for, needs to be prefaced by "fields."  
 &nbsp; &nbsp; &nbsp; &nbsp; e.g. "fields.Barcode"  
 **entity_value** : `str`  
 &nbsp; &nbsp; &nbsp; &nbsp; Value of the entity_property to query for  
+**location_type_field_name** : `str`  
+&nbsp; &nbsp; &nbsp; &nbsp; Name of the location type field  
+&nbsp; &nbsp; &nbsp; &nbsp; For containers, this is "container.Container Type"  
+&nbsp; &nbsp; &nbsp; &nbsp; For locations, this is "location.Location Type"  
+&nbsp; &nbsp; &nbsp; &nbsp; Can leave as None if not querying for a specific location type  
+**location_type_value** : `str`  
+&nbsp; &nbsp; &nbsp; &nbsp; name to query for in the location_type_field_name field  
+&nbsp; &nbsp; &nbsp; &nbsp; e.g. "96 well Matrix Plate" or "Matrix Tube"  
+&nbsp; &nbsp; &nbsp; &nbsp; Can leave as None if not querying for a specific location type  
 **stop_after_items** : `int, optional`  
 &nbsp; &nbsp; &nbsp; &nbsp; Number of items to stop after, by default 1000000  
   
