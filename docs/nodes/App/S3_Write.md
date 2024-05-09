@@ -15,20 +15,15 @@ Sync GCS bucket -\> S3 bucket
 - **src_object_prefix** : `str`
   - Prefix of data lake object(s) to write
 - **src_all_or_current_run** : `str`
-  - "all" or "current" - whether to sync all files or the files in the input or output
-  - bucket from the current run
+  - "all" or "current" - whether to sync all files or the files in the input or output bucket from the current run
 - **dest_node_name_in_path** : `bool`
-  - "true" or "false" - whether to prepend the flow name and node name for specified file in
-  - the S3 bucket path.  If the output bucket is specified, written files will contain
-  - the flow name and the timestamp of the run in that path to the file.
+  - "true" or "false" - whether to prepend the flow name and node name for specified file in the S3 bucket path.  If the output bucket is specified, written files will contain the flow name and the timestamp of the run in that path to the file.
 - **dest_replace_or_append** : `str`
-  - "replace" or "append" - whether to replace existing files or only add new files to the
-  - destination S3 bucket when a file in the S3 bucket has the same name as the source file
-  - being synced
+  - "replace" or "append" - whether to replace existing files or only add new files to the destination S3 bucket when a file in the S3 bucket has the same name as the source file being synced
 - **dest_s3_key** : `str`
-  - Destination S3 key to write to.  If this string ends with a '/', it will be treated as a
-  - prefix (i.e. - S3 folder), and the file will be written with the same name as the source
-  - file
+  - Destination S3 key to write to.  If this string ends with a '/', it will be treated as a prefix (i.e. - S3 folder), and the file will be written with the same name as the source file
+- **glob_pattern** : `str`
+  - Glob pattern to match files that need to be synced.  Specify "*" to avoid filtering by glob pattern.
 
 ### Notes
 
