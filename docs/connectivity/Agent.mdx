@@ -544,6 +544,7 @@ Agents send a heartbeat message to Ganymede Cloud every 30 seconds to inform the
 - **Live**: The Agent is currently running and communicating with Ganymede Cloud
 - **Disconnected**: Ganymede Cloud has not received a status update from the Agent in the last 65 seconds
 - **Shutdown**: The Agent was intentionally shut down; some potential reasons are if a user shut down the computer, manually stopped the Agent service, or if a known exception occurred for the Agent.
+- **Deprecated**: The Agent has been disabled in Ganymede UI as described in the [Updating Agents](#updating-agents) section.
 
 #### Logging
 
@@ -569,7 +570,11 @@ To modify Agent settings after creation, select the desired Agent in the Connect
 </div>
 &nbsp;
 
-Agents can also be archived or disabled. Archived Agents cannot be updated, but the Agent's connections can still communicate with Ganymede Cloud. Disabled Agents cannot be updated and its connections can no longer communicate with Ganymede Cloud.
+Agents can also be archived or disabled. 
+
+Archived Agents cannot be updated, but the Agent's connections can still communicate with Ganymede Cloud.  All associated connections for these Agents will continue to run, but the Agent can no longer be modified.  Archived agents can be restored to an active state by selecting the desired Agent and clicking on the <u>Restore Agent</u> link.
+
+Disabled Agents cannot be updated and its connections can no longer communicate with Ganymede Cloud.
 
 ### Viewing Build History
 
