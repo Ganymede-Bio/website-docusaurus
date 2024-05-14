@@ -537,6 +537,13 @@ The Agent page displays a list of all connections instantiated from a specific A
 </div>
 &nbsp;
 
+#### Connection Status
+
+Agents send a heartbeat message to Ganymede Cloud every 30 seconds to inform their status. The status of an Agent can be one of the following:
+
+- **Live**: The Agent is currently running and communicating with Ganymede Cloud
+- **Disconnected**: Ganymede Cloud has not received a status update from the Agent in the last 65 seconds
+- **Shutdown**: The Agent was intentionally shut down; some potential reasons are if a user shut down the computer, manually stopped the Agent service, or if a known exception occurred for the Agent.
 
 #### Logging
 
