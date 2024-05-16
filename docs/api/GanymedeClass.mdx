@@ -203,6 +203,11 @@ _list_files_all_ returns a listing of all files in the specified bucket in the e
 
 Templated email notifications can be sent from the execute function by using the GanymedeEmailAlert object in ganymede_sdk.util.
 
+GanymedeEmailAlert takes 2 parameters
+
+- _param_ **ganymede_context**: GanymedeContext - GanymedeContext object associated with the flow run
+- _param_ **html_template**: str - HTML Jinja template for the email, rendered using the ganymede_context object.  A Ganymede-specific template is used by default.
+
 ```python
 from ganymede_sdk import Ganymede
 from ganymede_sdk.util.email import GanymedeEmailAlert

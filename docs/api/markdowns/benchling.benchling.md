@@ -215,7 +215,7 @@ Bulk creates molecules in Benchling.&nbsp; &nbsp; If the entity does not exist, 
 **check_for_existing** : `bool`  
 &nbsp; &nbsp; &nbsp; &nbsp; Whether or not to check for the existence of the entities in `name_field`. This is useful to turn off when you know you'll be creating new entities (for example with many naming strategies) and want to avoid many api calls for checking existence of molecules,  
 **page_size_limit** : `int`  
-&nbsp; &nbsp; &nbsp; &nbsp; Maximum number of entities Benchling will return in a single page. Default is 100&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;   
+&nbsp; &nbsp; &nbsp; &nbsp; Maximum number of entities Benchling will return in a single page. Default is 100  
   
 ### Returns  
   
