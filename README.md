@@ -74,6 +74,16 @@ git merge <name-of-new-branch>
 git push
 ```
 
+### Updating the vector store
+
+After running
+
+```shell
+yarn build
+```
+
+Drop the build/ directory into the Ganymede documetation vector store.  This will update the vector store for querying documentation.
+
 ---
 
 ## Dependencies
