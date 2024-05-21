@@ -54,7 +54,7 @@ module.exports = {
           {
             type: 'doc',
             id: 'connectivity/Agent',
-            label: 'Capture Files with Agents'
+            label: 'Agents for Instrument Communication'
           },
           {
             type: 'doc',
@@ -65,8 +65,7 @@ module.exports = {
             type: 'doc',
             id: 'connectivity/Tags',
             label: 'Tagging Files'
-          }
-          ,
+          },
           {
             type: 'doc',
             id: 'connectivity/DebuggingAgents',
