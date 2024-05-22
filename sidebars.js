@@ -176,8 +176,8 @@ module.exports = {
     },
     {
       type: 'doc',
-      id: 'api/GPT',
-      label: 'GPT'
+      id: 'api/AI',
+      label: 'AI Interactions'
     },
     {
         type: 'category',
