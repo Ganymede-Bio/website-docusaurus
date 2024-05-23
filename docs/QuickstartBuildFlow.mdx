@@ -299,27 +299,4 @@ def execute(
     )
 ```
 
-#### Code Explanation
-
-If [configured](./api/GPT.mdx), you can use GPT as a coding assistant.  To observe available commands, return to the Python node, scroll to the bottom, and initiate the GPT object:
-
-```python
-from ganymede_sdk.editor import GPT
-gpt = GPT()
-gpt
-```
-
-<img alt="GPT available commands" src="https://ganymede-bio.mo.cloudinary.net/apiServer/QuickstartGPT_20230731.png"/>
-&nbsp;
-
-For example, you can generate a docstring by using the "generate_docstring" command, passing in the execute function as an argument:
-
-<img alt="GPT docstring" src="https://ganymede-bio.mo.cloudinary.net/apiServer/QuickstartGPT_Docstring_20230731.png"/>
-&nbsp;
-
-Putting this together, with the schema validation above results in a robust, well-documented piece of code:
-
-<img alt="Python node with schema validation and comments" 
-     src="https://ganymede-bio.mo.cloudinary.net/apiServer/QuickstartGPT_Complete_20230731.png"/>
-&nbsp;
 

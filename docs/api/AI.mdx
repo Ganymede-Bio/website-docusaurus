@@ -1,0 +1,27 @@
+---
+id: AI
+title: AI in Ganymede
+displayed_sidebar: APISidebar
+---
+
+Ganymede has the capability to interact with AI services to provide additional functionality.  Currently, Ganymede supports document search using OpenAI's gpt-4o model.  This model can be used to search Ganymede documentation for relevant information.
+
+## GPT Setup
+
+To do so, ensure that the following variables are set in [Environment Administration](../AdminControls):
+
+* **openai_api_key** - API key for the OpenAI service account specific to your tenant
+* **openai_project** - Project ID for the OpenAI service account specific to your tenant
+* **openai_ganymede_docs_asst** - [Assistant](https://platform.openai.com/assistants) ID for searching Ganymede documentation
+
+Ganymede documentation can be queried using GPT from OpenAI by default in development environments.  Please reach out to [Ganymede support](mailto:support@ganymede.bio) to enable this feature in other environments.
+
+## Usage
+
+When enabled, the documentation site can be queried in notebooks by using the `help` function.  For example:
+
+```python
+help("How do I add tags to a file in Ganymede?")
+``` 
+
+will return a response from the GPT model with relevant information on the query.  Messages sent within a single notebook session will be incorporated into the same OpenAI Thread.
