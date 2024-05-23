@@ -177,7 +177,7 @@ module.exports = {
     {
       type: 'doc',
       id: 'api/AI',
-      label: 'AI Interactions'
+      label: 'AI Help and Code Generation'
     },
     {
         type: 'category',
