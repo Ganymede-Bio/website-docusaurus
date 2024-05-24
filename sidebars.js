@@ -69,7 +69,7 @@ module.exports = {
           {
             type: 'doc',
             id: 'connectivity/DebuggingAgents',
-            label: 'Agent FAQ and Debugging'
+            label: 'Troubleshooting Agents'
           }
         ]
       },
@@ -78,28 +78,34 @@ module.exports = {
         label: 'Processing Data',
         collapsed: true,
         items: [{
-          type: 'category',
-          label: 'Running Flows',
-          collapsed: false,
-          items: ['Home', 'FlowView']
-        },
-        {
-          type: 'category',
-          label: 'Editing Flows',
-          collapsed: false,
-          items: ['FlowEditor', 'NodeEditor', 'SystemMetadata', 'DebuggingFlows'],
-        },
-        {
-          type: 'category',
-          label: 'Monitoring Flows',
-          collapsed: true,
-          items: ['FlowRuns', 'Notifications']
-        },
-        {
+            type: 'category',
+            label: 'Running Flows',
+            collapsed: false,
+            items: ['Home', 'FlowView']
+          },
+          {
+            type: 'category',
+            label: 'Editing Flows',
+            collapsed: false,
+            items: ['FlowEditor', 'NodeEditor', 'SystemMetadata'],
+          },
+          {
+            type: 'category',
+            label: 'Monitoring Flows',
+            collapsed: true,
+            items: ['FlowRuns', 'Notifications']
+          },
+          {
           type: 'doc',
           id: 'Virtualization',
           label: 'Virtualization'
-        }]
+          },
+          {
+            type: 'doc',
+            id: 'TroubleshootingDataProcessing',
+            label: 'Troubleshooting'
+          }
+        ]
       },
       {
         type: 'category',

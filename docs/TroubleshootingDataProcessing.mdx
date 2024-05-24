@@ -1,12 +1,20 @@
 ---
-id: DebuggingFlows
-title: Troubleshooting Flows
+id: TroubleshootingDataProcessing
+title: Troubleshooting Flows and Virtualization
 displayed_sidebar: webUiSidebar
 ---
 
 import { BranchesOutlined } from '@ant-design/icons';
 
 This page describes a set of common issues associated with flow development and execution.
+
+### Notebooks
+
+#### Issue: The notebook screen appears blank.
+
+This issue can occur when the notebook is not properly loaded. To resolve this issue, try performing a hard refresh by typing Cmd+Shift+R on Mac or Ctrl+Shift+R on Windows.
+
+If this does not work, try [clearing site cache in Developer Tools](https://support.google.com/chrome/thread/16531954/clear-cache-for-specific-website-in-google-chrome?hl=en).
 
 ### Flow Execution
 
@@ -40,3 +48,9 @@ Error committing file 400 - \{“statusCode”: 400, “message”: “Creating 
 
 This error occurs when you try to save a notebook after modifying the name of the respective node in
 the flow. You can copy and paste your new code into a reopened notebook to save the changes.
+
+### Virtualization
+
+#### Issue: I have the virtualization session open, but am unable to input text into the virtualization session.
+
+Make sure that your mouse cursor is hovering over the virtualization session. 
