@@ -13,7 +13,10 @@ Developers using Ganymede author **flows**, which are functions comprised of use
 - [**Node**](./nodes/Overview.mdx): core unit of processing in Ganymede which performs I/O between different systems and the user-defined components of a node.  The diagram above contains four nodes: CSV_Read, LIMS_Read, Associate_Data, Excel_Write.
 - **Node Attribute**: parameters passed into a node.  The CSV_Read node above has two node attributes: `csv` and `results`.
 - **Table Head**: a preview of a table output from the node; in the flow above, example_results is the table head for the CSV_Read node.
+
 - [**Agent**](./connectivity/Agent.mdx): locally-installed executable that captures data from external systems and make it available to Ganymede flows.  Agents are configured in and monitored from the Connections section of the Ganymede UI.
+- **Connection**: set of Agents corresponding to the same Connection.  For example, you may configure a single Connection for uploading flow cytometry data from different instruments, but each flow cytometer would have its own Agent.
+
 - [**Tag**](./connectivity/Tags.mdx): a user-defined label that can be applied to files to facilitate organization and searching.  Tags types are configured from the Manage Tag Types view within the Files page in the Ganymede UI.  Once configured, these tag types are referenced in user-defined code associated with Agents and Flows.
 
 Each node consists of an Operator and, if customizable, user-defined SQL and/or user-defined Python to enable customization as shown in the conceptual diagram below:
