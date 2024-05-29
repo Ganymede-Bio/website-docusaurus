@@ -6,7 +6,9 @@ displayed_sidebar: webUiSidebar
 
 import { DiffOutlined, PlusOutlined, SelectOutlined } from "@ant-design/icons";
 
-Ganymede Agents are a class of programs that can run directly on an instrument computer in the lab. They are a combination of user-defined code and Ganymede configuration, which allows for maximum flexibility in capturing files and interacting with the Ganymede ecosystem. 
+Ganymede Connections are a class of programs that can run directly on an instrument computer in the lab. Each Connection consists of a combination of user-defined code and Ganymede configuration, allowing for maximum flexibility in capturing files and interacting with the Ganymede ecosystem. 
+
+After creating a Connection, users can build and install local executables called Agents, individual instances of a given Connection, on instrument PCs.
 
 <img
   alt="Connections front page"
@@ -22,7 +24,7 @@ Agents can
   - upon specific files being written to the local machine by the instrument
   - upon specific files being written to a cloud storage bucket
   - on a scheduled cadence
-- delivering data to instrument PCs from Ganymede Cloud
+- deliver data to instrument PCs from Ganymede Cloud
 
 Users specify which of the above actions to take by configuring the Agent in the Ganymede app. Doing so creates a Linux binary and Windows executable corresponding to the specified configuration, which users can then install on instrument PCs. Once created, users can optionally [configure a user-defined Python script](#configuring-user-defined-python) associated with the Agent.
 
