@@ -6,7 +6,7 @@ displayed_sidebar: nodeSidebar
 
 ### Node Description
 
-Sync S3 bucket -\> Ganymede data lake bucket
+Sync S3 bucket -\> Ganymede data lake bucket.
 
 ### Node Attributes
 
@@ -14,6 +14,10 @@ Sync S3 bucket -\> Ganymede data lake bucket
   - Name of S3 bucket to read files from
 - **src_s3_prefix**
   - Prefix pattern to match for files to copy from S3 bucket
+- **duplicate_behavior**
+  - "ignore" or "save" files that already exist in the Ganymede output bucket
+- **required_aging_in_seconds**
+  - Minimum age in seconds for files to be considered for copying
 
 ### Notes
 

@@ -444,7 +444,6 @@ task_ids = b.write_dataframe_to_benchling_table(
     error_on_empty_result = True,  
     wait = True  
 )  
-  
 ```
 
 ## `function` Benchling.create_entry
