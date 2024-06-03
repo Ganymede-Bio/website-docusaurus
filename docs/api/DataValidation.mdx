@@ -91,8 +91,8 @@ from ganymede_sdk import Ganymede
 
 g = Ganymede()
 
-# Retrieve dataframe with run_id from most recent run
-query_sql = "SELECT * FROM tbl WHERE LEFT(run_id, 26) = FORMAT_TIMESTAMP('%Y-%m-%dT%R:%E6S', TIMESTAMP_MILLIS({{run_id}}));"
+# Retrieve dataframe with flow_run_id from most recent run
+query_sql = 'SELECT * FROM tbl WHERE flow_run_id = "{{run_id}}";'
 result = g.retrieve_sql(query_sql)
 ```
 

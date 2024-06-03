@@ -37,7 +37,7 @@ print(g['runId'])
 
 #### Retrieve GanymedeContext associated with a specific run ID
 ```python
-g = Ganymede(run_id='1693156227387')
+g = Ganymede(flow_run_id='1693156227387')
 ```
 
 #### In the execute function, the Ganymede object can be created from the ganymede_context parameter
@@ -282,7 +282,7 @@ def execute(ganymede_context: GanymedeContext):
 
 ### Attributes
 
-- **run_id**: Timestamp in ms when _flow_ was kicked off for manually triggered flows; guaranteed to be unique per _flow_ run
+- **flow_run_id**: Timestamp in ms when _flow_ was kicked off for manually triggered flows; guaranteed to be unique per _flow_ run
 - **created**: Timestamp in ms when _flow_ was kicked off for event-triggered flows
 - **dag.dag_id**: name of _flow_
 - **task_id**: type of _node_ (e.g. - <NodeChip text="Input_File" /> or <NodeChip text="Python" />)
@@ -310,7 +310,7 @@ def execute(
     """
 
     df_out = df_sql_result.copy()
-    df_out['__run_id'] = ganymede_context.run_id
+    df_out['__run_id'] = ganymede_context.flow_run_id
     df_out['__input_file_name'] = ganymede_context.get_param('CSV_Read', 'csv')
     df_out['experiment_id'] = ganymede_context.get_param('Input_Param', 'param')
 

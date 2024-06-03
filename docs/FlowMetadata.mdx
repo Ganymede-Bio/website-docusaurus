@@ -29,15 +29,15 @@ The example _flow_ performs the following operations:
 
 Template variables allow access to flow metadata in _node_ attributes and user-defined SQL queries through [Jinja templates](https://jinja.palletsprojects.com/en/3.1.x/). These variables can be accessed in Node Attributes and user-defined SQL queries by wrapping the template variable name with two braces on each side.
 
-In the example _flow_ shown above, the output of <NodeChip text="CSV_Write" /> uses the **run_id** template variable to add a timestamp to the CSV file output.
+In the example _flow_ shown above, the output of <NodeChip text="CSV_Write" /> uses the **flow_run_id** template variable (converted to ISO format) to add a timestamp to the CSV file output.
 
 ### Available template variables
 
-- **run_id**: Timestamp in ms when _flow_ was kicked off for manually triggered flows; guaranteed to be unique per _flow_ run
+- **flow_run_id**: Epoch time in ms when _flow_ was kicked off for manually triggered flows; guaranteed to be unique per _flow_ run
 - **created**: Timestamp in ms when _flow_ was kicked off for event-triggered flows
 - **dag.dag_id**: name of _flow
 - **task_id**: type of _node_ (e.g. - <NodeChip text="CSV_Read" /> or <NodeChip text="Transform_Py" />)
-- **params**: Run metadata; dictionary containing run_id, flow initiator, and file inputs to the flow.
+- **params**: Run metadata; dictionary containing flow initiator, and file inputs to the flow.
 
 ## Context Variables
 
@@ -56,11 +56,11 @@ from typing import Union, Dict, List
 def execute(
     df_sql_result: Union[pd.DataFrame, List[pd.DataFrame]], ganymede_context=None
 ) -> Union[pd.DataFrame, Dict[str, pd.DataFrame]]:
-    """Add run_id and input parameter as columns to Pandas DataFrame
+    """Add flow_run_id and input parameter as columns to Pandas DataFrame
     """
 
     df_out = df_sql_result.copy()
-    df_out['__run_id'] = ganymede_context.run_id
+    df_out['__run_id'] = ganymede_context.flow_run_id
     df_out['__input_file_name'] = ganymede_context.get_param('CSV_Read', 'csv')
     df_out['experiment_id'] = ganymede_context.get_param('Input_Param', 'param')
 
@@ -69,7 +69,7 @@ def execute(
 
 #### Ganymede Context class variables
 
-- **run_id: `str`**
+- **flow_run_id: `str`**
   - Timestamp in ms when _flow_ was kicked off; guaranteed to be unique per _flow_ run.
 
 #### Ganymede Context class methods
