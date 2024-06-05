@@ -30,14 +30,14 @@ display(g)
 
 #### Access run context parameters
 ```python
-print(g['runId'])
+print(g.flow_run_id)
 
 # Returns "1693156227387"
 ```
 
 #### Retrieve GanymedeContext associated with a specific run ID
 ```python
-g = Ganymede(run_id='1693156227387')
+g = Ganymede(flow_run_id='1693156227387')
 ```
 
 #### In the execute function, the Ganymede object can be created from the ganymede_context parameter
