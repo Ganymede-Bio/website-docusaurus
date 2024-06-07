@@ -7,8 +7,10 @@ displayed_sidebar: releaseSideBar
 ### June 06 2024
 
 **Improvements**
-- The Agent's name is now displayed on Connection cards (previously was the Agent's ID)
+- **Agent**: The Agent's name is now displayed on Connection cards (previously was the Agent's ID)
+- **Flow**: The run ID for a flow can now be retrieved from the [GanymedeContext attribute `flow_run_id` or the corresponding Ganymede object attribute `flow_run_id`](../api/GanymedeClass).
+- **Node**: The S3_Read node now has an associated notebook that allows the user to inspect files in the S3 bucket prior to syncing to Ganymede storage.
 
 **Bug Fixes**
-- Fixed an issue where setting file tags on an agent was causing errors
-- Fixed an issue where agents were marked as disconnected even when they still pinged the API Server
+- **Agent**: Fixed an issue where setting file tags on an agent was causing errors
+- **Agent**: Fixed an issue where agents were marked as disconnected even when they still pinged the API Server
