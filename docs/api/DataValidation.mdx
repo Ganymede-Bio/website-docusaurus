@@ -96,7 +96,7 @@ from ganymede_sdk import Ganymede
 g = Ganymede()
 
 # Retrieve dataframe with flow_run_id from most recent run
-query_sql = 'SELECT * FROM tbl WHERE flow_run_id = "{{run_id}}";'
+query_sql = 'SELECT * FROM tbl WHERE flow_run_id = "{{flow_run_id}}";'
 result = g.retrieve_sql(query_sql)
 ```
 
