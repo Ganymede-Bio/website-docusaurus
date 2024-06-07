@@ -5,7 +5,7 @@ displayed_sidebar: webUiSidebar
 ---
 
 import {
-  EditOutlined
+      EditOutlined
 } from '@ant-design/icons';
 
 
@@ -40,13 +40,9 @@ g.retrieve_sql?
 The source code for a function can be observed by typing `??` after the function name in a notebook cell.  This will display the function signature and source code.
 
 ```python
-from ganymede_sdk import Ganymede
+import pandas as pd
 
-# instantiate Ganymede object
-g = Ganymede()
-
-# shows function signature and source code (image below truncated for brevity)
-g.retrieve_sql??
+pd.to_datetime??
 ```
 
 <img alt="Explore source code" 
