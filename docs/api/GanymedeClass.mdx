@@ -124,7 +124,7 @@ _retrieve_files_ allows users to retrieve files from Ganymede cloud storage.  By
 - _param_ **flow_input_or_output**: str, by default "input" - Either "input" or "output" - to reference whether to retrieve files that are inputs to flows or outputs from flow nodes
 - _param_ **input_or_output_bucket**: str, by default "output" - (Pending deprecation) Either "input" or "output" - to reference bucket to retrieve files from.  
 - _param_ **current_flow_flag**: bool, by default True - Whether to filter for files associated with current flow or not
-- _param_ **run_id**: Optional[int], by default None - If set, filters for results with specified run_id; if not specified, retrieve file(s) associated with most recent run ID
+- _param_ **run_id**: Optional[int], by default None - If set, filters for results with specified flow_run_id; if not specified, retrieve file(s) associated with most recent run ID
 - _param_ **use_cache_in_notebook**: bool, by default False - If set to True, retrieves files from local cache when in editor or analysis notebooks rather than querying Ganymede to expedite development.  Note that flow runs will not reference cached files.  Cache can be cleared by calling the clear_cache() function.
 
 ```python
@@ -161,7 +161,7 @@ _list_files_ lists files in the environment
 - _param_ **input_or_output_bucket**: str, by default "input" - (Pending deprecation) Either "input" or "output" - to reference whether to observe the input or output bucket of the _flow_
 - _param_ **flow_name**: str, optional, by default True - Flow name to filter for.  If set to specific flow name, filter to include records based on
 - _param_ **current_flow_flag**: bool, by default True - Whether to filter for files associated with current flow or not
-- _param_ **current_run_id**: Optional[int] - If set, filters for results with specified run_id
+- _param_ **current_run_id**: Optional[int] - If set, filters for results with specified flow_run_id
 
 ```python
 from ganymede_sdk import Ganymede
@@ -305,7 +305,7 @@ from typing import Union, Dict, List
 def execute(
     df_sql_result: Union[pd.DataFrame, List[pd.DataFrame]], ganymede_context=None
 ) -> Union[pd.DataFrame, Dict[str, pd.DataFrame]]:
-    """Add run_id and input parameter as columns to Pandas DataFrame
+    """Add flow_run_id and input parameter as columns to Pandas DataFrame
     """
 
     df_out = df_sql_result.copy()
