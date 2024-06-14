@@ -1,9 +1,10 @@
-import os
-import yaml
 import json
-import shutil
+import os
 import re
+import shutil
 from typing import List
+
+import yaml
 
 keywords = [
     "Parameters",
@@ -112,6 +113,9 @@ if __name__ == "__main__":
         operator_filename = (
             os.path.join(operators_dir, "/".join(desc["path"].split(".")[1:-1])) + ".py"
         )
+        if operator_filename.endswith("_pod.py"):
+            operator_filename = operator_filename[:-7] + "_container.py"
+
         print(f"processing {operator_filename}...")
 
         dest_dir = os.path.join(markdown_dir, desc["type"])
