@@ -1,0 +1,100 @@
+---
+id: ReferenceArchitectures
+title: Reference Architectures
+sidebar_label: Reference Architectures
+displayed_sidebar: webUiSidebar
+---
+
+The diagrams below illustrate different ways by which Ganymede can be incorporated into different lab workflows, and provides a few examples for architecture.
+
+The diagrams are not meant to be exhaustive, but rather to provide a starting point for understanding how different components of Ganymede can be pieced together to address different lab workflows.
+
+## Software-centric
+
+### Data Capture and Visualization
+
+Data from lab instruments and analytical databases are captured and aggregated in Ganymede, enabling operational dashboards and reports for lab managers and scientists to be assembled from a broad variety of data.
+
+<div class="text--center">
+  <img width="400" alt="" src="https://storage.googleapis.com/ganymede-bio-website/public/general/ReferenceArchitectureDataStore2_20240614.png"/>
+</div>
+
+#### Example
+
+Centralization of data aggregated from multiple instruments and analytical databases to observe asset utilization and reliability.
+
+### Analytical Database Sync
+
+<div class="text--center">
+  <img width="400" alt="" src="https://storage.googleapis.com/ganymede-bio-website/public/general/ReferenceArchitectureDBSync20240614.png"/>
+</div>
+
+Analytical databases with experimental results are periodically queried, with results systematically delivered to ELN/LIMS for contextualized presentation for wet lab scientists.  Similarly, LIMS data is periodically synced to general databases for querying and data analysis.
+
+#### Example
+
+Syncing of key data from analytical databases used for machine learning to a LIMS for contextualization of experimental results.
+
+### LIMS Sync
+
+<div class="text--center">
+  <img width="400" alt="" src="https://storage.googleapis.com/ganymede-bio-website/public/general/ReferenceArchitectureELNSync20240614.png"/>
+</div>
+
+The data from two different LIMS are synced to each other.  This enables users of each LIMS to leverage domain-specific features from each LIMS, while still being able to access data entered into the other LIMS.
+
+#### Example
+
+Syncing of data between LIMS tailored for biologics and small molecule discovery.
+
+## Instrument-Centric
+
+### Hands-Free Data Capture
+
+<div class="text--center">
+  <img width="500" alt="Hands-Free Data Capture" src="https://storage.googleapis.com/ganymede-bio-website/public/general/ReferenceArchitectureDataCapture20240614.png"/>
+</div>
+
+Data from lab instruments are automatically captured in stored in Ganymede without manual intervention.  Ganymede creates an entity in the ELN/LIMS corresponding to instrument execution, and associates the results with the entity.  Users annotate the experiment on the instrument, which Ganymede parses and passes through to the ELN/LIMS.
+
+#### Example
+
+Passive capture of data from a bioreactor or cell culture analyzer.
+
+### Sample Data / Experimental Results Capture
+
+<div class="text--center">
+  <img width="600" alt="sample data / experimental results feed forward" src="https://storage.googleapis.com/ganymede-bio-website/public/general/ReferenceArchitectureSampleInstrumentSeparate20240614.png"/>
+</div>
+
+Users register samples & experiment run ID in the ELN/LIMS.  After an associated instrument run, users pass experimental results and associated experiment run ID, which Ganymede uses to retrieve experimental context.  After processing, Ganymede delivers results back to the ELN/LIMS.
+
+#### Example
+
+Sample data/metadata association for a live cell imaging experiment or a qPCR run.
+
+### Orchestrated round-trip
+
+<div class="text--center">
+  <img width="700" alt="sample data / experiment results capture" src="https://storage.googleapis.com/ganymede-bio-website/public/general/ReferenceArchitectureBidirectional20240614.png"/>
+</div>
+
+Users register samples in the ELN/LIMS, which are processed into input files for the instrument and delivered by Ganymede, either to the instrument or an associated disk drive.  Users load input files to instruct the instrument for the experimental run.  After execution, experimental data is captured by Ganymede, processed, and uploaded to the ELN/LIMS.
+
+#### Example
+
+Liquid chromatography run where sample and injection data are delivered to the LC, and results are subsequently captured from the CDS used to process experimental results.  Peak analysis corresponding to sample and assay are tailored and performed by Ganymede prior to delivery to ELN/LIMS.
+
+### Orchestration with Manual Processing
+
+<div class="text--center">
+  <img alt="Orchestration with Manual Processing" src="https://storage.googleapis.com/ganymede-bio-website/public/general/ReferenceArchitectureWithVirtualization20240614.png"/>
+</div>
+
+Sample data is delivered by Ganymede to the instrument for expediting experimental setup.  After the experiment, the data is captured by Ganymede and tagged to facilitate subsequent discovery.
+
+Users select tagged data and perform manual processing in a virtualized environment.  The processed data is then delivered back to Ganymede, which delivers the data to the ELN/LIMS.  This workflow enables users to incorporate processing requiring manual oversight / analysis into a well-defined, automated workflow.
+
+#### Example
+
+A flow cytometry run where a manual gating step is required to identify cell population counts.

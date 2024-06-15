@@ -20,6 +20,11 @@ module.exports = {
         label: 'Concepts'
       },
       {
+        type: 'doc',
+        id: 'ReferenceArchitectures',
+        label: 'Reference Architectures'
+      },
+      {
         type: 'category',
         label: 'Quickstart Guides',
         collapsed: false,
