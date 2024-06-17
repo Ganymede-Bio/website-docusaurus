@@ -16,13 +16,13 @@ module.exports = {
       },
       {
         type: 'doc',
-        id: 'Concepts',
-        label: 'Concepts'
+        id: 'ReferenceArchitectures',
+        label: 'Reference Architectures'
       },
       {
         type: 'doc',
-        id: 'ReferenceArchitectures',
-        label: 'Reference Architectures'
+        id: 'Concepts',
+        label: 'Ganymede Concepts'
       },
       {
         type: 'category',
@@ -82,17 +82,12 @@ module.exports = {
         type: 'category',
         label: 'Processing Data',
         collapsed: true,
-        items: [{
-            type: 'category',
-            label: 'Running Flows',
-            collapsed: false,
-            items: ['Home', 'FlowView']
-          },
+        items: [
           {
             type: 'category',
-            label: 'Editing Flows',
+            label: 'Editing and Running Flows',
             collapsed: false,
-            items: ['FlowEditor', 'NodeEditor', 'SystemMetadata'],
+            items: ['Home', 'FlowEditor', 'NodeEditor', 'FlowView', 'SystemMetadata'],
           },
           {
             type: 'category',
@@ -108,7 +103,7 @@ module.exports = {
           {
             type: 'doc',
             id: 'TroubleshootingDataProcessing',
-            label: 'Troubleshooting'
+            label: 'Troubleshooting Flows and Virtualization'
           }
         ]
       },
@@ -116,7 +111,7 @@ module.exports = {
         type: 'category',
         label: 'Observing Data',
         collapsed: true,
-        items: ['Files', 'Dashboards', 'AnalysisNotebook', 'DataExplorer']
+        items: ['Files', 'Dashboards', 'AnalysisNotebook', 'DataExplorer', 'DashboardTips']
       },
       {
         type: 'doc',

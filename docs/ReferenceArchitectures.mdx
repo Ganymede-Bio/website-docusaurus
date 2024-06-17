@@ -9,7 +9,7 @@ The diagrams below illustrate different ways by which Ganymede can be incorporat
 
 The diagrams are not meant to be exhaustive, but rather to provide a starting point for understanding how different components of Ganymede can be pieced together to address different lab workflows.
 
-## Software-centric
+## Software-Centric
 
 ### Data Capture and Visualization
 
@@ -21,7 +21,7 @@ Data from lab instruments and analytical databases are captured and aggregated i
 
 #### Example
 
-Centralization of data aggregated from multiple instruments and analytical databases to observe asset utilization and reliability.
+Centralization of data aggregated from multiple instruments and analytical databases to observe asset utilization and perform reliability analysis.  For example, Ganymede could connect to PI Server and LIMS to drive dashboards for visibility into lab operations.
 
 ### Analytical Database Sync
 
@@ -71,7 +71,7 @@ Users register samples & experiment run ID in the ELN/LIMS.  After an associated
 
 #### Example
 
-Sample data/metadata association for a live cell imaging experiment or a qPCR run.
+Sample data/metadata association for a live cell imaging experiment or a qPCR run.  A plate map is registered in the ELN/LIMS, and after the run, the plate map and results are passed to Ganymede for processing and delivery back to the ELN/LIMS.
 
 ### Orchestrated round-trip
 
@@ -97,4 +97,4 @@ Users select tagged data and perform manual processing in a virtualized environm
 
 #### Example
 
-A flow cytometry run where a manual gating step is required to identify cell population counts.
+A flow cytometry run where a manual gating step is required to identify cell population counts.  Ganymede delivers sample information to the flow cytometer and captures raw data with annotation.  The user selects the raw data for processing in a virtualized environment, and after processing, the results are delivered back to Ganymede for delivery to the ELN/LIMS.
