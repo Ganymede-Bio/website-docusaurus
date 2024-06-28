@@ -17,7 +17,9 @@ Sync S3 bucket -\> Ganymede data lake bucket
 - **duplicate_behavior**
   - "ignore" or "save" files that already exist in the Ganymede output bucket
 - **required_aging_in_seconds**
-  - Minimum age in seconds for files to be considered for copying
+  - Minimum age in seconds for files to be considered for copying.  This is useful for ensuring that files are not copied before they are fully written.
+- **max_aging_in_seconds**
+  - Maximum age in seconds for files to be considered for copying.  This is useful for only syncing recently modified files.
 
 ### Notes
 
