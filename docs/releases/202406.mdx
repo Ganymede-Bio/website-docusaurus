@@ -6,13 +6,15 @@ displayed_sidebar: releaseSideBar
 
 ### June 27 2024
 **Features** 
-- **UI** Agent logs now specify which connection is supplying the logs information, upgrading to the latest agent version will provide the most detailed logs
+- **UI**: Agent logs now specify which connection is supplying the logs information, upgrading to the latest agent version will provide the most detailed logs
 
 **Improvements**
-- **UI** The Connections UI now reflects connection status updates in real-time (i.e. without browser reloads)
+- **UI**: The Connections UI now reflects connection status updates in real-time (i.e. without browser reloads)
+- **Node**: The [S3 read node](../nodes/App/S3_Read.md) now has a parameter for maximum aging of files to sync
 
 **Bug Fixes**
-- **UI** Fixed an issue with sorting agent builds 
+- **UI**: Fixed an issue with sorting agent builds 
+- **SDK**: Fixed list_files method, which was returning duplicate records when referencing a file that had been associated with multiple flow runs
 
 
 ### June 20 2024
