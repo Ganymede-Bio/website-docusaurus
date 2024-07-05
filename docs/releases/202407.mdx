@@ -10,3 +10,8 @@ displayed_sidebar: releaseSideBar
 - **UI**: Performance and reliability improvement on flow run page for larger environments 
 - **Agents**: Agents will now send connectivity checks via https
 
+**Bug Fixes**
+- **Agents**: Files are uploaded to the associated flow folder instead of the default agents location
+- **Agents**: Files are correctly appended with timestamp for “unique” agent configuration when file already exists
+- **Agents**: File tags are applied correctly when supplied from the agent configuration
+- **Agents**: Updating the file param pattern for file watcher agents will correctly remote update
