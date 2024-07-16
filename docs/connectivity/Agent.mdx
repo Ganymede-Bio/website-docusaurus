@@ -441,7 +441,7 @@ StartLimitIntervalSec=10
 [Service]
 Type=simple
 Restart=always
-RestartSec=1
+RestartSec=5
 User=jane_doe
 ExecStart=/path/to/agent/executable -l linux -l service -n CWService
 StandardOutput=append:/var/log/ganymede/CWService.log
@@ -463,7 +463,7 @@ Once the service file is created, the Agent can be started by running:
 Save this file to /etc/systemd/system/ and set permissions to 644. For example, if the systemd service file were named _ganymede_example_agent.service_, this could be accomplished by running:
 
 ```shell
-sudo chmod 644 /etc/systemd/system/ganymede_example_agent.service
+sudo chmod 755 /etc/systemd/system/ganymede_example_agent.service
 ```
 
 To interact with this service, you can use the following commands:
