@@ -69,7 +69,7 @@ The _Configuration_ input specifies the action performed by the Agent, chosen fr
 
 For Cloud Watcher agents that download files from Ganymede Cloud, you can specify that they watch for flow _inputs_ (instead of the flow outputs) by adding the following to the Additional Params input box:
 
-```shell
+```bash
 -v "input_bucket=true" 
 ```
 :::
@@ -227,7 +227,7 @@ Patterns can also be matched against subdirectories using `*` for single level s
 
 For example, if your instrument writes out files in a directory like:
 
-```shell
+```bash
 ├── experiment_id_1
 │   ├── configuration.xml
 │   └── results.csv
@@ -388,7 +388,7 @@ vars: dict[str, str] = kwargs.get('vars', [])
 
 For Agents that reference local directories, the directory watched is specified in the Additional Params input box:
 
-```shell
+```bash
 -v "input_path=/absolute/path"
 
 # Example Windows input path specification
@@ -431,13 +431,13 @@ To do so, follow the steps below:
 
 After downloading the agent, modify permissions for the binary to 755.
 
-```shell
+```bash
 chmod 755 agent_name_<timestamp>_agent
 ```
 
 Create a [systemd service file](https://www.freedesktop.org/software/systemd/man/systemd.service.html) similar to what is shown below:
 
-```shell
+```bash
 [Unit]
 Description=Ganymede Example Agent
 After=network.target
@@ -457,28 +457,28 @@ WantedBy=multi-user.target
 ```
 
 - **Description**: field to identify the Agent in logs
-- **StartLimitIntervalSec**: set to 0 to avoid service from stopping due to number of failures observed in a preset timeframe
-- **Restart**: set to restart the Agent if it crashes
-- **User**: user to associate Agent runs with
-- **ExecStart**: path to the Agent executable.  -n specifies the name of the service.  -v specifies variables to pass to the Linux agent.
-- **StandardError**: log file for Agent errors
+- **StartLimitIntervalSec**: set to 0 to avoid service from stopping; by default, the service would stop after a certain number of failures within a specific timeframe
+- **Restart**: set to restart the Agent on unclean exit code or abnormal exit; does not restart on clean exit.
+- **User**: user to associate Agent runs with.  To see the current user, run `whoami`.
+- **ExecStart**: path to the Agent executable.  The executable takes the following command-line arguments:
+  - -n / --name: Required field for the name of the connection used to identify the device and its data, logs, and status throughout Ganymede.
+  - -v / --var: a string in the format "var_name=var_value" that allows setting user context variables accessible from user-defined agent code.  Multiple variables can be specified as shown in the [append configuration setting in argparse](https://docs.python.org/3/library/argparse.html#action).  This is the argument used to specify the folder to watch; if not specified, the folder watched will be the directory containing the agent binary.
+- **StandardOutput**: log file for Agent output.
+- **StandardError**: log file for Agent errors.  
+- **WantedBy**: specifies that, if the service has been enabled, the service should be started when multi-user.target is reached during the boot process.  This occurs when the system is operational and ready for multiple users to log in and use the system in a non-graphical mode.
 
-Once the service file is created, the Agent can be started by running:
+Once the service file is created, the Agent can be started by copying the file to /etc/systemd/system/ and setting permissions of the service file to 644. For example, if the systemd service file were named _ganymede_example_agent.service_, this could be accomplished by running:
 
-Save this file to /etc/systemd/system/ and set permissions to 644. For example, if the systemd service file were named ganymede_example_agent.service, this could be accomplished by running:
-
-```shell
+```bash
+sudo cp /path/to/ganymede_example_agent.service /etc/systemd/system/
 sudo chmod 644 /etc/systemd/system/ganymede_example_agent.service
 ```
 
-To interact with this service, you can use the following commands:
+To launch this service, you can use the following commands:
 
-```shell
+```bash
 # to start the Agent service
 sudo systemctl start ganymede_example_agent.service
-
-# to observe status of the Agent service
-sudo systemctl status ganymede_example_agent.service
 
 # to start the Agent service on system startup
 sudo systemctl enable ganymede_example_agent.service
@@ -486,8 +486,12 @@ sudo systemctl enable ganymede_example_agent.service
 
 Some other commands that can be useful:
 
-```shell
-# to restart the Agent service
+```bash
+# to observe status of the Agent service
+sudo systemctl status ganymede_example_agent.service
+
+# to reload the systemd service file after changes have been made to a service file
+# and restart the Agent service after changes have been made
 sudo systemctl daemon-reload
 sudo systemctl restart ganymede_example_agent.service
 ```
