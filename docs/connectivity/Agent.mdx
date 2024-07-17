@@ -441,28 +441,23 @@ Create a [systemd service file](https://www.freedesktop.org/software/systemd/man
 [Unit]
 Description=Ganymede Example Agent
 After=network.target
-StartLimitBurst=5
-StartLimitIntervalSec=10
+StartLimitIntervalSec=0
 
 [Service]
 Type=simple
 Restart=always
-RestartSec=5
+RestartSec=1
 User=jane_doe
-ExecStart=/path/to/agent/executable -l linux -l service -n CWService
-StandardOutput=append:/var/log/ganymede/CWService.log
-StandardError=append:/var/log/ganymede/CWService_err.log
+ExecStart=/path/to/agent/executable -n GanymedeExampleAgentService -v "input_path=/path/to/watch/dir"
+StandardOutput=append:/var/log/ganymede/GanymedeExampleAgentService.log
+StandardError=append:/var/log/ganymede/GanymedeExampleAgentService_err.log
 
 [Install]
 WantedBy=multi-user.target
 ```
 
-:::info
-The input path can be specified on the ExecStart parameter in the systemd file.  If not specified, the agent 
-will watch the same directory that the executable is found in.
-:::
-
 - **Description**: field to identify the Agent in logs
+- **StartLimitIntervalSec**: set to 0 to avoid service from stopping due to number of failures observed in a preset timeframe
 - **Restart**: set to restart the Agent if it crashes
 - **User**: user to associate Agent runs with
 - **ExecStart**: path to the Agent executable
@@ -493,15 +488,32 @@ sudo systemctl enable ganymede_example_agent.service
 Some other commands that can be useful:
 
 ```shell
-# to reload the systemd daemon upon modifying the agent service file
-sudo systemctl daemon-reload
-
-# to view recent logs
-journalctl -u ganymede_example_agent.service --no-pager | tail -100
-
 # to restart the Agent service
+sudo systemctl daemon-reload
 sudo systemctl restart ganymede_example_agent.service
 ```
+
+:::info
+After an agent binary is executed, a connection.yaml file is generated, similar to what is shown below.  When this file is present in the same directory as the agent binary, the agent will use this configuration file to determine inputs.
+
+```
+environment: ganymede-dev-multi
+id: <agent uuid>
+inferredData:
+  installPath: /path/to/agent/binary
+  macAddress: <mac address of machine>
+  machineIP: <IP address of machine>
+  machineName: <name of machine>
+  serviceDisplayName: GanymedeAgent-<agent uuid>
+labels: []
+name: ganymede_example_agent
+startTime: '2024-07-17T15:10:00Z'
+tagParams: []
+variables:
+  input_path: /path/to/watch/dir/
+version: <YYYYMMDD-timestamp>
+```
+:::
 
 ## Configuring User-Defined Python
 
