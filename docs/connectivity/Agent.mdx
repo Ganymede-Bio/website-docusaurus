@@ -444,7 +444,9 @@ After=network.target
 StartLimitIntervalSec=0
 
 [Service]
-Type=oneshot
+Type=simple
+Restart=on-failure
+RestartSec=10
 User=jane_doe
 ExecStart=/path/to/agent/executable -n GanymedeExampleAgentService -v "input_path=/path/to/watch/dir"
 StandardOutput=append:/var/log/ganymede/GanymedeExampleAgentService.log
