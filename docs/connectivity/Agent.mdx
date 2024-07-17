@@ -444,9 +444,7 @@ After=network.target
 StartLimitIntervalSec=0
 
 [Service]
-Type=simple
-Restart=always
-RestartSec=1
+Type=oneshot
 User=jane_doe
 ExecStart=/path/to/agent/executable -n GanymedeExampleAgentService -v "input_path=/path/to/watch/dir"
 StandardOutput=append:/var/log/ganymede/GanymedeExampleAgentService.log
@@ -460,8 +458,7 @@ WantedBy=multi-user.target
 - **StartLimitIntervalSec**: set to 0 to avoid service from stopping due to number of failures observed in a preset timeframe
 - **Restart**: set to restart the Agent if it crashes
 - **User**: user to associate Agent runs with
-- **ExecStart**: path to the Agent executable
-- **StandardOutput**: log file for Agent output
+- **ExecStart**: path to the Agent executable.  -n specifies the name of the service.  -v specifies variables to pass to the Linux agent.
 - **StandardError**: log file for Agent errors
 
 Once the service file is created, the Agent can be started by running:
