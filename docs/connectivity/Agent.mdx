@@ -429,7 +429,13 @@ To do so, follow the steps below:
 
 ### Linux Installation
 
-After downloading the agent, create a [systemd service file](https://www.freedesktop.org/software/systemd/man/systemd.service.html) similar to what is shown below:
+After downloading the agent, modify permissions for the binary to 755.
+
+```shell
+chmod 755 agent_name_<timestamp>_agent
+```
+
+Create a [systemd service file](https://www.freedesktop.org/software/systemd/man/systemd.service.html) similar to what is shown below:
 
 ```shell
 [Unit]
@@ -451,6 +457,11 @@ StandardError=append:/var/log/ganymede/CWService_err.log
 WantedBy=multi-user.target
 ```
 
+:::info
+The input path can be specified on the ExecStart parameter in the systemd file.  If not specified, the agent 
+will watch the same directory that the executable is found in.
+:::
+
 - **Description**: field to identify the Agent in logs
 - **Restart**: set to restart the Agent if it crashes
 - **User**: user to associate Agent runs with
@@ -460,10 +471,10 @@ WantedBy=multi-user.target
 
 Once the service file is created, the Agent can be started by running:
 
-Save this file to /etc/systemd/system/ and set permissions to 644. For example, if the systemd service file were named _ganymede_example_agent.service_, this could be accomplished by running:
+Save this file to /etc/systemd/system/ and set permissions to 644. For example, if the systemd service file were named ganymede_example_agent.service, this could be accomplished by running:
 
 ```shell
-sudo chmod 755 /etc/systemd/system/ganymede_example_agent.service
+sudo chmod 644 /etc/systemd/system/ganymede_example_agent.service
 ```
 
 To interact with this service, you can use the following commands:
@@ -474,6 +485,22 @@ sudo systemctl start ganymede_example_agent.service
 
 # to observe status of the Agent service
 sudo systemctl status ganymede_example_agent.service
+
+# to start the Agent service on system startup
+sudo systemctl enable ganymede_example_agent.service
+```
+
+Some other commands that can be useful:
+
+```shell
+# to reload the systemd daemon upon modifying the agent service file
+sudo systemctl daemon-reload
+
+# to view recent logs
+journalctl -u ganymede_example_agent.service --no-pager | tail -100
+
+# to restart the Agent service
+sudo systemctl restart ganymede_example_agent.service
 ```
 
 ## Configuring User-Defined Python
