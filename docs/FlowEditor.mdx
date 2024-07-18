@@ -169,3 +169,22 @@ While a flow save is in progress the indicator message will display in sequence 
 If an error is encountered during a flow save then an error message will be displayed.
 
 <img width="130" alt="Autorun modal" src="https://ganymede-bio.mo.cloudinary.net/apiServer/FlowBuildFail_20240416.png"/>
+
+### Flow Versions
+
+All changes to a Flow will be tracked as a new Flow Version. A history of all Flow Versions can be viewed by clicking on the
+<b>History</b> button in the Flow Editor page.
+
+<img alt="Go to Flow Version History button" src="https://ganymede-bio.mo.cloudinary.net/apiServer/FlowHistoryButton_20240718.png" />
+
+<img alt="Flow Version History" src="https://ganymede-bio.mo.cloudinary.net/apiServer/FlowVersionHistory_20240718.png" />
+
+\* Some Flow Versions created before July 18th 2024 may not be linked to a "Created By" user.
+
+Expanding a row will show the changes between the selected version and the <i>current version</i> of the Flow, <i>not</i> just the
+changes introduced in the selected version.
+
+The changes are shown like a side by side `git` diff where the left is old and the right is current.
+
+<img alt="Flow Version History row expanded with diff" src="https://ganymede-bio.mo.cloudinary.net/apiServer/FlowVersionHistory_diff_20240718.png" />
+
