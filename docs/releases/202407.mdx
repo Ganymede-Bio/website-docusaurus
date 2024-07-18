@@ -4,6 +4,22 @@ title: July 2024
 displayed_sidebar: releaseSideBar
 ---
 
+### July 18 2024
+
+**Features**
+- **UI**: [Flow history](../FlowEditor#flow-versions) is now viewable from within the Flow Editor
+  - All of the changes to a flow's configuration and code are available in the Flow Editor by clicking the History button 
+  - Flow Runs have a link to the code they were run with
+  - Links to specific changes are shareable with others
+
+**Improvements**
+- **Agents**: Agents will now raise a specific error if they are unable to start a flow run, previously this error looked similar to other retries
+- **Flows**: The [send_email method](../api/GanymedeClass#method-send_email) is now testable in notebooks. No email will be sent while testing, an HTML rendering of the email will be displayed
+
+**Bug Fixes**
+- **UI**: Filtering agent statuses from the agent table works as expected
+
+
 ### July 11 2024
 
 **Features**
