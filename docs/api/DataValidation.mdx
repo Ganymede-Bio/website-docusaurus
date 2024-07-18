@@ -81,9 +81,6 @@ df_new = new_schema.validate(df)
 
 More granular control over schema generation can be achieved by calling the `generate_pandera_schema` method on the SchemaValidation object.  This method returns a Pandera DataFrameSchema object that can be modified before validation.
 
-```python
-
-
 ### Jinja templating for SQL Queries
 
 Variables from the **Ganymede** object can be used in SQL queries by using [Jinja templating](https://jinja.palletsprojects.com/en/3.0.x/templates/).  The full set of variables available for Jinja templates can be found in the params attribute of either the **GanymedeContext** or **MockGanymedeContext** objects.

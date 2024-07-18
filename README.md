@@ -12,19 +12,19 @@ Download and install [VS Code](https://code.visualstudio.com/) or other editor o
 
 If you are using MacOS, install brew by running the following in terminal:
 
-```shell
+```bash
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
 
 Install xcode command line tools by running: 
 
-```shell
+```bash
 xcode-select --install
 ```
 
 Clone the website-docusaurus repo
 
-```shell
+```bash
 git clone https://github.com/Ganymede-Bio/website-docusaurus.git
 ```
 
@@ -32,7 +32,7 @@ git clone https://github.com/Ganymede-Bio/website-docusaurus.git
 
 ### Install packages required for running documentation website
 
-```shell
+```bash
 npm install --global yarn
 yarn install
 yarn build
@@ -44,7 +44,7 @@ yarn build
 
 Run local instance for debugging (defaults to port 3000).  Doing so, you should be able to see the website in the browser by visiting [localhost:3000](localhost:3000).
 
-```shell
+```bash
 yarn start
 ```
 
@@ -52,7 +52,7 @@ yarn start
 
 1. Create a new branch, so that you can validate website updates before deploying to [docs.ganymede.bio](docs.ganymede.bio).  The -b option on the checkout command below creates a new branch.
 
-```shell
+```bash
 cd website-docusaurus
 git checkout -b <name-of-new-branch>
 ```
@@ -61,14 +61,14 @@ git checkout -b <name-of-new-branch>
 
 3. When satisfied, with changes, run the following code.  You should be able to view changes after a couple minutes from the link in the notifications-website channel in Slack.
 
-```shell
+```bash
 git commit -am '<description of changes>'
 git push
 ```
 
 4. If successful, run the following code to deploy to [docs.ganymede.bio](docs.ganymede.bio)
 
-```shell
+```bash
 git checkout main
 git merge <name-of-new-branch>
 git push
@@ -80,7 +80,7 @@ git push
 
 Docusaurus v2.4.0 requires Node 16.14+; this website is known to run under Node v18.12.  You can install node by visiting the [node](https://nodejs.org/en/download) website.  If you run into unexpected issues, rebuild the dependencies by running
 
-```shell
+```bash
 yarn clear
 yarn build
 ```
@@ -95,7 +95,7 @@ Documentation for nodes is built using `pydoc-markdown` and pulling from `core-o
 
 Install the dependencies
 
-```shell
+```bash
 pushd pydoc
 python3 -m venv env 
 source env/bin/activate
@@ -108,7 +108,7 @@ popd
 
 Fetch the latest nodes and generate the docs
 
-```shell
+```bash
 git submodule update --recursive --remote --init
 pushd pydoc
 source env/bin/activate
