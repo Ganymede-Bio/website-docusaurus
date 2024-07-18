@@ -27,7 +27,7 @@ module.exports = {
   ],
   themeConfig: {
     prism: {
-      additionalLanguages: ['python'],
+      additionalLanguages: ['python', 'bash'],
       theme: prismThemes.nightOwl
     },
     algolia: {
