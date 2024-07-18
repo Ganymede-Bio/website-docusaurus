@@ -441,12 +441,14 @@ Create a [systemd service file](https://www.freedesktop.org/software/systemd/man
 [Unit]
 Description=Ganymede Example Agent
 After=network.target
+Wants=network.target
 StartLimitIntervalSec=0
 
 [Service]
 Type=simple
 Restart=on-failure
 RestartSec=10
+TimeoutSec=30
 User=jane_doe
 ExecStart=/path/to/agent/executable -n GanymedeExampleAgentService -v "input_path=/path/to/watch/dir"
 StandardOutput=append:/var/log/ganymede/GanymedeExampleAgentService.log
@@ -457,6 +459,7 @@ WantedBy=multi-user.target
 ```
 
 - **Description**: field to identify the Agent in logs
+- **After** and **Wants**: ensures that basic networking has been set up before launching the agent
 - **StartLimitIntervalSec**: set to 0 to avoid service from stopping; by default, the service would stop after a certain number of failures within a specific timeframe
 - **Restart**: set to restart the Agent on unclean exit code or abnormal exit; does not restart on clean exit.
 - **User**: user to associate Agent runs with.  To see the current user, run `whoami`.
@@ -480,13 +483,8 @@ To launch this service, you can use the following commands:
 # to start the Agent service
 sudo systemctl start ganymede_example_agent.service
 
-<<<<<<< HEAD
-# to observe status of the Agent service
-sudo systemctl status ganymede_example_agent.service
-=======
 # to start the Agent service on system startup
 sudo systemctl enable ganymede_example_agent.service
->>>>>>> 8419603bd97b5e233d55c549fcda6e94e3e5d32a
 ```
 
 Some other commands that can be useful:
