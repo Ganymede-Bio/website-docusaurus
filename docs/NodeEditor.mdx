@@ -5,7 +5,7 @@ displayed_sidebar: webUiSidebar
 ---
 
 import {
-    EditOutlined, SaveFilled
+    CodeOutlined, SaveFilled
 } from '@ant-design/icons';
 
 ## Node Overview
@@ -17,7 +17,7 @@ _Nodes_ are customizable blocks of code that execute a single task within a _flo
   />
 </div>
 
-On the Flow Editor page, nodes are rendered as a box with a header that contains the node name.  The node name can be edited by clicking the <div className="button dark_gray_button">Edit</div> button in the upper right hand corner of the node.  
+On the Flow Editor page, nodes are rendered as a box with a header that contains the node name.  The node name can be edited by clicking on the header.  
 
 <div class="text--center">
 <img width="300" alt="image" src="https://ganymede-bio.mo.cloudinary.net/apiServer/EditNodeBefore_20230522.png"/>
@@ -26,9 +26,12 @@ On the Flow Editor page, nodes are rendered as a box with a header that contains
 The image above shows how _nodes_ are represented on the Flow Editor page; each _node_ consists of:
 
 - **Node Name**: located in the header of the _node_; CSV_Read in the image above.
-- **Pencil Icon**: if present, the <EditOutlined className="button darkblue_button"/> is a button that opens the user-editable notebook when clicked.
+- **Terminal Icon**: if present, the <CodeOutlined className="button darkblue_button"/> is a button that opens the user-editable notebook when clicked.
 - **Node Attribute(s)**: if present, the attributes associated with the _node_ that are processed by the node.  In the image above, the node attributes 'csv' and 'results' have values '.csv' and 'example_results' respectively.
-- **Edit Button**: the <div className="button dark_gray_button">Edit</div> button that unlocks the _node_ for modifying _node_ name, changing _node_ attributes, or deleting the _node_
+
+:::note
+By default, nodes are shown closed.  Clicking on the chevron in the upper right hand corner of the node opens the node to display the node attributes.
+:::
 
 For nodes with editable components, notebooks follow a common structure.
 
@@ -55,8 +58,8 @@ A full listing of available nodes and their key characteristics can be found on 
 </div>
 
 
-Editable nodes contain a pencil icon (<EditOutlined className="button darkblue_button"/>) in their upper right hand corner that opens up the notebook backing the node upon button click.
-These notebooks format code upon cell execution using [black](https://black.readthedocs.io/en/stable/), and perform type checking, hinting, and code diagnostics using [Jupyter LSP](https://github.com/jupyter-lsp/jupyterlab-lsp) configured with [PyRight](https://github.com/microsoft/pyright).  
+Editable nodes contain a terminal icon (<CodeOutlined className="button darkblue_button"/>) in their upper right hand corner that opens up the notebook backing the node upon button click.
+These notebooks format code upon cell execution using [black](https://black.readthedocs.io/en/stable/), and perform type checking, hinting, and code diagnostics using [Jupyter LSP](https://github.com/jupyter-lsp/jupyterlab-lsp) configured with a linter.  
 
 #### Hover over an underlined piece of code to see warnings and errors from the LSP:
 
@@ -242,4 +245,4 @@ _Flows_ can be configured to accept user inputs at the start of each run by sele
 - Text (string) inputs (e.g. - string)
 - Tag inputs (e.g. - TagBenchling)
 
-A list of available _nodes_ and their associated categories can be found on the [table listing of node characteristics](./nodes/Overview.mdx#available-nodes-with-key-characteristics)  More detail can be found on the [Node documentation page](./nodes/Overview.mdx).
+A list of available nodes and their associated categories can be found on the [table listing of node characteristics](./nodes/Overview.mdx#available-nodes-with-key-characteristics)  More detail can be found on the [Node documentation page](./nodes/Overview.mdx).
