@@ -107,9 +107,11 @@ def execute(file_data: Dict[str, bytes], ganymede_context) -> NodeReturn:
     )
 ```
 
-#### Tagging Files in Agents
+#### Tagging Files in Agents or Connections
 
-To tag a file delivered by an Agent to Ganymede, you can configure an agent to tag any files submitted from it using the [File tags parameter in Agent configuration](./Agent).
+To tag a file delivered by an Agent to Ganymede, you can configure an agent or connection to tag any files submitted from it using the [File tags parameter in Agent configuration](./Agent).
+
+You may want the agent to automatically tag files with an instrument ID and a connection from that agent to tag files with a lab location.
 
 Tagging can also be performed programmatically using the `add_file_tag_to_fileparam` function in the `ganymede_sdk.agent` module.  This function takes the following arguments:
 

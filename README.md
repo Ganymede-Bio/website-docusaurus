@@ -134,6 +134,10 @@ popd
 * [Admonitions](https://docusaurus.io/docs/markdown-features/admonitions) are used to add colored chips
 * The [title size determines how titles are featured in a sidebar](https://docusaurus.io/docs/markdown-features/toc)
 
+### Images
+
+To add images, drop them into [this GCS bucket](https://console.cloud.google.com/storage/browser/ganymede-bio-website/public;tab=objects?project=ganymede-website-356920&pageState=(%22StorageObjectListTable%22:(%22f%22:%22%255B%255D%22))&prefix=&forceOnObjectsSortingFiltering=false)
+
 ### Other packages employed
 
 * For search, the documentation website uses [Typesense](https://cloud.typesense.org/login), which is configured in docsearch-config.json
