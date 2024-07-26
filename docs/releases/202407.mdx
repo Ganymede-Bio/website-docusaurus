@@ -4,6 +4,23 @@ title: July 2024
 displayed_sidebar: releaseSideBar
 ---
 
+### July 26 2024
+
+**Features**
+- **UI**: Connection details are now visible and editable in the UI
+  - Review details about your connection by clicking on a connection card
+  - The image for the connection can be customized
+  - See the connection logs and configuration
+  - If the agent is running version 4.5.0 or higher, you can see the details of the PC where the agent is running 
+  - If the agent is running version 4.5.0 or higher, you can set connection-specific file tags to be applied to files ingested by that agent
+
+**Improvements**
+- **UI**: Users in the environment list are now sorted properly
+
+**Bug Fixes**
+- **Agents**: An issue where 502 responses were being returned intermittently to agents  has been addressed
+
+
 ### July 18 2024
 
 **Features**
@@ -15,6 +32,7 @@ displayed_sidebar: releaseSideBar
 **Improvements**
 - **Agents**: Agents will now raise a specific error if they are unable to start a flow run, previously this error looked similar to other retries
 - **Flows**: The [send_email method](../api/GanymedeClass#method-send_email) is now testable in notebooks. No email will be sent while testing, an HTML rendering of the email will be displayed
+- **Dashboards**: Agents, connections, and flow errors are now available as data sources to be used in dashboards.
 
 **Bug Fixes**
 - **UI**: Filtering agent statuses from the agent table works as expected
