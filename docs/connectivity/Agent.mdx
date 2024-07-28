@@ -571,27 +571,45 @@ Logs can be found on the Logs tab for each Agent. These logs contain status chec
 
 Agents are capable of communicating with Ganymede Cloud to upload files and run flows. These communications can be monitored by observing status updates and logs in the Ganymede web app UI.
 
-The Connections page shows an overview of all connections that have ever been made and their latest status in addition to other metadata made available from their last status ping.
-
 <div class="text--center">
   <img
-    alt="Agent Status"
-    src="https://ganymede-bio.mo.cloudinary.net/agent/Agent_Connection_Status_Overview20230726.png"
-    width="400"
+    alt="Connection cards"
+    src="https://ganymede-bio.mo.cloudinary.net/agent/ConnectionCards20240726.png"
+    width="600"
   />
 </div>
 &nbsp;
 
-The Agent page displays a list of all connections instantiated from a specific Agent. This provides the user quick and easy access to the running executables associated with a specific Agent configuration.
+Connection data can be viewed by clicking on the connection card in the Connections tab. 
+
 
 <div class="text--center">
   <img
-    alt="Agent Connection Status"
-    src="https://ganymede-bio.mo.cloudinary.net/agent/Agent_Status20230726.png"
-    width="400"
+    alt="Connection Detail UI"
+    src="https://ganymede-bio.mo.cloudinary.net/agent/ConnectionDetails20240726.png"
+    width="600"
   />
 </div>
 &nbsp;
+
+The detail fields of a connection are as follows:
+
+| Field Name | Description |
+|------------|-------------|
+| Status|  The current running status of the installed connection. |
+| Agent | The agent from which the connection is running. |
+| Connection Version | The version of the connection configuration currently running. Will be updated any time the connection configuration is updated. |
+| Agent Version | The version of the agent configuration from which the connection is running. Will be updated any time the agent configuration or processor code changes. |
+| Core Version | The version of the core agent infrastructure from which the connection is running. Will require a reinstall to update. |
+| Strated At | The time the connection was first registered in Ganymede. |
+| Last Status Ping | The last time a status ping was received from the connection by Ganymede. |
+| PC Name | The hostname of the machine hosting the connection |
+| MAC Address | The MAC address of the machine hosting the connection. |
+| Machine IP  | The IP address Ganymede sees from the machine hosting the connection |
+| Install Path | Directory path on the hosting machine the executable was installed. |
+| Service Name | The Windows service name for the connection executable on the hosting machine. |
+| Agent Tags | Tags that will be applied to all files uploaded by any connection running from the agent. These are changeable in agent configuration |
+
 
 #### Connection Status
 
@@ -631,6 +649,16 @@ Agents can also be archived or disabled.
 Archived Agents cannot be updated, but the Agent's connections can still communicate with Ganymede Cloud.  All associated connections for these Agents will continue to run, but the Agent can no longer be modified.  Archived agents can be restored to an active state by selecting the desired Agent and clicking on the <u>Restore Agent</u> link.
 
 Disabled Agents cannot be updated and its connections can no longer communicate with Ganymede Cloud.
+
+### Updating Connections
+
+To update a connection, select the desired connection in the Connections tab to update the connection.  You can update the following fields on a connection from the Ganymede UI:
+
+- Name: The display name for the connection
+- Image: An image to associate with the connection
+- Tags: The file tags to apply to files uploaded by the connection
+- Variables: Key-value pairs that can be referenced in user-defined code
+- Label: A list of strings that can be used to group connections in the Ganymede UI
 
 ### Viewing Build History
 
