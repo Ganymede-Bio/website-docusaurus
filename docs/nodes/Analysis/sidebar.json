@@ -1,1 +1,1 @@
-{"type": "category", "label": "Analysis", "items": ["nodes/Analysis/Branch_Python", "nodes/Analysis/Python", "nodes/Analysis/RunContainer", "nodes/Analysis/Transform_SQL", "nodes/Analysis/Transform_py", "nodes/Analysis/Trigger_Python"]}
+{"type": "category", "label": "Analysis", "items": ["nodes/Analysis/Branch_Python", "nodes/Analysis/Python", "nodes/Analysis/Transform_SQL", "nodes/Analysis/Trigger_Python"]}
