@@ -596,19 +596,19 @@ The detail fields of a connection are as follows:
 
 | Field Name | Description |
 |------------|-------------|
-| Status|  The current running status of the installed connection. |
-| Agent | The agent from which the connection is running. |
-| Connection Version | The version of the connection configuration currently running. Will be updated any time the connection configuration is updated. |
-| Agent Version | The version of the agent configuration from which the connection is running. Will be updated any time the agent configuration or processor code changes. |
-| Core Version | The version of the core agent infrastructure from which the connection is running. Will require a reinstall to update. |
-| Strated At | The time the connection was first registered in Ganymede. |
-| Last Status Ping | The last time a status ping was received from the connection by Ganymede. |
-| PC Name | The hostname of the machine hosting the connection |
-| MAC Address | The MAC address of the machine hosting the connection. |
-| Machine IP  | The IP address Ganymede sees from the machine hosting the connection |
-| Install Path | Directory path on the hosting machine the executable was installed. |
-| Service Name | The Windows service name for the connection executable on the hosting machine. |
-| Agent Tags | Tags that will be applied to all files uploaded by any connection running from the agent. These are changeable in agent configuration |
+| Status|  Current running status of the installed connection |
+| Agent | Agent from which the connection is running. |
+| Connection Version | Version of the connection configuration currently running; updated when the connection configuration is updated |
+| Agent Version | Version of the agent configuration from which the connection is running; updated when the agent configuration or processor code changes |
+| Core Version | Version of the core agent infrastructure from which the connection is running; requires a reinstall to update |
+| Started At | UTC Time when the connection was first registered in Ganymede |
+| Last Status Ping | Time when last status ping was received from the connection by Ganymede |
+| PC Name | Hostname of the machine hosting the connection |
+| MAC Address | MAC address of the machine hosting the connection |
+| Machine IP  | IP address that Ganymede sees from the machine hosting the connection |
+| Install Path | Directory path on the hosting machine that the executable was installed on |
+| Service Name | Windows service name for the connection executable on the hosting machine |
+| Agent Tags | Tags applied to all file captured by any connection running from the agent, configured in the Agent UI |
 
 
 #### Connection Status
@@ -654,11 +654,11 @@ Disabled Agents cannot be updated and its connections can no longer communicate 
 
 To update a connection, select the desired connection in the Connections tab to update the connection.  You can update the following fields on a connection from the Ganymede UI:
 
-- Name: The display name for the connection
-- Image: An image to associate with the connection
-- Tags: The file tags to apply to files uploaded by the connection
+- Name: Display name for the connection
+- Image: Image to associate with the connection
+- Tags: [File tags](./Tags) to apply to files uploaded by the connection
 - Variables: Key-value pairs that can be referenced in user-defined code
-- Label: A list of strings that can be used to group connections in the Ganymede UI
+- Labels: Strings that can be used to group connections in the Ganymede UI
 
 ### Viewing Build History
 
