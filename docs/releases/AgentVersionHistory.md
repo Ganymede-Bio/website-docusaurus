@@ -14,6 +14,7 @@ This page contains a summary of key version updates for the Ganymede [Agent](../
 
 - Recoverable errors will result in Agent restart rather than shutdown
 - Address null type exception thrown for Cloud Watcher Agents if no glob pattern is specified
+- Fix add_file_tag method for cron and upload Agents
 
 ## 4.5.0
 
@@ -21,7 +22,8 @@ This page contains a summary of key version updates for the Ganymede [Agent](../
 
 ## 4.4.12
 
-- Added status redundancy check added to ensure accuracy of connection status
+- Added status redundancy check on separate thread to ensure accuracy of connection status and improve connection stability
+- Status checks performed over 443 rather that via ICMP
 
 ## 4.4.0
 
@@ -30,6 +32,10 @@ This page contains a summary of key version updates for the Ganymede [Agent](../
 ## 4.2.0
 
 - New virtualization agent type added for running flow action
+
+## 4.1.0
+
+- Added method to permanently stop and disable a service in cases where Agent service requires manual intervention
 
 ## 3.3.9
 
@@ -54,7 +60,7 @@ This page contains a summary of key version updates for the Ganymede [Agent](../
 - Changes in Agent processor code and Agent configuration can be remotely updated
 - Virtualization Agent types introduced (for delivering data to and from Virtualization environments)
 
-## 0
+## beta
 
 - Initial Agent release
 - Agents are able to trigger processing based on file existence on a local machine, file presence in Ganymede cloud, or a cron schedule
