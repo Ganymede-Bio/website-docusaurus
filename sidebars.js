@@ -1,5 +1,3 @@
-const { type } = require('os')
-
 nodeAnalysis = require('./docs/nodes/Analysis/sidebar.json')
 nodeApp = require('./docs/nodes/App/sidebar.json')
 nodeFile = require('./docs/nodes/File/sidebar.json')
