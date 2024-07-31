@@ -96,9 +96,9 @@ module.exports = {
             items: ['FlowRuns', 'Notifications']
           },
           {
-          type: 'doc',
-          id: 'Virtualization',
-          label: 'Virtualization'
+            type: 'doc',
+            id: 'Virtualization',
+            label: 'Virtualization'
           },
           {
             type: 'doc',
@@ -186,42 +186,54 @@ module.exports = {
       label: 'AI Help and Code Generation'
     },
     {
-        type: 'category',
-        label: 'SDK',
-        collapsed: true,
-        items: [
-          {
-            type: 'doc',
-            id: 'api/markdowns/AgentDataModels',
-          },
-          {
-            type: 'doc',
-            id: 'api/markdowns/EnvironmentDetection',
-          },
-            nodeSDKApi,
-            nodeSDKAnalytics
-        ],
-        collapsed: false
+      type: 'category',
+      label: 'SDK',
+      collapsed: true,
+      items: [
+        {
+          type: 'doc',
+          id: 'api/markdowns/AgentDataModels',
+        },
+        {
+          type: 'doc',
+          id: 'api/markdowns/EnvironmentDetection',
+        },
+        nodeSDKApi,
+        nodeSDKAnalytics
+      ],
+      collapsed: false
     }
   ],
   releaseSideBar: [
     {
-      type: 'category',
-      label: '2024',
-      collapsed: false,
-      items: ['releases/202407', 'releases/202406', 'releases/202405', 'releases/202404', 'releases/202403', 'releases/202402', 'releases/202401']
+    type: 'category',
+    label: 'Release Notes',
+    collapsed: false,
+    items:
+      [
+        {
+          type: 'category',
+          label: '2024',
+          collapsed: false,
+          items: ['releases/202407', 'releases/202406', 'releases/202405', 'releases/202404', 'releases/202403', 'releases/202402', 'releases/202401']
+        },
+        {
+          type: 'category',
+          label: '2023',
+          collapsed: true,
+          items: ['releases/202312', 'releases/202311', 'releases/202310', 'releases/202309', 'releases/202308', 'releases/202307', 'releases/202306', 'releases/202305', 'releases/202304', 'releases/202303', 'releases/202302', 'releases/202301']
+        },
+        {
+          type: 'category',
+          label: '2022',
+          collapsed: true,
+          items: ['releases/202212', 'releases/202211', 'releases/202210', 'releases/202209']
+        },
+      ]
     },
     {
-      type: 'category',
-      label: '2023',
-      collapsed: true,
-      items: ['releases/202312', 'releases/202311', 'releases/202310', 'releases/202309', 'releases/202308', 'releases/202307', 'releases/202306', 'releases/202305', 'releases/202304', 'releases/202303', 'releases/202302', 'releases/202301']
-    },
-    {
-      type: 'category',
-      label: '2022',
-      collapsed: true,
-      items: ['releases/202212', 'releases/202211', 'releases/202210', 'releases/202209']
-    },
+      type: 'doc',
+      id: 'releases/AgentVersionHistory',
+    }
   ]
 };
