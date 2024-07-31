@@ -1,3 +1,5 @@
+const { type } = require('os')
+
 nodeAnalysis = require('./docs/nodes/Analysis/sidebar.json')
 nodeApp = require('./docs/nodes/App/sidebar.json')
 nodeFile = require('./docs/nodes/File/sidebar.json')
@@ -115,9 +117,14 @@ module.exports = {
       },
       {
         type: 'category',
-        label: 'Environment Configuration',
+        label: 'Environment Setup',
         collapsed: false,
-        items: ['AdminControls', 'connectivity/AgentNetworkConfig']
+        items: ['configuration/SSOConfig', 'configuration/AgentNetworkConfig']
+      },
+      {
+        type: 'doc',
+        id: 'AdminControls',
+        label: 'Environment Administration'
       },
       {
         type: 'doc',
