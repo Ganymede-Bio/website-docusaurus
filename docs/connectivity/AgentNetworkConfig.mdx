@@ -1,0 +1,36 @@
+---
+id: AgentNetworkConfig
+title: Agent Network Configuration
+displayed_sidebar: webUiSidebar
+---
+
+## Overview
+
+The Ganymede agent relies on outbound connections only to communicate with the Ganymede system, requiring that port 443 is open for outbound connections.
+
+If direct access to the internet is allowed (no proxy), configure your Firewall to allow Outbound HTTPS (port 443) connections from the PC where the agent is running. 
+If direct access to the internet is not allowed (proxy), configure your Proxy to allow the following  connections from the PC where the agent is running.
+
+- storage.googleapis.com on port 443
+- pubsub.googleapis.com on port 443
+- \<tenant_name\>.ganymede.bio port 443 or 35.186.238.205 on port 443
+
+## Testing Connectivity 
+
+For Windows Agents, connectivity can be tested by running the following commands in PowerShell:
+
+```powershell
+$ Test-NetConnection -ComputerName storage.googleapis.com -Port 443
+$ Test-NetConnection -ComputerName pubsub.googleapis.com -Port 443
+$ Test-NetConnection -ComputerName <tenant_name>.ganymede.bio -Port 443
+$ Test-NetConnection -ComputerName 35.186.238.205 -Port 443
+```
+
+For Linux Agents, connectivity can be tested by installing netcat and running the following commands in a terminal:
+
+```shell 
+$ nc -vz storage.googleapis.com -Port 443
+$ nc -vz pubsub.googleapis.com -Port 443
+$ nc -vz 35.186.238.205 -Port 443
+$ nc -vz <tenant_name>.ganymede.bio -Port 443
+```
