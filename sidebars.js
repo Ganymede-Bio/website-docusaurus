@@ -114,14 +114,20 @@ module.exports = {
         items: ['Files', 'Dashboards', 'AnalysisNotebook', 'DataExplorer', 'DashboardTips']
       },
       {
-        type: 'doc',
-        id: 'NotebookTips',
-        label: 'Notebook Tips'
+        type: 'category',
+        label: 'Environment Setup',
+        collapsed: false,
+        items: ['configuration/SSOConfig', 'configuration/AgentNetworkConfig']
       },
       {
         type: 'doc',
         id: 'AdminControls',
         label: 'Environment Administration'
+      },
+      {
+        type: 'doc',
+        id: 'NotebookTips',
+        label: 'Notebook Tips'
       },
       {
         type: 'doc',

@@ -1,0 +1,92 @@
+---
+id: AgentNetworkConfig
+title: Agent System Prerequisites & Network Configuration
+displayed_sidebar: webUiSidebar
+---
+
+## System Requirements
+
+To ensure that the [Agent](../connectivity/Agent) is able to communicate with Ganymede Cloud, ensure that your computer meets the following specs:
+
+### Hardware Requirements
+- Intel i3 processor or newer, with x86/x64 architecture
+- At least 4GB of RAM, though more may be needed for heavy workloads.
+- At least 10GB of free disk space
+
+### Network Requirements
+- Ability to access relevant network-limited resources (network drives, VPN, databases, etc.)
+- has outbound HTTPS (port 443)
+
+### OS Requirements
+- Either Windows 10 or newer with display, or Ubuntu/Debian Linux prior to EOL
+- Operating system should be up to date with latest patches and updates
+
+## Installation permissions
+
+Administrative access is required so that the Agent can be installed to run as a service, which enables the Agent to launch automatically on system startup.  Once configured, users are not required to log in as an admin.  
+
+## Testing Connectivity 
+
+If direct access to the internet is allowed (no proxy), configure your Firewall to allow Outbound HTTPS (port 443) connections from the PC where the agent is running. 
+If direct access to the internet is not allowed (proxy), configure your Proxy to allow the following  connections from the PC where the agent is running.
+
+- storage.googleapis.com on port 443
+- pubsub.googleapis.com on port 443
+- \<tenant_name\>.ganymede.bio port 443
+
+### Windows Agents
+
+For Windows Agents, connectivity can be tested by running the following commands in PowerShell:
+
+```powershell
+$ Test-NetConnection -ComputerName storage.googleapis.com -Port 443
+$ Test-NetConnection -ComputerName pubsub.googleapis.com -Port 443
+$ Test-NetConnection -ComputerName <tenant_name>.ganymede.bio -Port 443
+```
+
+### Linux Agents
+
+For Linux Agents, connectivity can be tested by installing [netcat](https://netcat.sourceforge.net/) and running the following commands in a terminal:
+
+```shell 
+$ nc -vz storage.googleapis.com -Port 443
+$ nc -vz pubsub.googleapis.com -Port 443
+$ nc -vz <tenant_name>.ganymede.bio -Port 443
+```
+
+## Agent Configuration Considerations
+
+Once basic system requirements are met, the core areas requiring consideration are how to configure Agents to suit your operations.   Below are some questions to consider when configuring your Agents:
+
+### User Interaction with Lab Instruments
+
+Frequently, the data producer is not the same person who is configuring Agents.  Some questions for the data producer are:
+
+- Does the instrument software have an option to auto-export files?  If not, could data be exported to a consistent location?  Ensuring process consistency is critical for ensuring data consistency.
+- What are the file formats that are being exported?  Are they standardized?
+- Which of the exported files should be captured in Ganymede Cloud?
+- Is there a way to instruct the instrument to include experiment/sample ID within the file contents or file name?  If not, how can this information be supplied?
+
+#### File Exports
+
+- Is it feasible to replicate data from an instrument to a network drive?  This may be helpful if there is sensitivity around installing software on instrument PCs, and potentially reduce effort required to manage Agents installed across many machines.
+- What are the folder location(s) for the file exports?
+- Does the instrument output new files for each run, or does it output a single file for all runs?  If the latter, what is the desired impetus for save (e.g. - last modified time > 5 minutes ago)
+- For instruments with multiple users, does the instrument export to the same folder location for each user?
+
+### Instrument Run Metadata
+
+[Tagging files](../connectivity/Tags) with relevant characteristics is critical for ensuring that data remains appropriately organized and accessible once captured in Ganymede.  By default, Ganymede captures PC information as shown in the [Monitoring Agent Connections section of the Agent documentation](../connectivity/Agent#monitoring-agent-connections), but instrument data often can be shaped to a degree by end-user needs.  Some questions to consider when tagging files are:
+
+- What are the metadata fields that are relevant to the instrument?  Some examples include:
+  - Instrument name / vendor
+  - Instrument function
+  - Instrument location
+  - Software name / version
+  - Team
+  - Program
+  - Experiment
+  - Sample
+  - User
+
+- Where do the metadata fields live?  Are they in the file name, file contents, or contents of the captured files?
