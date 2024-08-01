@@ -6,16 +6,6 @@ displayed_sidebar: releaseSideBar
 
 This page contains a summary of key version updates for the Ganymede [Agent](../connectivity/Agent.mdx).  Since the individual instances of Agents (connections) are not updated when the Agent is updated, this page can be helpful for determining the capabilities of specific connections previously installed.
 
-## 4.7.0
-
-- Connection versions can be updated remotely from the Ganymede Cloud
-
-## 4.6.0
-
-- Recoverable errors will result in Agent restart rather than shutdown
-- Address null type exception thrown for Cloud Watcher Agents if no glob pattern is specified
-- Fix add_file_tag method for cron and upload Agents
-
 ## 4.5.0
 
 - Connection configuration can be updated remotely from the Ganymede Cloud.  For example, the input path being watched by the Agent can be updated remotely.
