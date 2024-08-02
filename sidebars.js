@@ -117,7 +117,7 @@ module.exports = {
         type: 'category',
         label: 'Environment Setup',
         collapsed: false,
-        items: ['configuration/SSOConfig', 'configuration/AgentNetworkConfig']
+        items: ['configuration/SSOConfig', 'configuration/AgentNetworkConfig', 'configuration/S3EventConfig']
       },
       {
         type: 'doc',
