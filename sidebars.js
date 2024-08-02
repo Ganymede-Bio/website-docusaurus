@@ -59,7 +59,7 @@ module.exports = {
           {
             type: 'doc',
             id: 'connectivity/Agent',
-            label: 'Agents for Instrument Communication'
+            label: 'Agents for Instrument Data Capture and Delivery'
           },
           {
             type: 'doc',
