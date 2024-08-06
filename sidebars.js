@@ -74,7 +74,7 @@ module.exports = {
           {
             type: 'doc',
             id: 'connectivity/DebuggingAgents',
-            label: 'Troubleshooting Agents'
+            label: 'Agent Reference & Troubleshooting'
           }
         ]
       },
