@@ -32,6 +32,10 @@ table {
   margin: 0 auto;
 }
 
+.no-sidebar .theme-doc-sidebar-container {
+  display: none;
+}
+
 [data-theme='dark'] {
   --ifm-color-primary: #bab6e6;
   --ifm-color-primary-light: #d7d5f1;
