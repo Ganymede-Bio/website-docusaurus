@@ -4,6 +4,27 @@ title: August 2024
 displayed_sidebar: releaseSideBar
 ---
 
+### August 8 2024
+
+**Features**
+- **Agents**: Agents installed on Windows at version 4.8 or later can now have their core version remotely updated
+    - When triggered, this will install the latest compatible version of the Ganymede agent which bring logging and performance improvements
+    - You can trigger this from the agent's page if the latest version is compatible with the agent's version
+- **UI**: Each environment can have a default role that will be applied to new users as they log in to Ganymede
+    - This can be set by an admin in the environment settings page
+    - The default role can be set to Reader, Writer, Runner, Admin, or None
+
+**Improvements**
+- **UI**: Files page loading has been optimized for better performance
+- **Agents**: Agents will have less delay between detecting a file and running a flow
+- **UI**: Tag activity page has been updated to support paging and more efficient loading
+
+**Bug Fixes**
+- **Agents**: [Windows] Signals are now properly handled and don't cause the agent to shut down
+- **Agents**: [Windows] Connections now properly handle connection names with spaces
+
+
+
 ### August 1 2024
 
 **Features**
