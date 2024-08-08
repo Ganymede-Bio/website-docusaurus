@@ -10,21 +10,6 @@ module.exports = {
   favicon: 'img/favicon.png',
   organizationName: 'Ganymede-Bio',
   projectName: 'website-docusaurus',
-  plugins: [
-    [
-      '@docusaurus/plugin-client-redirects',
-      {
-        createRedirects(existingPath) {
-          if (existingPath.includes('/api')) {
-            return [
-              existingPath.replace('/api', '/sdk'),
-            ];
-          }
-          return undefined; // Return a falsy value: no redirect created
-        },
-      },
-    ],
-  ],
   themeConfig: {
     prism: {
       additionalLanguages: ['python', 'bash', 'powershell'],
@@ -59,8 +44,8 @@ module.exports = {
         {
           type: 'doc',
           position: 'left',
-          docId: 'api/GanymedeSDKOverview',
-          label: 'API'
+          docId: 'sdk/GanymedeSDKOverview',
+          label: 'SDK'
         },
         {
           type: 'doc',
@@ -91,7 +76,7 @@ module.exports = {
             },
             {
               label: 'Ganymede SDK',
-              to: 'api/GanymedeSDKOverview'
+              to: 'sdk/GanymedeSDKOverview'
             },
             {
               label: 'Release Notes',
