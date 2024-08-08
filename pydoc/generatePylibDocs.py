@@ -16,7 +16,7 @@ PYLIB_PATH = f"../pylib/src/{PKG}"
 SAVE_PATH = "../docs/sdk/markdowns"
 
 sidebar_dict = {
-    "api": {"type": "category", "label": "API", "collapsed": True, "items": []},
+    "sdk": {"type": "category", "label": "SDK", "collapsed": True, "items": []},
     "analytics": {
         "type": "category",
         "label": "Analytics",
