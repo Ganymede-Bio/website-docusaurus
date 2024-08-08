@@ -1,0 +1,51 @@
+---
+id: GanymedeSDKOverview
+title: Ganymede SDK
+displayed_sidebar: SDKSidebar
+sidebar_label: SDK Overview
+---
+
+
+The Ganymede SDK provides a methods for interacting with Ganymede from editor and analysis notebooks.
+
+```python
+from ganymede_sdk import Ganymede
+```
+
+- The [**Ganymede**](./GanymedeClass.mdx) Class contains methods for listing and retrieving data stored in Ganymede
+- The [**Benchling**](./Benchling.mdx) Class contains convenience methods for accessing Benchling data
+- [**Analytical methods**](./markdowns/fcs.md) and [**more granular API documentation**](./markdowns/benchling.benchling.md) can be found under the SDK header on the left
+- The [**AI**](./AI) page contains methods for interacting with Ganymede using natural language
+- [**Allotrope Schemas**](./markdowns/allotrope_schema.md) contains DataFrame schemas for validating DataFrames against Allotrope schemas
+
+:::tip
+
+Functions can be introspected by typing ? or ?? before the function name in a notebook cell.  For example:
+
+```python
+from ganymede_sdk import Ganymede
+
+g = Ganymede()
+
+# shows function signature and docstring 
+?g.retrieve_sql
+```
+
+<div style={{textAlign: 'center'}}>
+  <img alt="Explore documentation" 
+       src="https://ganymede-bio.mo.cloudinary.net/apiServer/Example_Function_Docstring20230712.png"
+       />
+</div>
+
+
+```python
+# shows function signature and source code
+??g
+```
+
+<div style={{textAlign: 'center'}}>
+  <img alt="Function Signature and Source Code" 
+       src="https://ganymede-bio.mo.cloudinary.net/apiServer/ObjectSourceCode4_20240606.png"
+       />
+</div>
+:::

@@ -1,0 +1,61 @@
+---
+id: AI
+title: AI Help and Code Generation
+displayed_sidebar: SDKSidebar
+---
+
+Ganymede incorporates OpenAI models to facilitate document search and code generation in Flow development.  When configured, these functions can be accessed in notebooks without additional imports by calling the `help` and `code` functions respectively.
+
+## GPT Setup
+
+To set up access for any given environment, ensure that the following variables are set in [Environment Administration](../AdminControls):
+
+* **openai_api_key** - API key for the OpenAI service account specific to your tenant
+* **openai_project** - Project ID for the OpenAI service account specific to your tenant
+* **openai_ganymede_docs_asst** - [Assistant ID](https://platform.openai.com/assistants) for searching Ganymede documentation
+
+By default, access is configured in non-production environments.  Please reach out to [Ganymede support](mailto:support@ganymede.bio) to enable this feature in other environments.
+
+## Usage
+
+### Search Documentation
+
+When enabled, the documentation site can be queried in notebooks by using the `help` function.  For example:
+
+```python
+help("How do I add tags to a file in Ganymede?")
+``` 
+
+returns a response similar to what is shown below:
+
+<div class="text--center">
+<img alt="Example response on tags" src="https://ganymede-bio.mo.cloudinary.net/apiServer/HelpExample_20240523.png"/>
+<img alt="Example response on tags2" src="https://ganymede-bio.mo.cloudinary.net/apiServer/HelpExample2_20240523.png"/>
+</div>
+
+Messages sent within a single notebook session will be incorporated into the same OpenAI [Thread](https://platform.openai.com/docs/assistants/overview).
+
+### Code Generation
+
+The `code` function can be used to generate code snippets in editor notebooks, which can be used as the basis for the execute function.  This function generates code for the [User-Defined Function section of the notebook](../NodeEditor#backing-notebooks) based on a provided prompt and files provided. 
+
+To try this feature out, you can perform the following steps:
+
+0. Create a [CSV_Read node](../nodes/File/CSV_Read) in a Flow and open up the corresponding notebook.
+1. Download [this example file](https://github.com/Ganymede-Bio/website-docusaurus/raw/main/qiacuity_dpcr_example01.csv) and upload this file using the widget in the testing section of the notebook.
+2. Run the following code in the notebook:
+
+```python
+code(query_str='Can you fill out the "execute" function referenced in the instructions to upload the attached data as a table called "results"? Please ignore the first row in the CSV file, treating the second row as the header. Please name the first column in the uploaded file "Well Position".', 
+     files=input_file)
+```
+
+Executing this code will generate a response similar to the one shown below:
+
+<div class="text--center">
+<img alt="Example response on code" src="https://ganymede-bio.mo.cloudinary.net/apiServer/CodeExample_20240522.png"/>
+<img alt="Example response on code2" src="https://ganymede-bio.mo.cloudinary.net/apiServer/CodeExample2_20240522.png"/>
+</div>
+
+Copying and pasting this code into the User-Defined Function section of the notebook will allow you to execute the function and view the results in the notebook.
+
