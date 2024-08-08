@@ -62,7 +62,7 @@ Calls Benchling to get data for flow to trigger
 
 ### Notes
 
-Documentation for the Benchling API can be found here: https://benchling.com/api/reference
+Documentation for the Benchling API can be found here: https://benchling.com/sdk/reference
 Reference for Benchling events can be found here: https://docs.benchling.com/docs/events-reference
 
 benchling_context is an object of class BenchlingContext, consisting of

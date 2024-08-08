@@ -7,16 +7,16 @@ import textwrap
 SIDEBAR_HEADER = """---
 sidebar_label: {}
 title: {}
-displayed_sidebar: APISidebar
+displayed_sidebar: SDKSidebar
 --- \n\n
 """
 
 PKG = "ganymede_sdk"
 PYLIB_PATH = f"../pylib/src/{PKG}"
-SAVE_PATH = "../docs/api/markdowns"
+SAVE_PATH = "../docs/sdk/markdowns"
 
 sidebar_dict = {
-    "api": {"type": "category", "label": "API", "collapsed": True, "items": []},
+    "sdk": {"type": "category", "label": "SDK", "collapsed": True, "items": []},
     "analytics": {
         "type": "category",
         "label": "Analytics",
@@ -69,7 +69,7 @@ def dir_files_docstrings_to_markdown_files(_dir, save_path):
             with open(markdown_file, "w") as mf:
                 mf.write(docstrings_md.replace("{", "\{").replace("}", "\}"))
 
-            sidebar_dict[md_key]["items"].append(f"api/markdowns/{header}")
+            sidebar_dict[md_key]["items"].append(f"sdk/markdowns/{header}")
 
 
 def file_docstrings_to_markdown(file_path, header=None):
