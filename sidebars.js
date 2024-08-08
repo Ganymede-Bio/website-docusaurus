@@ -3,8 +3,8 @@ nodeApp = require('./docs/nodes/App/sidebar.json')
 nodeFile = require('./docs/nodes/File/sidebar.json')
 nodeInstrument = require('./docs/nodes/Instrument/sidebar.json')
 nodeTag = require('./docs/nodes/Tag/sidebar.json')
-nodeSDKApi = require('./docs/api/markdowns/sidebar_apps.json')
-nodeSDKAnalytics = require('./docs/api/markdowns/sidebar_analytics.json')
+nodeSDK = require('./docs/sdk/markdowns/sidebar_apps.json')
+nodeSDKAnalytics = require('./docs/sdk/markdowns/sidebar_analytics.json')
 
 module.exports = {
   webUiSidebar:
@@ -158,18 +158,18 @@ module.exports = {
         nodeTag]
     }
   ],
-  APISidebar: [
+  SDKSidebar: [
     {
       type: 'doc',
-      id: 'api/GanymedeSDKOverview',
+      id: 'sdk/GanymedeSDKOverview',
     },
     {
       type: 'doc',
-      id: 'api/GanymedeClass',
+      id: 'sdk/GanymedeClass',
     },
     {
       type: 'doc',
-      id: 'api/BenchlingClass',
+      id: 'sdk/BenchlingClass',
     },
     {
       type: 'category',
@@ -177,23 +177,23 @@ module.exports = {
       items: [
         {
           type: 'doc',
-          id: 'api/DataValidation',
+          id: 'sdk/DataValidation',
         },
         {
           type: 'doc',
-          id: 'api/markdowns/allotrope_schema',
+          id: 'sdk/markdowns/allotrope_schema',
           label: 'Allotrope'
         },
         {
           type: 'doc',
-          id: 'api/FileTags',
+          id: 'sdk/FileTags',
         }
       ],
       collapsed: false
     },
     {
       type: 'doc',
-      id: 'api/AI',
+      id: 'sdk/AI',
       label: 'AI Help and Code Generation'
     },
     {
@@ -203,13 +203,13 @@ module.exports = {
       items: [
         {
           type: 'doc',
-          id: 'api/markdowns/AgentDataModels',
+          id: 'sdk/markdowns/AgentDataModels',
         },
         {
           type: 'doc',
-          id: 'api/markdowns/EnvironmentDetection',
+          id: 'sdk/markdowns/EnvironmentDetection',
         },
-        nodeSDKApi,
+        nodeSDK,
         nodeSDKAnalytics
       ],
       collapsed: false

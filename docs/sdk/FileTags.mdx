@@ -1,7 +1,7 @@
 ---
 id: FileTags
 title: File Tags and File Utilities
-displayed_sidebar: APISidebar
+displayed_sidebar: SDKSidebar
 sidebar_label: File Tags and Utilities
 ---
 
@@ -13,7 +13,7 @@ The Ganymede SDK offers methods to interact with file tags from the flow editor 
 
 Adds a file tag to a file.
 
-- _param_ **input_file_path**: str - The name of the file to tag.  The file path can be obtained from the keys in the dictionary returned by the [retrieve_files](../api/GanymedeClass#method-retrieve_files) for Ganymede class or by calling the [get_gcs_uri method](#get_gcs_uri).
+- _param_ **input_file_path**: str - The name of the file to tag.  The file path can be obtained from the keys in the dictionary returned by the [retrieve_files](../sdk/GanymedeClass#method-retrieve_files) for Ganymede class or by calling the [get_gcs_uri method](#get_gcs_uri).
 - _param_ **tag_type_id**: str - The name of the tag type to apply to the file.  This corresponds with the tag type created on the Manage Tag Types tab of the Files page in the Ganymede UI.
 - _param_ **display_value**: str - Value to apply to the tag.
 - _param_ **tag_id**: Optional[str] - The tag id to apply to the file. If not provided, the tag will be created.
@@ -48,7 +48,7 @@ Deletes a specific tag from a File.
 
 Add or replace a file tag on a file.
 
-- _param_ **input_file_path**: str - The name of the file to tag.  The file path can be obtained from the keys in the dictionary returned by the [retrieve_files](../api/GanymedeClass#method-retrieve_files) for Ganymede class.
+- _param_ **input_file_path**: str - The name of the file to tag.  The file path can be obtained from the keys in the dictionary returned by the [retrieve_files](../sdk/GanymedeClass#method-retrieve_files) for Ganymede class.
 - _param_ **tag_type_id**: str - The name of the tag type to apply to the file.  This corresponds with the tag type created on the Manage Tag Types tab of the Files page in the Ganymede UI.
 - _param_ **display_value**: str - Value to apply to the tag.
 - _param_ **tag_id**: Optional[str] - The tag id to apply to the file. If not provided, the tag will be created.

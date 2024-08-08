@@ -1,7 +1,7 @@
 ---
 sidebar_label: lc.cdf
 title: lc.cdf
-displayed_sidebar: APISidebar
+displayed_sidebar: SDKSidebar
 --- 
 
 
