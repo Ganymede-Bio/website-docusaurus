@@ -203,7 +203,7 @@ module.exports = {
       items: [
         {
           type: 'doc',
-          id: 'sdk/markdowns/AgentDataModels',
+          id: 'sdk/markdowns/AgentModelsAndMethods',
         },
         {
           type: 'doc',
