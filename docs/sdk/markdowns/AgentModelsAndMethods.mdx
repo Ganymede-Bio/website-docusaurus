@@ -1,5 +1,5 @@
 ---
-id: AgentDataModels
+id: AgentModelsAndMethods
 title: Agent Models and Methods
 displayed_sidebar: SDKSidebar
 ---
@@ -171,3 +171,18 @@ The ScanResult object is a dataclass used to store the file paths for files of i
 
 One example of how these functions can be used is to use `scan_for_finished_files` to scan a directory for files continuously, uploading them to Ganymede Cloud for processing when they are older than a specified number of minutes.  Such a flow would query previously uploaded files to Ganymede using the [list_files](../GanymedeClass.mdx#method-list_files) method to ensure that the same file is not uploaded multiple times.
 
+### Accessing Ganymede tables from Agents
+
+`agent.ganymede` contains convenience methods for accessing Ganymede cloud from Agents.
+
+#### Functions
+
+`read_sql_query` returns a Pandas DataFrame for a query executed against the Ganymede data lake.
+
+- _param_ **sql_query**: str - SQL query string (in BigQuery format) to execute
+
+```python
+from agent.ganymede import read_sql_query
+
+df = read_sql_query("SELECT * FROM plate_map WHERE experiment_id = 'exp123'")
+```

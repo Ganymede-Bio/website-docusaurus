@@ -45,7 +45,7 @@ The strict mode setting, if disabled, allows admins to delete or modify tags.  T
 
 ### Tagging Files
 
-Files can be tagged in user-defined code within flows and agents, but using slightly different methods.  Within flows, files are tagged by passing the path to the file into the `add_file_tag` function.  Within agents, files are tagged by passing the [FileParam](../sdk/markdowns/AgentDataModels#classes-associated-with-agent-triggered-flows) object into the `add_file_tag_to_fileparam` function.  The FileParam object holds the file that the Agent submits to Ganymede storage (for initiating a flow if the agent is configured to do so).
+Files can be tagged in user-defined code within flows and agents, but using slightly different methods.  Within flows, files are tagged by passing the path to the file into the `add_file_tag` function.  Within agents, files are tagged by passing the [FileParam](../sdk/markdowns/AgentModelsAndMethods#classes-associated-with-agent-triggered-flows) object into the `add_file_tag_to_fileparam` function.  The FileParam object holds the file that the Agent submits to Ganymede storage (for initiating a flow if the agent is configured to do so).
 
 The full set of methods available for interacting with tags can be found on the [File Tag](../sdk/FileTags.mdx) module in the SDK documentation.
 
