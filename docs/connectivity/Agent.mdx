@@ -726,7 +726,7 @@ If the new connection fails to start, the old connection will resume and will no
 Changes in the agent configuration, including the agent processor, or connection configuration will be sent to the connection on its next status ping as soon as they are saved.
 
 **Update Process**
-A runtime update does not require any process restart or executable installation. As a result, the connection is able to accept changes to configuration while continuing its normal operations. The update is validated for authenticity, the information is stored locally for access if it connection restarts for any reason in the future, then the information is loaded into the connection's memory for usage in its intended functionality.
+A runtime update does not require any process restart or executable re-installation. As a result, the connection is able to accept changes to configuration while continuing its normal operations. The update is validated for integrity and the information is stored locally for access if it connection restarts for any reason in the future.
 
 ### Viewing Build History
 
