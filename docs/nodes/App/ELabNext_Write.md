@@ -12,7 +12,7 @@ Retrieves one or more tables from Ganymede data lake, which are processed by use
 function.  The tables returned by the user-defined function are uploaded to
 the specified eLabNext page.
 
-[Documentation for the eLabNext API](https://www.elabjournal.com/docs/sdk/index#!/Experiment_Sections/ExperimentSection_CreateSection)
+[Documentation for the eLabNext API](https://www.elabjournal.com/docs/api/index#!/Experiment_Sections/ExperimentSection_CreateSection)
 
 ### Node Attributes
 
@@ -57,4 +57,4 @@ Example demonstrating submission of user-defined SQL query into eLabNext
 
 ### Notes
 
-See [eLabNext API](https://www.elabjournal.com/docs/sdk/index) for more details on API usage.
+See [eLabNext API](https://www.elabjournal.com/docs/api/index) for more details on API usage.

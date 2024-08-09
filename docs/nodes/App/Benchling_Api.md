@@ -56,4 +56,4 @@ conjunction with the Input_Param node.
 
 ### Notes
 
-Documentation for the Benchling API can be found here: https://benchling.com/sdk/reference
+Documentation for the Benchling API can be found here: https://benchling.com/api/reference
