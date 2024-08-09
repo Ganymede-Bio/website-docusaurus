@@ -686,7 +686,7 @@ Every time the connection contacts Ganymede with a health check-in, Ganymede res
 
 - Core Version Update: The core version corresponds to the underlying agent code developed by Ganymede. These changes are new features or patches that can be applied to all agents across all environment but each agent manages which core version it is pinned to.
 - Agent Configuration Update: Agent configuration is updated through the agent page or the agent's processor notebook. This is a configuration that all connections for that agent adhere to. For example, if an agent that watcher for files then runs a flow is updated to run a new flow when the params are met, all compatible connections will begin to run that flow after they complete their update. Every save to an agent notebook is considered a new version that will be retrieved and loaded after the connections next status ping.
-- Connection Configuration Update: Updates made to the connection's configuration on its page will only update the running connection that it corresponds to. Other connections for that agent will not observe any change is made. This includes connection aspects such as variables and labels.
+- Connection Configuration Update: Updates made to the connection's configuration on its page will only update the running connection that it corresponds to. Other connections for that agent will not be affected. Connection-level changes include variables and labels.
 
 There are two types of remote updates that occur based on the type of update - full or runtime update.
 
