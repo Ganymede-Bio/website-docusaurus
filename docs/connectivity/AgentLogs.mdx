@@ -13,7 +13,9 @@ The diagrams in this section show the steps that an Agent transitions through du
 
 Upon installing the binary associated with an Agent, the Connection associated with the Agent looks for whether a connection file exists to determine configuration.  If not available, configuration information is collected in a wizard (graphical for Windows, CLI for Linux) and a Connection configuration file is stored to a local file based on these inputs.  
 
-<img alt="Agent installation execution flow" src="https://ganymede-bio.mo.cloudinary.net/agent/AgentInstallationFlow2_20240807.png" />
+<div class="text--center">
+<img alt="Agent installation execution flow" width="600" src="https://ganymede-bio.mo.cloudinary.net/agent/Agent_Process_Diagrams-Binary_Installation_20240808.png" />
+</div>
 
 If the binary associated with the Agent is re-run, the Agent will attempt to use the previous configuration (found in the same directory as the binary) if available.  This can be convenient if there is a need re-install an Agent; to avoid using the existing connection configuration, remove the existing configuration file.
 
@@ -21,22 +23,22 @@ If the binary associated with the Agent is re-run, the Agent will attempt to use
 
 The Connection startup processes follows the config validation execution flow described in the prior section.  These steps are executed by the service that is created immediately after an Agent binary has been run.
 
-<img alt="Agent startup execution flow" src="https://ganymede-bio.mo.cloudinary.net/agent/AgentExecutionFlow_20240807.png" />
+<img alt="Agent startup execution flow" src="https://ganymede-bio.mo.cloudinary.net/agent/Agent_Process_Diagrams-Connection_Startup_20240808.png" />
 
 - **Create OS signal handling**: Signal handlers specific to the OS are created for handling system events (for example, to halt execution)
 - **Load conn obj from yaml**: Load the configuration file created during installation to the Connection
 - **Validate configuration**: The Agent validates that the configuration file is valid
 - **Upload local and OS service logs**: Local logs are for the Agent Connection are uploaded.  Note: this log upload occurs on a best efforts basis prior to health checks conducted in the subsequent step, and so may fail if the computer lacks connectivity with Ganymede Cloud
-- **Health Check**: Connectivity to Ganymede cloud and ability for the Agent to access local watch directory is established
-- **Register Connection**: Connection registers its configuration with Ganymede Cloud, sets its runtime state to EXECUTING, and its connection state to LIVE
-- **Start Status Ping**: Status ping thread starts executing.  This thread also handles version updates and responds to Ganymede Cloud requests to shut down (e.g. - if a user disables the Agent in the Ganymede web app)
-- **Execute Pipeline**: Connection executes its stated purpose (e.g. - scans local directory for new/modified files and uploads them)
+- **Health check**: Connectivity to Ganymede cloud and ability for the Agent to access local watch directory is established
+- **Register connection**: Connection registers its configuration with Ganymede Cloud, sets its runtime state to EXECUTING, and its connection state to LIVE
+- **Start status ping**: Status ping thread starts executing.  This thread also handles version updates and responds to Ganymede Cloud requests to shut down (e.g. - if a user disables the Agent in the Ganymede web app)
+- **Execute pipeline**: Connection executes its stated purpose (e.g. - scans local directory for new/modified files and uploads them)
 
 ### Execution
 
 Connections associated with an Agent pass through runtime states shown below.  The activities described in Connection Startup occur in the INITIALIZATION connection runtime state.  Transitions between the different states can be found in Connection log messages.
 
-<img alt="Connection Runtime State transitions" src="https://ganymede-bio.mo.cloudinary.net/agent/AgentConnectionRuntimeStateDiagram_20240807.png" />
+<img alt="Connection Runtime State transitions" src="https://ganymede-bio.mo.cloudinary.net/agent/Agent_Process_Diagrams-Execution_20240808.png" />
 
 | **Connection Runtime State** | **Description**                                                                                                                                        |
 | ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------- |
