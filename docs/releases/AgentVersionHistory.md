@@ -6,6 +6,22 @@ displayed_sidebar: releaseSideBar
 
 This page contains a summary of key version updates for the Ganymede [Agent](../connectivity/Agent.mdx).  Since the individual instances of Agents (connections) are not updated when the Agent is updated, this page can be helpful for determining the capabilities of specific connections previously installed.
 
+## 4.8.0
+
+- Connection logs are now systematically recorded on method calls to ease debugging
+- Connection versions can now be remotely updated for non-major updates
+- Ganymede database tables can be accessed using Ganymede SDK
+- Windows Agent Connection names can now have spaces
+- Performance improvements made to checking for file existence in Ganymede
+
+## 4.7.0
+
+- Agent error messages are now more concise
+
+## 4.6.0
+
+- Windows Agent installer file sizes reduced by ~30%
+
 ## 4.5.0
 
 - Connection configuration can be updated remotely from the Ganymede Cloud.  For example, the input path being watched by the Agent can be updated remotely.

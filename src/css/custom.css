@@ -23,7 +23,17 @@
   --ifm-color-black: black;
   --ifm-color-blue: blue;
   --ifm-color-blue-dark: #211e55;
-  --ifm-code-font-size: 95%;
+  --ifm-code-font-size: 80%;
+}
+
+/* table {
+  display: table;
+  width: initial;
+  margin: 0 auto;
+} */
+
+.no-sidebar .theme-doc-sidebar-container {
+  display: none;
 }
 
 [data-theme='dark'] {
