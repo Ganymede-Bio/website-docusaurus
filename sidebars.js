@@ -3,7 +3,7 @@ nodeApp = require('./docs/nodes/App/sidebar.json')
 nodeFile = require('./docs/nodes/File/sidebar.json')
 nodeInstrument = require('./docs/nodes/Instrument/sidebar.json')
 nodeTag = require('./docs/nodes/Tag/sidebar.json')
-nodeSDK = require('./docs/sdk/markdowns/sidebar_apps.json')
+nodeSDKAPI = require('./docs/sdk/markdowns/sidebar_api.json')
 nodeSDKAnalytics = require('./docs/sdk/markdowns/sidebar_analytics.json')
 
 module.exports = {
@@ -209,7 +209,7 @@ module.exports = {
           type: 'doc',
           id: 'sdk/markdowns/EnvironmentDetection',
         },
-        nodeSDK,
+        nodeSDKAPI,
         nodeSDKAnalytics
       ],
       collapsed: false

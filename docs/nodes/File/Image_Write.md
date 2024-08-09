@@ -9,7 +9,9 @@ displayed_sidebar: nodeSidebar
 Parse table data and writes to storage.  Useful for storing graphs created from data.
 
 Retrieves table(s) from Ganymede data lake, processes table(s) via user-defined function,
-and stores result in cloud storages
+and stores result in cloud storages.
+
+Inkscape is installed in the container to convert various image formats.
 
 ## User-Defined Python
 

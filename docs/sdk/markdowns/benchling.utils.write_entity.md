@@ -29,7 +29,7 @@ Register custom entity to Benchling registry with retry logic
   
 ### Raises  
   
-**BenchlingError**  
+**RegistrationError**  
 &nbsp; &nbsp; &nbsp; &nbsp; Failure to register entity to registry  
 
 
@@ -65,6 +65,11 @@ Creates and returns the id of the custom entity.
   
 `Dict[str, str]`  
 &nbsp; &nbsp; &nbsp; &nbsp; Dictionary with custom entity name as key and custom entity ID as value  
+  
+### Raises  
+  
+**BenchlingError**  
+&nbsp; &nbsp; &nbsp; &nbsp; Failure to create entity  
 
 
 ## `function` update_custom_entity
