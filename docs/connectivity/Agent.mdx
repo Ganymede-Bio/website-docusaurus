@@ -712,6 +712,8 @@ Once a user clicks to Upgrade an agent, all connections will be told of the new 
 **Update Process**
 A full update requires reinstalling the executable, but Ganymede now takes care of this installation seamlessly. When a connection receives a command to do a full update, it will continue to operate normally but also attempt to start the new version in parallel after verifying the validity of the command and the executable. Once this new version registers with Ganymede as operational, the old connection will stop. The new executable will also cleanup the artifacts of the old executable and its dependencies.
 
+There may be a disruption to any ongoing processing on the agent when an update is in progress so it is safest to request it when there is no activity on the instruments where the agents are running.
+
 If the new connection fails to start, the old connection will resume and will not be told to attempt a full update again on that version to avoid the connection from entering a precarious state.
 
 #### Runtime Update
