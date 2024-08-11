@@ -3,25 +3,26 @@ id: ReferenceArchitectures
 title: Reference Architectures
 sidebar_label: Reference Architectures
 displayed_sidebar: webUiSidebar
+toc_max_heading_level: 4
 ---
 
-The diagrams below illustrate different ways by which Ganymede can be incorporated into different lab workflows, and provides a few examples for architecture.
+The diagrams below illustrate various ways to integrate Ganymede into laboratory workflows, providing examples of possible architectures.
 
-The diagrams are not meant to be exhaustive, but rather to provide a starting point for understanding how different components of Ganymede can be pieced together to address different lab workflows.
+These diagrams are intended as starting points to help you understand how Ganymede's components can be configured to support different lab operations, rather than as exhaustive solutions.
 
 ## Software-Centric
 
 ### Data Capture and Visualization
 
-Data from lab instruments and analytical databases are captured and aggregated in Ganymede, enabling operational dashboards and reports for lab managers and scientists to be assembled from a broad variety of data.
+Ganymede aggregates data from laboratory instruments and analytical databases, enabling the creation of operational dashboards and reports for lab managers and scientists. These tools consolidate diverse data sources to provide comprehensive insights.
 
 <div class="text--center">
   <img width="400" alt="" src="https://storage.googleapis.com/ganymede-bio-website/public/general/ReferenceArchitectureDataStore2_20240614.png"/>
 </div>
 
-#### Example
+#### Example: Dashboarding QMS Data
 
-Centralization of data aggregated from multiple instruments and analytical databases to observe asset utilization and perform reliability analysis.  For example, Ganymede could connect to PI Server and LIMS to drive dashboards for visibility into lab operations.
+Centralizing data from multiple instruments and analytical databases allows for monitoring asset utilization and performing reliability analyses. For instance, Ganymede can interface with PI Server and LIMS to generate dashboards that enhance visibility into lab operations.
 
 ### Analytical Database Sync
 
@@ -29,11 +30,11 @@ Centralization of data aggregated from multiple instruments and analytical datab
   <img width="400" alt="" src="https://storage.googleapis.com/ganymede-bio-website/public/general/ReferenceArchitectureDBSync20240614.png"/>
 </div>
 
-Analytical databases with experimental results are periodically queried, with results systematically delivered to ELN/LIMS for contextualized presentation for wet lab scientists.  Similarly, LIMS data is periodically synced to general databases for querying and data analysis.
+Ganymede periodically queries analytical databases to extract experimental results, which are then systematically delivered to ELN/LIMS for contextual presentation to wet lab scientists. Similarly, LIMS data is regularly synced to general databases for broader querying and analysis.
 
-#### Example
+#### Example: Delivering ML Results to LIMS
 
-Syncing of key data from analytical databases used for machine learning to a LIMS for contextualization of experimental results.
+Synchronizing key data from analytical databases used in machine learning with a LIMS, enabling contextualization of experimental results.
 
 ### LIMS Sync
 
@@ -41,11 +42,11 @@ Syncing of key data from analytical databases used for machine learning to a LIM
   <img width="400" alt="" src="https://storage.googleapis.com/ganymede-bio-website/public/general/ReferenceArchitectureELNSync20240614.png"/>
 </div>
 
-The data from two different LIMS are synced to each other.  This enables users of each LIMS to leverage domain-specific features from each LIMS, while still being able to access data entered into the other LIMS.
+Ganymede facilitates the synchronization of data between two distinct LIMS platforms. This enables users to leverage the specialized features of each LIMS while accessing data from both systems.
 
-#### Example
+#### Example: Synchronizing Domain-Specific LIMS
 
-Syncing of data between LIMS tailored for biologics and small molecule discovery.
+Synchronizing data between LIMS systems tailored for biologics and small molecule discovery.
 
 ## Instrument-Centric
 
@@ -55,11 +56,11 @@ Syncing of data between LIMS tailored for biologics and small molecule discovery
   <img width="500" alt="Hands-Free Data Capture" src="https://storage.googleapis.com/ganymede-bio-website/public/general/ReferenceArchitectureDataCapture20240614.png"/>
 </div>
 
-Data from lab instruments are automatically captured in stored in Ganymede without manual intervention.  Ganymede creates an entity in the ELN/LIMS corresponding to instrument execution, and associates the results with the entity.  Users annotate the experiment on the instrument, which Ganymede parses and passes through to the ELN/LIMS.
+Ganymede automatically captures data from lab instruments and stores it without requiring manual intervention. The system creates a corresponding entity in the ELN/LIMS for each instrument execution and associates the results with this entity. Users annotate the experiment on the instrument, and Ganymede parses and forwards these annotations to the ELN/LIMS.
 
-#### Example
+#### Example: Bioprocessing Data Capture
 
-Passive capture of data from a bioreactor and associated cell culture analyzer.
+Passive data capture from a bioreactor and associated cell culture analyzer.
 
 ### Sample Data / Experimental Results Capture
 
@@ -67,11 +68,11 @@ Passive capture of data from a bioreactor and associated cell culture analyzer.
   <img width="600" alt="sample data / experimental results feed forward" src="https://storage.googleapis.com/ganymede-bio-website/public/general/ReferenceArchitectureSampleInstrumentSeparate20240614.png"/>
 </div>
 
-Users register samples & experiment run ID in the ELN/LIMS.  After an associated instrument run, users pass experimental results and associated experiment run ID, which Ganymede uses to retrieve experimental context.  After processing, Ganymede delivers results back to the ELN/LIMS.
+Users register samples and experiment run IDs in the ELN/LIMS. After the instrument run, experimental results and the associated run ID are passed to Ganymede, which retrieves the experimental context. Ganymede then processes the data and delivers the results back to the ELN/LIMS.
 
-#### Example
+#### Example: Plate map association for qPCR
 
-Sample data/metadata association for a live cell imaging experiment or a qPCR run.  A plate map is registered in the ELN/LIMS, and after the run, the plate map and results are passed to Ganymede for processing and delivery back to the ELN/LIMS.
+Associating sample data and metadata for a live cell imaging experiment or a qPCR run. A plate map is registered in the ELN/LIMS, and after the run, the map and results are processed by Ganymede and sent back to the ELN/LIMS.
 
 ### Orchestrated round-trip
 
@@ -79,11 +80,11 @@ Sample data/metadata association for a live cell imaging experiment or a qPCR ru
   <img width="700" alt="sample data / experiment results capture" src="https://storage.googleapis.com/ganymede-bio-website/public/general/ReferenceArchitectureBidirectional20240614.png"/>
 </div>
 
-Users register samples in the ELN/LIMS, which are processed into input files for the instrument and delivered by Ganymede, either to the instrument or an associated disk drive.  Users load input files to instruct the instrument for the experimental run.  After execution, experimental data is captured by Ganymede, processed, and uploaded to the ELN/LIMS.
+Users register samples in the ELN/LIMS, which are then processed into input files for the instrument. Ganymede delivers these files either directly to the instrument or to an associated disk drive. After the experimental run, Ganymede captures, processes, and uploads the experimental data back to the ELN/LIMS.
 
-#### Example
+#### Example: Chromatography sample execution and data capture
 
-Liquid chromatography run where sample and injection data are delivered to the LC, and results are subsequently captured from the CDS used to process experimental results.  Peak analysis corresponding to sample and assay are tailored and performed by Ganymede prior to delivery to ELN/LIMS.
+For a liquid chromatography run, sample and injection data are delivered to the LC, and results are subsequently captured from the CDS used to process the experimental data. Ganymede then performs tailored peak analysis before delivering the results to the ELN/LIMS.
 
 ### Orchestration with Manual Processing
 
@@ -91,10 +92,12 @@ Liquid chromatography run where sample and injection data are delivered to the L
   <img alt="Orchestration with Manual Processing" src="https://storage.googleapis.com/ganymede-bio-website/public/general/ReferenceArchitectureWithVirtualization20240614.png"/>
 </div>
 
-Sample data is delivered by Ganymede to the instrument for expediting experimental setup.  After the experiment, the data is captured by Ganymede and tagged to facilitate subsequent discovery.
+Ganymede delivers sample data to the instrument, expediting experimental setup. After the experiment, Ganymede captures and tags the data, facilitating subsequent discovery.
 
-Users select tagged data and perform manual processing in a virtualized environment.  The processed data is then delivered back to Ganymede, which delivers the data to the ELN/LIMS.  This workflow enables users to incorporate processing requiring manual oversight / analysis into a well-defined, automated workflow.
+Users can select the tagged data for manual processing in a virtualized environment. Once processed, the data is returned to Ganymede, which then delivers it to the ELN/LIMS. This workflow allows for the integration of manual analysis steps within an otherwise automated process.
 
-#### Example
+#### Example: Systematically capturing flow cytometry compensation and gating
 
-A flow cytometry run where a manual gating step is required to identify cell population counts.  Ganymede delivers sample information to the flow cytometer and captures raw data with annotation.  The user selects the raw data for processing in a virtualized environment, and after processing, the results are delivered back to Ganymede for delivery to the ELN/LIMS.
+In a flow cytometry run requiring manual gating to identify cell populations, Ganymede delivers sample information to the flow cytometer and captures raw data with annotations. Users then process the raw data in a virtualized environment, and the results are subsequently sent back to Ganymede for delivery to the ELN/LIMS.
+
+

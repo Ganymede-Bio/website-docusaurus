@@ -24,51 +24,69 @@ A: To exclude specific files from being uploaded, you can use the `fp` function 
 
 #### Q: How do I capture a file that is periodically overwritten by an instrument?
 
-A: Modified files are captured by the Agent, and so would be uploaded and processed in flows when modified.  Logic can be implemented within flow or agent logic to address intended behavior, depending on whether the instrument appends to or overwrites the file.
+A: File watcher Agents automatically capture modified files, which they then upload for processing in flows. You can implement logic within the flow or agent to handle the intended behavior, depending on whether the instrument appends to or overwrites the file.
 
 #### Q: Can I access environment secrets from the Agent?
 
-A: Yes, you can access environment secrets from the Agent.  To do so, you can reference the [get_secret](../sdk/GanymedeClass#method-get_secret) method.
+A: Yes, environment secrets can be accessed from the Agent by using the [get_secret](../sdk/GanymedeClass#method-get_secret) method.
 
 #### Q: Can I access an environment variable from a cron Agent?  For example, can I access the `input_path` variable configured upon installation?
 
-A: Yes, this can be done by referencing variables within the `kwargs` dictionary.  For example, to access the `input_path` variable, you can use the following code:
+A: Yes, environment variables can be accessed from a cron Agent through the `kwargs` dictionary.  For example, to access the `input_path` variable, you can use the following code:
 
 ```python
 # .get method for dictionries is used to handle the case where the variable may not be present without erroring out
 # note: assumes DEFAULT_PATH is configured in the agent
-watch_directory = Path(kwargs.get("vars", []).get("input_path", DEFAULT_PATH))
+watch_directory = Path(kwargs.get("vars", {}).get("input_path", DEFAULT_PATH))
 ```
 
 ## Troubleshooting
 
-#### Issue: I am unable to install the agent on Windows; the installer is failing at the final step.
+#### Issue: I am unable to install an Agent Connection on Windows; the installer is failing at the final step.
 
 Ensure that you are running the installer as an administrator.  
 
-Then, ensure that there is not an existing installation that is conflicting with the current installation.  To do so, open up the Task Manager and navigate to the Services tab.  Look for any service that starts with "GanymedeAgent-" and stop the service by right clicking on it and selecting "Stop".  Open up "Add or Remove Programs" and uninstall any existing Ganymede Agent installations.  Then, try installing the Agent again.
+Check for existing installations that might conflict with the current installation:
+- Open Task Manager and navigate to the Services tab.
+- Look for any service starting with "GanymedeAgent-" and stop it by right-clicking and selecting "Stop."
+- Open "Add or Remove Programs" and uninstall any existing Ganymede Agent installations.
+- Try installing the Agent again.
 
-#### Issue: The Agent is not actively running.  How do I check?
+#### Issue: The Agent Connection is not actively running.  How do I check?
 
-On Windows, check that the installed agent is running by opening up Task Manager and navigating to the Services tab.  Look for the agent of interest (will be a service with a name starting with "GanymedeAgent-") and verify that its current status is Running.  
+On Windows:
+- Open Task Manager and navigate to the Services tab.
+- Look for the Connection of interest (a service with a name starting with "GanymedeAgent-") and verify that its status is "Running."
+- If the service is not running, right-click on it and select "Start." Connections are configured to start upon reboot by default.
 
-On Linux, check that the installed agent is running by opening up a terminal and running the following command:
+On Linux:
 
-```bash
-sudo systemctl status GanymedeAgent-<agent_name>
-```
+- Open a terminal and run the following command to check the Agent's status:
 
-If you do not see it, ensure that the Agent is installed.
+  ```bash
+  sudo systemctl status GanymedeAgent-<agent_name>
+  ```
 
-If you see that the Agent is present but is not running, right click on the service and select "Start".  This should start the Agent.  Note that, by default, Agents are configured to start upon reboot.
+  If the Agent is installed but not running, you can start it by running:
 
-#### Issue: Agent is showing as disconnected after the Agent has been running for a while
+  ```bash
+  sudo systemctl start GanymedeAgent-<agent_name>
+  ```
 
-On Windows, ensure that the PC that the Agent is installed on is not asleep.  In particular, PCs with cron Agents should be configured to never sleep.  To do so, open up the Control Panel and navigate to "Hardware and Sound" -> "Power Options".  Select "Change when the computer sleeps" and set "Put the computer to sleep" to "Never".
+#### Issue: Agent Connection is showing as disconnected after running for a while
 
-Also, ensure that the current system time is properly sync'd; if the time is not inaccurate, the Agent will show as disconnected.  To do so, right click on the time in the bottom right corner of the screen and select "Adjust date/time".  Ensure that the "Set time automatically" option is enabled, and click "Sync now".
+On Windows:
+
+- Ensure that the PC where the Agent is installed is not asleep. PCs running cron Agents should be configured to never sleep:
+    - Open the Control Panel and navigate to "Hardware and Sound" -> "Power Options."
+    - Select "Change when the computer sleeps" and set "Put the computer to sleep" to "Never."
+- Verify that the system time is properly synced:
+    - Right-click on the time in the bottom right corner of the screen and select "Adjust date/time."
+    - Ensure that "Set time automatically" is enabled, and click "Sync now."
 
 #### Issue: The flow is failing to trigger when files are being dropped
+
+On Windows:
 
 Look at the logs for the agent in Ganymede App.  If you see the JWT error below, click on the system clock in the lower right corner of the screen and select "Adjust date/time".  Ensure that the "Set time automatically" option is enabled, and click "Sync now".
 
@@ -76,19 +94,20 @@ Look at the logs for the agent in Ganymede App.  If you see the JWT error below,
 _thread.ExceptHookArgs(exc_type=<class 'google.auth.exceptions.RefreshError'>, exc_value=RefreshError('invalid_grant: Invalid JWT: Token must be a short-lived token (60 minutes) and in a reasonable timeframe. Check your iat and exp values in the JWT claim.', {'error': 'invalid_grant', 'error_description': 'Invalid JWT: Token must be a short-lived token (60 minutes) and in a reasonable timeframe. Check your iat and exp values in the JWT claim.'})
 ```
 
-If not, verify that the watch folder is specified correctly.  This is configured upon [Agent installation](./Agent#windows-installation); note that the input path must be specified with forward slashes for both Windows and Linux installations.
+    - Right-click on the system clock and select "Adjust date/time."
+    - Ensure that "Set time automatically" is enabled, and click "Sync now."
 
-For example, to watch a folder on the Desktop named "watch_folder" specify the following on installation, with \<username\> replaced with the appropriate user name:
+Verify that the watch folder is correctly specified during [Agent installation](./Agent#windows-installation). Note that the input path must use forward slashes on both Windows and Linux installations:
 
 ```bash
 -v "input_path=C:/Users/<username>/Desktop/watch_folder"
 ```
 
-:::note Take care when copying and pasting commands
-One common gotcha is that the quote character `"` somehow gets replaced with the left or right quotes (`“` or `”`) when copying and pasting commands from documents (which can be hard to spot).  Always ensure that the single quote character `"` is used. 
+:::warning Take care when copying and pasting commands
+Be careful when copying and pasting commands. The quote character `"` can sometimes be replaced with left or right quotes (`“` or `”`), which may cause issues. Always ensure that the straight quote character `"` is used.
 :::
 
-#### Issue: All files are present in the directory watched.  In the logs within the app, files are shown as being collected in two different waiting groups, so the flow does not trigger.  How do I ensure that all files appear in the same waiting group?
+#### Issue: All files are present in the watched directory, but the flow does not trigger. The logs show files being collected in two different waiting groups.
 
 A: Unquote the string referenced within the fp function, which specifies which filename patterns the Agent should watch for.  An example is shown below:
 

@@ -6,28 +6,30 @@ displayed_sidebar: webUiSidebar
 
 import { DiffOutlined, PlusOutlined, SelectOutlined } from "@ant-design/icons";
 
-Ganymede Connections are a class of programs that can run directly on an instrument computer in the lab. Each Connection consists of a combination of user-defined code and Ganymede configuration, allowing for maximum flexibility in capturing files and interacting with the Ganymede ecosystem. 
+## Agents for Instrument Communication
 
-# Terminology
-- Agent: A combination of a trigger, processor, and action configuration to move data from a remote user device into Ganymede.
-- Trigger: A component that is configured to kick off the remaining agent pipeline based on a particular change or event
-- Processor: User defined code that converts whatever data is produced from a trigger into data that can be handled by the action in the end form appropriate for the use case.
-- Action: An interaction with Ganymede's cloud or application that will move data output from the processor into the configured location.
-- Connection: A running instance of the agent that has previously or is currently connected to Ganymede, waiting for the configured trigger.
-- Pipeline: A data flow of trigger -> processor -> action. This is tailored to the use case and is composed of a processor template to help guide that use case. Two pipelines can be composed of the same trigger and action but because of the end usage be populated with a different processor template on creation that is suited toward a given use case.
-- Runtime Uptime: An update to the latest processor and configuration (agent and connection-levels) that occurs “in-place”. Without requiring any stop or start of the process. The pipeline loop temporarily pauses to reload the files but no data is lost.
-- Full Update: A complete update of the connection binary. This is useful for including new dependency updates or core-codebase changes. A new connection executable must be brought up in parallel.
-- Connection Configuration: Each installed executable maintains its own name, labels, variables, and file tags. These, plus the “parent-level” agent configuration and processor make a connection unique. Certain connection metadata is not configurable and therefore not a part of the configuration, such as the id, start time, version, and generated metadata. 
-- Connection Version: Anytime the connection configuration is modified, the connection version is updated. This version should follow the standard Ganymede version scheme of YYYYMMDD_HHmmSSssss
-- Agent Configuration: An agent’s action and trigger can be configured for certain behavior. Otherwise, the configuration includes other user-friendly optiosn such as name and file tags. 
-- Agent Version: Any time the agent configuration is changed, the version, in the standard Ganymede version scheme, is updated. 
-- Core Version: This refers to the underlying core agent repo version. This is the internal foundational code that all agents, regardless of type or configuration, run on. New features and bug patches for the core will increment the version. 
-- Connection Variables: Key-Value pairs that are stored in the connection configuration, meaning that they can be different per executable, that are allowed to be accessed by the user. These variables may be valuable for processor code that depends on certain connection-level variables.
-- Connection Labels: A list of strings that are intended to help categorize and identify connections in the Ganymede UI. 
-- Connection Context: An internal dictionary to the code that should not be exposed to the user but allows passing data between the agent trigger, processor, and action if necessary.
+Ganymede Connections are specialized programs that can run directly on an instrument computer in the lab. Each Connection consists of a combination of user-defined code and Ganymede configuration, providing flexibility in capturing files and interacting with the Ganymede ecosystem.
+
+### Terminology
+- **Agent**: A combination of a trigger, processor, and action configuration to move data from a remote user device into Ganymede.
+- **Trigger**: A component configured to initiate the agent pipeline based on a specific change or event.
+- **Processor**: User-defined code that converts data produced by a trigger into a format suitable for the action.
+- **Action**: Interaction with Ganymede's cloud or application that moves the processed data to the desired location.
+- **Connection**: A running instance of the agent that is or has been connected to Ganymede, waiting for the configured trigger.
+- **Pipeline**: A data flow of trigger -> processor -> action, tailored to the use case. Pipelines may share the same trigger and action but differ in the processor template based on the use case.
+- **Runtime Uptime**: An in-place update to the latest processor and configuration (agent and connection levels) without stopping the process. The pipeline loop temporarily pauses to reload files, but no data is lost.
+- **Full Update**: A complete update of the connection binary, useful for incorporating new dependency updates or core-codebase changes. A new connection executable must be brought up in parallel.
+- **Connection Configuration**: Each installed executable maintains its own name, labels, variables, and file tags. This configuration, along with the “parent-level” agent configuration and processor, makes a connection unique. Some metadata, like ID, start time, version, and generated metadata, is not configurable.
+- **Connection Version**: Updated whenever the connection configuration is modified. It follows the standard Ganymede version scheme of YYYYMMDD_HHmmSSssss.
+- **Agent Configuration**: An agent's action and trigger can be configured for certain behaviors. The configuration includes user-friendly options like name and file tags.
+- **Agent Version**: Updated whenever the agent configuration changes, following the standard Ganymede version scheme.
+- **Core Version**: Refers to the underlying core agent repo version, which is the foundational code all agents run on. New features and bug patches increment this version.
+- **Connection Variables**: Key-value pairs stored in the connection configuration, accessible by the user, and used by processor code that depends on certain connection-level variables.
+- **Connection Labels**: Strings used to categorize and identify connections in the Ganymede UI.
+- **Connection Context**: An internal dictionary within the code that is not exposed to the user but allows data to pass between the agent trigger, processor, and action if necessary.
 
 # Quick Start
-After creating a Connection, users can build and install local executables called Agents, individual instances of a given Connection, on instrument PCs.
+After creating a Connection, users can build and install local executables called Connections, individual instances of a given Agent, on instrument PCs.
 
 <img
   alt="Connections front page"
@@ -37,17 +39,17 @@ After creating a Connection, users can build and install local executables calle
 
 Agents can
 
-- filter and designate how to process data
+- filter and process data
 - upload files into Ganymede Cloud
-- initiate data processing pipelines, which can be based
-  - upon specific files being written to the local machine by the instrument
-  - upon specific files being written to a cloud storage bucket
-  - on a scheduled cadence
-- deliver data to instrument PCs from Ganymede Cloud
+- initiate data processing pipelines, based on:
+  - files written to the local machine by the instrument
+  - files written to a cloud storage bucket
+  - a scheduled cadence
+- deliver data from Ganymede Cloud to instrument PCs
 
-Users specify which of the above actions to take by configuring the Agent in the Ganymede app. Doing so creates a Linux binary and Windows executable corresponding to the specified configuration, which users can then install on instrument PCs. Once created, users can optionally [configure a user-defined Python script](#configuring-user-defined-python) associated with the Agent.
+Users specify these actions by configuring the Agent in the Ganymede app. Doing so creates a Linux binary and Windows executable, which can then be installed on instrument PCs. Optionally, users can [configure a user-defined Python script](#configuring-user-defined-python) associated with the Agent.
 
-For details on system requirements for Agents, see [Agent Network Config & Prerequisites](../configuration/AgentNetworkConfig).
+For system requirements, see [Agent Network Config & Prerequisites](../configuration/AgentNetworkConfig).
 
 ## Building an Agent Overview
 
@@ -59,7 +61,7 @@ To create a new Agent, click the <div className="button system_button"><PlusOutl
 />
 &nbsp;
 
-The left side of the configuration panel is used to specify the Agent's configuration; Agent parameters relevant to selected configuration are displayed. The right side of the configuration panel shows the default Python script associated with the Agent, which can be modified after Agent installation.
+The left side of the configuration panel is used to specify the Agent's configuration, while the right side displays the default Python script associated with the Agent, which can be modified after installation.
 
 <div class="text--center">
   <img
@@ -69,32 +71,31 @@ The left side of the configuration panel is used to specify the Agent's configur
 </div>
 &nbsp;
 
-After filling out this form, click <div className="button darkblue_button_icon">Create</div> to start building Windows and Linux executables. When the build is complete, the Agent (i.e. - the configured executables) can be downloaded from the Ganymede application by selecting the corresponding Agent from the Connections tab.
+After filling out the form, click <div className="button darkblue_button_icon">Create</div> to start building Windows and Linux executables. When the build is complete, the Agent can be downloaded from the Ganymede application by selecting the corresponding Agent from the Connections tab.
 
-Building an executable typically takes around 10 minutes to complete. Once built, the Agent can be downloaded onto the instrument PC from the Connections tab of the Ganymede web app and installed.
+Building an executable typically takes around 10 minutes. Once built, the Agent can be downloaded onto the instrument PC from the Connections tab of the Ganymede web app and installed.
 
 ## Configuring Agents
 
-All Agents have two required input parameters, _Name_ and _Configuration_. Once the Configuration is selected, Input Parameters specific to the Configuration may appear.
+All Agents have two required input parameters, _Name_ and _Configuration_. Once the Configuration is selected, specific input parameters may appear.
 
 The _Name_ input is used to specify the display name for the Agent.
 
-The _Configuration_ input specifies the action performed by the Agent, chosen from the following options:
+The _Configuration_ input specifies the action performed by the Agent, with options including:
 
 - [**Watch for files locally then run flow**](#watch-for-files-locally-then-run-flow): Monitor specified directory on the local file system for files to process and execute upon observing new files matching specified pattern
 - [**Set a cron job to run flows periodically**](#set-a-cron-job-to-run-flows-periodically): Periodically observe local directory for files and deliver those files to Ganymede Cloud for processing
 - [**Watch for files locally and upload**](#watch-for-files-locally-and-upload): Monitor specified directory on the local file system and upload files to Ganymede Cloud upon observation.
 - [**Watch for flow outputs then save locally**](#watch-for-flow-outputs-then-save-locally): Monitor specified flow in Ganymede Cloud Storage for new output files, and capture + process files on local instrument PC upon observation.
 
-:::note
+  :::note
 
-For Cloud Watcher agents that download files from Ganymede Cloud, you can specify that they watch for flow _inputs_ (instead of the flow outputs) by adding the following to the Additional Params input box:
+  For Cloud Watcher agents that download files from Ganymede Cloud, you can specify that they watch for flow _inputs_ (instead of the flow outputs) by adding the following to the Additional Params input box:
 
-```bash
--v "input_bucket=true" 
-```
-:::
-
+  ```bash
+  -v "input_bucket=true" 
+  ```
+  :::
 
 - [**Load local files into Ganymede with a custom filter**](#load-local-files-into-ganymede-with-a-custom-filter): Send specified files on local instrument PC and process on Ganymede Cloud
 - [**Set a cron job to upload files periodically**](#set-a-cron-job-to-upload-files-periodically): Periodically deliver files to Ganymede Cloud
@@ -107,22 +108,28 @@ Three additional input parameters are available for all configurations:
 
 #### Input Parameters
 
-- `Flow Name`: Flow to run upon observing new files matching specified pattern
-- `Check Period (seconds)`: Frequency with which Agent will poll local directory for new files
-- `If a discovered filename exists in storage`: Whether to use the file in storage or the observed file in the local directory
-- `File pattern to parameter mapping`: For the selected Flow, the [glob pattern](<https://en.wikipedia.org/wiki/Glob_(programming)>) to associate with the input parameter(s)
-  - This option is only available on create. Further configuration updates will occur inside the notebook, not inside the agent configuration
-- `File Tags`: Tags to associate with the files uploaded to Ganymede Cloud
-- `Image`: Image to associate with agent.  A common use case is to associate an image of the instrument that the agent is running on.
-- `Auto deploy code and configuration changes to Live Connections`: If checked, updates to agent code will be reflected on currently installed agents.
+- `Flow Name`: The flow to run upon observing new files matching the specified pattern.
+- `Check Period (seconds)`: The frequency with which the Agent will poll the local directory for new files.
+- `If a discovered filename exists in storage`: Specifies whether to use the file in storage or the observed file in the local directory.
+- `File pattern to parameter mapping`: A [glob pattern](<https://en.wikipedia.org/wiki/Glob_(programming)>) associated with the input parameter(s) for the selected flow.
 
-The corresponding user-defined code will be generated to map those file patterns to parameters.  There are 2 functions that could require modification in the user-defined code during configuration:
+  :::note
+  
+  This option is only available during Agent creation. Further configuration updates will occur inside the notebook, not inside the agent configuration
+
+  :::
+
+- `File Tags`: Tags to associate with the files uploaded to Ganymede Cloud.
+- `Image`: An image to associate with agent in the Ganymede UI.
+- `Auto deploy code and configuration changes to Live Connections`: If checked, updates to Agent code will be reflected on current Connections.
+
+The user-defined code will be generated to map those file patterns to parameters.  Three functions may require modification during configuration:
 
 - `get_param_mapping`: This function is called whenever a file is added or modified in the watch directory.  Modify this function to specify the files you want to look for prior to triggering a flow.
 - `execute`: Called when all glob patterns specified by `get_param_mapping` have been matched, this object returned by this function specifies the inputs to the flow that is executed when all files are observed.
 - `fp`: This function returns a function that performs pattern matching against a file path.  Use this function as a template for matching files.
 
-For example, if the instrument outputs a CSV file called "\{id\}\_lc_output\<YYYYMMDD\>.csv" which is to be ingested by a [CSV_Read node](../nodes/File/CSV_Read.md) called "Ingest_Data", an appropriate configuration would be "\{id\}\_lc_output\*.csv" for the input box associated with the "Ingest_Data.csv" node.  The corresponding user-defined code would be:
+For example, if the instrument outputs a CSV file called "\{id\}\_lc_output\<YYYYMMDD\>.csv" that is to be ingested by a [CSV_Read node](../nodes/File/CSV_Read.md) called "Ingest_Data", an appropriate configuration would be "\{id\}\_lc_output\*.csv" for the input box associated with the "Ingest_Data.csv" node.  The corresponding user-defined code would be:
 
 ```python
 from ganymede_sdk.agent.models import TriggerFlowParams, FileWatcherResult
@@ -192,7 +199,7 @@ def execute(flow_params_fw: FileWatcherResult) -> TriggerFlowParams:
     )
 ```
 
-If a second parameter is added, such as an [Excel_Read node](../nodes/File/Excel_Read.md) called "Experiment_Context" that accepted files of the pattern "\{experiment_id\}\_context.xlsx", then the get_param_mapping function would later have to be modified to include that param like so:
+If a second parameter, such as an [Excel_Read node](../nodes/File/Excel_Read.md) called "Experiment_Context", is added, the **get_param_mapping** function would be modified to include that parameter:
 
 ```python
 def get_param_mapping(
@@ -225,15 +232,15 @@ def get_param_mapping(
     }
 ```
 
-This would not only ensure the files that match the parameters are sent to the correct flow node, but also only group files of the same id together. If three files came were ingested in the following order:
+This ensures that files matching the parameters are sent to the correct flow node, and files with the same ID are grouped together. For example, if the following files are ingested:
 
 - experiment626_lc_output072623.csv
 - experiment627_context.xlsx
 - experiment626_context.xlsx
 
-Instead of starting the flow after the first two files, which do fulfill the parameter file patterns, the experiment ids will be grouped together so that the flow is only started when all experiment626 files are ready.
+The flow will only start when all files for experiment627 are ready, preventing the flow from starting prematurely.
 
-Whenever a file matches a glob pattern, it will be uploaded to Ganymede storage, even if it's not used in a flow. Files that are written to the watched directory can be ignored by ensuring that they do not match any of the glob patterns for the parameter inputs.
+Files that match a glob pattern will be uploaded to Ganymede storage, even if they are not used in a flow. Files written to the watched directory can be ignored by ensuring they do not match any of the glob patterns for the parameter inputs.
 
 <div class="text--center">
   <img
@@ -272,8 +279,8 @@ An instrument outputs files to a directory as it completes runs, which are proce
 - `Flow Name`: Flow to run upon observing new files matching specified pattern
 - `Time Interval`: Frequency and times with which to run flow, based on UTC time
 - `File Tags`: Tags to associate with the files uploaded to Ganymede Cloud
-- `Image`: Image to associate with agent.  A common use case is to associate an image of the instrument that the agent is running on.
-- `Auto deploy code and configuration changes to Live Connections`: If checked, updates to agent code will be reflected on currently installed agents.
+- `Image`: An image to associate with Agent in the Ganymede UI.
+- `Auto deploy code and configuration changes to Live Connections`: If checked, updates to Agent code will be reflected on current Connections.
 
 <div class="text--center">
   <img
@@ -286,7 +293,7 @@ An instrument outputs files to a directory as it completes runs, which are proce
 
 #### Example use case
 
-A user-defined script must be run once a day to poll and capture updates from telemetry devices, which are further processed in a Ganymede flow.
+A user-defined script runs once a day to poll and capture updates from telemetry devices, which are then processed in a Ganymede flow.
 
 ### Watch for files locally and upload
 
@@ -294,11 +301,11 @@ A user-defined script must be run once a day to poll and capture updates from te
 
 - `Flow Name`: Flow to run upon observing new files matching specified pattern
 - `Check Period (seconds)`: Frequency with which Agent will poll local directory for new files
-- `If a discovered filename exists in storage`: Whether to use the file in storage or the observed file in the local directory
-- `File pattern to parameter mapping`: For the selected Flow, the [glob pattern](<https://en.wikipedia.org/wiki/Glob_(programming)>) to associate with the input parameter(s).
-- `File Tags`: Tags to associate with the files uploaded to Ganymede Cloud
-- `Image`: Image to associate with agent.  A common use case is to associate an image of the instrument that the agent is running on.
-- `Auto deploy code and configuration changes to Live Connections`: If checked, updates to agent code will be reflected on currently installed agents.
+- `If a discovered filename exists in storage`: Specifies whether to use the file in storage or the observed file in the local directory.
+- `File pattern to parameter mapping`: A [glob pattern](<https://en.wikipedia.org/wiki/Glob_(programming)>) associated with the input parameters for the selected flow.
+- `File Tags`: Tags to associate with the files uploaded to Ganymede Cloud.
+- `Image`: An image to associate with Agent in the Ganymede UI.
+- `Auto deploy code and configuration changes to Live Connections`: If checked, updates to Agent code will be reflected on current Connections.
 
 <div class="text--center">
   <img
@@ -311,16 +318,16 @@ A user-defined script must be run once a day to poll and capture updates from te
 
 #### Example use case
 
-Multiple flow cytometers are used to observe cell populations for a related set of experiments, which are collated by Ganymede Agents configured to systematically capture these runs.
+Multiple flow cytometers are used to observe cell populations for a related set of experiments.  Ganymede Connections associated with an Agent are configured to systematically capture these runs.
 
 ### Watch for flow outputs then save locally
 
 #### Input Parameters
 
-- `Flow Name`: Flow from which to download output files. This will autopopulate the glob pattern matching field correspondingly.
-- `Glob pattern matching`: the [glob patterns](<https://en.wikipedia.org/wiki/Glob_(programming)>) that output files must match in order to download.
-- `Image`: Image to associate with agent.  A common use case is to associate an image of the instrument that the agent is running on.
-- `Auto deploy code and configuration changes to Live Connections`: If checked, updates to agent code will be reflected on currently installed agents.
+- `Flow Name`: The flow from which to download output files. This will autopopulate the glob pattern matching field correspondingly.
+- `Glob pattern matching`: The [glob patterns](<https://en.wikipedia.org/wiki/Glob_(programming)>) that output files must match in order to be downloaded.
+- `Image`: An image to associate with Agent in the Ganymede UI.
+- `Auto deploy code and configuration changes to Live Connections`: If checked, updates to Agent code will be reflected on current Connections.
 
 <div class="text--center">
   <img
@@ -333,7 +340,7 @@ Multiple flow cytometers are used to observe cell populations for a related set 
 
 #### Example use case
 
-Instructions for lab execution are generated on Ganymede Cloud and downloaded to the instrument PC for execution.
+Instructions for lab execution are generated in Ganymede Cloud and downloaded to the instrument PC for execution.
 
 ### Load local files into Ganymede with a custom filter
 
@@ -354,10 +361,10 @@ A selected subset of key instrument output files are captured on Ganymede Cloud.
 
 #### Input Parameters
 
-- `Time Interval`: Frequency and times with which to upload files, based on UTC time
+- `Time Interval`: The frequency and times at which to upload files, based on UTC time.
 - `File Tags`: Tags to associate with the files uploaded to Ganymede Cloud
-- `Image`: Image to associate with agent.  A common use case is to associate an image of the instrument that the agent is running on.
-- `Auto deploy code and configuration changes to Live Connections`: If checked, updates to agent code will be reflected on currently installed agents.
+- `Image`: An image to associate with Agent in the Ganymede UI.
+- `Auto deploy code and configuration changes to Live Connections`: If checked, updates to Agent code will be reflected on current Connections.
 
 <div class="text--center">
   <img
@@ -370,21 +377,15 @@ A selected subset of key instrument output files are captured on Ganymede Cloud.
 
 #### Example use case
 
-A local file is modified on regular intervals and needs to uploaded to Ganymede Cloud after each modification.
+A local file is modified at regular intervals and needs to uploaded to Ganymede Cloud after each modification.
 
-## Installing Agents
+## Installing Connections corresponding to an Agent
 
-To install an Agent, open the Ganymede application in a browser window and navigate to the Connection tab in the left sidebar. Select the desired Agent by name and download the relevant Windows/Linux installation file.
-
-:::note
-
-Both Linux and Windows versions of the Agent are built using x86_64 architecture. The Linux executable is Ubuntu-based and the Windows executable is Windows Server 2022.
-
-:::
+To install a Connection, open the Ganymede application in a browser window and navigate to the Connection tab in the left sidebar. Select the desired Agent by name and download the relevant Windows/Linux installation file.
 
 ### Windows Installation
 
-After downloading the Agent, launch the installation file to complete Agent configuration
+After downloading the Agent Connection, launch the installer to complete the configuration.
 
 <div class="text--center">
   <img
@@ -395,9 +396,9 @@ After downloading the Agent, launch the installation file to complete Agent conf
 </div>
 &nbsp;
 
-- **Connection name** is the name seen by users in the instrument computer and in the Ganymede UI
-- **Variable definitions** are strings in the format "var_name=var_value", which allows users to set context variables to be used in the user-defined Python
-- **Label** is a string that can be used to identify and group connections within Ganymede. The label is visible in the Connections UI
+- **Connection name**: The name visible to users on the instrument computer and in the Ganymede UI.
+- **Variable definitions**: Strings in the format "var_name=var_value" that allow users to set context variables for use in user-defined Python code.
+- **Label** A string used to identify and group Connections within Ganymede. The label is visible in the Connections UI.
 
 Variables and labels can be referenced in your user-defined code by extracting the values from `kwargs`:
 
@@ -407,7 +408,7 @@ labels: list[str] = kwargs.get('labels', [])
 vars: dict[str, str] = kwargs.get('vars', [])
 ```
 
-For Agents that reference local directories, the directory watched is specified in the Additional Params input box:
+For Agents that reference local directories, the monitored directory is specified in the Additional Params input box.  All subdirectories of _input_path_ are also monitored.
 
 ```bash
 -v "input_path=/absolute/path"
@@ -428,16 +429,15 @@ Agents may be unable to run if the computer enters a sleep state; this is partic
 
 :::note Network privileges
 
-Because Windows services use the Local System User, which does not have network privileges by default, you may need to ensure the service is running on a user which can access the network drive.
+Windows services use the Local System User, which does not have network privileges by default. You may need to ensure the service runs on a user account that can access the network drive.
 
 To do so, follow the steps below:
 
 1. **Set Up Authentication**:
-   - There are two options for authenticating to a remote system:
-     - Use Windows Credential Manager to store the remote user's credentials on the local system.
-     - Create matching local (if cross-domain) or domain (if on the same domain, e.g. AD) user accounts on both the remote and local systems.
+    - Use Windows Credential Manager to store the remote user's credentials on the local system.
+    - Or, create matching local (if cross-domain) or domain (if on the same domain, e.g. AD) user accounts on both the remote and local systems.
 2. **Check Network**:
-   - Ensure both systems can communicate using tools like `ping`.
+   - Ensure both systems can communicate as described on the [Agent Network Config page](../configuration/AgentNetworkConfig)
 3. **Service Configuration**:
    - Open `services.msc` on the local system.
    - Find and right-click the Ganymede service > `Properties` > `Log On`. Use the local user account where the credentials are stored (not the "Local System Account").
@@ -456,7 +456,7 @@ After downloading the agent, modify permissions for the binary to 755.
 chmod 755 agent_name_<timestamp>_agent
 ```
 
-Create a [systemd service file](https://www.freedesktop.org/software/systemd/man/systemd.service.html) similar to what is shown below:
+Create a [systemd service file](https://www.freedesktop.org/software/systemd/man/systemd.service.html) similar to this:
 
 ```bash
 [Unit]
@@ -479,49 +479,49 @@ StandardError=append:/var/log/ganymede/GanymedeExampleAgentService_err.log
 WantedBy=multi-user.target
 ```
 
-- **Description**: field to identify the Agent in logs
-- **After** and **Wants**: ensures that basic networking has been set up before launching the agent
-- **StartLimitIntervalSec**: set to 0 to avoid service from stopping; by default, the service would stop after a certain number of failures within a specific timeframe
-- **Restart**: set to restart the Agent on unclean exit code or abnormal exit; does not restart on clean exit.
-- **User**: user to associate Agent runs with.  To see the current user, run `whoami`.
-- **ExecStart**: path to the Agent executable.  The executable takes the following command-line arguments:
-  - -n / --name: Required field for the name of the connection used to identify the device and its data, logs, and status throughout Ganymede.
-  - -v / --var: a string in the format "var_name=var_value" that allows setting user context variables accessible from user-defined agent code.  Multiple variables can be specified as shown in the [append configuration setting in argparse](https://docs.python.org/3/library/argparse.html#action).  This is the argument used to specify the folder to watch; if not specified, the folder watched will be the directory containing the agent binary.
-- **StandardOutput**: log file for Agent output.
-- **StandardError**: log file for Agent errors.  
-- **WantedBy**: specifies that, if the service has been enabled, the service should be started when multi-user.target is reached during the boot process.  This occurs when the system is operational and ready for multiple users to log in and use the system in a non-graphical mode.
+- **Description**: Identifies the Connection in logs.
+- **After** and **Wants**: Ensures that basic networking has been set up before launching the Connection.
+- **StartLimitIntervalSec**: set to 0 to avoid service from stopping; by default, the service would stop after a certain number of failures within a specific timeframe.
+- **Restart**: Set to restart the Connection on unclean exit code or abnormal exit; does not restart on clean exit.
+- **User**: The user to associate with Agent runs.  To see the current user, run `whoami`.
+- **ExecStart**: The path to the Agent executable.  The executable takes the following command-line arguments:
+  - -n / --name: The required field for the Connection name used to identify the device and its data, logs, and status throughout Ganymede.
+  - -v / --var: a string in the format "var_name=var_value" that allows setting user context variables accessible from user-defined agent code.  Multiple variables can be specified as shown in the [append configuration setting in argparse](https://docs.python.org/3/library/argparse.html#action).  This argument specifies the folder to watch; if not specified, the folder watched will be the directory containing the Connection binary.
+- **StandardOutput**: log file for Connection output.
+- **StandardError**: log file for Connection errors.  
+- **WantedBy**: Specifies that, if the service has been enabled, it should start when multi-user.target is reached during boot. This occurs when the system is operational and ready for multiple users to log in and use the system in non-graphical mode.
 
-Once the service file is created, the Agent can be started by copying the file to /etc/systemd/system/ and setting permissions of the service file to 644. For example, if the systemd service file were named _ganymede_example_agent.service_, this could be accomplished by running:
+Once the service file is created, start the Agent by copying the file to /etc/systemd/system/ and setting permissions of the service file to 644. For example, if the systemd service file were named _ganymede_example_agent.service_, run:
 
 ```bash
 sudo cp /path/to/ganymede_example_agent.service /etc/systemd/system/
 sudo chmod 644 /etc/systemd/system/ganymede_example_agent.service
 ```
 
-To launch this service, you can use the following commands:
+To launch this service, use the following commands:
 
 ```bash
-# to start the Agent service
+# to start the Agent Connection service
 sudo systemctl start ganymede_example_agent.service
 
-# to ensure that the Agent service starts on system startup
+# to ensure that the Connection service starts on system startup
 sudo systemctl enable ganymede_example_agent.service
 ```
 
-Some other commands that can be useful:
+Additional commands that can be useful:
 
 ```bash
-# to observe status of the Agent service
+# observe the status of the Connection service
 sudo systemctl status ganymede_example_agent.service
 
-# to reload the systemd service file after changes have been made to a service file
-# and restart the Agent service after changes have been made
+# Reload the systemd service file after changes have been made to a service file
+# and restart the Connection service after changes have been made
 sudo systemctl daemon-reload
 sudo systemctl restart ganymede_example_agent.service
 ```
 
 :::info
-After an agent binary is executed, a connection.yaml file is generated, similar to what is shown below.  When this file is present in the same directory as the agent binary, the agent will use this configuration file to determine inputs.
+After an Agent binary is executed, a connection.yaml file is generated, similar to the one shown below.  When this file is present in the same directory as the Connection binary, the Agent uses this configuration file to determine inputs.
 
 ```bash
 environment: ganymede-dev-multi
@@ -544,7 +544,7 @@ version: <YYYYMMDD-timestamp>
 
 ## Configuring User-Defined Python
 
-To modify user-defined code executed by the Agent, select the Agent in the Ganymede app and then click on the <div className="button gray_button"><SelectOutlined />Code</div> button. Doing so opens a notebook for the user to modify user-defined code, which is executed on observed files prior to transfer.
+To modify user-defined code executed by the Agent, select the Agent in the Ganymede app and click on the <div className="button gray_button"><SelectOutlined />Code</div> button. This opens a notebook where the user can modify the code executed on observed files before transfer.
 
 <div class="text--center">
   <img
@@ -578,7 +578,7 @@ Previously built Agents remain available for download in Ganymede in the [Histor
 
 ### Viewing Logs
 
-Logs can be found on the Logs tab for each Agent. These logs contain status check-ins and information regarding Agent activity.
+Logs can be found on the Logs tab for each Agent and Connection.  More detail on these log messages can be found on the [Agent Logs page](./AgentLogs).
 
 <div class="text--center">
   <img
@@ -590,7 +590,7 @@ Logs can be found on the Logs tab for each Agent. These logs contain status chec
 
 ### Monitoring Agent Connections
 
-Agents are capable of communicating with Ganymede Cloud to upload files and run flows. These communications can be monitored by observing status updates and logs in the Ganymede web app UI.
+Connection status updates and logs can be accessed in the Ganymede web app UI.
 
 <div class="text--center">
   <img
@@ -601,8 +601,7 @@ Agents are capable of communicating with Ganymede Cloud to upload files and run 
 </div>
 &nbsp;
 
-Connection data can be viewed by clicking on the connection card in the Connections tab. 
-
+Connection data can be viewed by clicking on the appropriate connection card in the Connections tab. 
 
 <div class="text--center">
   <img
@@ -613,23 +612,23 @@ Connection data can be viewed by clicking on the connection card in the Connecti
 </div>
 &nbsp;
 
-The detail fields of a connection are as follows:
+This opens up a page displaying parameters associated with the Connection:
 
 | Field Name | Description |
 |------------|-------------|
-| Status|  Current running status of the installed connection |
-| Agent | Agent from which the connection is running. |
-| Connection Version | Version of the connection configuration currently running; updated when the connection configuration is updated |
-| Agent Version | Version of the agent configuration from which the connection is running; updated when the agent configuration or processor code changes |
-| Core Version | Version of the core agent infrastructure from which the connection is running; requires a reinstall to update |
-| Started At | UTC Time when the connection was first registered in Ganymede |
-| Last Status Ping | Time when last status ping was received from the connection by Ganymede |
+| Status|  Current running status of the installed Connection |
+| Agent | Agent associated with the Connection |
+| Connection Version | The version of the Connection configuration currently running, updated when the Connection configuration is modified |
+| Agent Version | The version of the Agent configuration from which the Connection is running, updated when the Agent configuration or processor code changes |
+| Core Version | The version of the core Agent infrastructure from which the Connection is running; requires a reinstall to update |
+| Started At | UTC Time when the Connection was first registered in Ganymede |
+| Last Status Ping | Time when last status ping was received from the Connection by Ganymede |
 | PC Name | Hostname of the machine hosting the connection |
 | MAC Address | MAC address of the machine hosting the connection |
 | Machine IP  | IP address that Ganymede sees from the machine hosting the connection |
-| Install Path | Directory path on the hosting machine that the executable was installed on |
-| Service Name | Windows service name for the connection executable on the hosting machine |
-| Agent Tags | Tags applied to all file captured by any connection running from the agent, configured in the Agent UI |
+| Install Path | Directory path on the hosting machine where the executable was installed on |
+| Service Name | Windows service name for the Connection on the hosting machine |
+| Agent Tags | Tags applied to all file captured by any Connection running from the Agent, configured in the Agent UI |
 
 
 #### Connection Status
@@ -638,12 +637,12 @@ Agents send a heartbeat message to Ganymede Cloud every 30 seconds to inform the
 
 - **Live**: The Agent is currently running and communicating with Ganymede Cloud
 - **Disconnected**: Ganymede Cloud has not received a status update from the Agent in the last 65 seconds
-- **Shutdown**: The Agent was intentionally shut down; some potential reasons are if a user shut down the computer, manually stopped the Agent service, or if a known exception occurred for the Agent.
+- **Shutdown**: The Agent was intentionally shut down, possibly due to a user shutting down the computer, manually stopping the Agent service, or encountering a known exception.
 - **Deprecated**: The Agent has been disabled in Ganymede UI as described in the [Updating Agents](#updating-agents) section.
 
-#### Logging
+#### Custom Logging
 
-You create custom logs that will be displayed in the Ganymede UI and local log files by using the `logger` keyword argument in your user-defined processor code. For example:
+You can create custom logs that will be displayed in the Ganymede UI and local log files by using the `logger` keyword argument in your user-defined processor code. For example:
 
 ```python
 def execute(**kwargs) -> Optional[TriggerFlowParams]:  # type: ignore
@@ -654,7 +653,7 @@ def execute(**kwargs) -> Optional[TriggerFlowParams]:  # type: ignore
 
 ### Updating Agents
 
-To modify Agent settings after creation, select the desired Agent in the Connections tab to update the Agent. Upon clicking <div className="button blue_button">Update</div>, the Agent will be built and then made available for download.
+To modify Agent settings after creation, select the desired Agent in the Ganymede web app UI to update the Agent. Upon clicking <div className="button blue_button">Update</div>, the Agent will be built and then made available for download.
 
 <div class="text--center">
   <img
@@ -673,31 +672,40 @@ Disabled Agents cannot be updated and its connections can no longer communicate 
 
 ### Updating Connections
 
-To update a connection, select the desired connection in the Connections tab to update the connection.  You can update the following fields on a connection from the Ganymede UI:
+To update a Connection, select the desired Connection in the Connections tab.  You can update the following fields on a connection from the Ganymede UI:
 
-- Name: Display name for the connection
-- Image: Image to associate with the connection
-- Tags: [File tags](./Tags) to apply to files uploaded by the connection
+- Name: Display name for the Connection
+- Image: An image to associate with the Connection in the Ganymede UI.
+- Tags: [File tags](./Tags) to apply to files uploaded by the Connection
 - Variables: Key-value pairs that can be referenced in user-defined code
-- Labels: Strings that can be used to group connections in the Ganymede UI
+- Labels: Strings that can be used to group Connections in the Ganymede UI
 
 ### Remote Update of Live Connections
-Every time the connection contacts Ganymede with a health check-in, Ganymede responds with any changes the connection needs to incorporate. There are three level of changes that can occur.
 
-- Core Version Update: The core version corresponds to the underlying agent code developed by Ganymede. These changes are new features or patches that can be applied to all agents across all environment but each agent manages which core version it is pinned to.
-- Agent Configuration Update: Agent configuration is updated through the agent page or the agent's processor notebook. This is a configuration that all connections for that agent adhere to. For example, if an agent that watches for files then runs a flow is updated to run a new flow, all compatible connections will begin to run that flow after they are updated. Every save to an agent notebook is considered a new agent version that will be retrieved and loaded by the agent.
-- Connection Configuration Update: Updates made to the connection's configuration on its page will only update the running connection that it corresponds to. Other connections for that agent will not be affected. Connection-level changes include variables and labels.
+Every time the Connection contacts Ganymede with a health check-in, Ganymede responds with any changes that the Connection needs to incorporate. There are three level of changes that can occur.
 
-There are two types of remote updates that occur based on the type of update - full or runtime update.
+- Core Version Update: The core version corresponds to the underlying Agent code developed by Ganymede. These changes are new features or patches applied across all Agents, but each Agent manages which core version it is pinned to.
+- Agent Configuration Update: Updated through the Agent page or the Agent's processor notebook. This configuration applies to all Connections for that Agent. For example, if an Agent that runs flow upon file capture is updated to run a new flow, then all compatible Connections will begin to run the new flow.
+- Connection Configuration Update: Updates made to the Connection's configuration will only update a single Connection, rather than the Agent that it was generated from. Different Connection-level variables and labels can be configured for Connections associated with the same Agent.
+
+There are two types of remote updates that occur based on the type of update - full update or runtime update.
 
 #### Full Update
-**Compatibility**
-- Agents _installed_ with core v4.8.0 or later
-- The core version of the installed connection must align with the major version of the core version of the agent Ganymede’s UI. Otherwise there is a breaking change that requires reinstallation.
-- Auto-update is enabled for the agent
 
-**Cause**
-A full update is only triggered for a "Core Version Update." The remote update is not kicked off without user intervention. In the Ganymede UI, an agent's core version is listed on the right side of the page in a section called "Core Agent Infrastructure." If the agent is not up to date to the latest available core version, an "Upgrade" button will appear. The text will inform users what version is available and what version the agent is currently pinned to. 
+**Compatibility**
+- Agents installed with core v4.8.0 or later.
+- The core version of the installed connection must align with the major version of the core version of the agent Ganymede's UI. Otherwise, a breaking change requires reinstallation.
+- Auto-update is enabled for the agent.
+
+##### How full updates are initiated
+
+A full update is only triggered for a "Core Version Update." The remote update is not initiated without user intervention. 
+
+:::note
+
+In the Ganymede UI, an Agent's core version is listed on the right side of the page in a section called "Core Agent Infrastructure." If the agent is not up to date to the latest available core version, an "Upgrade" button will appear. The text will inform users what version is available and what version the agent is currently pinned to. 
+
+:::
 
 <div class="text--center">
   <img
@@ -709,28 +717,33 @@ A full update is only triggered for a "Core Version Update." The remote update i
 
 Once a user clicks to Upgrade an agent, all connections will be told of the new version on their next status ping. 
 
-**Update Process**
-A full update requires reinstalling the executable, but Ganymede now takes care of this installation seamlessly. When a connection receives a command to do a full update, it will continue to operate normally but also attempt to start the new version in parallel after verifying the validity of the command and the executable. Once this new version registers with Ganymede as operational, the old connection will stop. The new executable will also cleanup the artifacts of the old executable and its dependencies.
+##### Update Process
 
-There may be a disruption to any ongoing processing on the agent when an update is in progress so it is safest to request it when there is no activity on the instruments where the agents are running.
+A full update requires reinstalling the executable, but Ganymede now handles this installation seamlessly. When a Connection receives a command to perform a full update, it continues to operate normally while attempting to start the new version in parallel after verifying the validity of the command and the executable. Once the new version registers with Ganymede as operational, the old Connection stops. The new executable also cleans up the artifacts of the old executable and its dependencies.
 
-If the new connection fails to start, the old connection will resume and will not be told to attempt a full update again on that version to avoid the connection from entering a precarious state.
+There may be a disruption to any ongoing processing on the Agent during the update, so it is safest to request it when no activity occurs on the instruments where the Agent Connections are running.
+
+If the new Connection fails to start, the old Connection will resume, and the system will not attempt a full update again on that version to avoid putting the Connection in a precarious state.
 
 #### Runtime Update
-**Compatibility**
+
+##### Compatibility
+
 - Agents _installed_ with core v1.0.0 or later
-- The core version of the installed connection must match the core version of the agent Ganymede’s UI
+- The core version of the installed connection must match the core version of the agent Ganymede's UI
 - Auto-update is enabled for the agent
 
-**Cause**
-Changes in the agent configuration, including the agent processor, or connection configuration will be sent to the connection on its next status ping as soon as they are saved.
+##### How runtime updates are initiated
 
-**Update Process**
-A runtime update does not require any process restart or executable re-installation. As a result, the connection is able to accept changes to configuration while continuing its normal operations. The update is validated for integrity and the information is stored locally for access if it connection restarts for any reason in the future.
+Changes in the Agent configuration, including the Agent user-defined code, or Connection configuration, will be sent to the Connection on its next status ping as soon as they are saved.
+
+##### Update Process
+
+A runtime update does not require any process restart or executable reinstallation. As a result, the Connection can accept changes to configuration while continuing normal operations. The update is validated for integrity and the information is stored locally for access if the Connection restarts for any reason.
 
 ### Viewing Build History
 
-Each iteration of Agent build can be viewed in the History tab of the Agent. This view provides context for each change, either in the form of a log of the configuration change or through a custom commit message from the Agent notebook.
+Each iteration of Agent build can be viewed in the History tab of the Agent. This view provides context for each change, either as a log of the configuration change or through a custom commit message from the Agent notebook.
 
 <div class="text--center">
   <img
@@ -751,11 +764,11 @@ Configuration differences between two Agent builds can be viewed for audit or de
   />
 </div>
 
-### Uninstalling Agents
+### Uninstalling Agent Connections
 
 #### Windows
 
-The Agent can be uninstalled and associated service removed through the “Add or Remove Programs” panel from the Control Panel.
+The Agent can be uninstalled and the associated service removed through the “Add or Remove Programs” panel from the Control Panel.
 
 <div class="text--center">
   <img
@@ -764,9 +777,25 @@ The Agent can be uninstalled and associated service removed through the “Add o
     width="500"
   />
 </div>
+&nbsp;
 
-After uninstalling the Agent, the Ganymede folder will remain in the Program Files directory. This folder can be deleted if desired.
+After uninstalling the Agent, the Ganymede folder will remain in the Program Files directory.
+
+:::warning
+
+By default, the directory that the Agent Connection is installed to is retained, so that logs associated with Connection are kept on the instrument PC.  Removing the Ganymede folder will also remove these logs.
+
+:::
 
 #### Linux
 
-To uninstall the Agent, stop the systemd service associated with the Agent and remove the service file from /etc/systemd/system/
+To uninstall the Agent, stop the systemd service associated with the Agent and remove the service file from /etc/systemd/system/.
+
+```bash
+# to stop the Agent Connection service
+sudo systemctl stop ganymede_example_agent.service
+
+# remove the service file
+sudo rm /etc/systemd/system/ganymede_example_agent.service
+```
+

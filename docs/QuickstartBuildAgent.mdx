@@ -1,28 +1,28 @@
 ---
 id: QuickstartBuildAgent
-title: Build an Agent
+title: Build an Agent + Configure a Connection
 sidebar_label: Build an Agent to Capture Data
 displayed_sidebar: webUiSidebar
 ---
 
 import { BellOutlined, DownloadOutlined, PlusOutlined, UserOutlined } from '@ant-design/icons';
 
-This guide walks you through creating an agent to capture data from a local instrument PC and upload it to a Ganymede flow for processing.
+This guide will walk you through the process of creating an Agent to capture and process data from a local instrument PC. You'll create one Connection by installing the Agent on a local PC.
 
 <div class="text--center">
 <img alt="Agent" src="https://ganymede-bio.mo.cloudinary.net/agent/AgentFrontPage_20240331.png"/>
 </div>
 &nbsp;
 
-To do this we'll proceed through the following steps:
-- Sign into Ganymede
-- Create a new Agent to watch a folder and pushed files to Ganymede
+We will follow these steps:
+- Sign in to Ganymede
+- Create a new Agent to monitor a folder and push files to Ganymede
 - Install the Agent on a local PC
-- Test the Agent by saving a file to the watched folder
+- Test the Agent by saving a file to the monitored folder
 
 ### Step 1: Sign into Ganymede
 
-The <div className="button gray_button"><UserOutlined /> Sign In</div> button should be available once authentication is configured for your tenant, which is generally going to be a web address accessible via any web browser with the URL https://\<your_tenant\>.ganymede.bio.
+Using Google Chrome, sign into Ganymede. The <div className="button gray_button"><UserOutlined /> Sign In</div> button will be available once authentication is configured for your tenant. This is typically a web address accessible via any browser at https://\<your_tenant\>.ganymede.bio.
 
 You may need to enable pop-ups for Ganymede or disable any ad-blocking software for the ganymede.bio domain.
 
@@ -32,29 +32,29 @@ You may need to enable pop-ups for Ganymede or disable any ad-blocking software 
 
 ### Step 2: Create a new Agent
 
-In the left sidebar, navigate to the Agents tab within the Connections pane and click on the <div className="button dark_gray_button"><PlusOutlined /> New Agent</div> button.  This opens up a configuration panel for the agent as shown below:
+In the left sidebar, navigate to the Agents tab within the Connections pane and click the <div className="button dark_gray_button"><PlusOutlined /> New Agent</div> button. This will open a configuration panel for the Agent:
 
 <div class="text--center">
 <img alt="Add new agent" src="https://ganymede-bio.mo.cloudinary.net/agent/AddNewAgent_20240331.png"/>
 </div>
 &nbsp;
 
-Fill in the agent with the configuration shown below.  This will create an agent that watches a folder on the local PC for files with a ".xlsx" file extension, and then uploads detected files to the selected Ganymede flow for execution.
+Fill in the configuration fields as shown below. This will create an Agent that monitors a folder on the local PC for files with a ".xlsx" extension and uploads detected files to the selected Ganymede flow for execution.
 
 <div class="text--center">
 <img alt="Quickstart agent creation filled in" src="https://ganymede-bio.mo.cloudinary.net/agent/AddnewAgentFilledInExcel_20240125.png"/>
 </div>
 &nbsp;
 
-The agent name can be anything you would like, and the agent configuration can remain as "Watch for files locally then run flow".  The Flow Name specifies the flow that is initiated upon file capture; for this Quickstart, we will use the **Example_Quickstart_Absorbance_Change** flow which is pre-configured in every environment.  
+You can choose any name for the Agent. The configuration should remain as "Watch for files locally then run flow." The Flow Name specifies the flow that will be triggered upon file capture; for this Quickstart, we'll use the **Example_Quickstart_Absorbance_Change** flow, which is pre-configured in every environment.
 
 When the Flow Name is specified, the "File pattern to parameter mapping" section will display 1 row for each node that receives an input file.  Populate this field with a [glob pattern](https://en.wikipedia.org/wiki/Glob_(programming)) matching the file path within the directory to be watched.
 
-Click on the <div className="button darkblue_button">Create</div> button to create the agent.  This will initiate the build of an Agent, which will take roughly 20 minutes to complete, and can be monitored by clicking on the <div className="button darkblue_button"><BellOutlined /></div> in the header bar to view the Notifications page.
+Click the <div className="button darkblue_button">Create</div> button to create the agent.  This will initiate the build of an Agent, which will take roughly 20 minutes to complete, and can be monitored by clicking on the <div className="button darkblue_button"><BellOutlined /></div> in the header bar to view the Notifications page.
 
 :::info
 
-Subsequent iterations to the user-defined code within the agent will not require agent rebuild, and so will be much faster.  A typical update will take less than 10 seconds to complete, and will not require agent re-installation.
+Subsequent updates to the user-defined code within the Agent will not require a full rebuild and will be much faster—typically taking less than 10 seconds to complete, without needing to reinstall the Agent.
 
 :::
 
@@ -70,11 +70,11 @@ If you're not already on the local PC where the agent will be installed, navigat
 
 #### Step 3a: Sync Windows time (if necessary)
 
-Right click on the time in the lower right hand corner of the Windows taskbar and select "Adjust date/time".  In the window that opens, click on the "Sync now" button to ensure that the time is synchronized with the internet time server.
+If the Windows System time is inaccurate, right-click the time in the lower right-hand corner of the Windows taskbar and select "Adjust date/time." In the window that opens, click the "Sync now" button to ensure that the time is synchronized with the internet time server.
 
-#### Step 3b: Create a folder to watch
+#### Step 3b: Create a folder to monitor
 
-Create a new folder on your Desktop by right-clicking on the Desktop and selecting "New" -> "Folder".  Name the folder "watch_folder".
+Create a new folder on your Desktop by right-clicking on the Desktop and selecting "New" -> "Folder." Name the folder "watch_folder."
 
 :::note
 
@@ -84,22 +84,24 @@ If you choose a pre-existing folder, be aware that the agent will, by default, n
 
 #### Step 3c: Download the agent
 
-When the agent build is complete, the agent will be available for download from the Connections pane.
+Once the Agent build is complete, the associated installer will be available for download from the Connections pane.
 
 <div class="text--center">
 <img alt="Agent download" src="https://ganymede-bio.mo.cloudinary.net/agent/AgentDownload_20240125.png"/>
 </div>
 
 
-On the local PC where the agent will be installed, sign into your tenant (as described in [step 1](#step-1-sign-into-ganymede)) and download the installer for the Windows agent by hovering over the <div className="button dark_gray_button"><DownloadOutlined /> Download</div> button and selecting Windows.
+On the local PC where the Agent will be installed, sign in to your tenant (as described in [step 1](#step-1-sign-into-ganymede)) and download the installer for the Windows Agent by hovering over the <div className="button dark_gray_button"><DownloadOutlined /> Download</div> button and selecting Windows.
 
-Once downloaded, run the executable to start the installation process.  Name the connection "Quickstart Agent", and type in the path to the folder created in [step 3b](#step-3b-create-a-folder-to-watch) in the "Watched folder" field.  
+After downloading, run the executable to start the installation process. Name the connection "Quickstart Agent" and enter the path to the folder created in [step 3b](#step-3b-create-a-folder-to-monitor) in the "Watched folder" field.  
 
-:::warning
+:::tip
 
-Take care when configuring the watch folder path, since a configuration error here may be challenging to debug. Specifically, ensure that the input path is specified correctly.  In the example shown, the Desktop is found within the OneDrive directory because OneDrive is being used to back up files stored on Desktop.  
+Be precise when configuring the watch folder path, as errors here can be difficult to troubleshoot. Ensure the input path is correctly specified. For example, if OneDrive is used to back up Desktop files, the path may be "C:\Users\<username>\OneDrive\Desktop\watch_folder." 
 
-If OneDrive is not being used, the path would typically be "C:\\Users\\\<username\>\\Desktop\\watch_folder".  Note that folder paths can be specified using either forward or backward slashes.
+If OneDrive is not used, the path would typically be "C:\Users\<username>\Desktop\watch_folder." Note that folder paths can be specified using either forward or backward slashes.
+
+To check this configuration, verify the input_path variable on the Connections page associated with Quickstart Agent after completing this guide.
 
 :::
 
@@ -108,7 +110,7 @@ If OneDrive is not being used, the path would typically be "C:\\Users\\\<usernam
 </div>
 &nbsp;
 
-Specify the desired installation location and click through the installer to complete the installation.
+Choose the desired installation location and proceed through the installer to complete the installation.
 
 <div class="text--center">
 <img width="600" alt="Agent installation location" src="https://ganymede-bio.mo.cloudinary.net/agent/GanymedeAgentInstallationLocation2_20240125.png"/>
@@ -126,30 +128,29 @@ Specify the desired installation location and click through the installer to com
 </div>
 &nbsp;
 
-The agent will launch automatically after installation is complete.
+The Agent will launch automatically once installation is complete.
 
 ### Step 4: Test the agent
 
-Drop the [sample plate reader file](https://github.com/Ganymede-Bio/website-docusaurus/raw/main/PlateReader.xlsx) into the watch folder created in [step 3b](#step-3b-create-a-folder-to-watch).  The agent will detect the file and upload it to the Ganymede flow for processing.
+Drop the [sample plate reader file](https://github.com/Ganymede-Bio/website-docusaurus/raw/main/PlateReader.xlsx) into the "watch_folder" created in [step 3b](#step-3b-create-a-folder-to-monitor).  The agent will detect the file and upload it to the Ganymede flow for processing.
 
-Any window with the environment open will show that the flow has been initiated.  Congrats on creating your first agent!
+Any window with the environment open will display that the flow has been initiated. Congratulations on creating your first Agent!
 
 <div class="text--center">
 <img alt="Agent installation completion" src="https://ganymede-bio.mo.cloudinary.net/agent/GanymedeAgentFlowLaunch2_20240125.png"/>
 </div>
 &nbsp;
 
-If you run into any challenges with the Quickstart, please visit the [Troubleshooting Agents page](./connectivity/DebuggingAgents.mdx) or [contact Ganymede Support](./Support.mdx).
+If you encounter any issues with this Quickstart, please visit the [Troubleshooting Agents page](./connectivity/DebuggingAgents.mdx) or [contact Ganymede Support](./Support.mdx).
 
 ### Next steps
 
-Now that you have successfully created an agent, you can learn more about 
-- the [different agent configurations available](./connectivity/Agent#configuration-options).  Some examples are:
-  - an agent that [runs on a recurring schedule](./connectivity/Agent#set-a-cron-job-to-run-flows-periodically)
-  - an agent that [executes performs local processing when a file stored in cloud storage](./connectivity/Agent#watch-for-flow-outputs-then-save-locally)
-- [how to modify the agent code](./connectivity/Agent#watch-for-files-locally-then-run-flow) to add custom functionality.  Some examples of this are
-  - [adding tags to files](./connectivity/Tags.mdx) so they are easy to find in Ganymede
-  - parsing metadata from file contents, determining how the file is processed
-  - delivering [multiple files into a single node](./sdk/markdowns/AgentModelsAndMethods#classes-associated-with-agent-triggered-flows)
-- incorporating [agent file utilities](./sdk/markdowns/AgentModelsAndMethods#file-system-utilities) from the Ganymede SDK
-  
+Now that you have successfully created and installed an Agent, you can explore more about:
+- The [different Agent configurations available](./connectivity/Agent#configuration-options).  Examples include:
+  - An Agent that [runs on a recurring schedule](./connectivity/Agent#set-a-cron-job-to-run-flows-periodically)
+  - An Agent that [executes local processing when a file stored in cloud storage](./connectivity/Agent#watch-for-flow-outputs-then-save-locally)
+- [How to modify the agent code](./connectivity/Agent#watch-for-files-locally-then-run-flow) to add custom functionality, such as
+  - [Adding tags to files](./connectivity/Tags.mdx) to make them easier to find in Ganymede
+  - Parsing metadata from file contents to determine how files are processed
+  - Delivering [multiple files into a single node](./sdk/markdowns/AgentModelsAndMethods#classes-associated-with-agent-triggered-flows)
+- Incorporating [Agent file utilities](./sdk/markdowns/AgentModelsAndMethods#file-system-utilities) from the Ganymede SDK

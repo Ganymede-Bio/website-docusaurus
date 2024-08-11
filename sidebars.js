@@ -16,13 +16,13 @@ module.exports = {
       },
       {
         type: 'doc',
-        id: 'ReferenceArchitectures',
-        label: 'Reference Architectures'
+        id: 'Concepts',
+        label: 'Ganymede Concepts'
       },
       {
         type: 'doc',
-        id: 'Concepts',
-        label: 'Ganymede Concepts'
+        id: 'ReferenceArchitectures',
+        label: 'Reference Architectures'
       },
       {
         type: 'category',
@@ -63,7 +63,7 @@ module.exports = {
           },
           {
             type: 'doc',
-            id: 'connectivity/FileWatcher',
+            id: 'connectivity/BrowserFileWatcher',
             label: 'Capture Files with Browser'
           },
           {

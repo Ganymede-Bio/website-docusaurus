@@ -7,17 +7,17 @@ displayed_sidebar: webUiSidebar
 
 ![Ganymede example flow](https://ganymede-bio.mo.cloudinary.net/apiServer/FlowImageExpanded_20240331.png)
 
-Developers using Ganymede author **flows**, which are functions comprised of user-editable **nodes**.  **Nodes** are used to ingest data, perform calculations, and communicate with APIs.
+Developers using Ganymede create **flows**, which are functions made up of user-editable **nodes**.  **Nodes** are used to ingest data, perform calculations, and interact with APIs.
 
-- **Flow**: a set of nodes that processes data; the diagram above shows a flow named _ganymede_documentation_.  Flows are executed top-to-bottom, with edges describing execution dependencies between different nodes.  
-- [**Node**](./nodes/Overview.mdx): core unit of processing in Ganymede which performs I/O between different systems and the user-defined components of a node.  The diagram above contains four nodes: CSV_Read, LIMS_Read, Associate_Data, Excel_Write.
-- **Node Attribute**: parameters passed into a node.  The CSV_Read node above has two node attributes: `csv` and `results`.
-- **Table Head**: a preview of a table output from the node; in the flow above, example_results is the table head for the CSV_Read node.
+- **Flow**: A sequence of nodes that processes data. The diagram above shows a flow named *ganymede_documentation*. Flows are executed from top to bottom, with edges indicating execution dependencies between nodes.
+- [**Node**](./nodes/Overview.mdx): The fundamental processing unit in Ganymede, which handles input/output operations between different systems and user-defined components. The diagram above contains four nodes: CSV_Read, LIMS_Read, Associate_Data, and Excel_Write.
 
-- [**Agent**](./connectivity/Agent.mdx): locally-installed executable that captures data from external systems and make it available to Ganymede flows.  Agents are configured in and monitored from the Connections section of the Ganymede UI.
-- **Connection**: An instance of an Agent.  For example, you may configure a single Agent for uploading flow cytometry data from different instruments, but each flow cytometer would have its own Connection.
+- [**Agent**](./connectivity/Agent.mdx): A locally-installed executable that captures data from external systems and makes it available to Ganymede flows. Agents are configured and monitored within the Connections section of the Ganymede UI, and can be customized using user-defined Python.
+- **Agent Connection** / **Connection**: An instance of an Agent.  For example, you may customize a single Agent for uploading data from multiple flow cytometers, but each flow cytometer would have its own Connection.
 
-- [**Tag**](./connectivity/Tags.mdx): a user-defined label that can be applied to files to facilitate organization and searching.  Tags types are configured from the Manage Tag Types view within the Files page in the Ganymede UI.  Once configured, these tag types are referenced in user-defined code associated with Agents and Flows.
+- [**Tag**](./connectivity/Tags.mdx): A user-defined label applied to files to facilitate organization and searching. Each tag is linked to a specific tag type, which defines the label category. For example, a Ganymede environment might include an `Instrument` tag type, which an analytical chemistry team uses to label raw chromatograms with an `LC` tag. 
+
+  Tag types are set up through the Manage Tag Types view on the Files page in the Ganymede UI. Once configured, these tag types can be referenced in user-defined code associated with Agents and Flows or specified in the Agent and Connection configuration pages within the Ganymede UI.
 
 Each node consists of an Operator and, if customizable, user-defined SQL and/or user-defined Python to enable customization as shown in the conceptual diagram below:
 
@@ -26,7 +26,7 @@ Each node consists of an Operator and, if customizable, user-defined SQL and/or 
 </div>
 
 Depending on the node, data may be retrieved from or sent to 
-  - a SQL database
+  - Relational/non-relational databases
   - cloud storage 
   - third-party API 
   - flat files

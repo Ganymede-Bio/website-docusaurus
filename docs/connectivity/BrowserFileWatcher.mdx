@@ -1,0 +1,68 @@
+---
+id: BrowserFileWatcher
+title: Browser-based File Watcher
+displayed_sidebar: webUiSidebar
+---
+
+import {
+  HomeOutlined,
+  NodeIndexOutlined,
+  SettingOutlined
+} from '@ant-design/icons';
+
+## Watching directories for new files
+
+Using the browser-based file watcher, Ganymede can be configured to watch for new files for processing, enabling hands-free file processing. This feature allows users to define a directory that is continuously watched for file additions or changes. When new files appear, they are automatically queued for processing in Ganymede.
+
+To setup a browser-based file watcher, open up a flow on the <div className="button darkblue_button"><HomeOutlined /> **Home**</div> page or via the <div className="button darkblue_button"><NodeIndexOutlined /> **Flow Editor**</div> page. The flow inputs section, shown below, consists of a form input for the input types that have been defined for the flow.  Inputs that accept files have a <div className="button dark_gray_button"><SettingOutlined /></div> icon, which you can use to select the directory to be watched. 
+
+<div class="text--center">
+  <img
+    alt="Flow Inputs"
+    src="https://ganymede-bio.mo.cloudinary.net/apiServer/Flow_Inputs20231219.png"
+  />
+</div>
+&nbsp;
+
+:::info
+
+Browser-based file watcher configuration is done per node, not per flow.
+
+:::
+
+
+#### Configuring directory watching
+
+Clicking on the <div className="button dark_gray_button"><SettingOutlined /></div> icon exposes the modal for configuring directory watching.
+
+<div class="text--center">
+  <img
+    alt="Browser-Based File Watcher"
+    src="https://ganymede-bio.mo.cloudinary.net/apiServer/Browser_File_Watcher20231219.png"
+    width="500"
+  />
+</div>
+&nbsp;
+
+This produces a modal with two settings, the observation mode and the write mode.
+
+The observation mode specifies which files are captured:
+ - **Differential mode**: detects files that are created or modified in a directory after the watcher starts.
+ - **Cumulative mode**: Captures all existing files in the directory and continues to monitor for any new or modified files.
+
+The write mode defines how Ganymede Cloud handles observed files.  When the watcher detects a file, it uploads the file to Ganymede independent of its mode. If a file with the same name already exists in Ganymede for a given flow and input, the watcher can:
+ - queue the existing file in the system to run, or
+ - upload the new file with a unique name to avoid conflicts.
+
+After configuring the watcher, close the modal and click the file icon to select the directory. The watcher will continue to monitor that directory until the user refreshes or closes the site, or selects the 'X' icon that appears when watching a file.
+
+#### Executing flows upon file detection
+
+The file watcher can be configured to either queue runs or execute a run once all relevant files for the flow have been detected.  To configure this, click on the <div className="button dark_gray_button"><SettingOutlined />  Input Settings</div> button and check off "Enable auto-run".
+
+<div class="text--center">
+  <img
+    alt="Web-based file watcher auto-run"
+    src="https://ganymede-bio.mo.cloudinary.net/apiServer/File_Watcher_Autorun20231219.png"
+  />
+</div>
