@@ -1,4 +1,3 @@
-import * as React from "react"
 
 const SvgComponent = (props) => (
   <svg
@@ -66,7 +65,7 @@ const SvgComponent = (props) => (
         />
       </a>
       <a
-        xlinkHref="https://docs.ganymede.bio/connectivity/FileWatcher"
+        xlinkHref="https://docs.ganymede.bio/connectivity/BrowserFileWatcher"
         target="_blank"
       >
         <path
@@ -166,7 +165,7 @@ const SvgComponent = (props) => (
       <use xlinkHref="#t" transform="translate(247.689 839.661)" />
       <use xlinkHref="#q" transform="translate(394.692 839.661)" />
       <a
-        xlinkHref="https://docs.ganymede.bio/connectivity/FileWatcher"
+        xlinkHref="https://docs.ganymede.bio/connectivity/BrowserFileWatcher"
         target="_blank"
       >
         <path fill="url(#u)" d="M950 164h140v120H950z" />

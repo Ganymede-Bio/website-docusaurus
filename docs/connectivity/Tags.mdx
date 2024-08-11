@@ -6,27 +6,25 @@ displayed_sidebar: webUiSidebar
 
 ## What are File Tags?
 
-File tags are a way to organize files within Ganymede.  These tags are specified in user-defined code and can be filtered for in the file browser.  Tags can be used to systematically capture organize files; for example, they can be used to capture associate samples, run purpose, experiment ID, experiment step, and any other characteristic relevant to that file.
+File tags in Ganymede provide a way to organize and categorize files systematically. These tags, specified in user-defined code, allow for efficient filtering and searching within the file browser. Tags can be used to capture various details about a file, such as sample ID, run purpose, experiment ID, experiment step, and any other relevant characteristic defined by users in Ganymede.
 
-Once tagged, files can be filtered for in the file browser. 
+Once a file is tagged, it can be easily filtered in the file browser, enabling streamlined access to specific data.
 
 <div class="text--center">
   <img alt="Tagged Files" src="https://ganymede-bio.mo.cloudinary.net/apiServer/tags/Tagged_Files_Example20231221.png" />
 </div>
 &nbsp;
 
-To configure a file tag, configure the file tag type if necessary and reference the tag type in user-defined code.  The following sections describe how to configure file tag types and tag files.
-
 ### Configuring File Tag Types
 
-Prior to tagging files, a file tag type must be configured.  This is done by navigating to the **Manage Tag Types** section of the Files page.
+Before tagging files, a file tag type must be configured.  This is done in the **Manage Tag Types** section on the Files page.
 
 <div class="text--center">
   <img alt="Manage Tag Types" src="https://ganymede-bio.mo.cloudinary.net/apiServer/tags/Manage_Tag_Types20231221.png" />
 </div>
 &nbsp;
 
-To create a new tag type, click the <div className="button darkblue_inverted_button">Create Tag Type</div> button in the upper right corner of the page.  This will open a modal where the attributes of a tag type can be specified.
+To create a new tag type, click the <div className="button darkblue_inverted_button">Create Tag Type</div> button in the upper right corner of the page.  This opens a modal where you can specify the attributes of the tag type.
 
 <div class="text--center">
   <img alt="Create Tag Type" src="https://ganymede-bio.mo.cloudinary.net/apiServer/tags/Create_Tag_Type20231221.png" />
@@ -35,21 +33,21 @@ To create a new tag type, click the <div className="button darkblue_inverted_but
 
 For each tag type, the following attributes can be specified:
 - **Tag Type Name**: The name of the tag type.
-- **Description**: A description of the tag type.
-- **Has URL**: Indicates that the value of the tag type must be a URL (which would be rendered as a link in the file browser).
-- **Allow Multiple**: Indicates that multiple tags of the specified type can be applied to a single file.
-- **Fill**: Background color of tags with this type.
-- **Text**: Text color of tags with this type.
+- **Description**: A brief description of the tag type.
+- **Has URL**: Indicates whether the tag value must be a URL (rendered as a link in the file browser).
+- **Allow Multiple**: Allows multiple tags of this type to be applied to a single file.
+- **Fill**: The background color for tags of this type.
+- **Text**: The text color for tags of this type.
 
-The strict mode setting, if disabled, allows admins to delete or modify tags.  Tags may only be deleted if they are not applied to any files; the delete button is grayed out if tag type deletion is not permitted.
+The strict mode setting, if disabled, allows admins to delete or modify tags.  Tags may only be deleted if they are not applied to any files; the delete button will be grayed out if tag type deletion is not permitted.
 
 ### Tagging Files
 
-Files can be tagged in user-defined code within flows and agents, but using slightly different methods.  Within flows, files are tagged by passing the path to the file into the `add_file_tag` function.  Within agents, files are tagged by passing the [FileParam](../sdk/markdowns/AgentModelsAndMethods#classes-associated-with-agent-triggered-flows) object into the `add_file_tag_to_fileparam` function.  The FileParam object holds the file that the Agent submits to Ganymede storage (for initiating a flow if the agent is configured to do so).
+Files can be tagged in user-defined code within flows and Agents, though the methods differ slightly.  In flows, files are tagged by passing the file path to the `add_file_tag` function.  Within Agents, files are tagged by passing the [FileParam](../sdk/markdowns/AgentModelsAndMethods#classes-associated-with-agent-triggered-flows) object into the `add_file_tag_to_fileparam` function.  The FileParam object contains the file that the Agent submits to Ganymede storage (for initiating a flow if the Agent is configured to do so).
 
 The full set of methods available for interacting with tags can be found on the [File Tag](../sdk/FileTags.mdx) module in the SDK documentation.
 
-#### Tagging Files in Flows
+#### Tagging files in flows
 
 To tag a file within a flow, use the `add_file_tag` function in the `ganymede_sdk.file_tag` module.  This function takes the following arguments:
 
@@ -62,10 +60,8 @@ To tag a file within a flow, use the `add_file_tag` function in the `ganymede_sd
 
 ```python
 from typing import Dict
-
 from ganymede_sdk.file_tag import add_file_tag
 from ganymede_sdk.io import NodeReturn
-
 
 def execute(file_data: Dict[str, bytes], ganymede_context) -> NodeReturn:
     entry_name = "test_entry"
@@ -79,7 +75,7 @@ def execute(file_data: Dict[str, bytes], ganymede_context) -> NodeReturn:
         )
 ```
 
-File Tags can also be added to files returned in the NodeReturn object:
+File tags can also be added to files returned in the NodeReturn object:
 
 ```python
 from typing import Dict
@@ -107,19 +103,19 @@ def execute(file_data: Dict[str, bytes], ganymede_context) -> NodeReturn:
     )
 ```
 
-#### Tagging Files in Agents or Connections
+#### Tagging files in Agents or Connections
 
-To tag a file delivered by an Agent to Ganymede, you can configure an agent or connection to tag any files submitted from it using the [File tags parameter in Agent configuration](./Agent).
+To tag a file delivered by an Agent to Ganymede, you can configure an Agent or Connection to tag any files submitted from it using the [File tags parameter in Agent configuration](./Agent).
 
-You may want the agent to automatically tag files with an instrument ID and a connection from that agent to tag files with a lab location.
+For example, you might configure the agent to automatically tag files with an instrument ID and a connection from that agent to tag files with a lab location.
 
-Tagging can also be performed programmatically using the `add_file_tag_to_fileparam` function in the `ganymede_sdk.agent` module.  This function takes the following arguments:
+You can also tag files programmatically using the `add_file_tag_to_fileparam` function from the `ganymede_sdk.agent` module.  This function takes the following arguments:
 
-- _param_ **file_param**: Union[FileParam, MultiFileParam] - The FileParam object to tag.  FileParam objects hold a single file, while MultiFileParam objects hold multiple files (for use in nodes that take in multiple files).  If a MultiFileParam object is specified, the tag is applied to all files within the object.
+- _param_ **file_param**: FileParam | MultiFileParam - The FileParam object to tag.  FileParam objects hold a single file, while MultiFileParam objects hold multiple files (for use in nodes that take in multiple files).  If a MultiFileParam object is specified, the tag is applied to all files within the object.
 - _param_ **tag_type_id**: str - The name of the tag type to apply to the file.
-- _param_ **display_value**: str - Value of the tag to display in the file browser.
-- _param_ **tag_id**: str - Optional tag ID that can be used to reference tags in code.
-- _param_ **url**: str - URL to associate with the tag, if applicable.
+- _param_ **display_value**: str - The value of the tag to display in the file browser.
+- _param_ **tag_id**: str - An optional tag ID for referencing tags in code.
+- _param_ **url**: str - A URL to associate with the tag, if applicable.
 
 ```python
 from ganymede_sdk.agent import (
@@ -157,9 +153,9 @@ def execute(flow_params_fw: FileWatcherResult, **kwargs) -> TriggerFlowParams:
 
 :::info
 
-Files are passed to and from Virtualization environments using agents, so files passed to and from virtualization environments can be tagged as well.
+Files are passed to and from Virtualization environments using Agents.  Therefore, files passed to and from Virtualization environments can be tagged as well.
 
-Note that virtualization stores a json file in the `C:/Program Files/Ganymede/` directory that contains information about the session, including the input files and the current session id.
+Note that Virtualization stores a json file in the `C:/Program Files/Ganymede/` directory that contains information about the session, including the input files and the current session id.
 
 ```python
 import json

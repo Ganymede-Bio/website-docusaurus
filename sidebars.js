@@ -63,7 +63,7 @@ module.exports = {
           },
           {
             type: 'doc',
-            id: 'connectivity/FileWatcher',
+            id: 'connectivity/BrowserFileWatcher',
             label: 'Capture Files with Browser'
           },
           {
