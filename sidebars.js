@@ -116,7 +116,7 @@ module.exports = {
         type: 'category',
         label: 'Observing Data',
         collapsed: true,
-        items: ['Files', 'Dashboards', 'DataExplorer', 'AnalysisNotebook', 'SystemMetadata', 'DashboardTips']
+        items: ['Files', 'Dashboards', 'TagActivity', 'DataExplorer', 'AnalysisNotebook', 'SystemMetadata', 'DashboardTips']
       },
       {
         type: 'category',
