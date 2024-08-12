@@ -37,7 +37,7 @@
 }
 
 .menu__link:hover {
-  color: var(--ifm-color-gray-darker);
+  color: var(--ifm-color-primary-dark);
 }
 
 

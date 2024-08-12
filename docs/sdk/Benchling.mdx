@@ -108,8 +108,9 @@ The Benchling object contains methods to retrieve data from Benchling. The metho
 - **get_assay_result_schema_table**(self, assay_result_id: str)
 - **get_fields_data**(self, service: str, \*args, benchling_filter: Optional[Dict] = None, \*\*kwargs)
 
-### Retrieve data (IDs, names, ...) - get
-This method is used to retrieve data from Benchling such as custom_entities, assay_results, schemas,
+### Retrieve data (IDs, names, ...)
+
+The **get** method is used to retrieve data from Benchling such as custom_entities, assay_results, schemas,
 plates, etc. To see available services, use 
 
 ```python
@@ -143,8 +144,9 @@ custom_entities = b.get('custom_entities', ids=['bfi_1234', 'bfi_5678'])
 test_plate = b.get('plates', benchling_filter={'name': 'my_plate_name'})[0]
 ```
 
-### Retrieve Schema Table - get_assay_result_schema_table
-This method will retrieve the schema table for an assay result using its ID. This method can be used to see
+### Retrieve Schema Table
+
+The **get_assay_result_schema_table** method retrieves the schema table for an assay result using its ID. This method can be used to see
 which columns to keep in your dataframe or how to name them.
 
 ```python
@@ -158,12 +160,13 @@ result_id = "example_result_id"
 schema_table = b.get_assay_result_schema_table(result_id)
 ```
 
-You can validate your dataframea against the schema using 
+You can validate your dataframe against the schema using 
     
 - **validate_assay_result_schema_names**(self, df: pd.DataFrame, assay_result_id: str)
 
-### Retrieve Data in Entities and Results - get_fields_data
-Get a pandas dataframe of benchling service field results such as custom\_entity and assay results data. For assay results, you must pass the schema ID starting with assaysch_.
+### Retrieve Data in Entities and Results
+
+**get_fields_data** gets a Pandas DataFrame of Benchling service field results such as custom\_entity and assay results data. For assay results, you must pass the schema ID starting with assaysch_.
 
 ```python
 from ganymede_sdk.api.benchling import Benchling
