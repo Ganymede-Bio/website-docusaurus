@@ -21,6 +21,7 @@ module.exports = {
       indexName: 'ganymede',
       contextualSearch: false,
       searchPagePath: 'search',
+      insights: true,
       optionalFilters: ['category:-releases'],
     },
     navbar: {

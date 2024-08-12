@@ -32,7 +32,14 @@
 
 .menu__link {
   padding: 0.25rem 0.5rem; /* Tighter padding around links */
+  font-size: 0.85rem;
+  color: var(--ifm-color-gray-dark);
 }
+
+.menu__link:hover {
+  color: var(--ifm-color-gray-darker);
+}
+
 
 .no-sidebar .theme-doc-sidebar-container {
   display: none;
