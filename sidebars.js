@@ -57,9 +57,26 @@ module.exports = {
             label: 'Ways to Capture Data'
           },
           {
-            type: 'doc',
-            id: 'connectivity/Agent',
-            label: 'Agents for Instrument Data Capture and Delivery'
+            type: 'category',
+            label: 'Agents',
+            collapsed: false,
+            items: [
+              {
+                type: 'doc',
+                id: 'connectivity/Agent',
+                label: 'Agents for Instrument Data Capture and Delivery'
+              },
+              {
+                type: 'doc',
+                id: 'connectivity/DebuggingAgents',
+                label: 'Agent Troubleshooting'
+              },
+              {
+                type: 'doc',
+                id: 'connectivity/AgentLogs',
+                label: 'Agent Logs and Reference'
+              }
+            ]
           },
           {
             type: 'doc',
@@ -70,16 +87,6 @@ module.exports = {
             type: 'doc',
             id: 'connectivity/Tags',
             label: 'Tagging Files'
-          },
-          {
-            type: 'doc',
-            id: 'connectivity/DebuggingAgents',
-            label: 'Troubleshooting Agents'
-          },
-          {
-            type: 'doc',
-            id: 'connectivity/AgentLogs',
-            label: 'Agent Logs and Reference'
           }
         ]
       },
@@ -92,7 +99,7 @@ module.exports = {
             type: 'category',
             label: 'Editing and Running Flows',
             collapsed: false,
-            items: ['Home', 'FlowEditor', 'NodeEditor', 'FlowView', 'NotebookTips'],
+            items: ['Home', 'FlowEditor', 'FlowView', 'NodeEditor', 'NotebookTips'],
           },
           {
             type: 'category',
@@ -101,14 +108,20 @@ module.exports = {
             items: ['FlowRuns', 'Notifications']
           },
           {
-            type: 'doc',
-            id: 'Virtualization',
-            label: 'Virtualization'
-          },
-          {
-            type: 'doc',
-            id: 'TroubleshootingDataProcessing',
-            label: 'Troubleshooting Flows and Virtualization'
+            type: 'category',
+            label: 'Virtualization',
+            collapsed: false,
+            items: [{
+              type: 'doc',
+              id: 'Virtualization',
+              label: 'Virtualization'
+            },
+            {
+              type: 'doc',
+              id: 'TroubleshootingDataProcessing',
+              label: 'Troubleshooting Flows and Virtualization'
+              }
+            ]
           }
         ]
       },
@@ -116,7 +129,20 @@ module.exports = {
         type: 'category',
         label: 'Observing Data',
         collapsed: true,
-        items: ['Files', 'Dashboards', 'TagActivity', 'DataExplorer', 'AnalysisNotebook', 'SystemMetadata', 'DashboardTips']
+        items: [
+          {
+            type: 'category', 
+            label: 'Files',
+            collapsed: false,
+            items: ['Files', 'TagActivity']
+          },
+          {
+            type: 'category',
+            label: 'Tables',
+            collapsed: false,
+            items: ['Dashboards', 'DataExplorer', 'DashboardTips']
+          },
+           'AnalysisNotebook', 'SystemMetadata']
       },
       {
         type: 'category',
