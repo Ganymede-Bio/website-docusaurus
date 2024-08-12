@@ -70,3 +70,23 @@ Once complete, the following information from your Azure AD SSO application shou
 - Certificate (Base64) - This can be found within the SAML Signing Certificate section
 - Azure AD Identifier - This can be found within the Set up SSO Demo section
 - Login URL - This can be found within the Set up SSO Demo section
+
+### Shibboleth
+
+Please ensure the following service-provider (SP) metadata is uploaded to IdP:
+| Field | Value |
+| --- | --- |
+| Identifier (Entity ID) | ganymede.bio |
+| ACS (Assertion Consumer Service) URL | https://ganymede-core.firebaseapp.com/__/auth/handler |
+
+Also, please ensure the following metadata format:
+| Field | Notes |
+| --- | --- |
+| Name ID | urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress |
+
+Once complete, the following information should be provided to Ganymede, either directly or through a shared metadata XML page:
+
+- Entity ID - this should be the URL of the metadata XML page if available
+- SSO URL - this should correspond to HTTP-Redirect location metadata
+- Certificate
+
