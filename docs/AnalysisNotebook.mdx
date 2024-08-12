@@ -8,7 +8,7 @@ import {
   BranchesOutlined,
 } from '@ant-design/icons';
 
-Analysis notebooks are Jupyter notebooks that enable access to data uploaded to the Ganymede Cloud data lake as part of a _flow_ run.  A fresh notebook instantiation has templates to retrieve data and save notebooks.  To access a fresh notebook instance, on the <div className="button darkblue_button"><BranchesOutlined /> **Flow Editor**</div> page, click on the **Analysis** button in the header and select `default`.  The image below shows an example of what this notebook would contain:
+Analysis notebooks are Jupyter notebooks that allow users to access and analyze data uploaded to Ganymede Cloud as part of a Flow run.  A fresh notebook instantiation has templates to retrieve data and save notebooks.  To access a fresh notebook instance, go to the <div className="button darkblue_button"><BranchesOutlined /> **Flow Editor**</div> page, click on the **Analysis** button in the header and select `default`.  The image below shows an example of what this notebook would contain:
 
 ![Ganymede Notebook](https://ganymede-bio.mo.cloudinary.net/apiServer/GanymedeNotebook_20230405.png)
 
@@ -36,7 +36,7 @@ Additional packages can be installed using pip magic.  For example, the followin
 
 ### Loading data from Ganymede data lake
 
-Tables in the environment can be accessed via the Ganymede SDK.  For example, the code below lists available tables in the environment:
+Tables in the environment can be accessed via the Ganymede SDK.  For example, the code below lists available tables:
 
 ```python
 from ganymede_sdk import Ganymede
@@ -47,7 +47,7 @@ for table in tables:
     print(table.table_id)
 ```
 
-A query can be run by passing a SQL snippet following [ANSI SQL syntax](https://cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax) to the __query_sql__ variable and running the __results__ method from Ganymede's __query__ module. This will return a Pandas dataframe. Before running the query, a dry run of the query is also available in the Ganymede's query module using the __dry_run__ method. For example, the commands below perform a dry run and return the results of the query provided in __query_sql__.
+To run a query, pass an [ANSI SQL snippet](https://cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax) to the __query_sql__ variable and use the __retrieve_sql__ method from Ganymede's query module.  This will return the results as a Pandas DataFrame.  Below is an example of retrieving query results.
 
 ```python
 q = 'select * from ganymede_demo.demo_table'
@@ -60,7 +60,7 @@ g.retrieve_sql(query_sql)
 
 ### Saving notebooks
 
-The final cell contains a code which commits the notebook to the HEAD of the Github repository containing the stored Flow.  The src entry in the files dictionary specifies the location of the notebook within the repo, and the dest entry specifies the name that the notebook is committed under.
+The final cell contains a code that commits the notebook to the HEAD of the Github repository containing the stored Flow.  The `src` entry in the `files` dictionary specifies the location of the notebook within the repository, and the `dest` entry specifies the name under which the notebook is committed.
 
 ```python
 from ganymede_sdk.notebook import save

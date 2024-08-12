@@ -2,6 +2,7 @@
 id: NodeEditor
 title: Node Editor
 displayed_sidebar: webUiSidebar
+toc_max_heading_level: 4
 ---
 
 import {
@@ -10,43 +11,47 @@ import {
 
 ## Node Overview
 
-_Nodes_ are customizable blocks of code that execute a single task within a _flow_.  Selecting a _node_ provides template code for defining and testing pipeline logic.
+Nodes are customizable blocks of code that execute specific tasks within a Flow. Each node in Ganymede provides a template to define and test pipeline logic.
 
 <div style={{textAlign: 'center'}}>
   <img width="400" alt="Example node layout" src="https://ganymede-bio.mo.cloudinary.net/apiServer/Operator_Conceptual_Layout_20230828.png"
   />
 </div>
 
-On the Flow Editor page, nodes are rendered as a box with a header that contains the node name.  The node name can be edited by clicking on the header.  
+On the Flow Editor page, nodes are displayed as boxes with headers containing the node name. You can edit the node name by clicking on the header.
 
 <div class="text--center">
 <img width="300" alt="image" src="https://ganymede-bio.mo.cloudinary.net/apiServer/EditNodeBefore_20230522.png"/>
 </div>
 
-The image above shows how _nodes_ are represented on the Flow Editor page; each _node_ consists of:
+Each node in the Flow Editor includes:
 
-- **Node Name**: located in the header of the _node_; CSV_Read in the image above.
+- **Node Name**: Located in the header; in the example above, it's "CSV_Read."
 - **Terminal Icon**: if present, the <CodeOutlined className="button darkblue_button"/> is a button that opens the user-editable notebook when clicked.
-- **Node Attribute(s)**: if present, the attributes associated with the _node_ that are processed by the node.  In the image above, the node attributes 'csv' and 'results' have values '.csv' and 'example_results' respectively.
+- **Node Attribute(s)**: If present, these attributes are processed by the node. In the image above, the node attributes "csv" and "results" have values ".csv" and "example_results," respectively.
 
 :::note
-By default, nodes are shown closed.  Clicking on the chevron in the upper right hand corner of the node opens the node to display the node attributes.
+By default, nodes are shown in a collapsed state. Click the chevron in the upper-right corner to expand the node and view its attributes.
 :::
 
-For nodes with editable components, notebooks follow a common structure.
+Nodes with editable components open a notebook with a common structure:
 
-#### Cells that are saved upon running Save Commit and Deploy:
-- **User-defined SQL** for retrieving tabular data to be processed by the node.  This code is executed by the workflow management system.
-- **User-defined Python** for processing input.  This code is executed by the workflow management system.
+### Cells Saved on Notebook Save
+- **User-defined SQL**: Retrieves tabular data to be processed by the node. This code is executed by the workflow management system.
+- **User-defined Python**: Processes input data. This code is also executed by the workflow management system.
 
 These cells have a light blue background.
 
-#### Cells that are discarded upon notebook close:
-- **Testing Section** for testing changes to user-defined SQL and Python
+### Cells Discarded Upon Notebook Close
+- **Testing Section**: Allows you to test changes to the user-defined SQL and Python before committing and deploying the code.
 
 Cells in this section have a light gray background.
 
-The Testing section enables users to test changes to the user-defined SQL and Python prior to committing and deploying code.
+:::info
+
+Cells created in the notebook have a light gray background, and are discarded when the webpage for the notebook is closed.
+
+:::
 
 A full listing of available nodes and their key characteristics can be found on the [Node Overview](./nodes/NodeOverview) page.
 
@@ -58,10 +63,12 @@ A full listing of available nodes and their key characteristics can be found on 
 </div>
 
 
-Editable nodes contain a terminal icon (<CodeOutlined className="button darkblue_button"/>) in their upper right hand corner that opens up the notebook backing the node upon button click.
-These notebooks format code upon cell execution using [black](https://black.readthedocs.io/en/stable/), and perform type checking, hinting, and code diagnostics using [Jupyter LSP](https://github.com/jupyter-lsp/jupyterlab-lsp) configured with a linter.  
+Editable nodes contain a terminal icon (<CodeOutlined className="button darkblue_button"/>) in their upper-right corner. Clicking this icon opens the notebook backing the node. 
+These notebooks format code upon cell execution using [black](https://black.readthedocs.io/en/stable/), and perform type checking, hinting, and code diagnostics using [Jupyter LSP](https://github.com/jupyter-lsp/jupyterlab-lsp) configured with [Ruff](https://docs.astral.sh/ruff/).
 
-#### Hover over an underlined piece of code to see warnings and errors from the LSP:
+### Code Warnings and Errors
+
+Hover over any underlined piece of code to see warnings and errors from the LSP:
 
 <div style={{textAlign: 'center'}}>
   <img width="500" alt="Ganymede notebook hover warning"
@@ -69,7 +76,9 @@ These notebooks format code upon cell execution using [black](https://black.read
         />
 </div>
 
-#### Hover over a class or method and click `Ctrl` to display a tooltip with the class or method signature:
+### Viewing Class or Method Signatures
+
+Hover over a class or method and click `Ctrl` to display a tooltip with the class or method signature:
 
 <div style={{textAlign: 'center'}}>
   <img alt="Ganymede notebook tooltip"
@@ -91,11 +100,11 @@ For nodes that reference the Ganymede data lake on input, the _query_sql_ string
 
 :::info observing columns and tables in Ganymede data lake
 
-Available tables and their associated schemas can be observed in the [Data Explorer](./DataExplorer.mdx) tab of the Ganymede app.
+Available tables and their associated schemas can be observed in the [Data Explorer](./DataExplorer.mdx) tab of the Ganymede app or explored in [Dashboards](./Dashboards).
 
 :::
 
-More than 1 query can be specified as input; to do so, specify multiple queries as semicolon-delimited query strings.  These are passed as a parameter to the user-defined Python function as a list of tables.
+Multiple queries can be specified as input by separating them with semicolons. These queries are passed as a list of tables to the user-defined Python function.
 
 
 ### User-defined Python
@@ -164,13 +173,13 @@ def execute(
 
 In this example, the _execute_ function takes the results of 1 or more tables as input, presented as either a pandas DataFrame or list of pandas DataFrames.  
 
-A single table is retrieved from df_sql_result, and the results are written to both the tabular database and as a CSV file to the file storage system.
+A single table is retrieved from df_sql_result, and the results are written to both the tabular database and a CSV file.
 
 :::caution
 
-The names of the _query_sql_ variable and _execute_ function cannot be modified or moved to different cells in a notebook.  Upon [saving the notebook](#saving-and-deploying-pipeline-code), the cells that contain the _query_sql_ string and execute function are saved, and the contents of all other cells are discarded.  
+The names of the _query_sql_ variable and _execute_ function cannot be modified or moved to different cells in a notebook.  When [saving the notebook](#saving-and-deploying-pipeline-code), these cells are saved, and all other cells are discarded. 
 
-This allows users to conduct testing in other cells prior to committing and loading code to the workflow orchestrator.
+This allows users to test in other cells before committing and deploying the code.
 
 :::
 
@@ -200,18 +209,17 @@ _Nodes_ that load data use a file upload widget so that a file can be uploaded p
 ```python
 # Example 2: Testing section for Input_File node
 
-# Load Jupyter black, and create widget for uploading CSV for testing node operation
+# Create widget for uploading CSV for testing node operation
 from IPython.display import display
 import ipywidgets as widgets
-
-import jupyter_black
-jupyter_black.load(line_length=100)
 
 # Create file upload widget
 file_uploader = widgets.FileUpload(
     multiple=False,
 )
 display(file_uploader)
+
+# --- 
 
 # Retrieve context variable from most recent run
 from ganymede_sdk import Ganymede
@@ -222,6 +230,8 @@ f = file_uploader.value[0]
 input_file = {f.name: f.content.tobytes()}
 print("\nInput file: \n" + "\n".join(input_file.keys()))
 
+# ---
+
 # Run user-defined Python on uploaded file
 res = execute(input_file, ganymede_context=g.ganymede_context)
 res
@@ -229,17 +239,23 @@ res
 
 ### Saving and Deploying Pipeline Code
 
-Saving notebooks can be accomplished in a couple ways:
+You can save notebooks in a few ways:
 
 - Clicking the <SaveFilled className="button dark_gray_button"/>   button in the upper right hand corner of the notebook.
 - Typing `Cmd+S` (Mac) or `Ctrl+S` (Windows/Linux) to save the pipeline cell(s).
-- Selecting the _Kernel_ menu and then selecting _Save Commit and Deploy_
+- Selecting the _Kernel_ menu and then selecting _Save Commit and Deploy_.
 
-Executing any of these actions will lint the pipeline cell(s), and then commit and deploy the pipeline code to the workflow orchestrator.  A pop-up will box will appear for each of these actions; lint errors will be displayed in the initial pop-up, and commit confirmation will be displayed on the second pop-up.
+Executing any of these actions will lint the pipeline cell(s), and then commit and deploy the pipeline code to the workflow orchestrator.  A pop-up will box will appear for each of these actions; lint warnings/errors will be displayed in the initial pop-up, and commit confirmation will be displayed on the second pop-up.
 
-## Adding flow inputs
+:::note
 
-_Flows_ can be configured to accept user inputs at the start of each run by selecting the appropriate node and saving the _flow_. There are three types of inputs:
+Code is committed and deployed upon saving, even if it does not pass linting, and even if it is not executed prior to saving.  This allows you to step outside the structure enforced by black and ruff if desired.
+
+:::
+
+## Adding Flow inputs
+
+Flows can be configured to accept user inputs at the start of each run by selecting the appropriate node and saving the Flow. There are three types of inputs:
 
 - File inputs (e.g. - FileAny, FileCSV, etc.)
 - Text (string) inputs (e.g. - string)

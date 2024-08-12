@@ -26,6 +26,14 @@
   --ifm-code-font-size: 80%;
 }
 
+.menu__list-item {
+  margin: 0.25rem 0; /* Less space between items */
+}
+
+.menu__link {
+  padding: 0.25rem 0.5rem; /* Tighter padding around links */
+}
+
 .no-sidebar .theme-doc-sidebar-container {
   display: none;
 }

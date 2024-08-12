@@ -12,22 +12,22 @@ import {
 
 ## What is Virtualization?
 
-Virtualization is an add-on platform feature that makes it possible to integrate a manual analysis that are locally executed into data processing workflows.  
+Virtualization is an add-on platform feature that makes it possible to integrate manual analyses that are locally executed into data processing workflows.  
 
 This feature facilitates:
-- **Interactive analysis** that requires judgment in a rich, scientifically familiar user experience
-- **Traceability** - all users can see sessions that have been created, the user who created each session, input and output files, and users who have accessed each session.
-- **Flexibility** - the ability to incorporate encrypted files or proprietary binary access in a data pipeline that captures analyses in a structured, machine-readable format
-- **Collaboration** - virtualization sessions can be opened or shared with colleagues so that live collaboration can take place in the session
-- **Scalability** - users have access to an environment that can flexibly scale up compute resources as needed. RAM-intensive applications can run more easily, minimizing the risk that an app will crash and lose a user's progress.
+- **Interactive Analysis**: Enables judgment-driven analysis within a rich, scientifically familiar user experience.
+- **Traceability**: Provides visibility into session creation, users involved, input/output files, and access history, ensuring data traceability.
+- **Flexibility**: Allows for the integration of encrypted files or proprietary binaries in a data pipeline, capturing analyses in a structured, machine-readable format.
+- **Collaboration**: Facilitates live collaboration by allowing sessions to be shared and accessed by colleagues.
+- **Scalability**: Offers an environment that can scale up compute resources as needed, reducing the risk of application crashes and data loss.
 
 Some examples of analyses that could be suitable are: 
-- flow cytometry gating
-- protein structure analysis
-- microscopy image analysis 
-- gel electrophoresis band quantification
+- Flow cytometry gating
+- Protein structure analysis
+- Microscopy image analysis 
+- Gel electrophoresis band quantification
 - ddPCR analysis
-- statistical charting / data visualization
+- Statistical charting / data visualization
 
 To use this feature, scientists select files relevant files for processing from the [File Browser](./Files), conduct an analysis in the software, and then store relevant results back to Ganymede File Storage by saving output files in the appropriate location.
 
@@ -35,23 +35,28 @@ Pleaes reach out to [Ganymede](mailto:support@ganymede.bio) to explore your spec
 
 ## Using Virtualization
 
-Users can start a session from the File Browser by selecting files and the relevant App. The selected files will become input files to the session and will appear in the C:\Users\appuser\Desktop\input_files directory.
+Users can start a session from the [File Browser](./Files.mdx) by selecting files and the relevant App. The selected files will become input files to the session and will appear in the C:\Users\appuser\Desktop\input_files directory.
 
 ### Starting a Session
 
 1. Navigate to the File Browser.
-2. Filter for the relevant files to bring into the session.
-3. Select the relevant files by using the checkboxes to the left.
-    1. The checkbox in the top-left corner of the table will select all files on the current page. Traversing multiple pages to select files is possible, as files will remain selected.
+2. Filter for the relevant files to bring into the session.  Commonly, this would be done by filtering for [files with a specific Tag or set of Tags](./connectivity/Tags.mdx).
+3. Select the relevant files by using the checkboxes on the left side of the files table.
+
+:::info
+
+The checkbox in the top-left corner of the table will select all files on the current page. Traversing multiple pages to select files is possible, as files remain selected after navigating to different pages.
+
+:::
+
 4. In the top-right corner, a Run Application button will become clickable. Hover over the button and select the relevant app from the dropdown.
 
 <div style={{textAlign: 'center'}}>
   <img alt="Starting a Virtualization Session" src="https://ganymede-bio.mo.cloudinary.net/virtualization/StartingVirtualizationSessionZoomed20240507.png"
   />
 </div>
-&nbsp;
 
-5. In a new window, the virtualization session will start loading. New sessions typically take about 2-3 minutes for creation. You are welcome to navigate away from the session while it loads in the background - if the window is closed, you can navigate back to the session through the Sessions page in the left sidebar of the Ganymede app.
+5. A new window will open, and the session will start loading. Sessions typically take 2-3 minutes to initialize. You can navigate away while it loads; if the window is closed, you can return to the session via the Sessions page.
 
 <div style={{textAlign: 'center'}}>
   <img width="800" alt="Launching Virtualization VM" src="https://ganymede-bio.mo.cloudinary.net/virtualization/VirtualizationVMLaunching20240507.png"
@@ -74,7 +79,7 @@ When the session first loads, you will see a Windows lock screen with a Ganymede
 1. As denoted by the arrows, you will need to select the “appuser” account.
 1. The session password is displayed at the bottom of the screen. Click on the <div className="button darkblue_button"><CopyOutlined /> **Paste Password**</div> button and paste it into the password field.
 
-Once the session is opened, a Windows desktop appears. On the desktop, there is a directory called “Input_Files”. In this directory are the files that were selected in the File Browser during session creation.
+Once the session is opened, a Windows desktop appears. On the desktop, there is a directory called “Input_Files”. This directory contains the files that were selected in the File Browser during session creation.
 
 <div style={{ textAlign: 'center' }}>
   <img width="800" alt="Virtualization Desktop" src="https://ganymede-bio.mo.cloudinary.net/virtualization/VirtualizationDesktop20240507.png"
@@ -84,9 +89,9 @@ Once the session is opened, a Windows desktop appears. On the desktop, there is 
 
 #### Adding files to a session
 
-If there are additional files that need to be added to a session, a user can either add files from the Sessions page or from within a session itself. 
+If additional files are needed, you can add them from either the Sessions page or directly within the session:
 
-To add files from the Sessions page within the Ganymede app:
+- **From the Sessions Page**: Navigate to the relevant session and click the Add Files (+) icon next to the input files.
 
 <div style={{ textAlign: 'center' }}>
   <img width="800" alt="Adding files to a Virtualization Session from the Sessions page" src="https://ganymede-bio.mo.cloudinary.net/virtualization/VirtualizationSessionAddFiles20240507.png"
@@ -94,15 +99,13 @@ To add files from the Sessions page within the Ganymede app:
 </div>
 &nbsp;
 
-1. Navigate to the relevant session on the Sessions page.
-1. To the right of the input files, click on the Add Files (+) icon.
-
-To add files from within a session, click on the Add Files button in the bottom bar of the session window
+- **From Within the Session**: Navigate to the relevant session and click the Add Files (+) icon next to the input files.
 
 <div style={{ textAlign: 'center' }}>
   <img width="800" alt="Adding files to a Virtualization Session from the active session" src="https://ganymede-bio.mo.cloudinary.net/virtualization/VirtualizationAddFiles20240507.png"
   />
 </div>
+&nbsp;
 
 which launches a modal for selecting files from Ganymede data storage to add.
 
@@ -114,18 +117,17 @@ which launches a modal for selecting files from Ganymede data storage to add.
 
 ### Storing files from a session
 
-When the analysis is complete, the user can save the output files to Ganymede File Storage.
+After completing your analysis, save the output files to Ganymede File Storage.
 
 :::warning
 
-Please remember to capture output files, as any session files that are not captured as either input files or output files in Ganymede will be lost once the session ends.
+Remember to capture output files, as any files not saved in Ganymede will be lost once the session ends.
 
 :::
 
 To capture an output file:
-1. Navigate to the file that you want to save.
-1. Copy or move the file to the "Output_files" directory on the desktop. The full path of this directory is C:\Users\appuser\Desktop\Output_files.  To verify that the files were captured as outputs, click on "Output Files" in the control bar at the bottom of the screen; the files should appear in the “Output Files” section. 
-1. To view the output files in Ganymede, either select “View Output Files” or the file chips themselves. This will redirect you to the File Browser in Ganymede; you may need to refresh the File Browser for recent files to appear.
+1. **Move Files to Output Directory**: Copy or move the output files to the "Output_files" directory on the desktop (C:\Users\appuser\Desktop\Output_files).
+1. **Verify File Capture**: Check the "Output Files" section in the control bar at the bottom of the screen to ensure files were captured.
 
 <div style={{ textAlign: 'center' }}>
   <img alt="Virtualization Output Files" src="https://ganymede-bio.mo.cloudinary.net/virtualization/VirtualizationOutputFiles20240507.png"

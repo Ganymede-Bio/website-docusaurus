@@ -92,7 +92,7 @@ module.exports = {
             type: 'category',
             label: 'Editing and Running Flows',
             collapsed: false,
-            items: ['Home', 'FlowEditor', 'NodeEditor', 'FlowView', 'SystemMetadata'],
+            items: ['Home', 'FlowEditor', 'NodeEditor', 'FlowView', 'NotebookTips'],
           },
           {
             type: 'category',
@@ -116,7 +116,7 @@ module.exports = {
         type: 'category',
         label: 'Observing Data',
         collapsed: true,
-        items: ['Files', 'Dashboards', 'AnalysisNotebook', 'DataExplorer', 'DashboardTips']
+        items: ['Files', 'Dashboards', 'DataExplorer', 'AnalysisNotebook', 'SystemMetadata', 'DashboardTips']
       },
       {
         type: 'category',
@@ -128,11 +128,6 @@ module.exports = {
         type: 'doc',
         id: 'AdminControls',
         label: 'Environment Administration'
-      },
-      {
-        type: 'doc',
-        id: 'NotebookTips',
-        label: 'Notebook Tips'
       },
       {
         type: 'doc',

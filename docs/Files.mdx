@@ -14,23 +14,23 @@ import {
 } from '@ant-design/icons';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 
-The <div className="button darkblue_button"><FolderOutlined /> **Files**</div> page provides access to all of the files uploaded to Ganymede and all files created in Ganymede by Flow Runs for the current environment.  Files can be browsed and searched for using various metadata fields, including file name, file type, file size, tags, creation date, file origin and Flows that the file was used in.
+The <div className="button darkblue_button"><FolderOutlined /> **Files**</div> page allows users to search, filter, download, and link to files within the Ganymede environment.
 
 ![Files](https://ganymede-bio.mo.cloudinary.net/apiServer/GanymedeFileBrowser_20240401.png)
 
 ## Finding files
 
-To search for a file by name, type a query in the search box in the upper left of the page.  To filter files by other properties, click the filter icon ( <FilterFilled /> ) next to supported column titles in the table header, select the desired values, and click OK.
+To locate a file by name, enter your query in the search box in the upper left corner of the page. For more advanced filtering, click the filter icon ( <FilterFilled /> ) next to the column headers to apply filters based on specific file properties. After selecting your desired filters, click OK.
 
 ![Files (filtered)](https://ganymede-bio.mo.cloudinary.net/apiServer/Files-Filtered-2024-04-01.png)
 
 ### Advanced Search
 
-The advanced search panel allows you to filter files by various file characteristics or [file tags](./connectivity/Tags).  To use this feature, define tag types on the [Manage Tag Types panel](./connectivity/Tags#configuring-file-tag-types), and assign tags to specific files using methods found in the [file_tags module](./sdk/FileTags) of the Ganymede SDK.
+The advanced search panel allows you to filter files by various file characteristics or [File Tags](./connectivity/Tags).  To use this feature, define tag types on the [Manage Tag Types panel](./connectivity/Tags#configuring-file-tag-types), and assign tags to specific files using methods found in the [file_tags module](./sdk/FileTags) of the Ganymede SDK.
 
 ![Advanced Search](https://ganymede-bio.mo.cloudinary.net/apiServer/AdvancedSearch20240507.png)
 
-Searches are evaluated with an AND condition between the different fields and an OR condition within the same field.  For example, if you search for files with the instrument tag "LC" and the tag "MS", the search will return files with either a "LC" or "MS" instrument tag (or both).  If you add a size filter of "greater than 1MB", then only files that have either a "LC" or "MS" instrument tag or both and are greater than 1MB will be returned.
+Searches combine conditions across fields with an AND logic, while conditions within the same field use OR logic. For example, searching for files with the "LC" and "MS" instrument tags will return files tagged with either "LC" or "MS" (or both). Adding a size filter of "greater than 1MB" will further narrow the results to files with the "LC" or "MS" tags that are also larger than 1MB.
 
 ## Downloading files
 
@@ -38,15 +38,15 @@ To download a file, click the file's name in the _File name_ column.
 
 ## Linking to files
 
-Click the link icon ( <LinkOutlined /> ) next to a file's name in the _File name_ column to copy a link to that file to the clipboard.  This link can be shared with other users in the same Ganymede environment.  Visiting the link will open the <div className="button darkblue_button"><FolderOutlined /> **Files**</div> page filtered to show only the linked file.
+To copy a link to a file, click the link icon ( <LinkOutlined /> ) next to a file's name in the _File name_ column.  This link can be shared with other users in the same Ganymede environment.  Visiting the link will open the <div className="button darkblue_button"><FolderOutlined /> **Files**</div> page filtered to show only the linked file.
 
 ![Files (copying link)](https://ganymede-bio.mo.cloudinary.net/apiServer/Files-Copying-Link-2023-08-31.png)
 &nbsp;
 ![Files (single-file view)](https://ganymede-bio.mo.cloudinary.net/apiServer/Files-Single-File-View-2023-08-31.png)
 
-### URLs for accessing Ganymede files from other apps (deep links)
+### Deep Links - URLs for Accessing Ganymede Files from Other Apps
 
-URLs for files can be generated using the get_file_url function in the Ganymede SDK by calling the `get_file_url` function.
+You can generate URLs for files using the [get_file_url function](./sdk/FileTags#get_file_url) in the Ganymede SDK. This function returns a URL that users can use to directly access the file from another application, such as another LIMS system.
 
 ```python
 from ganymede_sdk.storage import get_file_url
@@ -56,20 +56,19 @@ filename = 'sample_file_name.txt'
 file_url = get_file_url(filename=filename, bucket=bucket)
 ```
 
-This function returns a URL that users can use to directly access the file from another application, such as another LIMS system.  
-
 :::note
+
 Accessing a Ganymede file URL requires the user to be authenticated in Ganymede.  If you're having trouble accessing a file URL, log in to your
-Ganymede tenant in a separate browser tab and try again.
+Ganymede tenant in a separate Google Chrome browser tab and try again.
+
 :::
 
 ## Viewing related entities
 
-For each file, the <div className="button darkblue_button"><FolderOutlined /> **Files**</div> page shows the ID of the Flow or Agent that originated the file (_Origin_) along with the IDs of all Flows and Flow Runs that the file was used in (_Usage_), as applicable.  Click any Flow ID, Agent ID or Flow Run ID to view details for that entity in the <div className="button darkblue_button"><img src={useBaseUrl('/img/flows_icon.svg')} className="filter-white" /> **Flow View**</div>, <div className="button darkblue_button"><ApiOutlined /> **Connections**</div>, and <div className="button darkblue_button"><CheckCircleOutlined /> **Flow Runs**</div> pages, respectively.
+For each file, the <div className="button darkblue_button"><FolderOutlined /> **Files**</div> page displays the ID of the Flow or Agent that originated the file (_Origin_) along with the IDs of all Flows and Flow Runs that the file was used in (_Usage_), as applicable.  Click any Flow ID, Agent ID or Flow Run ID to view details for that entity in the <div className="button darkblue_button"><img src={useBaseUrl('/img/flows_icon.svg')} className="filter-white" /> **Flow View**</div>, <div className="button darkblue_button"><ApiOutlined /> **Connections**</div>, and <div className="button darkblue_button"><CheckCircleOutlined /> **Flow Runs**</div> pages, respectively.
 
 ![Files (usage)](https://ganymede-bio.mo.cloudinary.net/apiServer/Files-Usage-2023-08-31.png)
-&nbsp;
 
 ## Refreshing
 
-The "Last refreshed" timestamp in the lower left of the page shows the last time the file browser retrieved an up-to-date list of files from Ganymede storage.  Click the <div className="button darkblue_inverted_button"><SyncOutlined /> Refresh</div> button in the lower left of the page to check for files that have been added since the last retrieval.
+The _Last refreshed_ timestamp in the lower-left corner of the page indicates when the file browser last retrieved an up-to-date list of files from Ganymede storage. To check for newly added files, click the <div className="button darkblue_inverted_button"><SyncOutlined /> Refresh</div> button.
