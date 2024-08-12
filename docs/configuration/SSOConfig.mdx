@@ -78,10 +78,15 @@ Please ensure the following service-provider (SP) metadata is uploaded to IdP:
 | --- | --- |
 | Identifier (Entity ID) | ganymede.bio |
 | ACS (Assertion Consumer Service) URL | https://ganymede-core.firebaseapp.com/__/auth/handler |
-| NameID Format | urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress |
+
+Also, please ensure the following metadata format:
+| Field | Notes |
+| --- | --- |
+| Name ID | urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress |
 
 Once complete, the following information should be provided to Ganymede, either directly or through a shared metadata XML page:
 
-- Entity ID - this should be the URL metadata XML page, if available
-- Certificate (Base64)
+- Entity ID - this should be the URL of the metadata XML page if available
 - SSO URL - this should correspond to HTTP-Redirect location metadata
+- Certificate
+
