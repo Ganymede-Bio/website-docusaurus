@@ -13,40 +13,40 @@ The <div className="button darkblue_button"><AreaChartOutlined /> **Dashboard**<
 &nbsp;
 
 To assemble a dashboard:
-- [Add a dataset](#adding-a-dataset), either chosen from the environment or via SQL query
-- [Create a chart](#creating-a-chart) from the dataset
-- [Save the chart](#saving-charts-to-dashboards) to add the chart to the specified dashboard.
-- [Modify dashboards and chart layouts](#editing-dashboards) by selecting the corresponding dashboard from the **Dashboards** tab in the top menu bar
+- [Add a dataset](#adding-a-dataset) from the environment or create one via SQL query.
+- [Create a chart](#creating-a-chart) from the dataset.
+- [Save the chart](#saving-charts-to-dashboards) to a specified dashboard.
+- [Modify dashboards and chart layouts](#editing-dashboards) by selecting the corresponding dashboard from the **Dashboards** tab in the top menu bar.
 
 ## Adding a Dataset
 
-Datasets must be added from the environment prior to charting, either chosen from the environment ([Physical Datasets](#adding-physical-datasets)) or created via an ANSI SQL query ([Virtual Datasets](#adding-virtual-datasets)) based prior to charting.
+Before creating charts, you will need to add datasets from the environment.  These can be either ([Physical Datasets](#adding-physical-datasets)) or [Virtual Datasets](#adding-virtual-datasets) (created via an ANSI SQL query).
 
 ### Adding Physical Datasets
 
-Physical datasets are tables outputted from flows.  To add a physical dataset:
+Physical datasets are outputted by Flows.  To add a physical dataset:
 
 - Click on the Datasets button in the top bar:
 
 <img alt="Dashboard - Select Dataset" src="https://ganymede-bio.mo.cloudinary.net/dashboard/Select_Dataset20230531.png" />
 
-- Select a database, schema, and table to add and click <div className="button darkblue_button">**CREATE DATASET AND CREATE CHART**</div>.
+- Choose a database, schema, and table. Then click <div className="button darkblue_button">**CREATE DATASET AND CREATE CHART**</div>.
 
 <img alt="Dashboard - Add Physical Dataset" src="https://ganymede-bio.mo.cloudinary.net/dashboard/Add_Dataset20230531.png" />
 
 ### Adding Virtual Datasets
 
-Virtual datasets for the dashboard environment are constructed by querying existing tables.
+Virtual datasets are created by querying existing tables in Ganymede.
 
-- Hover over SQL in the top menu bar and click on SQL Lab.  This should bring you to a SQL editor that lets you preview tables, and results of SQL queries:
+- Hover over SQL in the top menu bar and click on SQL Lab.  This should bring you to a SQL editor, where you can preview tables and run SQL queries.
 
 <img alt="Dashboard - SQL Editor" src="https://ganymede-bio.mo.cloudinary.net/dashboard/SQL_Editor20230531.png" />
 
-- Fill in the SQL Editor with a query string, select an appropriate number of rows to observe, and click <div className="button darkblue_button">**RUN**</div> to execute SQL.
+- Enter your SQL query, select the number of rows to preview, and click <div className="button darkblue_button">**RUN**</div> to execute the query.
 
 <img alt="Dashboard - SQL Editor Query" src="https://ganymede-bio.mo.cloudinary.net/dashboard/SQL_Editor_Query20230531.png" />
 
-- Save a virtual dataset by clicking on the <div className="button purple_button_dashboard"><DownOutlined /></div> next to the <div className="button purple_button_dashboard">SAVE</div> button, and clicking on <div className="button jupyter_button">Save Dataset</div>.
+- To save the virtual dataset, click the <div className="button purple_button_dashboard"><DownOutlined /></div> next to the <div className="button purple_button_dashboard">SAVE</div> button, and select <div className="button jupyter_button">Save Dataset</div>.
 
 <img alt="Dashboard - Add Virtual Dataset" src="https://ganymede-bio.mo.cloudinary.net/dashboard/SQL_Editor_Save_Dataset20230531.png" />
 
@@ -64,29 +64,29 @@ Charts can be created from physical or virtual datasets.
 
 To create a chart:
 
-- Hover over Data in the top menu bar and click on Datasets.  Then, click on one of the listed datasets, which should bring up the following pane:
+- Hover over **Data** in the top menu bar and click on **Datasets**.  Select a dataset from the list, which will open the chart creation pane:
 
 <img alt="Dashboard - Create Chart" src="https://ganymede-bio.mo.cloudinary.net/dashboard/Create_Chart20230415.png" />
 
-The DATA tab has controls for specifying chart type and pivoting/aggregating data from the selected table.  The customize tab has functionality for annotating axis labels, specifying axis format, and chart title.
+- Use the DATA tab to specify chart type and to pivot or aggregate data.  The CUSTOMIZE tab allows you to annotate axis labels, specify axis formats, and set the chart title.
 
 ### Saving charts to dashboards
 
-- Once the created chart looks satisfactory, add a chart to a dashboard by clicking on **SAVE** in the upper-right hand corner of the screen to bring up this modal:
+Once the created chart is ready, click **SAVE** in the upper-right hand corner to add it to a dashboard:
 
 <img alt="Dashboard - Save Chart" src="https://ganymede-bio.mo.cloudinary.net/dashboard/Save_Chart20230415.png" />
 
 ### Calculated columns
 
-Calculated columns can be added to the dataset, which can be handy for correcting data for visualization.  Some example use cases are:
+Calculated columns are useful for refining data visualization. Examples include:
 
 - Taking the floor or ceiling of a variable to truncate data outside of a desired range
-- Performing string manipulations on a field to categorize or subset data
-- Extracting values from a string for aggregation
+- Categorizing or subsetting data through string manipulation
+- Extracting values for aggregation
 
 To create a calculated column:
 
-- Hover over the three dots to the right of the dataset on the Chart Creation page and click Edit Dataset.
+- Hover over the three dots to the right of the dataset on the Chart Creation page and click **Edit Dataset**.
 
 <img alt="Dashboard - Edit Dataset" src="https://ganymede-bio.mo.cloudinary.net/dashboard/Edit_Dataset20230415.png" />
 
@@ -101,19 +101,18 @@ can be filtered on, sorted by, and/or used to categorize data.
 
 <img alt="Dashboard - Calculated Column" src="https://ganymede-bio.mo.cloudinary.net/dashboard/Calculated_Column20230415.png" />
 
+## Editing dashboards
+
+To edit a dashboard:
+- Select **Dashboards** from the top menu bar and navigate to the desired dashboard.  Click <div className="button purple_button_dashboard">**EDIT DASHBOARD**</div> to resize and rearrange the layout of different charts.
+- To filter data within graphs, click the <DashboardFilterIcon /> icon on the left side of the dashboard, then select <div className="button superset_button"><PlusOutlined /> Add filters and dividers</div> and use the SCOPING panel to apply filters.
+
 :::info Permissions for editing datasets
 
-Dashboards can only be edited by their owner.  One method for multiple users to avoid conflicting dataset modifications would be for
+Dashboards can only be edited by their owner(s).  One method for multiple users to avoid conflicting dataset modifications would be for
 users of shared datasets to create virtual datasets for their own use.
 
 :::
-
-## Editing dashboards
-
-To edit a dashboard, select **Dashboards** from the top menu bar and navigate to the desired dashboard.  Clicking on <div className="button purple_button_dashboard">**EDIT DASHBOARD**</div> allows users
-to resize and rearrange the layout of different charts.
-
-Data backing the graphs can be filtered by clicking on the <DashboardFilterIcon /> icon on the left side of the dashboard, selecting <div className="button superset_button"><PlusOutlined /> Add filters and dividers</div> and selecting the SCOPING panel.
 
 :::tip Tables referenced by dashboard filter
 
