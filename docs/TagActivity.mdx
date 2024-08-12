@@ -1,0 +1,33 @@
+---
+id: TagActivity
+title: Tag Activity
+displayed_sidebar: webUiSidebar
+---
+
+import {
+  CheckCircleOutlined,
+  FolderOutlined,
+  AppstoreOutlined,
+  ApiOutlined
+} from '@ant-design/icons';
+import useBaseUrl from '@docusaurus/useBaseUrl';
+
+
+The Tag Activity page provides access to all activity related to a single file tag. All tag activities for a selected tag are displayed on a timeline, with the activities listed in chronological order.
+Each tag activity displays its activity type and details on the timeline.
+
+![Tag activity](https://github.com/user-attachments/assets/2678f7fd-0e91-40cd-9ca0-7d5cc265196b)
+
+## Viewing tag activity
+
+To view a tag activity, click on a file tag chip from the <div className="button darkblue_button"><FolderOutlined /> **Files**</div> page or by clicking on any file name. 
+
+![File chip](https://github.com/user-attachments/assets/dd53b89c-a99b-41ae-932e-891d5b35d5cd)
+
+### Reading tag activity
+
+Tag activity is grouped into the following categories:
+
+- Files used in <div className="button darkblue_button"><CheckCircleOutlined /> **Flow Run**</div>. Details shown include time the file was used in the flow run, link to the corresponding flow run details, flow run status, user that ran the flow, and a summary of input and output files.
+- Input and output files tagged in a <div className="button darkblue_button"><AppstoreOutlined /> **Virtualization Session**</div>. Details shown include application used (e.g. FlowJo), user that started the session, and a summary of input and output files.
+- Files used in <div className="button darkblue_button"><ApiOutlined /> **Agent Connections**</div>. Details shown include connection name, link to connection details, user that initiated the connection, and a summary of files used in the agent connection.
