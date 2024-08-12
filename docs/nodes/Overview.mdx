@@ -9,24 +9,24 @@ import {
   SaveFilled,
 } from '@ant-design/icons';
 
-_Nodes_ provide template structure for performing data extraction, processing, and API communication. The diagram below shows how a node performs a base function, but exposes an interface for user-defined code to enable tailoring.
+Nodes provide template structure for performing data extraction, processing, and API communication. The diagram below shows how a Node performs a base function, but exposes an interface for user-defined code to enable tailoring.
 
 <div style={{textAlign: 'center'}}>
   <img width="400" alt="Example node layout" src="https://ganymede-bio.mo.cloudinary.net/apiServer/Operator_Conceptual_Layout_20230828.png"
   />
 </div>
 
-In Jupyter notebooks associated backing editable nodes, user-defined SQL and user-defined Python cells share a light blue background and are committed to a repo + deployed to a workflow orchestrator upon clicking on the <SaveFilled className="button dark_gray_button"/>   button in the toolbar, or by pressing `Cmd+S` or `Ctrl+S` (Windows/Linux).
+In Jupyter notebooks associated backing editable Nodes, user-defined SQL and user-defined Python cells share a light blue background and are committed to a repo + deployed to a workflow orchestrator upon clicking on the <SaveFilled className="button dark_gray_button"/>   button in the toolbar, or by pressing `Cmd+S` or `Ctrl+S` (Windows/Linux).
 
 ## Key Node Characteristics
 
-A useful way to interact with _nodes_ is to consider how _nodes_ interact with files and APIs, their input and output types, and whether or not they contain a user-editable component.  The table below shows the full list of available _nodes_, along with whether there is a user-editable component associated with the node.
+A useful way to interact with Nodes is to consider how Nodes interact with files and APIs, their input and output types, and whether or not they contain a user-editable component.  The table below shows the full list of available Nodes, along with whether there is a user-editable component associated with the Node.
 
 ### Available Nodes with Key Characteristics
 
-The table below lists available nodes.
-- **Is Editable** indicates that the node has a user-editable components
-- **Is Multi** indicates that the node can accept multiple inputs.
+The table below lists available Nodes.
+- **Is Editable** indicates that the Node has a user-editable components
+- **Is Multi** indicates that the Node can accept multiple inputs.
 
 | [Category](#node-categories)   | Name                   | [Input Types](#input-and-output-types-for-nodes)                                                           | [Output Types](#input-and-output-types-for-nodes)                                | Is Editable   | Is Multi   |
 |------------|---------------------------|-------------------------|--------------------------|---------------|------------|
@@ -102,7 +102,7 @@ The table below lists available nodes.
 
 #### NodeReturn Object
 
-Many nodes return a `NodeReturn` object, which contain tables and files to store in the Ganymede data lake.  
+Many Nodes return a `NodeReturn` object, which contain tables and files to store in the Ganymede data lake.  
 
 Initializing a NodeReturn object involves passing the following parameters:
   - _param_ **tables_to_upload**: Optional[dict[str, pd.DataFrame]] - Tables keyed by name to store in Ganymede
@@ -111,7 +111,7 @@ Initializing a NodeReturn object involves passing the following parameters:
   - _param_ **tables_measurement_units**: Optional[dict[str, pd.DataFrame]] - if provided, the measurement units for columns; keys are table names, values are
     pandas DataFrames with "column_name" and "unit" as columns
   - _param_ **file_location**: Optional[str] - Bucket location to output to, either "input" or "output; only need to specify if files_to_upload is not null, by default output
-  - _param_ **wait_for_job**: whether to wait for write to Ganymede data lake before continuing execution to subsequent node, by default False
+  - _param_ **wait_for_job**: whether to wait for write to Ganymede data lake before continuing execution to subsequent Node, by default False
   - _param_ **tags**: Optional[dict[list[dict] | dict]]: Dictionary of files to tag; keys are file names, values are dictionaries of
         keyword parameters to pass into the [add_file_tag function](../connectivity/Tags#tagging-files).
 
@@ -170,31 +170,31 @@ execute()
 
 #### FlowInputs object
 
-Nodes that trigger other flows return a `FlowInputs` object, which specifies the inputs to the triggered flow.  
+Nodes that trigger other Flows return a `FlowInputs` object, which specifies the inputs to the triggered Flow.  
 
 Initializing a `FlowInputs` object involves passing the following parameters, which are found in ganymede_sdk.io:
-  - _param_ **files**: Optional[List[FlowInputFile]] - Name of flow to trigger
-  - _param_ **params**: Optional[List[FlowInputParam]] - Inputs to pass to triggered flow
-  - _param_ **tags**: Optional[List[Tag]] - Tags to pass to triggered flow
+  - _param_ **files**: Optional[List[FlowInputFile]] - Name of Flow to trigger
+  - _param_ **params**: Optional[List[FlowInputParam]] - Inputs to pass to triggered Flow
+  - _param_ **tags**: Optional[List[Tag]] - Tags to pass to triggered Flow
 
-`FlowInputFile` is a dataclass used to pass file(s) into a node.  It has the following attributes:
-  - _param_ **node_name**: str - Name of node within triggered flow to pass file(s) into
-  - _param_ **param_name**: str - Node parameter in the triggered flow node that is used to specify the string pattern that the filename must match (e.g. - "csv" for the CSV_Read _node_)
-  - _param_ **files**: Dict[str, bytes] - Files to pass into node
+`FlowInputFile` is a dataclass used to pass file(s) into a Node.  It has the following attributes:
+  - _param_ **node_name**: str - Name of Node within triggered Flow to pass file(s) into
+  - _param_ **param_name**: str - Node parameter in the triggered Flow Node that is used to specify the string pattern that the filename must match (e.g. - "csv" for the CSV_Read Node)
+  - _param_ **files**: Dict[str, bytes] - Files to pass into Node
 
-`FlowInputParam` is a dataclass used to pass parameters into a node.  It has the following attributes:
-  - _param_ **node_name**: str - Name of node within triggered flow to pass parameter(s) into
-  - _param_ **param_name**: str - Node parameter in the triggered flow node that is used to specify the string pattern that the parameter must match ("param" for the Input_Param _node_)
-  - _param_ **param_value**: str - Value to pass into node
+`FlowInputParam` is a dataclass used to pass parameters into a Node.  It has the following attributes:
+  - _param_ **node_name**: str - Name of Node within triggered Flow to pass parameter(s) into
+  - _param_ **param_name**: str - Node parameter in the triggered Flow Node that is used to specify the string pattern that the parameter must match ("param" for the Input_Param Node)
+  - _param_ **param_value**: str - Value to pass into Node
 
 `Tag` is a dataclass used to pass tags into a node.  It has the following attributes:
-  - _param_ **node_name**: str - Name of node within triggered flow to pass tag(s) into
-  - _param_ **display_tag**: str - Value displayed in the dropdown in Ganymede UI.  For Benchling_Tag _nodes_, this is the name of the tag displayed in the dropdown in Flow View / Flow Editor.
-  - _param_ **run_tag**: str - Underlying value of the tag.  For Benchling_Tag _nodes_, this is the Benchling ID associated with the value selected in the dropdown.
+  - _param_ **node_name**: str - Name of node within triggered Flow to pass tag(s) into
+  - _param_ **display_tag**: str - Value displayed in the dropdown in Ganymede UI.  For Benchling_Tag Nodes, this is the name of the tag displayed in the dropdown in Flow View / Flow Editor.
+  - _param_ **run_tag**: str - Underlying value of the tag.  For Benchling_Tag Nodes, this is the Benchling ID associated with the value selected in the dropdown.
 
 #### Other input/output types
 
-Some other input and output types characteristic to nodes are:
+Some other input and output types characteristic to Nodes are:
 
 - **Table**: Tabular data retrieved from or passed to tenant-specific Ganymede data lake.  Tables are retrieved from Ganymede data lake via ANSI SQL queries, and are passed to Ganymede data lake as pandas DataFrames
 - **API**: access via third-party API
@@ -217,9 +217,9 @@ Some other input and output types characteristic to nodes are:
 
 ### User-editable Nodes
 
-User-editable nodes present an interface for modifying and testing code that is executed by the workflow management system.  These Jupyter notebooks are split into the following sections:
-- **Node Description**: A short blurb about the node that the user-editable function corresponds to
-- **Node Input Data**: For nodes that retrieve tabular data from the data lake as input, the query string in this cell specifies the query (-ies) that are executed and presented to the user-defined function for processing.  
+User-editable Nodes present an interface for modifying and testing code that is executed by the workflow management system.  These Jupyter notebooks are split into the following sections:
+- **Node Description**: A short blurb about the Node that the user-editable function corresponds to
+- **Node Input Data**: For Nodes that retrieve tabular data from the data lake as input, the query string in this cell specifies the query (-ies) that are executed and presented to the user-defined function for processing.  
 - **User-Defined Function**: The _execute_ function within this cell processes data.  The workflow management system calls the _execute_ function within this cell during _flow_ execution.
 
 :::info
@@ -234,7 +234,7 @@ The _execute_ function may call classes and functions found within the User-Defi
 
 | [Category](#node-categories)   | Name                   | Brief Description                                                            |
 |------------|---------------------------|------------------------------------------------------------------------------|
-| Analysis   | Branch_Python             | Process data with Python and conditionally execute downstream nodes          |
+| Analysis   | Branch_Python             | Process data with Python and conditionally execute downstream Nodes          |
 | Analysis   | Python                    | Process data with python                                                     |
 | Analysis   | Transform_SQL             | SQL analysis Function                                                        |
 | Analysis   | Trigger_Python            | Process data with Python and trigger subsequent flow                         |
