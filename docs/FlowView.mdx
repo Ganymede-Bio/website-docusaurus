@@ -4,55 +4,57 @@ title: Flow View
 displayed_sidebar: webUiSidebar
 ---
 
-import { HomeOutlined,
-         PlayCircleOutlined
-       } from '@ant-design/icons';
+import {
+  HomeOutlined,
+  PlayCircleOutlined
+} from '@ant-design/icons';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 
-The <div className="button darkblue_button"><img src={useBaseUrl('/img/flows_icon.svg')} className="filter-white" /> **Flow View**</div> page provides access to running flows and viewing run history.  This page can be accessed by clicking on a _flow_ on the <div className="button darkblue_button"><HomeOutlined /> **Home**</div> page.
+The <div className="button darkblue_button"><img src={useBaseUrl('/img/flows_icon.svg')} className="filter-white" /> **Flow View**</div> page provides access to running flows and viewing run history.  You can access this page by clicking on a Flow on the <div className="button darkblue_button"><HomeOutlined /> **Home**</div> page.
 
 ## Running flows
 
-To run a _flow_, drop a file into the upload box and click the <div className="button run_queue_button">**Run** <PlayCircleOutlined /></div> button on the left side of the run box.
+To run a Flow, drop a file into the upload box and click the <div className="button run_queue_button">**Run** <PlayCircleOutlined /></div> button on the left side of the run box.
 
 <img alt="Flow View page" src="https://ganymede-bio.mo.cloudinary.net/apiServer/FlowView_20230531.png" />
  
 ## Flow status indicators
 
+The Flow View page provides detailed status indicators at both the Flow and node levels to help you track the progress and outcomes of your Flows.
+
 <img alt="Flow status indicator" src="https://ganymede-bio.mo.cloudinary.net/apiServer/FlowStatusIndicator_20230109.png" />
 
 ### Flow-level status
 
-The Run History table contains the following status information on historical runs:
+The Run History table displays status information for each historical run:
 
-- **File**: Input files and input parameters associated with _flow_ run
-- **Run Tag**: Run tags associated with _flow_ run. An example run tag would be a Benchling custom entity ID used to reference a table within Benchling.
-- **Status**: Run status for a _flow_ run instance.  Possible status values are: 
-  - Running: Job is in the process of running
-  - Success: All _nodes_ have run successfully
-  - Failed: At least one _node_ has failed to run successfully
+- **File**: The input files and parameters associated with the flow run.
+- **Run Tag**: Tags associated with the flow run, such as a Benchling custom entity ID used to reference a table within Benchling.
+- **Status**: The current status of the flow run. Possible status values include:
+  - Running: The job is currently in progress.
+  - Success: All nodes have successfully completed.
+  - Failed: At least one node failed to complete successfully.
 
 ### Node-level status
 
 <img alt="Node status indicator" src="https://ganymede-bio.mo.cloudinary.net/apiServer/NodeStatusAndLog_20230831.png" />
 
-Clicking on the plus sign found on the left hand side of each Run History table record expands the view to display _node_-level status.  
+You can click the plus sign on the left side of each record in the Run History table to expand the view and display node-level status.
 
-Some common values for colors that you will see are:
-  - ![#B22222](https://placehold.co/2x2/B22222/B22222.png) **Red**: failure after retries exhausted
-  - ![#01FF70](https://placehold.co/2x2/01FF70/01FF70.png) **Light green**: currently running
-  - ![#2ECC40](https://placehold.co/2x2/2ECC40/2ECC40.png) **Dark green**: successful run
-  - ![#A9A9A9](https://placehold.co/2x2/A9A9A9/A9A9A9.png) **Gray**: queued; awaiting system resource to commence
-  - ![#FFFF00](https://placehold.co/2x2/FFFF00/FFFF00.png) **Yellow**: failure to run on at least 1 try; awaiting retry
-  - ![#9932CC](https://placehold.co/2x2/9932CC/9932CC.png) **Dark Orchid**: skipped prior to completion; this color may indicate a system resource limitation
-  - ![#FFA500](https://placehold.co/2x2/FFA500/FFA500.png) **Orange**: dependency for node has failed, preventing this node from being run
+The color of the node status indicators reflects the current status:
+- ![#B22222](https://placehold.co/2x2/B22222/B22222.png) **Red**: The node failed after retries were exhausted.
+- ![#01FF70](https://placehold.co/2x2/01FF70/01FF70.png) **Light green**: The node is currently running.
+- ![#2ECC40](https://placehold.co/2x2/2ECC40/2ECC40.png) **Dark green**: The node successfully completed.
+- ![#A9A9A9](https://placehold.co/2x2/A9A9A9/A9A9A9.png) **Gray**: The node is queued and awaiting system resource to start.
+- ![#FFFF00](https://placehold.co/2x2/FFFF00/FFFF00.png) **Yellow**: The node failed at least once but is awaiting a retry.
+- ![#9932CC](https://placehold.co/2x2/9932CC/9932CC.png) **Dark Orchid**: The node was skipped before completion.  This may be intended behavior for nodes downstream of a [Branch_Python](./nodes/Analysis/Branch_Python.md) node, but may also indicate a system resource limitation.  If the issue is system resource-related, please reach out to [Ganymede Support](./Support.mdx).
+- ![#FFA500](https://placehold.co/2x2/FFA500/FFA500.png) **Orange**: A dependency for the node failed, preventing this node from running.
 
-Logs associated with each _flow_ step can be accessed by clicking on the corresponding colored box.
+Logs for each flow step can be accessed by clicking on the corresponding colored box.
 
-#### Error Attribution
+### Error Attribution
 
-Developers on the platform are able to throw specify an error type and message associated with a failed _node_, as shown
-in the example code below, which would live within a node.  The type is displayed on the status tag of the Run History table.
+Developers using the platform can specify error types and messages associated with failed nodes. These are displayed on the status tag in the Run History table. Below is an example code snippet that would be placed within a node to raise an error:
 
 ```python
 from ganymede_sdk.flow_runtime import GanymedeException
@@ -61,8 +63,8 @@ from ganymede_sdk.flow_runtime import GanymedeException
 raise GanymedeException(message=”Peaks not detected in results”, exception_type=”Function”)
 ```
 
-Categories of errors are:
+#### Categories of Errors
 
-- **Validation**: Schema validation errors; an example use case would be a Pandas DataFrame failing to validate against a Pandera schema.
-- **Connection**: Errors related to connecting to external services.  Check for errors related to authentication, service availability, and how the service is being accessed.
-- **Function**: Errors related to function logic; an example use case would be a failed function call to a Python package.
+- **Validation**: Schema validation errors. An example use case would be a Pandas DataFrame failing to validate against a Pandera schema.
+- **Connection**: Errors related to connecting to external services. Check for errors related to authentication, service availability, and access methods.
+- **Function**: Errors related to function logic. For example, a failed function call to a Python package would fall under this category.

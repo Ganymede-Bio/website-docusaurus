@@ -32,27 +32,43 @@ The <div className="button darkblue_button"><BranchesOutlined /> **Flow Editor**
 
 ## Header Bar
 
-The header bar contains buttons for creating flows and monitoring _flow_ runs.
+The header bar contains buttons for creating flows and monitoring Flow runs.
 
-<img alt="Flow Editor header" src="https://ganymede-bio.mo.cloudinary.net/apiServer/FlowEditorHeader_20240331.png" />
+<img alt="Flow Editor header" src="https://ganymede-bio.mo.cloudinary.net/apiServer/FlowEditorHeader_20240812.png" />
 &nbsp;
 
-* **Choose a Flow**: Selection box for specifying the _flow_ to load.
-* **Node**: Opens right sidebar for selecting new *node* to add.  
-* **View**: Opens right sidebar for specifying whether _flow_ should be laid out horizontally or vertically
-* **Analysis**: Enables access to Jupyter notebooks which can be used for ad-hoc observation and data analysis.  These notebooks are hosted on a virtual machine (VM) separate from the workflow management software running the _flow_.
+* **Flow Dropdown**: Selection box for specifying the Flow to load.
+* **Node**: Opens right sidebar for selecting new node to add.  
+* **View**: Opens right sidebar for specifying whether Flow should be laid out horizontally or vertically
+* **History**: Opens a view showing historical commits from the Flow Editor or [Node Editor](./NodeEditor.mdx)
+* **Analysis**: Enables access to Jupyter notebooks which can be used for ad-hoc observation and data analysis.  These notebooks are hosted on a virtual machine (VM) separate from the workflow management software running the Flow.
+* **Save**: Button to save Flow layout to git repo and deploy code to workflow management system.
 
-* **Save**: Button to save _flow_ layout to git repo and deploy code to workflow management system.
-* **Manage**: Opens right sidebar to create new flows or delete existing ones. When a flow is selected, we can apply new configurations to the flow.
-  * **Owner** - Owner of the flow.  The flow will appear on the home page for the owner of a flow.
-  * **Retries** - How many times the flow would retry to execute a node, in case of an error or a timeout.
-  * **Emails** - Emails to notify in case of a failure.
-  * **Auto run trigger** - Times to run the flow automatically if selected.
-  * **Assign Flow to** - Users assigned a flow will have the flow appear on their home page.
+### Managing Flows
+
+Click the <div className="button darkblue_button">**Manage <SettingOutlined />**</div> button to add, delete, configure, or [document](#documenting-flows) Flows. On the configurations pane, you will find:
+
+* **Name**: Display name of the Flow.
+* **Id**: Unique ID for the Flow.
+* **Owner**: Owner of the Flow.  The Flow will appear on the home page for the owner of a flow.
+* [**Retries**](#configuring-retries): How many times the Flow would retry to execute a node, in case of an error or a timeout.
+* **Production Mode**: Toggle to place Flow in *production mode*, which makes all tabular data written by the Flow to be done append-only.  
+
+:::info
+
+More granular control can be achieved using the [if_exists parameter in the NodeReturn object](./nodes/NodeOverview#nodereturn-object).  
+
+If enabled, this toggle overwrites the configuration specified on the NodeReturn objects in the Flow.
+
+:::
+
+* [**Send Email Notifications**](#configuring-email-notifications): Emails to notify in case of a failure.
+* [**Auto run trigger**](#scheduling-flow-execution): Cron schedule for running the Flow, if enabled
+* **Assign Flow to**: Users assigned a Flow will have the Flow appear under the [My Flows tab of their Home page](./Home.mdx).
 
 ## Run Queue Bar
 
-The Run Queue Bar located at the bottom of the screen contains buttons for executing _flow_ runs.  The full menu can be accessed by clicking on the <div className="button darkblue_button_mui"><ExpandLessOutlined className="white_icon" />**Expand**</div> icon in the bottom right corner of the bar.
+The Run Queue Bar located at the bottom of the screen contains buttons for executing Flow runs.  The full menu can be accessed by clicking on the <div className="button darkblue_button_mui"><ExpandLessOutlined className="white_icon" />**Expand**</div> icon in the bottom right corner of the bar.
 
 <img alt="Flow Editor header" src="https://ganymede-bio.mo.cloudinary.net/apiServer/RunQueueBar_20230405.png" />
 &nbsp;
@@ -65,13 +81,13 @@ The Run Queue Bar located at the bottom of the screen contains buttons for execu
 
 ## Flows
 
-To create a new _flow_, click the <div className="button darkblue_button">**Manage <SettingOutlined />**</div> button in the upper right hand corner of the screen. Then click the <div className="button black_button"><PlusOutlined /> Add New Flow</div> button on the sidebar.  This action exposes a modal for naming and describing the _flow_.  
+To create a new Flow, click the <div className="button darkblue_button">**Manage <SettingOutlined />**</div> button in the upper right hand corner of the screen. Then click the <div className="button black_button"><PlusOutlined /> Add New Flow</div> button on the sidebar.  This action exposes a modal for naming and describing the Flow.  
 
 <img alt="Add new flow" src="https://ganymede-bio.mo.cloudinary.net/apiServer/AddNewFlow_20240617.png"/>
 
 ### Documenting Flows
 
-The documentation allows developers to specify instructions for _flow_ execution; for example, developers could specify the purpose of the _flow_ and the expected inputs and outputs.
+The documentation allows developers to specify instructions for Flow execution; for example, developers could specify the purpose of the Flow and the expected inputs and outputs.
 
 Initially, the documentation is set to the Flow description given when creating a new Flow.
 
@@ -105,21 +121,21 @@ Flows can be configured to automatically run on a schedule. The schedule is set 
 
 ### Configuring Email Notifications
 
-Email notifications are sent to specified users upon _flow_ failure; an example email for this is shown below.
+Email notifications are sent to specified users upon Flow failure; an example email for this is shown below.
 
 <img alt="Email notifications" src="https://ganymede-bio.mo.cloudinary.net/apiServer/FlowEmail_20230424.png"/>
 
 ### Configuring Retries
 
-Retries and email notifications associated with the _flow_ can be specified in this modal.  Retries is the number of times that a node run within the flow is retried before processing is considered to have failed.  
+Retries and email notifications associated with the Flow can be specified in this modal.  Retries is the number of times that a node run within the flow is retried before processing is considered to have failed.  
 
 ### Loading and Saving Flows
 
-To load a _flow_, specify the _flow_ to load in the <div className="button datalist_button">**Choose A Flow <DownOutlined />**</div> selection box.  Upon doing so, the primary pane displays the graphical structure of the _flow_.
+To load a Flow, specify the Flow to load in the <div className="button datalist_button">**Choose A Flow <DownOutlined />**</div> selection box.  Upon doing so, the primary pane displays the graphical structure of the Flow.
 
 <img alt="Loading a flow" src="https://ganymede-bio.mo.cloudinary.net/apiServer/LoadFlow2_20240331.png"/>
 
-After saving a _flow_, the entire environment (which contains all flows) is saved and deployed. When this save and deploy is taking place, users are temporarily restricted from running flows. A tooltip will be displayed to the user if they try to run a _flow_ during this time. Users can observe the status of environment updates on the [<div className="button darkblue_button"><NotificationOutlined /> **Notifications**</div>](Notifications.mdx) page.
+After saving a Flow, the entire environment (which contains all flows) is saved and deployed. When this save and deploy is taking place, users are temporarily restricted from running flows. A tooltip will be displayed to the user if they try to run a Flow during this time. Users can observe the status of environment updates on the [<div className="button darkblue_button"><NotificationOutlined /> **Notifications**</div>](Notifications.mdx) page.
 
 
 ### Running Flows
@@ -132,9 +148,9 @@ If the input file is uploaded from local computer and has previously been upload
 
 <img width="550" alt="existing_file_treatment" src="https://ganymede-bio.mo.cloudinary.net/apiServer/RunQueueBar_AddRun_20230405.png" />
 
-To run the same _flow_ with different sets of input files, add additional rows to the input box by clicking on the <div className="button darkblue_button"><PlusOutlined /> Add run</div> button.
+To run the same Flow with different sets of input files, add additional rows to the input box by clicking on the <div className="button darkblue_button"><PlusOutlined /> Add run</div> button.
 
-Clicking the <div className="button run_queue_button">**Run** <PlayCircleOutlined /></div> button on the Flow Inputs _node_ kicks off the _flow_ run.  Run progress can be tracked by clicking on the **Runs** button in the header, or by navigating to the [<div className="button darkblue_button"><CheckCircleOutlined /> **Flow Runs**</div>](FlowRuns.mdx) page.
+Clicking the <div className="button run_queue_button">**Run** <PlayCircleOutlined /></div> button on the Flow Inputs node kicks off the Flow run.  Run progress can be tracked by clicking on the **Runs** button in the header, or by navigating to the [<div className="button darkblue_button"><CheckCircleOutlined /> **Flow Runs**</div>](FlowRuns.mdx) page.
 
 All inputs MUST be filled out otherwise the run will not be started. A message box will appear saying which inputs have not been filled. 
 
@@ -155,12 +171,12 @@ Enabling this feature will allow for runs to start whenever all inputs for a row
 
 Edges can be removed by selecting them and pressing "delete" or "backspace" on the keyboard.  A selected edge is slightly darker and wider than unselected edges.
 
-To make two nodes dependent on each other within a run, click and drag between two orbs two different nodes.  _Flow_ dependencies run top-to-bottom (if vertical layout is specified) or left-to-right (if horizontal layout is specified).
+To make two nodes dependent on each other within a run, click and drag between two orbs two different nodes.  Flow dependencies run top-to-bottom (if vertical layout is specified) or left-to-right (if horizontal layout is specified).
 
 In order to delete flows, click the <div className="button darkblue_button">**Manage <SettingOutlined />**</div>Button on the Flow Editor page, which opens up the right sidebar offering a button to <div className="button black_button">Delete Flow</div>
 
 :::caution
-Deleting flows is not reversible from within the Ganymede UI, so undoing a _flow_ deletion will require restoring code from a prior commit in the git repo corresponding to the Ganymede cloud tenant.
+Deleting flows is not reversible from within the Ganymede UI, so undoing a Flow deletion will require restoring code from a prior commit in the git repo corresponding to the Ganymede cloud tenant.
 :::
 
 

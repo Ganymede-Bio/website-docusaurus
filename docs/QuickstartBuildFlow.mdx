@@ -1,7 +1,7 @@
 ---
 id: QuickstartBuildFlow
 title: Build a Flow
-sidebar_label: Build a Flow to Process Data
+sidebar_label: Process Data with Flows
 displayed_sidebar: webUiSidebar
 ---
 
@@ -25,10 +25,10 @@ import {
     SaveOutlined
 } from '@mui/icons-material';
 
-This guide walks you through building a flow for ingesting plate reader absorbance data captured at two timepoints and computing the difference between the two values.
+This guide walks you through building a Flow for ingesting plate reader absorbance data captured at two timepoints and computing the difference between the two values.
 
 :::tip Flows and Nodes
-Flows are programs represented as directed graphs comprised of user-editable nodes. For precise definitions of flows and nodes, check out [the Ganymede Concepts page](./Concepts.mdx).
+Flows are programs represented as directed graphs comprised of user-editable nodes. For precise definitions of Flows and nodes, check out [the Ganymede Concepts page](./Concepts.mdx).
 :::
 
 ### Step 0: Download sample plate reader file
@@ -49,26 +49,26 @@ You may need to enable pop-ups for Ganymede or disable any ad-blocking software 
 
 Click the <div className="button darkblue_button"><BranchesOutlined /> **Flow Editor**</div> button in the sidebar.
 
-<img width="1124" alt="Quickstart" src="https://ganymede-bio.mo.cloudinary.net/apiServer/QuickstartSelectflowEditor_20230501.png"/>
+<img width="1124" alt="Quickstart" src="https://ganymede-bio.mo.cloudinary.net/apiServer/QuickstartSelect_Flow_Editor_20230501.png"/>
 
-### Step 3: Create a new flow
+### Step 3: Create a new Flow
 
 Click the <div className="button darkblue_button">**Manage <SettingOutlined />**</div> button in the upper right-hand corner of the header bar and select <div className="button black_button">Add New Flow</div> from the right sidebar.
 
 <img width="1124" alt="Settings" src="https://ganymede-bio.mo.cloudinary.net/apiServer/QuickstartCreateNewFlow_20230501.png"/>
 &nbsp;
 
-This exposes a modal for adding a new flow. Name the flow "Quickstart_Absorbance_Change" as shown below, add a description, and then hit the "Create Flow" button.
+This exposes a modal for adding a new Flow. Name the Flow "Quickstart_Absorbance_Change" as shown below, add a description, and then hit the "Create Flow" button.
 
 <div class="text--center">
-<img alt="Quickstart flow description" src="https://ganymede-bio.mo.cloudinary.net/apiServer/QuickstartFlowDesc_20230110.png"/>
+<img alt="Quickstart Flow description" src="https://ganymede-bio.mo.cloudinary.net/apiServer/QuickstartFlowDesc_20230110.png"/>
 </div>
 
-After a few seconds, your flow will be created and you'll be redirected to a blank flow editor page where you can edit your new flow.
+After a few seconds, your Flow will be created and you'll be redirected to a blank Flow editor page where you can edit your new Flow.
 
 ### Step 4: Add nodes to ingest and process data
 
-Click the <div className="button darkblue_button">**Node** <PlusCircleOutlined /></div> button in the header bar and search for the term "input" to filter for the relevant <div className="button darkblue_button">**Input_File**</div> node.  Click the <div className="button darkblue_button">**Add**</div> button to add it to your flow. 
+Click the <div className="button darkblue_button">**Node** <PlusCircleOutlined /></div> button in the header bar and search for the term "input" to filter for the relevant <div className="button darkblue_button">**Input_File**</div> node.  Click the <div className="button darkblue_button">**Add**</div> button to add it to your Flow. 
 
 :::note input file vs input file multi
 The Input File Multi node can be used to ingest multiple files on a single node. For this quickstart, we will use the Input File node to ingest a single file.
@@ -83,7 +83,7 @@ Click the downward-pointing carat <DownOutlined className="button darkblue_butto
 Change the **file_pattern** node attribute from "file_pattern" to "*.xlsx" so that only files with `.xlsx` as an extension will be processed by this node (other file types, such as `.csv` will be blocked). 
 
 <div class="text--center">
-<img alt="Quickstart flow description" src="https://ganymede-bio.mo.cloudinary.net/apiServer/QuickstartAddedNodeInputFile3_20230731.png"/>
+<img alt="Quickstart Flow description" src="https://ganymede-bio.mo.cloudinary.net/apiServer/QuickstartAddedNodeInputFile3_20230731.png"/>
 </div>
 &nbsp;
 
@@ -97,15 +97,15 @@ Click <div className="button darkblue_button_mui">**Save**<SaveOutlined classNam
 A message will pop up in the upper right when the save is complete. You can also click the <BellOutlined className="button darkblue_button_icon"/> button in the upper right corner to view the Notifications page where you can track the progress of a save. 
 :::
 
-Now you have a one-node flow that is capable of ingesting Excel files. Let's add a second node to process this incoming raw data.
+Now you have a one-node Flow that is capable of ingesting Excel files. Let's add a second node to process this incoming raw data.
 
-Click the <div className="button darkblue_button">**Node** <PlusCircleOutlined /></div> button in the header bar again, and search for the term "Python". This time, add a <div className="button darkblue_button">**Python**</div> node to your flow by clicking the <div className="button darkblue_button">**Add**</div> button.
+Click the <div className="button darkblue_button">**Node** <PlusCircleOutlined /></div> button in the header bar again, and search for the term "Python". This time, add a <div className="button darkblue_button">**Python**</div> node to your Flow by clicking the <div className="button darkblue_button">**Add**</div> button.
 
 After adding the node, the <div className="button darkblue_button"><BranchesOutlined/> **Flow Editor**</div> window should look like this:
 
 <img alt="Quickstart Flow Init" src="https://ganymede-bio.mo.cloudinary.net/apiServer/QuickstartTwoNodesUnconnected2_20230731.png"/>
 
-We want data processing to flow from the <div className="button darkblue_button">**Input_File**</div> node to the <div className="button darkblue_button">**Python**</div> node.  To do this, click on the <div className="button darkblue_button">**Input_File**</div> node's bottom attachment point and drag the connection to the top of the <div className="button darkblue_button">**Python**</div> node. Then click <div className="button darkblue_button_mui">**Save**<SaveOutlined className="white_icon" /></div>.
+We want data processing to Flow from the <div className="button darkblue_button">**Input_File**</div> node to the <div className="button darkblue_button">**Python**</div> node.  To do this, click on the <div className="button darkblue_button">**Input_File**</div> node's bottom attachment point and drag the connection to the top of the <div className="button darkblue_button">**Python**</div> node. Then click <div className="button darkblue_button_mui">**Save**<SaveOutlined className="white_icon" /></div>.
 
 ### Step 5: Modify the Input File node to store results in a table
 
@@ -128,7 +128,7 @@ def execute(file_data: Dict[str, bytes], ganymede_context=None) -> NodeReturn:
     file_data : Dict[str, bytes]
         Bytes object to process, indexed by filename
     ganymede_context : GanymedeContext
-        Ganymede context variable, which stores flow run metadata
+        Ganymede context variable, which stores Flow run metadata
 
     Returns
     -------
@@ -150,14 +150,14 @@ def execute(file_data: Dict[str, bytes], ganymede_context=None) -> NodeReturn:
 Non-tabular data can be stored by returning a dictionary of files to upload in the `files_to_upload` key of the `NodeReturn` object.
 :::
 
-Run the **User-Defined Function** cell by selecting the cell and then clicking on the <div className="button jupyter_button">▶️ Run</div> button in the header, which runs the selected cell.  In the "Testing" section below, you can test uploading the original plate reader excel file and passing it into the **User-Defined Function**.  This is a great way to debug your code before deploying the flow.
+Run the **User-Defined Function** cell by selecting the cell and then clicking on the <div className="button jupyter_button">▶️ Run</div> button in the header, which runs the selected cell.  In the "Testing" section below, you can test uploading the original plate reader excel file and passing it into the **User-Defined Function**.  This is a great way to debug your code before deploying the Flow.
 
 
 Save and deploy changes made to the Python node by clicking the <SaveFilled className="button dark_gray_button"/>   button in the toolbar, or by pressing `Cmd+S` (Mac) or `Ctrl+S` (Windows/Linux).
 
 
 :::tip
-Below the **User-Defined Function** cell in the notebook, you'll find the **Testing Section**. Here, you can upload a test input file and test the processing performed by the **User-Defined Function** interactively.  This is a great way to debug your code before deploying the flow.
+Below the **User-Defined Function** cell in the notebook, you'll find the **Testing Section**. Here, you can upload a test input file and test the processing performed by the **User-Defined Function** interactively.  This is a great way to debug your code before deploying the Flow.
 :::
 
 
@@ -206,30 +206,30 @@ This code calculates the difference between the two columns `run1` and `run2`, a
 Near the bottom of the notebook you'll find the **Testing Section**. As with the Input_File node, you can interactively test the SQL query and the **User-Defined Function**.
 :::
 
-After saving the flow, close the editor notebook associated with the Python node to return to the <div className="button darkblue_button"><BranchesOutlined /> **Flow Editor**</div> view.
+After saving the Flow, close the editor notebook associated with the Python node to return to the <div className="button darkblue_button"><BranchesOutlined /> **Flow Editor**</div> view.
 
-### Step 7: Run the flow
+### Step 7: Run the Flow
 
 On the <div className="button darkblue_button"><BranchesOutlined /> **Flow Editor**</div> page, click <div className="button darkblue_button_mui"><ExpandLessOutlined className="white_icon" />**Expand**</div> in the Run Queue bar at the bottom of the screen to expand the input form for running nodes. Click the "Drag and drop files here or Browse" button and upload the "PlateReader.xlsx" file downloaded at the beginning of this quickstart.
 
 :::note
-The associated file ingested into the flow can be now found in the <div className="button darkblue_button"><FolderOutlined /> **Files**</div> tab of Ganymede.
+The associated file ingested into the Flow can be now found in the <div className="button darkblue_button"><FolderOutlined /> **Files**</div> tab of Ganymede.
 
 <img alt="Files tab input files" src="https://ganymede-bio.mo.cloudinary.net/apiServer/QuickstartFiles_20230731.png"/>
 :::
 
 
-Click the <div className="button run_queue_button">**Run** <PlayCircleOutlined /></div> button to kick off the flow. The running flow run will now be visible below.
+Click the <div className="button run_queue_button">**Run** <PlayCircleOutlined /></div> button to kick off the Flow. The running Flow run will now be visible below.
 
-<img alt="Example flow running" src="https://ganymede-bio.mo.cloudinary.net/apiServer/QuickstartFlowRunning_20230731.png"/>
+<img alt="Example Flow running" src="https://ganymede-bio.mo.cloudinary.net/apiServer/QuickstartFlowRunning_20230731.png"/>
 
 :::tip
 You can also click on <div className="button darkblue_button"><CheckCircleOutlined /> **Flow Runs**</div> in the left sidebar to monitor the current run or browse past runs.
 :::
 
-When the job is complete, the flow status should indicate success:
+When the job is complete, the Flow status should indicate success:
 
-<img alt="Example flow success" src="https://ganymede-bio.mo.cloudinary.net/apiServer/QuickstartFlowSuccess2_20230731.png"/>
+<img alt="Example Flow success" src="https://ganymede-bio.mo.cloudinary.net/apiServer/QuickstartFlowSuccess2_20230731.png"/>
 
 ### Step 8: Observe results in Data Explorer
 
