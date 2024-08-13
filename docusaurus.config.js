@@ -62,6 +62,15 @@ module.exports = {
         }
       ],
     },
+    plugins: [
+      [
+        'vercel-analytics',
+        {
+          debug: false,
+          mode: 'auto',
+        },
+      ]
+    ],
     footer: {
       style: 'dark',
       links: [
