@@ -6,14 +6,14 @@ displayed_sidebar: SDKSidebar
 
 import NodeChip from '@site/src/components/NodeChip.js'
 
-Objects associated with triggering a flow from an [Agent](../../../connectivity/Agent) can be found in `ganymede_sdk.agent.models`.  
+Objects for triggering a Flow from an [Agent](../../../connectivity/Agent) can be found in `ganymede_sdk.agent.models`.  
 
-Within the user-defined function for Agents that execute flows, the get_param_mapping function is run whenever a file is added or modified
-in the directory that the Agent is watching, and the execute function is run whenever all files are observed.  The _get_param_mapping_ function
-is used to specify the parameters that will be passed to the flow, and the _execute_ function is used to specify the input files and parameters to
-the flow that is executed.
+In the user-defined function for Agents executing Flows, the _get_param_mapping_ function is run whenever a file is added or modified
+in the directory that the Agent is watching. The _execute_ function is run whenever all files are observed.  The _get_param_mapping_ function
+is used to specify the parameters to be passed to the Flow, and the _execute_ function specifies the input files and parameters to
+the Flow that is executed.
 
-A skeleton for the user-defined function with associated types is shown below:
+Below is a skeleton example for the user-defined function with associated types:
 
 ```python
 def fp(watch_dir: str, parent_dir: str, pattern: str) -> Callable[[str], bool]:
@@ -34,34 +34,44 @@ def execute(flow_params_fw: FileWatcherResult) -> TriggerFlowParams:
     pass
 ```
 
-## Classes associated with Agent-triggered flows
+## Classes for Agent-triggered flows
 
-The FileWatcherResult consists of a dictionary of FileParam objects indexed by `node name`.`param name`.
+### FileWatcherResult Class
+
+FileWatcherResult is a dictionary of FileParam objects indexed by `node name`.`param name`.
+
 - _param_ **files**: dict[str, fileParam] - Dictionary of FileParam objects indexed by `node name`.`param name`
 - _param_ **tags**: Optional[List[FileTag]] - List of tags to be applied to all files
 
-TriggerFlowParams is used to specify the inputs to the flow that is executed when all files are observed.  It contains the following parameters:
-- _param_ **single_file_params**: Optional[Dict[str, FileParam]] - Dict of FileParam objects indexed by `node name`.`param name`.  These parameters are used for nodes that accept a single file as input.
-- _param_ **multi_file_params**: Optional[Dict[str, MultiFileParam]] - Dict of MultiFileParam objects indexed by `node name`.`param name`.  These parameters are used for nodes that accept multiple files as input.
+### TriggerFlowParams Class
+
+TriggerFlowParams specifies the inputs for the Flow executed when all files are observed.  It includes the following parameters:
+
+- _param_ **single_file_params**: Optional[Dict[str, FileParam]] - Dict of FileParam objects indexed by `node name`.`param name`.  These parameters are used for Nodes that accept a single file as input.
+- _param_ **multi_file_params**: Optional[Dict[str, MultiFileParam]] - Dict of MultiFileParam objects indexed by `node name`.`param name`.  These parameters are used for Nodes that accept multiple files as input.
 - _param_ **benchling_tag**: Optional[Tag] - Additional parameters to be passed to flow.  This parameter is used for inputs to the Input_Benchling node.
 - _param_ **additional_params**: Optional[Dict[str, str]] - Additional parameters to be passed to flow.  This parameter is used for inputs to the Input_Param node.
 
-The FileParam and MultiFileParam objects are used to specify the files to be uploaded to Ganymede Cloud and the corresponding flow parameters to be used in the flow.  A dictionary of FileParam objects (FileWatcherResult) are provided to the `execute` function once all files to observe are detected.
+### FileParam Class
 
-The FileParam object contains the following parameters:
-- _param_ **filename**: str - Name of file, e.g. "my_file.txt"
-- _param_ **content_type**: str - Content type of file, e.g. "text/plain".  If not specified, the content type of the first file in the files dict will be used.
+FileParam specifies files to be uploaded to Ganymede Cloud and their corresponding Flow parameters. These parameters are provided to the _execute_ function once all files are detected.
+
+- _param_ **filename**: str - Name of the file, e.g. "my_file.txt"
+- _param_ **content_type**: str - Content type of the file, e.g. "text/plain".  If not specified, the content type of the first file in the files dict will be used.
 - _param_ **body**: bytes - File contents in bytes
-- _param_ **param**: str - Name of parameter to be used in flow, e.g. `node_name`.`parameter_field_name`
-- _param_ **parent_dir**: str - Path within Agent watch directory that contains file.  For example. if C:/Users/username/watch_dir/ is being watched and C:/Users/username/watch_dir/abc/def/my_file.txt is found, then parent_dir would be "abc/def"
-- _param_ **upload_ts**: str - Timestamp string in ISO format of when file was uploaded to Agent watch directory, e.g. "2021-01-01T00:00:00Z"
+- _param_ **param**: str - Name of parameter to be used in Flow, e.g. `node_name`.`parameter_field_name`
+- _param_ **parent_dir**: str - Path within the Agent watch directory containing the file.  For example. if C:/Users/username/watch_dir/ is being watched and C:/Users/username/watch_dir/abc/def/my_file.txt is found, then parent_dir would be "abc/def"
+- _param_ **upload_ts**: str - Timestamp string in ISO format of when file was uploaded to the Agent watch directory, e.g. "2021-01-01T00:00:00Z"
 - _param_ **upload_path**: Optional[str] - Path in Ganymede storage where file will be uploaded
-- _param_ **tags*: Optional[List[FileTag]] - List of tags to be applied to file
+- _param_ **tags*: Optional[List[FileTag]] - List of tags to be applied to the file
 - _param_ **bucket_name**: str - Bucket associated with file
-- _param_ **files**: str - Alternative method for specifying file contents.  If specified, then the key of this dict is used as thefilename and the value is used as the body.
+- _param_ **files**: str - Alternative method for specifying file contents, where the key is the filename and the value is the file body.
 
-The MultiFileParam object is used for submitting multiple files to a single node.  It contains the following parameters:
-- _param_ **files**: str - Alternative method for specifying file contents.  If specified, then the key of this dict is used as thefilename and the value is used as the body.
+### MultiFileParam Class
+
+MultiFileParam is used for submitting multiple files to a single node. It includes the following parameters:
+
+- _param_ **files**: str - Alternative method for specifying file contents, where the key is the filename and the value is the file body.
 - _param_ **content_type**: str - Content type of file, e.g. "text/plain".  If not specified, the content type of the first file in the files dict will be used.
 - _param_ **param**: str - Name of parameter to be used in flow, e.g. `node_name`.`parameter_field_name`
 - _param_ **parent_dir**: str - Path within Agent watch directory that contains file.  For example. if C:/Users/username/watch_dir/ is being watched and C:/Users/username/watch_dir/abc/def/my_file.txt is found, then parent_dir would be "abc/def"
@@ -77,21 +87,13 @@ The MultiFileParam object contains a method for initiation from a list of FilePa
 m = MultiFileParam.from_file_param([fp1, fp2])
 ```
 
-The TriggerFlowParams object is used to specify the inputs to the flow that is executed when all files are observed.  It contains the following parameters:
-- _param_ **single_file_params**: Optional[Dict[str, FileParam]] - Dict of FileParam objects indexed by `node name`.`param name`.  These parameters are used for nodes that accept a single file as input.
-- _param_ **multi_file_params**: Optional[Dict[str, MultiFileParam]] - Dict of MultiFileParam objects indexed by `node name`.`param name`.  These parameters are used for nodes that accept multiple files as input.
-- _param_ **benchling_tag**: Optional[Tag] - Additional parameters to be passed to flow.  This parameter is used for inputs to the Input_Benchling node.
-- _param_ **additional_params**: Optional[Dict[str, str]] - Additional parameters to be passed to flow.  This parameter is used for inputs to the Input_Param node.
-
 ## Utility functions
 
-Agent utility functions are provided in `ganymede_sdk.agent.utils`, which can be useful for validating data integrity and interacting with file systems.
+Agent utility functions are provided in `ganymede_sdk.agent.utils` for validating data integrity and interacting with file systems.
 
 ### Computing file checksums
 
-Ganymede provides two functions for validating the integrity of files, which can be accessed from `ganymede_sdk.agent.utils`.  The code below shows how these values can be accessed; these values can be used to:
-
-- verify the integrity of a file uploaded to cloud storage
+Ganymede provides functions to validate file integrity, accessible via `ganymede_sdk.agent.utils`.  These values can be used to verify the integrity of a file uploaded to cloud storage:
 
 ```python
 from ganymede_sdk.agent.utils import calculate_md5, calculate_crc32c
@@ -103,7 +105,7 @@ md5 = calculate_md5(file_path)
 crc32c = calculate_crc32c(file_path)
 ```
 
-These methods can also be used to calculate the checksum of a file that has been uploaded to Ganymede Cloud.  To do so, create a tempfile.TemporaryFile object and write the file contents to it before calculating the checksum.
+You can also calculate the checksum of a file uploaded to Ganymede Cloud by creating a a tempfile.TemporaryFile object, writing the file contents to it, and then calculating the checksum:
 
 ```python
 from ganymede_sdk.agent.utils import calculate_md5, calculate_crc32c
@@ -126,9 +128,9 @@ os.remove(tmp_file_name)
 
 `ganymede_sdk.agent.utils` provides a number of convenience functions, which can be helpful to use with cron Agents that involve more complex logic prior to invoking a flow.  Some examples of this are when a file is written to multiple times before being processed, or if there is a variable number of files being processed, such that the trigger for invoking a flow requires more than just the presence of a file.
 
-#### Dataclasses
+#### ScanResult Dataclass
 
-The ScanResult object is a dataclass used to store the file paths for files of interest.  It contains the following parameters:
+ScanResult stores file paths for files of interest.  It includes:
 
 - _param_ **file_path**: str - Path to file
 - _param_ **modified_time**: datetime - Datetime of when file was last modified
@@ -169,4 +171,6 @@ The ScanResult object is a dataclass used to store the file paths for files of i
 - _param_ **age_in_minutes**: int - Minimum age in minutes for files to be included in the results
 - _param_ **pattern**: re.Pattern | list[re.Pattern] - Regex pattern to match files against; only files that match against at least one of the specified patterns will be included in results
 
-One example of how these functions can be used is to use `scan_for_finished_files` to scan a directory for files continuously, uploading them to Ganymede Cloud for processing when they are older than a specified number of minutes.  Such a flow would query previously uploaded files to Ganymede using the [list_files](../GanymedeClass.mdx#method-list_files) method to ensure that the same file is not uploaded multiple times.
+#### Example Use Case
+
+You can use `scan_for_finished_files` to continuously scan a directory for files, uploading them to Ganymede Cloud for processing when they are older than a specified number of minutes. The Flow could query previously uploaded files using the [list_files](../GanymedeClass.mdx#method-list_files) method to avoid uploading the same file multiple times.
