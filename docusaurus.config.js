@@ -20,8 +20,6 @@ module.exports = {
       apiKey: 'd7fb51ca85e14d48eb21e1fd4e08c1f6',
       indexName: 'ganymede',
       contextualSearch: false,
-      searchPagePath: 'search',
-      insights: true,
       optionalFilters: ['category:-releases'],
     },
     navbar: {

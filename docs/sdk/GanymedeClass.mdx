@@ -8,7 +8,9 @@ import NodeChip from '@site/src/components/NodeChip.js'
 
 ## Overview
 
-The **Ganymede** object is used within editor notebooks to access data in Editor notebooks, enabling users to test the behavior of code changes on data from prior runs.
+The **Ganymede** object is a powerful tool used within editor notebooks to access and interact with data from previous runs, allowing users to test code changes effectively.
+
+To get started, you can create a Ganymede object associated with the most recent run:
 
 ```python
 import pandas as pd
@@ -18,7 +20,10 @@ from ganymede_sdk import Ganymede
 g = Ganymede()
 ```
 
-#### Display Ganymede SDK version and run context parameters
+#### Displaying SDK Version and Run Context Parameters
+
+You can easily display the current Ganymede SDK version and run context parameters:
+
 ```python
 display(g)
 ```
@@ -28,19 +33,28 @@ display(g)
       />
 
 
-#### Access run context parameters
+#### Accessing Run Context Parameters
+
+To access specific run context parameters, such as the flow run ID, use the following command:
+
 ```python
 print(g.flow_run_id)
 
 # Returns "1693156227387"
 ```
 
-#### Retrieve GanymedeContext associated with a specific run ID
+#### Retrieving a GanymedeContext for a Specific Run ID
+
+If you need to retrieve the GanymedeContext associated with a specific run ID, you can do so by passing the ID to the Ganymede constructor:
+
 ```python
 g = Ganymede(flow_run_id='1693156227387')
 ```
 
-#### In the execute function, the Ganymede object can be created from the ganymede_context parameter
+#### Creating a Ganymede Object in the Execute Function
+
+Within an execute function, you can create a Ganymede object using the ganymede_context parameter:
+
 ```python
 def execute(ganymede_context: GanymedeContext):
   g = Ganymede(ganymede_context)
@@ -50,11 +64,11 @@ def execute(ganymede_context: GanymedeContext):
 
 ### `method` retrieve_sql
 
-_retrieve_sql_ allows users to query tabular data from the Ganymede data lake.  Input can either be single SQL query, or a semicolon-delimited string containing a set of queries to run.
+_retrieve_sql_ allows you to query tabular data from the Ganymede data lake. You can provide a single SQL query or a semicolon-delimited string of queries.
 
-The results are returned as a DataFrame in Python if a single DataFrame is specified, or a list of Pandas DataFrames if multiple queries are submitted.
+The results are returned as a DataFrame if a single query is used or as a list of DataFrames if multiple queries are provided.
 
-- _param_ **query_str**: str - Semicolon-delimited query string(s) to retrieve.
+- _param_ **query_str**: str - Semicolon-delimited query string(s).
 - _param_ **render_dict**: Optional[Dict[str, str]] - Dictionary used for rendering Jinja template variables in query.  Not used if context is provided.
 
 ```python
@@ -67,12 +81,10 @@ df_query1, df_query2 = g.retrieve_sql(query_sql)
 
 ### `method` retrieve_tables
 
-_retrieve_tables_ allows users to retrieve tabular data from the Ganymede data lake, preserving field names with special characters.
+The _retrieve_tables_ method retrieves tabular data from the Ganymede data lake while preserving field names with special characters. The result is returned as a dictionary of DataFrames, keyed by table name.
 
-The results are returned as a Dict of DataFrames in Python, keyed by table name.  Returned DataFrames contain the entire contents of the specified table(s).
-
-- _param_ **table_names**: Union[str, List[str]] - Table or list of tables to retrieve
-- _param_ **use_cache_in_notebook**: bool, by default False - If set to True, retrieves files from local cache when in editor or analysis notebooks rather than querying Ganymede to expedite development.  Note that flow runs will not reference cached files.  Cache can be cleared by calling the clear_cache() function.
+- _param_ **table_names**: str | list[str] - The name of the table(s) to retrieve.
+- _param_ **use_cache_in_notebook**: bool, by default False - If set to True, data is retrieved from the local cache in notebooks, speeding up development. Note that flow runs will not use cached data. Cache can be cleared with the _clear_cache_ function in `ganymede_sdk`.
 
 ```python
 from ganymede_sdk import Ganymede
@@ -82,9 +94,9 @@ df_query1 = g.retrieve_tables(['table1', 'table2'])
 
 ### `method` list_tables
 
-_list_tables_ returns a listing of tables, column names, and associated flows as a Pandas DataFrame.  By default, the method retrieves tables associated with the current _flow_.
+The _list_tables_ method returns a Pandas DataFrame listing tables, column names, and associated flows. By default, it retrieves tables associated with the current flow.
 
-- _param_ **current_flow_flag**: bool, by default True - Whether to filter for tables associated with current flow or not
+- _param_ **currentFlowflag**: bool, by default True - Whether to filter for tables associated with current flow or not
 - _param_ **current_run_id**: Optional[int], by default None - If set to specific run ID, filter to include records for specified run ID.
 
 ```python
@@ -97,7 +109,7 @@ tables_in_current_flow = g.list_tables(context):
 print(tables_in_current_flow)
 
 # retrieves all tables in environment
-for table_name in g.list_tables(context, current_flow_flag=False):
+for table_name in g.list_tables(context, currentFlowflag=False):
   print(table_name)
 ```
 
@@ -107,7 +119,7 @@ _list_tables_current_run_ returns a listing of all tables associated with the cu
 
 ### `method` list_tables_current_flow
 
-_list_tables_current_flow_ returns a listing of all tables associated with the current flow as a Pandas DataFrame.
+_list_tables_currentFlow returns a listing of all tables associated with the current flow as a Pandas DataFrame.
 
 ### `method` list_tables_all
 
@@ -118,12 +130,11 @@ _list_tables_all_ returns a listing of all tables associated with the current en
 
 ### `method` retrieve_files
 
-_retrieve_files_ allows users to retrieve files from Ganymede cloud storage.  By default, the most recent file associated with current run is retrieved.
+The _retrieve_files_ method allows you to retrieve files from Ganymede cloud storage. By default, it retrieves the most recent file associated with the current run.
 
-- _param_ **file_names**: Union[str, List[str]] - File or list of files to retrieve
-- _param_ **flow_input_or_output**: str, by default "input" - Either "input" or "output" - to reference whether to retrieve files that are inputs to flows or outputs from flow nodes
-- _param_ **input_or_output_bucket**: str, by default "output" - (Pending deprecation) Either "input" or "output" - to reference bucket to retrieve files from.  
-- _param_ **current_flow_flag**: bool, by default True - Whether to filter for files associated with current flow or not
+- _param_ **file_names**: str | list[str] - The file(s) to retrieve.
+- _param_ **flow_input_or_output**: str, by default "input" - Either "input" or "output" - to reference whether to retrieve files that are inputs to Flows or outputs from Flow Nodes
+- _param_ **currentFlowflag**: bool, by default True - Filters for files associated with the current Flow
 - _param_ **run_id**: Optional[int], by default None - If set, filters for results with specified flow_run_id; if not specified, retrieve file(s) associated with most recent run ID
 - _param_ **use_cache_in_notebook**: bool, by default False - If set to True, retrieves files from local cache when in editor or analysis notebooks rather than querying Ganymede to expedite development.  Note that flow runs will not reference cached files.  Cache can be cleared by calling the clear_cache() function.
 
@@ -137,7 +148,7 @@ input_file = retrieve_files("sample_test.csv", flow_input_or_output="input")
 
 # Retrieves 2 files from the output bucket in the environment associated with most recent run of flow
 output_files = retrieve_files(['sample_output.xlsx', 'sample_validation.txt'], 
-                              flow_input_or_output="output", current_flow_flag=False)
+                              flow_input_or_output="output", currentFlowflag=False)
 ```
 
 ### `method` get_last_run_input_files
@@ -158,9 +169,8 @@ most_recent_input_files = g.get_last_run_input_files()
 _list_files_ lists files in the environment
 
 - _param_ **flow_input_or_output**: str, by default "input" - Either "input" or "output" - to reference whether to retrieve files that are inputs to flows or outputs from flow nodes
-- _param_ **input_or_output_bucket**: str, by default "input" - (Pending deprecation) Either "input" or "output" - to reference whether to observe the input or output bucket of the _flow_
 - _param_ **flow_name**: str, optional, by default True - Flow name to filter for.  If set to specific flow name, filter to include records based on
-- _param_ **current_flow_flag**: bool, by default True - Whether to filter for files associated with current flow or not
+- _param_ **currentFlowflag**: bool, by default True - Whether to filter for files associated with current flow or not
 - _param_ **current_run_id**: Optional[int] - If set, filters for results with specified flow_run_id
 
 ```python
@@ -169,11 +179,11 @@ from ganymede_sdk import Ganymede
 g = Ganymede()
 
 # Lists all files in the input bucket of the current flow
-df_cur_flow_input_files = g.list_files(flow_input_or_output="input")
-display(df_cur_flow_input_files)
+df_curFlowinput_files = g.list_files(flow_input_or_output="input")
+display(df_curFlowinput_files)
 
 # Lists all files in the output bucket of the environment
-df_output_files = g.list_files(flow_input_or_output="output", current_flow_flag=False):
+df_output_files = g.list_files(flow_input_or_output="output", currentFlowflag=False):
 display(df_output_files)
 ```
 
@@ -182,21 +192,18 @@ display(df_output_files)
 _list_files_current_run_ returns a listing of available files in the specified bucket associated with the run ID provided by Ganymede context
 
 - _param_ **flow_input_or_output**: str, by default "input" - Either "input" or "output" - to reference whether to retrieve files that are inputs to flows or outputs from flow nodes
-- _param_ **input_or_output_bucket**: str, by default "input" - (Pending deprecation) Either "input" or "output" - to reference whether to observe the input or output bucket of the _flow_
 
 ### `method` list_files_current_flow
 
-_list_files_current_flow_ returns a listing of available files in the specified bucket associated with the current _flow_ provided by Ganymede context
+_list_files_currentFlow returns a listing of available files in the specified bucket associated with the current Flow provided by Ganymede context
 
 - _param_ **flow_input_or_output**: str, by default "input" - Either "input" or "output" - to reference whether to retrieve files that are inputs to flows or outputs from flow nodes
-- _param_ **input_or_output_bucket**: str, by default "input" - (Pending deprecation) Either "input" or "output" - to reference whether to observe the input or output bucket of the _flow_
 
 ### `method` list_files_all
 
 _list_files_all_ returns a listing of all files in the specified bucket in the environment
 
 - _param_ **flow_input_or_output**: str, by default "input" - Either "input" or "output" - to reference whether to retrieve files that are inputs to flows or outputs from flow nodes
-- _param_ **input_or_output_bucket**: str, by default "input" - (Pending deprecation) Either "input" or "output" - to reference whether to observe the input or output bucket of the _flow_
 - _param_ **flow_name**: str, by default None - Flow name to filter for, if input
 
 ## Sending emails from execute function
@@ -228,7 +235,7 @@ _send_email_ sends an email notification to the specified recipient(s).  The met
 
 - _param_ **to** : Union[str, Iterable[str]] - The recipient(s) of the email. This can be a single email address (str) or a list of email addresses (Iterable).
 - _param_ **subject** : str - The subject of the email.
-- _param_ **message** : str - The plain text message content of the email.
+- _param_ **message** : str - The plain text message content.
 - _param_ **cc** : Optional[Union[str, Iterable[str]]] - The recipient(s) to be copied on the email (CC), by default None.  This can be a single email address or a list of email addresses.
 - _param_ **bcc** : Optional[Union[str, Iterable[str]]] - The recipient(s) to be blindly copied on the email (BCC), by default None.  This can be a single email address or a list of email addresses.
 - _param_ **custom_headers** : Optional[Dict[str, Any]] - A dictionary of custom email headers, by default None.
@@ -261,7 +268,7 @@ _get_gcs_uri_ returns a Google Cloud Storage URI for referencing files.  This me
 
 ## `class` GanymedeContext
 
-**GanymedeContext** stores _flow_ metadata such as user ID, input filenames, input parameters, and execution timestamp upon _flow_ execution.  This object is generated in pipeline runs by the workflow management system.  The **GanymedeContext** object from the most recent run can be mimicked in testing code via the **Ganymede** object.
+**GanymedeContext** stores [Flow](../FlowEditor.mdx) metadata such as user ID, input filenames, input parameters, and execution timestamp upon Flow execution.  The **GanymedeContext** object from the most recent run can be mimicked in testing code via the **Ganymede** object.
 
 ```python
 from ganymede_sdk import Ganymede
@@ -282,21 +289,21 @@ def execute(ganymede_context: GanymedeContext):
 
 ### Attributes
 
-- **flow_run_id**: Timestamp in ms when _flow_ was kicked off for manually triggered flows; guaranteed to be unique per _flow_ run
-- **created**: Timestamp in ms when _flow_ was kicked off for event-triggered flows
-- **dag.dag_id**: name of _flow_
-- **task.task_id**: type of _node_ (e.g. - <NodeChip text="Input_File" /> or <NodeChip text="Python" />)
+- **flow_run_id**: Timestamp in ms when Flow was kicked off for manually triggered Flows; guaranteed to be unique per Flow run
+- **created**: Timestamp in ms when Flow was kicked off for event-triggered Flows
+- **dag.dag_id**: The name of the Flow
+- **task.task_id**: type of Node (e.g. - <NodeChip text="Input_File" /> or <NodeChip text="Python" />)
 
 ### Methods
 
 - **get_param(self, node_name: `str`, parameter_type: `str`) -> `str`**:
-  - Obtain input parameter or input filename in _flow_. Node name can be found in the indigo bar at the top of each node. Parameter type generally references the file extension for nodes that ingest files, and can be found on the Flow Editor as values with green background and white text.
+  - Obtain input parameter or input filename in Flow. Node name can be found in the indigo bar at the top of each node. Parameter type generally references the file extension for nodes that ingest files, and can be found on the Flow Editor as values with green background and white text.
 - **set_param(self, parameter_type: `str`, parameter_value: Any, node_name: `str` = None) -> None**:
   - Set parameter value
 
 ### Example
 
-In the code below, the flow run timestamp, filename uploaded, and experiment_id flow input parameter are incorporated into the input CSV as new columns and written to the data lake.
+In the code below, the Flow run timestamp, filename uploaded, and experiment_id are incorporated into the input CSV as new columns in a table written to the data lake.  
 
 ```python
 import pandas as pd

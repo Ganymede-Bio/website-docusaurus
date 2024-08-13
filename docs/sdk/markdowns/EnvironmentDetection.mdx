@@ -10,11 +10,9 @@ import NodeChip from '@site/src/components/NodeChip.js'
 ## Prod vs Dev 
 
 Dev or test environments are used for general testing and exploratory analysis of datasets. These
-environments can be used for developing operators, flows, or testing changes to the codebase. Flows 
-are to be built in these environments for client demos and User Acceptance Testing (UAT). Once UAT
-is signed off, the flows are migrated to production. 
+environments are ideal for building Flows and testing changes to the codebase. Flows are typically created in these environments for client demonstrations and User Acceptance Testing (UAT). Once UAT is approved, the flows are migrated to the production environment.
 
-To test if an environment is production, the following code may be used.
+To determine if you are in a production environment, use the following code:
 
 ```python
 from ganymede_sdk import lib
@@ -25,24 +23,26 @@ else:
     print("This is not a production environment")
 ```
 
-## Other useful methods to detect state
+## Additional Methods to Detect Environment State
 
-### Cron flows
+### Detecting Cron Flows
 
-Cron flows can be checked by 
+To check if the current flow is a cron flow, use:
 
 ```python
 from ganymede_sdk import lib
 
-if lib._is_cron_flow():
+if lib.is_cron_flow():
     print("This is a cron flow")
 else:
     print("This is not a cron flow")
 ```
 
-### Notebooks
+### Identifying Notebooks
 
-Check whether or not you are in an editor notebook or an analysis notebook
+To determine if you are in an editor notebook or an analysis notebook, use the following:
+
+For editor notebooks (that are part of a Flow):
 
 ```python
 from ganymede_sdk import lib
@@ -53,6 +53,8 @@ else:
     print("This is not an editor notebook")
 ```
 
+For analysis notebooks:
+
 ```python
 from ganymede_sdk import lib
 
@@ -62,9 +64,20 @@ else:
     print("This is not an analysis notebook")
 ```
 
-### Containers
+For Agent notebooks:
 
-Containers can be checked by 
+```python
+from ganymede_sdk import lib
+
+if lib._is_agent_notebook_():
+    print("This is an Agent notebook")
+else:
+    print("This is not an Agent notebook")
+```
+
+### Checking Containers
+
+To check if the code is running in a container, use:
 
 ```python
 from ganymede_sdk import lib
@@ -75,9 +88,10 @@ else:
     print("This is not a container")
 ```
 
-### Agent
+### Detecting Agent Execution
 
-Check if the code is run in an agent
+To verify if the code is being executed by an agent, use:
+
 ```python
 from ganymede_sdk import lib
 
@@ -87,9 +101,9 @@ else:
     print("This is not agent code")
 ```
 
-### Airflow
+### Detecting Airflow Pipeline Execution
 
-Airflow can be checked by 
+To check if the flow is running in Airflow, use:
 
 ```python
 from ganymede_sdk import lib
