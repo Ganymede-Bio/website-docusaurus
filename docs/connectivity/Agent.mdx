@@ -1,12 +1,10 @@
 ---
 id: Agent
-title: Agents for Instrument Communication
+title: Configuring Agents and Connections
 displayed_sidebar: webUiSidebar
 ---
 
 import { DiffOutlined, PlusOutlined, SelectOutlined } from "@ant-design/icons";
-
-## Agents for Instrument Communication
 
 Ganymede Connections are specialized programs that can run directly on an instrument computer in the lab. Each Connection consists of a combination of user-defined code and Ganymede configuration, providing flexibility in capturing files and interacting with the Ganymede ecosystem.
 
@@ -105,6 +103,8 @@ Three additional input parameters are available for all configurations:
 ## Configuration Options
 
 ### Watch for files locally then run flow
+
+A Connection watches a directory (and associated subdirectories) for new files and updates to existing files.  The Flow configured with the Agent is triggered when all expected files are found.
 
 #### Input Parameters
 
@@ -274,6 +274,8 @@ An instrument outputs files to a directory as it completes runs, which are proce
 
 ### Set a cron job to run flows periodically
 
+A Connection executes a Python script on a set cadence.  Commonly, this Agent type is used as a more flexible version of the Agent type that runs flows upon detecting file change, to allow for greater logic customization in triggering Flows.
+
 #### Input Parameters
 
 - `Flow Name`: Flow to run upon observing new files matching specified pattern
@@ -296,6 +298,8 @@ An instrument outputs files to a directory as it completes runs, which are proce
 A user-defined script runs once a day to poll and capture updates from telemetry devices, which are then processed in a Ganymede flow.
 
 ### Watch for files locally and upload
+
+A Connection that monitors a local directory (and associated subdirectories) for new files and file updates, uploading them to Ganymede Cloud when observed.  This type of Agent does not kick off a Flow.
 
 #### Input Parameters
 
@@ -322,6 +326,8 @@ Multiple flow cytometers are used to observe cell populations for a related set 
 
 ### Watch for flow outputs then save locally
 
+A Connection that monitors Flow file outputs, saving them to local directories as specified by the Agent logic.
+
 #### Input Parameters
 
 - `Flow Name`: The flow from which to download output files. This will autopopulate the glob pattern matching field correspondingly.
@@ -344,6 +350,8 @@ Instructions for lab execution are generated in Ganymede Cloud and downloaded to
 
 ### Load local files into Ganymede with a custom filter
 
+A Connection that loads local files into Ganymede one time (as opposed to persistently monitoring a directory for new files and updates).  This can be useful for conducting data backfills.
+
 <div class="text--center">
   <img
     alt="Agent configuration - Download"
@@ -358,6 +366,8 @@ Instructions for lab execution are generated in Ganymede Cloud and downloaded to
 A selected subset of key instrument output files are captured on Ganymede Cloud.
 
 ### Set a cron job to upload files periodically
+
+A Connection that uploads files to Ganymede Cloud on a scheduled cadence.
 
 #### Input Parameters
 

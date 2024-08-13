@@ -64,7 +64,7 @@ module.exports = {
               {
                 type: 'doc',
                 id: 'connectivity/Agent',
-                label: 'Agents for Instrument Data Capture and Delivery'
+                label: 'Configuring Agents and Connections'
               },
               {
                 type: 'doc',
