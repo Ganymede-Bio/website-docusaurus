@@ -6,28 +6,7 @@ displayed_sidebar: webUiSidebar
 
 import { DiffOutlined, PlusOutlined, SelectOutlined } from "@ant-design/icons";
 
-Ganymede Connections are specialized programs that can run directly on an instrument computer in the lab. Each Connection consists of a combination of user-defined code and Ganymede configuration, providing flexibility in capturing files and interacting with the Ganymede ecosystem.
-
-### Terminology
-- **Agent**: A combination of a trigger, processor, and action configuration to move data from a remote user device into Ganymede.
-- **Trigger**: A component configured to initiate the Agent pipeline based on a specific change or event.
-- **Processor**: User-defined code that converts data produced by a trigger into a format suitable for the action.
-- **Action**: Interaction with Ganymede's cloud or application that moves the processed data to the desired location.
-- **Connection**: A running instance of the Agent that is or has been connected to Ganymede, waiting for the configured trigger.
-- **Pipeline**: A data flow of trigger -> processor -> action, tailored to the use case. Pipelines may share the same trigger and action but differ in the processor template based on the use case.
-- **Runtime Uptime**: An in-place update to the latest processor and configuration (Agent and Connection levels) without stopping the process. The pipeline loop temporarily pauses to reload files, but no data is lost.
-- **Full Update**: A complete update of the Connection binary, useful for incorporating new dependency updates or core-codebase changes. A new Connection executable must be brought up in parallel.
-- **Connection Configuration**: Each installed executable maintains its own name, labels, variables, and file tags. This configuration, along with the “parent-level” Agent configuration and processor, makes a Connection unique. Some metadata, like ID, start time, version, and generated metadata, is not configurable.
-- **Connection Version**: Updated whenever the Connection configuration is modified. It follows the standard Ganymede version scheme of YYYYMMDD_HHmmSSssss.
-- **Agent Configuration**: An Agent's action and trigger can be configured for certain behaviors. The configuration includes user-friendly options like name and file tags.
-- **Agent Version**: Updated whenever the Agent configuration changes, following the standard Ganymede version scheme.
-- **Core Version**: Refers to the underlying core Agent repo version, which is the foundational code all Agents run on. New features and bug patches increment this version.
-- **Connection Variables**: Key-value pairs stored in the Connection configuration, accessible by the user, and used by processor code that depends on certain Connection-level variables.
-- **Connection Labels**: Strings used to categorize and identify Connections in the Ganymede UI.
-- **Connection Context**: An internal dictionary within the code that is not exposed to the user but allows data to pass between the Agent trigger, processor, and action if necessary.
-
-# Quick Start
-After creating a Connection, users can build and install local executables called Connections, individual instances of a given Agent, on instrument PCs.
+## Overview
 
 <img
   alt="Connections front page"
@@ -47,9 +26,30 @@ Agents can
 
 Users specify these actions by configuring the Agent in the Ganymede app. Doing so creates a Linux binary and Windows executable, which can then be installed on instrument PCs. Optionally, users can [configure a user-defined Python script](#configuring-user-defined-python) associated with the Agent.
 
+After creating an Agent, users can build and install local executables called Connections, individual instances of a given Agent, on instrument PCs. Each Connection consists of a combination of user-defined code and Ganymede configuration, providing flexibility in capturing files and interacting with the Ganymede ecosystem.
+
 For system requirements, see [Agent Network Config & Prerequisites](../configuration/AgentNetworkConfig).
 
-## Building an Agent Overview
+### Terminology
+
+- **Agent**: A combination of a trigger, processor, and action configuration to move data from a remote user device into Ganymede.
+- **Trigger**: A component configured to initiate the Agent pipeline based on a specific change or event.
+- **Processor**: User-defined code that converts data produced by a trigger into a format suitable for the action.
+- **Action**: Interaction with Ganymede's cloud or application that moves the processed data to the desired location.
+- **Connection**: A running instance of the Agent that is or has been connected to Ganymede, waiting for the configured trigger.
+- **Pipeline**: A data flow of trigger -> processor -> action, tailored to the use case. Pipelines may share the same trigger and action but differ in the processor template based on the use case.
+- **Runtime Uptime**: An in-place update to the latest processor and configuration (Agent and Connection levels) without stopping the process. The pipeline loop temporarily pauses to reload files, but no data is lost.
+- **Full Update**: A complete update of the Connection binary, useful for incorporating new dependency updates or core-codebase changes. A new Connection executable must be brought up in parallel.
+- **Connection Configuration**: Each installed executable maintains its own name, labels, variables, and file tags. This configuration, along with the “parent-level” Agent configuration and processor, makes a Connection unique. Some metadata, like ID, start time, version, and generated metadata, is not configurable.
+- **Connection Version**: Updated whenever the Connection configuration is modified. It follows the standard Ganymede version scheme of YYYYMMDD_HHmmSSssss.
+- **Agent Configuration**: An Agent's action and trigger can be configured for certain behaviors. The configuration includes user-friendly options like name and file tags.
+- **Agent Version**: Updated whenever the Agent configuration changes, following the standard Ganymede version scheme.
+- **Core Version**: Refers to the underlying core Agent repo version, which is the foundational code all Agents run on. New features and bug patches increment this version.
+- **Connection Variables**: Key-value pairs stored in the Connection configuration, accessible by the user, and used by processor code that depends on certain Connection-level variables.
+- **Connection Labels**: Strings used to categorize and identify Connections in the Ganymede UI.
+- **Connection Context**: An internal dictionary within the code that is not exposed to the user but allows data to pass between the Agent trigger, processor, and action if necessary.
+
+## Building an Agent
 
 To create a new Agent, click the <div className="button system_button"><PlusOutlined /> New Agent</div> button on the Agents tab of the Connections page.
 
@@ -389,7 +389,7 @@ A Connection that uploads files to Ganymede Cloud on a scheduled cadence.
 
 A local file is modified at regular intervals and needs to uploaded to Ganymede Cloud after each modification.
 
-## Installing Connections corresponding to an Agent
+## Installing Connections
 
 To install a Connection, open the Ganymede application in a browser window and navigate to the Connection tab in the left sidebar. Select the desired Agent by name and download the relevant Windows/Linux installation file.
 

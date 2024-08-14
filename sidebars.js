@@ -166,20 +166,27 @@ module.exports = {
       },
       {
         type: 'category',
-        label: 'Dashboards',
+        label: 'Dashboards and Visualization',
         collapsed: true,
         items: [
           {
-            type: 'doc',
-            id: 'app/dashboards/QuickstartCreateDashboard',
-            label: 'Quickstart'
+            type: 'category',
+            label: 'Dashboards',
+            collapsed: false,
+            items: [
+              {
+                type: 'doc',
+                id: 'app/visualization/QuickstartCreateDashboard',
+                label: 'Quickstart'
+              },
+              {
+                type: 'doc',
+                id: 'app/visualization/Dashboards',
+                label: 'Building Dashboards'
+              },
+              'app/visualization/DashboardTips']
           },
-          {
-            type: 'doc',
-            id: 'app/dashboards/Dashboards',
-            label: 'Building Dashboards'
-          },
-          'app/dashboards/DashboardTips'
+          'app/visualization/AnalysisNotebook'
         ]
       },
       {
@@ -188,12 +195,12 @@ module.exports = {
         collapsed: true,
         items: [{
           type: 'doc',
-          id: 'app/virtualization/Virtualization',
+          id: 'app/virt/Virtualization',
           label: 'Using Virtualization'
         },
         {
           type: 'doc',
-          id: 'app/virtualization/TroubleshootingVirtualization',
+          id: 'app/virt/TroubleshootingVirtualization',
           label: 'Troubleshooting Virtualization'
         }
         ]

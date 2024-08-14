@@ -6,8 +6,6 @@ displayed_sidebar: webUiSidebar
 slug: /
 ---
 
-import HeroNav from '@site/src/components/HeroNav';
-
 <div class="text--center">
   <img alt="Ganymede hero image" 
         src="https://ganymede-bio.mo.cloudinary.net/apiServer/HeroImage_20230110.png"
@@ -17,100 +15,120 @@ import HeroNav from '@site/src/components/HeroNav';
 
 Ganymede is a cloud-based data platform, engineered to streamline the capture and processing of data between lab instruments, ELN/LIMS/analytical applications, and cloud platforms.
 
-**IT and Software Engineers** find Ganymede to be a unified, intuitive repository for coordinating their data processing needs by eliminating the need to set up bespoke cloud infrastructure for hosting and executing code.
+**IT and Software Engineers** use Ganymede to coordinate their data processing needs, eliminating the need to set up bespoke cloud infrastructure for hosting and executing code.
 
-**Process Engineers and Operations personnel** use Ganymede for observing process weaknesses and address bottlenecks.
+**Process Engineers and Operations personnel** leverage Ganymede to monitor process weaknesses and address bottlenecks.
 
-**Scientists** leverage Ganymede to trace data generated from different sources, as it consolidates crucial data into one accessible location and processes it through shared pipelines to ensure reliability and accuracy in data capture and analysis.
+**Scientists** rely on Ganymede to trace data generated from various sources.  The platform consolidates critical data into one accessible location and processes it through shared pipelines to ensure reliability and accuracy in data capture and analysis.
 
-**Executive Leaders** benefit from data-driven dashboards, facilitating transparent, informed planning and resource allocation decisions.
+**Executive Leaders** gain valuable insights from data-driven dashboards, facilitating transparent, informed planning and resource allocation decisions.
 
 Some common use cases for Ganymede are:
 
-**Asset Utilization / Reliability Analysis** - observing instrument usage and performance over time to identify trends and potential issues.
+**Asset Utilization / Reliability Analysis**: Monitoring instrument usage and performance over time to identify trends and potential issues.
 
-**Multilingual Connectivity** - providing a common platform to ensure that sample data, raw instrument output, and analyses travel together and are accessible in one place.
+**Multilingual Connectivity**: Providing a common platform to ensure that sample data, raw instrument output, and analyses travel together and are accessible in one place.
 
-**Platform Data Processing** - ensuring that shared data processing is executed in a consistent and secure environment with visibility for process owners.
+**Platform Data Processing**: Ensuring that shared data processing is executed in a consistent and secure environment with visibility for process owners.
 
-## A Quick Tour of Ganymede
+## Ganymede Components
 
-<div style={{textAlign: 'center'}}>
-  <HeroNav />
-</div>
+The Ganymede Platform consists of a set of flexible, interchangeable components that enable data acquisition, processing, observation, and delivery to other systems.
 
-The Ganymede Platform consists of a set of interchangeable components that enable data acquisition, processing, observation, and delivery to other systems.
+### [Flows](app/flows/FlowEditor)
 
-Instrument data can be ingested into Ganymede in a variety of ways:
-
-* [software installed on instrument PCs](app/intro/Concepts#ganymede-agent), 
-* [by manual upload](app/intro/Concepts#drag-and-drop),
-* [via events emitted by cloud platforms](app/intro/Concepts#event-driven-processing), or
-* [web-based file watcher requiring no local software installation](app/intro/Concepts#browser-based-file-watcher).
-
-Once captured, Ganymede offers an innovative [flow-based programming environment](app/flows/FlowEditor) for processing data:
+Flows provide a Python/SQL development environment where [code changes are tracked](app/flows/FlowEditor#flow-versions) and runtime execution occurs on versioned runtimes, ensuring processing stability and reproducibility.  
 
 <div style={{textAlign: 'center'}}>
   <a href="app/flows/FlowEditor">
     <img alt="Ganymede sample flow"
-         src="https://ganymede-bio.mo.cloudinary.net/apiServer/FlowImageExpanded_20240331.png" />
+          src="https://ganymede-bio.mo.cloudinary.net/apiServer/Ganymede_Runtime_Architecture20240814.png"
+          width="70%" />
   </a>
 </div>
 &nbsp;
 
-Ganymede allows users to choose and assemble nodes, each offering a template for the processing performed.  Users can customize processing through [an intuitive interface](app/flows/NodeEditor) that provides control over the logical processing performed by each node.
+[Nodes](../flows/NodeEditor.mdx) within a Flow are equipped with editor notebooks, providing a testing environment for quickly recreating [run contexts from prior executions](sdk/GanymedeClass.mdx).  This enables users to rapidly debug, develop, and deploy pipeline jobs.
+
+### [Agents](app/agents/Agent)
+
+Agents are locally installed executables for delivering data to and acquiring data from lab instruments.  They include a configurable Python component that (if enabled) allows users to remotely manage Agent behavior.
 
 <div style={{textAlign: 'center'}}>
-  <a href="app/flows/NodeEditor">
-    <img alt="Ganymede notebook"
-         src="https://ganymede-bio.mo.cloudinary.net/apiServer/GanymedeNotebook_20230920.png" />
+  <a href="app/flows/FlowEditor">
+    <img
+          alt="Connections front page"
+          src="https://ganymede-bio.mo.cloudinary.net/agent/GanymedeConnectionsFrontPage_20240521.png"
+          width="80%"
+      
+    />
   </a>
 </div>
 &nbsp;
 
-When a Flow is executed, Ganymede [tracks details such as the user running the Flow, input files, output files, and execution time](app/flows/FlowRuns).  Records of prior runs are stored in a centralized location for streamlined tracking and accessiblility.
 
-<div style={{textAlign: 'center'}}>
-  <a href="app/flows/FlowRuns">
-    <img alt="Ganymede flow execution"
-         src="https://ganymede-bio.mo.cloudinary.net/apiServer/GanymedeFlowExecution_20240401.png" />
-  </a>
-</div>
-&nbsp;
+### [File Browser](app/files/FileBrowser)
 
-Data can be [tagged to ensure traceability](app/files/Tags) and [browsed](app/files/FileBrowser) ...
+The File Browser allows users to filter and select data files by [Tags](app/files/Tags), which [Flows](app/flows/FlowEditor) and/or [Agents](app/agents/Agent), and other file attributes.
 
 <div style={{textAlign: 'center'}}>
   <a href="app/files/FileBrowser">
-    <img alt="Ganymede File Browser"
-         src="https://ganymede-bio.mo.cloudinary.net/apiServer/GanymedeFileBrowser_20240401.png" />
+    <img
+          alt="File Browser advanced search"
+          src="https://ganymede-bio.mo.cloudinary.net/apiServer/AdvancedSearch20240507.png"
+          width="80%"
+      
+    />
   </a>
 </div>
 &nbsp;
 
-[structured data can be queried](app/tables/DataExplorer)...
+### [Data Explorer](app/tables/DataExplorer)
+
+Data Explorer lets users execute SQL queries on tabular data captured by Agents and Flows.
 
 <div style={{textAlign: 'center'}}>
   <a href="app/tables/DataExplorer">
-    <img alt="Ganymede Data Explorer"
-        src="https://ganymede-bio.mo.cloudinary.net/apiServer/DataExplorer_20230531.png" />
+    <img
+          alt="Data Explorer query"
+          src="https://ganymede-bio.mo.cloudinary.net/apiServer/DataExplorerQuery_20231108.png"
+          width="80%"
+      
+    />
   </a>
 </div>
 &nbsp;
 
-[visualized via dashboards](app/dashboards/Dashboards.mdx)...
+### [Dashboards](app/visualization/Dashboards) and [Analysis Notebooks](app/visualization/AnalysisNotebook)
+
+These tools offer different modes for exploring and visualizing data within Ganymede.
 
 <div style={{textAlign: 'center'}}>
-  <a href="app/dashboards/Dashboards">
-    <img alt="Dashboard example"
-        src="https://ganymede-bio.mo.cloudinary.net/apiServer/Dashboard_20230531.png" />
+  <a href="app/visualization/Dashboards">
+    <img
+          alt="Example dashboard"
+          src="https://ganymede-bio.mo.cloudinary.net/apiServer/Dashboard_20230831.png"
+          width="80%"
+      
+    />
   </a>
 </div>
 &nbsp;
 
-Raw or processed data can be delivered to ELN/LIMS systems, cloud storage, or lab instrument computers via [Flows](nodes/App/APINode) or [Agents](app/agents/Agent#watch-for-flow-outputs-then-save-locally).
+### [Virtualization](app/virt/Virtualization)
 
-More detail into how different components can be used together to address common integrations can be found in the [Reference Architectures](app/intro/ReferenceArchitectures) section.
+Virtualization allows users to insert manual processing steps into an automated workflow.
+
+<div style={{ textAlign: 'center' }}>
+  <a href="app/virt/Virtualization">
+    <img alt="Virtualization Desktop" src="https://ganymede-bio.mo.cloudinary.net/virtualization/VirtualizationDesktop20240507.png" width="80%"
+    />
+  </a>
+</div>
+
+### [Environment Administration](app/admin/AdminControls)
+
+The environment administration panel in Ganymede provides administrators with tools to manage user access and credentials available in the environment.
 
 ## Getting Started
 
@@ -118,4 +136,4 @@ To get started, check out one or more of our Quickstart guides:
 
 * [Create an Agent](app/agents/QuickstartBuildAgent.mdx) to automatically capture data from lab PCs
 * [Build a Flow](app/flows/QuickstartBuildFlow.mdx) to process structured and unstructured data
-* [Create a dashboard](app/dashboards/QuickstartCreateDashboard.mdx) to visualize data
+* [Create a dashboard](app/visualization/QuickstartCreateDashboard.mdx) to visualize data
