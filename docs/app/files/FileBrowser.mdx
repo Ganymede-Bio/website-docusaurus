@@ -1,5 +1,5 @@
 ---
-id: Files
+id: FileBrowser
 title: File Browser
 displayed_sidebar: webUiSidebar
 ---
@@ -26,7 +26,7 @@ To locate a file by name, enter your query in the search box in the upper left c
 
 ### Advanced Search
 
-The advanced search panel allows you to filter files by various file characteristics or [File Tags](./connectivity/Tags).  To use this feature, define tag types on the [Manage Tag Types panel](./connectivity/Tags#configuring-file-tag-types), and assign tags to specific files using methods found in the [file_tags module](./sdk/FileTags) of the Ganymede SDK.
+The advanced search panel allows you to filter files by various file characteristics or [File Tags](./Tags).  To use this feature, define tag types on the [Manage Tag Types panel](./Tags#configuring-file-tag-types), and assign tags to specific files using methods found in the [file_tags module](../../sdk/FileTags) of the Ganymede SDK.
 
 ![Advanced Search](https://ganymede-bio.mo.cloudinary.net/apiServer/AdvancedSearch20240507.png)
 
@@ -46,7 +46,7 @@ To copy a link to a file, click the link icon ( <LinkOutlined /> ) next to a fil
 
 ### Deep Links - URLs for Accessing Ganymede Files from Other Apps
 
-You can generate URLs for files using the [get_file_url function](./sdk/FileTags#get_file_url) in the Ganymede SDK. This function returns a URL that users can use to directly access the file from another application, such as another LIMS system.
+You can generate URLs for files using the [get_file_url function](../../sdk/FileTags#get_file_url) in the Ganymede SDK. This function returns a URL that users can use to directly access the file from another application, such as another LIMS system.
 
 ```python
 from ganymede_sdk.storage import get_file_url

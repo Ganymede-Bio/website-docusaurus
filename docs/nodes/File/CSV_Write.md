@@ -1,7 +1,7 @@
 ---
 sidebar_label: CSV_Write
 title: CSV_Write
-displayed_sidebar: nodeSidebar
+displayed_sidebar: webUiSidebar
 ---
 
 ### Node Description

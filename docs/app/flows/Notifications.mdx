@@ -22,6 +22,6 @@ The notifications table provides the following information per event.
     - **Processing**: The event has been initiated and is in progress. For _SAVE_ events, processing will temporarily disable users from running flows, as the entire environment is saved and deployed when a flow is saved. Flow runs will become available again once all SAVE events are no longer in the Processing state.
     - **Completed**: Event completed successfully. 
     - **Flow Error**: Applicable only to _RUN_ events, indicating that a Flow run has failed. Detailed logs can be viewed on the [Flow Runs page](FlowRuns.mdx).
-    - **Error**: An unexpected error occurred. Users should retry the operation or contact [Ganymede Support](./Support.mdx) for assistance.
+    - **Error**: An unexpected error occurred. Users should retry the operation or contact [Ganymede Support](../Support.mdx) for assistance.
     - **Timeout**: The notification timed out 180 seconds after the event started. Users should check the Flow that triggered the event for the latest status or try the operation again.
 - **User**: The login of the user who triggered the associated event.

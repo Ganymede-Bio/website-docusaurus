@@ -37,7 +37,7 @@ To assign a flow to yourself, select the All Flows tab and star the relevant flo
 <ReactPlayer playing={true} controls={true} url="https://storage.googleapis.com/ganymede-bio-website/public/apiServer/my_flows-self-assign_flow20231106.mp4" />
 <br /><br /> 
 
-[Admins](./AdminControls.mdx) can also assign users to flows from the [<div className="button darkblue_button"><BranchesOutlined /> **Flow Editor**</div>](./FlowEditor.mdx) page.
+[Admins](./admin/AdminControls.mdx) can also assign users to flows from the [<div className="button darkblue_button"><BranchesOutlined /> **Flow Editor**</div>](./flows/FlowEditor.mdx) page.
 <ReactPlayer playing={true} controls={true} url="https://storage.googleapis.com/ganymede-bio-website/public/apiServer/assign_user_to_flow20231106.mp4" />
 
 ## NavBars
@@ -48,13 +48,13 @@ The navigation sidebar contains pages for building and running flows, as well as
 
 [<div className="button darkblue_button"><HomeOutlined /> **Home**</div>](./Home.mdx) - Home screen used to access flows to run
 
-[<div className="button darkblue_button"><BranchesOutlined /> **Flow Editor**</div>](./FlowEditor.mdx) - Editor for modifying flows and their underlying code
+[<div className="button darkblue_button"><BranchesOutlined /> **Flow Editor**</div>](./flows/FlowEditor.mdx) - Editor for modifying flows and their underlying code
 
-[<div className="button darkblue_button"><CheckCircleOutlined /> **Flow Runs**</div>](./FlowRuns.mdx) - Table for tracking status of current and prior _flow_ runs
+[<div className="button darkblue_button"><CheckCircleOutlined /> **Flow Runs**</div>](./flows/FlowRuns.mdx) - Table for tracking status of current and prior _flow_ runs
 
-[<div className="button darkblue_button"><FileSearchOutlined /> **Data Explorer**</div>](./DataExplorer.mdx) - Tools for querying and managing tabular data created by flows
+[<div className="button darkblue_button"><FileSearchOutlined /> **Data Explorer**</div>](./tables/DataExplorer.mdx) - Tools for querying and managing tabular data created by flows
 
-[<div className="button darkblue_button"><FolderOutlined /> **Files**</div>](./Files.mdx) - File browser for accessing snapshotted input and output data processed through flows
+[<div className="button darkblue_button"><FolderOutlined /> **Files**</div>](./files/FileBrowser) - File browser for accessing snapshotted input and output data processed through flows
 
 ### Environment Selector
 
@@ -65,10 +65,10 @@ In order to change them please feel free to contact the ganymede email in order 
 
 The header contains buttons for accessing environment notifications, app documentation, and settings for administering access to Ganymede and secrets stored used on Ganymede platform.
 
-[<div className="button darkblue_button"><BellOutlined /> **Notifications**</div>](./Notifications.mdx) - Activity (e.g. - _flow_ saves, _flow_ runs, etc.) associated with Ganymede tenant environment
+[<div className="button darkblue_button"><BellOutlined /> **Notifications**</div>](./flows/Notifications.mdx) - Activity (e.g. - _flow_ saves, _flow_ runs, etc.) associated with Ganymede tenant environment
 
 [<div className="button darkblue_button"><FileTextOutlined /> **Docs**</div>](https://docs.ganymede.bio) - Link to Ganymede's documentation, which can also be accessed directly at [docs.ganymede.bio](https://docs.ganymede.bio/) 
 
-[<div className="button darkblue_button"><SettingOutlined /> **Admin**</div>](./AdminControls.mdx) - Panel for configuring access to Ganymede and secrets for accessing third-party applications from Ganymede
+[<div className="button darkblue_button"><SettingOutlined /> **Admin**</div>](./admin/AdminControls.mdx) - Panel for configuring access to Ganymede and secrets for accessing third-party applications from Ganymede
 
 [<div className="button darkblue_button"><UserOutlined /> **Log Out**</div>](https://www.ganymede.bio) - Log out from Ganymede cloud

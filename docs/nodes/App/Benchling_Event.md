@@ -1,7 +1,7 @@
 ---
 sidebar_label: Benchling_Event
 title: Benchling_Event
-displayed_sidebar: nodeSidebar
+displayed_sidebar: webUiSidebar
 ---
 
 ### Node Description

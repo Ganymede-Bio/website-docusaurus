@@ -1,7 +1,7 @@
 ---
 sidebar_label: HDF5_Read
 title: HDF5_Read
-displayed_sidebar: nodeSidebar
+displayed_sidebar: webUiSidebar
 ---
 
 ### Node Description

@@ -8,9 +8,10 @@ slug: /
 
 import HeroNav from '@site/src/components/HeroNav';
 
-<div style={{textAlign: 'center', width: "100%", height: "100%"}}>
+<div class="text--center">
   <img alt="Ganymede hero image" 
-       src="https://ganymede-bio.mo.cloudinary.net/apiServer/HeroImage_20230110.png"
+        src="https://ganymede-bio.mo.cloudinary.net/apiServer/HeroImage_20230110.png"
+       width="70%"
        />
 </div>
 
@@ -28,7 +29,7 @@ Some common use cases for Ganymede are:
 
 **Asset Utilization / Reliability Analysis** - observing instrument usage and performance over time to identify trends and potential issues.
 
-**Multilingual Connectivity** - providing a common platform that can ensure sample data, raw instrument output, and analyses travel together and are accessible in one place.
+**Multilingual Connectivity** - providing a common platform to ensure that sample data, raw instrument output, and analyses travel together and are accessible in one place.
 
 **Platform Data Processing** - ensuring that shared data processing is executed in a consistent and secure environment with visibility for process owners.
 
@@ -42,79 +43,79 @@ The Ganymede Platform consists of a set of interchangeable components that enabl
 
 Instrument data can be ingested into Ganymede in a variety of ways:
 
-* [software installed on instrument PCs](Concepts#ganymede-agent), 
-* [by manual upload](Concepts#drag-and-drop),
-* [via events emitted by cloud platforms](Concepts#event-driven-processing), or
-* [web-based file watcher requiring no local software installation](Concepts#browser-based-file-watcher).
+* [software installed on instrument PCs](app/intro/Concepts#ganymede-agent), 
+* [by manual upload](app/intro/Concepts#drag-and-drop),
+* [via events emitted by cloud platforms](app/intro/Concepts#event-driven-processing), or
+* [web-based file watcher requiring no local software installation](app/intro/Concepts#browser-based-file-watcher).
 
-Once captured, Ganymede offers an innovative [flow-based programming environment](FlowEditor) for processing data:
+Once captured, Ganymede offers an innovative [flow-based programming environment](app/flows/FlowEditor) for processing data:
 
 <div style={{textAlign: 'center'}}>
-  <a href="./FlowEditor">
+  <a href="app/flows/FlowEditor">
     <img alt="Ganymede sample flow"
          src="https://ganymede-bio.mo.cloudinary.net/apiServer/FlowImageExpanded_20240331.png" />
   </a>
 </div>
 &nbsp;
 
-Ganymede allows users to choose and assemble nodes, each offering a template for the processing performed.  Users can customize processing through [an intuitive interface](NodeEditor) that provides control over the logical processing performed by each node.
+Ganymede allows users to choose and assemble nodes, each offering a template for the processing performed.  Users can customize processing through [an intuitive interface](app/flows/NodeEditor) that provides control over the logical processing performed by each node.
 
 <div style={{textAlign: 'center'}}>
-  <a href="./NodeEditor">
+  <a href="app/flows/NodeEditor">
     <img alt="Ganymede notebook"
          src="https://ganymede-bio.mo.cloudinary.net/apiServer/GanymedeNotebook_20230920.png" />
   </a>
 </div>
 &nbsp;
 
-When a Flow is executed, Ganymede [tracks details such as the user running the Flow, input files, output files, and execution time](FlowRuns).  Records of prior runs are stored in a centralized location for streamlined tracking and accessiblility.
+When a Flow is executed, Ganymede [tracks details such as the user running the Flow, input files, output files, and execution time](app/flows/FlowRuns).  Records of prior runs are stored in a centralized location for streamlined tracking and accessiblility.
 
 <div style={{textAlign: 'center'}}>
-  <a href="./FlowRuns">
+  <a href="app/flows/FlowRuns">
     <img alt="Ganymede flow execution"
          src="https://ganymede-bio.mo.cloudinary.net/apiServer/GanymedeFlowExecution_20240401.png" />
   </a>
 </div>
 &nbsp;
 
-Data can be [tagged to ensure traceability](./connectivity/Tags) and [browsed](Files) ...
+Data can be [tagged to ensure traceability](app/files/Tags) and [browsed](app/files/FileBrowser) ...
 
 <div style={{textAlign: 'center'}}>
-  <a href="./Files">
+  <a href="app/files/FileBrowser">
     <img alt="Ganymede File Browser"
          src="https://ganymede-bio.mo.cloudinary.net/apiServer/GanymedeFileBrowser_20240401.png" />
   </a>
 </div>
 &nbsp;
 
-[structured data can be queried](DataExplorer)...
+[structured data can be queried](app/tables/DataExplorer)...
 
 <div style={{textAlign: 'center'}}>
-  <a href="./DataExplorer">
+  <a href="app/tables/DataExplorer">
     <img alt="Ganymede Data Explorer"
         src="https://ganymede-bio.mo.cloudinary.net/apiServer/DataExplorer_20230531.png" />
   </a>
 </div>
 &nbsp;
 
-[visualized via dashboards](Dashboards)...
+[visualized via dashboards](app/dashboards/Dashboards.mdx)...
 
 <div style={{textAlign: 'center'}}>
-  <a href="./Dashboards">
+  <a href="app/dashboards/Dashboards">
     <img alt="Dashboard example"
         src="https://ganymede-bio.mo.cloudinary.net/apiServer/Dashboard_20230531.png" />
   </a>
 </div>
 &nbsp;
 
-Raw or processed data can be delivered to ELN/LIMS systems, cloud storage, or lab instrument computers via [Flows](./nodes/App/APINode) or [Agents](./connectivity/Agent#watch-for-flow-outputs-then-save-locally).
+Raw or processed data can be delivered to ELN/LIMS systems, cloud storage, or lab instrument computers via [Flows](nodes/App/APINode) or [Agents](app/agents/Agent#watch-for-flow-outputs-then-save-locally).
 
-More detail into how different components can be used together to address common integrations can be found in the [Reference Architectures](./ReferenceArchitectures) section.
+More detail into how different components can be used together to address common integrations can be found in the [Reference Architectures](app/intro/ReferenceArchitectures) section.
 
 ## Getting Started
 
 To get started, check out one or more of our Quickstart guides:
 
-* [Create an Agent](./QuickstartBuildAgent.mdx) to automatically capture data from lab PCs
-* [Build a Flow](./QuickstartBuildFlow.mdx) to process structured and unstructured data
-* [Create a dashboard](./QuickstartCreateDashboard.mdx) to visualize data
+* [Create an Agent](app/agents/QuickstartBuildAgent.mdx) to automatically capture data from lab PCs
+* [Build a Flow](app/flows/QuickstartBuildFlow.mdx) to process structured and unstructured data
+* [Create a dashboard](app/dashboards/QuickstartCreateDashboard.mdx) to visualize data

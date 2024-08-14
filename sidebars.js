@@ -16,17 +16,17 @@ module.exports = {
         items: [
           {
             type: 'doc',
-            id: 'Welcome',
+            id: 'app/intro/Welcome',
             label: 'Welcome',
           },
           {
             type: 'doc',
-            id: 'Concepts',
+            id: 'app/intro/Concepts',
             label: 'Concepts'
           },
           {
             type: 'doc',
-            id: 'ReferenceArchitectures',
+            id: 'app/intro/ReferenceArchitectures',
             label: 'Reference Architectures'
           },
         ]
@@ -43,17 +43,17 @@ module.exports = {
             items: [
               {
                 type: 'doc',
-                id: 'QuickstartBuildFlow',
+                id: 'app/flows/QuickstartBuildFlow',
                 label: 'Quickstart'
               },
-              'FlowEditor',
-              'NodeEditor',
+              'app/flows/FlowEditor',
+              'app/flows/NodeEditor',
               {
                 type: 'doc',
-                id: 'NotebookTips',
+                id: 'app/flows/NotebookTips',
                 label: 'Notebook Tips and Tricks'
               },
-              'TroubleshootingFlows'
+              'app/flows/TroubleshootingFlows'
               ],
           },
           {
@@ -63,11 +63,33 @@ module.exports = {
             items: [
               {
                 type: 'doc',
-                id: 'FlowView',
+                id: 'app/flows/FlowView',
                 label: 'Running Flows'
               },
-              'FlowRuns', 'Notifications']
+              'app/flows/FlowRuns', 'app/flows/Notifications']
           },
+          {
+            type: 'category',
+            label: 'Nodes',
+            collapsed: false,
+            items: [
+              {
+                type: 'doc',
+                id: 'nodes/NodeOverview',
+              },
+              {
+                type: 'category',
+                label: 'Node Types',
+                collapsed: false,
+                items: [
+                  nodeAnalysis,
+                  nodeApp,
+                  nodeFile,
+                  nodeInstrument,
+                  nodeTag]
+              }
+            ]
+          }
         ]
       },
       {
@@ -77,30 +99,34 @@ module.exports = {
         items: [
           {
             type: 'doc',
-            id: 'QuickstartBuildAgent',
+            id: 'app/agents/QuickstartBuildAgent',
             label: 'Quickstart'
           },
-          'configuration/AgentNetworkConfig',
+          'app/configuration/AgentNetworkConfig',
           {
             type: 'doc',
-            id: 'connectivity/Agent',
+            id: 'app/agents/Agent',
             label: 'Configuring Agents'
           },
           {
             type: 'doc',
-            id: 'connectivity/AgentMonitoring',
+            id: 'app/agents/AgentMonitoring',
             label: 'Monitoring Agents'
           },
           {
             type: 'doc',
-            id: 'connectivity/DebuggingAgents',
+            id: 'app/agents/DebuggingAgents',
             label: 'Troubleshooting Agents'
           },
           {
             type: 'doc',
-            id: 'connectivity/AgentLogs',
+            id: 'app/agents/AgentLogs',
             label: 'Agent Logging and Reference'
           },
+          {
+            type: 'ref',
+            id: 'releases/AgentVersionHistory'
+          }
         ]
       },
       {
@@ -110,18 +136,18 @@ module.exports = {
         items: [
           {
             type: 'doc',
-            id: 'Files',
+            id: 'app/files/FileBrowser',
             label: 'Browsing Files'
           },
           
           {
             type: 'doc',
-            id: 'connectivity/Tags',
+            id: 'app/files/Tags',
             label: 'Tagging Files'
           },
           {
             type: 'doc',
-            id: 'TagActivity',
+            id: 'app/files/TagActivity',
             label: 'Exploring Tag Activity'
           }
         ]
@@ -133,7 +159,7 @@ module.exports = {
         items: [
           {
             type: 'doc',
-            id: 'DataExplorer',
+            id: 'app/tables/DataExplorer',
             label: 'Data Explorer'
           }
         ],
@@ -145,15 +171,15 @@ module.exports = {
         items: [
           {
             type: 'doc',
-            id: 'QuickstartCreateDashboard',
+            id: 'app/dashboards/QuickstartCreateDashboard',
             label: 'Quickstart'
           },
           {
             type: 'doc',
-            id: 'Dashboards',
+            id: 'app/dashboards/Dashboards',
             label: 'Building Dashboards'
           },
-          'DashboardTips'
+          'app/dashboards/DashboardTips'
         ]
       },
       {
@@ -162,12 +188,12 @@ module.exports = {
         collapsed: true,
         items: [{
           type: 'doc',
-          id: 'Virtualization',
+          id: 'app/virtualization/Virtualization',
           label: 'Using Virtualization'
         },
         {
           type: 'doc',
-          id: 'TroubleshootingVirtualization',
+          id: 'app/virtualization/TroubleshootingVirtualization',
           label: 'Troubleshooting Virtualization'
         }
         ]
@@ -177,10 +203,10 @@ module.exports = {
         label: 'Environment Administration',
         collapsed: true,
         items: [
-          'AdminControls',
+          'app/admin/AdminControls',
           {
             type: 'doc',
-            id: 'configuration/SSOConfig',
+            id: 'app/configuration/SSOConfig',
             label: 'SSO/SAML Configuration'
           },
           {
@@ -190,17 +216,17 @@ module.exports = {
             items: [
               {
                 type: 'doc',
-                id: 'configuration/S3EventConfig',
+                id: 'app/configuration/S3EventConfig',
                 label: 'S3 Event-Driven Flows'
               },
               {
                 type: 'doc',
-                id: 'configuration/BenchlingEventConfig',
+                id: 'app/configuration/BenchlingEventConfig',
                 label: 'Benchling Event-Driven Flows'
               },
               {
                 type: 'doc',
-                id: 'configuration/GenericWebhookConfig',
+                id: 'app/configuration/GenericWebhookConfig',
                 label: 'Webhook Event-Driven Flows'
               }
             ]
@@ -209,27 +235,10 @@ module.exports = {
       },
       {
         type: 'doc',
-        id: 'Support',
+        id: 'app/Support',
         label: 'Support'
       }
     ],
-  nodeSidebar: [
-    {
-      type: 'doc',
-      id: 'nodes/NodeOverview',
-    },
-    {
-      type: 'category',
-      label: 'Node Category',
-      collapsed: false,
-      items: [
-        nodeAnalysis,
-        nodeApp,
-        nodeFile,
-        nodeInstrument,
-        nodeTag]
-    }
-  ],
   SDKSidebar: [
     {
       type: 'doc',

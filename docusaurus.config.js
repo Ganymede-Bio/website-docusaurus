@@ -32,14 +32,8 @@ module.exports = {
         {
           type: 'doc',
           position: 'left',
-          docId: 'Welcome',
+          docId: 'app/intro/Welcome',
           label: 'App'
-        },
-        {
-          type: 'doc',
-          position: 'left',
-          docId: 'nodes/NodeOverview',
-          label: 'Nodes'
         },
         {
           type: 'doc',

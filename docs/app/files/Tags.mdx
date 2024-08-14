@@ -43,15 +43,15 @@ The strict mode setting, if disabled, allows admins to delete or modify tags.  T
 
 ### Tagging Files
 
-Files can be tagged in user-defined code within flows and Agents, though the methods differ slightly.  In flows, files are tagged by passing the file path to the `add_file_tag` function.  Within Agents, files are tagged by passing the [FileParam](../sdk/markdowns/AgentModelsAndMethods#classes-for-agent-triggered-flows) object into the `add_file_tag_to_fileparam` function.  The FileParam object contains the file that the Agent submits to Ganymede storage (for initiating a flow if the Agent is configured to do so).
+Files can be tagged in user-defined code within flows and Agents, though the methods differ slightly.  In flows, files are tagged by passing the file path to the `add_file_tag` function.  Within Agents, files are tagged by passing the [FileParam](../../sdk/markdowns/AgentModelsAndMethods#classes-for-agent-triggered-flows) object into the `add_file_tag_to_fileparam` function.  The FileParam object contains the file that the Agent submits to Ganymede storage (for initiating a flow if the Agent is configured to do so).
 
-The full set of methods available for interacting with tags can be found on the [File Tag](../sdk/FileTags.mdx) module in the SDK documentation.
+The full set of methods available for interacting with tags can be found on the [File Tag](../../sdk/FileTags.mdx) module in the SDK documentation.
 
 #### Tagging files in flows
 
 To tag a file within a flow, use the `add_file_tag` function in the `ganymede_sdk.file_tag` module.  This function takes the following arguments:
 
-- _param_ **input_file_path**: str - The name of the file to tag.  The file path can be obtained from the keys in the dictionary returned by the [retrieve_files](../sdk/GanymedeClass#method-retrieve_files) for Ganymede class or by calling the [get_gcs_uri method](../sdk/GanymedeClass#method-get_gcs_uri).
+- _param_ **input_file_path**: str - The name of the file to tag.  The file path can be obtained from the keys in the dictionary returned by the [retrieve_files](../../sdk/GanymedeClass#method-retrieve_files) for Ganymede class or by calling the [get_gcs_uri method](../../sdk/GanymedeClass#method-get_gcs_uri).
 - _param_ **tag_type_id**: str - The name of the tag type to apply to the file.
 - _param_ **display_value**: str - Value of the tag to display in the file browser.
 - _param_ **tag_id**: Optional[str] - Optional tag ID that can be used to reference tags in code.
@@ -105,7 +105,7 @@ def execute(file_data: Dict[str, bytes], ganymede_context) -> NodeReturn:
 
 #### Tagging files in Agents or Connections
 
-To tag a file delivered by an Agent to Ganymede, you can configure an Agent or Connection to tag any files submitted from it using the [File tags parameter in Agent configuration](./Agent).
+To tag a file delivered by an Agent to Ganymede, you can configure an Agent or Connection to tag any files submitted from it using the [File tags parameter in Agent configuration](../agents/Agent).
 
 For example, you might configure the agent to automatically tag files with an instrument ID and a connection from that agent to tag files with a lab location.
 

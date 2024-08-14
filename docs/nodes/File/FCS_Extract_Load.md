@@ -1,7 +1,7 @@
 ---
 sidebar_label: FCS_Extract_Load
 title: FCS_Extract_Load
-displayed_sidebar: nodeSidebar
+displayed_sidebar: webUiSidebar
 ---
 
 ### Node Description

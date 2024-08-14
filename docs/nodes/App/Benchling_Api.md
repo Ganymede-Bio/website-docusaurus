@@ -1,7 +1,7 @@
 ---
 sidebar_label: Benchling_Api
 title: Benchling_Api
-displayed_sidebar: nodeSidebar
+displayed_sidebar: webUiSidebar
 ---
 
 ### Node Description

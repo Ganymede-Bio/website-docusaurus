@@ -1,7 +1,7 @@
 ---
 sidebar_label: Input_File_Multi
 title: Input_File_Multi
-displayed_sidebar: nodeSidebar
+displayed_sidebar: webUiSidebar
 ---
 
 ### Node Description

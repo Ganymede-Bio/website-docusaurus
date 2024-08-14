@@ -1,7 +1,7 @@
 ---
 sidebar_label: PDF_Read_Multi
 title: PDF_Read_Multi
-displayed_sidebar: nodeSidebar
+displayed_sidebar: webUiSidebar
 ---
 
 ### Node Description

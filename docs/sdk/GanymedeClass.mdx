@@ -260,15 +260,15 @@ _clear_cache_ clears files and tables stored in local cache for the editor or an
 
 ### `method` get_file_url
 
-_get_file_url returns an HTTPS URL for referencing files stored in Ganymede cloud storage from external apps.  More documentation on usage can be found on the [deep links section of the File Browser page](../Files#deep-links---urls-for-accessing-ganymede-files-from-other-apps)
+_get_file_url returns an HTTPS URL for referencing files stored in Ganymede cloud storage from external apps.  More documentation on usage can be found on the [deep links section of the File Browser page](../app/files/FileBrowser#deep-links---urls-for-accessing-ganymede-files-from-other-apps)
 
 ### `method` get_gcs_uri
 
-_get_gcs_uri_ returns a Google Cloud Storage URI for referencing files.  This method is useful for referencing files for tags, which is described in further detail on the [Tagging Files page](../connectivity/Tags).
+_get_gcs_uri_ returns a Google Cloud Storage URI for referencing files.  This method is useful for referencing files for tags, which is described in further detail on the [Tagging Files page](../app/files/Tags).
 
 ## `class` GanymedeContext
 
-**GanymedeContext** stores [Flow](../FlowEditor.mdx) metadata such as user ID, input filenames, input parameters, and execution timestamp upon Flow execution.  The **GanymedeContext** object from the most recent run can be mimicked in testing code via the **Ganymede** object.
+**GanymedeContext** stores [Flow](../app/flows/FlowEditor.mdx) metadata such as user ID, input filenames, input parameters, and execution timestamp upon Flow execution.  The **GanymedeContext** object from the most recent run can be mimicked in testing code via the **Ganymede** object.
 
 ```python
 from ganymede_sdk import Ganymede

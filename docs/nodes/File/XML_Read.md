@@ -1,7 +1,7 @@
 ---
 sidebar_label: XML_Read
 title: XML_Read
-displayed_sidebar: nodeSidebar
+displayed_sidebar: webUiSidebar
 ---
 
 ### Node Description

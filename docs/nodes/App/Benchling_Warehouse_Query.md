@@ -1,7 +1,7 @@
 ---
 sidebar_label: Benchling_Warehouse_Query
 title: Benchling_Warehouse_Query
-displayed_sidebar: nodeSidebar
+displayed_sidebar: webUiSidebar
 ---
 
 ### Node Description

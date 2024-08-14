@@ -1,7 +1,7 @@
 ---
 sidebar_label: Agilent_HPLC_Read
 title: Agilent_HPLC_Read
-displayed_sidebar: nodeSidebar
+displayed_sidebar: webUiSidebar
 ---
 
 ### Node Description

@@ -1,7 +1,7 @@
 ---
 sidebar_label: Azure_Write
 title: Azure_Write
-displayed_sidebar: nodeSidebar
+displayed_sidebar: webUiSidebar
 ---
 
 ### Node Description

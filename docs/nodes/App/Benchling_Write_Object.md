@@ -1,7 +1,7 @@
 ---
 sidebar_label: Benchling_Write_Object
 title: Benchling_Write_Object
-displayed_sidebar: nodeSidebar
+displayed_sidebar: webUiSidebar
 ---
 
 ### Node Description

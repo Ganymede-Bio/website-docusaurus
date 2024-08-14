@@ -1,7 +1,7 @@
 ---
 sidebar_label: S3_Event
 title: S3_Event
-displayed_sidebar: nodeSidebar
+displayed_sidebar: webUiSidebar
 ---
 
 ### Node Description

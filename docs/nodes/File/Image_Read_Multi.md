@@ -1,7 +1,7 @@
 ---
 sidebar_label: Image_Read_Multi
 title: Image_Read_Multi
-displayed_sidebar: nodeSidebar
+displayed_sidebar: webUiSidebar
 ---
 
 ### Node Description

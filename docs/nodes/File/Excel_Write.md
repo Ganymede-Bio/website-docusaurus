@@ -1,7 +1,7 @@
 ---
 sidebar_label: Excel_Write
 title: Excel_Write
-displayed_sidebar: nodeSidebar
+displayed_sidebar: webUiSidebar
 ---
 
 ### Node Description

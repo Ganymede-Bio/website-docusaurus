@@ -129,7 +129,7 @@ The user-defined code will be generated to map those file patterns to parameters
 - `execute`: Called when all glob patterns specified by `get_param_mapping` have been matched, this object returned by this function specifies the inputs to the flow that is executed when all files are observed.
 - `fp`: This function returns a function that performs pattern matching against a file path.  Use this function as a template for matching files.
 
-For example, if the instrument outputs a CSV file called "\{id\}\_lc_output\<YYYYMMDD\>.csv" that is to be ingested by a [CSV_Read node](../nodes/File/CSV_Read.md) called "Ingest_Data", an appropriate configuration would be "\{id\}\_lc_output\*.csv" for the input box associated with the "Ingest_Data.csv" node.  The corresponding user-defined code would be:
+For example, if the instrument outputs a CSV file called "\{id\}\_lc_output\<YYYYMMDD\>.csv" that is to be ingested by a [CSV_Read node](../../nodes/File/CSV_Read.md) called "Ingest_Data", an appropriate configuration would be "\{id\}\_lc_output\*.csv" for the input box associated with the "Ingest_Data.csv" node.  The corresponding user-defined code would be:
 
 ```python
 from ganymede_sdk.agent.models import TriggerFlowParams, FileWatcherResult
@@ -199,7 +199,7 @@ def execute(flow_params_fw: FileWatcherResult) -> TriggerFlowParams:
     )
 ```
 
-If a second parameter, such as an [Excel_Read node](../nodes/File/Excel_Read.md) called "Experiment_Context", is added, the **get_param_mapping** function would be modified to include that parameter:
+If a second parameter, such as an [Excel_Read node](../../nodes/File/Excel_Read.md) called "Experiment_Context", is added, the **get_param_mapping** function would be modified to include that parameter:
 
 ```python
 def get_param_mapping(
@@ -266,7 +266,7 @@ For example, if your instrument writes out files in a directory like:
 
 You would use parameters like `*/configuration.xml` and `*/results.csv` to upload the files and submit them to a flow.
 
-Documentation on the objects used in the user-defined code for these agents can be found on the [Agent Data Models](../sdk/markdowns/AgentModelsAndMethods.mdx) page.
+Documentation on the objects used in the user-defined code for these agents can be found on the [Agent Data Models](../../sdk/markdowns/AgentModelsAndMethods.mdx) page.
 
 #### Example use case
 

@@ -1,7 +1,7 @@
 ---
 sidebar_label: Zip_Read
 title: Zip_Read
-displayed_sidebar: nodeSidebar
+displayed_sidebar: webUiSidebar
 ---
 
 ### Node Description
