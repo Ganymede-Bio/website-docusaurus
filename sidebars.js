@@ -29,6 +29,28 @@ module.exports = {
             id: 'app/intro/ReferenceArchitectures',
             label: 'Reference Architectures'
           },
+          {
+            type: 'category',
+            label: 'Quickstart',
+            collapsed: false,
+            items: [
+              {
+                type: 'doc',
+                id: 'app/flows/QuickstartBuildFlow',
+                label: 'Build a Flow'
+              },
+              {
+                type: 'doc',
+                id: 'app/agents/QuickstartBuildAgent',
+                label: 'Build an Agent'
+              },
+              {
+                type: 'doc',
+                id: 'app/visualization/QuickstartCreateDashboard',
+                label: 'Create a Dashboard'
+              }
+            ]
+          }
         ]
       },
       {
@@ -41,11 +63,6 @@ module.exports = {
             label: 'Building Flows',
             collapsed: false,
             items: [
-              {
-                type: 'doc',
-                id: 'app/flows/QuickstartBuildFlow',
-                label: 'Quickstart'
-              },
               'app/flows/FlowEditor',
               'app/flows/NodeEditor',
               {
@@ -97,11 +114,6 @@ module.exports = {
         label: 'Agents & Connections',
         collapsed: true,
         items: [
-          {
-            type: 'doc',
-            id: 'app/agents/QuickstartBuildAgent',
-            label: 'Quickstart'
-          },
           'app/configuration/AgentNetworkConfig',
           {
             type: 'doc',
@@ -174,11 +186,6 @@ module.exports = {
             label: 'Dashboards',
             collapsed: false,
             items: [
-              {
-                type: 'doc',
-                id: 'app/visualization/QuickstartCreateDashboard',
-                label: 'Quickstart'
-              },
               {
                 type: 'doc',
                 id: 'app/visualization/Dashboards',
