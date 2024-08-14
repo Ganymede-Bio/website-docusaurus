@@ -44,17 +44,29 @@ module.exports = {
               {
                 type: 'doc',
                 id: 'QuickstartBuildFlow',
-                label: 'QuickstartBuildFlow'
+                label: 'Quickstart'
               },
               'FlowEditor',
               'NodeEditor',
-              'NotebookTips'],
+              {
+                type: 'doc',
+                id: 'NotebookTips',
+                label: 'Notebook Tips and Tricks'
+              },
+              'TroubleshootingFlows'
+              ],
           },
           {
             type: 'category',
-            label: 'Running Flows',
+            label: 'Flow Execution',
             collapsed: false,
-            items: ['FlowView', 'FlowRuns', 'Notifications']
+            items: [
+              {
+                type: 'doc',
+                id: 'FlowView',
+                label: 'Running Flows'
+              },
+              'FlowRuns', 'Notifications']
           },
         ]
       },
@@ -66,13 +78,13 @@ module.exports = {
           {
             type: 'doc',
             id: 'QuickstartBuildAgent',
-            label: 'QuickstartBuildAgent'
+            label: 'Quickstart'
           },
           'configuration/AgentNetworkConfig',
           {
             type: 'doc',
             id: 'connectivity/Agent',
-            label: 'Configuring Agents and Connections'
+            label: 'Configuring Agents'
           },
           {
             type: 'doc',
@@ -82,12 +94,12 @@ module.exports = {
           {
             type: 'doc',
             id: 'connectivity/DebuggingAgents',
-            label: 'Agent Troubleshooting'
+            label: 'Troubleshooting Agents'
           },
           {
             type: 'doc',
             id: 'connectivity/AgentLogs',
-            label: 'Agent Logs and Reference'
+            label: 'Agent Logging and Reference'
           },
         ]
       },
@@ -96,19 +108,35 @@ module.exports = {
         label: 'Files',
         collapsed: true,
         items: [
-          'Files',
+          {
+            type: 'doc',
+            id: 'Files',
+            label: 'Browsing Files'
+          },
+          
           {
             type: 'doc',
             id: 'connectivity/Tags',
             label: 'Tagging Files'
           },
-          'TagActivity']
+          {
+            type: 'doc',
+            id: 'TagActivity',
+            label: 'Exploring Tag Activity'
+          }
+        ]
       },
       {
         type: 'category',
         label: 'Tables',
         collapsed: true,
-        items: ['DataExplorer'],
+        items: [
+          {
+            type: 'doc',
+            id: 'DataExplorer',
+            label: 'Data Explorer'
+          }
+        ],
       },
       {
         type: 'category',
@@ -118,7 +146,7 @@ module.exports = {
           {
             type: 'doc',
             id: 'QuickstartCreateDashboard',
-            label: 'QuickstartCreateDashboard'
+            label: 'Quickstart'
           },
           {
             type: 'doc',
@@ -139,8 +167,8 @@ module.exports = {
         },
         {
           type: 'doc',
-          id: 'TroubleshootingDataProcessing',
-          label: 'Troubleshooting Flows and Virtualization'
+          id: 'TroubleshootingVirtualization',
+          label: 'Troubleshooting Virtualization'
         }
         ]
       },
