@@ -28,7 +28,7 @@ Once configured, add the AWS role ARN secret to your environment by clicking on 
 
 In addition to configuring role ARN, EventBridge must be configured to send events to Ganymede for the buckets that you would like to reference.  The API destination for EventBridge should be configured to https://\<your_tenant_name\>/event/aws.
 
-For more details on configuring EventBridge, visit https://docs.ganymede.bio/configuration/S3EventConfig.
+For more details on configuring EventBridge, visit https://docs.ganymede.bio/app/configuration/S3EventConfig.
 
 ## User-Defined Python
 
