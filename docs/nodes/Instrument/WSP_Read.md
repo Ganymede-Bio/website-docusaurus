@@ -1,7 +1,7 @@
 ---
 sidebar_label: WSP_Read
 title: WSP_Read
-displayed_sidebar: nodeSidebar
+displayed_sidebar: webUiSidebar
 ---
 
 ### Node Description

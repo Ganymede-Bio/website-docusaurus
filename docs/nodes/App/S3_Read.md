@@ -1,7 +1,7 @@
 ---
 sidebar_label: S3_Read
 title: S3_Read
-displayed_sidebar: nodeSidebar
+displayed_sidebar: webUiSidebar
 ---
 
 ### Node Description

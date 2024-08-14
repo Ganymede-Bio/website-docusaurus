@@ -157,7 +157,7 @@ if __name__ == "__main__":
                 "---\n"
                 f"sidebar_label: {name}\n"
                 f"title: {name}\n"
-                "displayed_sidebar: nodeSidebar\n"
+                "displayed_sidebar: webUiSidebar\n"
                 "---\n\n"
             )
 

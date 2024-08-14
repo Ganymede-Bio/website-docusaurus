@@ -1,7 +1,7 @@
 ---
 sidebar_label: CSV_Read
 title: CSV_Read
-displayed_sidebar: nodeSidebar
+displayed_sidebar: webUiSidebar
 ---
 
 ### Node Description

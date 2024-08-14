@@ -1,7 +1,7 @@
 ---
 sidebar_label: RunContainer
 title: RunContainer
-displayed_sidebar: nodeSidebar
+displayed_sidebar: webUiSidebar
 ---
 
 ### Node Description

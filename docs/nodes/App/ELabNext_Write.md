@@ -1,7 +1,7 @@
 ---
 sidebar_label: ELabNext_Write
 title: ELabNext_Write
-displayed_sidebar: nodeSidebar
+displayed_sidebar: webUiSidebar
 ---
 
 ### Node Description

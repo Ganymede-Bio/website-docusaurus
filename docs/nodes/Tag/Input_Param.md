@@ -1,7 +1,7 @@
 ---
 sidebar_label: Input_Param
 title: Input_Param
-displayed_sidebar: nodeSidebar
+displayed_sidebar: webUiSidebar
 ---
 
 ### Node Description

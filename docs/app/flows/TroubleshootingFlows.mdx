@@ -1,0 +1,53 @@
+---
+id: TroubleshootingFlows
+title: Troubleshooting Flows
+displayed_sidebar: webUiSidebar
+toc_max_heading_level: 4
+---
+
+import { BranchesOutlined } from '@ant-design/icons';
+
+This page describes a set of common issues associated with flow development and execution.
+
+### Notebooks
+
+#### Issue: The Ganymede notebook screen appears blank.
+
+This issue may occur when the notebook fails to load properly. To resolve it:
+1. Perform a hard refresh in the browser
+    - **On Mac**: Press Cmd+Shift+R
+    - **On Windows**: Press Ctrl+Shift+R
+2. Clear site cache
+    - If the hard refresh doesn't work, try [clearing the site cache using Developer Tools](https://support.google.com/chrome/thread/16531954/clear-cache-for-specific-website-in-google-chrome?hl=en).
+
+### Flow Execution
+
+#### Issue: Flow run fails due to a Platform Error.  Run logs for the failing node contains "INFO - Data retrieval unsuccessful. Exception class: NotFound"
+
+This error often occurs when using a browser other than Google Chrome. Ganymede requires Google Chrome for Flow execution, so switch to Chrome to avoid this issue.
+
+#### Issue: The Run button is disabled and greyed out, preventing run execution for an extended period of time (more than 3 minutes).
+
+If the environment status on the [<div className="button darkblue_button"><BranchesOutlined /> **Flow Editor**</div>](./FlowEditor.mdx) page shows a spinner as below:
+
+<img alt="Environment Status - save in progress" src="https://ganymede-bio.mo.cloudinary.net/apiServer/SaveInProgress_20240331.png" width="125"/>
+
+Verify that: 
+1. A Flow save has triggered a rebuild of the workflow execution system.  This occurs when there are updates to the requirements to the environment, which comes from using new Nodes in the environment, with package dependencies that did not exist prior to the Node being used.  Typically, environment rebuilds take around 10 minutes to complete; flows should be runnable once the save is complete.
+2. Flow saves in rapid succession can result in race conditions; typically, the notifications page would show multiple concurrent saves in this case.  To clear the condition, modify the editor notebook associated with any flow and save the change to clear this state.
+
+If the environment status says "Deploy Successful" as shown below, but the Run button is still disabled
+
+<img alt="Environment Status - deploy successful" src="https://ganymede-bio.mo.cloudinary.net/apiServer/DeploySuccessful_20240331.png" width="250"/>
+
+click on your user name in the upper-right hand corner, navigate to Environment Settings, and verify that your role is either runner, writer, or admin.
+
+If you are still unable to run the Flow, please [reach out to Ganymede Support](../Support).
+
+### Flow Development
+
+#### Issue: I received a 400 status code while saving a notebook.
+
+Error committing file 400 - \{“statusCode”: 400, “message”: “Creating a file with this API is prohibited, attempted to create dags/…/function.py\}
+
+This error occurs when you try to save a notebook after modifying the name of the respective node in the Flow. You can copy and paste your new code into a reopened notebook to save the changes.

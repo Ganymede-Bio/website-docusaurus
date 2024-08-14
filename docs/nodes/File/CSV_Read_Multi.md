@@ -1,7 +1,7 @@
 ---
 sidebar_label: CSV_Read_Multi
 title: CSV_Read_Multi
-displayed_sidebar: nodeSidebar
+displayed_sidebar: webUiSidebar
 ---
 
 ### Node Description

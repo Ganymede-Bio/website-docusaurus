@@ -1,0 +1,68 @@
+---
+id: S3EventConfig
+title: Configuring S3 Event-Driven Flows
+displayed_sidebar: webUiSidebar
+---
+
+Ganymede Flows can be triggered on file save to an S3 bucket, so that files are processed as soon as they land in an S3 bucket.  This page details the configuration required to enable this platform feature.
+
+## EventBridge setup in AWS
+
+1. Create bucket (if necessary) and, in Properties, enable “Send notifications to [Amazon EventBridge](https://aws.amazon.com/eventbridge/) for all events in this bucket”.
+2. Set up an EventBridge rule
+    1. Navigate to EventBridge -> Rules -> Create Rule
+
+    <div style={{textAlign: 'center'}}>
+      <img alt="Setup EventBridge rule" 
+          src="https://ganymede-bio.mo.cloudinary.net/config/SetupEventBridgeRule_20240802.png"
+      />
+    </div>
+
+    2. In Build Event Pattern, select “AWS events or EventBridge partner events”, and configure event pattern for S3 Object Created events.  The example below shows an example S3 bucket called ganymede-s3-to-eventbridge referenced.
+
+    <div style={{textAlign: 'center'}}>
+      <img alt="Set up event pattern" 
+          src="https://ganymede-bio.mo.cloudinary.net/config/SetupEventPattern_20240802.png"
+      />
+    </div>
+
+    3. In Select Targets, select “EventBridge API destination” and enter the API Destination details (POST request to https://\<tenant subdomain\>.ganymede.bio/event/aws)
+
+    4. Enter a new connection with authorization type “API Key”.  
+        - API key name: api-key
+        - Value: \<enter an api key value that will be sent in request header\>.  
+        &nbsp;
+        
+        :::note
+        You can generate the API Key by running
+
+        Linux:
+        ```shell
+        openssl rand -hex 32 
+        ```
+
+        Windows PowerShell:
+        ```powershell
+        [System.BitConverter]::ToString((1..32 | ForEach-Object {Get-Random -Minimum 0 -Maximum 256})).Replace('-','').ToLower()
+        ```
+        :::
+
+        <div style={{textAlign: 'center'}} width="600">
+          <img alt="Set up EventBridge API Key in AWS" 
+              src="https://ganymede-bio.mo.cloudinary.net/config/SetupEventBridgeAPIKey_20240802.png"
+          />
+        </div>
+
+    5. Create rule.
+
+3. Enter the API Key configured in step 2.iv into a secret named **s3_api_key** the [Environment Secrets](../admin/AdminControls#environment-secrets) panel.
+
+4. Test out the connection using an [S3 Event node](../../nodes/App/S3_Event).
+
+5. Deliver your S3 bucket name to [Ganymede support](mailto:support@ganymede.bio).  Your Ganymede representative will need to direct events coming from your S3 bucket to your Ganymede tenant. To do so, please provide them with your S3 bucket name.
+
+## Troubleshooting
+
+#### Issue: An S3 Event rule and IAM role have been set up correctly, but there is no indication that EventBridge has accessed the role.
+
+Check the event bus for the event rule; the monitored event, by default, would go to a default event bus rather than a newly created event bus.

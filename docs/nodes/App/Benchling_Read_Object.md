@@ -1,7 +1,7 @@
 ---
 sidebar_label: Benchling_Read_Object
 title: Benchling_Read_Object
-displayed_sidebar: nodeSidebar
+displayed_sidebar: webUiSidebar
 ---
 
 ### Node Description

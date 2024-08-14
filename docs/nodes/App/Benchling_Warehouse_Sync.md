@@ -1,7 +1,7 @@
 ---
 sidebar_label: Benchling_Warehouse_Sync
 title: Benchling_Warehouse_Sync
-displayed_sidebar: nodeSidebar
+displayed_sidebar: webUiSidebar
 ---
 
 ### Node Description

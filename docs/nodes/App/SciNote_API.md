@@ -1,7 +1,7 @@
 ---
 sidebar_label: SciNote_API
 title: SciNote_API
-displayed_sidebar: nodeSidebar
+displayed_sidebar: webUiSidebar
 ---
 
 ### Node Description

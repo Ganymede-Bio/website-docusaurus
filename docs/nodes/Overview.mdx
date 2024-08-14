@@ -1,8 +1,8 @@
 ---
 id: NodeOverview
 title: Node Overview
-displayed_sidebar: nodeSidebar
-sidebar_label: Node Overview
+displayed_sidebar: webUiSidebar
+sidebar_label: Overview
 ---
 
 import {
@@ -112,7 +112,7 @@ To initialize a `NodeReturn` object, the following parameters can be passed:
   - _param_ **tables_measurement_units**: Optional[dict[str, pd.DataFrame]] - (If provided) Specifies the measurement units for columns; keys are table names, values are pandas DataFrames with "column_name" and "unit" as columns.
   - _param_ **file_location**: Optional[str] - Specifies the bucket location ("input" or "output"); required only if files_to_upload is not null, defaults to "output".
   - _param_ **wait_for_job**: Whether to wait for the write operation to complete before continuing execution; defaults to False.
-  - _param_ **tags**: Optional[dict[str, list[dict] | dict]]: Dictionary of files to tag, with keys as file names and values as a dictionary of keyword parameters for the [add_file_tag function](../connectivity/Tags#tagging-files).  Multiple tags can be added to a single file by passing a list of add_file_tag parameters in the dictionary.
+  - _param_ **tags**: Optional[dict[str, list[dict] | dict]]: Dictionary of files to tag, with keys as file names and values as a dictionary of keyword parameters for the [add_file_tag function](../app/files/Tags#tagging-files).  Multiple tags can be added to a single file by passing a list of add_file_tag parameters in the dictionary.
 
 
 ##### NodeReturn Example

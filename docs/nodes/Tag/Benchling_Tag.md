@@ -1,7 +1,7 @@
 ---
 sidebar_label: Benchling_Tag
 title: Benchling_Tag
-displayed_sidebar: nodeSidebar
+displayed_sidebar: webUiSidebar
 ---
 
 ### Node Description

@@ -1,0 +1,135 @@
+---
+id: FlowView
+title: Running Flows
+displayed_sidebar: webUiSidebar
+---
+
+import {
+  HomeOutlined,
+  NodeIndexOutlined,
+  PlayCircleOutlined,
+  SettingOutlined
+} from '@ant-design/icons';
+
+
+import useBaseUrl from '@docusaurus/useBaseUrl';
+
+The <div className="button darkblue_button"><img src={useBaseUrl('/img/flows_icon.svg')} className="filter-white" /> **Flow View**</div> page provides access to running flows and viewing run history.  You can access this page by clicking on a Flow on the <div className="button darkblue_button"><HomeOutlined /> **Home**</div> page.
+
+## Running Flows
+
+Flows can be run [from the browser](#manually-running-flows), from an [Agent](../agents/Agent), from [an event](../configuration/S3EventConfig), or by configuring a [browser-based file watcher](#watching-directories-for-new-files).  This sections below detail how Flows can be run from the browser.
+
+### Manually running Flows
+
+To run a Flow manually, drop a file into the upload box and click the <div className="button run_queue_button">**Run** <PlayCircleOutlined /></div> button on the left side of the run box.
+
+<img alt="Flow View page" src="https://ganymede-bio.mo.cloudinary.net/apiServer/FlowView_20230531.png" />
+
+### Watching directories for new files
+
+Using the browser-based file watcher, Ganymede can be configured to watch for new files for processing, enabling hands-free file processing. This feature allows users to define a directory that is continuously watched for file additions or changes. When new files appear, they are automatically queued for processing in Ganymede.
+
+To setup a browser-based file watcher, open up a flow on the <div className="button darkblue_button"><HomeOutlined /> **Home**</div> page or via the <div className="button darkblue_button"><NodeIndexOutlined /> **Flow Editor**</div> page. The flow inputs section, shown below, consists of a form input for the input types that have been defined for the flow.  Inputs that accept files have a <div className="button dark_gray_button"><SettingOutlined /></div> icon, which you can use to select the directory to be watched. 
+
+<div class="text--center">
+  <img
+    alt="Flow Inputs"
+    src="https://ganymede-bio.mo.cloudinary.net/apiServer/Flow_Inputs20231219.png"
+  />
+</div>
+&nbsp;
+
+:::info
+
+Browser-based file watcher configuration is done per node, not per flow.
+
+:::
+
+
+#### Configuring directory watching
+
+Clicking on the <div className="button dark_gray_button"><SettingOutlined /></div> icon exposes the modal for configuring directory watching.
+
+<div class="text--center">
+  <img
+    alt="Browser-Based File Watcher"
+    src="https://ganymede-bio.mo.cloudinary.net/apiServer/Browser_File_Watcher20231219.png"
+    width="500"
+  />
+</div>
+&nbsp;
+
+This produces a modal with two settings, the observation mode and the write mode.
+
+The observation mode specifies which files are captured:
+ - **Differential mode**: detects files that are created or modified in a directory after the watcher starts.
+ - **Cumulative mode**: Captures all existing files in the directory and continues to monitor for any new or modified files.
+
+The write mode defines how Ganymede Cloud handles observed files.  When the watcher detects a file, it uploads the file to Ganymede independent of its mode. If a file with the same name already exists in Ganymede for a given flow and input, the watcher can:
+ - queue the existing file in the system to run, or
+ - upload the new file with a unique name to avoid conflicts.
+
+After configuring the watcher, close the modal and click the file icon to select the directory. The watcher will continue to monitor that directory until the user refreshes or closes the site, or selects the 'X' icon that appears when watching a file.
+
+#### Executing flows upon file detection
+
+The file watcher can be configured to either queue runs or execute a run once all relevant files for the flow have been detected.  To configure this, click on the <div className="button dark_gray_button"><SettingOutlined />  Input Settings</div> button and check off "Enable auto-run".
+
+<div class="text--center">
+  <img
+    alt="Web-based file watcher auto-run"
+    src="https://ganymede-bio.mo.cloudinary.net/apiServer/File_Watcher_Autorun20231219.png"
+  />
+</div>
+ 
+## Flow status indicators
+
+The Flow View page provides detailed status indicators at both the Flow and node levels to help you track the progress and outcomes of your Flows.
+
+<img alt="Flow status indicator" src="https://ganymede-bio.mo.cloudinary.net/apiServer/FlowStatusIndicator_20230109.png" />
+
+### Flow-level status
+
+The Run History table displays status information for each historical run:
+
+- **File**: The input files and parameters associated with the flow run.
+- **Run Tag**: Tags associated with the flow run, such as a Benchling custom entity ID used to reference a table within Benchling.
+- **Status**: The current status of the flow run. Possible status values include:
+  - Running: The job is currently in progress.
+  - Success: All nodes have successfully completed.
+  - Failed: At least one node failed to complete successfully.
+
+### Node-level status
+
+<img alt="Node status indicator" src="https://ganymede-bio.mo.cloudinary.net/apiServer/NodeStatusAndLog_20230831.png" />
+
+You can click the plus sign on the left side of each record in the Run History table to expand the view and display node-level status.
+
+The color of the node status indicators reflects the current status:
+- ![#B22222](https://placehold.co/2x2/B22222/B22222.png) **Red**: The node failed after retries were exhausted.
+- ![#01FF70](https://placehold.co/2x2/01FF70/01FF70.png) **Light green**: The node is currently running.
+- ![#2ECC40](https://placehold.co/2x2/2ECC40/2ECC40.png) **Dark green**: The node successfully completed.
+- ![#A9A9A9](https://placehold.co/2x2/A9A9A9/A9A9A9.png) **Gray**: The node is queued and awaiting system resource to start.
+- ![#FFFF00](https://placehold.co/2x2/FFFF00/FFFF00.png) **Yellow**: The node failed at least once but is awaiting a retry.
+- ![#9932CC](https://placehold.co/2x2/9932CC/9932CC.png) **Dark Orchid**: The node was skipped before completion.  This may be intended behavior for nodes downstream of a [Branch_Python](../../nodes/Analysis/Branch_Python.md) node, but may also indicate a system resource limitation.  If the issue is system resource-related, please reach out to [Ganymede Support](../Support.mdx).
+- ![#FFA500](https://placehold.co/2x2/FFA500/FFA500.png) **Orange**: A dependency for the node failed, preventing this node from running.
+
+Logs for each flow step can be accessed by clicking on the corresponding colored box.
+
+### Error Attribution
+
+Developers using the platform can specify error types and messages associated with failed nodes. These are displayed on the status tag in the Run History table. Below is an example code snippet that would be placed within a node to raise an error:
+
+```python
+from ganymede_sdk.flow_runtime import GanymedeException
+
+# available exception types are: Validation, Connection, Function
+raise GanymedeException(message=”Peaks not detected in results”, exception_type=”Function”)
+```
+
+#### Categories of Errors
+
+- **Validation**: Schema validation errors. An example use case would be a Pandas DataFrame failing to validate against a Pandera schema.
+- **Connection**: Errors related to connecting to external services. Check for errors related to authentication, service availability, and access methods.
+- **Function**: Errors related to function logic. For example, a failed function call to a Python package would fall under this category.

@@ -1,7 +1,7 @@
 ---
 sidebar_label: LC_Read
 title: LC_Read
-displayed_sidebar: nodeSidebar
+displayed_sidebar: webUiSidebar
 ---
 
 ### Node Description

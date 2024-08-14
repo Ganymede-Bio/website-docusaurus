@@ -1,10 +1,10 @@
 ---
 id: AgentVersionHistory
-title: Agent Version History
+title: Agent Change Log
 displayed_sidebar: releaseSideBar
 ---
 
-This page contains a summary of key version updates for the Ganymede [Agent](../connectivity/Agent.mdx).  Since the individual instances of Agents (connections) are not updated when the Agent is updated, this page can be helpful for determining the capabilities of specific connections previously installed.
+This page contains a summary of key version updates for the Ganymede [Agent](../app/agents/Agent.mdx).  Since the individual instances of Agents (connections) are not updated when the Agent is updated, this page can be helpful for determining the capabilities of specific connections previously installed.
 
 ## 4.8.0
 

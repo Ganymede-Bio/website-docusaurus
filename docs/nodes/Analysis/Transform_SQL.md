@@ -1,7 +1,7 @@
 ---
 sidebar_label: Transform_SQL
 title: Transform_SQL
-displayed_sidebar: nodeSidebar
+displayed_sidebar: webUiSidebar
 ---
 
 ### Node Description

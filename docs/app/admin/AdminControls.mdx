@@ -1,0 +1,49 @@
+---
+id: AdminControls
+title: Environment Administration
+displayed_sidebar: webUiSidebar
+---
+
+## Summary
+
+The Admin page enables administrators to manage user access and configure environment secrets. This page can be accessed by clicking on the bubble containing your email address in the top right corner of the top navbar and selecting Environment Settings.
+
+### Access Levels
+
+The Roles panel shown below enables adminstrators to specify access levels for different users:
+
+<img alt="Admin - Access Panel" src="https://ganymede-bio.mo.cloudinary.net/apiServer/Admin_Panel_20230831.png" />
+
+There are five levels of access, and are set at the environment level.  These access levels are shown below in order from least to most restrictive. Roles that are higher in the list contain all the access of roles beneath them.  For example, users with Writer privilege have all the privileges of a Runner in addition to the ability to create flows.
+
+**Admin**:
+    Manage the environment settings, able to manage access of others. Admins are able to create, modify, and execute flows.
+
+**Writer**:
+    Can create, modify, and execute flows.
+
+**Runner**:
+    Can execute flows, but cannot modify or create new flows.
+
+**Reader**:
+    Can observe flows, read data, and observe environment settings, but not permitted to execute or alter flows.
+
+**None**:
+    Cannot see the environment as an option in the dropdown menu.  This is relevant for providing access to a specific environment; for example, a user may have **Runner** permission for prod but **None** permission for dev if that user is not involved in development.
+
+### Environment Secrets
+
+The secrets panel enables administrators to configure secrets that are used by Ganymede cloud to connect to external services such as Benchling or AWS.  These secrets are specific to the nodes used within a given environment (i.e. - development or production environment).
+The example shown in the image below shows an environment with a AWS S3 Role ARN specified, enabling connectivity between Ganymede cloud and AWS S3 Storage when using the [S3_Read](../../nodes/App/S3_Read) or [S3_Write](../../nodes/App/S3_Write) nodes.
+
+<img alt="Admin - Secrets Panel" src="https://ganymede-bio.mo.cloudinary.net/apiServer/SecretsPanel_20230405.png" />
+
+Admins can add secrets by clicking on the Add Secret button and edit secrets as appropriate.  Note that secrets cannot be viewed from this panel, so if a secret is lost, it can either be re-entered here or recovered by [contacting Ganymede support](../Support.mdx).
+
+Any secrets entered here will not be committed into code, but can be printed by environment users with the *Writer* or *Admin* role.
+
+### Environment Detection in the SDK
+
+The SDK has helper functions to determine the state of the environments, such as production versus
+development. Please see [Environment Detection](../../sdk/markdowns/EnvironmentDetection) for more information.
+

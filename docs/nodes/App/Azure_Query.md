@@ -1,7 +1,7 @@
 ---
 sidebar_label: Azure_Query
 title: Azure_Query
-displayed_sidebar: nodeSidebar
+displayed_sidebar: webUiSidebar
 ---
 
 ### Node Description

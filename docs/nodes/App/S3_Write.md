@@ -1,7 +1,7 @@
 ---
 sidebar_label: S3_Write
 title: S3_Write
-displayed_sidebar: nodeSidebar
+displayed_sidebar: webUiSidebar
 ---
 
 ### Node Description

@@ -1,0 +1,74 @@
+---
+id: Home
+title: Home
+displayed_sidebar: webUiSidebar
+---
+
+import {
+  BellOutlined,
+  BranchesOutlined,
+  CheckCircleOutlined,
+  FileSearchOutlined,
+  FileTextOutlined,
+  FolderOutlined,
+  HomeOutlined,
+  SettingOutlined,
+  UserOutlined
+} from '@ant-design/icons';
+
+import ReactPlayer from 'react-player';
+
+
+The <div className="button darkblue_button"><HomeOutlined /> **Home**</div> page serves as the central hub for accessing and managing flows and Agents in your environment.
+
+<img width="1302" alt="Home" src="https://storage.googleapis.com/ganymede-bio-website/public/apiServer/HomeScreen_20240812.png"/>
+<br /><br /> 
+
+Clicking on the ellipsis in the upper-right hand corner of a flow card allows you to edit, run, or update the associated flow image associated with a flow.
+<img width="1302" alt="Home" src="https://storage.googleapis.com/ganymede-bio-website/public/apiServer/HomeScreenEditFlow_20240122.png"/>
+<br /><br /> 
+
+
+The My Flows tab contains flows relevant to you, while the All Flows tab contains all flows in the environment.
+<ReactPlayer playing={true} controls={true} url="https://storage.googleapis.com/ganymede-bio-website/public/apiServer/my_flows-all_flows20231106.mp4" />
+<br /><br /> 
+
+To assign a flow to yourself, select the All Flows tab and star the relevant flows.
+<ReactPlayer playing={true} controls={true} url="https://storage.googleapis.com/ganymede-bio-website/public/apiServer/my_flows-self-assign_flow20231106.mp4" />
+<br /><br /> 
+
+[Admins](./admin/AdminControls.mdx) can also assign users to flows from the [<div className="button darkblue_button"><BranchesOutlined /> **Flow Editor**</div>](./flows/FlowEditor.mdx) page.
+<ReactPlayer playing={true} controls={true} url="https://storage.googleapis.com/ganymede-bio-website/public/apiServer/assign_user_to_flow20231106.mp4" />
+
+## NavBars
+
+### Collapsible Sidebar
+
+The navigation sidebar contains pages for building and running flows, as well as observing data processed by flows.
+
+[<div className="button darkblue_button"><HomeOutlined /> **Home**</div>](./Home.mdx) - Home screen used to access flows to run
+
+[<div className="button darkblue_button"><BranchesOutlined /> **Flow Editor**</div>](./flows/FlowEditor.mdx) - Editor for modifying flows and their underlying code
+
+[<div className="button darkblue_button"><CheckCircleOutlined /> **Flow Runs**</div>](./flows/FlowRuns.mdx) - Table for tracking status of current and prior _flow_ runs
+
+[<div className="button darkblue_button"><FileSearchOutlined /> **Data Explorer**</div>](./tables/DataExplorer.mdx) - Tools for querying and managing tabular data created by flows
+
+[<div className="button darkblue_button"><FolderOutlined /> **Files**</div>](./files/FileBrowser) - File browser for accessing snapshotted input and output data processed through flows
+
+### Environment Selector
+
+This dropdown decides which environment that is currently being looked at. All tables, flows, and dashboards that are shown are associated with this environment. They can be color coded and have icons to distinguish them a bit easier.
+In order to change them please feel free to contact the ganymede email in order to get it adjusted. 
+
+### Header Navigation
+
+The header contains buttons for accessing environment notifications, app documentation, and settings for administering access to Ganymede and secrets stored used on Ganymede platform.
+
+[<div className="button darkblue_button"><BellOutlined /> **Notifications**</div>](./flows/Notifications.mdx) - Activity (e.g. - _flow_ saves, _flow_ runs, etc.) associated with Ganymede tenant environment
+
+[<div className="button darkblue_button"><FileTextOutlined /> **Docs**</div>](https://docs.ganymede.bio) - Link to Ganymede's documentation, which can also be accessed directly at [docs.ganymede.bio](https://docs.ganymede.bio/) 
+
+[<div className="button darkblue_button"><SettingOutlined /> **Admin**</div>](./admin/AdminControls.mdx) - Panel for configuring access to Ganymede and secrets for accessing third-party applications from Ganymede
+
+[<div className="button darkblue_button"><UserOutlined /> **Log Out**</div>](https://www.ganymede.bio) - Log out from Ganymede cloud

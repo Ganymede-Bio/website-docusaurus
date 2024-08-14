@@ -1,7 +1,7 @@
 ---
 sidebar_label: Snowflake_Write
 title: Snowflake_Write
-displayed_sidebar: nodeSidebar
+displayed_sidebar: webUiSidebar
 ---
 
 ### Node Description

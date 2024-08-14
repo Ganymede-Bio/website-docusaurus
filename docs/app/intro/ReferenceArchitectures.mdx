@@ -1,0 +1,160 @@
+---
+id: ReferenceArchitectures
+title: Reference Architectures
+sidebar_label: Reference Architectures
+displayed_sidebar: webUiSidebar
+---
+
+The diagrams below illustrate various ways to integrate Ganymede into laboratory workflows, providing examples of possible architectures.
+
+These diagrams are intended as starting points to help you understand how Ganymede's components can be configured to support different lab operations, rather than as exhaustive solutions.
+
+## Software-Centric
+
+### Data Capture and Visualization
+
+Ganymede aggregates data from laboratory instruments and analytical databases, enabling the creation of operational dashboards and reports for lab managers and scientists. These tools consolidate diverse data sources to provide comprehensive insights.
+
+<div class="text--center">
+  <img width="400" alt="" src="https://storage.googleapis.com/ganymede-bio-website/public/general/ReferenceArchitectureDataStore2_20240614.png"/>
+</div>
+
+#### Example: Dashboarding QMS Data
+
+Centralizing data from multiple instruments and analytical databases allows for monitoring asset utilization and performing reliability analyses. For instance, Ganymede can interface with PI Server and LIMS to generate dashboards that enhance visibility into lab operations.
+
+### Analytical Database Sync
+
+<div class="text--center">
+  <img width="400" alt="" src="https://storage.googleapis.com/ganymede-bio-website/public/general/ReferenceArchitectureDBSync20240614.png"/>
+</div>
+
+Ganymede periodically queries analytical databases to extract experimental results, which are then systematically delivered to ELN/LIMS for contextual presentation to wet lab scientists. Similarly, LIMS data is regularly synced to general databases for broader querying and analysis.
+
+#### Example: Delivering ML Results to LIMS
+
+Synchronizing key data from analytical databases used in machine learning with a LIMS, enabling contextualization of experimental results.
+
+### LIMS Sync
+
+<div class="text--center">
+  <img width="400" alt="" src="https://storage.googleapis.com/ganymede-bio-website/public/general/ReferenceArchitectureELNSync20240614.png"/>
+</div>
+
+Ganymede facilitates the synchronization of data between two distinct LIMS platforms. This enables users to leverage the specialized features of each LIMS while accessing data from both systems.
+
+#### Example: Synchronizing Domain-Specific LIMS
+
+Synchronizing data between LIMS systems tailored for biologics and small molecule discovery.
+
+## Instrument-Centric
+
+### Hands-Free Data Capture
+
+<div class="text--center">
+  <img width="500" alt="Hands-Free Data Capture" src="https://storage.googleapis.com/ganymede-bio-website/public/general/ReferenceArchitectureDataCapture20240614.png"/>
+</div>
+
+Ganymede automatically captures data from lab instruments and stores it without requiring manual intervention. The system creates a corresponding entity in the ELN/LIMS for each instrument execution and associates the results with this entity. Users annotate the experiment on the instrument, and Ganymede parses and forwards these annotations to the ELN/LIMS.
+
+#### Example: Bioprocessing Data Capture
+
+Passive data capture from a bioreactor and associated cell culture analyzer.
+
+### Sample Data / Experimental Results Capture
+
+<div class="text--center">
+  <img width="600" alt="sample data / experimental results feed forward" src="https://storage.googleapis.com/ganymede-bio-website/public/general/ReferenceArchitectureSampleInstrumentSeparate20240614.png"/>
+</div>
+
+Users register samples and experiment run IDs in the ELN/LIMS. After the instrument run, experimental results and the associated run ID are passed to Ganymede, which retrieves the experimental context. Ganymede then processes the data and delivers the results back to the ELN/LIMS.
+
+#### Example: Plate map association for qPCR
+
+Associating sample data and metadata for a live cell imaging experiment or a qPCR run. A plate map is registered in the ELN/LIMS, and after the run, the map and results are processed by Ganymede and sent back to the ELN/LIMS.
+
+### Orchestrated round-trip
+
+<div class="text--center">
+  <img width="700" alt="sample data / experiment results capture" src="https://storage.googleapis.com/ganymede-bio-website/public/general/ReferenceArchitectureBidirectional20240614.png"/>
+</div>
+
+Users register samples in the ELN/LIMS, which are then processed into input files for the instrument. Ganymede delivers these files either directly to the instrument or to an associated disk drive. After the experimental run, Ganymede captures, processes, and uploads the experimental data back to the ELN/LIMS.
+
+#### Example: Chromatography sample execution and data capture
+
+For a liquid chromatography run, sample and injection data are delivered to the LC, and results are subsequently captured from the CDS used to process the experimental data. Ganymede then performs tailored peak analysis before delivering the results to the ELN/LIMS.
+
+### Orchestration with Manual Processing
+
+<div class="text--center">
+  <img alt="Orchestration with Manual Processing" src="https://storage.googleapis.com/ganymede-bio-website/public/general/ReferenceArchitectureWithVirtualization20240614.png"/>
+</div>
+
+Ganymede delivers sample data to the instrument, expediting experimental setup. After the experiment, Ganymede captures and tags the data, facilitating subsequent discovery.
+
+Users can select the tagged data for manual processing in a virtualized environment. Once processed, the data is returned to Ganymede, which then delivers it to the ELN/LIMS. This workflow allows for the integration of manual analysis steps within an otherwise automated process.
+
+#### Example: Systematically capturing flow cytometry compensation and gating
+
+In a flow cytometry run requiring manual gating to identify cell populations, Ganymede delivers sample information to the flow cytometer and captures raw data with annotations. Users then process the raw data in a virtualized environment, and the results are subsequently sent back to Ganymede for delivery to the ELN/LIMS.
+
+
+## Connectivity Overview
+
+Connectivity is fundamental to ensuring that lab data is systematically captured, forming the foundation of the Ganymede platform. Ganymede offers four primary methods for capturing instrument files and data:
+
+- [Manually drag-and-dropping files](../flows/FlowView.mdx) into the Ganymede app, where they are processed via flows
+- Using a [Ganymede Agent](../agents/Agent.mdx), a Linux or Windows-based executable that captures instrument files for storage and processing, or automatically captures files generated by instrument PCs in cloud storage
+- Leveraging [event-driven processing](#event-driven-processing) to listen for and process files written to an S3 bucket or other event sources
+- Utilizing a [Browser-based File Watcher](../flows/FlowView#watching-directories-for-new-files) to capture and associate files with specific flows
+
+### Drag-and-drop
+
+Instrument files can be drag-and-dropped into file inputs associated with a specific flow.  This method requires no setup and is available immediately after your Ganymede tenant is configured.
+
+#### When to use Drag-and-drop
+
+Drag-and-drop is ideal when manual input is common, and there are relatively few instrument files to process. This method is the simplest to set up but requires more manual effort to use. Once files are captured, previously processed files can be easily accessed within Ganymede, eliminating the need to re-upload the same files.
+
+Users can specify input parameters during flow execution, allowing for greater flexibility in flows that require varying execution based on user input.
+
+However, the drag-and-drop method may become cumbersome for instruments that generate large volumes of files.
+
+### Ganymede Agent
+
+The Ganymede Agent is an installable program that captures, transfers, and processes files, either locally or online. Agents are configured within the Ganymede app and can be downloaded to Windows and Linux instrument PCs. Once installed, Agents run as a background service, resilient to computer restarts.
+
+#### When to use Ganymede Agent
+
+Ganymede Agents provide a robust solution for capturing files without user intervention. Running in the background on the instrument PC, they are durable against restarts and unintended shutdowns.
+
+Agents also enable developers to write custom code that executes on the instrument PC, offering greater flexibility in how files are captured and processed.
+
+#### When Ganymede Agents are not appropriate
+
+Agents require the installation of software on an instrument PC, which may not be suitable if there are concerns about loading third-party software on the system. Additionally, because the Agent does not require a login to capture files, it cannot distinguish between different users if a shared login is used on the computer unless this information is specified in the contents of captured files.
+
+### Event-Driven Processing
+
+Ganymede can be configured to listen for and trigger Flows based on AWS and Benchling events, as well as from webhooks generally. This method requires credentialing Ganymede to capture relevant events.
+
+#### When to use Event-Driven Processing
+
+The use cases for event-driven processing depend on the system emitting the events.
+
+AWS events are particularly useful when many files are generated from a lab instrument and methods already exist to write these files to AWS S3 in an organized manner.
+
+### Browser-based File Watcher
+
+Input nodes in a Flow can be configured to monitor specific directories on the instrument PC, allowing the Ganymede web app to view the local file system. Like drag-and-drop, this method requires no additional setup beyond enabling the Ganymede app.
+
+#### When to use Browser-based File Watcher
+
+This approach automates data capture without user input, requires no installation of executables on the local machine, and does not need cloud infrastructure configuration to start.
+
+However, the file watcher will stop running when the Ganymede browser tab is closed. This can happen unintentionally if the instrument PC is shut down or restarted for updates. As such, Ganymede Agents are generally more robust than the browser-based file watcher.
+
+#### When not to use Browser-based File Watcher
+
+Since the file watcher passively collects files without requiring user login, this method would not capture user identity (unless present in the contents of the underlying files captured).

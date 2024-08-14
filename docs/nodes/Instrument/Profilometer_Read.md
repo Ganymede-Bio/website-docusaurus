@@ -1,7 +1,7 @@
 ---
 sidebar_label: Profilometer_Read
 title: Profilometer_Read
-displayed_sidebar: nodeSidebar
+displayed_sidebar: webUiSidebar
 ---
 
 ### Node Description

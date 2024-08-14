@@ -1,7 +1,7 @@
 ---
 sidebar_label: AirtableExport
 title: AirtableExport
-displayed_sidebar: nodeSidebar
+displayed_sidebar: webUiSidebar
 ---
 
 ### Node Description

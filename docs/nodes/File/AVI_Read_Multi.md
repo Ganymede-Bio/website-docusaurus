@@ -1,7 +1,7 @@
 ---
 sidebar_label: AVI_Read_Multi
 title: AVI_Read_Multi
-displayed_sidebar: nodeSidebar
+displayed_sidebar: webUiSidebar
 ---
 
 ### Node Description

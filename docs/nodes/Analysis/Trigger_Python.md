@@ -1,7 +1,7 @@
 ---
 sidebar_label: Trigger_Python
 title: Trigger_Python
-displayed_sidebar: nodeSidebar
+displayed_sidebar: webUiSidebar
 ---
 
 ### Node Description

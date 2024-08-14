@@ -1,7 +1,7 @@
 ---
 sidebar_label: Load_Parquet_to_Table
 title: Load_Parquet_to_Table
-displayed_sidebar: nodeSidebar
+displayed_sidebar: webUiSidebar
 ---
 
 ### Node Description

@@ -1,7 +1,7 @@
 ---
 sidebar_label: Smartsheet_Read
 title: Smartsheet_Read
-displayed_sidebar: nodeSidebar
+displayed_sidebar: webUiSidebar
 ---
 
 ### Node Description

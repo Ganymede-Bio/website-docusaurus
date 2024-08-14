@@ -1,7 +1,7 @@
 ---
 sidebar_label: LCMS_Read
 title: LCMS_Read
-displayed_sidebar: nodeSidebar
+displayed_sidebar: webUiSidebar
 ---
 
 ### Node Description

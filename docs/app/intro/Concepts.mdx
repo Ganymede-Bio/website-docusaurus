@@ -1,0 +1,59 @@
+---
+id: Concepts
+title: Ganymede Concepts
+sidebar_label: Ganymede Concepts
+displayed_sidebar: webUiSidebar
+---
+
+## Flows
+
+### [Flow](../flows/FlowEditor)
+
+A sequence of Nodes used to process data. Flows are executed from top to bottom, with edges indicating execution dependencies between Nodes.
+
+When Flows are saved, whether from the [Flow Editor](../flows/FlowEditor) or from a Node specific to a notebook, all code and configuration changes are stored in a git repository, and corresponding updates are made to a cloud-native workflow orchestration platform.
+
+### [Node](../../nodes/Overview.mdx)
+
+The fundamental processing unit in Flows.  Nodes that can be customized contain SQL and/or Python templates that can be customized.  The diagram below shows the execution order for a configurable Node.
+
+<div class="text--center">
+  <img width="400" alt="Example node layout" src="https://ganymede-bio.mo.cloudinary.net/apiServer/Operator_Conceptual_Layout_20230828.png" />
+</div>
+
+A comprehensive listing of different Nodes and their attributes can be found on the [Node Overview page](../../nodes/NodeOverview).
+
+### Node Attribute
+
+Parameters associated with a Node used to configure Node behavior.  These can be found by clicking on the [dark blue header bar of a Node](../flows/NodeEditor).
+
+### Table Head
+
+A preview of a table output from Node.  These can be viewed by clicking on [View button in the Header Bar of the Flow Editor page](../flows/FlowEditor#header-bar) and toggling "Show Tables".
+
+## Agents / Connections
+
+### [Agent](../agents/Agent.mdx)
+
+A locally-installed executable that captures data from external systems or delivers data to instrument PCs. Agents are configured and monitored within the Connections section of the Ganymede UI, and can be customized using user-defined Python.
+
+### Connection
+
+An instance of an Agent.  For example, you may customize a single Agent for uploading data from multiple flow cytometers, but each flow cytometer would have its own Connection.
+
+### Other Agent-related terms
+
+A larger set of Agent-related terms can be found in the [Terminology section of the Agents page](../agents/Agent#terminology).
+
+## Files / Tags
+
+### [Tag](../files/Tags.mdx)
+
+A user-defined label applied to files to facilitate organization and searching. 
+
+### [Tag Type](../files/Tags#configuring-file-tag-types)
+
+Category that a Tag pertains to.  Each Tag is linked to a specific Tag type, which defines the label category. For example, a Ganymede environment might include an `Instrument` Tag type, which an analytical chemistry team uses to label raw chromatograms with an `LC` Tag. 
+
+Tag types are set up through the Manage Tag Types view on the Files page in the Ganymede UI. Once configured, these Tag types can be referenced in user-defined code associated with Agents and Flows or specified in the Agent and Connection configuration pages within the Ganymede UI.
+

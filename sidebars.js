@@ -10,175 +10,250 @@ module.exports = {
   webUiSidebar:
     [
       {
-        type: 'doc',
-        id: 'Welcome',
-        label: 'Welcome',
-      },
-      {
-        type: 'doc',
-        id: 'Concepts',
-        label: 'Ganymede Concepts'
-      },
-      {
-        type: 'doc',
-        id: 'ReferenceArchitectures',
-        label: 'Reference Architectures'
-      },
-      {
         type: 'category',
-        label: 'Quickstart Guides',
+        label: 'Introduction',
         collapsed: false,
         items: [
           {
             type: 'doc',
-            id: 'QuickstartBuildAgent',
-            label: 'QuickstartBuildAgent'
+            id: 'app/intro/Welcome',
+            label: 'Welcome',
           },
           {
             type: 'doc',
-            id: 'QuickstartBuildFlow',
-            label: 'QuickstartBuildFlow'
+            id: 'app/intro/Concepts',
+            label: 'Concepts'
           },
           {
             type: 'doc',
-            id: 'QuickstartCreateDashboard',
-            label: 'QuickstartCreateDashboard'
-          }
-        ]
-      },
-      {
-        type: 'category',
-        label: 'Acquiring Data',
-        collapsed: true,
-        items: [
-          {
-            type: 'doc',
-            id: 'connectivity/Overview',
-            label: 'Ways to Capture Data'
+            id: 'app/intro/ReferenceArchitectures',
+            label: 'Reference Architectures'
           },
           {
             type: 'category',
-            label: 'Agents',
+            label: 'Quickstart',
             collapsed: false,
             items: [
               {
                 type: 'doc',
-                id: 'connectivity/Agent',
-                label: 'Configuring Agents and Connections'
+                id: 'app/flows/QuickstartBuildFlow',
+                label: 'Build a Flow'
               },
               {
                 type: 'doc',
-                id: 'connectivity/DebuggingAgents',
-                label: 'Agent Troubleshooting'
+                id: 'app/agents/QuickstartBuildAgent',
+                label: 'Build an Agent'
               },
               {
                 type: 'doc',
-                id: 'connectivity/AgentLogs',
-                label: 'Agent Logs and Reference'
+                id: 'app/visualization/QuickstartCreateDashboard',
+                label: 'Create a Dashboard'
+              }
+            ]
+          }
+        ]
+      },
+      {
+        type: 'category',
+        label: 'Flows',
+        collapsed: true,
+        items: [
+          {
+            type: 'category',
+            label: 'Building Flows',
+            collapsed: false,
+            items: [
+              'app/flows/FlowEditor',
+              'app/flows/NodeEditor',
+              {
+                type: 'doc',
+                id: 'app/flows/NotebookTips',
+                label: 'Notebook Tips and Tricks'
+              },
+              'app/flows/TroubleshootingFlows'
+              ],
+          },
+          {
+            type: 'category',
+            label: 'Nodes',
+            collapsed: false,
+            items: [
+              {
+                type: 'doc',
+                id: 'nodes/NodeOverview',
+              },
+              {
+                type: 'category',
+                label: 'Node Types',
+                collapsed: false,
+                items: [
+                  nodeAnalysis,
+                  nodeApp,
+                  nodeFile,
+                  nodeInstrument,
+                  nodeTag]
               }
             ]
           },
           {
+            type: 'category',
+            label: 'Flow Execution',
+            collapsed: false,
+            items: [
+              {
+                type: 'doc',
+                id: 'app/flows/FlowView',
+                label: 'Running Flows'
+              },
+              'app/flows/FlowRuns', 'app/flows/Notifications']
+          }
+        ]
+      },
+      {
+        type: 'category',
+        label: 'Agents & Connections',
+        collapsed: true,
+        items: [
+          'app/configuration/AgentNetworkConfig',
+          {
             type: 'doc',
-            id: 'connectivity/BrowserFileWatcher',
-            label: 'Capture Files with Browser'
+            id: 'app/agents/Agent',
+            label: 'Configuring Agents'
           },
           {
             type: 'doc',
-            id: 'connectivity/Tags',
+            id: 'app/agents/AgentMonitoring',
+            label: 'Monitoring Agents'
+          },
+          {
+            type: 'doc',
+            id: 'app/agents/DebuggingAgents',
+            label: 'Troubleshooting Agents'
+          },
+          {
+            type: 'doc',
+            id: 'app/agents/AgentLogs',
+            label: 'Agent Logging and Reference'
+          },
+          {
+            type: 'ref',
+            id: 'releases/AgentVersionHistory',
+            label: 'Agent Change Log'
+          }
+        ]
+      },
+      {
+        type: 'category',
+        label: 'Files',
+        collapsed: true,
+        items: [
+          {
+            type: 'doc',
+            id: 'app/files/FileBrowser',
+            label: 'Browsing Files'
+          },
+          
+          {
+            type: 'doc',
+            id: 'app/files/Tags',
             label: 'Tagging Files'
+          },
+          {
+            type: 'doc',
+            id: 'app/files/TagActivity',
+            label: 'Exploring Tag Activity'
           }
         ]
       },
       {
         type: 'category',
-        label: 'Processing Data',
+        label: 'Tables',
+        collapsed: true,
+        items: [
+          {
+            type: 'doc',
+            id: 'app/tables/DataExplorer',
+            label: 'Data Explorer'
+          }
+        ],
+      },
+      {
+        type: 'category',
+        label: 'Dashboards and Visualization',
         collapsed: true,
         items: [
           {
             type: 'category',
-            label: 'Editing and Running Flows',
+            label: 'Dashboards',
             collapsed: false,
-            items: ['Home', 'FlowEditor', 'FlowView', 'NodeEditor', 'NotebookTips'],
+            items: [
+              {
+                type: 'doc',
+                id: 'app/visualization/Dashboards',
+                label: 'Building Dashboards'
+              },
+              'app/visualization/DashboardTips']
+          },
+          'app/visualization/AnalysisNotebook'
+        ]
+      },
+      {
+        type: 'category',
+        label: 'Virtualization',
+        collapsed: true,
+        items: [{
+          type: 'doc',
+          id: 'app/virt/Virtualization',
+          label: 'Using Virtualization'
+        },
+        {
+          type: 'doc',
+          id: 'app/virt/TroubleshootingVirtualization',
+          label: 'Troubleshooting Virtualization'
+        }
+        ]
+      },
+      {
+        type: 'category',
+        label: 'Environment Administration',
+        collapsed: true,
+        items: [
+          'app/admin/AdminControls',
+          {
+            type: 'doc',
+            id: 'app/configuration/SSOConfig',
+            label: 'SSO/SAML Configuration'
           },
           {
             type: 'category',
-            label: 'Monitoring Flows',
+            label: 'Events',
             collapsed: false,
-            items: ['FlowRuns', 'Notifications']
-          },
-          {
-            type: 'category',
-            label: 'Virtualization',
-            collapsed: false,
-            items: [{
-              type: 'doc',
-              id: 'Virtualization',
-              label: 'Virtualization'
-            },
-            {
-              type: 'doc',
-              id: 'TroubleshootingDataProcessing',
-              label: 'Troubleshooting Flows and Virtualization'
+            items: [
+              {
+                type: 'doc',
+                id: 'app/configuration/S3EventConfig',
+                label: 'S3 Event-Driven Flows'
+              },
+              {
+                type: 'doc',
+                id: 'app/configuration/BenchlingEventConfig',
+                label: 'Benchling Event-Driven Flows'
+              },
+              {
+                type: 'doc',
+                id: 'app/configuration/GenericWebhookConfig',
+                label: 'Webhook Event-Driven Flows'
               }
             ]
-          }
+          },
         ]
       },
       {
-        type: 'category',
-        label: 'Observing Data',
-        collapsed: true,
-        items: [
-          {
-            type: 'category', 
-            label: 'Files',
-            collapsed: false,
-            items: ['Files', 'TagActivity']
-          },
-          {
-            type: 'category',
-            label: 'Tables',
-            collapsed: false,
-            items: ['Dashboards', 'DataExplorer', 'DashboardTips']
-          },
-           'AnalysisNotebook', 'SystemMetadata']
-      },
-      {
-        type: 'category',
-        label: 'Environment Setup',
-        collapsed: false,
-        items: ['configuration/SSOConfig', 'configuration/AgentNetworkConfig', 'configuration/S3EventConfig']
-      },
-      {
         type: 'doc',
-        id: 'AdminControls',
-        label: 'Environment Administration'
-      },
-      {
-        type: 'doc',
-        id: 'Support',
+        id: 'app/Support',
         label: 'Support'
-      },
-    ]
-  ,
-  nodeSidebar: [
-    {
-      type: 'doc',
-      id: 'nodes/NodeOverview',
-    },
-    {
-      type: 'category',
-      label: 'Node Category',
-      collapsed: false,
-      items: [
-        nodeAnalysis,
-        nodeApp,
-        nodeFile,
-        nodeInstrument,
-        nodeTag]
-    }
-  ],
+      }
+    ],
   SDKSidebar: [
     {
       type: 'doc',
@@ -258,6 +333,7 @@ module.exports = {
     {
       type: 'doc',
       id: 'releases/AgentVersionHistory',
+      label: 'Agent Change Log'
     }
   ]
 };

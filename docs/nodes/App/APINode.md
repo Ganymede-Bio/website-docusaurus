@@ -1,7 +1,7 @@
 ---
 sidebar_label: APINode
 title: APINode
-displayed_sidebar: nodeSidebar
+displayed_sidebar: webUiSidebar
 ---
 
 ### Node Description

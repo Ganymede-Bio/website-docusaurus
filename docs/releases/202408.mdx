@@ -8,16 +8,16 @@ displayed_sidebar: releaseSideBar
 
 **Features**
 - **Agents**: Agents installed on Windows at version 4.8 or later can now have their core version remotely updated
-    - When triggered, this will install the latest compatible version of the Ganymede agent which bring [logging](../connectivity/AgentLogs.mdx) and performance improvements
+    - When triggered, this will install the latest compatible version of the Ganymede agent which bring [logging](../app/agents/AgentLogs.mdx) and performance improvements
     - You can trigger this from the agent's page if the latest version is compatible with the agent's version
 - **UI**: Each environment can have a default role that will be applied to new users as they log in to Ganymede
-    - This can be set by an admin in the [Environment Administration page](../AdminControls)
+    - This can be set by an admin in the [Environment Administration page](../app/admin/AdminControls)
     - The default role can be set to Reader, Writer, Runner, Admin, or None
 
 **Improvements**
-- **Agents**: [File watcher Agents](../connectivity/Agent#watch-for-files-locally-then-run-flow) will have less delay between detecting a file and starting a flow with the detected file
-- **UI**: [Files page](../Files) loading has been optimized for better performance; likewise, the [modal for selecting files on Ganymede Cloud for running flows](../FlowEditor#running-flows) is also more performant
-- **UI**: [Tag activity page](../TagActivity.mdx) has been updated to support paging and more efficient loading
+- **Agents**: [File watcher Agents](../app/agents/Agent#watch-for-files-locally-then-run-flow) will have less delay between detecting a file and starting a flow with the detected file
+- **UI**: [Files page](app/files/FileBrowser.mdx) loading has been optimized for better performance; likewise, the [modal for selecting files on Ganymede Cloud for running flows](../app/flows/FlowEditor#running-flows) is also more performant
+- **UI**: [Tag activity page](../app/files/TagActivity.mdx) has been updated to support paging and more efficient loading
 - **Flows**: Performance for [Ganymede SDK methods for accessing files](../sdk/GanymedeClass#methods-for-accessing-files) have been optimized
 
 **Bug Fixes**
@@ -28,8 +28,8 @@ displayed_sidebar: releaseSideBar
 ### August 1 2024
 
 **Features**
-- **UI**: You can now see the history of activities related to a given file [Tag](../connectivity/Tags.mdx)
-    - Click on any Tag to see all activities in a [timeline view](../TagActivity.mdx)
+- **UI**: You can now see the history of activities related to a given file [Tag](../app/files/Tags.mdx)
+    - Click on any Tag to see all activities in a [timeline view](../app/files/TagActivity.mdx)
     - Tags can be accessed via the file explorer or by clicking on a file and viewing its context menu
 
 **Improvements**

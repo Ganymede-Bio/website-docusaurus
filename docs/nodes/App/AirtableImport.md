@@ -1,7 +1,7 @@
 ---
 sidebar_label: AirtableImport
 title: AirtableImport
-displayed_sidebar: nodeSidebar
+displayed_sidebar: webUiSidebar
 ---
 
 ### Node Description

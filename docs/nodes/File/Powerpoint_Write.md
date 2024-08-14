@@ -1,7 +1,7 @@
 ---
 sidebar_label: Powerpoint_Write
 title: Powerpoint_Write
-displayed_sidebar: nodeSidebar
+displayed_sidebar: webUiSidebar
 ---
 
 ### Node Description

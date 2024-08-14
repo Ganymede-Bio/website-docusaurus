@@ -1,7 +1,7 @@
 ---
 sidebar_label: Python
 title: Python
-displayed_sidebar: nodeSidebar
+displayed_sidebar: webUiSidebar
 ---
 
 ### Node Description

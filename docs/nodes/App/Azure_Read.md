@@ -1,7 +1,7 @@
 ---
 sidebar_label: Azure_Read
 title: Azure_Read
-displayed_sidebar: nodeSidebar
+displayed_sidebar: webUiSidebar
 ---
 
 ### Node Description

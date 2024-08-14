@@ -1,7 +1,7 @@
 ---
 sidebar_label: Branch_Python
 title: Branch_Python
-displayed_sidebar: nodeSidebar
+displayed_sidebar: webUiSidebar
 ---
 
 ### Node Description

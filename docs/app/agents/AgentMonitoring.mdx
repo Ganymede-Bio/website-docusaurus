@@ -1,0 +1,241 @@
+---
+id: AgentMonitoring
+title: Monitoring Agents
+displayed_sidebar: webUiSidebar
+---
+
+import { DiffOutlined, PlusOutlined, SelectOutlined } from "@ant-design/icons";
+
+## Maintaining Agents
+
+<div class="text--center">
+  <img
+    alt="Maintaining Agents - configuration"
+    src="https://ganymede-bio.mo.cloudinary.net/agent/Agent_Configuration20231108.png"
+    width="500"
+  />
+</div>
+
+### Viewing Logs
+
+Logs can be found on the Logs tab for each Agent and Connection.  More detail on these log messages can be found on the [Agent Logs page](./AgentLogs).
+
+<div class="text--center">
+  <img
+    alt="Agent logs"
+    src="https://ganymede-bio.mo.cloudinary.net/agent/Agent_Logs_Page20230726.png"
+    width="500"
+  />
+</div>
+
+### Monitoring Agent Connections
+
+Connection status updates and logs can be accessed in the Ganymede web app UI.
+
+<div class="text--center">
+  <img
+    alt="Connection cards"
+    src="https://ganymede-bio.mo.cloudinary.net/agent/ConnectionCards20240726.png"
+    width="600"
+  />
+</div>
+&nbsp;
+
+Connection data can be viewed by clicking on the appropriate connection card in the Connections tab. 
+
+<div class="text--center">
+  <img
+    alt="Connection Detail UI"
+    src="https://ganymede-bio.mo.cloudinary.net/agent/ConnectionDetails20240726.png"
+    width="600"
+  />
+</div>
+&nbsp;
+
+This opens up a page displaying parameters associated with the Connection:
+
+| Field Name | Description |
+|------------|-------------|
+| Status|  Current running status of the installed Connection |
+| Agent | Agent associated with the Connection |
+| Connection Version | The version of the Connection configuration currently running, updated when the Connection configuration is modified |
+| Agent Version | The version of the Agent configuration from which the Connection is running, updated when the Agent configuration or processor code changes |
+| Core Version | The version of the core Agent infrastructure from which the Connection is running; requires a reinstall to update |
+| Started At | UTC Time when the Connection was first registered in Ganymede |
+| Last Status Ping | Time when last status ping was received from the Connection by Ganymede |
+| PC Name | Hostname of the machine hosting the connection |
+| MAC Address | MAC address of the machine hosting the connection |
+| Machine IP  | IP address that Ganymede sees from the machine hosting the connection |
+| Install Path | Directory path on the hosting machine where the executable was installed on |
+| Service Name | Windows service name for the Connection on the hosting machine |
+| Agent Tags | Tags applied to all file captured by any Connection running from the Agent, configured in the Agent UI |
+
+
+#### Connection Status
+
+Agents send a heartbeat message to Ganymede Cloud every 30 seconds to inform their status. The status of an Agent can be one of the following:
+
+- **Live**: The Agent is currently running and communicating with Ganymede Cloud
+- **Disconnected**: Ganymede Cloud has not received a status update from the Agent in the last 65 seconds
+- **Shutdown**: The Agent was intentionally shut down, possibly due to a user shutting down the computer, manually stopping the Agent service, or encountering a known exception.
+- **Deprecated**: The Agent has been disabled in Ganymede UI as described in the [Updating Agents](#updating-agents) section.
+
+#### Custom Logging
+
+You can create custom logs that will be displayed in the Ganymede UI and local log files by using the `logger` keyword argument in your user-defined processor code. For example:
+
+```python
+def execute(**kwargs) -> Optional[TriggerFlowParams]:  # type: ignore
+    # if there is not logger, the default logger is print
+    logger = kwargs.get("logger", print)
+    logger(f"Local files: {os.listdir('./')}")
+```
+
+### Updating Agents
+
+To modify Agent settings after creation, select the desired Agent in the Ganymede web app UI to update the Agent. Upon clicking <div className="button blue_button">Update</div>, the Agent will be built and then made available for download.
+
+<div class="text--center">
+  <img
+    alt="Agent update configuration"
+    src="https://ganymede-bio.mo.cloudinary.net/agent/Agent_Update_Configuration20230726.png"
+    width="500"
+  />
+</div>
+&nbsp;
+
+Agents can also be archived or disabled. 
+
+Archived Agents cannot be updated, but the Agent's connections can still communicate with Ganymede Cloud.  All associated connections for these Agents will continue to run, but the Agent can no longer be modified.  Archived agents can be restored to an active state by selecting the desired Agent and clicking on the <u>Restore Agent</u> link.
+
+Disabled Agents cannot be updated and its connections can no longer communicate with Ganymede Cloud.
+
+### Updating Connections
+
+To update a Connection, select the desired Connection in the Connections tab.  You can update the following fields on a connection from the Ganymede UI:
+
+- Name: Display name for the Connection
+- Image: An image to associate with the Connection in the Ganymede UI.
+- Tags: [File tags](../files/Tags) to apply to files uploaded by the Connection
+- Variables: Key-value pairs that can be referenced in user-defined code
+- Labels: Strings that can be used to group Connections in the Ganymede UI
+
+### Remote Update of Live Connections
+
+Every time the Connection contacts Ganymede with a health check-in, Ganymede responds with any changes that the Connection needs to incorporate. There are three level of changes that can occur.
+
+- Core Version Update: The core version corresponds to the underlying Agent code developed by Ganymede. These changes are new features or patches applied across all Agents, but each Agent manages which core version it is pinned to.
+- Agent Configuration Update: Updated through the Agent page or the Agent's processor notebook. This configuration applies to all Connections for that Agent. For example, if an Agent that runs flow upon file capture is updated to run a new flow, then all compatible Connections will begin to run the new flow.
+- Connection Configuration Update: Updates made to the Connection's configuration will only update a single Connection, rather than the Agent that it was generated from. Different Connection-level variables and labels can be configured for Connections associated with the same Agent.
+
+There are two types of remote updates that occur based on the type of update - full update or runtime update.
+
+#### Full Update
+
+**Compatibility**
+- Agents installed with core v4.8.0 or later.
+- The core version of the installed connection must align with the major version of the core version of the agent Ganymede's UI. Otherwise, a breaking change requires reinstallation.
+- Auto-update is enabled for the agent.
+
+##### How full updates are initiated
+
+A full update is only triggered for a "Core Version Update." The remote update is not initiated without user intervention. 
+
+:::note
+
+In the Ganymede UI, an Agent's core version is listed on the right side of the page in a section called "Core Agent Infrastructure." If the agent is not up to date to the latest available core version, an "Upgrade" button will appear. The text will inform users what version is available and what version the agent is currently pinned to. 
+
+:::
+
+<div class="text--center">
+  <img
+    alt="Agent build history"
+    src="https://ganymede-bio.mo.cloudinary.net/agent/AgentUpgrade.png"
+    width="800"
+  />
+</div>
+
+Once a user clicks to Upgrade an agent, all connections will be told of the new version on their next status ping. 
+
+##### Update Process
+
+A full update requires reinstalling the executable, but Ganymede now handles this installation seamlessly. When a Connection receives a command to perform a full update, it continues to operate normally while attempting to start the new version in parallel after verifying the validity of the command and the executable. Once the new version registers with Ganymede as operational, the old Connection stops. The new executable also cleans up the artifacts of the old executable and its dependencies.
+
+There may be a disruption to any ongoing processing on the Agent during the update, so it is safest to request it when no activity occurs on the instruments where the Agent Connections are running.
+
+If the new Connection fails to start, the old Connection will resume, and the system will not attempt a full update again on that version to avoid putting the Connection in a precarious state.
+
+#### Runtime Update
+
+##### Compatibility
+
+- Agents _installed_ with core v1.0.0 or later
+- The core version of the installed connection must match the core version of the agent Ganymede's UI
+- Auto-update is enabled for the agent
+
+##### How runtime updates are initiated
+
+Changes in the Agent configuration, including the Agent user-defined code, or Connection configuration, will be sent to the Connection on its next status ping as soon as they are saved.
+
+##### Update Process
+
+A runtime update does not require any process restart or executable reinstallation. As a result, the Connection can accept changes to configuration while continuing normal operations. The update is validated for integrity and the information is stored locally for access if the Connection restarts for any reason.
+
+### Viewing Build History
+
+Each iteration of Agent build can be viewed in the History tab of the Agent. This view provides context for each change, either as a log of the configuration change or through a custom commit message from the Agent notebook.
+
+<div class="text--center">
+  <img
+    alt="Agent build history"
+    src="https://ganymede-bio.mo.cloudinary.net/agent/Agent_History20230726.png"
+    width="800"
+  />
+</div>
+&nbsp;
+
+Configuration differences between two Agent builds can be viewed for audit or debugging purposes by clicking <div className="keystroke blue_keystroke"><DiffOutlined /></div> button.
+
+<div class="text--center">
+  <img
+    alt="Agent build history detail"
+    src="https://ganymede-bio.mo.cloudinary.net/agent/Agent_History_Diff20230726.png"
+    width="800"
+  />
+</div>
+
+### Uninstalling Agent Connections
+
+#### Windows
+
+The Agent can be uninstalled and the associated service removed through the “Add or Remove Programs” panel from the Control Panel.
+
+<div class="text--center">
+  <img
+    alt="Agent uninstall"
+    src="https://ganymede-bio.mo.cloudinary.net/agent/Agent_Uninstall20230615.png"
+    width="500"
+  />
+</div>
+&nbsp;
+
+After uninstalling the Agent, the Ganymede folder will remain in the Program Files directory.
+
+:::warning
+
+By default, the directory that the Agent Connection is installed to is retained, so that logs associated with Connection are kept on the instrument PC.  Removing the Ganymede folder will also remove these logs.
+
+:::
+
+#### Linux
+
+To uninstall the Agent, stop the systemd service associated with the Agent and remove the service file from /etc/systemd/system/.
+
+```bash
+# to stop the Agent Connection service
+sudo systemctl stop ganymede_example_agent.service
+
+# remove the service file
+sudo rm /etc/systemd/system/ganymede_example_agent.service
+```
+

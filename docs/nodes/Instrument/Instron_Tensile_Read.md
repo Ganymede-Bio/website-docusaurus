@@ -1,7 +1,7 @@
 ---
 sidebar_label: Instron_Tensile_Read
 title: Instron_Tensile_Read
-displayed_sidebar: nodeSidebar
+displayed_sidebar: webUiSidebar
 ---
 
 ### Node Description

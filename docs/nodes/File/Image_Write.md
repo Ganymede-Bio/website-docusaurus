@@ -1,7 +1,7 @@
 ---
 sidebar_label: Image_Write
 title: Image_Write
-displayed_sidebar: nodeSidebar
+displayed_sidebar: webUiSidebar
 ---
 
 ### Node Description

@@ -1,0 +1,77 @@
+---
+id: SystemMetadata
+title: System Reference Tables
+sidebar_label: System Reference Tables
+displayed_sidebar: webUiSidebar
+---
+
+import { CheckCircleOutlined } from '@ant-design/icons';
+
+Ganymede metadata tables allow users to query and reference details about flow runs, tables, and files stored within the Ganymede platform. These tables can be utilized for various purposes, such as debugging previous runs, locating specific files or table records associated with past runs, and systematically displaying tags used to contextualize and ensure traceability of captured data.
+
+The tables described below are found in the Ganymede database, and can be referenced from [Data Explorer](../tables/DataExplorer.mdx), within [Flow code](NodeEditor), or in [Dashboards](../visualization/Dashboards.mdx).
+
+## Flow Runs
+
+The **flow_run_metadata** table captures a record for each flow execution.
+
+| Field Name | Description |
+|------------|-------------|
+| flow_run_id | Unique identifier for the Flow run, stored as epoch time in milliseconds |
+| flow_id | Flow name |
+| inputs_dict | Run context for the Flow; corresponds to the run context described in the [Ganymede Class overview](../../sdk/GanymedeClass.mdx#overview) |
+| initiator | Flow run initiator; agent name + MAC address for agent-initiated Flows, user email for user-initiated flows, event name for event-triggered Flows, or Flow name if triggered from another Flow |
+| initiator_type | Type of the user who initiated the flow run (AGENT, USER, EVENT, FLOW) |
+| flow_version | Commit hash associated with flow execution |
+| state | Final disposition of Flow run (Success, Failed) |
+
+## Table Writes
+
+The **public_flow_run_output** table contains 1 record per output table written in Ganymede.
+
+| Field Name | Description |
+|------------|-------------|
+| id | ID for table save |
+| node | Name of node that wrote to table |
+| name | Name of table written to Ganymede table storage |
+| timestamp | Time of the table save; stored as epoch time in fractional seconds |
+| datastream_metadata | JSON containing the UUID associated with the table write transaction and Flow run ID |
+
+## File Writes
+
+The **file_metadata** table contains 1 record per file written in Ganymede.
+
+| Field Name | Description |
+|------------|-------------|
+| bucketType | Either "Input" or "Output"; indicates whether the file was input into Ganymede or an output from processing performed in Ganymede |
+| uri | Full URI to the file |
+| path | Path within storage bucket to file |
+| size | Size of the file in bytes |
+| createdAt | Time of the file save, stored as epoch time in milliseconds |
+| creator | Name of the file creator (e.g. - email address for users, agent name + MAC address for Agents) |
+| fileTags | List of JSON objects containing [Tags](../files/Tags.mdx#what-are-file-tags) associated with the file |
+
+## Python Packages
+
+The **ganymede_env_python_package_list** shows a list of all Python packages installed in the workflow environment.
+
+| Field Name | Description |
+|------------|-------------|
+| package_name | Name of the Python package |
+| version_number | Version of the Python package |
+
+## Pandas \<-\> Ganymede DB Field Reference
+
+SQL columns have character restrictions for compability with SQL which are not present in Pandas.  **__TABLE_SCHEMA** contains the mapping between table field names referenced in [NodeReturn](../../nodes/Overview.mdx#nodereturn-object) and the corresponding SQL column names.
+
+The [retrieve_tables method associated with Ganymede class](../../sdk/GanymedeClass.mdx#method-retrieve_tables) provides a convenient method to retrieve tables in notebooks with their original Pandas Dataframe column names.
+
+This table contains 1 record per table write transaction.
+
+| Field Name | Description |
+|------------|-------------|
+| pd_field_name | Pandas field name |
+| pd_field_type | Pandas field column type |
+| bq_table_name | Table name in Ganymede data lake |
+| bq_field_name | Column name in Ganymede data lake |
+| flow_run_id | Flow run that the table write is associated with |

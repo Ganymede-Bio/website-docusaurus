@@ -1,7 +1,7 @@
 ---
 sidebar_label: Coda_Write
 title: Coda_Write
-displayed_sidebar: nodeSidebar
+displayed_sidebar: webUiSidebar
 ---
 
 ### Node Description

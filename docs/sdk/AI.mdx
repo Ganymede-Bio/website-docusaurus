@@ -8,7 +8,7 @@ Ganymede incorporates OpenAI models to facilitate document search and code gener
 
 ## GPT Setup
 
-To set up access for any given environment, ensure that the following variables are set in [Environment Administration](../AdminControls):
+To set up access for any given environment, ensure that the following variables are set in [Environment Administration](../app/admin/AdminControls):
 
 * **openai_api_key** - API key for the OpenAI service account specific to your tenant
 * **openai_project** - Project ID for the OpenAI service account specific to your tenant
@@ -37,7 +37,7 @@ Messages sent within a single notebook session will be incorporated into the sam
 
 ### Code Generation
 
-The `code` function can be used to generate code snippets in editor notebooks, which can be used as the basis for the execute function.  This function generates code for the [User-Defined Function section of the notebook](../NodeEditor#backing-notebooks) based on a provided prompt and files provided. 
+The `code` function can be used to generate code snippets in editor notebooks, which can be used as the basis for the execute function.  This function generates code for the [User-Defined Function section of the notebook](../app/flows/NodeEditor#backing-notebooks) based on a provided prompt and files provided. 
 
 To try this feature out, you can perform the following steps:
 
