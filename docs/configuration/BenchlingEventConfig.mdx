@@ -1,0 +1,31 @@
+---
+id: BenchlingEventConfig
+title: Configuring Benchling Event-Driven Flows
+displayed_sidebar: webUiSidebar
+---
+
+Ganymede Flows can be triggered upon receiving a Benchling event
+
+## Event
+
+1. In your Benchling tenant, open the Settings menu and click Feature settings -> Developer Console ([see Benchling instructions](https://docs.benchling.com/docs/events-getting-started)) to set up delivery of Benchling Events to AWS EventBridge.
+
+2. Populate the following information in Benchling to create an EventBridge subscription with Ganymede:
+
+```shell
+AWS account ID: 710795444417
+Region: us-east-1
+Event bus name: \<Ganymede subdomain\>
+Event types: \<event types to listen to\>
+```
+
+For example, if your Ganymede tenant was configured as xyz.ganymede.bio and you wanted to execute flows upon entity registration, the configuration would be:
+
+```shell
+AWS account ID: 710795444417
+Region: us-east-1
+Event bus name: xyz
+Event types: v2.entity.registered
+```
+
+3. Notify [Ganymede Support](../Support.mdx) to complete the configuration of your tenant for handling Benchling Events.

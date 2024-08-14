@@ -179,10 +179,26 @@ module.exports = {
         items: [
           'AdminControls',
           {
+            type: 'doc',
+            id: 'configuration/SSOConfig',
+            label: 'SSO/SAML Configuration'
+          },
+          {
             type: 'category',
-            label: 'Integration',
+            label: 'Events',
             collapsed: false,
-            items: ['configuration/SSOConfig', 'configuration/S3EventConfig']
+            items: [
+              {
+                type: 'doc',
+                id: 'configuration/S3EventConfig',
+                label: 'S3 Event-Driven Flows'
+              },
+              {
+                type: 'doc',
+                id: 'configuration/BenchlingEventConfig',
+                label: 'Benchling Event-Driven Flows'
+              }
+            ]
           },
         ]
       },
