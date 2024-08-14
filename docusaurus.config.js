@@ -15,13 +15,6 @@ module.exports = {
       additionalLanguages: ['python', 'bash', 'powershell'],
       theme: prismThemes.nightOwl
     },
-    algolia: {
-      appId: 'SMEM8QA2TD',
-      apiKey: 'd7fb51ca85e14d48eb21e1fd4e08c1f6',
-      indexName: 'ganymede',
-      contextualSearch: false,
-      optionalFilters: ['category:-releases'],
-    },
     navbar: {
       title: 'Ganymede',
       logo: {
@@ -66,6 +59,16 @@ module.exports = {
         {
           debug: false,
           mode: 'auto',
+        },
+      ],
+      [
+        "@orama/plugin-docusaurus-v3",
+        {
+          cloud: {
+            indexId: "l0thkr1jebarpryzj3kxi4fy",
+            oramaCloudAPIKey: process.env.ORAMA_CLOUD_API_KEY, // Env variable suggested
+            deploy: true // Enables deploy while building/starting
+          },
         },
       ]
     ],
@@ -115,7 +118,7 @@ module.exports = {
           ],
         },
       ],
-      copyright: `Copyright © 2024 Ganymede Bio, Inc.  Built with Docusaurus`,
+      copyright: `Copyright © 2022-2024 Ganymede Bio, Inc.  Built with Docusaurus`,
     },
   },
   presets: [
