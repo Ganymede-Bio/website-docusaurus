@@ -10,158 +10,160 @@ module.exports = {
   webUiSidebar:
     [
       {
-        type: 'doc',
-        id: 'Welcome',
-        label: 'Welcome',
-      },
-      {
-        type: 'doc',
-        id: 'Concepts',
-        label: 'Ganymede Concepts'
-      },
-      {
-        type: 'doc',
-        id: 'ReferenceArchitectures',
-        label: 'Reference Architectures'
+        type: 'category',
+        label: 'Introduction',
+        collapsed: false,
+        items: [
+          {
+            type: 'doc',
+            id: 'Welcome',
+            label: 'Welcome',
+          },
+          {
+            type: 'doc',
+            id: 'Concepts',
+            label: 'Concepts'
+          },
+          {
+            type: 'doc',
+            id: 'ReferenceArchitectures',
+            label: 'Reference Architectures'
+          },
+        ]
       },
       {
         type: 'category',
-        label: 'Quickstart Guides',
-        collapsed: false,
+        label: 'Flows',
+        collapsed: true,
+        items: [
+          {
+            type: 'category',
+            label: 'Building Flows',
+            collapsed: false,
+            items: [
+              {
+                type: 'doc',
+                id: 'QuickstartBuildFlow',
+                label: 'QuickstartBuildFlow'
+              },
+              'FlowEditor',
+              'NodeEditor',
+              'NotebookTips'],
+          },
+          {
+            type: 'category',
+            label: 'Running Flows',
+            collapsed: false,
+            items: ['FlowView', 'FlowRuns', 'Notifications']
+          },
+        ]
+      },
+      {
+        type: 'category',
+        label: 'Agents & Connections',
+        collapsed: true,
         items: [
           {
             type: 'doc',
             id: 'QuickstartBuildAgent',
             label: 'QuickstartBuildAgent'
           },
+          'configuration/AgentNetworkConfig',
           {
             type: 'doc',
-            id: 'QuickstartBuildFlow',
-            label: 'QuickstartBuildFlow'
+            id: 'connectivity/Agent',
+            label: 'Configuring Agents and Connections'
           },
           {
             type: 'doc',
-            id: 'QuickstartCreateDashboard',
-            label: 'QuickstartCreateDashboard'
-          }
+            id: 'connectivity/AgentMonitoring',
+            label: 'Monitoring Agents'
+          },
+          {
+            type: 'doc',
+            id: 'connectivity/DebuggingAgents',
+            label: 'Agent Troubleshooting'
+          },
+          {
+            type: 'doc',
+            id: 'connectivity/AgentLogs',
+            label: 'Agent Logs and Reference'
+          },
         ]
       },
       {
         type: 'category',
-        label: 'Acquiring Data',
+        label: 'Files',
         collapsed: true,
         items: [
-          {
-            type: 'doc',
-            id: 'connectivity/Overview',
-            label: 'Ways to Capture Data'
-          },
-          {
-            type: 'category',
-            label: 'Agents',
-            collapsed: false,
-            items: [
-              {
-                type: 'doc',
-                id: 'connectivity/Agent',
-                label: 'Configuring Agents and Connections'
-              },
-              {
-                type: 'doc',
-                id: 'connectivity/DebuggingAgents',
-                label: 'Agent Troubleshooting'
-              },
-              {
-                type: 'doc',
-                id: 'connectivity/AgentLogs',
-                label: 'Agent Logs and Reference'
-              }
-            ]
-          },
-          {
-            type: 'doc',
-            id: 'connectivity/BrowserFileWatcher',
-            label: 'Capture Files with Browser'
-          },
+          'Files',
           {
             type: 'doc',
             id: 'connectivity/Tags',
             label: 'Tagging Files'
-          }
+          },
+          'TagActivity']
+      },
+      {
+        type: 'category',
+        label: 'Tables',
+        collapsed: true,
+        items: ['DataExplorer'],
+      },
+      {
+        type: 'category',
+        label: 'Dashboards',
+        collapsed: true,
+        items: [
+          {
+            type: 'doc',
+            id: 'QuickstartCreateDashboard',
+            label: 'QuickstartCreateDashboard'
+          },
+          {
+            type: 'doc',
+            id: 'Dashboards',
+            label: 'Building Dashboards'
+          },
+          'DashboardTips'
         ]
       },
       {
         type: 'category',
-        label: 'Processing Data',
+        label: 'Virtualization',
         collapsed: true,
-        items: [
-          {
-            type: 'category',
-            label: 'Editing and Running Flows',
-            collapsed: false,
-            items: ['Home', 'FlowEditor', 'FlowView', 'NodeEditor', 'NotebookTips'],
-          },
-          {
-            type: 'category',
-            label: 'Monitoring Flows',
-            collapsed: false,
-            items: ['FlowRuns', 'Notifications']
-          },
-          {
-            type: 'category',
-            label: 'Virtualization',
-            collapsed: false,
-            items: [{
-              type: 'doc',
-              id: 'Virtualization',
-              label: 'Virtualization'
-            },
-            {
-              type: 'doc',
-              id: 'TroubleshootingDataProcessing',
-              label: 'Troubleshooting Flows and Virtualization'
-              }
-            ]
-          }
+        items: [{
+          type: 'doc',
+          id: 'Virtualization',
+          label: 'Using Virtualization'
+        },
+        {
+          type: 'doc',
+          id: 'TroubleshootingDataProcessing',
+          label: 'Troubleshooting Flows and Virtualization'
+        }
         ]
       },
       {
         type: 'category',
-        label: 'Observing Data',
+        label: 'Environment Administration',
         collapsed: true,
         items: [
-          {
-            type: 'category', 
-            label: 'Files',
-            collapsed: false,
-            items: ['Files', 'TagActivity']
-          },
+          'AdminControls',
           {
             type: 'category',
-            label: 'Tables',
+            label: 'Integration',
             collapsed: false,
-            items: ['Dashboards', 'DataExplorer', 'DashboardTips']
+            items: ['configuration/SSOConfig', 'configuration/S3EventConfig']
           },
-           'AnalysisNotebook', 'SystemMetadata']
-      },
-      {
-        type: 'category',
-        label: 'Environment Setup',
-        collapsed: false,
-        items: ['configuration/SSOConfig', 'configuration/AgentNetworkConfig', 'configuration/S3EventConfig']
-      },
-      {
-        type: 'doc',
-        id: 'AdminControls',
-        label: 'Environment Administration'
+        ]
       },
       {
         type: 'doc',
         id: 'Support',
         label: 'Support'
-      },
-    ]
-  ,
+      }
+    ],
   nodeSidebar: [
     {
       type: 'doc',
