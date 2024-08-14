@@ -75,18 +75,6 @@ module.exports = {
           },
           {
             type: 'category',
-            label: 'Flow Execution',
-            collapsed: false,
-            items: [
-              {
-                type: 'doc',
-                id: 'app/flows/FlowView',
-                label: 'Running Flows'
-              },
-              'app/flows/FlowRuns', 'app/flows/Notifications']
-          },
-          {
-            type: 'category',
             label: 'Nodes',
             collapsed: false,
             items: [
@@ -106,6 +94,18 @@ module.exports = {
                   nodeTag]
               }
             ]
+          },
+          {
+            type: 'category',
+            label: 'Flow Execution',
+            collapsed: false,
+            items: [
+              {
+                type: 'doc',
+                id: 'app/flows/FlowView',
+                label: 'Running Flows'
+              },
+              'app/flows/FlowRuns', 'app/flows/Notifications']
           }
         ]
       },
@@ -137,7 +137,8 @@ module.exports = {
           },
           {
             type: 'ref',
-            id: 'releases/AgentVersionHistory'
+            id: 'releases/AgentVersionHistory',
+            label: 'Agent Change Log'
           }
         ]
       },
@@ -332,6 +333,7 @@ module.exports = {
     {
       type: 'doc',
       id: 'releases/AgentVersionHistory',
+      label: 'Agent Change Log'
     }
   ]
 };

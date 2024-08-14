@@ -1,6 +1,6 @@
 ---
 id: AgentVersionHistory
-title: Agent Version History
+title: Agent Change Log
 displayed_sidebar: releaseSideBar
 ---
 
