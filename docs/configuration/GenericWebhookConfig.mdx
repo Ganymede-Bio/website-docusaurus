@@ -1,0 +1,18 @@
+---
+id: GenericWebhookConfig
+title: Configuring Generic Webhook-Driven Flows
+displayed_sidebar: webUiSidebar
+---
+
+Webhooks are commonly used for robust communication between software systems.
+
+1. From [Ganymede Support](../Support.mdx), obtain the following information:
+
+- The API endpoint to deliver events to: https://your_subdomain.ganymede.bio/event/ENV_NAME/webhook
+- Auth header in include in delivered events: SECRET_NAME: SECRET_VALUE
+
+ENV_NAME is your Ganymede environment; for example, if you have development and production Ganymede environments, then webhooks would be configured separately for each of these environments.
+SECRET_NAME is a designated name for the secret associated with the webhook
+SECRET_VALUE is a random API key
+
+2. Verify that the SECRET_NAME: SECRET_VALUE key-value pair is present in the [Environment Administration panel](../AdminControls.mdx).

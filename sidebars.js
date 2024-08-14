@@ -197,6 +197,11 @@ module.exports = {
                 type: 'doc',
                 id: 'configuration/BenchlingEventConfig',
                 label: 'Benchling Event-Driven Flows'
+              },
+              {
+                type: 'doc',
+                id: 'configuration/GenericWebhookConfig',
+                label: 'Webhook Event-Driven Flows'
               }
             ]
           },
