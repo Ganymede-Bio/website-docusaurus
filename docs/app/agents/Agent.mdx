@@ -410,17 +410,11 @@ After downloading the Agent Connection, launch the installer to complete the con
 - **Variable definitions**: Strings in the format "var_name=var_value" that allow users to set context variables for use in user-defined Python code.
 - **Label** A string used to identify and group Connections within Ganymede. The label is visible in the Connections UI.
 
-Variables and labels can be referenced in your user-defined code by extracting the values from `kwargs`:
 
-```python
-labels: list[str] = kwargs.get('labels', [])
-# -- OR --
-vars: dict[str, str] = kwargs.get('vars', [])
-```
 
 For Agents that reference local directories, the monitored directory is specified in the Additional Params input box.  All subdirectories of _input_path_ are also monitored.
 
-```bash
+```shell
 -v "input_path=/absolute/path"
 
 # Example Windows input path specification
@@ -429,6 +423,30 @@ For Agents that reference local directories, the monitored directory is specifie
 # If the directory is in a network drive, be sure to use the UNC path or IP like so:
 -v "input_path=//server/share/path"
 # where `server` is the name of the server and `share` is the name of the shared folder
+```
+
+More generally, Variables and Labels can be flexibly used to control Connection behavior.  Additional Variables and Labels can be defined as show in the example below:
+
+```shell
+# Example: multiple variables and labels passed in
+-v "abc=1" -v "xyz=2" -l "UPLC" -l "Analytical Dev"
+```
+
+And [modified in the corresponding Connections panel in the Ganymede web app after installation, for Agent versions 4.5+](AgentMonitoring#monitoring-agent-connections).
+
+
+Variables and labels can be referenced in your user-defined code by extracting the values from `kwargs` in the _execute_ function:
+
+```python
+labels: list[str] = kwargs.get('labels', {})
+# -- OR --
+vars: dict[str, str] = kwargs.get('vars', {})
+
+# Example: Retrieve the `input_path` variable for use in Agent code
+input_path = kwargs.get('vars', {})['input_path']
+
+# Example: Retrieve all labels for use in Agent code
+connection_
 ```
 
 :::info Sleep status
