@@ -4,6 +4,8 @@ title: SciNote_API
 displayed_sidebar: webUiSidebar
 ---
 
+## Node
+
 ### Node Description
 
 Writes a table or set of tables to an SciNote entry.
@@ -20,7 +22,7 @@ the specified SciNote page.
   - Specify "input" or "output" for the Ganymede cloud storage bucket to read from.
   - "input" contains files ingested into a flow; "output" contains processed data.
 - **input_object_names**
-  - Objects to read from Ganymede cloud storage
+  - Semicolon-delimited list of objects to read from Ganymede cloud storage.
 
 ### Notes
 
@@ -63,7 +65,7 @@ Example demonstrating access to SciNote API
 ### Returns
 
 `NodeReturn`
-  Object containing data to store in data lake and/or file storage.
+Object containing data to store in data lake and/or file storage.
 
 ### Notes
 

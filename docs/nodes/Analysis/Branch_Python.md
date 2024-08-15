@@ -4,6 +4,8 @@ title: Branch_Python
 displayed_sidebar: webUiSidebar
 ---
 
+## Node
+
 ### Node Description
 
 Branches to different downstream tasks based on results of Python function.
@@ -14,7 +16,11 @@ and stores result table(s) to Ganymede data lake.
 ### Node Attributes
 
 - **output_table_results**
-  - Table displayed on Table Header in Ganymede UI
+  - Table displayed on [Table Head](https://docs.ganymede.bio/app/intro/Concepts#table-head) in Ganymede UI.
+
+### Notes
+
+In the execute function, returning NodeReturn(tables_to_upload=\{'results': df\}) would render the DataFrame df in the Flow Editor if Table Head visualization is enabled.
 
 ## User-Defined Python
 
@@ -31,17 +37,17 @@ is written to the output bucket.
 ### Returns
 
 `BranchableNodeReturn`
-  A NodeReturn object with an additional parameter for specifying downstream nodes to execute, in addition to
-  which tables and files to store in data lake / file storage.  Some parameters are:
-  - tables_to_upload: dict[str, pd.DataFrame]
-    keys are table names, values are pandas DataFrames to upload
-  - files_to_upload: dict[str, bytes]
-    keys are file names, values are file data to upload
-  - downstream_nodes_to_execute: bool | str | list[str]
-    Boolean or string indicating whether to continue to next node in flow.  If False,
-    the flow will stop at this node.  If True, the flow will continue to the next node(s).
-    If a string or list of strings is provided, the flow will continue to the node(s)
-    specified in the string(s).
+A NodeReturn object with an additional parameter for specifying downstream nodes to execute, in addition to
+which tables and files to store in data lake / file storage.  Some parameters are:
+- tables_to_upload: dict[str, pd.DataFrame]
+keys are table names, values are pandas DataFrames to upload
+- files_to_upload: dict[str, bytes]
+keys are file names, values are file data to upload
+- downstream_nodes_to_execute: bool | str | list[str]
+Boolean or string indicating whether to continue to next node in flow.  If False,
+the flow will stop at this node.  If True, the flow will continue to the next node(s).
+If a string or list of strings is provided, the flow will continue to the node(s)
+specified in the string(s).
 
 
 ### Notes

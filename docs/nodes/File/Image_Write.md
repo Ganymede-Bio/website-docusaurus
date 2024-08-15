@@ -4,12 +4,14 @@ title: Image_Write
 displayed_sidebar: webUiSidebar
 ---
 
+## Node
+
 ### Node Description
 
 Parse table data and writes to storage.  Useful for storing graphs created from data.
 
 Retrieves table(s) from Ganymede data lake, processes table(s) via user-defined function,
-and stores result in cloud storages.
+and stores result in cloud storage.
 
 Inkscape is installed in the container to convert various image formats.
 
@@ -27,4 +29,4 @@ Process image data into a dictionary of images indexed by filename to save in cl
 ### Returns
 
 `NodeReturn`
-  Object containing data to store in data lake and/or file storage.
+Object containing data to store in data lake and/or file storage.

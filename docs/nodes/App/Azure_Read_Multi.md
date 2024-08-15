@@ -4,9 +4,11 @@ title: Azure_Read_Multi
 displayed_sidebar: webUiSidebar
 ---
 
+## Node
+
 ### Node Description
 
-Read files from Azure Blob Storage into data lake.
+Read all files from a Azure Blob Storage container into Ganymede.
 
 ### Node Attributes
 
@@ -26,3 +28,10 @@ Prior to usage, the following secrets must be configured in your Ganymede enviro
 Secrets can be configured by clicking on your username in the upper-right hand of the Ganymede
 application, then selecting Environment Settings and navigating to the Secrets tab.  If you need
 assistance, please don't hesitate to reach out to Ganymede.
+
+### Example
+
+An example configuration is shown below:
+
+- **azure_storage_uri**: https://abc123.blob.core.windows.net
+- **src_azure_container_name**: abc123

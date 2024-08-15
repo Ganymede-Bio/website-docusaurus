@@ -4,9 +4,9 @@ title: XML_Read
 displayed_sidebar: webUiSidebar
 ---
 
-### Node Description
+## Node
 
-Reads an XML file and stores processed results in data lake
+### Node Description
 
 Reads an XML file, processes via user-defined function, and stores result
 table in Ganymede data lake
@@ -16,7 +16,11 @@ table in Ganymede data lake
 - **input_file_xml**
   - File extension for valid XML files submitted.  For example, filling in this attribute with "*.xml" will only allow files with the extension .xml to be uploaded.
 - **output_table_results**
-  - Table name where parsed XML data will be stored.
+  - Table displayed on [Table Head](https://docs.ganymede.bio/app/intro/Concepts#table-head) in Ganymede UI.
+
+### Notes
+
+In the execute function, returning NodeReturn(tables_to_upload=\{'results': df\}) would render the DataFrame df in the Flow Editor if Table Head visualization is enabled.
 
 ## User-Defined Python
 
@@ -32,4 +36,4 @@ Parse XML file into table for storage in data lake
 ### Returns
 
 `NodeReturn`
-  Object containing data to store in data lake and/or file storage.
+Object containing data to store in data lake and/or file storage.

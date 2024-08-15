@@ -4,6 +4,8 @@ title: CSV_Write
 displayed_sidebar: webUiSidebar
 ---
 
+## Node
+
 ### Node Description
 
 Writes 1 table from data lake to CSV
@@ -15,7 +17,7 @@ data lake.
 ### Node Attributes
 
 - **output_csv_filename**
-  - name of output CSV file
+  - Name of the output CSV file
 
 ## User-Defined Python
 
@@ -31,4 +33,4 @@ Process table(s) resulting from user-defined SQL query into CSV file
 ### Returns
 
 `NodeReturn`
-  Object containing data to store in data lake and/or file storage.
+Object containing data to store in data lake and/or file storage.

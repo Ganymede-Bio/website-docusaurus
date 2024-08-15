@@ -4,6 +4,8 @@ title: Snowflake_Write
 displayed_sidebar: webUiSidebar
 ---
 
+## Node
+
 ### Node Description
 
 Sync Ganymede data lake tables to Snowflake

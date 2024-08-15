@@ -4,6 +4,8 @@ title: Excel_Write
 displayed_sidebar: webUiSidebar
 ---
 
+## Node
+
 ### Node Description
 
 Writes a table or set of tables as an Excel spreadsheet.
@@ -36,4 +38,4 @@ Write table(s) from SQL query and stores Excel sheet in cloud storage.
 ### Returns
 
 `NodeReturn`
-  Object containing data to store in data lake and/or file storage
+Object containing data to store in data lake and/or file storage

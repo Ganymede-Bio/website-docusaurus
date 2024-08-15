@@ -4,6 +4,8 @@ title: Python
 displayed_sidebar: webUiSidebar
 ---
 
+## Node
+
 ### Node Description
 
 Runs user-defined Python function on results of query on Ganymede data lake.
@@ -14,7 +16,11 @@ and stores result table(s) to Ganymede data lake.
 ### Node Attributes
 
 - **output_table_results**
-  - Table displayed on Table Header in Ganymede UI
+  - Table displayed on [Table Head](https://docs.ganymede.bio/app/intro/Concepts#table-head) in Ganymede UI.
+
+### Notes
+
+In the execute function, returning NodeReturn(tables_to_upload=\{'results': df\}) would render the DataFrame df in the Flow Editor if Table Head visualization is enabled.
 
 ## User-Defined Python
 
@@ -31,12 +37,12 @@ is written to the output bucket.
 ### Returns
 
 `NodeReturn`
-  Object containing data to store in data lake and/or file storage.  NodeReturn object takes
-  2 parameters:
-  - tables_to_upload: dict[str, pd.DataFrame]
-    keys are table names, values are pandas DataFrames to upload
-  - files_to_upload: dict[str, bytes]
-    keys are file names, values are file data to upload
+Object containing data to store in data lake and/or file storage.  NodeReturn object takes
+2 parameters:
+- tables_to_upload: dict[str, pd.DataFrame]
+keys are table names, values are pandas DataFrames to upload
+- files_to_upload: dict[str, bytes]
+keys are file names, values are file data to upload
 
 ### Notes
 

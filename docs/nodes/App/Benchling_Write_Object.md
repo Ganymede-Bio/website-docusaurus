@@ -4,6 +4,8 @@ title: Benchling_Write_Object
 displayed_sidebar: webUiSidebar
 ---
 
+## Node
+
 ### Node Description
 
 Writes data stored in Ganymede cloud storage to Benchling custom entity, as specified by input
@@ -17,7 +19,7 @@ Passes Benchling ID to user-defined function for retrieving Benchling API data.
   - Specify "input" or "output" for the Ganymede cloud storage bucket to read from.
   - "input" contains files ingested into a flow; "output" contains processed data.
 - **input_object_names**
-  - Objects to upload
+  - Semicolon-delimited list of objects to retrieve to the execute function
 
 ### Notes
 
@@ -55,4 +57,4 @@ If new custom entities are created, returns DataFrame associated with custom ent
 ### Returns
 
 `NodeReturn`
-  Object containing data to store in data lake and/or file storage.
+Object containing data to store in data lake and/or file storage.

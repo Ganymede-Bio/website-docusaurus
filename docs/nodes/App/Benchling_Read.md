@@ -4,6 +4,8 @@ title: Benchling_Read
 displayed_sidebar: webUiSidebar
 ---
 
+## Node
+
 ### Node Description
 
 Reads Benchling data specified by Benchling run tag.
@@ -20,7 +22,7 @@ data lake.
 ### Node Attributes
 
 - **output_table_results**
-  - Table to display on Table Head in Flow Editor
+  - Table displayed on [Table Head](https://docs.ganymede.bio/app/intro/Concepts#table-head) in Ganymede UI.
 
 ### Notes
 
@@ -38,11 +40,7 @@ Secrets can be configured by clicking on your username in the upper-right hand o
 application, then selecting Environment Settings and navigating to the Secrets tab.  If you need
 assistance, please don't hesitate to reach out to Ganymede.
 
-If a DataFrame is returned, the table name corresponds to the output_table_results parameter
-of the node.
-
-If a dict is returned, the keys of the dict are used as table names for the corresponding
-DataFrames to store. The table with output_table_results as its key is displayed on the Flow Editor.
+In the execute function, returning NodeReturn(tables_to_upload=\{'results': df\}) would render the DataFrame df in the Flow Editor if Table Head visualization is enabled.
 
 ## User-Defined Python
 
@@ -59,7 +57,7 @@ conjunction with the Benchling_Tag node.
 ### Returns
 
 `NodeReturn`
-  Object containing data to store in data lake and/or file storage
+Object containing data to store in data lake and/or file storage
 
 ### Notes
 

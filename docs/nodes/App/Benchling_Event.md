@@ -4,6 +4,8 @@ title: Benchling_Event
 displayed_sidebar: webUiSidebar
 ---
 
+## Node
+
 ### Node Description
 
 Copies data from Benchling to Ganymede
@@ -39,6 +41,13 @@ Secrets can be configured by clicking on your username in the upper-right hand o
 application, then selecting Environment Settings and navigating to the Secrets tab.  If you need
 assistance, please don't hesitate to reach out to Ganymede.
 
+### Example
+
+The Event Node configuration below would be executed each time the entity ts_abc1234 was seen, perform processing as defined in the _execute_ function, and trigger the HT_Screening Flow with parameters specified in the _execute_ function.
+
+- **input_filter_path**: detail.entity.schema.id=='ts_abc1234'
+- **input_trigger_flow_name**: HT_Screening
+
 ## User-Defined Python
 
 Calls Benchling to get data for flow to trigger
@@ -57,8 +66,8 @@ Calls Benchling to get data for flow to trigger
 ### Returns
 
 `FlowInputs | NodeReturn`
-  if FlowInputs object is returned; flow inputs for kicking off subsequent Flow
-  if NodeReturn object is returned; NodeReturn object for storing data
+if FlowInputs object is returned; flow inputs for kicking off subsequent Flow
+if NodeReturn object is returned; NodeReturn object for storing data
 
 ### Notes
 

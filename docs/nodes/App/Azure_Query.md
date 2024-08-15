@@ -4,6 +4,8 @@ title: Azure_Query
 displayed_sidebar: webUiSidebar
 ---
 
+## Node
+
 ### Node Description
 
 Query Azure SQL database, process data in Python, and upload results to Ganymede data lake
@@ -15,7 +17,7 @@ Query Azure SQL database, process data in Python, and upload results to Ganymede
 - **src_azure_database**
   - Azure database to pull from
 - **output_table_analysis**
-  - Table in Ganymede data lake to write to
+  - Table displayed on [Table Head](https://docs.ganymede.bio/app/intro/Concepts#table-head) in Ganymede UI.
 
 ### Notes
 
@@ -35,6 +37,16 @@ On the Ganymede end - make sure that the relevant MSSQL ODBC Driver is made avai
 workflow execution environment.
 artifact_registry should be populated in secrets with the web address hosting the container
 
+In the execute function, returning NodeReturn(tables_to_upload=\{'analysis': df\}) would render the DataFrame df in the Flow Editor if Table Head visualization is enabled.
+
+### Example
+
+An example configuration is shown below:
+
+- **src_azure_host_name**: sql-abc123.database.windows.net
+- **src_azure_database**: az_db
+- **output_table_analysis**: output_tbl
+
 ## User-Defined Python
 
 Process tabular data from user-defined SQL query, writing results back to data lake
@@ -49,4 +61,4 @@ Process tabular data from user-defined SQL query, writing results back to data l
 ### Returns
 
 `NodeReturn`
-  Object containing data to store in data lake and/or file storage
+Object containing data to store in data lake and/or file storage

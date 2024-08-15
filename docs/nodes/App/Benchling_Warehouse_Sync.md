@@ -4,6 +4,8 @@ title: Benchling_Warehouse_Sync
 displayed_sidebar: webUiSidebar
 ---
 
+## Node
+
 ### Node Description
 
 Sync Benchling Warehouse Postgres database to Ganymede data lake, creating table if it does not
@@ -55,4 +57,4 @@ Ganymede.
 ### Returns
 
 `pd.DataFrame`
-  DataFrame containing schema, from_benchling_table, and to_ganymede_table
+DataFrame containing schema, from_benchling_table, and to_ganymede_table

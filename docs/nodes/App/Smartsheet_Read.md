@@ -4,6 +4,8 @@ title: Smartsheet_Read
 displayed_sidebar: webUiSidebar
 ---
 
+## Node
+
 ### Node Description
 
 Reads Smartsheet sheet into Ganymede
@@ -33,7 +35,7 @@ Process Smartsheet table
 ### Returns
 
 `NodeReturn`
-  Object containing data to store in data lake and/or file storage.
+Object containing data to store in data lake and/or file storage.
 
 ### Notes
 

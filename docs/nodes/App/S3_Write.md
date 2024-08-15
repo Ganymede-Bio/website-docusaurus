@@ -4,6 +4,8 @@ title: S3_Write
 displayed_sidebar: webUiSidebar
 ---
 
+## Node
+
 ### Node Description
 
 Sync GCS bucket -\> S3 bucket
@@ -38,3 +40,14 @@ connectivity.
 Once configured, add the AWS role ARN secret to your environment by clicking on your username in
 the upper-right hand of the Ganymede application, then selecting Environment Settings and
 navigating to the Secrets tab.
+
+### Example
+
+An example configuration for an S3 Write Node in the Flow Editor (src_object_prefix is left empty so that no prefix is added to files).
+
+- **dest_node_name_in_path**: false
+- **dest_replace_or_append**: append
+- **dest_s3_key**: s3://environment-sandbox-s3-bucket/test_path/
+- **src_all_or_current_run**: current
+- **src_input_or_output_bucket**: output
+- **src_object_prefix**:
