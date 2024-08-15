@@ -4,7 +4,11 @@ title: S3_Event
 displayed_sidebar: webUiSidebar
 ---
 
+## Node
+
 ### Node Description
+
+Node for triggering Flow upon receiving an S3 Event.
 
 ### Node Attributes
 
@@ -12,10 +16,6 @@ displayed_sidebar: webUiSidebar
   - Input [JSONPath](https://jsonpath.com) used for applying filtering logic
 - **input_trigger_flow_name**
   - Input Ganymede flow to trigger from captured event
-
-### Example
-An example *input_filter_path* would be:
-detail.object.key.includes('PlateReader/ABC/')&&@.detail.bucket.name==('instrument-bucket')
 
 ### Notes
 
@@ -28,7 +28,14 @@ Once configured, add the AWS role ARN secret to your environment by clicking on 
 
 In addition to configuring role ARN, EventBridge must be configured to send events to Ganymede for the buckets that you would like to reference.  The API destination for EventBridge should be configured to https://\<your_tenant_name\>/event/aws.
 
-For more details on configuring EventBridge, visit https://docs.ganymede.bio/app/configuration/S3EventConfig.
+For more details on configuring EventBridge, visit https://docs.ganymede.bio/apps/configuration/S3EventConfig.
+
+### Example
+
+The example below shows the example-flow-to-trigger Flow being triggered when CSV files are loaded to test-folder in s3://environment-sandbox-s3-bucket/.  The Trigger flow name is the ID of the Flow to trigger, which can be found in the [Manage Flows panel on the Flow Editor page](https://docs.ganymede.bio/app/flows/FlowEditor#managing-flows).
+
+- **input_filter_path**: detail.object.key.includes('test_folder')&&@.detail.bucket.name=='environment-sandbox-s3-bucket'&&@.detail.object.key.includes('.csv')
+- **input_trigger_flow_name**: example-flow-to-trigger
 
 ## User-Defined Python
 
@@ -46,4 +53,4 @@ Calls AWS to get data for flow to trigger
 ### Returns
 
 `FlowInputs`
-  Object containing data for kicking off subsequent Flow
+Object containing data for kicking off subsequent Flow

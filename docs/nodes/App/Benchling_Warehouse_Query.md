@@ -4,6 +4,8 @@ title: Benchling_Warehouse_Query
 displayed_sidebar: webUiSidebar
 ---
 
+## Node
+
 ### Node Description
 
 Query Benchling Warehouse Postgres database, process data in Python, and upload results to Ganymede data lake
@@ -38,4 +40,4 @@ Process tabular data from user-defined SQL query, writing results back to data l
 ### Returns
 
 `NodeReturn`
-  Object containing data to store in data lake and/or file storage
+Object containing data to store in data lake and/or file storage

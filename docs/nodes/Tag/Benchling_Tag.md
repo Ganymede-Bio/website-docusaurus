@@ -4,6 +4,8 @@ title: Benchling_Tag
 displayed_sidebar: webUiSidebar
 ---
 
+## Node
+
 ### Node Description
 
 Associates a Benchling run tag with a Flow run

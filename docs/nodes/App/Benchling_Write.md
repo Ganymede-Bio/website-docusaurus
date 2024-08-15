@@ -4,6 +4,8 @@ title: Benchling_Write
 displayed_sidebar: webUiSidebar
 ---
 
+## Node
+
 ### Node Description
 
 Writes to Benchling via API
@@ -45,4 +47,4 @@ Processes input DataFrame for upload to Benchling
 ### Returns
 
 `NodeReturn`
-  Object containing data to store in data lake and/or blob storage
+Object containing data to store in data lake and/or blob storage

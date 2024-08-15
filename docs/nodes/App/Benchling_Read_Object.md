@@ -4,6 +4,8 @@ title: Benchling_Read_Object
 displayed_sidebar: webUiSidebar
 ---
 
+## Node
+
 ### Node Description
 
 Reads Benchling data specified by input Benchling ID string.
@@ -19,7 +21,7 @@ the Ganymede data lake.
 - **input_string_id**
   - Benchling API ID, specified on node
 - **output_table_results**
-  - Name of data lake table to write results to
+  - Table displayed on [Table Head](https://docs.ganymede.bio/app/intro/Concepts#table-head) in Ganymede UI.
 
 ### Notes
 
@@ -37,6 +39,8 @@ Secrets can be configured by clicking on your username in the upper-right hand o
 application, then selecting Environment Settings and navigating to the Secrets tab.  If you need
 assistance, please don't hesitate to reach out to Ganymede.
 
+In the execute function, returning NodeReturn(tables_to_upload=\{'results': df\}) would render the DataFrame df in the Flow Editor if Table Head visualization is enabled.
+
 ## User-Defined Python
 
 Reads Benchling data based on input parameter.  This node should be used in
@@ -52,7 +56,7 @@ conjunction with the Input_Param node.
 ### Returns
 
 `NodeReturn`
-  Object containing data to store in data lake and/or file storage
+Object containing data to store in data lake and/or file storage
 
 ### Notes
 

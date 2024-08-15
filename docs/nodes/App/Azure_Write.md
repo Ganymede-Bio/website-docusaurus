@@ -4,6 +4,8 @@ title: Azure_Write
 displayed_sidebar: webUiSidebar
 ---
 
+## Node
+
 ### Node Description
 
 Write files from data lake to Azure Blob Storage.
@@ -30,3 +32,12 @@ Prior to usage, the following secrets must be configured in your Ganymede enviro
 Secrets can be configured by clicking on your username in the upper-right hand of the Ganymede
 application, then selecting Environment Settings and navigating to the Secrets tab.  If you need
 assistance, please don't hesitate to reach out to Ganymede.
+
+### Example
+
+An example configuration is shown below:
+
+- **azure_storage_uri**: https://abc123.blob.core.windows.net
+- **src_object_name**: filename.parquet
+- **dest_azure_container_Name**: abc123
+- **dest_azure_blob_name**: "\{\{dag.dag_id\}\}/filename.parquet"

@@ -13,6 +13,7 @@ keywords = [
     "Yields",
     "Raises",
     "Node Attributes",
+    "Example",
     "Examples",
 ]
 
@@ -72,7 +73,7 @@ def extract_docstring(filename: str, search_str: str = "class", python_spaces: s
                     if current_table != "Parameters":
                         num_spaces -= 1
 
-                    if current_table == "Notes":
+                    if current_table in ["Notes", "Example"]:
                         table_record = "".join(table_record[1:]).strip()
                         if re.search(r"^\w+: \w+", table_record):
                             secrets = [v.strip() for v in table_record.split(":", 1)]
@@ -124,7 +125,8 @@ if __name__ == "__main__":
 
         search_str = "class" if name != "Branch_Python" else "class BranchPythonNode"
         operator_data_list = extract_docstring(operator_filename, search_str=search_str)
-        operator_data = "### Node Description\n\n" + "\n".join(operator_data_list)
+        operator_data = "## Node\n\n"
+        operator_data += "### Node Description\n\n" + "\n".join(operator_data_list)
         operator_data = (
             operator_data.replace("{", "\{")
             .replace("}", "\}")

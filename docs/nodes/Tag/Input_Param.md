@@ -4,6 +4,8 @@ title: Input_Param
 displayed_sidebar: webUiSidebar
 ---
 
+## Node
+
 ### Node Description
 
 Reads input parameter into Flow. Useful when downstream nodes need
@@ -14,7 +16,11 @@ access to a input parameter specified by the _flow_ runner.
 - **input_string_param**
   - input string to be read into the Flow
 
-### Examples
+### Example
+
+The Node configuration below would capture a string called 'xyz':
+
+- **param**: xyz
 
 To access the input parameter from a node named "Input_Param" in a downstream node,
 use the following syntax to obtain the parameter value input by the user:

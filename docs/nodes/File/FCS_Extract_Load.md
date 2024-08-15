@@ -4,6 +4,8 @@ title: FCS_Extract_Load
 displayed_sidebar: webUiSidebar
 ---
 
+## Node
+
 ### Node Description
 
 Function for reading Flow Cytometry Standard (FCS) files into Ganymede data lake
@@ -73,6 +75,16 @@ analysis end: byte offset to the last byte of the ANALYSIS segment
 
 - **channel_names**: names for each channel
 
+### Example
+
+The Node configuration below would capture FCS files. In the execute function, returning NodeReturn(tables_to_upload=\{'data': df_data, 'metadata_file': df_metadata_file, 'metadata_fcs': df_metadata_fcs, 'metadata_channels': df_metadata_channels\}) would render the 4 DataFrames returned in the Flow Editor if Table Head visualization is enabled.
+
+fcs: *.fcs
+- **data**: fcs_data
+- **metadata_file**: fcs_file_metadata
+- **metadata_fcs**: fcs_metadata
+- **metadata_channels**: fcs_channel_metadata
+
 ## User-Defined Python
 
 Process FCS data/metadata file
@@ -89,4 +101,4 @@ Process FCS data/metadata file
 ### Returns
 
 `NodeReturn`
-  Object containing data to store in data lake and/or file storage
+Object containing data to store in data lake and/or file storage

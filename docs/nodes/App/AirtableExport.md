@@ -4,6 +4,8 @@ title: AirtableExport
 displayed_sidebar: webUiSidebar
 ---
 
+## Node
+
 ### Node Description
 
 Reads table(s) from Ganymede data lake and uploads to Airtable.
@@ -40,4 +42,4 @@ Process tabular data from user-defined SQL query, writing results to Airtable
 ### Returns
 
 `NodeReturn`
-  Object containing data to store in data lake and/or file storage
+Object containing data to store in data lake and/or file storage

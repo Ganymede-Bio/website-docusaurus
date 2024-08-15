@@ -4,6 +4,8 @@ title: S3_Read
 displayed_sidebar: webUiSidebar
 ---
 
+## Node
+
 ### Node Description
 
 Sync S3 bucket -\> Ganymede data lake bucket
@@ -35,29 +37,41 @@ Once configuration of AWS is complete, add the AWS role ARN secret to your envir
 on your username in the upper-right hand of the Ganymede application, then selecting Environment
 Settings and navigating to the Secrets tab.
 
+### Example
+
+An example configuration for an S3 Read Node in the Flow Editor so that only files with a last modified date within the past 24 hours are synced:
+
+- **src_s3_bucket**: environment-sandbox-s3-bucket
+- **src_s3_prefix**: test_
+- **duplicate_behavior**: save
+- **required_aging_in_seconds**: 1
+- **max_aging_in_seconds**: 86400
+
 ## User-Defined Python
 
 Specify list of S3 keys to upload to GCS
 
 ### Parameters
 
-  - df_s3_objects: pd.DataFrame
-    - Dataframe containing s3_object key metadata like Key, ETag, LastModified, Size, StorageClass,
-    - and Bucket
-  - client: botocore.client.S3
-    - Boto3 client to interact with S3.  This can be used to retrieve the body of objects from S3.
-  - ganymede_context: GanymedeContext
-    - Ganymede context object
+- df_s3_objects: pd.DataFrame
+  - Dataframe containing s3_object key metadata like Key, ETag, LastModified, Size, StorageClass,
+  - and Bucket
+- client: botocore.client.S3
+  - Boto3 client to interact with S3.  This can be used to retrieve the body of objects from S3.
+- ganymede_context: GanymedeContext
+  - Ganymede context object
 
 ### Returns
 
 `dict[str, str]`
-  Dictionary specifying files to upload to GCS.  The keys are the keys in S3 and the values
-  are the file names to use in Ganymede
+Dictionary specifying files to upload to GCS.  The keys are the keys in S3 and the values
+are the file names to use in Ganymede
 
 ### Examples
 
 Retrieve body of S3 object of first record in df_s3_objects (assuming boto3 client is passed in as client)
 
->>> obj = df_s3_objects.iloc[0].to_dict()
->>> file_contents = client.get_object(Key=obj["Key"], Bucket=obj["Bucket"])['Body'].read()
+```python
+obj = df_s3_objects.iloc[0].to_dict()
+file_contents = client.get_object(Key=obj["Key"], Bucket=obj["Bucket"])['Body'].read()
+```

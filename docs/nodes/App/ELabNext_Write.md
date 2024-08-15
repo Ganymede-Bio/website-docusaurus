@@ -4,6 +4,8 @@ title: ELabNext_Write
 displayed_sidebar: webUiSidebar
 ---
 
+## Node
+
 ### Node Description
 
 Writes a table or set of tables to an eLabNext entry.
@@ -20,7 +22,7 @@ the specified eLabNext page.
   - Specify "input" or "output" for the Ganymede cloud storage bucket to read from.
   - "input" contains files ingested into a flow; "output" contains processed data.
 - **input_object_names**
-  - Objects to read from Ganymede cloud storage
+  - Semicolon-delimited list of objects to read from Ganymede cloud storage
 
 ### Notes
 
@@ -53,7 +55,7 @@ Example demonstrating submission of user-defined SQL query into eLabNext
 ### Returns
 
 `NodeReturn`
-  Object containing data to store in data lake and/or file storage.
+Object containing data to store in data lake and/or file storage.
 
 ### Notes
 

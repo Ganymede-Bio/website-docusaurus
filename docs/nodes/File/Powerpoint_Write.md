@@ -4,6 +4,8 @@ title: Powerpoint_Write
 displayed_sidebar: webUiSidebar
 ---
 
+## Node
+
 ### Node Description
 
 Parses table data and writes Powerpoint output to storage.
@@ -25,4 +27,4 @@ Processes table(s) from user-defined SQL query into Powerpoint output
 ### Returns
 
 `NodeReturn`
-  Object containing data to store in data lake and/or file storage
+Object containing data to store in data lake and/or file storage

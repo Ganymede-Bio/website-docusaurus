@@ -4,6 +4,8 @@ title: Coda_Write
 displayed_sidebar: webUiSidebar
 ---
 
+## Node
+
 ### Node Description
 
 Writes a table or set of tables to a Coda.io page.
@@ -36,7 +38,7 @@ are populated, with the doc_id from the generated document returned.
 ### Returns
 
 `NodeReturn`
-  Object containing data to store in data lake and/or file storage.
+Object containing data to store in data lake and/or file storage.
 
 ### Notes
 

@@ -4,6 +4,8 @@ title: Agilent_HPLC_Read
 displayed_sidebar: webUiSidebar
 ---
 
+## Node
+
 ### Node Description
 
 An Airflow operator class that reads data from an Agilent HPLC file and writes the data to the provided output tables in the Ganymede data lake.

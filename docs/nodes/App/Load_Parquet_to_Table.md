@@ -4,6 +4,8 @@ title: Load_Parquet_to_Table
 displayed_sidebar: webUiSidebar
 ---
 
+## Node
+
 ### Node Description
 
 Loads parquet files saved in Ganymede storage into datalake tables. Data will be appended to the
