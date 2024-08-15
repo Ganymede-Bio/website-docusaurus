@@ -438,15 +438,15 @@ And [modified in the corresponding Connections panel in the Ganymede web app aft
 Variables and labels can be referenced in your user-defined code by extracting the values from `kwargs` in the _execute_ function:
 
 ```python
-labels: list[str] = kwargs.get('labels', {})
+labels = kwargs.get('labels', {})
 # -- OR --
-vars: dict[str, str] = kwargs.get('vars', {})
+vars = kwargs.get('vars', [])
 
 # Example: Retrieve the `input_path` variable for use in Agent code
 input_path = kwargs.get('vars', {})['input_path']
 
 # Example: Retrieve all labels for use in Agent code
-connection_
+connection_labels = kwargs.get('labels', [])
 ```
 
 :::info Sleep status
