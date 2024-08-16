@@ -335,5 +335,18 @@ module.exports = {
       id: 'releases/AgentVersionHistory',
       label: 'Agent Change Log'
     }
-  ]
+  ],
+  ganymedeapi: [
+    {
+      type: "category",
+      label: "Ganymede API",
+      link: {
+        type: "generated-index",
+        title: "Ganymede API",
+        description: "Ganymede API",
+        slug: "/category/ganymedeapi",
+      },
+      items: require("./docs/ganymedeapi/sidebar.ts"),
+    },
+  ],
 };

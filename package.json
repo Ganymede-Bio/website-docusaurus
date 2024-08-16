@@ -9,7 +9,8 @@
     "clear": "docusaurus clear",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
-    "serve": "docusaurus serve"
+    "serve": "docusaurus serve",
+    "api": "docusaurus clean-api-docs all && docusaurus gen-api-docs all"
   },
   "dependencies": {
     "@algolia/autocomplete-js": "^1.17.4",
@@ -28,6 +29,9 @@
     "@mui/material": "^5.11.16",
     "algoliasearch": "^4.23.3",
     "classnames": "^2.2.6",
+    "docusaurus-plugin-openapi-docs": "^3.0.1",
+    "docusaurus-theme-openapi-docs": "^3.0.1",
+    "instantsearch.js": "^4.67.0",
     "prism-react-renderer": "^2.3.1",
     "prop-types": "^15.8.1",
     "react": "^18.0.0",
