@@ -106,6 +106,11 @@ module.exports = {
                 label: 'Running Flows'
               },
               'app/flows/FlowRuns', 'app/flows/Notifications']
+          },
+          {
+            type: 'doc',
+            label: 'Ganymede Metadata Tables',
+            id: 'app/flows/SystemMetadata'
           }
         ]
       },
