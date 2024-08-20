@@ -12,27 +12,14 @@ module.exports = {
   projectName: 'website-docusaurus',
   plugins: [
     [
-      '@docusaurus/plugin-client-redirects',
-      {
-        createRedirects(existingPath) {
-          if (existingPath.includes('/api')) {
-            return [
-              existingPath.replace('/api', '/sdk'),
-            ];
-          }
-          return undefined; // Return a falsy value: no redirect created
-        },
-      }
-    ],
-    [
       'docusaurus-plugin-openapi-docs',
       {
         id: "api", // plugin id
         docsPluginId: "classic", // configured for preset-classic
         config: {
           GanymedeApi: {
-            specPath: "examples/openapi.yaml",
-            outputDir: "docs/ganymedeapi",
+            specPath: "api-server/common/public-api/openapi.yaml",
+            outputDir: "docs/api",
             sidebarOptions: {
               groupPathsBy: "tag",
             },
@@ -69,6 +56,10 @@ module.exports = {
           label: 'App'
         },
         {
+          label: "API",
+          to: "/api",
+        },
+        {
           type: 'doc',
           position: 'left',
           docId: 'sdk/GanymedeSDKOverview',
@@ -84,11 +75,7 @@ module.exports = {
           href: 'https://github.com/Ganymede-Bio/website-docusaurus',
           label: 'GitHub',
           position: 'right',
-        },
-        {
-          label: "Ganymede API",
-          to: "/category/ganymedeapi",
-        },
+        }
       ],
     },
     plugins: [

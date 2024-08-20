@@ -344,9 +344,9 @@ module.exports = {
         type: "generated-index",
         title: "Ganymede API",
         description: "Ganymede API",
-        slug: "/category/ganymedeapi",
+        slug: "/api",
       },
-      items: require("./docs/ganymedeapi/sidebar.ts"),
+      items: require("./docs/api/sidebar.ts"),
     },
   ],
 };

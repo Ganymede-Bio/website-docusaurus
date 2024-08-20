@@ -2618,11 +2618,11 @@
     "@types/node" "*"
 
 "@types/node@*":
-  version "22.3.0"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-22.3.0.tgz#7f8da0e2b72c27c4f9bd3cb5ef805209d04d4f9e"
-  integrity sha512-nrWpWVaDZuaVc5X84xJ0vNrLvomM205oQyLsRt7OHNZbSHslcWsvgFR7O7hire2ZonjLrWBbedmotmIlJDVd6g==
+  version "22.4.0"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-22.4.0.tgz#c295fe1d6f5f58916cc61dbef8cf65b5b9b71de9"
+  integrity sha512-49AbMDwYUz7EXxKU/r7mXOsxwFr4BYbvB7tWYxVuLdb2ibd30ijjXINSMAHiEEZk5PCRBmW1gUeisn2VMKt3cQ==
   dependencies:
-    undici-types "~6.18.2"
+    undici-types "~6.19.2"
 
 "@types/node@^17.0.5":
   version "17.0.45"
@@ -4527,10 +4527,10 @@ dns-packet@^5.2.2:
   dependencies:
     "@leichtgewicht/ip-codec" "^2.0.1"
 
-docusaurus-plugin-openapi-docs@^3.0.1, docusaurus-plugin-openapi-docs@^3.0.2:
-  version "3.0.2"
-  resolved "https://registry.yarnpkg.com/docusaurus-plugin-openapi-docs/-/docusaurus-plugin-openapi-docs-3.0.2.tgz#45f45ed187b04127edc682f33a2c56c725fc0f7b"
-  integrity sha512-58aYOOD6VhJpACvzSdI2fSFbX9H9PA7Xt+O5TfNRMyl5XuSIyrVhqfLr1VqTcBkc4xqA5MGko7JLBIxymXxPvg==
+docusaurus-plugin-openapi-docs@0.0.0-763:
+  version "0.0.0-763"
+  resolved "https://registry.yarnpkg.com/docusaurus-plugin-openapi-docs/-/docusaurus-plugin-openapi-docs-0.0.0-763.tgz#3bddff769c75600b3bddbec050b432f8c11aee95"
+  integrity sha512-K6bFiNbwFTMlCd5yfnzj0wvVBfs4rR/tLS4E0YiWQjXVpb/qYE1IBHU+DSBZv36lVcyH8HXQGqp8z0wbtsfciw==
   dependencies:
     "@apidevtools/json-schema-ref-parser" "^11.5.4"
     "@docusaurus/plugin-content-docs" "^3.0.1"
@@ -4558,10 +4558,10 @@ docusaurus-plugin-sass@^0.2.3:
   dependencies:
     sass-loader "^10.1.1"
 
-docusaurus-theme-openapi-docs@^3.0.1:
-  version "3.0.2"
-  resolved "https://registry.yarnpkg.com/docusaurus-theme-openapi-docs/-/docusaurus-theme-openapi-docs-3.0.2.tgz#ac528ced6b2b2bc1acaf669d7e7a6cd787eb5037"
-  integrity sha512-zON8rvZCvkq5YtK2rNwp8I+LGxcIGdvLg6KEMV2yLWa6kHEZhK3QMC3H4/+hpbx07FV9FvkEek6fqvaJunlJ2Q==
+docusaurus-theme-openapi-docs@0.0.0-763:
+  version "0.0.0-763"
+  resolved "https://registry.yarnpkg.com/docusaurus-theme-openapi-docs/-/docusaurus-theme-openapi-docs-0.0.0-763.tgz#73c2d521938c3d61e84246d0c27acca60d862315"
+  integrity sha512-UIDb2d6EOchqCy2TrfHM05iaHYNVC+zcWzONv4jleuDBmPe39cIGmUndxuXQWmhmnHH6ToIj6Sfak31lGrJ2Bw==
   dependencies:
     "@docusaurus/theme-common" "^3.0.1"
     "@hookform/error-message" "^2.0.1"
@@ -4569,7 +4569,7 @@ docusaurus-theme-openapi-docs@^3.0.1:
     clsx "^1.1.1"
     copy-text-to-clipboard "^3.1.0"
     crypto-js "^4.1.1"
-    docusaurus-plugin-openapi-docs "^3.0.2"
+    docusaurus-plugin-openapi-docs "0.0.0-763"
     docusaurus-plugin-sass "^0.2.3"
     file-saver "^2.0.5"
     lodash "^4.17.20"
@@ -10591,10 +10591,10 @@ undici-types@~5.26.4:
   resolved "https://registry.yarnpkg.com/undici-types/-/undici-types-5.26.5.tgz#bcd539893d00b56e964fd2657a4866b221a65617"
   integrity sha512-JlCMO+ehdEIKqlFxk6IfVoAUVmgz7cU7zD/h9XZ0qzeosSHmUJVOzSQvvYSYWXkFXC+IfLKSIffhv0sVZup6pA==
 
-undici-types@~6.18.2:
-  version "6.18.2"
-  resolved "https://registry.yarnpkg.com/undici-types/-/undici-types-6.18.2.tgz#8b678cf939d4fc9ec56be3c68ed69c619dee28b0"
-  integrity sha512-5ruQbENj95yDYJNS3TvcaxPMshV7aizdv/hWYjGIKoANWKjhWNBsr2YEuYZKodQulB1b8l7ILOuDQep3afowQQ==
+undici-types@~6.19.2:
+  version "6.19.6"
+  resolved "https://registry.yarnpkg.com/undici-types/-/undici-types-6.19.6.tgz#e218c3df0987f4c0e0008ca00d6b6472d9b89b36"
+  integrity sha512-e/vggGopEfTKSvj4ihnOLTsqhrKRN3LeO6qSN/GxohhuRv8qH9bNQ4B8W7e/vFL+0XTnmHPB4/kegunZGA4Org==
 
 unicode-canonical-property-names-ecmascript@^2.0.0:
   version "2.0.0"
