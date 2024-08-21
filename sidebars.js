@@ -339,11 +339,12 @@ module.exports = {
   ganymedeapi: [
     {
       type: "category",
-      label: "Ganymede API",
+      label: "API",
       link: {
         type: "generated-index",
-        title: "Ganymede API",
-        description: "Ganymede API",
+        description: `Welcome to the Ganymede application programming interface (API) reference.
+        This guide describes various REST API operations for the Ganymede platform,
+        related request and response structures, and error codes.`,
         slug: "/api",
       },
       items: require("./docs/api/sidebar.ts"),

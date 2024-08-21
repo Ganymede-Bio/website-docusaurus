@@ -3,10 +3,6 @@ import type { SidebarsConfig } from "@docusaurus/plugin-content-docs";
 const sidebar: SidebarsConfig = {
   apisidebar: [
     {
-      type: "doc",
-      id: "api/ganymede-api",
-    },
-    {
       type: "category",
       label: "Agents",
       items: [
@@ -63,6 +59,12 @@ const sidebar: SidebarsConfig = {
           id: "api/download-file",
           label: "downloadFile",
           className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "api/upload-file",
+          label: "uploadFile",
+          className: "api-method post",
         },
       ],
     },
@@ -168,6 +170,12 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "api/schemas/fileuploadbody",
+          label: "FileUploadBody",
+          className: "schema",
+        },
+        {
+          type: "doc",
           id: "api/schemas/flow",
           label: "Flow",
           className: "schema",
@@ -194,6 +202,12 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "api/schemas/table",
           label: "Table",
+          className: "schema",
+        },
+        {
+          type: "doc",
+          id: "api/schemas/postquerybody",
+          label: "PostQueryBody",
           className: "schema",
         },
         {

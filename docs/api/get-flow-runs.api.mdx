@@ -1,13 +1,12 @@
 ---
 id: get-flow-runs
 title: "getFlowRuns"
-description: "getFlowRuns"
+description: "Get all [FlowRuns](https://docs.ganymede.bio/app/flows/FlowView#running-flows) for a specific [Flow](https://docs.ganymede.bio/app/flows/FlowEditor#flows) in an Environment"
 sidebar_label: "getFlowRuns"
 hide_title: true
 hide_table_of_contents: true
-api: eJy9VU1v2zAM/SsGTxvg1emOvnXAWhS7bG23SxAMik0nam1Jlah0geH/PlCyHadJi2Ubekosinz8eHxqQRu0gqRW1yXksEK6rPXTjVcOUjDCigYJrYN83oISDUIOqDbSatWgIkjB4qOXFkvIyXpMQSrIwQhaQwquWGMjIG+BtoZdHVmpVtB16RitqvXTdfkfAlmvPmGlLe7FqkTthmCPHu0WUijRFVYaLprLMbpYJyQbTKRKGlnX0mGhVemOASvfLNE+B76oCO3b4C4YxRmtHDq2f5zN+Gc/9hVSIuo64eZar1xSaZuIxBksZCWLcM6oQiX70yy0Iv6XtyCMqWURqJHdOw7bHqYlrBVcmiRs3ORcL++x4IDGMsFIxmRleWSG6cCBY6YNWicj+IGtTx0bRT9euSaVJClI26NWR4Lw0MLRfQP5HL559MgEvfFKRdOtLwp0PKdLIetg9OpB6ScFixRIUs2R+kW6DQARydKdbAJapW0jCHIoBeEHZgGkxyosT3OQyni6lDW6PxjSbomi3234PtFTe/o7yOh4J5Yne5KVqxVaLLnDJ/l20xWdMx3TnQANVDtKrCmNBtIczpohAorDwltJ26CbwsifD8j/F7y+JLjHcxiFdvFcGvZVuEFa616cgyjTGnLINufZZHezdvLRZVyUy9pYW/y0MZpDuxkE3dsaclgTGZdnWbvWjroDneLOCCvHOfGtqDiV8DUzMpx0QZqGum9ZKOL9sfrdmIz8gmFOHH+Nogzi2cvpcD/SstLBsW/zlVDbBktMLr5eHyT6zDgqB5yfzc5mvbiJgpPn2EY7akSQjB55hZRw35O+8Xvhx+wJf1FmaiEVL1xoYdsPZQ6b8x19eknN9z/DZPh45N04nEXaN3cObbsUDr/buuv4OL4gPLJSOp7E7oV5luQo4K+/L0drCVPae0c3ovZ8D/i5exPo4SXdIS92/DuxA+9u+l1/n7yEOzBSbaeYQz7TyZ3WgX+G7tnRLbp02BAuPhovigINTdwO3mru2qgbV5/vIAXhmaLTJXwIS9j/4ehHUxr2ccgs7Gb6wuW2jcvddeP9aHrRY1z/eJt7s+i67jd3KKCy
+api: eJzVVlFv2zgM/isG97IBXt3eo982oB2GPa3t7SUwBsWmE662pElUusDwfx8o24m7uMVydxhwT7Ekkp9EfvyYDoxFp5iM/lhBDhvkm8Y83gbtIYUKfenIyink8AE5UU2TrCaL4vWW2fo8yypT+ouN0vsWK7xYk8mUtVndmEefifUXwsdXLmhNevM2br9JauMSlXiLJdVUDlF/P+J1RWzcqzEW6UTp5FrvyBndomZIwSqnWmR0HvJVB1q1CDngExuH3wM5rCBnFzAFkndaxVtIwZdbbBXkHfDeiqtnR3oDfZ8eogn8x+o/COSCfo+1cfgkVq0aPwX7HtDtT2qC1pTbhKlFyUFLTUMeS6MrvwSsQ7tG9yvwu5rR/RncQlC8Ndqjl/O/Li/lZ5lnE81+ZYrsL1a8NJrlK+9AWdtQGXmdffMStju9lnJOydOIsfWzfbP+hmWkkJPuYBouS9VCDdOJA0tHO3SeBvCTs5GI2Gr+8oIZaWJSbNziqWfFeHoi0UML+Qo+BwwoBL0dmg9SuAtliV7qdKOoiYdBP2jzqKFIgYkbiTQm/y4CDEiO76mNaLVxrWLIoVKMb4UFkC69sDrPgbQNfEMN+t8o0rGJBr+7uD7T0wT+Z5CD471an+3JjjYbdFhJhs/y7ectuhI6pkcBmqi2SKw5jSbSnNZaICKKxzI44n3UTWXp6wPKdyHty0pyvILDlChSaJG3ZpweUXh5Czlku6tsprZZN1v0o5J3w/2HpRuGjke3m0Q7uAZymGZCtzWe+xMtktcrR4daiNWgKrUKjbAu7vRRfqa33YkYDPaHFx5LYekTxlpI/C2qKgrkKJmT/UC92kTHMZWLl5vaG64uLi8uR6FSpVxSYljjuVWx/UeEF6Zwd1S5/9tAHpPL+IMz2yjS0vOxwt3ImRXsro4MHt3yp8sIINsH6h+4U6Rj7VfQdWvl8W/X9L1sD0NMGFWRF6Ich9yz2X1xxC2+JZLoySjfqSZEWsjE/SPQ0zA/IhfH9jgzA69vR7l5kzyHOzWM3s8xp/vMK3deBv419MiOvujTqYHl8cPhu7JEyzO3k78L/VzWPlzfQwoqCEXnGvEQNWL8kOiLV5rkYrpZlI70GeOuG7Sn7w/2w9GzHgd1GqwlN0Xf9z8B6H8VZg==
 sidebar_class_name: "get api-method"
-info_path: api/ganymede-api
 custom_edit_url: null
 ---
 
@@ -40,7 +39,7 @@ import TabItem from "@theme/TabItem";
 
 
 
-getFlowRuns
+Get all [FlowRuns](https://docs.ganymede.bio/app/flows/FlowView#running-flows) for a specific [Flow](https://docs.ganymede.bio/app/flows/FlowEditor#flows) in an Environment
 
 <Heading
   id={"request"}
@@ -121,7 +120,7 @@ getFlowRuns
         <div>
           
           
-          Get all flowruns for a specific flow in an environment
+          Get all FlowRuns for a specific Flow in an Environment
           
           
         </div><div>
