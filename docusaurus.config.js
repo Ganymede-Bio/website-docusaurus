@@ -15,6 +15,11 @@ module.exports = {
       additionalLanguages: ['python', 'bash', 'powershell'],
       theme: prismThemes.nightOwl
     },
+    docs: {
+      sidebar: {
+        hideable: true,
+      }
+    },
     algolia: {
       appId: 'SMEM8QA2TD',
       apiKey: 'd7fb51ca85e14d48eb21e1fd4e08c1f6',
