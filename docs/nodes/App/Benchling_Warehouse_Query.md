@@ -40,4 +40,4 @@ Process tabular data from user-defined SQL query, writing results back to data l
 ### Returns
 
 `NodeReturn`
-Object containing data to store in data lake and/or file storage
+  Object containing data to store in data lake and/or file storage

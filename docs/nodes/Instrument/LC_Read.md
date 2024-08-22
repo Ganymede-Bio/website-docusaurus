@@ -19,7 +19,7 @@ Parse data from an LC file and ingest into Ganymede data lake.
 
 The Node configuration below would capture CDF files:
 
-- **lc**: *.cdf
+lc: *.cdf
 
 ## User-Defined Python
 
@@ -35,4 +35,4 @@ Function to process LC file data
 ### Returns
 
 `NodeReturn`
-Object containing data to store in data lake and/or file storage
+  Object containing data to store in data lake and/or file storage

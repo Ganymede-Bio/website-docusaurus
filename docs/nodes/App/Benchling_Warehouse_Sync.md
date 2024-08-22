@@ -57,4 +57,4 @@ Ganymede.
 ### Returns
 
 `pd.DataFrame`
-DataFrame containing schema, from_benchling_table, and to_ganymede_table
+  DataFrame containing schema, from_benchling_table, and to_ganymede_table

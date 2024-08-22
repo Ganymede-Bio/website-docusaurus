@@ -38,4 +38,4 @@ Write table(s) from SQL query and stores Excel sheet in cloud storage.
 ### Returns
 
 `NodeReturn`
-Object containing data to store in data lake and/or file storage
+  Object containing data to store in data lake and/or file storage

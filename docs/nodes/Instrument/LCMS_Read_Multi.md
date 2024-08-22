@@ -19,7 +19,7 @@ Parse and ingest data from multiple LCMS files into Ganymede data lake.
 
 The Node configuration below would capture mzML files:
 
-- **lcms**: *.mzML
+lcms: *.mzML
 
 ## User-Defined Python
 
@@ -35,4 +35,4 @@ Function to process LCMS file data
 ### Returns
 
 `NodeReturn`
-Object containing data to store in data lake and/or file storage
+  Object containing data to store in data lake and/or file storage

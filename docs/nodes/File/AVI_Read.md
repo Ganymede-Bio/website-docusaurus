@@ -43,4 +43,12 @@ data tables stored in the data lake
 ### Returns
 
 `NodeReturn`
-Object containing data to store in data lake and/or file storage
+  Object containing data to store in data lake and/or file storage
+
+### Notes
+
+If a DataFrame is returned, the table name corresponds to the **results** parameter of the node.
+
+If a dict of dataframes is returned, the keys of the dict are used as table names
+for the corresponding DataFrames to store.  The table with **results** as its key
+is displayed on the Flow Editor.

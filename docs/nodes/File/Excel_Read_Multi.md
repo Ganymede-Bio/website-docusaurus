@@ -8,9 +8,9 @@ displayed_sidebar: webUiSidebar
 
 ### Node Description
 
-Reads multiple Excel files and uploads processed result to data lake
+Reads Excel file and uploads processed result to data lake
 
-Ingests multiple Excel files, which is passed to the user-defined function as a bytes object
+Ingests one Excel file, which is passed to the user-defined function as a bytes object
 for processing.  The user-defined function returns one or more tables, which are
 uploaded to the Ganymede data lake.
 
@@ -29,7 +29,7 @@ In the execute function, returning NodeReturn(tables_to_upload=\{'results': df\}
 
 The Node attribute configuration below captures all files ending in xls, xlsx, xlsm.
 
-- **excel**: *.\{xls,xlsx,xlsm\}
+excel: *.\{xls,xlsx,xlsm\}
 - **results**: instrument_output_results
 
 ## User-Defined Python
@@ -46,7 +46,7 @@ Reads Excel file and stores processed table(s) in data lake.
 ### Returns
 
 `NodeReturn`
-Object containing data to store in data lake and/or file storage
+  Object containing data to store in data lake and/or file storage
 
 ### Notes
 

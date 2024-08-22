@@ -56,7 +56,7 @@ conjunction with the Input_Param node.
 ### Returns
 
 `NodeReturn`
-Object containing data to store in data lake and/or file storage
+  Object containing data to store in data lake and/or file storage
 
 ### Notes
 
