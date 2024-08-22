@@ -133,7 +133,7 @@ module.exports = {
           {
             type: 'doc',
             id: 'app/agents/DebuggingAgents',
-            label: 'Troubleshooting Agents'
+            label: 'Troubleshooting Agents & FAQ'
           },
           {
             type: 'doc',
