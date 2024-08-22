@@ -29,11 +29,11 @@ The fcsparser python package is used to parse FCS files into metadata and data
 
 ### Notes
 
-*data* contains a record for each flow cytometer detection event
+- **data** contains a record for each flow cytometer detection event
 (generally passage of single cell past detector); for each event, a value is recorded for
 each channel
 
-*metadata* comprises of the following components:
+- **metadata** comprises of the following components:
 
 - **header**: contains FCS version number and bytes corresponding to where binary positions of text, data, and analysis in FCS file.
 FCS format: FCS version number
@@ -79,7 +79,7 @@ analysis end: byte offset to the last byte of the ANALYSIS segment
 
 The Node configuration below would capture FCS files. In the execute function, returning NodeReturn(tables_to_upload=\{'data': df_data, 'metadata_file': df_metadata_file, 'metadata_fcs': df_metadata_fcs, 'metadata_channels': df_metadata_channels\}) would render the 4 DataFrames returned in the Flow Editor if Table Head visualization is enabled.
 
-fcs: *.fcs
+- **fcs**: *.fcs
 - **data**: fcs_data
 - **metadata_file**: fcs_file_metadata
 - **metadata_fcs**: fcs_metadata
@@ -101,4 +101,4 @@ Process FCS data/metadata file
 ### Returns
 
 `NodeReturn`
-Object containing data to store in data lake and/or file storage
+  Object containing data to store in data lake and/or file storage

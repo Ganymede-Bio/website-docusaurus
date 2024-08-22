@@ -29,4 +29,4 @@ Process image data into a dictionary of images indexed by filename to save in cl
 ### Returns
 
 `NodeReturn`
-Object containing data to store in data lake and/or file storage.
+  Object containing data to store in data lake and/or file storage.

@@ -53,19 +53,19 @@ Specify list of S3 keys to upload to GCS
 
 ### Parameters
 
-- df_s3_objects: pd.DataFrame
+- **df_s3_objects**: `pd.DataFrame`
   - Dataframe containing s3_object key metadata like Key, ETag, LastModified, Size, StorageClass,
   - and Bucket
-- client: botocore.client.S3
+- **client**: `botocore.client.S3`
   - Boto3 client to interact with S3.  This can be used to retrieve the body of objects from S3.
-- ganymede_context: GanymedeContext
+- **ganymede_context**: `GanymedeContext`
   - Ganymede context object
 
 ### Returns
 
 `dict[str, str]`
-Dictionary specifying files to upload to GCS.  The keys are the keys in S3 and the values
-are the file names to use in Ganymede
+  Dictionary specifying files to upload to GCS.  The keys are the keys in S3 and the values
+  are the file names to use in Ganymede
 
 ### Examples
 

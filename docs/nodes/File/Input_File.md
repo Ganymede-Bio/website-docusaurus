@@ -38,7 +38,7 @@ Processes file data for saving in cloud storage
 ### Returns
 
 `NodeReturn`
-Object containing data to store in data lake and/or file storage
+  Object containing data to store in data lake and/or file storage
 
 ### Notes
 

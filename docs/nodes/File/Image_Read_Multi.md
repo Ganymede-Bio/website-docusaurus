@@ -8,7 +8,7 @@ displayed_sidebar: webUiSidebar
 
 ### Node Description
 
-Ingests and processes multiple image files
+Ingests and processes an image file
 
 Takes multiple images as input, processes via user-defined function, and stores a dict of processed
 images to the storage bucket
@@ -45,4 +45,4 @@ Process image data into a dictionary of images indexed by filename to save in cl
 ### Returns
 
 `NodeReturn`
-Object containing data to store in data lake and/or file storage.
+  Object containing data to store in data lake and/or file storage.

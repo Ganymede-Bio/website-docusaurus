@@ -10,7 +10,7 @@ displayed_sidebar: webUiSidebar
 
 Reads multiple Excel files and uploads processed result to data lake
 
-Ingests multiple Excel files, which is passed to the user-defined function as a bytes object
+Ingests Excel files, which are passed to the user-defined function as a bytes object
 for processing.  The user-defined function returns one or more tables, which are
 uploaded to the Ganymede data lake.
 
@@ -46,9 +46,9 @@ Reads Excel file and stores processed table(s) in data lake.
 ### Returns
 
 `NodeReturn`
-Object containing data to store in data lake and/or file storage
+  Object containing data to store in data lake and/or file storage
 
 ### Notes
 
-Excel_file is represented in bytes so user can handle cases where Excel spreadsheet is
+excel_file is represented in bytes so user can handle cases where Excel spreadsheet is
 a binary object within this function

@@ -47,10 +47,10 @@ Calls AWS to get data for flow to trigger
     - File name in S3 bucket
 - **bucket_name** : `str`
     - Name of S3 bucket
-  - s3_hook: S3Hook
+- **s3_hook**: S3Hook
     - AWS S3 hook
 
 ### Returns
 
 `FlowInputs`
-Object containing data for kicking off subsequent Flow
+  Object containing data for kicking off subsequent Flow

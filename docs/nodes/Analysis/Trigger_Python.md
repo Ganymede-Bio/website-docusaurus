@@ -27,8 +27,8 @@ Processes data, then triggers downstream flow
 ### Returns
 
 `tuple[str, FlowInputs]`
-Tuple where first element is the ID of the flow to trigger
-and second element is the FlowInputs class containing all inputs for the flow to trigger
+  Tuple where first element is the ID of the flow to trigger
+  and second element is the FlowInputs class containing all inputs for the flow to trigger
 
 ### Notes
 

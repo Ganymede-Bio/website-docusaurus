@@ -163,7 +163,7 @@ if __name__ == "__main__":
                 "---\n\n"
             )
 
-            dest_file.write(header + operator_data + action_data)
+            dest_file.write(header + operator_data + action_data + "\n")
 
     # create sidebar JSON files
     operator_types = set([v["type"] for v in operators.values()])

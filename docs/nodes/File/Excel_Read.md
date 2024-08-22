@@ -29,7 +29,7 @@ In the execute function, returning NodeReturn(tables_to_upload=\{'results': df\}
 
 The Node attribute configuration below captures all files ending in xls, xlsx, xlsm.
 
-excel: *.\{xls,xlsx,xlsm\}
+- **excel**: *.\{xls,xlsx,xlsm\}
 - **results**: instrument_output_results
 
 ## User-Defined Python
@@ -46,9 +46,9 @@ Reads Excel file and stores processed table(s) in data lake.
 ### Returns
 
 `NodeReturn`
-Object containing data to store in data lake and/or file storage
+  Object containing data to store in data lake and/or file storage
 
 ### Notes
 
-Excel_file is represented in bytes so user can handle cases where Excel spreadsheet is
+excel_file is represented in bytes so user can handle cases where Excel spreadsheet is
 a binary object within this function

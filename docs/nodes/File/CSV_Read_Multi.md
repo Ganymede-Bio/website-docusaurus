@@ -10,7 +10,7 @@ displayed_sidebar: webUiSidebar
 
 Reads contents of multiple CSV files into data lake
 
-The contents of CSV files are passed to the user-defined function, which
+The contents of CSV file are passed to the user-defined function, which
 return one or more tables for storage in Ganymede data lake.
 
 ### Node Attributes
@@ -39,4 +39,4 @@ stored in data lake
 ### Returns
 
 `NodeReturn`
-Object containing data to store in data lake and/or file storage.
+  Object containing data to store in data lake and/or file storage.

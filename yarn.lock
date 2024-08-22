@@ -1477,7 +1477,7 @@
     utility-types "^3.10.0"
     webpack "^5.88.1"
 
-"@docusaurus/plugin-content-docs@3.5.2", "@docusaurus/plugin-content-docs@^3.0.1":
+"@docusaurus/plugin-content-docs@3.5.2", "@docusaurus/plugin-content-docs@^3.0.1", "@docusaurus/plugin-content-docs@^3.5.2":
   version "3.5.2"
   resolved "https://registry.yarnpkg.com/@docusaurus/plugin-content-docs/-/plugin-content-docs-3.5.2.tgz#adcf6c0bd9a9818eb192ab831e0069ee62d31505"
   integrity sha512-Bt+OXn/CPtVqM3Di44vHjE7rPCEsRCB/DMo2qoOuozB9f7+lsdrHvD0QCHdBs0uhz6deYJDppAr2VgqybKPlVQ==
@@ -4527,10 +4527,10 @@ dns-packet@^5.2.2:
   dependencies:
     "@leichtgewicht/ip-codec" "^2.0.1"
 
-docusaurus-plugin-openapi-docs@0.0.0-763:
-  version "0.0.0-763"
-  resolved "https://registry.yarnpkg.com/docusaurus-plugin-openapi-docs/-/docusaurus-plugin-openapi-docs-0.0.0-763.tgz#3bddff769c75600b3bddbec050b432f8c11aee95"
-  integrity sha512-K6bFiNbwFTMlCd5yfnzj0wvVBfs4rR/tLS4E0YiWQjXVpb/qYE1IBHU+DSBZv36lVcyH8HXQGqp8z0wbtsfciw==
+docusaurus-plugin-openapi-docs@^4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/docusaurus-plugin-openapi-docs/-/docusaurus-plugin-openapi-docs-4.0.1.tgz#2c767cd7af363b24413f7249e85b26ac154d803a"
+  integrity sha512-ST0VLbRMTNz2O0NFIezWcF0dNYrGf34/oUmn3wH3hdMcStGQIOCEwD3JvuzyQ7WygjAR8md2kITHeRBRB2yhAA==
   dependencies:
     "@apidevtools/json-schema-ref-parser" "^11.5.4"
     "@docusaurus/plugin-content-docs" "^3.0.1"
@@ -4558,10 +4558,10 @@ docusaurus-plugin-sass@^0.2.3:
   dependencies:
     sass-loader "^10.1.1"
 
-docusaurus-theme-openapi-docs@0.0.0-763:
-  version "0.0.0-763"
-  resolved "https://registry.yarnpkg.com/docusaurus-theme-openapi-docs/-/docusaurus-theme-openapi-docs-0.0.0-763.tgz#73c2d521938c3d61e84246d0c27acca60d862315"
-  integrity sha512-UIDb2d6EOchqCy2TrfHM05iaHYNVC+zcWzONv4jleuDBmPe39cIGmUndxuXQWmhmnHH6ToIj6Sfak31lGrJ2Bw==
+docusaurus-theme-openapi-docs@^4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/docusaurus-theme-openapi-docs/-/docusaurus-theme-openapi-docs-4.0.1.tgz#fb10e9e253afa7d1012f47e73e9a89ab0e8121a5"
+  integrity sha512-4HIzYm2Y+pPiqvFs2oSEghtSgamza3Az1nGgwAJ+dpowfdOUafsGnbWOkJoFWVncRNn8/2mYSwrbUuo1t0kVUQ==
   dependencies:
     "@docusaurus/theme-common" "^3.0.1"
     "@hookform/error-message" "^2.0.1"
@@ -4569,7 +4569,7 @@ docusaurus-theme-openapi-docs@0.0.0-763:
     clsx "^1.1.1"
     copy-text-to-clipboard "^3.1.0"
     crypto-js "^4.1.1"
-    docusaurus-plugin-openapi-docs "0.0.0-763"
+    docusaurus-plugin-openapi-docs "^4.0.1"
     docusaurus-plugin-sass "^0.2.3"
     file-saver "^2.0.5"
     lodash "^4.17.20"
