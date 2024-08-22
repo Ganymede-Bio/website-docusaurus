@@ -27,6 +27,13 @@ module.exports = {
           },
         }
       },
+    ],
+    [
+      'vercel-analytics',
+      {
+        debug: false,
+        mode: 'auto',
+      },
     ]
   ],
   themes: ["docusaurus-theme-openapi-docs"], 
