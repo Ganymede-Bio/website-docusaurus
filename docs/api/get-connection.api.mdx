@@ -1,0 +1,296 @@
+---
+id: get-connection
+title: "getConnection"
+description: "Get a [Connection](https://docs.ganymede.bio/app/agents/Agent#installing-connections) in an Environment by its id."
+sidebar_label: "getConnection"
+hide_title: true
+hide_table_of_contents: true
+api: eJzFVU2P0zAQ/SvRcAEpNLscc0OAEIITu5yqHqbxtB1IHGNPClXk/47GSdp0NwsSBzjF9nzPezPpoXXkUbi1HwyUsCd501pLlb5ADoZC5dmlWwnvSTLM1heNzfODiAtlUZi2Cqs92lNDhlZbbgt0rsA9WQnFa/08YxsE65rt/mV19hBeZGwztNk7e2Tf2oasZNtTxhIyNivIwaHHhoR8gHLdg8WGoAS6qEMOnr537MlAKb6jHFizdSgHyCFUB2oQyh7k5NQ0iGe7hxjzszc2f+1ko4bBtTZQUPmrmxv9XDfuqqdVa0XTLntA52quUvuLr0FV+8eh2u1XqrRK5xUs4SEQm4V08rGiBUEQlAVJDmS7Bso1fOIjQQ5fnEEZJG85jEiRNuju0Ilpf2gNb8l5qlDfNzkIS01XZd6lYDGHI/nAQ2FLGXm55yfyTdz5sFzkHP0lueA+zAToPZ4gBxZqwl93dnhYEByx7pYkcc6p9UCypDKZzFp3j4NBjVuqUxa2q2vcqnCg4zWj2JAV3jH5rCFBg4LZrvUZZtWca39owDnTpVQTkybeXJCc43ZB6RqTRU5oGA0UqOo8yymNMzp++Y30vNFRGoBbz6yCOmtIDu24n9JKkAOUUBxvi1nUop9dYjHbMUXPJmri5I/THul8DSVM66s/tEHio4WXkPKsMKS2qdYw3TvsalEH+hLTGpjqutMBHvTP1V2o6PgjJSjU/4HQkJ96XZ71tU1sd20yHBu5mNw0XXC7ulndjMsFK01Sfbg2SINp+sYIv13w/WU3/Z9dPzZJ6KcUrka2Ol4JqX4EfQ3H2wdky6G8vs4iqpDTjhqgW0PfbzHQF1/HqM/fO/KJfRekEz0MBz0bKHdYh4fjN2/U88/j4LzInqpgwt6ezqOf4EvUuKpF/0n/MDQbiJuYTzzUwgfB66oiJzOTR3+qOB/L9+/udRd0itCc6t8S1ceDel9MZ2L9lFWagPwJ5b4fRijGs/4getLiPGRjzZp7jPEXCZoRUQ==
+sidebar_class_name: "get api-method"
+custom_edit_url: null
+---
+
+import ApiTabs from "@theme/ApiTabs";
+import DiscriminatorTabs from "@theme/DiscriminatorTabs";
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import SecuritySchemes from "@theme/ApiExplorer/SecuritySchemes";
+import MimeTabs from "@theme/MimeTabs";
+import ParamsItem from "@theme/ParamsItem";
+import ResponseSamples from "@theme/ResponseSamples";
+import SchemaItem from "@theme/SchemaItem";
+import SchemaTabs from "@theme/SchemaTabs";
+import Heading from "@theme/Heading";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"getConnection"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/v1/environment/{environment}/connections/{id}"}
+>
+  
+</MethodEndpoint>
+
+
+
+Get a [Connection](https://docs.ganymede.bio/app/agents/Agent#installing-connections) in an Environment by its id.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<details
+  style={{"marginBottom":"1rem"}}
+  className={"openapi-markdown__details"}
+  data-collapsed={false}
+  open={true}
+>
+  <summary
+    style={{}}
+  >
+    <h3
+      className={"openapi-markdown__details-summary-header-params"}
+    >
+      Path Parameters
+    </h3>
+  </summary><div>
+    <ul>
+      <ParamsItem
+        className={"paramsItem"}
+        param={{"name":"environment","required":true,"in":"path","schema":{"type":"string"}}}
+      >
+        
+      </ParamsItem><ParamsItem
+        className={"paramsItem"}
+        param={{"name":"id","required":true,"in":"path","schema":{"type":"string"}}}
+      >
+        
+      </ParamsItem>
+    </ul>
+  </div>
+</details><div>
+  <div>
+    <ApiTabs
+      label={undefined}
+      id={undefined}
+    >
+      <TabItem
+        label={"200"}
+        value={"200"}
+      >
+        <div>
+          
+          
+          Connection
+          
+          
+        </div><div>
+          <MimeTabs
+            className={"openapi-tabs__mime"}
+            schemaType={"response"}
+          >
+            <TabItem
+              label={"application/json"}
+              value={"application/json"}
+            >
+              <SchemaTabs
+                className={"openapi-tabs__schema"}
+              >
+                <TabItem
+                  label={"Schema"}
+                  value={"Schema"}
+                >
+                  <details
+                    style={{}}
+                    className={"openapi-markdown__details response"}
+                    data-collapsed={false}
+                    open={true}
+                  >
+                    <summary
+                      style={{}}
+                      className={"openapi-markdown__details-summary-response"}
+                    >
+                      <strong>
+                        Schema
+                      </strong>
+                    </summary><div
+                      style={{"textAlign":"left","marginLeft":"1rem"}}
+                    >
+                      
+                    </div><ul
+                      style={{"marginLeft":"1rem"}}
+                    >
+                      <SchemaItem
+                        collapsible={false}
+                        name={"id"}
+                        required={true}
+                        schemaName={"string"}
+                        qualifierMessage={undefined}
+                        schema={{"type":"string"}}
+                      >
+                        
+                      </SchemaItem><SchemaItem
+                        collapsible={false}
+                        name={"name"}
+                        required={true}
+                        schemaName={"string"}
+                        qualifierMessage={undefined}
+                        schema={{"type":"string"}}
+                      >
+                        
+                      </SchemaItem><SchemaItem
+                        collapsible={false}
+                        name={"state"}
+                        required={true}
+                        schemaName={"ConnectionState (string)"}
+                        qualifierMessage={"**Possible values:** [`Live`, `Updating`, `Disconnected`, `Shutdown`, `Deprecated`]"}
+                        schema={{"type":"string","enum":["Live","Updating","Disconnected","Shutdown","Deprecated"],"title":"ConnectionState"}}
+                      >
+                        
+                      </SchemaItem><SchemaItem
+                        collapsible={false}
+                        name={"version"}
+                        required={true}
+                        schemaName={"string"}
+                        qualifierMessage={undefined}
+                        schema={{"type":"string"}}
+                      >
+                        
+                      </SchemaItem><SchemaItem
+                        collapsible={false}
+                        name={"startTime"}
+                        required={true}
+                        schemaName={"string"}
+                        qualifierMessage={undefined}
+                        schema={{"type":"string"}}
+                      >
+                        
+                      </SchemaItem><SchemaItem
+                        collapsible={false}
+                        name={"agentId"}
+                        required={true}
+                        schemaName={"string"}
+                        qualifierMessage={undefined}
+                        schema={{"type":"string"}}
+                      >
+                        
+                      </SchemaItem><SchemaItem
+                        collapsible={false}
+                        name={"environment"}
+                        required={true}
+                        schemaName={"string"}
+                        qualifierMessage={undefined}
+                        schema={{"type":"string"}}
+                      >
+                        
+                      </SchemaItem><SchemaItem
+                        collapsible={true}
+                        className={"schemaItem"}
+                      >
+                        <details
+                          style={{}}
+                          className={"openapi-markdown__details"}
+                        >
+                          <summary
+                            style={{}}
+                          >
+                            <span
+                              className={"openapi-schema__container"}
+                            >
+                              <strong
+                                className={"openapi-schema__property"}
+                              >
+                                tags
+                              </strong><span
+                                className={"openapi-schema__name"}
+                              >
+                                 object[]
+                              </span>
+                            </span>
+                          </summary><div
+                            style={{"marginLeft":"1rem"}}
+                          >
+                            <li>
+                              <div
+                                style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem","paddingBottom":".5rem"}}
+                              >
+                                Array [
+                              </div>
+                            </li><SchemaItem
+                              collapsible={false}
+                              name={"id"}
+                              required={true}
+                              schemaName={"string"}
+                              qualifierMessage={undefined}
+                              schema={{"type":"string"}}
+                            >
+                              
+                            </SchemaItem><SchemaItem
+                              collapsible={false}
+                              name={"type"}
+                              required={true}
+                              schemaName={"string"}
+                              qualifierMessage={undefined}
+                              schema={{"type":"string"}}
+                            >
+                              
+                            </SchemaItem><SchemaItem
+                              collapsible={false}
+                              name={"value"}
+                              required={true}
+                              schemaName={"string"}
+                              qualifierMessage={undefined}
+                              schema={{"type":"string"}}
+                            >
+                              
+                            </SchemaItem><li>
+                              <div
+                                style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem"}}
+                              >
+                                ]
+                              </div>
+                            </li>
+                          </div>
+                        </details>
+                      </SchemaItem><SchemaItem
+                        collapsible={false}
+                        name={"labels"}
+                        required={false}
+                        schemaName={"string[]"}
+                        qualifierMessage={undefined}
+                        schema={{"nullable":true,"description":"identifier metadata for a connection","type":"array","items":{"type":"string"}}}
+                      >
+                        
+                      </SchemaItem>
+                    </ul>
+                  </details>
+                </TabItem><TabItem
+                  label={"Example (from schema)"}
+                  value={"Example (from schema)"}
+                >
+                  <ResponseSamples
+                    responseExample={"{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"state\": \"Live\",\n  \"version\": \"string\",\n  \"startTime\": \"string\",\n  \"agentId\": \"string\",\n  \"environment\": \"string\",\n  \"tags\": [\n    {\n      \"id\": \"string\",\n      \"type\": \"string\",\n      \"value\": \"string\"\n    }\n  ],\n  \"labels\": [\n    \"string\"\n  ]\n}"}
+                    language={"json"}
+                  >
+                    
+                  </ResponseSamples>
+                </TabItem>
+              </SchemaTabs>
+            </TabItem>
+          </MimeTabs>
+        </div>
+      </TabItem>
+    </ApiTabs>
+  </div>
+</div>
+      

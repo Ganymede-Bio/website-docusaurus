@@ -1,0 +1,265 @@
+---
+id: upload-file
+title: "uploadFile"
+description: "Get a signed url to upload a [File](https://docs.ganymede.bio/app/files/FileBrowser) in an Environment. The url will valid for 15 minutes. Uploads using this url will require the header 'x-goog-content-length-range' set with value '0,10000000', the header 'x-goog-meta-initiatortype' set with value 'API', and the header 'x-goog-meta-initiatorid' set with the initiator value that was passed in the request body."
+sidebar_label: "uploadFile"
+hide_title: true
+hide_table_of_contents: true
+api: eJztVU2P2zYQ/SvEnBJAtuyiPVS3TbEpgh4aZHdPXh/G0lhiQpEMSdlrCPrvxZCSP2JvkKKnAtnLSuLM43y899yDseQwSKM/VFBAZ5XB6r1UBBlU5EsnLR9CAX9SECi8rDVVonNKBCNSuECx4pT1myYE64s8r0zp5zXqQ0sVzTfS5GhtvpWKfM6R75zZe3JvhdQCtbjXO+mMbkmHuXhsKMLvpVJih0pWYmucWP4mWqm7QH4unuK1XnRe6lqERvpThqOvnXQkQkOiIazIiWd4mdXG1LPS6EA6zBTpOjQzh7qmZxCegtjL0PBtHYlnWGTLRfp7huwmUksBZ1LLIDEYFw72Js7dxw8MgLr6ARBZnUNw/PFoBAwNBrFHLyx6TxUPj8O4Y/JBbEx1mEMGFh22FMh5KFY9aGwJCqDTjCGDcUoVFMF1lIHkDVsMDWTgy4ZahKIH7gsK8MFJXcMwrFMi+fDOVAeO+BZnnDAfobVKlpFa+WfPFOqvoc3mM5VckHVMxCDJ82mq+aoArnMcya3yzttaJYzzjHUGQQbFKczBRKLYyDCkZG+N9qmCXxYL/ncpgYdE/ien4N+3eiyT7/p18fs1PFcl7pQjrA7i/kX64P/bPUMGnsrOyXCIVEArZ1+In9e8y4A1UyTe63k8LYXGsA1Y4+NSmBAF5LtlfkafvD97GUZVJydg9pDbTdTrnIICJlPoG+PDcOUrkMEOncSNSpPnqDSbLXYqMAB/GSL9pnYeuOsUf2zqOAG08i86wMjqpDrIJiFM8TwdHuKnE6PvX7C1ik4MnIZ5QbwLOm5NvHjk1c3myPn0spwv5otxo1hyk1wDz7pFfXbp6ybcn9jw04//L348sjLQS8itQqmZOVEa/aiwFeyWkH1j0cXla1wWZCM5WK1JKCvo+w16enJqGPjz145clPhJV1GMlfT8XEGxReXpO8x682m00bfitfInpelDlK/qRvZHIV40MqyHbNIgl5Ei/hg3/8g4J4QrgxuyKeOuLMmG78aeO9jHvx8eIYPN+DvVmopzHO75xw/3qVoTm48uEr/1oFDXHdYcmzBZodjxks7t5Uu0l/GBu7o5j8lpprFE18leCe77ZFvDcIxPR69mHI0tRfNi1sMw/AO7R2Ku
+sidebar_class_name: "post api-method"
+custom_edit_url: null
+---
+
+import ApiTabs from "@theme/ApiTabs";
+import DiscriminatorTabs from "@theme/DiscriminatorTabs";
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import SecuritySchemes from "@theme/ApiExplorer/SecuritySchemes";
+import MimeTabs from "@theme/MimeTabs";
+import ParamsItem from "@theme/ParamsItem";
+import ResponseSamples from "@theme/ResponseSamples";
+import SchemaItem from "@theme/SchemaItem";
+import SchemaTabs from "@theme/SchemaTabs";
+import Heading from "@theme/Heading";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"uploadFile"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/v1/environment/{environment}/files/upload"}
+>
+  
+</MethodEndpoint>
+
+
+
+Get a signed url to upload a [File](https://docs.ganymede.bio/app/files/FileBrowser) in an Environment. The url will valid for 15 minutes. Uploads using this url will require the header "x-goog-content-length-range" set with value "0,10000000", the header "x-goog-meta-initiatortype" set with value "API", and the header "x-goog-meta-initiatorid" set with the initiator value that was passed in the request body.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<details
+  style={{"marginBottom":"1rem"}}
+  className={"openapi-markdown__details"}
+  data-collapsed={false}
+  open={true}
+>
+  <summary
+    style={{}}
+  >
+    <h3
+      className={"openapi-markdown__details-summary-header-params"}
+    >
+      Path Parameters
+    </h3>
+  </summary><div>
+    <ul>
+      <ParamsItem
+        className={"paramsItem"}
+        param={{"name":"environment","required":true,"in":"path","schema":{"type":"string"}}}
+      >
+        
+      </ParamsItem>
+    </ul>
+  </div>
+</details><MimeTabs
+  className={"openapi-tabs__mime"}
+>
+  <TabItem
+    label={"application/json"}
+    value={"application/json-schema"}
+  >
+    <details
+      style={{}}
+      className={"openapi-markdown__details mime"}
+      data-collapsed={false}
+      open={true}
+    >
+      <summary
+        style={{}}
+        className={"openapi-markdown__details-summary-mime"}
+      >
+        <h3
+          className={"openapi-markdown__details-summary-header-body"}
+        >
+          Body
+        </h3><strong
+          className={"openapi-schema__required"}
+        >
+          required
+        </strong>
+      </summary><div
+        style={{"textAlign":"left","marginLeft":"1rem"}}
+      >
+        
+      </div><ul
+        style={{"marginLeft":"1rem"}}
+      >
+        <SchemaItem
+          collapsible={false}
+          name={"name"}
+          required={true}
+          schemaName={"string"}
+          qualifierMessage={undefined}
+          schema={{"type":"string"}}
+        >
+          
+        </SchemaItem><SchemaItem
+          collapsible={false}
+          name={"initiator"}
+          required={true}
+          schemaName={"string"}
+          qualifierMessage={undefined}
+          schema={{"type":"string"}}
+        >
+          
+        </SchemaItem>
+      </ul>
+    </details>
+  </TabItem>
+</MimeTabs><div>
+  <div>
+    <ApiTabs
+      label={undefined}
+      id={undefined}
+    >
+      <TabItem
+        label={"200"}
+        value={"200"}
+      >
+        <div>
+          
+          
+          Signed Url
+          
+          
+        </div><div>
+          <MimeTabs
+            className={"openapi-tabs__mime"}
+            schemaType={"response"}
+          >
+            <TabItem
+              label={"application/json"}
+              value={"application/json"}
+            >
+              <SchemaTabs
+                className={"openapi-tabs__schema"}
+              >
+                <TabItem
+                  label={"Schema"}
+                  value={"Schema"}
+                >
+                  <details
+                    style={{}}
+                    className={"openapi-markdown__details response"}
+                    data-collapsed={false}
+                    open={true}
+                  >
+                    <summary
+                      style={{}}
+                      className={"openapi-markdown__details-summary-response"}
+                    >
+                      <strong>
+                        Schema
+                      </strong>
+                    </summary><div
+                      style={{"textAlign":"left","marginLeft":"1rem"}}
+                    >
+                      
+                    </div><ul
+                      style={{"marginLeft":"1rem"}}
+                    >
+                      <div
+                        style={{"marginTop":".5rem","marginBottom":".5rem"}}
+                      >
+                        
+                        
+                        string
+                        
+                        
+                      </div>
+                    </ul>
+                  </details>
+                </TabItem>
+              </SchemaTabs>
+            </TabItem>
+          </MimeTabs>
+        </div>
+      </TabItem><TabItem
+        label={"409"}
+        value={"409"}
+      >
+        <div>
+          
+          
+          File Already Exists
+          
+          
+        </div><div>
+          <MimeTabs
+            className={"openapi-tabs__mime"}
+            schemaType={"response"}
+          >
+            <TabItem
+              label={"application/json"}
+              value={"application/json"}
+            >
+              <SchemaTabs
+                className={"openapi-tabs__schema"}
+              >
+                <TabItem
+                  label={"Schema"}
+                  value={"Schema"}
+                >
+                  <details
+                    style={{}}
+                    className={"openapi-markdown__details response"}
+                    data-collapsed={false}
+                    open={true}
+                  >
+                    <summary
+                      style={{}}
+                      className={"openapi-markdown__details-summary-response"}
+                    >
+                      <strong>
+                        Schema
+                      </strong>
+                    </summary><div
+                      style={{"textAlign":"left","marginLeft":"1rem"}}
+                    >
+                      
+                    </div><ul
+                      style={{"marginLeft":"1rem"}}
+                    >
+                      <div
+                        style={{"marginTop":".5rem","marginBottom":".5rem"}}
+                      >
+                        
+                        
+                        string
+                        
+                        
+                      </div>
+                    </ul>
+                  </details>
+                </TabItem>
+              </SchemaTabs>
+            </TabItem>
+          </MimeTabs>
+        </div>
+      </TabItem>
+    </ApiTabs>
+  </div>
+</div>
+      

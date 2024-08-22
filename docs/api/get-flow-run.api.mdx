@@ -1,0 +1,277 @@
+---
+id: get-flow-run
+title: "getFlowRun"
+description: "Get a [FlowRun](https://docs.ganymede.bio/app/flows/FlowView#running-flows) in an Environment by its id."
+sidebar_label: "getFlowRun"
+hide_title: true
+hide_table_of_contents: true
+api: eJzFVU1PGzEQ/Sur6QUkk4Ue99YDINRTgXKJcnB2J4lh1zb2ODRa+b9XY+8mQQlItBU97Xq+/ebNuAdj0UlSRt80UMES6ao1L7dBg4AGfe2UZSVUcI1UyGI6qGcnKyLrq7JsTO0nS6k3HTY4mStTSmvLRWtefMnGDwpfvrigtdLLsyQ+LZQupC4u9Vo5ozvUVMw3hSJfqGYCAqx0skNC56Ga9qBlh1AB7sxBgMPnoBw2UJELKEBxjVbSCgT4eoWdhKoH2lh29eSUXkKMYhuNK7lp/lGg26D/ItaMHb012qNn/dfzc/68hn/XltpoYgyqHqS1rapT+8pHz3b9YR4zf8SaIbOOm00qZ1HNkVrEiMsx1RqdVznJgW6vOQ/vmCmtSEky7qjWkyQ81HD00EE1hR8BAzLQt5lPIOAu1DV6DwKupGqTMugnbV40zASQohZ36N2lBDmTo3vVpWwL4zpJUEEjCc+IpeLYDZuPOShtA12pNsM9qKVzcgMCFGHnjxIr+92l8wc9TaA/S5kd7+X8w57k1HKJDhtG+EO+cX9cpkxHsRvKkWpHibVPo5E0h73mFJzEYx2cok1aJdKqsyfk/xmPHUmGeDq6eA7TIa3MsAvTLqIVVFCuL8q9Usp+7xCHbdfn8vPRBT1I0nKIXCm69bjTgmuhgnGH9ivjKR6sXAZCOrVtC1vlzbCQoWUCJklMK2S85x3Pf7bf3nbXFau+Y2oLx1+hbJAxHFbZaJ9ZuDDJcUD1aHHjpMPF5HxyPuwmWXORHMMaT51Mm2DI8Pb70u/22mc+NQMuhL+otK1Umic3NacfWj+F9cVrHoKA6vUx5WLxlsAjBUZhfiFmYujhFPp+Lj3+dG2MLH4O6BItdy1PPGmU5/8GqoVsPb4D2sntME2nxVv3GkmgN4lZbRgamzjy6ob8vn1i6gG2/5A19yXOohingVHP+m91jZb2PA+e27i/L64v70GADEya/YF7SgM3/HD0o1WNszcWl+ZQvGHc93mQY9zaZ9WbHttRz9YMzyzG+BsHZWp6
+sidebar_class_name: "get api-method"
+custom_edit_url: null
+---
+
+import ApiTabs from "@theme/ApiTabs";
+import DiscriminatorTabs from "@theme/DiscriminatorTabs";
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import SecuritySchemes from "@theme/ApiExplorer/SecuritySchemes";
+import MimeTabs from "@theme/MimeTabs";
+import ParamsItem from "@theme/ParamsItem";
+import ResponseSamples from "@theme/ResponseSamples";
+import SchemaItem from "@theme/SchemaItem";
+import SchemaTabs from "@theme/SchemaTabs";
+import Heading from "@theme/Heading";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"getFlowRun"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/v1/environment/{environment}/flows/{flowId}/flowruns/{flowRunId}"}
+>
+  
+</MethodEndpoint>
+
+
+
+Get a [FlowRun](https://docs.ganymede.bio/app/flows/FlowView#running-flows) in an Environment by its id.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<details
+  style={{"marginBottom":"1rem"}}
+  className={"openapi-markdown__details"}
+  data-collapsed={false}
+  open={true}
+>
+  <summary
+    style={{}}
+  >
+    <h3
+      className={"openapi-markdown__details-summary-header-params"}
+    >
+      Path Parameters
+    </h3>
+  </summary><div>
+    <ul>
+      <ParamsItem
+        className={"paramsItem"}
+        param={{"name":"environment","required":true,"in":"path","schema":{"type":"string"}}}
+      >
+        
+      </ParamsItem><ParamsItem
+        className={"paramsItem"}
+        param={{"name":"flowId","required":true,"in":"path","schema":{"type":"string"}}}
+      >
+        
+      </ParamsItem><ParamsItem
+        className={"paramsItem"}
+        param={{"name":"flowRunId","required":true,"in":"path","schema":{"type":"string"}}}
+      >
+        
+      </ParamsItem>
+    </ul>
+  </div>
+</details><div>
+  <div>
+    <ApiTabs
+      label={undefined}
+      id={undefined}
+    >
+      <TabItem
+        label={"200"}
+        value={"200"}
+      >
+        <div>
+          
+          
+          FlowRun
+          
+          
+        </div><div>
+          <MimeTabs
+            className={"openapi-tabs__mime"}
+            schemaType={"response"}
+          >
+            <TabItem
+              label={"application/json"}
+              value={"application/json"}
+            >
+              <SchemaTabs
+                className={"openapi-tabs__schema"}
+              >
+                <TabItem
+                  label={"Schema"}
+                  value={"Schema"}
+                >
+                  <details
+                    style={{}}
+                    className={"openapi-markdown__details response"}
+                    data-collapsed={false}
+                    open={true}
+                  >
+                    <summary
+                      style={{}}
+                      className={"openapi-markdown__details-summary-response"}
+                    >
+                      <strong>
+                        Schema
+                      </strong>
+                    </summary><div
+                      style={{"textAlign":"left","marginLeft":"1rem"}}
+                    >
+                      
+                    </div><ul
+                      style={{"marginLeft":"1rem"}}
+                    >
+                      <SchemaItem
+                        collapsible={false}
+                        name={"id"}
+                        required={true}
+                        schemaName={"string"}
+                        qualifierMessage={undefined}
+                        schema={{"type":"string"}}
+                      >
+                        
+                      </SchemaItem><SchemaItem
+                        collapsible={false}
+                        name={"flowId"}
+                        required={true}
+                        schemaName={"string"}
+                        qualifierMessage={undefined}
+                        schema={{"type":"string"}}
+                      >
+                        
+                      </SchemaItem><SchemaItem
+                        collapsible={false}
+                        name={"version"}
+                        required={true}
+                        schemaName={"string"}
+                        qualifierMessage={undefined}
+                        schema={{"type":"string"}}
+                      >
+                        
+                      </SchemaItem><SchemaItem
+                        collapsible={false}
+                        name={"environmentVersion"}
+                        required={true}
+                        schemaName={"string"}
+                        qualifierMessage={undefined}
+                        schema={{"type":"string"}}
+                      >
+                        
+                      </SchemaItem><SchemaItem
+                        collapsible={false}
+                        name={"initiator"}
+                        required={true}
+                        schemaName={"string"}
+                        qualifierMessage={undefined}
+                        schema={{"type":"string"}}
+                      >
+                        
+                      </SchemaItem><SchemaItem
+                        collapsible={false}
+                        name={"state"}
+                        required={true}
+                        schemaName={"FlowRunState (string)"}
+                        qualifierMessage={"**Possible values:** [`Queued`, `Running`, `Success`, `Failed`, `unknown`]"}
+                        schema={{"type":"string","enum":["Queued","Running","Success","Failed","unknown"],"title":"FlowRunState"}}
+                      >
+                        
+                      </SchemaItem><SchemaItem
+                        collapsible={false}
+                        name={"startTime"}
+                        required={false}
+                        schemaName={"date-time"}
+                        qualifierMessage={undefined}
+                        schema={{"format":"date-time","type":"string"}}
+                      >
+                        
+                      </SchemaItem><SchemaItem
+                        collapsible={false}
+                        name={"endTime"}
+                        required={false}
+                        schemaName={"date-time"}
+                        qualifierMessage={undefined}
+                        schema={{"format":"date-time","type":"string"}}
+                      >
+                        
+                      </SchemaItem><SchemaItem
+                        collapsible={false}
+                        name={"inputFiles"}
+                        required={false}
+                        schemaName={"string[]"}
+                        qualifierMessage={undefined}
+                        schema={{"type":"array","items":{"type":"string"}}}
+                      >
+                        
+                      </SchemaItem><SchemaItem
+                        collapsible={false}
+                        name={"inputStrings"}
+                        required={false}
+                        schemaName={"string[]"}
+                        qualifierMessage={undefined}
+                        schema={{"type":"array","items":{"type":"string"}}}
+                      >
+                        
+                      </SchemaItem><SchemaItem
+                        collapsible={false}
+                        name={"outputFiles"}
+                        required={false}
+                        schemaName={"string[]"}
+                        qualifierMessage={undefined}
+                        schema={{"type":"array","items":{"type":"string"}}}
+                      >
+                        
+                      </SchemaItem><SchemaItem
+                        collapsible={false}
+                        name={"outputTables"}
+                        required={false}
+                        schemaName={"string[]"}
+                        qualifierMessage={undefined}
+                        schema={{"type":"array","items":{"type":"string"}}}
+                      >
+                        
+                      </SchemaItem><SchemaItem
+                        collapsible={false}
+                        name={"triggeredFlows"}
+                        required={false}
+                        schemaName={"string[]"}
+                        qualifierMessage={undefined}
+                        schema={{"type":"array","items":{"type":"string"}}}
+                      >
+                        
+                      </SchemaItem>
+                    </ul>
+                  </details>
+                </TabItem><TabItem
+                  label={"Example (from schema)"}
+                  value={"Example (from schema)"}
+                >
+                  <ResponseSamples
+                    responseExample={"{\n  \"id\": \"string\",\n  \"flowId\": \"string\",\n  \"version\": \"string\",\n  \"environmentVersion\": \"string\",\n  \"initiator\": \"string\",\n  \"state\": \"Queued\",\n  \"startTime\": \"2024-07-29T15:51:28.071Z\",\n  \"endTime\": \"2024-07-29T15:51:28.071Z\",\n  \"inputFiles\": [\n    \"string\"\n  ],\n  \"inputStrings\": [\n    \"string\"\n  ],\n  \"outputFiles\": [\n    \"string\"\n  ],\n  \"outputTables\": [\n    \"string\"\n  ],\n  \"triggeredFlows\": [\n    \"string\"\n  ]\n}"}
+                    language={"json"}
+                  >
+                    
+                  </ResponseSamples>
+                </TabItem>
+              </SchemaTabs>
+            </TabItem>
+          </MimeTabs>
+        </div>
+      </TabItem>
+    </ApiTabs>
+  </div>
+</div>
+      

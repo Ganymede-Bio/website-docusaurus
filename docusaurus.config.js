@@ -10,6 +10,26 @@ module.exports = {
   favicon: 'img/favicon.png',
   organizationName: 'Ganymede-Bio',
   projectName: 'website-docusaurus',
+  plugins: [
+    [
+      'docusaurus-plugin-openapi-docs',
+      {
+        id: "api", // plugin id
+        docsPluginId: "classic", // configured for preset-classic
+        config: {
+          GanymedeApi: {
+            specPath: "api-server/common/public-api/openapi.yaml",
+            outputDir: "docs/api",
+            sidebarOptions: {
+              groupPathsBy: "tag",
+            },
+            showSchemas: true
+          },
+        }
+      },
+    ]
+  ],
+  themes: ["docusaurus-theme-openapi-docs"], 
   themeConfig: {
     prism: {
       additionalLanguages: ['python', 'bash', 'powershell'],
@@ -34,6 +54,10 @@ module.exports = {
           position: 'left',
           docId: 'app/intro/Welcome',
           label: 'App'
+        },
+        {
+          label: "API",
+          to: "/api",
         },
         {
           type: 'doc',
@@ -84,7 +108,7 @@ module.exports = {
             {
               label: 'Release Notes',
               to: 'releases/ReleaseNotes'
-            },
+            }
           ],
         },
         {
@@ -121,6 +145,7 @@ module.exports = {
           sidebarPath: require.resolve('./sidebars.js'),
           editUrl:
             'https://github.com/Ganymede-Bio/website-docusaurus/edit/main/',
+          docItemComponent: "@theme/ApiItem",
         },
         blog: false,
         gtag: {

@@ -1,0 +1,265 @@
+---
+id: post-query
+title: "postQuery"
+description: "Submit a SQL query against data in your [Tables](https://docs.ganymede.bio/app/tables/DataExplorer). The SQL query must be compatible with [BigQuery](https://cloud.google.com/bigquery/docs/introduction-sql)."
+sidebar_label: "postQuery"
+hide_title: true
+hide_table_of_contents: true
+api: eJzdVctu2zAQ/BViTw2gWEmPuvV1KFqgaZKeDB9W0kZiS4k0ubJjCPr3Ykkpdl4teu0pkjX7mp3ZjGAdeWRt+881FOBs4O8D+QNkUFOovHbyDQq4GcpOs0J18/2r2gpEYYO6D6xqZFS6Vwc7eLW+xdJQ2LxpmV0o8ry2VVg12B86qmlVapujczlHVP4RGT/dO2M9+bOVum3pJH83BFYlqcp2DlmXhtRec6vW73UTmzwWqYwd6lVjbWNoVdkuL3UTk8Tyue7Z23qoZJbzsDVnK8jAoceOmHyAYj1Cjx1BAdTvtLd9Rz1DBp62g/ZUQ8F+oAy0UOGQW8ggVC11CMUIfHASGtjrvoFp2qRACvze1gdBPM1T2Z6lQjECOmd0FVeQ/wzC9fg8tS1/UiUNOS8LY00h4rYmbeuFJk6bXx+RmwxYsxHo1bLs2OU0pZjgbB9S+rcXF/LnsRCuKQyGg7J3iltSztudrqk+7g3+fTz0HiVOM3Xh72N7u38JhHWtpQ6aq0fw58yQ99b/nTSpc8JXVPa13UeqBBuoGrzmQ9QPOn3+i+R5IwJgbERXKShImo64tYvJov64hQLy3WV+Irp8PHmZFp8sxAbyu0WwgzdQwOKAsbWBp2e2hQx26HVqohhBUGmndzgYlgTyyxRFu8xzI/tJ+Iepjrty+gvFZUn+lrAmD9linwUv9Mi6r48++HSPnRMiT3X7QL3ku7Oxzkz3i7OQD+nlcnWxupilhpXMJCWF2g6jyOaGXr1o41Gl/+Fxm5fFdM+5M6h7YTgqZpyFt4bdJWRP7l3x+DUNAhlsl9uR9LOGcSwx0A9vpkl+Tt+L9eYot6jRWgd5rqG4QxPoDyt4cz0b70y91v4iwP4QVW2GWSVRn48GmTZTtkhT2kiID6nY+a3kOWZ4dqGmbIl4V1Xk+I/YU2Nffbu5hQzK+eh3tpYYj3v5T4L71K2Nw6c7hvGOGeybARvBppyiZBxkSaeu+xVdNz/IVC/ysRhwoSWaMXsFPI7JzdP0gE+fXo148HtCy2I20zT9BpJK3ms=
+sidebar_class_name: "post api-method"
+custom_edit_url: null
+---
+
+import ApiTabs from "@theme/ApiTabs";
+import DiscriminatorTabs from "@theme/DiscriminatorTabs";
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import SecuritySchemes from "@theme/ApiExplorer/SecuritySchemes";
+import MimeTabs from "@theme/MimeTabs";
+import ParamsItem from "@theme/ParamsItem";
+import ResponseSamples from "@theme/ResponseSamples";
+import SchemaItem from "@theme/SchemaItem";
+import SchemaTabs from "@theme/SchemaTabs";
+import Heading from "@theme/Heading";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"postQuery"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/v1/environment/{environment}/tables/query"}
+>
+  
+</MethodEndpoint>
+
+
+
+Submit a SQL query against data in your [Tables](https://docs.ganymede.bio/app/tables/DataExplorer). The SQL query must be compatible with [BigQuery](https://cloud.google.com/bigquery/docs/introduction-sql).
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<details
+  style={{"marginBottom":"1rem"}}
+  className={"openapi-markdown__details"}
+  data-collapsed={false}
+  open={true}
+>
+  <summary
+    style={{}}
+  >
+    <h3
+      className={"openapi-markdown__details-summary-header-params"}
+    >
+      Path Parameters
+    </h3>
+  </summary><div>
+    <ul>
+      <ParamsItem
+        className={"paramsItem"}
+        param={{"name":"environment","required":true,"in":"path","schema":{"type":"string"}}}
+      >
+        
+      </ParamsItem>
+    </ul>
+  </div>
+</details><MimeTabs
+  className={"openapi-tabs__mime"}
+>
+  <TabItem
+    label={"application/json"}
+    value={"application/json-schema"}
+  >
+    <details
+      style={{}}
+      className={"openapi-markdown__details mime"}
+      data-collapsed={false}
+      open={true}
+    >
+      <summary
+        style={{}}
+        className={"openapi-markdown__details-summary-mime"}
+      >
+        <h3
+          className={"openapi-markdown__details-summary-header-body"}
+        >
+          Body
+        </h3><strong
+          className={"openapi-schema__required"}
+        >
+          required
+        </strong>
+      </summary><div
+        style={{"textAlign":"left","marginLeft":"1rem"}}
+      >
+        
+      </div><ul
+        style={{"marginLeft":"1rem"}}
+      >
+        <SchemaItem
+          collapsible={false}
+          name={"sqlQuery"}
+          required={true}
+          schemaName={"string"}
+          qualifierMessage={undefined}
+          schema={{"type":"string"}}
+        >
+          
+        </SchemaItem>
+      </ul>
+    </details>
+  </TabItem>
+</MimeTabs><div>
+  <div>
+    <ApiTabs
+      label={undefined}
+      id={undefined}
+    >
+      <TabItem
+        label={"200"}
+        value={"200"}
+      >
+        <div>
+          
+          
+          Results of the provided SQL query
+          
+          
+        </div><div>
+          <MimeTabs
+            className={"openapi-tabs__mime"}
+            schemaType={"response"}
+          >
+            <TabItem
+              label={"application/json"}
+              value={"application/json"}
+            >
+              <SchemaTabs
+                className={"openapi-tabs__schema"}
+              >
+                <TabItem
+                  label={"Schema"}
+                  value={"Schema"}
+                >
+                  <details
+                    style={{}}
+                    className={"openapi-markdown__details response"}
+                    data-collapsed={false}
+                    open={true}
+                  >
+                    <summary
+                      style={{}}
+                      className={"openapi-markdown__details-summary-response"}
+                    >
+                      <strong>
+                        Schema
+                      </strong>
+                    </summary><div
+                      style={{"textAlign":"left","marginLeft":"1rem"}}
+                    >
+                      
+                    </div><ul
+                      style={{"marginLeft":"1rem"}}
+                    >
+                      <li>
+                        <div
+                          style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem","paddingBottom":".5rem"}}
+                        >
+                          Array [
+                        </div>
+                      </li><SchemaItem
+                        collapsible={true}
+                        className={"schemaItem"}
+                      >
+                        <details
+                          style={{}}
+                          className={"openapi-markdown__details"}
+                        >
+                          <summary
+                            style={{}}
+                          >
+                            <span
+                              className={"openapi-schema__container"}
+                            >
+                              <strong
+                                className={"openapi-schema__property"}
+                              >
+                                row
+                              </strong><span
+                                className={"openapi-schema__name"}
+                              >
+                                 object
+                              </span><span
+                                className={"openapi-schema__divider"}
+                              >
+                                
+                              </span><span
+                                className={"openapi-schema__required"}
+                              >
+                                required
+                              </span>
+                            </span>
+                          </summary><div
+                            style={{"marginLeft":"1rem"}}
+                          >
+                            <SchemaItem
+                              name={"property name*"}
+                              required={false}
+                              schemaName={"string"}
+                              qualifierMessage={undefined}
+                              schema={{"type":"string"}}
+                              collapsible={false}
+                              discriminator={false}
+                            >
+                              
+                            </SchemaItem>
+                          </div>
+                        </details>
+                      </SchemaItem><SchemaItem
+                        collapsible={false}
+                        name={"error"}
+                        required={false}
+                        schemaName={"string"}
+                        qualifierMessage={undefined}
+                        schema={{"type":"string"}}
+                      >
+                        
+                      </SchemaItem><li>
+                        <div
+                          style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem"}}
+                        >
+                          ]
+                        </div>
+                      </li>
+                    </ul>
+                  </details>
+                </TabItem><TabItem
+                  label={"Example (from schema)"}
+                  value={"Example (from schema)"}
+                >
+                  <ResponseSamples
+                    responseExample={"[\n  {\n    \"row\": {},\n    \"error\": \"string\"\n  }\n]"}
+                    language={"json"}
+                  >
+                    
+                  </ResponseSamples>
+                </TabItem>
+              </SchemaTabs>
+            </TabItem>
+          </MimeTabs>
+        </div>
+      </TabItem>
+    </ApiTabs>
+  </div>
+</div>
+      

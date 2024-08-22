@@ -76,6 +76,10 @@ git push
 
 ---
 
+## Generating API Docs
+
+`yarn api` will generate new docs based on the openapi yaml definition that is linked via api-server.
+
 ## Dependencies
 
 Docusaurus v2.4.0 requires Node 16.14+; this website is known to run under Node v18.12.  You can install node by visiting the [node](https://nodejs.org/en/download) website.  If you run into unexpected issues, rebuild the dependencies by running
