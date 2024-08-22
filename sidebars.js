@@ -345,7 +345,7 @@ module.exports = {
         description: `Welcome to the Ganymede application programming interface (API) reference.
         This guide describes various REST API operations for the Ganymede Platform,
         related request and response structures, and error codes. Additional information related
-        to available resources can be found in the Systems Reference Table (https://website-docusaurus-git-openapi-docs-ganymede.vercel.app/app/flows/SystemMetadata). 
+        to available resources can be found in the Systems Reference Table (https://docs.ganymede.bio/app/flows/SystemMetadata). 
         This table includes information about each resources' unique identifier and where to find them in the Ganymede Platform.`,
         slug: "/api",
       },
