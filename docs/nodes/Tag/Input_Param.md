@@ -9,7 +9,7 @@ displayed_sidebar: webUiSidebar
 ### Node Description
 
 Reads input parameter into Flow. Useful when downstream nodes need
-access to a input parameter specified by the _flow_ runner.
+access to a input parameter specified by the Flow runner.
 
 ### Node Attributes
 

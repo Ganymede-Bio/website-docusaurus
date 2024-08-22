@@ -22,7 +22,7 @@ result to Ganymede cloud storage.
 
 The Node configuration below would capture files ending in .xml:
 
-file_pattern: *.xml
+- **file_pattern**: *.xml
 
 ## User-Defined Python
 

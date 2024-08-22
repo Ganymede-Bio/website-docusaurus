@@ -28,7 +28,7 @@ In the execute function, returning NodeReturn(tables_to_upload=\{'image_info': d
 
 The example Node configuration captures PNG files and would render image_info_tbl in Flow Editor if Table Heads are enabled
 
-image: *.png
+- **image**: *.png
 - **image_info**: image_info_tbl
 
 ## User-Defined Python

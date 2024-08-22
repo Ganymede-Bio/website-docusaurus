@@ -50,39 +50,7 @@ An example configuration for an S3 Write Node in the Flow Editor (src_object_pre
 - **dest_s3_key**: s3://environment-sandbox-s3-bucket/test_path/
 - **src_all_or_current_run**: current
 - **src_input_or_output_bucket**: output
-src_object_prefix:
-
-from typing import Sequence
-
-- **template_fields**: Sequence[str] = (
-"src_input_or_output_bucket",
-"gcs_bucket",
-"src_object_prefix",
-"dest_s3_key",
-"dest_replace_or_append",
-"dest_node_name_in_path",
-"src_all_or_current_run",
-"glob_pattern",
-"output_path",
-"query_path",
-"function_path",
-"dag_run_id",
-"ts",
-"ti",
-)
-
-def __init__(
-self,
-- **src_input_or_output_bucket**: str,
-- **src_object_prefix**: str,
-- **src_all_or_current_run**: str,
-- **dest_node_name_in_path**: str,
-- **dest_replace_or_append**: str,
-- **dest_s3_key**: str,
-- **glob_pattern**: str = "*",
-**kwargs,
-):
-Writes file to S3 bucket
+- **src_object_prefix**:
 
 ### Parameters
 

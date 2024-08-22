@@ -8,7 +8,7 @@ displayed_sidebar: webUiSidebar
 
 ### Node Description
 
-Reads contents of a CSV file into data lake
+Reads contents of multiple CSV files into data lake
 
 The contents of CSV file are passed to the user-defined function, which
 return one or more tables for storage in Ganymede data lake.

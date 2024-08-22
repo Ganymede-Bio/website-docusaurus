@@ -8,7 +8,7 @@ displayed_sidebar: webUiSidebar
 
 ### Node Description
 
-Reads contents of a is_tens file into data lake
+Reads contents of an is_tens file into data lake
 
 The contents of is_tens file are passed to the user-defined function, which
 return one or more tables for storage in Ganymede data lake.

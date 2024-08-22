@@ -19,7 +19,7 @@ Parse data from an LC file and ingest into Ganymede data lake.
 
 The Node configuration below would capture CDF files:
 
-lc: *.cdf
+- **lc**: *.cdf
 
 ## User-Defined Python
 

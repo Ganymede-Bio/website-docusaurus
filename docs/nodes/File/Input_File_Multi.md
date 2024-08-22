@@ -8,7 +8,7 @@ displayed_sidebar: webUiSidebar
 
 ### Node Description
 
-Retrieves file for processing by user-defined function and uploads
+Retrieves files for processing by user-defined function and uploads
 result to Ganymede cloud storage.
 
 ### Node Attributes
@@ -22,7 +22,7 @@ result to Ganymede cloud storage.
 
 The Node configuration below would capture files ending in .xml:
 
-file_pattern: *.xml
+- **file_pattern**: *.xml
 
 ## User-Defined Python
 
