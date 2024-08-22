@@ -40,6 +40,14 @@ A: Yes, environment variables can be accessed from a cron Agent through the `kwa
 watch_directory = Path(kwargs.get("vars", {}).get("input_path", DEFAULT_PATH))
 ```
 
+#### Q: Are there any command-line scripts (e.g. - .vbs or .bat) that need to run for Windows Agents to work?
+
+A: No, there are no command-line scripts that need to execute for the Windows Agent.
+
+#### Q: Are there any known application dependencies or pre-requisites for the Windows Agent (e.g. - .NET, KBs, Redist)?
+
+A: No, the full set of Agent requirements can be found on the [Agent System Requirements page](../configuration/AgentNetworkConfig.mdx).
+
 ## Troubleshooting
 
 #### Issue: I am unable to install an Agent Connection on Windows; the installer is failing at the final step.
