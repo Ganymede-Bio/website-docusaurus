@@ -1,0 +1,35 @@
+name: Pull Request Checks
+
+on:
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  spellcheck:
+    name: Spellcheck
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4.1.0
+      name: Checkout
+    - id: changed_files
+      name: Changed Files
+      uses: tj-actions/changed-files@v45
+      with:
+        files: |
+           **.mdx
+    - name: List all changed files
+      env:
+        ALL_CHANGED_FILES: ${{ steps.changed_files.outputs.all_changed_files }}
+      run: |
+        for file in ${ALL_CHANGED_FILES}; do
+        echo "$file was changed"
+        done
+    - uses: rojopolis/spellcheck-github-actions@0.41.0
+      name: Spellcheck
+      if: ${{ steps.changed_files.outputs.all_changed_files }}
+      with:
+        source_files: ${{ steps.changed_files.outputs.all_changed_files }}
+        task_name: Markdown
