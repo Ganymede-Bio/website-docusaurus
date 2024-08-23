@@ -225,9 +225,20 @@ module.exports = {
         items: [
           'app/admin/AdminControls',
           {
-            type: 'doc',
-            id: 'app/configuration/SSOConfig',
-            label: 'SSO/SAML Configuration'
+            type: 'category',
+            label: 'Authentication',
+            items: [
+              {
+                type: 'doc',
+                id: 'app/configuration/SharedComputerAutoLogout',
+                label: 'Shared Computer Auto Logout'
+              },
+              {
+                type: 'doc',
+                id: 'app/configuration/SSOConfig',
+                label: 'SSO/SAML Configuration'
+              }              
+            ]
           },
           {
             type: 'category',
