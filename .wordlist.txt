@@ -2,3 +2,5 @@ ganymede
 UI
 performant
 releaseSideBar
+SDK
+MSI
