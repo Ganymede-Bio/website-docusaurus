@@ -16,8 +16,8 @@ This guide will walk you through the process of creating an Agent to capture and
 We will follow these steps:
 - Sign in to Ganymede
 - Create a new Agent to monitor a folder and push files to Ganymede
-- Install the Agent on a local PC
-- Test the Agent by saving a file to the monitored folder
+- Install an Agent Connection on a local PC
+- Test the Connection by saving a file to the monitored folder
 
 ### Step 1: Sign into Ganymede
 
@@ -26,7 +26,7 @@ Using Google Chrome, sign into Ganymede. The <div className="button gray_button"
 You may need to enable pop-ups for Ganymede or disable any ad-blocking software for the ganymede.bio domain.
 
 <div class="text--center">
-  <img width="400" alt="Ganymede sign-in" src="https://ganymede-bio.mo.cloudinary.net/apiServer/GanymedeSignIn_20230110.png"/>
+  <img width="400" alt="Ganymede sign-in" src="https://ganymede-bio.mo.cloudinary.net/apiServer/GanymedeSignIn_20240823.png"/>
 </div>
 
 ### Step 2: Create a new Agent
@@ -53,7 +53,7 @@ Click the <div className="button darkblue_button">Create</div> button to create 
 
 :::info
 
-Subsequent updates to the user-defined code within the Agent will not require a full rebuild and will be much faster—typically taking less than 10 seconds to complete, without needing to reinstall the Agent.
+Subsequent updates to the user-defined code within the Agent will be immediately pushed to existing Connections - typically taking less than 10 seconds to complete.  Updating user-defined code does not require Connection reinstallation.
 
 :::
 
@@ -63,9 +63,9 @@ A completed agent build will look like this on the Notifications page:
 <img alt="Agent build notification" src="https://ganymede-bio.mo.cloudinary.net/agent/AgentBuildNotificationsPage_20240125.png"/>
 </div>
 
-### Step 3: Download and install the agent
+### Step 3: Download and install the Agent Connection
 
-If you're not already on the local PC where the agent will be installed, navigate to that PC and sign into your tenant (as described in [step 1](#step-1-sign-into-ganymede)).
+If you're not already on the local PC where the Agent Connection will be installed, navigate to that PC and sign into your tenant (as described in [step 1](#step-1-sign-into-ganymede)).
 
 #### Step 3a: Sync Windows time (if necessary)
 
@@ -81,7 +81,7 @@ If you choose a pre-existing folder, be aware that the agent will, by default, n
 
 :::
 
-#### Step 3c: Download the agent
+#### Step 3c: Download the Agent Installer
 
 Once the Agent build is complete, the associated installer will be available for download from the Connections pane.
 
@@ -96,9 +96,9 @@ After downloading, run the executable to start the installation process. Name th
 
 :::tip
 
-Be precise when configuring the watch folder path, as errors here can be difficult to troubleshoot. Ensure the input path is correctly specified. For example, if OneDrive is used to back up Desktop files, the path may be "C:\Users\<username>\OneDrive\Desktop\watch_folder." 
+Be precise when configuring the watch folder path, as errors here can be difficult to troubleshoot. Ensure the input path is correctly specified. For example, if OneDrive is used to back up Desktop files, the path may be "C:\Users\\\<username>\OneDrive\Desktop\watch_folder." 
 
-If OneDrive is not used, the path would typically be "C:\Users\<username>\Desktop\watch_folder." Note that folder paths can be specified using either forward or backward slashes.
+If OneDrive is not used, the path would typically be "C:\Users\\\<username>\Desktop\watch_folder." Note that folder paths can be specified using either forward or backward slashes.
 
 To check this configuration, verify the input_path variable on the Connections page associated with Quickstart Agent after completing this guide.
 
@@ -131,9 +131,9 @@ The Agent will launch automatically once installation is complete.
 
 ### Step 4: Test the agent
 
-Drop the [sample plate reader file](https://github.com/Ganymede-Bio/website-docusaurus/raw/main/PlateReader.xlsx) into the "watch_folder" created in [step 3b](#step-3b-create-a-folder-to-monitor).  The agent will detect the file and upload it to the Ganymede flow for processing.
+Drop the [sample plate reader file](https://github.com/Ganymede-Bio/website-docusaurus/raw/main/PlateReader.xlsx) into the "watch_folder" created in [step 3b](#step-3b-create-a-folder-to-monitor).  The agent will detect the file and upload it to the Ganymede Flow for processing.
 
-Any window with the environment open will display that the flow has been initiated. Congratulations on creating your first Agent!
+Any window with the environment open will display that the Flow has been initiated. Congratulations on creating your first Agent!
 
 <div class="text--center">
 <img alt="Agent installation completion" src="https://ganymede-bio.mo.cloudinary.net/agent/GanymedeAgentFlowLaunch2_20240125.png"/>
@@ -149,7 +149,8 @@ Now that you have successfully created and installed an Agent, you can explore m
   - An Agent that [runs on a recurring schedule](./Agent#set-a-cron-job-to-run-flows-periodically)
   - An Agent that [executes local processing when a file stored in cloud storage](./Agent#watch-for-flow-outputs-then-save-locally)
 - [How to modify the agent code](./Agent#watch-for-files-locally-then-run-flow) to add custom functionality, such as
-  - [Adding tags to files](../files/Tags.mdx) to make them easier to find in Ganymede
+  - [Adding tags to files](../files/Tags.mdx) to make captured files easier to find in Ganymede
   - Parsing metadata from file contents to determine how files are processed
-  - Delivering [multiple files into a single node](../../sdk/markdowns/AgentModelsAndMethods#classes-for-agent-triggered-flows)
-- Incorporating [Agent file utilities](../../sdk/markdowns/AgentModelsAndMethods#file-system-utilities) from the Ganymede SDK
+  - Delivering [multiple files into a single Node](../../sdk/markdowns/AgentModelsAndMethods#classes-for-agent-triggered-flows)
+- Incorporating [Agent utility functions](../../sdk/markdowns/AgentModelsAndMethods) from the Ganymede SDK and Agent SDK
+- Interpreting [Agent log messages](./AgentLogs)
