@@ -6,8 +6,11 @@ matrix:
   - name: spellcheck-mdx
     # Specify the source files to check (in this case, .mdx files)
     sources:
-      - '*.mdx'
+      - '**/*.mdx'
     # Define the spelling check configuration
+    aspell:
+      lang: en
+      d: en_US
     spelling:
       # List of words to ignore
       ignore-words:
