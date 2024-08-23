@@ -1,0 +1,31 @@
+# pyspelling.yaml
+
+# The general configuration for pyspelling
+matrix:
+  # Define the name of this check
+  - name: spellcheck-mdx
+    # Specify the source files to check (in this case, .mdx files)
+    sources:
+      - '*.mdx'
+    # Define the spelling check configuration
+    spelling:
+      # List of words to ignore
+      ignore-words:
+        - Ganymede
+      # List of patterns to ignore
+      ignore-regex:
+      # Locale setting (e.g., en_US for American English)
+      dictionary:
+        locale: en_US
+      # If needed, you can specify multiple dictionaries
+      extra-dictionaries:
+        - dictionary1.dic
+        - dictionary2.dic
+      # Define custom filters for specific file types
+      filters:
+        # Apply a specific filter for .mdx files
+        mdx:
+          - markdown:
+              strip-html: true  # Strips HTML tags
+              strip-raw: true   # Strips raw content (e.g., code blocks)
+              ignore-math: true # Ignores LaTeX/math expressions

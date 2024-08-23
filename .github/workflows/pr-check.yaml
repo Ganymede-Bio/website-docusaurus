@@ -18,10 +18,8 @@ jobs:
       name: Changed Files
       uses: tj-actions/changed-files@v45
       with:
-        files_yaml: |
-          doc:
-            - '**.mdx'
-            - docs/**
+        files: |
+           **.mdx
     - name: List all changed files
       env:
         ALL_CHANGED_FILES: ${{ steps.changed_files.outputs.all_changed_files }}
