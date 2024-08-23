@@ -14,9 +14,9 @@ jobs:
     steps:
     - uses: actions/checkout@v4.1.0
       name: Checkout
-    - uses: jitterbit/get-changed-files@v1
-      id: changed_files
-      name: Get changed files
+    - id: changed_files
+      name: Changed Files
+      uses: tj-actions/changed-files@v45
     - id: md_changed_files
       name: Spellcheck Markdown files
       run: |-
