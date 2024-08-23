@@ -18,9 +18,10 @@ jobs:
       name: Changed Files
       uses: tj-actions/changed-files@v45
       with:
-        # Avoid using single or double quotes for multiline patterns
-        files: |
-           **.mdx
+        files_yaml: |
+          doc:
+            - '**.mdx'
+            - docs/**
     - name: List all changed files
       env:
         ALL_CHANGED_FILES: ${{ steps.changed_files.outputs.all_changed_files }}
