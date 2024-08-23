@@ -6,11 +6,15 @@ displayed_sidebar: releaseSideBar
 
 This page contains a summary of key version updates for the Ganymede [Agent](../app/agents/Agent.mdx).  Since the individual instances of Agents (connections) are not updated when the Agent is updated, this page can be helpful for determining the capabilities of specific connections previously installed.
 
+## 4.9.0
+
+- Ganymede database tables can be accessed using Ganymede SDK
+- File watching is now event-driven rather than polling-based
+
 ## 4.8.0
 
 - Connection logs are now systematically recorded on method calls to ease debugging
 - Connection versions can now be remotely updated for non-major updates
-- Ganymede database tables can be accessed using Ganymede SDK
 - Windows Agent Connection names can now have spaces
 - Performance improvements made to checking for file existence in Ganymede
 
@@ -25,9 +29,6 @@ This page contains a summary of key version updates for the Ganymede [Agent](../
 ## 4.5.0
 
 - Connection configuration can be updated remotely from the Ganymede Cloud.  For example, the input path being watched by the Agent can be updated remotely.
-
-## 4.4.12
-
 - Added status redundancy check on separate thread to ensure accuracy of connection status and improve connection stability
 - Status checks performed over 443 rather that via ICMP
 
