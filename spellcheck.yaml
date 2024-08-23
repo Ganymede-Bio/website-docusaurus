@@ -1,26 +1,20 @@
-# pyspelling.yaml
-
-# The general configuration for pyspelling
 matrix:
-  # Define the name of this check
-  - name: spellcheck-mdx
-    # Specify the source files to check (in this case, .mdx files)
-    sources:
-      - '**/*.mdx'
-    # Define the spelling check configuration
-    aspell:
-      lang: en
-      d: en_US
-    spelling:
-      # List of words to ignore
-      ignore-words:
-        - Ganymede
-      # Locale setting (e.g., en_US for American English)
-      dictionary:
-        locale: en_US
-      # Define custom filters for specific file types
-      pipeline:
-        - pyspelling.filters.markdown:
-            strip-html: true
-            strip-raw: true
-            ignore-math: true
+- name: Markdown
+  aspell:
+    lang: en
+  dictionary:
+    wordlists:
+    - .wordlist.txt
+    encoding: utf-8
+  pipeline:
+  - pyspelling.filters.markdown:
+      markdown_extensions:
+      - pymdownx.superfences
+  - pyspelling.filters.html:
+      comments: false
+      ignores:
+      - code
+      - pre
+  sources:
+  - '**/*.mdx'
+  default_encoding: utf-8
