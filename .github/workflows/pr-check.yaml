@@ -20,7 +20,14 @@ jobs:
       with:
         # Avoid using single or double quotes for multiline patterns
         files: |
-           **.md*
+           **.mdx
+    - name: List all changed files
+      env:
+        ALL_CHANGED_FILES: ${{ steps.changed_files.outputs.all_changed_files }}
+      run: |
+        for file in ${ALL_CHANGED_FILES}; do
+        echo "$file was changed"
+        done
     - uses: rojopolis/spellcheck-github-actions@0.41.0
       name: Spellcheck
       if: ${{ steps.changed_files.outputs.all_changed_files }}
