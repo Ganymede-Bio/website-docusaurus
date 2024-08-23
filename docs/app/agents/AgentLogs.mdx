@@ -68,6 +68,17 @@ The table below shows log messsages that can be found in Agents / Connections.  
 * **OS**: operating system that the message pertains to, if applicable
 * **Associated Error Type**: associated Agent error type, if applicable
 
+### Logging Level
+
+| **Logging Level** | **Description**                                                            |
+| ---------------- | ------------------------------------------------------------------------------ |
+| INTERNAL             | Internal systems messages are written locally, but not presented in the web UI. |
+| DEBUG         | For debugging Connection activity, but unnecessary for interpreting typical behavior. |
+| INFO         | Informational messages for contextualizing Connection behavior, but does not reflect changes to Connection state or interaction with Ganymede web server.                                      |
+| ACTIVITY         | Regards changes to state or operations performed by the Agent.                                      |
+| ERROR         | Indicates failure of Agent to perform an intended operation.  Note that the Connection may continue to function after observing errors, if the specific error is one that the Connection is able to recover from.                                      |
+
+
 ### System-generated messages
 
 For Agent Connections v4.8+, the messages below are logged on method calls within the Connection, and can be used to trace through the thread stack and call stack.
