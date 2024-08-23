@@ -174,3 +174,41 @@ ScanResult stores file paths for files of interest.  It includes:
 #### Example Use Case
 
 You can use `scan_for_finished_files` to continuously scan a directory for files, uploading them to Ganymede Cloud for processing when they are older than a specified number of minutes. The Flow could query previously uploaded files using the [list_files](../GanymedeClass.mdx#method-list_files) method to avoid uploading the same file multiple times.
+
+## Agent SDK
+
+The Agent SDK offers access to query the Ganymede database and add logging messages to the web app (for Agents v4.8+).
+
+### Querying Ganymede from Agent Code
+
+```python
+from ganymede_sdk.agent import read_sql_query
+
+df = read_sql_query('SELECT * FROM instrument_methods')
+```
+
+### Logging Methods
+
+Ganymede Agents (v4.9+) support user-defined logging messages in the `agent_sdk`, aligning with [logging level for Agent messages](../../app/agents/AgentLogs#logging-level).  Each level corresponds with a separate method in agent_sdk.
+
+```python
+from agent_sdk import internal, debug, info, activity, error
+
+# log internal
+internal('Display internal message')
+
+# log debug
+debug('Display debug message')
+
+# log info
+info('Display info message')
+
+# log activity
+activity('Display activity message')
+
+# log error
+error('Display error message')
+```
+
+In the UI, these log messages are [viewable and filterable on the corresponding Connections page](../../app/agents/AgentMonitoring#viewing-logs).
+
