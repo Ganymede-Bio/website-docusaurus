@@ -4,7 +4,7 @@ title: Create a Dashboard
 displayed_sidebar: webUiSidebar
 ---
 
-import { DownOutlined, SaveOutlined, UserOutlined } from '@ant-design/icons';
+import { DownOutlined, SaveOutlined, UserOutlined, AreaChartOutlined } from '@ant-design/icons';
 
 This guide walks you through creating a dashboard to compare the output data from a plate reader at two different timepoints, which has been ingested into Ganymede.  This dashboard utilizes the same data processed in the [Build a Flow guide](../flows/QuickstartBuildFlow). By the end of this tutorial, you will have transformed raw data to a dashboard that looks like this:
 
@@ -29,14 +29,18 @@ You may need to enable pop-ups for Ganymede or disable any ad-blocking software 
   <img width="400" alt="Ganymede sign-in" src="https://ganymede-bio.mo.cloudinary.net/apiServer/GanymedeSignIn_20230110.png"/>
 </div>
 
-## Step 2. Create virtual dataset for this visualization
+## Step 2: Create virtual dataset for this visualization
 
 In order to create our dashboard we will need to create two datasets:
 
 - **Quickstart_Absorbance_Change_Absolute_Differences** dataset - a table containing absorbance measurements from two different plates
 - **Quickstart_Absorbance_Change_Run_Parameters** dataset - a table containing temperature and timepoint metadata associated with each plate
 
-### Step 2a. Load plate reader data for charting
+### Step 2a: Select the Dashboard page
+
+Click the dashboard button <div className="button darkblue_button"><AreaChartOutlined /></div> in the sidebar.
+
+### Step 2b: Load plate reader data for charting
 
 Hover over SQL in the top menu bar and click on SQL Lab.  This will open a SQL editor that lets you preview tables and run SQL queries:
 
@@ -60,7 +64,7 @@ After running the query, the SQL editor should return the results:
 
 Save the results as a virtual dataset by clicking on the <div className="button purple_button_dashboard"><DownOutlined /></div> button next to the <div className="button purple_button_dashboard">SAVE</div> button. Save the dataset as **Quickstart_Absorbance_Change_Absolute_Differences**.
 
-### Step 2b. Load plate reader metadata for charting
+### Step 2c: Load plate reader metadata for charting
 
 Return to the SQL Editor and run the following query, then save the output as a virtual dataset named **Quickstart_Absorbance_Change_Run_Parameters**. 
 
@@ -72,7 +76,7 @@ UNPIVOT (value for run IN (run1, run2))
 WHERE field in ('Time [s]', 'Temp. [°C]', 'Cycle Nr.')
 ```
 
-## Step 3. Create run parameters pivot table
+## Step 3: Create run parameters pivot table
 
 Navigate to the Datasets tab in the top bar and search for "Quickstart" to find the virtual datasets you created.
 
@@ -99,7 +103,7 @@ Click <div className="button purple_button_dashboard"><SaveOutlined /> SAVE</div
 <img alt="Dashboard Quickstart save run parameters" src="https://ganymede-bio.mo.cloudinary.net/dashboard/Quickstart_SaveRunParametersChart20230531.png" />
 &nbsp;
 
-## Step 4. Create plate reader heat map
+## Step 4: Create plate reader heat map
 
 Navigate back to the Datasets tab in the top bar and select the "Quickstart_Absorbance_Change_Absolute_Differences" virtual dataset you created earlier.
 
@@ -120,7 +124,7 @@ Click <div className="button purple_button_dashboard"><SaveOutlined /> SAVE</div
 
 <img alt="Dashboard Quickstart save run parameters" src="https://ganymede-bio.mo.cloudinary.net/dashboard/Quickstart_SaveRunParametersChart20230531.png" />
 
-## Step 5. Orienting the dashboard
+## Step 5: Orienting the dashboard
 
 Click on the Dashboards button in the top bar and select the Absorbance Analytics dashboard.
 
