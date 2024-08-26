@@ -29,7 +29,9 @@ jobs:
         done
     - uses: rojopolis/spellcheck-github-actions@0.41.0
       name: Spellcheck
+      
       if: ${{ steps.changed_files.outputs.all_changed_files }}
       with:
+        config_path: spellcheck.yaml
         source_files: ${{ steps.changed_files.outputs.all_changed_files }}
         task_name: Markdown
