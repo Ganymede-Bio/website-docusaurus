@@ -50,7 +50,7 @@ TriggerFlowParams specifies the inputs for the Flow executed when all files are 
 - _param_ **single_file_params**: Optional[Dict[str, FileParam]] - Dict of FileParam objects indexed by `node name`.`param name`.  These parameters are used for Nodes that accept a single file as input.
 - _param_ **multi_file_params**: Optional[Dict[str, MultiFileParam]] - Dict of MultiFileParam objects indexed by `node name`.`param name`.  These parameters are used for Nodes that accept multiple files as input.
 - _param_ **benchling_tag**: Optional[Tag] - Additional parameters to be passed to flow.  This parameter is used for inputs to the Input_Benchling node.
-- _param_ **additional_params**: Optional[Dict[str, str]] - Additional parameters to be passed to flow.  This parameter is used for inputs to the Input_Param node.
+- _param_ **additional_params**: Optional[Dict[str, str]] - Additional parameters to be passed to flow.  This parameter is used for inputs to the Input_Param node; the key is the name if the Node name for the input parameter, and the value is the string to pass into the Node.
 
 ### FileParam Class
 
