@@ -2,6 +2,9 @@ matrix:
 - name: Markdown
   aspell:
     lang: en
+    d: en_US
+    mode: markdown
+    ignore-case: true
   dictionary:
     wordlists:
     - .wordlist.txt
@@ -17,4 +20,5 @@ matrix:
       - pre
   sources:
   - '**/*.mdx'
+  - '**/*.md'
   default_encoding: utf-8
