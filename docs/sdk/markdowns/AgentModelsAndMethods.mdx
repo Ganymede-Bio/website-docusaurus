@@ -63,7 +63,7 @@ FileParam specifies files to be uploaded to Ganymede Cloud and their correspondi
 - _param_ **parent_dir**: str - Path within the Agent watch directory containing the file.  For example. if C:/Users/username/watch_dir/ is being watched and C:/Users/username/watch_dir/abc/def/my_file.txt is found, then parent_dir would be "abc/def"
 - _param_ **upload_ts**: str - Timestamp string in ISO format of when file was uploaded to the Agent watch directory, e.g. "2021-01-01T00:00:00Z"
 - _param_ **upload_path**: Optional[str] - Path in Ganymede storage where file will be uploaded
-- _param_ **tags*: Optional[List[FileTag]] - List of tags to be applied to the file
+- _param_ **tags**: Optional[List[FileTag]] - List of tags to be applied to the file
 - _param_ **bucket_name**: str - Bucket associated with file
 - _param_ **files**: str - Alternative method for specifying file contents, where the key is the filename and the value is the file body.
 
