@@ -42,6 +42,9 @@ Benchling
 cron
 Dataclass
 subdirectories
+csv
+eventlog
+FCS
 
 
 ApiOutlined
