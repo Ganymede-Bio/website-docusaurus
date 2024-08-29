@@ -98,8 +98,6 @@ The _Configuration_ input specifies the action performed by the Agent, with opti
 - [**Load local files into Ganymede with a custom filter**](#load-local-files-into-ganymede-with-a-custom-filter): Send specified files on local instrument PC and process on Ganymede Cloud
 - [**Set a cron job to upload files periodically**](#set-a-cron-job-to-upload-files-periodically): Periodically deliver files to Ganymede Cloud
 
-Three additional input parameters are available for all configurations:
-
 ## Configuration Options
 
 ### Watch for files locally then run flow
@@ -277,6 +275,33 @@ An instrument outputs files to a directory as it completes runs, which are proce
 ### Set a cron job to run flows periodically
 
 A Connection executes a Python script on a set cadence.  Commonly, this Agent type is used as a more flexible version of the Agent type that runs flows upon detecting file change, to allow for greater logic customization in triggering Flows.
+
+Cron Agents can conditionally trigger code, depending on the return value of the execute function; no Flow is triggered if None is returned.
+
+```python
+from ganymede_sdk.agent.models import FileParam, UploadFileParams
+
+
+# Required Function
+def execute(**kwargs) -> UploadFileParams | None:
+    """
+    Executes on specified cadence.
+
+    Returns
+    -------
+    UploadFileParams | None
+        Files to upload; if set to None, then no files will be uploaded.
+    """
+
+    filename = "changeme.txt"
+    body = bytes("Hello, World!", "utf-8")
+
+    new_file_param = FileParam(filename=filename, body=body)
+
+    return UploadFileParams(files=[new_file_param])
+```
+
+Additional examples can be found on the [Agent Models and Methods page](../../sdk/markdowns/AgentModelsAndMethods#cron-agent)
 
 #### Input Parameters
 
