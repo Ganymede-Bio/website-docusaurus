@@ -223,7 +223,9 @@ def execute(new_file: FileParam, **kwargs) -> None:
 
 ## Cron Agent
 
-### Uploads a file if modified between _recency_min_ and _recency_max_ seconds ago.
+### Upload file if modified between _recency_min_ and _recency_max_ seconds ago.
+
+This Agent would require _parent_dir_, _file_to_watch_, _recency_min_, and _recency_max_ to be configured.
 
 ```python
 from ganymede_sdk.agent.models import FileParam, UploadFileParams
@@ -251,7 +253,7 @@ def execute(**kwargs) -> UploadFileParams | None:
     watch_dir = labels.get('parent_dir', None)
     filename = labels.get('file_to_watch', None)
     recency_min = float(labels.get('recency_min', 0))
-    recency_max = float(labels.get('recency_max', 0))
+    recency_max = float(labels.get('recency_max', 3600))
 
     if watch_dir and filename:
       full_file_path = Path(watch_dir) / Path(filename)
