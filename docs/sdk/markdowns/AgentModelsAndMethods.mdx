@@ -245,15 +245,15 @@ def execute(**kwargs) -> UploadFileParams | None:
         Files to upload; if set to None, then no files will be uploaded.
     """
 
-    labels = kwargs.get('labels', {})
-    if not labels:
+    agent_variables = kwargs.get('agent_variables', {})
+    if not agent_variables:
       info('Connection requires parent_dir and file_to_watch to be specified.')
       return None
 
-    watch_dir = labels.get('parent_dir', None)
-    filename = labels.get('file_to_watch', None)
-    recency_min = float(labels.get('recency_min', 0))
-    recency_max = float(labels.get('recency_max', 3600))
+    watch_dir = agent_variables.get('parent_dir', None)
+    filename = agent_variables.get('file_to_watch', None)
+    recency_min = float(agent_variables.get('recency_min', 0))
+    recency_max = float(agent_variables.get('recency_max', 3600))
 
     if watch_dir and filename:
       full_file_path = Path(watch_dir) / Path(filename)
