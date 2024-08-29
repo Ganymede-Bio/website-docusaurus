@@ -67,6 +67,10 @@ Uptime
 executables
 DiffOutlined
 SelectOutlined
+AgentMonitoring
+Hostname
+toc
+worklist
 
 
 ApiOutlined

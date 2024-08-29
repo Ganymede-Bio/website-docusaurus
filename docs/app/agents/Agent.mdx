@@ -106,6 +106,8 @@ Three additional input parameters are available for all configurations:
 
 A Connection watches a directory (and associated subdirectories) for new files and updates to existing files.  The Flow configured with the Agent is triggered when all expected files are found.
 
+The _input_path_ variable, configured for each Connection [at installation](#windows-installation), specifies the directory to watch.
+
 #### Input Parameters
 
 - `Flow Name`: The flow to run upon observing new files matching the specified pattern.
@@ -327,6 +329,8 @@ Multiple flow cytometers are used to observe cell populations for a related set 
 ### Watch for flow outputs then save locally
 
 A Connection that monitors Flow file outputs, saving them to local directories as specified by the Agent logic.
+
+The _output_path_ variable, configured for each Connection [at installation](#windows-installation), specifies the directory to store files to.
 
 #### Input Parameters
 
