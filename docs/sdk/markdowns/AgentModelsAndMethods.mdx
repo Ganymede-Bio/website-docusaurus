@@ -221,6 +221,58 @@ def execute(new_file: FileParam, **kwargs) -> None:
     return
 ```
 
+## Cron Agent
+
+### Uploads a file if modified between _recency_min_ and _recency_max_ seconds ago.
+
+```python
+from ganymede_sdk.agent.models import FileParam, UploadFileParams
+from pathlib import Path
+import os
+import time
+from agent_sdk import info, error
+
+# Required Function
+def execute(**kwargs) -> UploadFileParams | None:
+    """
+    Executes on specified cadence.
+
+    Returns
+    -------
+    UploadFileParams | None
+        Files to upload; if set to None, then no files will be uploaded.
+    """
+
+    labels = kwargs.get('labels', {})
+    if not labels:
+      info('Connection requires parent_dir and file_to_watch to be specified.')
+      return None
+
+    watch_dir = labels.get('parent_dir', None)
+    filename = labels.get('file_to_watch', None)
+    recency_min = float(labels.get('recency_min', 0))
+    recency_max = float(labels.get('recency_max', 0))
+
+    if watch_dir and filename:
+      full_file_path = Path(watch_dir) / Path(filename)
+
+      if not full_file_path.is_file():
+        error(f'File {full_file_path} does not exist')
+        return None
+    else:
+      info('Connection requires parent_dir and file_to_watch to be specified.')
+      return None
+
+    elapsed_time = time.time() - os.stat(file_path).st_mtime
+    if elapsed_time >= recency_min and elapsed_time < recency_max:
+      new_file_param = FileParam(filename=str(full_file_path), body=body)
+
+      return UploadFileParams(files=[new_file_param])
+
+    info(f'File exists, but was last modified {elapsed_time} seconds ago.  Only files modified between {recency_min} and {recency_max} seconds are uploaded.')
+    return None
+```
+
 ## Classes for Agent-triggered flows
 
 ### FileWatcherResult Class
