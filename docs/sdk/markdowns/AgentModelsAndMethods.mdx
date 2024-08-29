@@ -225,7 +225,7 @@ def execute(new_file: FileParam, **kwargs) -> None:
 
 ### Upload file if modified between _recency_min_ and _recency_max_ seconds ago.
 
-This Agent would require _parent_dir_, _file_to_watch_, _recency_min_, and _recency_max_ to be configured.
+This Agent would require _parent_dir_ and _file_to_watch_  to be configured.  Recency of last modified date can be configured if desired; if it isn't configured, then the watched file would be uploaded if it was modified in the last hour.
 
 ```python
 from ganymede_sdk.agent.models import FileParam, UploadFileParams
