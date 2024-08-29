@@ -71,6 +71,7 @@ AgentMonitoring
 Hostname
 toc
 worklist
+recency
 
 
 ApiOutlined
