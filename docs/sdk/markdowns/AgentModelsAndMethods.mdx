@@ -7,7 +7,11 @@ toc_max_heading_level: 4
 
 import NodeChip from '@site/src/components/NodeChip.js'
 
-Objects for triggering a Flow from an [Agent](../../app/agents/Agent) can be found in `ganymede_sdk.agent.models`.  
+## User-defined code examples by Agent type
+
+This section contains a cookbook of user-defined code examples, which can be helpful for expediting Agent definition.
+
+### Watch for files locally and run Flow
 
 In the user-defined function for Agents executing Flows, the _get_param_mapping_ function is run whenever a file is added or modified
 in the directory that the Agent is watching. The _execute_ function is run whenever all files are observed.  The _get_param_mapping_ function
@@ -63,10 +67,6 @@ def execute(flow_params_fw: FileWatcherResult) -> TriggerFlowParams:
     """
     pass
 ```
-
-## User-defined code examples by Agent type
-
-### Watch for files locally and run flow
 
 #### Delivering files to a Flow with single file input Nodes
 
@@ -276,6 +276,8 @@ def execute(**kwargs) -> UploadFileParams | None:
 ```
 
 ## Classes for Agent-triggered flows
+
+Objects for triggering a Flow from an [Agent](../../app/agents/Agent) can generally be found in `ganymede_sdk.agent.models`.  
 
 ### FileWatcherResult Class
 
