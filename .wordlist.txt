@@ -72,6 +72,8 @@ Hostname
 toc
 worklist
 recency
+AWS
+GCP
 
 
 ApiOutlined
