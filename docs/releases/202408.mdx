@@ -4,6 +4,23 @@ title: August 2024
 displayed_sidebar: releaseSideBar
 ---
 
+### August 29 2024
+**Features**
+- **UI**: Self-service Integration Panel
+    - Details about your Ganymede environment are now available for integration with other cloud services
+    - Connect to AWS or GCP using the service accounts or role JSON
+    - Restrict network access while preserving Ganymede functionality by allowing firewall traffic from the Ganymede IP addresses
+
+
+**Improvements**
+- **Agents**: Logging around log file rotation is now less noisy and more robust
+- **Agents**: Leading and trailing white space in Connection variables is now removed
+- **Agents**: Connections that rely on an input_path will now wait for one to be supplied before watching the current directory
+
+**Bug Fixes** 
+- **UI**: The Agent/Connection log filter is now a consistent size
+
+
 ### August 23 2024
 **Features**
 - **UI**: [Agent Logs](../app/agents/AgentLogs)
