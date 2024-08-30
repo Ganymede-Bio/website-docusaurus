@@ -60,6 +60,20 @@ Check for existing installations that might conflict with the current installati
 - Open "Add or Remove Programs" and uninstall any existing Ganymede Agent installations.
 - Try installing the Agent again.
 
+#### Issue: I've installed an Agent Connection, but do not see the Connection in logs.
+
+This is likely a network issue, which can be confirmed by [testing connectivity](../configuration/AgentNetworkConfig#testing-connectivity).  
+
+Another way to confirm this is to see 
+
+```bash
+ssl.SSLCertVerificationError: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate`
+``` 
+
+in the Connection logs file found locally on the computer.  These logs can be found in the directory that the Agent Connection is installed in.
+
+To resolve, ensure that outbound port 443 communication is available to the web addresses mentioned on the [Agent System Requirements page](../configuration/AgentNetworkConfig#testing-connectivity).
+
 #### Issue: The Agent Connection is not actively running.  How do I check?
 
 On Windows:
