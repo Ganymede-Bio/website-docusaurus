@@ -232,7 +232,6 @@ def execute(new_file: FileParam, **kwargs) -> None:
         with open(full_path, "wb") as fp:
             fp.write(new_file.body)
 
-        info(f"File write to {full_path} successful.")
     except FileNotFoundError:
         error(f"Error: The directory '{path}' does not exist.")
         return None
@@ -251,6 +250,11 @@ def execute(new_file: FileParam, **kwargs) -> None:
     except Exception as e:
         print(f"An unexpected error occurred while writing to {full_path}: {e}")
         return None
+
+    if not os.access(full_path, os.R_OK):
+        info(f"Unable to read {full_path} after file write.")
+    else:
+        info(f"File write to {full_path} successful.")
 
     return None
 ```
