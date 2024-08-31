@@ -310,10 +310,9 @@ def execute(**kwargs) -> UploadFileParams | None:
         if not os.access(full_file_path, os.R_OK):
             error(f'Do not have read permissions for file {full_file_path}')
             return None
-
-      new_file_param = FileParam(filename=str(full_file_path), body=body)
-
-      return UploadFileParams(files=[new_file_param])
+            
+        new_file_param = FileParam(filename=str(full_file_path), body=body)
+        return UploadFileParams(files=[new_file_param])
 
     info(f'File exists, but was last modified {elapsed_time} seconds ago.  Only files modified between {recency_min} and {recency_max} seconds are uploaded.')
     return None
