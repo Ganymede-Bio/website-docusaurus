@@ -191,7 +191,9 @@ def execute(flow_params_fw: FileWatcherResult, **kwargs) -> TriggerFlowParams:
 
 #### Deliver worklist to a liquid handler PC
 
+
 ```python
+from agent_sdk import info, error
 from ganymede_sdk.agent.models import FileParam
 from pathlib import Path
 import os
@@ -210,15 +212,52 @@ def execute(new_file: FileParam, **kwargs) -> None:
     # add experiment ID to the path variable
     path = path / exp_id
 
-    if not os.path.exists(path):
-        os.makedirs(path)
+    # Create directory for writing file if necessary
+    try: 
+        if not os.path.exists(path):
+            os.makedirs(path)
+    except PermissionError:
+        error(f"Permission denied: Cannot create directory at {path}.")
+        return None
+    except FileExistsError:
+        error(f"File exists: A file with the name '{path}' already exists and is not a directory.")
+        return None
+    except OSError as e:
+        error(f"OS error occurred: {e}")
+        return None
 
     # full_path is C:/Users/dev/liquid_handler/worklist/<exp_id>/<filename>
     full_path = path / filename
-    fp = open(full_path, "wb")
-    fp.write(new_file.body)
 
-    return
+    # Write file to full_path
+    try    
+        with open(full_path, "wb") as fp:
+            fp.write(new_file.body)
+    except FileNotFoundError:
+        error(f"Error: The directory '{path}' does not exist.")
+        return None
+    except PermissionError:
+        print(f"Error: Permission denied. Cannot write to '{full_path}'.")
+        return None
+    except IsADirectoryError:
+        print(f"Error: '{full_path}' is a directory, not a file.")
+        return None
+    except IOError as e:
+        print(f"IO error occurred: {e}")
+        return None
+    except AttributeError:
+        print("Error: 'new_file.body' is not a bytes-like object.")
+        return None
+    except Exception as e:
+        print(f"An unexpected error occurred while writing to {full_path}: {e}")
+        return None
+
+    if not os.access(full_path, os.R_OK):
+        info(f"Unable to read {full_path} after file write.")
+    else:
+        info(f"File write to {full_path} successful.")
+
+    return None
 ```
 
 ## Cron Agent
@@ -267,7 +306,7 @@ def execute(**kwargs) -> UploadFileParams | None:
 
     elapsed_time = time.time() - os.stat(file_path).st_mtime
     if elapsed_time >= recency_min and elapsed_time < recency_max:
-      if not os.access(full_file_path):
+      if not os.access(full_file_path, os.R_OK):
         error(f'Do not have read permissions for file {full_file_path}')
         return None
 
@@ -278,6 +317,15 @@ def execute(**kwargs) -> UploadFileParams | None:
     info(f'File exists, but was last modified {elapsed_time} seconds ago.  Only files modified between {recency_min} and {recency_max} seconds are uploaded.')
     return None
 ```
+
+Variables can be configured during the installation by [passing additional variables during the installation](../../app/agents/Agent#windows-installation):
+
+```bash
+# example variable configuration at installation
+-v parent_dir=C:\Users\dev\experiment_results\output\ -v file_to_watch="output.log" -v recency_min=60 -v recency_max=1800
+```
+
+Post-installation, for Agents v4.8+, the parameters for Connections can be [updated in the Connection UI](../../app/agents/AgentMonitoring#monitoring-agent-connections).
 
 ## Classes for Agent-triggered flows
 
