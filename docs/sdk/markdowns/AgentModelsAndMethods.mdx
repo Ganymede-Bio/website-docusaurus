@@ -267,6 +267,9 @@ def execute(**kwargs) -> UploadFileParams | None:
 
     elapsed_time = time.time() - os.stat(file_path).st_mtime
     if elapsed_time >= recency_min and elapsed_time < recency_max:
+      if not os.access(full_file_path):
+        error(f'Do not have read permissions for file {full_file_path}')
+
       new_file_param = FileParam(filename=str(full_file_path), body=body)
 
       return UploadFileParams(files=[new_file_param])
