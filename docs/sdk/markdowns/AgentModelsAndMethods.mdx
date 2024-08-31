@@ -286,8 +286,8 @@ def execute(**kwargs) -> UploadFileParams | None:
 
     agent_variables = kwargs.get('agent_variables', {})
     if not agent_variables:
-      info('Connection requires parent_dir and file_to_watch to be specified.')
-      return None
+        info('Connection requires parent_dir and file_to_watch to be specified.')
+        return None
 
     watch_dir = agent_variables.get('parent_dir', None)
     filename = agent_variables.get('file_to_watch', None)
@@ -295,20 +295,20 @@ def execute(**kwargs) -> UploadFileParams | None:
     recency_max = float(agent_variables.get('recency_max', 3600))
 
     if watch_dir and filename:
-      full_file_path = Path(watch_dir) / Path(filename)
-
-      if not full_file_path.is_file():
-        error(f'File {full_file_path} does not exist')
-        return None
+        full_file_path = Path(watch_dir) / Path(filename)
+        
+        if not full_file_path.is_file():
+            error(f'File {full_file_path} does not exist')
+            return None
     else:
-      info('Connection requires parent_dir and file_to_watch to be specified.')
-      return None
+        info('Connection requires parent_dir and file_to_watch to be specified.')
+        return None
 
     elapsed_time = time.time() - os.stat(file_path).st_mtime
     if elapsed_time >= recency_min and elapsed_time < recency_max:
-      if not os.access(full_file_path, os.R_OK):
-        error(f'Do not have read permissions for file {full_file_path}')
-        return None
+        if not os.access(full_file_path, os.R_OK):
+            error(f'Do not have read permissions for file {full_file_path}')
+            return None
 
       new_file_param = FileParam(filename=str(full_file_path), body=body)
 
