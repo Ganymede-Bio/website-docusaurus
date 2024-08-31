@@ -318,6 +318,15 @@ def execute(**kwargs) -> UploadFileParams | None:
     return None
 ```
 
+Variables can be configured during the installation by [passing additional variables during the installation](../../app/agents/Agent#windows-installation):
+
+```bash
+# example variable configuration at installation
+-v parent_dir=C:\Users\dev\experiment_results\output\ -v file_to_watch="output.log" -v recency_min=60 -v recency_max=1800
+```
+
+Post-installation, for Agents v4.8+, the parameters for Connections can be [updated in the Connection UI](../../app/agents/AgentMonitoring#monitoring-agent-connections).
+
 ## Classes for Agent-triggered flows
 
 Objects for triggering a Flow from an [Agent](../../app/agents/Agent) can generally be found in `ganymede_sdk.agent.models`.  
