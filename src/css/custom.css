@@ -282,6 +282,13 @@
   color: white;
 }
 
+.button.red_text_button {
+  background-color: white;
+  color: red;
+  border: none;
+}
+
+
 
 .filter-white{
   filter: brightness(0) invert(1);
