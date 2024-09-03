@@ -50,13 +50,14 @@ A: No, the full set of Agent requirements can be found on the [Agent System Requ
 
 ## Troubleshooting
 
-### Building an Agent installer in the Ganymede UI
-
 ### Agent build
 
 #### Issue: The build for a "Watch for files locally then run flow" Agent keeps failing, with no Windows executable or Linux binary created.
 
-Agents that watch for files locally then run Flow require file inputs to be passed to the Flow for execution.  Ensure that Agent creation occurs after Nodes for input files have been created; if necessary, create a new Agent after the Flow has input Nodes; to see that this is the case, you should see dropdown selectors for specifying glob patterns to associate with the input Nodes of the Flow corresponding to the new Agent.
+Agents that watch for files locally then run Flow require file inputs to be passed to the Flow for execution.  
+
+1. Ensure that the Flow being triggered by the Agent has at least one Node for ingesting files.
+2. Ensure that Agent creation occurs after Nodes for input files have been created; if necessary, create a new Agent after the Flow has input Nodes; to see that this is the case, you should see dropdown selectors for specifying glob patterns to associate with the input Nodes of the Flow corresponding to the new Agent.
 
 ### Agent installation
 
