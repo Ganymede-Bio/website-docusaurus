@@ -4,43 +4,59 @@ title: Environment Administration
 displayed_sidebar: webUiSidebar
 ---
 
+import {
+  UserDeleteOutlined
+} from '@ant-design/icons';
+
 ## Summary
 
-The Admin page enables administrators to manage user access and configure environment secrets. This page can be accessed by clicking on the bubble containing your email address in the top right corner of the top navbar and selecting Environment Settings.
+The Admin page enables administrators to manage user access, configure environment secrets, and view platform integration details. This page can be accessed by clicking on the bubble containing your email address in the top right corner of the top navbar and selecting Environment Settings.
 
 ### Access Levels
 
-The Roles panel shown below enables adminstrators to specify access levels for different users:
+The Roles panel shown below enables administrators to specify access levels for different users. The Last Seen column is populated in the permissions panel for users that have accessed Ganymede after [August 2024](../../releases/202408#august-15-2024), when the feature was introduced. 
 
-<img alt="Admin - Access Panel" src="https://ganymede-bio.mo.cloudinary.net/apiServer/Admin_Panel_20230831.png" />
+<img alt="Admin - Access Panel" src="https://ganymede-bio.mo.cloudinary.net/apiServer/Admin_Panel_20240903.png" />
+&nbsp;
 
-There are five levels of access, and are set at the environment level.  These access levels are shown below in order from least to most restrictive. Roles that are higher in the list contain all the access of roles beneath them.  For example, users with Writer privilege have all the privileges of a Runner in addition to the ability to create flows.
+There are five levels of access for Flows and Agents.
 
-**Admin**:
-    Manage the environment settings, able to manage access of others. Admins are able to create, modify, and execute flows.
+- **Admin**: Manage the environment settings, able to manage access of others. Admins are able to create, modify, and execute Flows and Agents.
+- **Writer**: Can create, modify, and execute Flows and Agents.
+- **Runner**: Can execute Flows, but cannot modify or create new Flows or Agents.  Can view Agent logs, Agent history, Connection statuses, and download and install Agent installers.
+- **Reader**: Can observe Flows and Agents, read data, and observe environment settings, but not permitted to execute or alter Flows.  Can view Agent logs and Connection history, but cannot download/install Agent installers.
+- **None**: Cannot see the environment as an option in the dropdown menu.  This is relevant for providing access to a specific environment; for example, a user may have **Runner** permission for prod but **None** permission for dev if that user is not involved in development.
 
-**Writer**:
-    Can create, modify, and execute flows.
+The New User Roles box appears for users with Admin privileges, enabling admins to set the default permission of new users added to the environment.  Admins can also click on <div className="button red_text_button"><UserDeleteOutlined /></div> to remove a user from an environment.
 
-**Runner**:
-    Can execute flows, but cannot modify or create new flows.
-
-**Reader**:
-    Can observe flows, read data, and observe environment settings, but not permitted to execute or alter flows.
-
-**None**:
-    Cannot see the environment as an option in the dropdown menu.  This is relevant for providing access to a specific environment; for example, a user may have **Runner** permission for prod but **None** permission for dev if that user is not involved in development.
+For dashboards, permissions can be viewed by navigating to the dashboards page and clicking Settings > List Users.  
 
 ### Environment Secrets
 
-The secrets panel enables administrators to configure secrets that are used by Ganymede cloud to connect to external services such as Benchling or AWS.  These secrets are specific to the nodes used within a given environment (i.e. - development or production environment).
+The Secrets panel enables administrators to configure secrets that are used by Ganymede cloud to connect to external services such as Benchling or AWS.  These secrets are specific to the nodes used within a given environment (i.e. - development or production environment).
 The example shown in the image below shows an environment with a AWS S3 Role ARN specified, enabling connectivity between Ganymede cloud and AWS S3 Storage when using the [S3_Read](../../nodes/App/S3_Read) or [S3_Write](../../nodes/App/S3_Write) nodes.
 
-<img alt="Admin - Secrets Panel" src="https://ganymede-bio.mo.cloudinary.net/apiServer/SecretsPanel_20230405.png" />
+<img alt="Admin - Secrets Panel" src="https://ganymede-bio.mo.cloudinary.net/apiServer/SecretsPanel_20240903.png" />
 
-Admins can add secrets by clicking on the Add Secret button and edit secrets as appropriate.  Note that secrets cannot be viewed from this panel, so if a secret is lost, it can either be re-entered here or recovered by [contacting Ganymede support](../Support.mdx).
+Admins can add secrets by clicking on the Add Secret button and edit secrets as appropriate.  
 
-Any secrets entered here will not be committed into code, but can be printed by environment users with the *Writer* or *Admin* role.
+:::note
+
+Secrets cannot be viewed from this panel, so if a secret is lost, it can either be re-entered here or recovered by [contacting Ganymede support](../Support.mdx).
+
+:::
+
+Any secrets entered here will not be committed into code, but can be printed by environment users with the *Writer* or *Admin* role in notebooks.
+
+### Platform Integration Details
+
+The Integration panel contains details about the Ganymede environment, which can be used for integration with external systems, as well as for IP whitelisting Ganymede.
+
+- **Notebook IP address**: IP address for hosted notebook environments
+- **Flow Runtime IP address**: IP address for workflow orchestration
+- **Notebook Service Account Email**: Service account for notebooks
+- **Flow Runtime Service Account Email**: Service account for workflow orchestration
+- **AWS Role JSON**: Role configuration for AWS Policy, to establish connectivity between Ganymede and Ganymede cloud
 
 ### Environment Detection in the SDK
 
