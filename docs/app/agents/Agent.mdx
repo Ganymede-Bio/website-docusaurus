@@ -32,12 +32,30 @@ For system requirements, see [Agent Network Config & Prerequisites](../configura
 
 ### Terminology
 
+#### Agent structure
+
+<div class="text--center">
+```mermaid
+stateDiagram-v2 
+  direction LR
+  [*] --> Trigger
+  Trigger --> Processor 
+  Processor --> Trigger
+  Processor --> Action 
+  Action --> Trigger
+  Action --> [*]
+```
+</div>
+
 - **Agent**: A combination of a trigger, processor, and action configuration to move data from a remote user device into Ganymede.
 - **Trigger**: A component configured to initiate the Agent pipeline based on a specific change or event.
 - **Processor**: User-defined code that converts data produced by a trigger into a format suitable for the action.
 - **Action**: Interaction with Ganymede's cloud or application that moves the processed data to the desired location.
 - **Connection**: A running instance of the Agent that is or has been connected to Ganymede, waiting for the configured trigger.
 - **Pipeline**: A data flow of trigger -> processor -> action, tailored to the use case. Pipelines may share the same trigger and action but differ in the processor template based on the use case.
+
+#### Agent / Connection configuration
+
 - **Runtime Uptime**: An in-place update to the latest processor and configuration (Agent and Connection levels) without stopping the process. The pipeline loop temporarily pauses to reload files, but no data is lost.
 - **Full Update**: A complete update of the Connection binary, useful for incorporating new dependency updates or core-codebase changes. A new Connection executable must be brought up in parallel.
 - **Connection Configuration**: Each installed executable maintains its own name, labels, variables, and file tags. This configuration, along with the “parent-level” Agent configuration and processor, makes a Connection unique. Some metadata, like ID, start time, version, and generated metadata, is not configurable.

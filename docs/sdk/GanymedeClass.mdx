@@ -8,9 +8,14 @@ import NodeChip from '@site/src/components/NodeChip.js'
 
 ## Overview
 
-The **Ganymede** object is a powerful tool used within editor notebooks to access and interact with data from previous runs, allowing users to test code changes effectively.
+The **Ganymede** object is a powerful tool used within editor notebooks to access and interact with data from previous runs, allowing users to test code changes effectively. It contains the following attributes related to run context:
 
-To get started, you can create a Ganymede object associated with the most recent run:
+- **flow_run_id**: str - Epoch time associated with run, which corresponds to runs shown in [Flow View](../app/flows/FlowView)
+- **initiator**: str - Flow run initiator; agent name + MAC address for agent-initiated Flows, user email for user-initiated flows, event name for event-triggered Flows, or Flow name if triggered from another Flow
+- **initiator_type**: str - Type of the user who initiated the flow run (AGENT, USER, EVENT, FLOW)
+- **ganymede_context**: GanymedeContext - Run context information, detailed in the [GanymedeContext section of this page](#class-ganymedecontext)
+
+As an example, you can create a Ganymede object associated with the most recent run to mirror the prior execution in user-defined code:
 
 ```python
 import pandas as pd
@@ -69,7 +74,7 @@ _retrieve_sql_ allows you to query tabular data from the Ganymede data lake. You
 The results are returned as a DataFrame if a single query is used or as a list of DataFrames if multiple queries are provided.
 
 - _param_ **query_str**: str - Semicolon-delimited query string(s).
-- _param_ **render_dict**: Optional[Dict[str, str]] - Dictionary used for rendering Jinja template variables in query.  Not used if context is provided.
+- _param_ **render_dict**: dict[str, str] | None - Dictionary used for rendering Jinja template variables in query.  Not used if context is provided.
 
 ```python
 from ganymede_sdk import Ganymede
@@ -84,20 +89,26 @@ df_query1, df_query2 = g.retrieve_sql(query_sql)
 The _retrieve_tables_ method retrieves tabular data from the Ganymede data lake while preserving field names with special characters. The result is returned as a dictionary of DataFrames, keyed by table name.
 
 - _param_ **table_names**: str | list[str] - The name of the table(s) to retrieve.
+- _param_ **run_id_filter_field**: str | None - If provided, filter for records with run ID associated with Ganymede Context
+- _param_ **get_measurement_unit_flag**: bool, by default False - Whether to return measurement unit information
 - _param_ **use_cache_in_notebook**: bool, by default False - If set to True, data is retrieved from the local cache in notebooks, speeding up development. Note that flow runs will not use cached data. Cache can be cleared with the _clear_cache_ function in `ganymede_sdk`.
 
 ```python
 from ganymede_sdk import Ganymede
 
+# example with no measurement units
 df_query1 = g.retrieve_tables(['table1', 'table2'])
+
+# example if measurement units are captured
+df_measurement_units, df_query1 = g.retrieve_tables(['table_with_measurement_units1'])
 ```
 
 ### `method` list_tables
 
 The _list_tables_ method returns a Pandas DataFrame listing tables, column names, and associated flows. By default, it retrieves tables associated with the current flow.
 
-- _param_ **currentFlowflag**: bool, by default True - Whether to filter for tables associated with current flow or not
-- _param_ **current_run_id**: Optional[int], by default None - If set to specific run ID, filter to include records for specified run ID.
+- _param_ **current_flow_flag**: bool, by default True - Whether to filter for tables associated with current flow or not
+- _param_ **current_run_id**: int | None, by default None - If set to specific run ID, filter to include records for specified run ID.
 
 ```python
 from ganymede_sdk import Ganymede
@@ -109,17 +120,17 @@ tables_in_current_flow = g.list_tables(context):
 print(tables_in_current_flow)
 
 # retrieves all tables in environment
-for table_name in g.list_tables(context, currentFlowflag=False):
-  print(table_name)
+for table_name in g.list_tables(context, current_flow_flag=False):
+print(table_name)
 ```
 
 ### `method` list_tables_current_run
 
-_list_tables_current_run_ returns a listing of all tables associated with the current flow and run ID as a Pandas DataFrame.
+_list_tables_current_run_ returns a listing of all tables associated with the current Flow and run ID as a Pandas DataFrame.
 
 ### `method` list_tables_current_flow
 
-_list_tables_currentFlow returns a listing of all tables associated with the current flow as a Pandas DataFrame.
+_list_tables_current_flow returns a listing of all tables associated with the current Flow as a Pandas DataFrame.
 
 ### `method` list_tables_all
 
@@ -134,9 +145,10 @@ The _retrieve_files_ method allows you to retrieve files from Ganymede cloud sto
 
 - _param_ **file_names**: str | list[str] - The file(s) to retrieve.
 - _param_ **flow_input_or_output**: str, by default "input" - Either "input" or "output" - to reference whether to retrieve files that are inputs to Flows or outputs from Flow Nodes
-- _param_ **currentFlowflag**: bool, by default True - Filters for files associated with the current Flow
+- _param_ **current_flow_flag**: bool, by default True - Filters for files associated with the current Flow
 - _param_ **run_id**: Optional[int], by default None - If set, filters for results with specified flow_run_id; if not specified, retrieve file(s) associated with most recent run ID
 - _param_ **use_cache_in_notebook**: bool, by default False - If set to True, retrieves files from local cache when in editor or analysis notebooks rather than querying Ganymede to expedite development.  Note that flow runs will not reference cached files.  Cache can be cleared by calling the clear_cache() function.
+- _param_ **use_full_path**: bool, by default True - Whether to return files keyed by full path or file name
 
 ```python
 from ganymede_sdk import Ganymede
@@ -148,8 +160,17 @@ input_file = retrieve_files("sample_test.csv", flow_input_or_output="input")
 
 # Retrieves 2 files from the output bucket in the environment associated with most recent run of flow
 output_files = retrieve_files(['sample_output.xlsx', 'sample_validation.txt'], 
-                              flow_input_or_output="output", currentFlowflag=False)
+                              flow_input_or_output="output", current_flow_flag=False)
 ```
+
+### `method` retrieve_files_current_run
+
+_retrieve_files_current_run_ retrieves the files associated with the current run
+
+- _param_ **file_names**: str | list[str] - The file(s) to retrieve.
+- _param_ **flow_input_or_output**: str, by default "input" - Either "input" or "output" - to reference whether to retrieve files that are inputs to Flows or outputs from Flow Nodes
+- _param_ **use_cache_in_notebook**: bool, by default False - If set to True, retrieves files from local cache when in editor or analysis notebooks rather than querying Ganymede to expedite development.  Note that flow runs will not reference cached files.  Cache can be cleared by calling the clear_cache() function.
+- _param_ **use_full_path**: bool, by default True - Whether to return files keyed by full path or file name
 
 ### `method` get_last_run_input_files
 
@@ -170,8 +191,8 @@ _list_files_ lists files in the environment
 
 - _param_ **flow_input_or_output**: str, by default "input" - Either "input" or "output" - to reference whether to retrieve files that are inputs to flows or outputs from flow nodes
 - _param_ **flow_name**: str, optional, by default True - Flow name to filter for.  If set to specific flow name, filter to include records based on
-- _param_ **currentFlowflag**: bool, by default True - Whether to filter for files associated with current flow or not
-- _param_ **current_run_id**: Optional[int] - If set, filters for results with specified flow_run_id
+- _param_ **current_flow_flag**: bool, by default True - Whether to filter for files associated with current flow or not
+- _param_ **current_run_id**: int | None - If set, filters for results with specified flow_run_id
 
 ```python
 from ganymede_sdk import Ganymede
@@ -179,11 +200,11 @@ from ganymede_sdk import Ganymede
 g = Ganymede()
 
 # Lists all files in the input bucket of the current flow
-df_curFlowinput_files = g.list_files(flow_input_or_output="input")
-display(df_curFlowinput_files)
+df_input_files_cur_flow = g.list_files(flow_input_or_output="input")
+display(df_input_files_cur_flow)
 
 # Lists all files in the output bucket of the environment
-df_output_files = g.list_files(flow_input_or_output="output", currentFlowflag=False):
+df_output_files = g.list_files(flow_input_or_output="output", current_flow_flag=False):
 display(df_output_files)
 ```
 
@@ -195,7 +216,7 @@ _list_files_current_run_ returns a listing of available files in the specified b
 
 ### `method` list_files_current_flow
 
-_list_files_currentFlow returns a listing of available files in the specified bucket associated with the current Flow provided by Ganymede context
+_list_files_current_flow returns a listing of available files in the specified bucket associated with the current Flow provided by Ganymede context
 
 - _param_ **flow_input_or_output**: str, by default "input" - Either "input" or "output" - to reference whether to retrieve files that are inputs to flows or outputs from flow nodes
 
@@ -262,6 +283,9 @@ _clear_cache_ clears files and tables stored in local cache for the editor or an
 
 _get_file_url returns an HTTPS URL for referencing files stored in Ganymede cloud storage from external apps.  More documentation on usage can be found on the [deep links section of the File Browser page](../app/files/FileBrowser#deep-links---urls-for-accessing-ganymede-files-from-other-apps)
 
+- _param_ **filename**: str - Path to the file within the bucket, without a leading slash
+- _param_ **bucket**: str - Bucket that the file is in; either 'input' or 'output'
+
 ### `method` get_gcs_uri
 
 _get_gcs_uri_ returns a Google Cloud Storage URI for referencing files.  This method is useful for referencing files for tags, which is described in further detail on the [Tagging Files page](../app/files/Tags).
@@ -289,10 +313,10 @@ def execute(ganymede_context: GanymedeContext):
 
 ### Attributes
 
-- **flow_run_id**: Timestamp in ms when Flow was kicked off for manually triggered Flows; guaranteed to be unique per Flow run
-- **created**: Timestamp in ms when Flow was kicked off for event-triggered Flows
-- **dag.dag_id**: The name of the Flow
-- **task.task_id**: type of Node (e.g. - <NodeChip text="Input_File" /> or <NodeChip text="Python" />)
+- **dag.dag_id**: str - The name of the Flow
+- **flow_run_id**: str - Timestamp in ms when Flow was kicked off for manually triggered Flows; guaranteed to be unique per Flow run
+- **created**: str - Timestamp in ms when Flow was kicked off for event-triggered Flows
+- **task.task_id**: str - type of Node (e.g. - <NodeChip text="Input_File" /> or <NodeChip text="Python" />)
 
 ### Methods
 

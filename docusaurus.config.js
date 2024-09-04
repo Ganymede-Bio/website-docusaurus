@@ -10,6 +10,9 @@ module.exports = {
   favicon: 'img/favicon.png',
   organizationName: 'Ganymede-Bio',
   projectName: 'website-docusaurus',
+  markdown: {
+    mermaid: true
+  },
   plugins: [
     [
       'docusaurus-plugin-openapi-docs',
@@ -36,7 +39,7 @@ module.exports = {
       },
     ]
   ],
-  themes: ["docusaurus-theme-openapi-docs"], 
+  themes: ["docusaurus-theme-openapi-docs", '@docusaurus/theme-mermaid'], 
   themeConfig: {
     prism: {
       additionalLanguages: ['python', 'bash', 'powershell'],
