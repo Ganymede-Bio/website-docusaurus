@@ -106,13 +106,13 @@ The table below provides a list of available Nodes, along with details on whethe
 Many Nodes return a `NodeReturn` object, which contain tables and files for storage in the Ganymede data lake.  
 
 To initialize a `NodeReturn` object, the following parameters can be passed:
-  - _param_ **tables_to_upload**: Optional[dict[str, pd.DataFrame]] - Tables to be stored in Ganymede, keyed by name.
-  - _param_ **files_to_upload**: Optional[dict[str, bytes]] - Files to be stored in Ganymede, keyed by filename.
+  - _param_ **tables_to_upload**: dict[str, pd.DataFrame] | None - Tables to be stored in Ganymede, keyed by name.
+  - _param_ **files_to_upload**: dict[str, bytes] | None - Files to be stored in Ganymede, keyed by filename.
   - _param_ **if_exists**: str - String indicating whether to overwrite or append to existing tables in Ganymede data lake.  Valid values are "replace", "append", or "fail"; defaults to "replace".
   - _param_ **tables_measurement_units**: Optional[dict[str, pd.DataFrame]] - (If provided) Specifies the measurement units for columns; keys are table names, values are pandas DataFrames with "column_name" and "unit" as columns.
-  - _param_ **file_location**: Optional[str] - Specifies the bucket location ("input" or "output"); required only if files_to_upload is not null, defaults to "output".
+  - _param_ **file_location**: str - Specifies the bucket location ("input" or "output"); required only if files_to_upload is not null, defaults to "output".
   - _param_ **wait_for_job**: Whether to wait for the write operation to complete before continuing execution; defaults to False.
-  - _param_ **tags**: Optional[dict[str, list[dict] | dict]]: Dictionary of files to tag, with keys as file names and values as a dictionary of keyword parameters for the [add_file_tag function](../app/files/Tags#tagging-files).  Multiple tags can be added to a single file by passing a list of add_file_tag parameters in the dictionary.
+  - _param_ **tags**: dict[str, list[dict[str, str]] | dict[str, str]] | None: Dictionary of files to tag, with keys as file names and values as a dictionary of keyword parameters for the [add_file_tag function](../app/files/Tags#tagging-files).  Multiple tags can be added to a single file by passing a list of add_file_tag parameters in the dictionary.
 
 
 ##### NodeReturn Example
@@ -172,14 +172,14 @@ execute()
 Nodes that trigger other Flows return a `FlowInputs` object, which specifies the inputs to the triggered Flow.  
 
 To initialize a `FlowInputs` object, use the following parameters from `ganymede_sdk.io`:
-  - _param_ **files**: Optional[List[FlowInputFile]] - Files to pass to the triggered Flow.
-  - _param_ **params**: Optional[List[FlowInputParam]] - Parameters to pass to triggered Flow.
-  - _param_ **tags**: Optional[List[Tag]] - Tags to pass to the triggered Flow.
+  - _param_ **files**: list[FlowInputFile] | None - Files to pass to the triggered Flow.
+  - _param_ **params**: list[FlowInputParam] | None - Parameters to pass to triggered Flow.
+  - _param_ **tags**: list[Tag] | None - Tags to pass to the triggered Flow.
 
 `FlowInputFile` is a dataclass used for passing files to a Node.  Attributes include:
   - _param_ **node_name**: str - Name of the Node within triggered Flow to pass file(s) into
   - _param_ **param_name**: str - Node parameter in the triggered Flow Node that specifies the string pattern that the filename must match (e.g., "csv" for the CSV_Read Node)
-  - _param_ **files**: Dict[str, bytes] - Files to pass into Node
+  - _param_ **files**: dict[str, bytes] - Files to pass into Node
 
 `FlowInputParam` is a dataclass used to pass parameters into a Node.  It has the following attributes:
   - _param_ **node_name**: str - Name of the Node within triggered Flow to pass parameter(s) to.
