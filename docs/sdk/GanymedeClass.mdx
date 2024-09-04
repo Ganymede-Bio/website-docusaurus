@@ -8,16 +8,14 @@ import NodeChip from '@site/src/components/NodeChip.js'
 
 ## Overview
 
-The **Ganymede** object is a powerful tool used within editor notebooks to access and interact with data from previous runs, allowing users to test code changes effectively.
-
-The object contains the following attributes related to run context:
+The **Ganymede** object is a powerful tool used within editor notebooks to access and interact with data from previous runs, allowing users to test code changes effectively. It contains the following attributes related to run context:
 
 - **flow_run_id**: str - Epoch time associated with run, which corresponds to runs shown in [Flow View](../app/flows/FlowView)
 - **initiator**: str - Flow run initiator; agent name + MAC address for agent-initiated Flows, user email for user-initiated flows, event name for event-triggered Flows, or Flow name if triggered from another Flow
 - **initiator_type**: str - Type of the user who initiated the flow run (AGENT, USER, EVENT, FLOW)
 - **ganymede_context**: GanymedeContext - Run context information, detailed in the [GanymedeContext section of this page](#class-ganymedecontext)
 
-For example, you can create a Ganymede object associated with the most recent run:
+As an example, you can create a Ganymede object associated with the most recent run to mirror the prior execution in user-defined code:
 
 ```python
 import pandas as pd
