@@ -84,19 +84,25 @@ df_query1, df_query2 = g.retrieve_sql(query_sql)
 The _retrieve_tables_ method retrieves tabular data from the Ganymede data lake while preserving field names with special characters. The result is returned as a dictionary of DataFrames, keyed by table name.
 
 - _param_ **table_names**: str | list[str] - The name of the table(s) to retrieve.
+- _param_ **run_id_filter_field**: Optional[str] - If provided, filter for records with run ID associated with Ganymede Context
+- _param_ **get_measurement_unit_flag**: bool, by default False - Whether to return measurement unit information
 - _param_ **use_cache_in_notebook**: bool, by default False - If set to True, data is retrieved from the local cache in notebooks, speeding up development. Note that flow runs will not use cached data. Cache can be cleared with the _clear_cache_ function in `ganymede_sdk`.
 
 ```python
 from ganymede_sdk import Ganymede
 
+# example with no measurement units
 df_query1 = g.retrieve_tables(['table1', 'table2'])
+
+# example if measurement units are captured
+df_measurement_units, df_query1 = g.retrieve_tables(['table_with_measurement_units1'])
 ```
 
 ### `method` list_tables
 
 The _list_tables_ method returns a Pandas DataFrame listing tables, column names, and associated flows. By default, it retrieves tables associated with the current flow.
 
-- _param_ **currentFlowflag**: bool, by default True - Whether to filter for tables associated with current flow or not
+- _param_ **current_flow_flag**: bool, by default True - Whether to filter for tables associated with current flow or not
 - _param_ **current_run_id**: Optional[int], by default None - If set to specific run ID, filter to include records for specified run ID.
 
 ```python
@@ -109,17 +115,17 @@ tables_in_current_flow = g.list_tables(context):
 print(tables_in_current_flow)
 
 # retrieves all tables in environment
-for table_name in g.list_tables(context, currentFlowflag=False):
-  print(table_name)
+for table_name in g.list_tables(context, current_flow_flag=False):
+print(table_name)
 ```
 
 ### `method` list_tables_current_run
 
-_list_tables_current_run_ returns a listing of all tables associated with the current flow and run ID as a Pandas DataFrame.
+_list_tables_current_run_ returns a listing of all tables associated with the current Flow and run ID as a Pandas DataFrame.
 
 ### `method` list_tables_current_flow
 
-_list_tables_currentFlow returns a listing of all tables associated with the current flow as a Pandas DataFrame.
+_list_tables_currentFlow returns a listing of all tables associated with the current Flow as a Pandas DataFrame.
 
 ### `method` list_tables_all
 
@@ -134,9 +140,10 @@ The _retrieve_files_ method allows you to retrieve files from Ganymede cloud sto
 
 - _param_ **file_names**: str | list[str] - The file(s) to retrieve.
 - _param_ **flow_input_or_output**: str, by default "input" - Either "input" or "output" - to reference whether to retrieve files that are inputs to Flows or outputs from Flow Nodes
-- _param_ **currentFlowflag**: bool, by default True - Filters for files associated with the current Flow
+- _param_ **current_flow_flag**: bool, by default True - Filters for files associated with the current Flow
 - _param_ **run_id**: Optional[int], by default None - If set, filters for results with specified flow_run_id; if not specified, retrieve file(s) associated with most recent run ID
 - _param_ **use_cache_in_notebook**: bool, by default False - If set to True, retrieves files from local cache when in editor or analysis notebooks rather than querying Ganymede to expedite development.  Note that flow runs will not reference cached files.  Cache can be cleared by calling the clear_cache() function.
+- _param_ **use_full_path**: bool, by default True - Whether to return files keyed by full path or file name
 
 ```python
 from ganymede_sdk import Ganymede
@@ -150,6 +157,15 @@ input_file = retrieve_files("sample_test.csv", flow_input_or_output="input")
 output_files = retrieve_files(['sample_output.xlsx', 'sample_validation.txt'], 
                               flow_input_or_output="output", currentFlowflag=False)
 ```
+
+### `method` retrieve_files_current_run
+
+_retrieve_files_current_run_ retrieves the files associated with the current run
+
+- _param_ **file_names**: str | list[str] - The file(s) to retrieve.
+- _param_ **flow_input_or_output**: str, by default "input" - Either "input" or "output" - to reference whether to retrieve files that are inputs to Flows or outputs from Flow Nodes
+- _param_ **use_cache_in_notebook**: bool, by default False - If set to True, retrieves files from local cache when in editor or analysis notebooks rather than querying Ganymede to expedite development.  Note that flow runs will not reference cached files.  Cache can be cleared by calling the clear_cache() function.
+- _param_ **use_full_path**: bool, by default True - Whether to return files keyed by full path or file name
 
 ### `method` get_last_run_input_files
 
@@ -261,6 +277,9 @@ _clear_cache_ clears files and tables stored in local cache for the editor or an
 ### `method` get_file_url
 
 _get_file_url returns an HTTPS URL for referencing files stored in Ganymede cloud storage from external apps.  More documentation on usage can be found on the [deep links section of the File Browser page](../app/files/FileBrowser#deep-links---urls-for-accessing-ganymede-files-from-other-apps)
+
+- _param_ **filename**: str - Path to the file within the bucket, without a leading slash
+- _param_ **bucket**: str - Bucket that the file is in; either 'input' or 'output'
 
 ### `method` get_gcs_uri
 
