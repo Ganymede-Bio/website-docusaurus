@@ -208,7 +208,7 @@ def execute(new_file: FileParam, **kwargs) -> None:
 
     default_path = "C:/Users/dev/liquid_handler/worklist/"
 
-    # The vars parameter can be updated by adding variables on the associated [Connection page](../../app/agents/AgentMonitoring#updating-connections) or upon [Connection installation](../../app/agents/Agent#windows-installation) using a -v flag for each variable.
+    # The vars parameter can be updated by adding variables on the associated Connection page or upon Connection installation using a -v flag for each variable.
     path = Path(kwargs.get("vars", {}).get("output_path", default_path))
 
     # add experiment ID to the path variable
@@ -232,7 +232,7 @@ def execute(new_file: FileParam, **kwargs) -> None:
     full_path = path / filename
 
     # Write file to full_path
-    try    
+    try:    
         with open(full_path, "wb") as fp:
             fp.write(new_file.body)
     except FileNotFoundError:
@@ -262,9 +262,9 @@ def execute(new_file: FileParam, **kwargs) -> None:
     return None
 ```
 
-## Cron Agent
+### Cron Agent
 
-### Upload file if modified between _recency_min_ and _recency_max_ seconds ago
+#### Upload file if modified between _recency_min_ and _recency_max_ seconds ago
 
 This Agent would require _parent_dir_ and _file_to_watch_  to be configured.  Recency of last modified date can be configured if desired; if it isn't configured, then the watched file would be uploaded if it was modified in the last hour.
 

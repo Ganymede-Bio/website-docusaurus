@@ -247,6 +247,17 @@ You can save notebooks in a few ways:
 
 Executing any of these actions will lint the pipeline cell(s), and then commit and deploy the pipeline code to the workflow orchestrator.  A pop-up will box will appear for each of these actions; lint warnings/errors will be displayed in the initial pop-up, and commit confirmation will be displayed on the second pop-up.
 
+:::info
+
+A more detailed view of lint issues in pipeline cells can be observed by running `lint()` in a notebook cell.
+
+<div style={{textAlign: 'center'}}>
+  <img width="800" alt="Full lint output" src="https://ganymede-bio.mo.cloudinary.net/apiServer/Example_Lint_Output_20240905.png"
+  />
+</div>
+
+:::
+
 :::note
 
 Code is committed and deployed upon saving, even if it does not pass linting, and even if it is not executed prior to saving.  This allows you to step outside the structure enforced by black and ruff if desired.
