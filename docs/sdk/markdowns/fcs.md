@@ -34,7 +34,7 @@ With corresponding FCS files, you can calculate population counts from FCS event
 the _apply_compensation_ and _calculate_population_counts_ methods.  
 
 
-## `function` WSP.__init__
+## `function` WSP.\_\_init\_\_
   
 Setup parsed WSP object, which contains gates, population statistics, and  
 table output structure as configured in Table Editor in FlowJo  
@@ -352,9 +352,9 @@ Creates XML representation of compensation matrix
 ```python  
 For a WSP object, insert a compensation matrix into the XML tree by executing the steps shown below:  
   
->>>> xml_comp_mat = WSP.create_comp_matrix_xml(df_comp_matrix)  
->>>> matrix = xml_comp_mat.xpath("./transforms:spilloverMatrix", namespaces=WSP.ns_transforms).pop()  
->>>> wsp_obj.wsp_root.xpath("./Matrices")[0].append(xml_comp_mat)  
+>>> xml_comp_mat = WSP.create_comp_matrix_xml(df_comp_matrix)  
+>>> matrix = xml_comp_mat.xpath("./transforms:spilloverMatrix", namespaces=WSP.ns_transforms).pop()  
+>>> wsp_obj.wsp_root.xpath("./Matrices")[0].append(xml_comp_mat)  
   
 In this example, df_comp_matrix is a Pandas DataFrame with a format mirroring an element  
 from an item in the 'compensation_matrices' dictionary returned by the 'get_compensation_matrices' method.  
