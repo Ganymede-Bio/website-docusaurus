@@ -5,34 +5,46 @@ displayed_sidebar: SDKSidebar
 --- 
 
 
-# fcs
-
 
 ## `class` WSP
   
 A class to parse a FlowJo WSP file following the Gating-ML 2.0 standard.&nbsp; &nbsp; Contains methods  
 for extracting gates, table output structure, population statistics, and compensation  
 matrices from WSP file.  
-  
+
+```python
 >>> wsp = WSP(wsp_bytes)  
+```
   
-# View gates  
+### View gates
+
+```python
 >>> wsp.gates  
+```
   
-# View population statistics computed in FlowJo  
+### View population statistics computed in FlowJo  
+
+```python
 >>> wsp.stats_flowjo  
+```
   
-# View table output structure, as configured in Table Editor in FlowJo  
+### View table output structure, as configured in Table Editor in FlowJo  
+
+```python
 >>> wsp.table_output_structure  
+```
   
-# Generate output table based on table output structure and FlowJo population statistics  
+### Generate output table based on table output structure and FlowJo population statistics  
+
+```python
 >>> WSP.apply_table_output_structure(  
-&nbsp; &nbsp; &nbsp; &nbsp; wsp.table_output_structure["Table"][["gate", "value_type", "statistic", "rename"]], wsp.stats_flowjo  
-&nbsp; &nbsp; &nbsp; &nbsp; )  
+  wsp.table_output_structure["Table"][["gate", "value_type", "statistic", "rename"]], 
+  wsp.stats_flowjo  
+)
+```
   
 With corresponding FCS files, you can calculate population counts from FCS events data using  
 the _apply_compensation_ and _calculate_population_counts_ methods.  
-
 
 ## `function` WSP.\_\_init\_\_
   
@@ -44,7 +56,6 @@ table output structure as configured in Table Editor in FlowJo
 **wsp_bytes** : `bytes or file_like object`  
 &nbsp; &nbsp; &nbsp; &nbsp; FlowJo Workspace file in bytes  
 
-
 ## `function` WSP.get_population_stats
   
 Retrieve population statistics from WSP file  
@@ -54,16 +65,14 @@ Retrieve population statistics from WSP file
 `pd.DataFrame`  
 &nbsp; &nbsp; &nbsp; &nbsp; Population statistics as a DataFrame  
 
-
 ## `function` WSP.get_gates
   
 Retrieve gates from WSP file  
   
-### Returns  
+### Returns
   
 `pd.DataFrame`  
 &nbsp; &nbsp; &nbsp; &nbsp; Gates as a DataFrame  
-
 
 ## `function` WSP.get_single_well_stats
   
@@ -85,7 +94,6 @@ sure to capture the unique identifier for each well in the loop.
 `Dict`  
 &nbsp; &nbsp; &nbsp; &nbsp; Dictionary containing single well stats requested  
 
-
 ## `function` WSP.get_table_output_structure
   
 Retrieve table structure as specified in Table Editor of FlowJo  
@@ -99,7 +107,6 @@ Retrieve table structure as specified in Table Editor of FlowJo
   
 `pd.DataFrame`  
 &nbsp; &nbsp; &nbsp; &nbsp; DataFrame consisting of gate and tables  
-
 
 ## `function` WSP.apply_table_output_structure
   
@@ -175,7 +182,6 @@ Retrieve gate structure as a nested dict from a WSP file
 **node** : `etree.Element`  
 &nbsp; &nbsp; &nbsp; &nbsp; XML node to start traversal in, typically node corresponding to well  
 
-
 ## `function` WSP.get_compensation_matrices
   
 Retrieve compensation matrices from WSP file as a DataFrame  
@@ -184,7 +190,6 @@ Retrieve compensation matrices from WSP file as a DataFrame
   
 `Dict[str, pd.DataFrame]`  
 &nbsp; &nbsp; &nbsp; &nbsp; Dictionary of compensation matrices, keyed by matrix name  
-
 
 ## `function` WSP.apply_compensation
   
@@ -203,7 +208,6 @@ Adjust flow cytometry data for compensation
   
 `pd.DataFrame`  
 &nbsp; &nbsp; &nbsp; &nbsp; DataFrame containing compensated events  
-
 
 ## `function` WSP.calculate_population_counts
   
@@ -235,7 +239,6 @@ Calculate population counts from FCS events data, using compensation matrix
 `pd.DataFrame`  
 &nbsp; &nbsp; &nbsp; &nbsp; DataFrame containing filename, population name, and counts  
 
-
 ## `class` FCS
   
 A class to represent an FCS (Flow Cytometry Standard) file.  
@@ -257,7 +260,6 @@ A class to represent an FCS (Flow Cytometry Standard) file.
   
 **parse_metadata(metadata: dict)**  
 &nbsp; &nbsp; &nbsp; &nbsp; Parses FCS file metadata.  
-
 
 ## `function` FCS.parse_metadata
   
@@ -286,7 +288,6 @@ channels: pd.DataFrame
 channel_names: Tuple  
 &nbsp; &nbsp; &nbsp; &nbsp; contains flow cytometer channel names  
 
-
 ## `function` FCS.gate_population_polygon
   
 Gate FCS file using a polygon  
@@ -307,7 +308,6 @@ Gate FCS file using a polygon
 `pd.DataFrame`  
 &nbsp; &nbsp; &nbsp; &nbsp; DataFrame containing gated population events  
 
-
 ## `function` FCS.gate_population_limit
   
 Gate FCS file using a limit  
@@ -327,7 +327,6 @@ Gate FCS file using a limit
   
 `pd.DataFrame`  
 &nbsp; &nbsp; &nbsp; &nbsp; DataFrame containing gated population events  
-
 
 ## `function` FCS.create_comp_matrix_xml
   
