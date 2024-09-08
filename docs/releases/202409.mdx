@@ -14,6 +14,11 @@ displayed_sidebar: releaseSideBar
 - **UI**: The environment Secrets table now supports sorting by Name and Updated Date
 - **UI**: The Agent log date filter now reflects the dates where logs are available
 - **UI**: Agent and Connection configuration information can now be copied from the UI for use in debugging and issue reporting
+- **Agent**: Clarification made to Cron upload and file watcher notebook templates that returning None from execute function will result in no files uploaded
+- **Agent**: Incorrectly typed objects returned from Agents in user-defined code now yields error messages in Connection logs.
+
 
 **Bug Fixes**
 - **UI**: The list of flows in an environment will now be fetched when logging in from a direct link
+- **Notebook**: In certain cases, single input notebook templates were retrieved for multi nodes and vice versa.  Faulty template retrieval was addressed in this release.
+- **SDK**: Fixed function call for applying compensation within [WSP.calculate_population_counts](../sdk/markdowns/fcs#function-wspcalculate-population-counts)
