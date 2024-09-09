@@ -119,7 +119,7 @@ module.exports = {
         label: 'Agents & Connections',
         collapsed: true,
         items: [
-          'app/configuration/AgentNetworkConfig',
+          'app/configuration/AgentSystemRequirements',
           {
             type: 'doc',
             id: 'app/agents/Agent',

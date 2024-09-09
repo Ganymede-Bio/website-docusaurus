@@ -1,5 +1,5 @@
 ---
-id: AgentNetworkConfig
+id: AgentSystemRequirements
 title: Agent System Requirements
 displayed_sidebar: webUiSidebar
 ---
@@ -39,9 +39,9 @@ If direct access to the internet is not allowed (proxy), configure your Proxy to
 For Windows Agents, connectivity can be tested by running the following commands in PowerShell:
 
 ```powershell
-$ Test-NetConnection -ComputerName storage.googleapis.com -Port 443
-$ Test-NetConnection -ComputerName pubsub.googleapis.com -Port 443
-$ Test-NetConnection -ComputerName <tenant_name>.ganymede.bio -Port 443
+$ IWR -URI storage.googleapis.com
+$ IWR -URI pubsub.googleapis.com
+$ IWR -URI <tenant_name>.ganymede.bio
 ```
 
 ### Linux Agents

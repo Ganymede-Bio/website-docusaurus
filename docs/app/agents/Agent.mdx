@@ -28,7 +28,7 @@ Users specify these actions by configuring the Agent in the Ganymede app. Doing 
 
 After creating an Agent, users can build and install local executables called Connections, individual instances of a given Agent, on instrument PCs. Each Connection consists of a combination of user-defined code and Ganymede configuration, providing flexibility in capturing files and interacting with the Ganymede ecosystem.
 
-For system requirements, see [Agent Network Config & Prerequisites](../configuration/AgentNetworkConfig).
+For system requirements, see [Agent Network Config & Prerequisites](../configuration/AgentSystemRequirements).
 
 ### Terminology
 
@@ -512,7 +512,7 @@ To do so, follow the steps below:
     - Use Windows Credential Manager to store the remote user's credentials on the local system.
     - Or, create matching local (if cross-domain) or domain (if on the same domain, e.g. AD) user accounts on both the remote and local systems.
 2. **Check Network**:
-   - Ensure both systems can communicate as described on the [Agent Network Config page](../configuration/AgentNetworkConfig)
+   - Ensure both systems can communicate as described on the [Agent Network Config page](../configuration/AgentSystemRequirements)
 3. **Service Configuration**:
    - Open `services.msc` on the local system.
    - Find and right-click the Ganymede service > `Properties` > `Log On`. Use the local user account where the credentials are stored (not the "Local System Account").
