@@ -46,7 +46,7 @@ A: No, there are no command-line scripts that need to execute for the Windows Ag
 
 #### Q: Are there any known application dependencies or pre-requisites for the Windows Agent (e.g. - .NET, KBs, Redist)?
 
-A: No, the full set of Agent requirements can be found on the [Agent System Requirements page](../configuration/AgentNetworkConfig.mdx).
+A: No, the full set of Agent requirements can be found on the [Agent System Requirements page](../configuration/AgentSystemRequirements.mdx).
 
 ## Troubleshooting
 
@@ -73,7 +73,7 @@ Check for existing installations that might conflict with the current installati
 
 #### Issue: I've installed an Agent Connection, but do not see the Connection in logs.
 
-This is likely a network issue, which can be confirmed by [testing connectivity](../configuration/AgentNetworkConfig#testing-connectivity).  
+This is likely a network issue, which can be confirmed by [testing connectivity](../configuration/AgentSystemRequirements#testing-connectivity).  
 
 Another way to confirm this is to see 
 
@@ -83,7 +83,7 @@ ssl.SSLCertVerificationError: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verif
 
 in the Connection logs file found locally on the computer.  These logs can be found in the directory that the Agent Connection is installed in.
 
-To resolve, ensure that outbound port 443 communication is available to the web addresses mentioned on the [Agent System Requirements page](../configuration/AgentNetworkConfig#testing-connectivity).
+To resolve, ensure that outbound port 443 communication is available to the web addresses mentioned on the [Agent System Requirements page](../configuration/AgentSystemRequirements#testing-connectivity).
 
 #### Issue: The Agent Connection is not actively running.  How do I check?
 
