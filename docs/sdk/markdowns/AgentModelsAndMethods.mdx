@@ -286,7 +286,7 @@ def execute(**kwargs) -> UploadFileParams | None:
         Files to upload; if set to None, then no files will be uploaded.
     """
 
-    agent_variables = kwargs.get('agent_variables', {})
+    agent_variables = kwargs.get('vars', {})
     if not agent_variables:
         info('Connection requires parent_dir and file_to_watch to be specified.')
         return None
