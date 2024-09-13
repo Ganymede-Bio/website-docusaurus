@@ -284,3 +284,7 @@ VPN
 EOL
 PowerShell
 netcat
+Webhook
+webhook
+AIA
+CDF
