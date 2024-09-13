@@ -132,7 +132,7 @@ Append peak information to an existing CDF file
 &nbsp; &nbsp; &nbsp; &nbsp; If False, append data to the existing CDF file  
 
 
-## `function` CDFOutput.__init__
+## `function` CDFOutput.\_\_init\_\_
   
 Initialize LCOutput object for outputting data from netCDF file in AIA format  
   

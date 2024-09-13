@@ -36,8 +36,8 @@ The table below provides a list of available Nodes, along with details on whethe
 | Analysis   | Transform_SQL             | Table(s)                | Table                    | True          | False      |
 | Analysis   | Trigger_Python            | Table(s) and/or File(s) | FlowInputs               | True          | False      |
 | App        | APINode                   | API                     | NodeReturn               | True          | False      |
-| App        | AirtableExport            | Table                   | API                      | True          | False      |
-| App        | AirtableImport            | API                     | NodeReturn               | False         | False      |
+| App        | Airtable_Export           | Table                   | API                      | True          | False      |
+| App        | Airtable_Import           | API                     | NodeReturn               | False         | False      |
 | App        | Azure_Query               | Table                   | NodeReturn               | True          | False      |
 | App        | Azure_Read                | API                     | FileAny                  | False         | False      |
 | App        | Azure_Read_Multi          | API                     | FileAny                  | False         | True       |
@@ -59,6 +59,7 @@ The table below provides a list of available Nodes, along with details on whethe
 | App        | SciNote_API               | Table                   | NodeReturn               | True          | False      |
 | App        | Smartsheet_Read           | API                     | NodeReturn               | True          | False      |
 | App        | Snowflake_Write           | Table                   | NodeReturn               | False         | False      |
+| App        | Webhook_Event             | Event                   | NodeReturn               | True          | False      |
 | File       | AVI_Read                  | FileAVI                 | NodeReturn               | True          | False      |
 | File       | AVI_Read_Multi            | Set[FileAVI]            | NodeReturn               | True          | True       |
 | File       | CSV_Read                  | FileCSV                 | NodeReturn               | True          | False      |
@@ -233,13 +234,13 @@ The _execute_ function may call classes and functions found within the User-Defi
 
 | [Category](#node-categories)   | Name                   | Brief Description                                                            |
 |------------|---------------------------|------------------------------------------------------------------------------|
-| Analysis   | Branch_Python             | Process data with Python and conditionally execute downstream Nodes          |
+| Analysis   | Branch_Python             | Process data with Python and conditionally execute downstream nodes          |
 | Analysis   | Python                    | Process data with python                                                     |
 | Analysis   | Transform_SQL             | SQL analysis Function                                                        |
 | Analysis   | Trigger_Python            | Process data with Python and trigger subsequent flow                         |
 | App        | APINode                   | Generic API Access Node                                                      |
-| App        | AirtableExport            | Export data from Ganymede data lake to Airtable                              |
-| App        | AirtableImport            | Import data from Airtable into Ganymede data lake                            |
+| App        | Airtable_Export           | Export data from Ganymede data lake to Airtable                              |
+| App        | Airtable_Import           | Import data from Airtable into Ganymede data lake                            |
 | App        | Azure_Query               | Query data from Azure SQL Server                                             |
 | App        | Azure_Read                | Read data from Azure Blob Storage                                            |
 | App        | Azure_Read_Multi          | Read all data from Azure Blob Storage                                        |
@@ -261,6 +262,7 @@ The _execute_ function may call classes and functions found within the User-Defi
 | App        | SciNote_API               | Create and write SciNote entry                                               |
 | App        | Smartsheet_Read           | Read sheet from Smartsheet                                                   |
 | App        | Snowflake_Write           | Sync tables in Ganymede data lake to Snowflake                               |
+| App        | Webhook_Event             | Capture events from a webhook for triggering flows                           |
 | File       | AVI_Read                  | Read in contents of an AVI file to a table                                   |
 | File       | AVI_Read_Multi            | Read in contents of multiple avi files to a table                            |
 | File       | CSV_Read                  | Read in contents of a CSV file                                               |

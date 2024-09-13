@@ -4,6 +4,8 @@ title: fcs
 displayed_sidebar: SDKSidebar
 --- 
 
+# fcs
+
 ## `class` WSP
   
 A class to parse a FlowJo WSP file following the Gating-ML 2.0 standard.&nbsp; &nbsp; Contains methods  
@@ -44,7 +46,7 @@ With corresponding FCS files, you can calculate population counts from FCS event
 the _apply_compensation_ and _calculate_population_counts_ methods.  
 
 
-## `function` WSP.__init__
+## `function` WSP.\_\_init\_\_
   
 Setup parsed WSP object, which contains gates, population statistics, and  
 table output structure as configured in Table Editor in FlowJo  
