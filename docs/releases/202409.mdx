@@ -18,6 +18,11 @@ displayed_sidebar: releaseSideBar
 - **Agent**: Stability improvements when processing updates
 - **Agent**: Log files that have been uploaded to the cloud will be deleted
 
+**Bug Fixes**
+- **SDK**: Fixed parameter validation in the from_file_param method of MultiFileParam, used to ensure that the node parameter is the same for all captured files intended to be placed with the same node
+- **SDK**: MockGanymedeContext should now correctly reference flow_run_id if requested, regardless of use_last_run flag setting
+- **SDK**: Benchling methods updated to generally default to Unset rather than None
+
 
 ### September 5 2024
 
