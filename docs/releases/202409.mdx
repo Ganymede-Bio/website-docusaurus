@@ -4,6 +4,26 @@ title: September 2024
 displayed_sidebar: releaseSideBar
 ---
 
+### September 12 2024
+
+**Features**
+- **UI**: The Environment Version summary is available in the Environment Settings menu
+    - This summary includes the version number of each Agent, Connection, and Flow in the environment
+    - Clicking an Agent or Flow will show the history of that item
+    - This view can be used in cases where stability and traceability are important
+
+**Improvements**
+- **Virtualization**: Session startup time should be greatly improved 
+- **Agent**: File names with spaces will not be written with URL encoding
+- **Agent**: Stability improvements when processing updates
+- **Agent**: Log files that have been uploaded to the cloud will be deleted
+
+**Bug Fixes**
+- **SDK**: Fixed parameter validation in the from_file_param method of MultiFileParam, used to ensure that the node parameter is the same for all captured files intended to be placed with the same node
+- **SDK**: MockGanymedeContext should now correctly reference flow_run_id if requested, regardless of use_last_run flag setting
+- **SDK**: Benchling methods updated to generally default to Unset rather than None
+
+
 ### September 5 2024
 
 **Features**
