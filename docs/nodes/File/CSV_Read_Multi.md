@@ -8,7 +8,7 @@ displayed_sidebar: webUiSidebar
 
 ### Node Description
 
-Reads contents of multiple CSV files into data lake
+Reads contents of a CSV file into data lake
 
 The contents of CSV file are passed to the user-defined function, which
 return one or more tables for storage in Ganymede data lake.
@@ -32,9 +32,9 @@ stored in data lake
 ### Parameters
 
 - **csv_file** : `dict[str, BytesIO]`
-    - CSV files, indexed by file name
+  - CSV files, indexed by file name
 - **ganymede_context** : `GanymedeContext`
-    - Ganymede context variable, which stores flow run metadata
+  - Ganymede context variable, which stores flow run metadata
 
 ### Returns
 

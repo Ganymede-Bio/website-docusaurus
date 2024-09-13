@@ -20,7 +20,7 @@ A class to interact with the Coda API.
 &nbsp; &nbsp; &nbsp; &nbsp; The maximum number of records that can be requested from the Coda API at once.  
 **coda_api_address** : `str`  
 &nbsp; &nbsp; &nbsp; &nbsp; The base URL of the Coda API.  
-**authorization_header** : `str`  
+**authorization_header** : `dict[str, str]`  
 &nbsp; &nbsp; &nbsp; &nbsp; The authorization header used in requests to the Coda API.  
 
 
@@ -44,7 +44,7 @@ Retrieve data from Coda API
   
 **endpoint** : `str`  
 &nbsp; &nbsp; &nbsp; &nbsp; Endpoint to retrieve data from  
-**params** : `Dict, optional`  
+**params** : `dict, optional`  
 &nbsp; &nbsp; &nbsp; &nbsp; Key/Value parameters to pass to get method  
 **limit** : `int, optional`  
 &nbsp; &nbsp; &nbsp; &nbsp; Maximum number of records to request, by default None  
@@ -53,8 +53,8 @@ Retrieve data from Coda API
   
 ### Returns  
   
-`Dict`  
-&nbsp; &nbsp; &nbsp; &nbsp; Coda API response  
+`list[requests.Response]`  
+&nbsp; &nbsp; &nbsp; &nbsp; List of Coda API responses  
 
 
 ## `function` Coda.post
@@ -65,14 +65,14 @@ Post data to Coda API
   
 **endpoint** : `str`  
 &nbsp; &nbsp; &nbsp; &nbsp; Endpoint to retrieve data from  
-**data** : `Dict`  
+**data** : `dict`  
 &nbsp; &nbsp; &nbsp; &nbsp; Data to post to endpoint  
 **sleep_time** : `float, optional`  
 &nbsp; &nbsp; &nbsp; &nbsp; Time in seconds to wait after posting data before checking response  
   
 ### Returns  
   
-`Dict`  
+`requests.Response`  
 &nbsp; &nbsp; &nbsp; &nbsp; Coda API response  
 
 
@@ -84,14 +84,14 @@ Puts data in Coda API
   
 **endpoint** : `str`  
 &nbsp; &nbsp; &nbsp; &nbsp; Endpoint to push data to  
-**data** : `Dict`  
+**data** : `dict`  
 &nbsp; &nbsp; &nbsp; &nbsp; Data to post to endpoint  
 **sleep_time** : `float, optional`  
 &nbsp; &nbsp; &nbsp; &nbsp; Time in seconds to wait after putting data before checking response  
   
 ### Returns  
   
-`Dict`  
+`requests.Response`  
 &nbsp; &nbsp; &nbsp; &nbsp; Coda API response  
 
 
@@ -110,7 +110,7 @@ Get IDs from Coda API
   
 ### Returns  
   
-`List`  
+`list`  
 &nbsp; &nbsp; &nbsp; &nbsp; List of IDs retrieved from Coda API  
 
 
@@ -120,7 +120,7 @@ Convenience method for listing documents
   
 ### Returns  
   
-`List`  
+`list`  
 &nbsp; &nbsp; &nbsp; &nbsp; Document objects  
 
 
@@ -135,7 +135,7 @@ Convenience method for listing table IDs associated with a document template
   
 ### Returns  
   
-`List`  
+`list`  
 &nbsp; &nbsp; &nbsp; &nbsp; Tables within document  
 
 
@@ -150,7 +150,7 @@ Convenience method for listing pages within document
   
 ### Returns  
   
-`Dict`  
+`dict`  
 &nbsp; &nbsp; &nbsp; &nbsp; Pages listing within document  
 
 
@@ -166,7 +166,7 @@ Creates a browser link to a Coda doc containing additional metadata
   
 ### Returns  
   
-`Dict`  
+`list[requests.Response]`  
 &nbsp; &nbsp; &nbsp; &nbsp; Metadata associated with browser link submitted  
 
 
@@ -183,7 +183,7 @@ Convenience method for listing columns within a table
   
 ### Returns  
   
-`Dict`  
+`list`  
 &nbsp; &nbsp; &nbsp; &nbsp; Columns listing within table  
 
 
@@ -197,12 +197,12 @@ Upserting rows into a table in Coda
 &nbsp; &nbsp; &nbsp; &nbsp; Coda Document ID  
 **table_id_or_name** : `str`  
 &nbsp; &nbsp; &nbsp; &nbsp; Coda table ID or name  
-**data** : `Dict`  
+**data** : `dict`  
 &nbsp; &nbsp; &nbsp; &nbsp; Data to post  
   
 ### Returns  
   
-`Dict`  
+`dict`  
 &nbsp; &nbsp; &nbsp; &nbsp; Response from posting data  
 
 
@@ -230,8 +230,8 @@ Uploads 1 set of files as a row to a table in Coda
 &nbsp; &nbsp; &nbsp; &nbsp; Coda Document ID  
 **table_id_or_name** : `str`  
 &nbsp; &nbsp; &nbsp; &nbsp; Coda table ID or name  
-**coda_to_signed_url_map** : `Dict[str, str]`  
-&nbsp; &nbsp; &nbsp; &nbsp; Dictionary containing Ganymede filepaths as keys and Coda column id as values  
+**coda_to_signed_url_map** : `dict[str, str]`  
+&nbsp; &nbsp; &nbsp; &nbsp; dictionary containing Ganymede filepaths as keys and Coda column id as values  
 
 
 ## `function` Coda.create_doc_from_template
@@ -245,5 +245,5 @@ Convenience method for creating document from template
   
 ### Returns  
   
-`Dict`  
+`requests.Response`  
 &nbsp; &nbsp; &nbsp; &nbsp; Response from call to create document from template  

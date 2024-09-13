@@ -8,9 +8,9 @@ displayed_sidebar: webUiSidebar
 
 ### Node Description
 
-Reads multiple Excel files and uploads processed result to data lake
+Reads Excel file and uploads processed result to data lake
 
-Ingests Excel files, which are passed to the user-defined function as a bytes object
+Ingests one Excel file, which is passed to the user-defined function as a bytes object
 for processing.  The user-defined function returns one or more tables, which are
 uploaded to the Ganymede data lake.
 
@@ -39,9 +39,9 @@ Reads Excel file and stores processed table(s) in data lake.
 ### Parameters
 
 - **excel_file** : `bytes | dict[str, bytes]`
-    - Excel file as a bytes object or as dict indexed by filename
+  - Excel file as a bytes object or as dict indexed by filename
 - **ganymede_context** : `GanymedeContext`
-    - Ganymede context variable, which stores flow run metadata
+  - Ganymede context variable, which stores flow run metadata
 
 ### Returns
 
@@ -50,5 +50,5 @@ Reads Excel file and stores processed table(s) in data lake.
 
 ### Notes
 
-excel_file is represented in bytes so user can handle cases where Excel spreadsheet is
+Excel_file is represented in bytes so user can handle cases where Excel spreadsheet is
 a binary object within this function

@@ -8,12 +8,12 @@ displayed_sidebar: webUiSidebar
 
 ### Node Description
 
-Loads parquet files saved in Ganymede storage into data lake tables. Data will be appended to the
-data lake table if it already exists, otherwise create a new one.
+Loads parquet files saved in Ganymede storage into datalake tables. Data will be appended to the
+datalake table if it already exists, otherwise create a new one.
 
 ### Node Attributes
 
 - **table_name: str**
-  - The new or existing table name in the data lake
+  - The new or existing table name in the datalake
 - **storage_regex: str**
   - Regex to identify parquet files

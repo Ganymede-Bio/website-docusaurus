@@ -24,6 +24,7 @@ Write files from data lake to Azure Blob Storage.
 ### Notes
 
 Prior to usage, the following secrets must be configured in your Ganymede environment:
+
 - **azure_client_id**: App client ID
 - **azure_tenant_id**: App tenant ID
 - **azure_subscription_id**: Azure subscription ID
@@ -40,4 +41,4 @@ An example configuration is shown below:
 - **azure_storage_uri**: https://abc123.blob.core.windows.net
 - **src_object_name**: filename.parquet
 - **dest_azure_container_Name**: abc123
-- **dest_azure_blob_name**: "\{\{dag.dag_id\}\}/filename.parquet"
+- **dest_azure_blob_name**: \{dag.dag_id\}/filename.parquet

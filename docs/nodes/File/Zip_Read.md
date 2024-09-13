@@ -30,9 +30,9 @@ Reads Zip file and stores extracted files in the data lake.
 ### Parameters
 
 - **input_zip_file** : `bytes`
-    - Zip file as a bytes object
+  - Zip file as a bytes object
 - **ganymede_context** : `Optional[GanymedeContext]`
-    - Ganymede context variable, which stores flow run metadata
+  - Ganymede context variable, which stores flow run metadata
 
 ### Returns
 

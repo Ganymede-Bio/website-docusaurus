@@ -33,6 +33,7 @@ in the relevant Benchling tenant.
 
 Prior to usage, the secrets below must be configured in your Ganymede environment.  More information
 on acquiring these credentials can be found [here](https://docs.benchling.com/docs/authentication).
+
 - **benchling_url**: URL for Benchling tenant; has form https://\<tenant\>.benchling.com
 - **benchling_app_client_id**: Client_ID; has form xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
 - **benchling_client_secret**: Client_Secret; has form cs_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
@@ -55,13 +56,13 @@ Calls Benchling to get data for flow to trigger
 ### Parameters
 
 - **object_id** : `str`
-    - ID used in Benchling API (e.g. - entity schema ID or notebook entry ID)
+  - ID used in Benchling API (e.g. - entity schema ID or notebook entry ID)
 - **event_type** : `str`
-    - Type of Benchling event (e.g. - v2.entity.registered)
+  - Type of Benchling event (e.g. - v2.entity.registered)
 - **benchling_context** : `BenchlingContext`
-    - Benchling context variable, which stores Benchling connection information
+  - Benchling context variable, which stores Benchling connection information
 - **ganymede_context** : `GanymedeContext`
-    - Ganymede context variable, which stores flow run metadata
+  - Ganymede context variable, which stores flow run metadata
 
 ### Returns
 
@@ -75,6 +76,7 @@ Documentation for the Benchling API can be found here: https://benchling.com/api
 Reference for Benchling events can be found here: https://docs.benchling.com/docs/events-reference
 
 benchling_context is an object of class BenchlingContext, consisting of
+
 - **conn**: Benchling connection
 - **run_tag**: Benchling ID associated with run tag
 - **display_tag**: Displayed value of Benchling run tag

@@ -7,6 +7,3 @@
 [submodule "pylib"]
 	path = pylib
 	url = git@github.com:Ganymede-Bio/pylib.git
-[submodule "api-server"]
-	path = api-server
-	url = https://github.com/Ganymede-Bio/api-server.git

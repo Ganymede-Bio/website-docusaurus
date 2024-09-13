@@ -22,9 +22,9 @@ Process image data into a dictionary of images indexed by filename to save in cl
 ### Parameters
 
 - **img** : `bytes`
-    - Image file, represented as bytes
+  - Image file, represented as bytes
 - **ganymede_context** : `GanymedeContext`
-    - Ganymede context variable, which stores flow run metadata
+  - Ganymede context variable, which stores flow run metadata
 
 ### Returns
 

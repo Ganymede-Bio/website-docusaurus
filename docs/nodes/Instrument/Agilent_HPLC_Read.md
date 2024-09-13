@@ -28,14 +28,14 @@ and another for the metadata.
 ### Parameters
 
 - **datafile** : `object`
-    - An object that contains the data, metadata, detector, xlabels and ylabels attributes.
-    - - datafile.data: A list of lists, where each sublist represents a row of data values.
-    - - datafile.metadata: A dictionary of metadata.
-    - - datafile.detector: A string representing the detector used.
-    - - datafile.xlabels: A list of labels for the x-axis.
-    - - datafile.ylabels: A list of labels for the y-axis.
+  - An object that contains the data, metadata, detector, xlabels and ylabels attributes.
+    - datafile.data: A list of lists, where each sublist represents a row of data values.
+    - datafile.metadata: A dictionary of metadata.
+    - datafile.detector: A string representing the detector used.
+    - datafile.xlabels: A list of labels for the x-axis.
+    - datafile.ylabels: A list of labels for the y-axis.
 - **ganymede_context** : `GanymedeContext`
-    - Ganymede context variable, which stores flow run metadata
+  - Ganymede context variable, which stores flow run metadata
 
 ### Returns
 

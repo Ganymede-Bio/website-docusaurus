@@ -19,7 +19,7 @@ Parse and ingest data from an LCMS file into Ganymede data lake.
 
 The Node configuration below would capture mzML files:
 
-- **lcms**: *.mzML
+lcms: *.mzML
 
 ## User-Defined Python
 
@@ -28,9 +28,9 @@ Function to process LCMS file data
 ### Parameters
 
 - **lcms_file_paths** : `str`
-    - Path to LCMS file to be read
+  - Path to LCMS file to be read
 - **ganymede_context** : `GanymedeContext`
-    - Ganymede context variable, which stores flow run metadata
+  - Ganymede context variable, which stores flow run metadata
 
 ### Returns
 

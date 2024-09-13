@@ -39,9 +39,9 @@ Reads Excel file and stores processed table(s) in data lake.
 ### Parameters
 
 - **excel_file** : `bytes | dict[str, bytes]`
-    - Excel file as a bytes object or as dict indexed by filename
+  - Excel file as a bytes object or as dict indexed by filename
 - **ganymede_context** : `GanymedeContext`
-    - Ganymede context variable, which stores flow run metadata
+  - Ganymede context variable, which stores flow run metadata
 
 ### Returns
 
@@ -50,5 +50,5 @@ Reads Excel file and stores processed table(s) in data lake.
 
 ### Notes
 
-excel_file is represented in bytes so user can handle cases where Excel spreadsheet is
+Excel_file is represented in bytes so user can handle cases where Excel spreadsheet is
 a binary object within this function
