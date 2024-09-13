@@ -24,6 +24,7 @@ Read files from Azure Blob Storage into data lake.
 ### Notes
 
 Prior to usage, the following secrets must be configured in your Ganymede environment:
+
 - **azure_client_id**: App client ID
 - **azure_tenant_id**: App tenant ID
 - **azure_subscription_id**: Azure subscription ID
@@ -39,5 +40,5 @@ An example configuration is shown below:
 
 - **azure_storage_uri**: https://abc123.blob.core.windows.net
 - **src_azure_container_name**: abc123
-- **src_azure_blob_name**: "run_results/filename.parquet"
+- **src_azure_blob_name**: `"run_results/filename.parquet"`
 - **dest_blob_name**: filename.parquet

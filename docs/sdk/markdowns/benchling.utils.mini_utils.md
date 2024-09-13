@@ -14,11 +14,11 @@ This method will flatten nested lists while preserving the original order.
   
 ### Parameters  
   
-**lists** : `Iterator[Union[List, List[list]]]`  
+**lists** : `Iterator[list | list[list]]]`  
 &nbsp; &nbsp; &nbsp; &nbsp; Nested lists  
-**benchling_filter** : `Optional[Dict]`  
+**benchling_filter** : `dict | None`  
 &nbsp; &nbsp; &nbsp; &nbsp; Optional filter to apply to the flattened list  
-**as_dict** : `Optional[bool]`  
+**as_dict** : `bool`  
 &nbsp; &nbsp; &nbsp; &nbsp; Optional flag to return each item as a dictionary. Default is True  
   
 ### Returns  
@@ -59,7 +59,7 @@ Fill null values to to pass Benchling validations
 &nbsp; &nbsp; &nbsp; &nbsp; Input DataFrame  
 **string_fill_na** : `str`  
 &nbsp; &nbsp; &nbsp; &nbsp; Value to replace NA values with, default is ""  
-**numeric_fill_na** : `Optional[int]`  
+**numeric_fill_na** : `int | None`  
 &nbsp; &nbsp; &nbsp; &nbsp; Optional value to replace numeric na with. Default is None. Will raise a ValueError if  
 &nbsp; &nbsp; &nbsp; &nbsp; numeric NA's are detected  
   
@@ -80,7 +80,7 @@ Serialize dictionary for transmission to Benchling
   
 ### Returns  
   
-`Union[benchling_sdk.helpers.serialization_helpers.D, Unset]`  
+`Fields`  
 &nbsp; &nbsp; &nbsp; &nbsp; Serialized dictionary  
 
 
@@ -99,7 +99,6 @@ Check if an entity exists in Benchling
   
 ### Returns  
   
-`Optional`  
 `benchling_sdk.models`  
 &nbsp; &nbsp; &nbsp; &nbsp; The entity if it exists, otherwise None  
   

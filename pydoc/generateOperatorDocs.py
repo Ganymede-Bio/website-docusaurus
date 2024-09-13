@@ -17,13 +17,21 @@ keywords = [
     "Examples",
 ]
 
+params_to_highlight = [
+    "tables_to_upload",
+    "files_to_upload",
+    "downstream_nodes_to_execute",
+    "src_azure_blob_name",
+]
+params_to_highlight_str = "(" + "|".join(params_to_highlight) + "):"
 
-def extract_docstring(filename: str, search_str: str = "class", python_spaces: str = 4) -> List:
+
+def extract_docstring(filename: str, search_str: str = "class", python_spaces: int = 4) -> List:
     """
     Extracts docstring from Ganymede operator class
     """
 
-    docstrings = []
+    docstrings: list = []
     is_comment = False
     search_str_found = False
     lines = open(filename, "r").readlines()
@@ -40,6 +48,9 @@ def extract_docstring(filename: str, search_str: str = "class", python_spaces: s
 
         if "branch" in filename.lower():
             print(line)
+
+        if re.search(params_to_highlight_str, line):
+            line = re.sub(r"([^\s:]+): (.+)", r"**\1**: `\2`", line)
 
         if prev_line.strip().endswith(":") and line_stripped.startswith('"""'):
             is_comment = True
@@ -109,7 +120,7 @@ if __name__ == "__main__":
             shutil.rmtree(os.path.join(markdown_dir, path))
 
     # copy markdown files to subdirectory by operator type
-    missing_files = []
+    missing_files: list = []
     for name, desc in operators.items():
         operator_filename = (
             os.path.join(operators_dir, "/".join(desc["path"].split(".")[1:-1])) + ".py"

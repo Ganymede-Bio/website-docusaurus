@@ -264,9 +264,9 @@ def execute(new_file: FileParam, **kwargs) -> None:
 
 ### Cron Agent
 
-#### Upload file if modified between _recency_min_ and _recency_max_ seconds ago
+#### Upload file if modified in the last day
 
-This Agent would require _parent_dir_ and _file_to_watch_  to be configured.  Recency of last modified date can be configured if desired; if it isn't configured, then the watched file would be uploaded if it was modified in the last hour.
+This Agent would require _watch_dir_ to be configured.  Recency of last modified date can be configured if desired; if it isn't configured, then the watched file would be uploaded if it was modified in the last hour.
 
 ```python
 from ganymede_sdk.agent.models import FileParam, UploadFileParams
@@ -291,32 +291,30 @@ def execute(**kwargs) -> UploadFileParams | None:
         info('Connection requires parent_dir and file_to_watch to be specified.')
         return None
 
-    # grab watch_dir, filename, recency_min, and recency_max from variables configurable in UI
+    # grab watch_dir, recency_min, and recency_max from variables configurable in UI
     watch_dir = agent_variables.get('parent_dir', None)
-    filename = agent_variables.get('file_to_watch', None)
     recency_min = float(agent_variables.get('recency_min', 0))
-    recency_max = float(agent_variables.get('recency_max', 3600))
+    recency_max = float(agent_variables.get('recency_max', 86400))  # last day
 
-    if watch_dir and filename:
-        full_file_path = Path(watch_dir) / Path(filename)
-        
-        if not full_file_path.is_file():
-            error(f'File {full_file_path} does not exist')
-            return None
-    else:
-        info('Connection requires parent_dir and file_to_watch to be specified.')
+    if not watch_dir:
+        error('Connection requires watch_dir to be specified.')
         return None
 
-    elapsed_time = time.time() - os.stat(file_path).st_mtime
-    if elapsed_time >= recency_min and elapsed_time < recency_max:
-        if not os.access(full_file_path, os.R_OK):
-            error(f'Do not have read permissions for file {full_file_path}')
-            return None
-            
-        new_file_param = FileParam(filename=str(full_file_path), body=body)
-        return UploadFileParams(files=[new_file_param])
+    list_of_files = glob.glob(f'{watch_dir}/*.csv')
 
-    info(f'File exists, but was last modified {elapsed_time} seconds ago.  Only files modified between {recency_min} and {recency_max} seconds are uploaded.')
+    file_params = []
+    for file_path in list_of_files:
+        file_elapsed_time = time.time() - os.stat(file_path).st_mtime
+        if file_elapsed_time >= recency_min and file_elapsed_time < recency_max:
+            if not os.access(file_path, os.R_OK):
+                error(f'Do not have read permissions for file {file_path}')
+                return None
+            with open(file_path, 'rb') as f:
+                body = f.read()
+                file_params.append(FileParam(filename=file_path, body=body))
+    if (len(file_params) > 0):    
+        return TriggerFlowParams(single_file_params=file_params)
+
     return None
 ```
 

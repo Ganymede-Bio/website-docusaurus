@@ -22,6 +22,7 @@ Retrieves Airtable table and uploads data to Ganymede data lake.
 ### Notes
 
 Prior to usage, the following secrets must be configured in your Ganymede environment:
+
 - **airtable_api_key**: API key from Airtable
 
 Secrets can be configured by clicking on your username in the upper-right hand of the Ganymede

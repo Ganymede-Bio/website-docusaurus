@@ -36,7 +36,7 @@ assistance, please don't hesitate to reach out to Ganymede.
 
 ## User-Defined Python
 
-This node helps to sync tables from Benchling warehouse to Ganymede data lake. A dataframe is
+This node helps to sync tables from Benchling warehouse to Ganymede datalake. A dataframe is
 constructed with the following columns
 
 - schema: str
@@ -52,7 +52,7 @@ Ganymede.
 ### Parameters
 
 - **ganymede_context** : `GanymedeContext`
-    - Ganymede context variable, which stores flow run metadata
+  - Ganymede context variable, which stores flow run metadata
 
 ### Returns
 

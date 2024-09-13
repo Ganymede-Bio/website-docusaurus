@@ -22,9 +22,9 @@ Create a molecule object to create in Benchling
 &nbsp; &nbsp; &nbsp; &nbsp; ID of the molecule schema to use  
 **registry_id** : `str`  
 &nbsp; &nbsp; &nbsp; &nbsp; ID of the registry to use  
-**fields** : `Optional[Dict]`  
+**fields** : `dict | None`  
 &nbsp; &nbsp; &nbsp; &nbsp; Dictionary of fields to add to the molecule  
-**author_id** : `Optional[str]`  
+**author_id** : `str | None`  
 &nbsp; &nbsp; &nbsp; &nbsp; ID of the author to assign to the molecule  
 **naming_strategy** : `NamingStrategy`  
 &nbsp; &nbsp; &nbsp; &nbsp; Naming strategy to use for the molecule, by default NamingStrategy.NEW_IDS  
@@ -59,7 +59,7 @@ Args:
 &nbsp; &nbsp; &nbsp; &nbsp; error_on_fail (bool, optional): Whether to raise an error if the task fails. Defaults to True.  
   
 Returns:  
-&nbsp; &nbsp; &nbsp; &nbsp; List[str]: A list of task IDs for each bulk create request.  
+&nbsp; &nbsp; &nbsp; &nbsp; list[str]: A list of task IDs for each bulk create request.  
 
 
 ## `function` update_molecules_bulk
@@ -101,14 +101,14 @@ Create a molecule update object to update in Benchling
 &nbsp; &nbsp; &nbsp; &nbsp; ID of the folder to create the entity in  
 **input_schema_id** : `str`  
 &nbsp; &nbsp; &nbsp; &nbsp; ID of the schema to use for the entity  
-**fields** : `Optional[Dict]`  
+**fields** : `dict | None`  
 &nbsp; &nbsp; &nbsp; &nbsp; Dictionary of fields to add to the entity, by default None  
-**author_id** : `Optional[str]`  
+**author_id** : `str | None`  
 &nbsp; &nbsp; &nbsp; &nbsp; ID of the author to assign to the entity, by default None  
 **bulk_update** : `bool`  
 &nbsp; &nbsp; &nbsp; &nbsp; Whether to return a MoleculeBulkUpdate object instead of a MoleculeUpdate object  
   
 ### Returns  
   
-`Dict[str, str]`  
+`dict[str, str]`  
 &nbsp; &nbsp; &nbsp; &nbsp; Dictionary containing the name and ID of the created entity  

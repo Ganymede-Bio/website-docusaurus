@@ -19,7 +19,7 @@ Parse data from an LC file and ingest into Ganymede data lake.
 
 The Node configuration below would capture CDF files:
 
-- **lc**: *.cdf
+lc: *.cdf
 
 ## User-Defined Python
 
@@ -28,9 +28,9 @@ Function to process LC file data
 ### Parameters
 
 - **lc_file_path** : `list[str]`
-    - Path to LC file to be read
+  - Path to LC file to be read
 - **ganymede_context** : `GanymedeContext`
-    - Ganymede context variable, which stores flow run metadata
+  - Ganymede context variable, which stores flow run metadata
 
 ### Returns
 

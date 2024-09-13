@@ -29,9 +29,9 @@ Parse WSP file
 ### Parameters
 
 - **wsp_file** : `BytesIO`
-    - Contents of WSP file
+  - Contents of WSP file
 - **ganymede_context** : `GanymedeContext`
-    - Ganymede context variable, which stores flow run metadata
+  - Ganymede context variable, which stores flow run metadata
 
 ### Returns
 

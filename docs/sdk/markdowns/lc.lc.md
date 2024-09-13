@@ -20,7 +20,7 @@ Reads liquid chromatography runs in CDF format
 &nbsp; &nbsp; &nbsp; &nbsp; Get elution peaks from raw chromatogram data  
 
 
-## `function` LC.__init__
+## `function` LC.\_\_init\_\_
   
 Initialize LC class  
 

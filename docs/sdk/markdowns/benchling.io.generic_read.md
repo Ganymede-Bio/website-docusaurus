@@ -42,7 +42,7 @@ A page is of the form: benchling_sdk.helpers.pagination_helpers.PageIterator
 &nbsp; &nbsp; &nbsp; &nbsp; Benchling context object  
 **\*args**  
 &nbsp; &nbsp; &nbsp; &nbsp; Optional positional arguments to pass to list method of benchling_sdk dropdown service  
-**dropdown_id** : `Optional[str]`  
+**dropdown_id** : `str | None`  
 &nbsp; &nbsp; &nbsp; &nbsp; Optional benchling dropdown id. If none, list all dropdowns. If given, list all dropdowns of  
 &nbsp; &nbsp; &nbsp; &nbsp; that id.  
 **\*\*kwargs**  
@@ -50,6 +50,6 @@ A page is of the form: benchling_sdk.helpers.pagination_helpers.PageIterator
   
 ### Returns  
   
-`List[dict]`  
+`list[dict]`  
 &nbsp; &nbsp; &nbsp; &nbsp; Flattened list of dropdown summaries converted to dicts from  
 &nbsp; &nbsp; &nbsp; &nbsp; benchling_sdk.models.DropdownSummary  

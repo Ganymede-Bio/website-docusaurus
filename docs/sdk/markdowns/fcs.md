@@ -4,47 +4,47 @@ title: fcs
 displayed_sidebar: SDKSidebar
 --- 
 
-
+# fcs
 
 ## `class` WSP
   
 A class to parse a FlowJo WSP file following the Gating-ML 2.0 standard.&nbsp; &nbsp; Contains methods  
 for extracting gates, table output structure, population statistics, and compensation  
 matrices from WSP file.  
-
-```python
+  
+```bash
 >>> wsp = WSP(wsp_bytes)  
 ```
   
-### View gates
+### View gates  
 
-```python
+```bash
 >>> wsp.gates  
 ```
   
 ### View population statistics computed in FlowJo  
 
-```python
+```bash
 >>> wsp.stats_flowjo  
 ```
   
 ### View table output structure, as configured in Table Editor in FlowJo  
 
-```python
+```bash
 >>> wsp.table_output_structure  
 ```
   
 ### Generate output table based on table output structure and FlowJo population statistics  
 
-```python
->>> WSP.apply_table_output_structure(  
-  wsp.table_output_structure["Table"][["gate", "value_type", "statistic", "rename"]], 
-  wsp.stats_flowjo  
-)
+```bash
+>>> WSP.apply_table_output_structure(
+      wsp.table_output_structure["Table"][["gate", "value_type", "statistic", "rename"]], 
+      wsp.stats_flowjo)  
 ```
   
 With corresponding FCS files, you can calculate population counts from FCS events data using  
 the _apply_compensation_ and _calculate_population_counts_ methods.  
+
 
 ## `function` WSP.\_\_init\_\_
   
@@ -56,6 +56,7 @@ table output structure as configured in Table Editor in FlowJo
 **wsp_bytes** : `bytes or file_like object`  
 &nbsp; &nbsp; &nbsp; &nbsp; FlowJo Workspace file in bytes  
 
+
 ## `function` WSP.get_population_stats
   
 Retrieve population statistics from WSP file  
@@ -65,14 +66,16 @@ Retrieve population statistics from WSP file
 `pd.DataFrame`  
 &nbsp; &nbsp; &nbsp; &nbsp; Population statistics as a DataFrame  
 
+
 ## `function` WSP.get_gates
   
 Retrieve gates from WSP file  
   
-### Returns
+### Returns  
   
 `pd.DataFrame`  
 &nbsp; &nbsp; &nbsp; &nbsp; Gates as a DataFrame  
+
 
 ## `function` WSP.get_single_well_stats
   
@@ -91,8 +94,9 @@ sure to capture the unique identifier for each well in the loop.
   
 ### Returns  
   
-`Dict`  
+`dict`  
 &nbsp; &nbsp; &nbsp; &nbsp; Dictionary containing single well stats requested  
+
 
 ## `function` WSP.get_table_output_structure
   
@@ -107,6 +111,7 @@ Retrieve table structure as specified in Table Editor of FlowJo
   
 `pd.DataFrame`  
 &nbsp; &nbsp; &nbsp; &nbsp; DataFrame consisting of gate and tables  
+
 
 ## `function` WSP.apply_table_output_structure
   
@@ -125,8 +130,8 @@ Apply table structure as specified in Table Editor of FlowJo to get population p
 &nbsp; &nbsp; &nbsp; &nbsp; population (series of gates applied to determine population)  
 &nbsp; &nbsp; &nbsp; &nbsp; statistic_name (name of statistic (e.g. count, MFI, etc.))  
 &nbsp; &nbsp; &nbsp; &nbsp; statistic_value (value of statistic)  
-**unique_id** : `Union[List[str], str]`  
-&nbsp; &nbsp; &nbsp; &nbsp; Unique identifying column names(s) for single flow run.&nbsp; &nbsp; Commonly, this would be well position,  
+**unique_id** : `list[str] | str`  
+&nbsp; &nbsp; &nbsp; &nbsp; Unique identifying column names(s) for single flow run. Commonly, this would be well position,  
 &nbsp; &nbsp; &nbsp; &nbsp; well position + timestamp, or filename.  
   
 ### Returns  
@@ -155,12 +160,12 @@ observed in file
   
 ### Parameters  
   
-**population_name** : `List[str]`  
+**population_name** : `list[str]`  
 &nbsp; &nbsp; &nbsp; &nbsp; List of populations, delimited by '/'  
   
 ### Returns  
   
-`List[str]`  
+`list[str]`  
 &nbsp; &nbsp; &nbsp; &nbsp; List of populations in order  
   
 ### Example  
@@ -182,14 +187,16 @@ Retrieve gate structure as a nested dict from a WSP file
 **node** : `etree.Element`  
 &nbsp; &nbsp; &nbsp; &nbsp; XML node to start traversal in, typically node corresponding to well  
 
+
 ## `function` WSP.get_compensation_matrices
   
 Retrieve compensation matrices from WSP file as a DataFrame  
   
 ### Returns  
   
-`Dict[str, pd.DataFrame]`  
+`dict[str, pd.DataFrame]`  
 &nbsp; &nbsp; &nbsp; &nbsp; Dictionary of compensation matrices, keyed by matrix name  
+
 
 ## `function` WSP.apply_compensation
   
@@ -201,13 +208,14 @@ Adjust flow cytometry data for compensation
 &nbsp; &nbsp; &nbsp; &nbsp; DataFrame containing FCS event data  
 **compensation_matrix** : `pd.DataFrame`  
 &nbsp; &nbsp; &nbsp; &nbsp; DataFrame containing compensation matrix; rows are from, columns are to  
-**compensation_channels** : `List[str]`  
+**compensation_channels** : `list[str] | None`  
 &nbsp; &nbsp; &nbsp; &nbsp; Fluorescent channels to adjust for compensation  
   
 ### Returns  
   
 `pd.DataFrame`  
 &nbsp; &nbsp; &nbsp; &nbsp; DataFrame containing compensated events  
+
 
 ## `function` WSP.calculate_population_counts
   
@@ -231,13 +239,14 @@ Calculate population counts from FCS events data, using compensation matrix
 **compensation_matrix** : `pd.DataFrame`  
 &nbsp; &nbsp; &nbsp; &nbsp; Compensation matrix as a DataFrame; rows are from labels, columns are to labels  
   
-**fcs_files_dict** : `Dict[str, bytes]`  
+**fcs_files_dict** : `dict[str, bytes]`  
 &nbsp; &nbsp; &nbsp; &nbsp; Dictionary of FCS files as bytes, keyed by filename  
   
 ### Returns  
   
 `pd.DataFrame`  
 &nbsp; &nbsp; &nbsp; &nbsp; DataFrame containing filename, population name, and counts  
+
 
 ## `class` FCS
   
@@ -260,6 +269,7 @@ A class to represent an FCS (Flow Cytometry Standard) file.
   
 **parse_metadata(metadata: dict)**  
 &nbsp; &nbsp; &nbsp; &nbsp; Parses FCS file metadata.  
+
 
 ## `function` FCS.parse_metadata
   
@@ -288,6 +298,7 @@ channels: pd.DataFrame
 channel_names: Tuple  
 &nbsp; &nbsp; &nbsp; &nbsp; contains flow cytometer channel names  
 
+
 ## `function` FCS.gate_population_polygon
   
 Gate FCS file using a polygon  
@@ -308,6 +319,7 @@ Gate FCS file using a polygon
 `pd.DataFrame`  
 &nbsp; &nbsp; &nbsp; &nbsp; DataFrame containing gated population events  
 
+
 ## `function` FCS.gate_population_limit
   
 Gate FCS file using a limit  
@@ -327,6 +339,7 @@ Gate FCS file using a limit
   
 `pd.DataFrame`  
 &nbsp; &nbsp; &nbsp; &nbsp; DataFrame containing gated population events  
+
 
 ## `function` FCS.create_comp_matrix_xml
   
@@ -351,9 +364,9 @@ Creates XML representation of compensation matrix
 ```python  
 For a WSP object, insert a compensation matrix into the XML tree by executing the steps shown below:  
   
->>> xml_comp_mat = WSP.create_comp_matrix_xml(df_comp_matrix)  
->>> matrix = xml_comp_mat.xpath("./transforms:spilloverMatrix", namespaces=WSP.ns_transforms).pop()  
->>> wsp_obj.wsp_root.xpath("./Matrices")[0].append(xml_comp_mat)  
+>>>> xml_comp_mat = WSP.create_comp_matrix_xml(df_comp_matrix)  
+>>>> matrix = xml_comp_mat.xpath("./transforms:spilloverMatrix", namespaces=WSP.ns_transforms).pop()  
+>>>> wsp_obj.wsp_root.xpath("./Matrices")[0].append(xml_comp_mat)  
   
 In this example, df_comp_matrix is a Pandas DataFrame with a format mirroring an element  
 from an item in the 'compensation_matrices' dictionary returned by the 'get_compensation_matrices' method.  

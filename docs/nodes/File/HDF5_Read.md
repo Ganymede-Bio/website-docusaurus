@@ -31,9 +31,9 @@ Processes HDF5 data
 ### Parameters
 
 - **h5data** : `dict[str, object]`
-    - HDF5 data presented as a nested dict
+  - HDF5 data presented as a nested dict
 - **ganymede_context** : `GanymedeContext`
-    - Ganymede context variable, which stores flow run metadata
+  - Ganymede context variable, which stores flow run metadata
 
 ### Returns
 

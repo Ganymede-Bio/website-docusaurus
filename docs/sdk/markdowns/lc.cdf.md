@@ -132,7 +132,7 @@ Append peak information to an existing CDF file
 &nbsp; &nbsp; &nbsp; &nbsp; If False, append data to the existing CDF file  
 
 
-## `function` CDFOutput.__init__
+## `function` CDFOutput.\_\_init\_\_
   
 Initialize LCOutput object for outputting data from netCDF file in AIA format  
   
@@ -142,7 +142,7 @@ Initialize LCOutput object for outputting data from netCDF file in AIA format
 &nbsp; &nbsp; &nbsp; &nbsp; Name of the netCDF file  
 **cdf** : `nc.Dataset`  
 &nbsp; &nbsp; &nbsp; &nbsp; netCDF file containing LC run data in AIA format  
-**baseline** : `np.array, optional`  
+**baseline** : `np.ndarray, optional`  
 &nbsp; &nbsp; &nbsp; &nbsp; Array containing baseline data  
 
 
@@ -152,7 +152,7 @@ Outputs the data from the netCDF file to an Excel file
   
 ### Parameters  
   
-**filename** : `str`  
+**filename** : `str | None`  
 &nbsp; &nbsp; &nbsp; &nbsp; Name of the file to write to  
 &nbsp; &nbsp; &nbsp; &nbsp; If None, the method will return a tuple of DataFrames (peak_purity, peak_stats)  
 **mode** : `str`  

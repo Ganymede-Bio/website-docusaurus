@@ -36,7 +36,7 @@ Set up the Benchling object
   
 **ganymede_context** : `GanymedeContext`  
 &nbsp; &nbsp; &nbsp; &nbsp; Ganymede context to get run attributes  
-**benchling_context** : `Optional[BenchlingContext]`  
+**benchling_context** : `BenchlingContext | None`  
 &nbsp; &nbsp; &nbsp; &nbsp; Benchling context variable, which stores Benchling connection information  
 
 
@@ -46,13 +46,13 @@ Lists schemas, filtered by type if provided
   
 ### Parameters  
   
-**type** : `Optional[str]`  
+**type** : `str | None`  
 &nbsp; &nbsp; &nbsp; &nbsp; Schema type - potential values are "custom_entity", "assay_result", "molecule", "plate",  
 &nbsp; &nbsp; &nbsp; &nbsp; "aa_sequence", "box", "container", "entry", "location", "mixture", "workflow_task", etc.  
   
 ### Returns  
   
-`List[Dict]`  
+`list[dict]`  
 &nbsp; &nbsp; &nbsp; &nbsp; list of schemas  
 
 
@@ -64,7 +64,7 @@ Get schema by name
   
 **schema_name** : `str`  
 &nbsp; &nbsp; &nbsp; &nbsp; Schema name  
-**type** : `Optional[str]`  
+**type** : `str | None`  
 &nbsp; &nbsp; &nbsp; &nbsp; Subset search by schema type - potential values are "custom_entity", "assay_result", etc.  
   
 ### Returns  
@@ -81,30 +81,30 @@ Creates custom entity in Benchling.&nbsp; &nbsp; If the entity does not exist, f
   
 **entity_name** : `str`  
 &nbsp; &nbsp; &nbsp; &nbsp; Name of new entity to be created  
-**folder_id** : `str`  
+**folder_id** : `str | Unset`  
 &nbsp; &nbsp; &nbsp; &nbsp; Folder ID containing Benchling entity to be created. This should be a string starting  
 &nbsp; &nbsp; &nbsp; &nbsp; with "lib_".&nbsp; &nbsp; If updating a custom entity, specifying the folder ID is optional (if specified,  
 &nbsp; &nbsp; &nbsp; &nbsp; moves the custom entity to the specified folder).  
-**schema_id** : `str`  
+**schema_id** : `str | Unset`  
 &nbsp; &nbsp; &nbsp; &nbsp; Input schema ID Tag. schema associated with Benchling entity to be created. This should  
 &nbsp; &nbsp; &nbsp; &nbsp; be a string starting with "ts_"  
-**registry_id** : `str`  
+**registry_id** : `str | Unset`  
 &nbsp; &nbsp; &nbsp; &nbsp; Project associated with custom entity.&nbsp; &nbsp; This identifies the registry that your run  
 &nbsp; &nbsp; &nbsp; &nbsp; entity will be registered to.&nbsp; &nbsp; This can be found by clicking on Avatar - Feature  
 &nbsp; &nbsp; &nbsp; &nbsp; Settings - Registry Settings, and you will be able to find it in the URL.&nbsp; &nbsp; This should  
 &nbsp; &nbsp; &nbsp; &nbsp; be a string starting with "src_"  
 **naming_strategy** : `NamingStrategy`  
 &nbsp; &nbsp; &nbsp; &nbsp; Naming strategy to use when creating new entities. See NamingStrategy for more details.  
-**custom_entity_fields** : `Optional[Dict]`  
+**custom_entity_fields** : `dict | Unset`  
 &nbsp; &nbsp; &nbsp; &nbsp; Dictionary of field names and values to associate with custom entity  
-**author_id** : `Optional[str]`  
+**author_id** : `str | Unset`  
 &nbsp; &nbsp; &nbsp; &nbsp; Author ID to associate with custom entity. Should be a string starting with "ent_"  
 **if_exists** : `str`  
 &nbsp; &nbsp; &nbsp; &nbsp; Either "fail" or "update". If "fail", will raise an error if the entity already exists.  
   
 ### Returns  
   
-`Dict[str, str]`  
+`dict[str, str]`  
 &nbsp; &nbsp; &nbsp; &nbsp; Dictionary with custom entity name as key and custom entity ID as value  
 
 
@@ -119,7 +119,7 @@ Bulk creates custom entities in Benchling.&nbsp; &nbsp; If the entity does not e
 &nbsp; &nbsp; &nbsp; &nbsp; Columns should include name_field and all fields in schema  
 **name_field** : `str`  
 &nbsp; &nbsp; &nbsp; &nbsp; Name of column in custom_entities_dataframe containing entity names  
-**folder_id** : `Optional[str]`  
+**folder_id** : `str | None`  
 &nbsp; &nbsp; &nbsp; &nbsp; Folder ID containing Benchling entity to be created. This should be a string starting  
 &nbsp; &nbsp; &nbsp; &nbsp; with "lib_".&nbsp; &nbsp; If updating a custom entity, specifying the folder ID is optional (if specified,  
 &nbsp; &nbsp; &nbsp; &nbsp; moves the custom entity to the specified folder).  
@@ -142,7 +142,7 @@ Bulk creates custom entities in Benchling.&nbsp; &nbsp; If the entity does not e
   
 ### Returns  
   
-`Dict[str, List[str]]`  
+`dict[str, list[str]]`  
 &nbsp; &nbsp; &nbsp; &nbsp; Dictionary with keys "created" and "updated" and values of lists of custom entity IDs  
 
 
@@ -167,11 +167,11 @@ Creates molecule in Benchling.&nbsp; &nbsp; If the entity does not exist, first 
 &nbsp; &nbsp; &nbsp; &nbsp; be a string starting with "src_"  
 **naming_strategy** : `NamingStrategy`  
 &nbsp; &nbsp; &nbsp; &nbsp; Naming strategy to use when creating new entities. See NamingStrategy for more details.  
-**custom_entity_fields** : `Optional[Dict]`  
+**custom_entity_fields** : `dict | None`  
 &nbsp; &nbsp; &nbsp; &nbsp; Dictionary of field names and values to associate with custom entity  
-**author_id** : `Optional[str]`  
+**author_id** : `str | None`  
 &nbsp; &nbsp; &nbsp; &nbsp; Author ID to associate with custom entity. Should be a string starting with "ent_"  
-**molecule_fields** : `Optional[Dict]`  
+**molecule_fields** : `dict | None`  
 &nbsp; &nbsp; &nbsp; &nbsp; Dictionary of field names and values to associate with molecule  
 **if_exists** : `str`  
 &nbsp; &nbsp; &nbsp; &nbsp; Either "fail" or "update". If "fail", will raise an error if the entity already exists.  
@@ -208,9 +208,9 @@ Bulk creates molecules in Benchling.&nbsp; &nbsp; If the entity does not exist, 
 &nbsp; &nbsp; &nbsp; &nbsp; Whether to wait for the task to complete before returning  
 **error_on_fail** : `bool`  
 &nbsp; &nbsp; &nbsp; &nbsp; Whether to raise an error if the task fails  
-**molecular_structure_field** : `Optional[str]`  
+**molecular_structure_field** : `str | None`  
 &nbsp; &nbsp; &nbsp; &nbsp; Name of column in molecules_dataframe containing molecular structure  
-**molecular_structure_format** : `Optional[str]`  
+**molecular_structure_format** : `str | None`  
 &nbsp; &nbsp; &nbsp; &nbsp; Format of molecular structure.&nbsp; &nbsp; This should be one of ["smiles", "mol-v3000"]  
 **check_for_existing** : `bool`  
 &nbsp; &nbsp; &nbsp; &nbsp; Whether or not to check for the existence of the entities in `name_field`. This is useful to turn off when you know you'll be creating new entities (for example with many naming strategies) and want to avoid many api calls for checking existence of molecules,  
@@ -219,7 +219,7 @@ Bulk creates molecules in Benchling.&nbsp; &nbsp; If the entity does not exist, 
   
 ### Returns  
   
-`Dict[str, List[str]]`  
+`dict[str, list[str]]`  
 &nbsp; &nbsp; &nbsp; &nbsp; Dictionary with keys "created" and "updated" and values of lists of molecule IDs  
 
 
@@ -230,7 +230,7 @@ Upload blob files to Benchling and return a dictionary of
   
 ### Parameters  
   
-**files** : `Dict[str, bytes]`  
+**files** : `dict[str, bytes]`  
 &nbsp; &nbsp; &nbsp; &nbsp; Files to upload to Benchling  
 **process_file_names** : `bool`  
 &nbsp; &nbsp; &nbsp; &nbsp; Use to process file_name for benchling by converting string to lowercase and removing  
@@ -238,7 +238,7 @@ Upload blob files to Benchling and return a dictionary of
   
 ### Returns  
   
-`Dict[str, Union[Unset, str]]`  
+`dict[str, Unset | str]`  
 &nbsp; &nbsp; &nbsp; &nbsp; Returns a dictionary of IDs from benchling_sdk.models.Blob where the keys are the blob  
 &nbsp; &nbsp; &nbsp; &nbsp; names and the benchling IDs are the values  
   
@@ -292,14 +292,14 @@ Process input DataFrame into assay results for upload to Benchling.
 **error_on_empty_result** : `bool`  
 &nbsp; &nbsp; &nbsp; &nbsp; If True, raise an error if the DataFrame is empty. Default is True.  
 **upload** : `bool`  
-&nbsp; &nbsp; &nbsp; &nbsp; Whether to upload List[AssayResults] to Benchling  
+&nbsp; &nbsp; &nbsp; &nbsp; Whether to upload list[AssayResults] to Benchling  
 **\*\*kwargs**  
 &nbsp; &nbsp; &nbsp; &nbsp; Keyword args to pass to create_assay_result_from_dict  
-&nbsp; &nbsp; &nbsp; &nbsp; drop_na (Optional[bool])  
+&nbsp; &nbsp; &nbsp; &nbsp; drop_na (bool | None)  
   
 ### Returns  
   
-`List[AssayResultCreate]`  
+`list[AssayResultCreate]`  
 &nbsp; &nbsp; &nbsp; &nbsp; List of AssayResultCreate's to be uploaded to Benchling  
   
 ### Example  
@@ -358,9 +358,9 @@ Transfer entities to a plate in Benchling.
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Volume of the entity  
 &nbsp; &nbsp; &nbsp; &nbsp; - volume_units: str  
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Units of the volume. See benchling_sdk.models.ContainerQuantityUnits for options  
-&nbsp; &nbsp; &nbsp; &nbsp; - concentration: Optional[float]  
+&nbsp; &nbsp; &nbsp; &nbsp; - concentration: float | None  
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Concentration of the entity  
-&nbsp; &nbsp; &nbsp; &nbsp; - concentration_units: Optional[str]  
+&nbsp; &nbsp; &nbsp; &nbsp; - concentration_units: str | None  
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Units of the concentration  
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Valid units are molar (M), mass (g/L), and count (cells/L) concentration units. Otherwise, use U/L units. See ContainerQuantityUnits for options to use in the form `f"\{mass or count unit\}/\{volume unit\}"`  
 
@@ -388,7 +388,7 @@ there are appropriate permissions to write to the notebook entry.
 &nbsp; &nbsp; &nbsp; &nbsp; If you don't see "Copy API ID" as an option, click on your avatar, click Settings,  
 &nbsp; &nbsp; &nbsp; &nbsp; and scroll to the bottom and verify that  
 &nbsp; &nbsp; &nbsp; &nbsp; "Enable Copy API ID button" is checked.  
-**table_id** : `Optional[str]`  
+**table_id** : `str | None`  
 &nbsp; &nbsp; &nbsp; &nbsp; ID of the table to write to.&nbsp; &nbsp; This should be a string starting with "strtbl_". You can  
 &nbsp; &nbsp; &nbsp; &nbsp; find this using b.get("entries", id="etr_") or b.get("entries", name="EXP12345678") in  
 &nbsp; &nbsp; &nbsp; &nbsp; the apiId field. The default is None.  
@@ -403,7 +403,7 @@ there are appropriate permissions to write to the notebook entry.
 &nbsp; &nbsp; &nbsp; &nbsp; Whether to wait for the task to complete before returning  
 **\*\*kwargs**  
 &nbsp; &nbsp; &nbsp; &nbsp; Keyword args to pass to create_assay_result_from_dict  
-&nbsp; &nbsp; &nbsp; &nbsp; drop_na (Optional[bool])  
+&nbsp; &nbsp; &nbsp; &nbsp; drop_na (bool | None)  
   
 ### Returns  
   
@@ -457,18 +457,18 @@ if passed the entry_template_id.
 &nbsp; &nbsp; &nbsp; &nbsp; The ID of the folder where the entry will be created.  
 **name** : `str`  
 &nbsp; &nbsp; &nbsp; &nbsp; The name of the new entry.  
-**author_ids** : `Union[str, List[str]], optional`  
+**author_ids** : `str | list[str] | Unset`  
 &nbsp; &nbsp; &nbsp; &nbsp; The IDs of the authors of the entry.  
-**custom_fields** : `models.CustomFields, optional`  
+**custom_fields** : `CustomFields | Unset`  
 &nbsp; &nbsp; &nbsp; &nbsp; Any custom fields to include in the entry.  
-**entry_template_id** : `str, optional`  
+**entry_template_id** : `str | Unset`  
 &nbsp; &nbsp; &nbsp; &nbsp; The ID of the template to use for the entry. The API ID can be copied from Template  
 &nbsp; &nbsp; &nbsp; &nbsp; Collections in Feature Settings.  
-**fields** : `models.Fields, optional`  
+**fields** : `Fields | Unset`  
 &nbsp; &nbsp; &nbsp; &nbsp; The fields to include in the entry.  
-**initial_tables** : `models.InitialTable, optional`  
+**initial_tables** : `InitialTable | list[InitialTable] | Unset`  
 &nbsp; &nbsp; &nbsp; &nbsp; The initial tables to include in the entry.  
-**schema_id** : `str, optional`  
+**schema_id** : `str | Unset`  
 &nbsp; &nbsp; &nbsp; &nbsp; The ID of the schema to use for the entry.  
   
 ### Returns  
@@ -531,7 +531,7 @@ name. Can pass a dropdown id to look up the id of an option of a dropdown
 &nbsp; &nbsp; &nbsp; &nbsp; Dropdown name to identify id for  
 **\*args**  
 &nbsp; &nbsp; &nbsp; &nbsp; Optional positional arguments to pass to list method of benchling_sdk dropdown service  
-**dropdown_id** : `Optional[str]`  
+**dropdown_id** : `str | None`  
 &nbsp; &nbsp; &nbsp; &nbsp; If supplied, get the ID of an option in the dropdown specified by the dropdown_name. The  
 &nbsp; &nbsp; &nbsp; &nbsp; default is None.  
 **\*\*kwargs**  
@@ -539,7 +539,7 @@ name. Can pass a dropdown id to look up the id of an option of a dropdown
   
 ### Returns  
   
-`Dict[str, str]`  
+`dict[str, str]`  
 &nbsp; &nbsp; &nbsp; &nbsp; Dictionary of dropdown name - dropdown id for a specified dropdown name. Raises an  
 &nbsp; &nbsp; &nbsp; &nbsp; error if dropdown id is not found  
   
@@ -565,7 +565,7 @@ List available Benchling services
   
 ### Returns  
   
-`List[str]`  
+`list[str]`  
 &nbsp; &nbsp; &nbsp; &nbsp; List of available Benchling services  
 
 
@@ -580,7 +580,7 @@ results data.
 &nbsp; &nbsp; &nbsp; &nbsp; Benchling object service (e.g. - 'custom_entities', 'assay_results')  
 **\*args**  
 &nbsp; &nbsp; &nbsp; &nbsp; Optional arguments to pass to list methods of the benchling service  
-**benchling_filter** : `Optional[Dict]`  
+**benchling_filter** : `dict | None`  
 &nbsp; &nbsp; &nbsp; &nbsp; Filter to apply to the list of Benchling objects  
 **\*\*kwargs**  
 &nbsp; &nbsp; &nbsp; &nbsp; Optional keyword arguments to pass to list methods of the benchling service  
@@ -626,7 +626,7 @@ Get all Benchling objects of a specific type, optionally filtered by object attr
 &nbsp; &nbsp; &nbsp; &nbsp; Optional arguments to pass to list methods of the benchling service  
 **as_dict** : `bool`  
 &nbsp; &nbsp; &nbsp; &nbsp; Whether to return each Benchling object as a dictionary. Default is True.  
-**benchling_filter** : `Optional[Dict]`  
+**benchling_filter** : `dict | None`  
 &nbsp; &nbsp; &nbsp; &nbsp; Filter to apply to the list of Benchling objects  
 **\*\*kwargs**  
 &nbsp; &nbsp; &nbsp; &nbsp; Optional keyword arguments to pass to list methods of the benchling service  
@@ -688,7 +688,7 @@ used in conjunction with Benchling.get()
 ### Parameters  
   
 **benchling_service_results** : `str`  
-&nbsp; &nbsp; &nbsp; &nbsp; Results of the form List[dict] returned from get() where "id" and "name" are common keys  
+&nbsp; &nbsp; &nbsp; &nbsp; Results of the form list[dict] returned from get() where "id" and "name" are common keys  
 &nbsp; &nbsp; &nbsp; &nbsp; in the dict.  
 **keys** : `str`  
 &nbsp; &nbsp; &nbsp; &nbsp; The key name of the inner dictionaries in the list used to set the key in the returned  
@@ -796,7 +796,7 @@ Archives assay results based on assay result schema and condition.
 &nbsp; &nbsp; &nbsp; &nbsp; Assay result schema ID to archive; should start with 'assaysch_'  
 **app_name** : `str, optional`  
 &nbsp; &nbsp; &nbsp; &nbsp; Creator of assay result to filter by, by default "Ganymede App"  
-**filter_fields** : `Dict[str, str], optional`  
+**filter_fields** : `dict[str, str], optional`  
 &nbsp; &nbsp; &nbsp; &nbsp; Fields on assay result to filter by, specified as a dictionary of field name to field display value  
 **execute** : `bool`  
 &nbsp; &nbsp; &nbsp; &nbsp; Whether to execute the archive.&nbsp; &nbsp; If False, will return assay results to archive.  
@@ -809,7 +809,7 @@ Archives assay results based on assay result schema and condition.
   
 ### Returns  
   
-`List[Dict]`  
+`list[dict]`  
 &nbsp; &nbsp; &nbsp; &nbsp; List of assay results to archive  
 
 

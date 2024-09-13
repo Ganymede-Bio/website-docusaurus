@@ -24,8 +24,6 @@ Sync GCS bucket -\> S3 bucket
   - "replace" or "append" - whether to replace existing files or only add new files to the destination S3 bucket when a file in the S3 bucket has the same name as the source file being synced
 - **dest_s3_key** : `str`
   - Destination S3 key to write to.  If this string ends with a '/', it will be treated as a prefix (i.e. - S3 folder), and the file will be written with the same name as the source file
-- **glob_pattern** : `str`
-  - Glob pattern to match files that need to be synced.  Specify "*" to avoid filtering by glob pattern.
 
 ### Notes
 
@@ -51,7 +49,6 @@ An example configuration for an S3 Write Node in the Flow Editor (src_object_pre
 - **src_all_or_current_run**: current
 - **src_input_or_output_bucket**: output
 - **src_object_prefix**:
-- **glob_pattern**: \*
 
 ### Parameters
 
@@ -68,6 +65,3 @@ An example configuration for an S3 Write Node in the Flow Editor (src_object_pre
   - "replace" or "append" - whether to replace existing files or only add new files to the destination S3 bucket when a file in the S3 bucket has the same name as the source file being synced
 - **dest_s3_key** : `str`
   - Destination S3 key to write to.  If this string ends with a '/', it will be treated as a prefix (i.e. - S3 folder), and the file will be written with the same name as the source file
-- **glob_pattern**: `str`
-  - Glob pattern to match files that need to be synced.  Specify "*" to avoid filtering by glob pattern.
-  

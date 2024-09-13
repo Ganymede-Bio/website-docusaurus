@@ -49,7 +49,7 @@ Convert string container position to grid coordinates
   
 ### Returns  
   
-`list`  
+`list[int, int]`  
 &nbsp; &nbsp; &nbsp; &nbsp; Container position in grid coordinates (e.g. - [0, 0])  
   
 
@@ -57,9 +57,6 @@ Convert string container position to grid coordinates
 ## `function` Signals.create_container
   
 Create a container in Signals  
-### Notes  
-  
-Container contents cannot be modified once created, except for adjusting amount.  
   
 ### Parameters  
   
@@ -76,9 +73,9 @@ Container contents cannot be modified once created, except for adjusting amount.
 &nbsp; &nbsp; &nbsp; &nbsp; ID of the plate location to create the container in  
 **batch_id** : `str`  
 &nbsp; &nbsp; &nbsp; &nbsp; ID of the batch to add to the container  
-**x_coord** : `int`  
+**x_coord** : `int | None`  
 &nbsp; &nbsp; &nbsp; &nbsp; X coordinate of the container inside a matrix plate  
-**y_coord** : `int`  
+**y_coord** : `str | None`  
 &nbsp; &nbsp; &nbsp; &nbsp; Y coordinate of the container inside a matrix plate  
 **barcode** : `str`  
 &nbsp; &nbsp; &nbsp; &nbsp; Barcode of the container  
@@ -89,11 +86,14 @@ Container contents cannot be modified once created, except for adjusting amount.
 **container_fields** : `list, optional`  
 &nbsp; &nbsp; &nbsp; &nbsp; List of dictionaries containing fields to add to the container, by default []  
   
-  
 ### Returns  
   
 `str`  
 &nbsp; &nbsp; &nbsp; &nbsp; ID of the created container  
+  
+### Notes  
+  
+Container contents cannot be modified once created, except for adjusting amount.  
 
 
 ## `function` Signals.create_location

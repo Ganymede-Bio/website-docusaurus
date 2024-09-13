@@ -12,11 +12,11 @@ displayed_sidebar: SDKSidebar
   
 Representation of all inputs for a flow  
   
-files: Optional[List[FlowInputFile]]  
+files: list[FlowInputFile] | None  
 &nbsp; &nbsp; &nbsp; &nbsp; list of files for flow  
-params: Optional[List[FlowInputFile]]  
+params: list[FlowInputParam] | None  
 &nbsp; &nbsp; &nbsp; &nbsp; list of params for flow  
-tags_benchling: Optional[List[FlowInputFile]]  
+tags_benchling: list[BenchlingInputTag] | None  
 &nbsp; &nbsp; &nbsp; &nbsp; list of Benchling tags for flow  
 
 
@@ -58,7 +58,7 @@ Retrieve file based on Benchling field name
 &nbsp; &nbsp; &nbsp; &nbsp; Node in triggered flow that will be receiving file input  
 **triggered_flow_param_name** : `str`  
 &nbsp; &nbsp; &nbsp; &nbsp; Parameter for node in triggered flow  
-**file_extension** : `Optional[str]`  
+**file_extension** : `str | None`  
 &nbsp; &nbsp; &nbsp; &nbsp; File extension (if different from what is param name)  
   
 ### Returns  
