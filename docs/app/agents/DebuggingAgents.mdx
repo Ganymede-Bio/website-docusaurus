@@ -70,6 +70,7 @@ set agentname=%1
 
 :: Set install path assuming agentname was passed:
 set installpath=C:\Program Files\Ganymede\%agentname%\
+
 :: If agentname was not passed, remove double filesep:
 IF "%~1" == "" (
 	set installpath=C:\Program Files\Ganymede\
@@ -88,7 +89,7 @@ copy "%~dp0connection.yaml" "%installpath%" /v /y
 ECHO Step 4: Running installer
 start "%installpath%" "%installpath%agent.exe"
 :: Uncomment next line for testing purposes if needed
-::PAUSE
+:: PAUSE
 ```
 
 ##### Execution steps
