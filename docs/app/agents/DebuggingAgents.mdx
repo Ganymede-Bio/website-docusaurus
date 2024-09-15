@@ -1,6 +1,6 @@
 ---
 id: DebuggingAgents
-title: Troubleshooting Agents
+title: Agent FAQ and Troubleshooting
 displayed_sidebar: webUiSidebar
 ---
 
@@ -11,15 +11,15 @@ displayed_sidebar: webUiSidebar
 A: To exclude specific files from being uploaded, you can use the `fp` function to specify which files should be included.  For example, to exclude files that contain the string "exclude" in the filename, you can use the following code:
 
 ```python
-    def fp_res(x: str):
-        x = parse.unquote(x)
+def fp_res(x: str):
+    x = parse.unquote(x)
 
-        # files excluding temp files
-        files_to_capture = [filename in glob.glob(os.path.join(watch_dir, pattern), recursive=True) if not 'exclude' in filename]
+    # files excluding temp files
+    files_to_capture = [filename in glob.glob(os.path.join(watch_dir, pattern), recursive=True) if not 'exclude' in filename]
 
-        return files_to_capture
+    return files_to_capture
 
-    return fp_res
+return fp_res
 ```
 
 #### Q: How do I capture a file that is periodically overwritten by an instrument?
@@ -38,6 +38,77 @@ A: Yes, environment variables can be accessed from a cron Agent through the `kwa
 # .get method for dictionries is used to handle the case where the variable may not be present without erroring out
 # note: assumes DEFAULT_PATH is configured in the agent
 watch_directory = Path(kwargs.get("vars", {}).get("input_path", DEFAULT_PATH))
+```
+
+#### Q: Can Windows Agents be installed headlessly?
+
+A: Yes - Agent installers (v4.10+) can be installed headlessly.
+
+##### Requirements
+
+The following files are needed:
+
+* Agent installer (EXE, not MSI) with a minimum core Agent version of 4.10
+* Configuration file (YAML); examples of this can be found in the directory specified by the installer when not installed headlessly.  Start with an existing YAML configuration and modify as follows:
+    * Include:
+        * name (required)
+        * variables
+        * tagParams (if applicable)
+    * Exclude:
+        * id
+        * inferredData
+        * startTime
+        * Version
+
+A Windows batch script, such as the one shown below, saved to a .bat file:
+
+```shell
+@ECHO OFF
+
+:: Agent name (used for defining install path) defined by passed argument:
+set agentname=%1
+
+:: Set install path assuming agentname was passed:
+set installpath=C:\Program Files\Ganymede\%agentname%\
+:: If agentname was not passed, remove double filesep:
+IF "%~1" == "" (
+	set installpath=C:\Program Files\Ganymede\
+)
+ECHO Step 1: Creating install path: %installpath%
+mkdir "%installpath%"
+
+ECHO Step 2: Copying exe file
+:: Note: %~dp0 is the path of the script (needed when running as admin)
+:: Note: /v verifies the copied file, /y forces a replace if file with same name exists
+copy "%~dp0agent.exe" "%installpath%" /v /y
+
+ECHO Step 3: Copying config file
+copy "%~dp0connection.yaml" "%installpath%" /v /y
+
+ECHO Step 4: Running installer
+start "%installpath%" "%installpath%agent.exe"
+:: Uncomment next line for testing purposes if needed
+::PAUSE
+```
+
+##### Execution steps
+
+1. Rename agent installer “agent.exe”
+1. Name configuration file “connection.yaml” (if it has a different name)
+1. Set the agentname variable in Line 3 of Windows batch script, which specifies `C:\Program Files\Ganymede\<agentname>\` as the the install path
+1. If desired, zip up a folder containing the agent installer, connection.yaml, and Windows batch script to facilitate sharing.
+1. On the target Windows machine, run the batch script as Administrator.  
+    1. To do this manually, unzip the installation package if necessary, right click on the Windows batch script, and click "Run as Administrator"
+    1. To do this via a script, create a task in Task Scheduler pointing to the Windows batch script.
+        1. Name the task, and check **Run with highest privileges**.
+        1. In the **Actions** tab, add a new action pointing to your batch script.
+        1. In the **Settings** tab, ensure that the task is configured to run without user intervention.
+        1. In the **Triggers** tab, set an appropriate condition to trigger the task.
+
+Once set, invoke the task using `schtasks`:
+
+```powershell
+schtasks /run /tn "TaskName"
 ```
 
 #### Q: Are there any command-line scripts (e.g. - .vbs or .bat) that need to run for Windows Agents to work?

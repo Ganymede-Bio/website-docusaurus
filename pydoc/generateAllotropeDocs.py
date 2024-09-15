@@ -1,5 +1,5 @@
 def get_allotrope_schema_dict(path: str) -> dict:
-    allotrope_globals = {}
+    allotrope_globals: dict = {}
     with open(path, "r") as f:
         exec(f.read(), allotrope_globals)
 
