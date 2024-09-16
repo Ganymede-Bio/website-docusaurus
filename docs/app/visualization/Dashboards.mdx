@@ -101,6 +101,65 @@ can be filtered on, sorted by, and/or used to categorize data.
 
 <img alt="Dashboard - Calculated Column" src="https://ganymede-bio.mo.cloudinary.net/dashboard/Calculated_Column20230415.png" />
 
+## Adding Jinja Templates to SQL Queries
+
+There are two ways to use [Jinja templates](https://jinja.palletsprojects.com/) in SQL queries:
+
+1. [Virtual Queries](#adding-virtual-datasets)
+2. Metrics
+
+### Example Using Virtual Queries
+
+An example virtual query that inherits inputs from a filter can be constructed to use Jinja
+templates using:
+
+```sql
+{% set variable_name = filter_values('some_column_name')[0] if filter_values('some_column_name') else 1 %}
+
+SELECT 
+  *, 
+  {{ variable_name }} AS inherited_filter_value,
+  value * {{ variable_name }} AS value_multiplied_by_inherited_filter_value
+FROM table_name
+```
+
+where a variable is set by calling the _filter_values_ function, a function native to the dashboarding environment, and returning the first value (since
+it always returns a list of selected values). The if statement checks to see a filtered value was 
+selected on column `some_column_name` and returns 1 otherwise. This assigns a default value to
+the query so that the dataset can be created and not raise any errors if there are no active
+filtered values present on that column. A dataset will not be savable without the if statement.
+After saving the query to a virtual dataset, any chart in a dashboard will have the Jinja template
+automatically be rendered.
+
+
+### Examples Using Metrics
+Creating a chart, a line chart for instance, requires creating a metric on that variable. You can
+use filter values by either referencing the new column created in a virtual query or by making the
+metric as follows:
+
+```sql
+AVG(value * {{ filter_values('some_column_name')[0] if filter_values('some_column_name') else 1}})
+```
+
+Where this mimics what was done in the virtual dataset above but instead works for both virtual and
+physical datasets. The if statement is required here as well in order for the chart to be displayed
+when a filter is not selected on `some_column_name`.
+
+
+### Notes
+
+Its important to make sure that you have 
+1. if statements to check if a filter value is present
+2. You are referencing the column name that is being filtered on in the dashboard  
+  a. For instance you have a filter defined in the dashboard named `My Filter` created on dataset
+`my_dataset` on column `some_column_name` where `some_column_name` is referenced in the Jinja
+template
+3. The column name is not contained in the dataset you are using the Jinja template in (unless you actually want your chart to be filtered as well) 
+4. You may need to wrap your Jinja template in a CAST to convert to INT or NUMERIC if necessary
+5. Other useful links for more detail or other use cases of Jinja:  
+  a. [From Preset website](https://preset.io/blog/intro-jinja-templating-apache-superset/)  
+  b. [From Apache Superset website](https://superset.apache.org/docs/configuration/sql-templating/)  
+
 ## Editing dashboards
 
 To edit a dashboard:
