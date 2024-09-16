@@ -32,6 +32,17 @@ module.exports = {
       },
     ],
     [
+      '@docusaurus/plugin-client-redirects',
+      {
+        redirects: [
+        {
+          to: '/app/agents/Agent',
+          from: '/connectivity/Agent',
+          }
+        ]
+      }
+    ],
+    [
       'vercel-analytics',
       {
         debug: false,
