@@ -292,3 +292,4 @@ MockGanymedeContext
 Jinja
 subsetting
 Superset
+DashboardFilterIcon
