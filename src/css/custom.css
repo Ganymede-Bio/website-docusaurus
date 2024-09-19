@@ -129,6 +129,12 @@
   color: var(--ifm-color-gray-lighter);
 }
 
+.button.darkblue_outline_button {
+  border-color: var(--ifm-color-black);
+  background-color: var(--ifm-color-white);
+  color: var(--ifm-color-blue-dark);
+}
+
 .button.darkblue_inverted_button {
   border-color: var(--ifm-color-blue-dark);
   background-color: white;

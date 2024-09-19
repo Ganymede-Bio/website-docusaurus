@@ -126,6 +126,11 @@ module.exports = {
             label: 'Configuring Agents'
           },
           {
+            type: 'doc', 
+            id: 'app/agents/AgentInstall',
+            label: 'Installing Agent Connections'
+          },
+          {
             type: 'doc',
             id: 'app/agents/AgentMonitoring',
             label: 'Monitoring Agents'
