@@ -150,6 +150,14 @@
   padding-bottom: 2px;
 }
 
+.button.darkblue_button_mui_reverse {
+  border-color: var(--ifm-color-black);
+  background-color: var(--ifm-color-gray-lighter);
+  color: var(--ifm-color-blue-dark);
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+
 .button.darkblue_button_icon {
   padding-left: 8px;
   padding-right: 8px;

@@ -4,7 +4,7 @@ title: Installing Agent Connections
 displayed_sidebar: webUiSidebar
 ---
 
-import { ApiOutlined, EditOutlined, PlusOutlined } from "@ant-design/icons";
+import { ApiOutlined, EditOutlined, PlusOutlined, DownloadOutlined } from "@ant-design/icons";
 
 To install a Connection, open the Ganymede application in a browser window and navigate to the Connection tab in the left sidebar. Select the desired Agent by name and download the relevant Windows/Linux installation file.
 
@@ -16,9 +16,9 @@ To install a Connection, open the Ganymede application in a browser window and n
 2. On the top panel, navigate to the appropriate environment (e.g. - development or production, as appropriate) for your tenant (if not already there).
 3. Navigate to the Connections page by selecting the <div className="button darkblue_button"><ApiOutlined /></div> icon in the left toolbar.
 4. Select the Agents subsection of the Connections page to view all available Agents.
-5. Find your Agent and hover over the **Download** button. 
+5. Find your Agent and hover over the <div className="button darkblue_button_mui_reverse"><DownloadOutlined /> Download</div> button. 
     1. Select the Windows EXE option to download the agent in your browser.
-    1. An executable named \<your_agent>_[id].exe should download to the PC
+    1. An executable named \<your_agent>_\<id\>.exe should download to the PC
 
 ### Step 2: Run the Agent Installer
 
@@ -85,16 +85,16 @@ If the Connection is not showing up in Ganymede, or if the status is anything ot
 There may be a slight delay as the service connection resumes.
 :::
 
-### Step 5: Set up Connection-Level Tags and Variables
+### Step 5: Set up Connection Tags and Variables
 
 1. Navigate to the Connections pane in the Ganymede app by selecting the <div className="button darkblue_button"><ApiOutlined /></div> icon in the left toolbar and selecting the Connections pane. 
 2. Find the Connection you just created. Click the <div className="button dark_gray_button"><EditOutlined /> **Edit Connections**</div> button at the bottom right of the Connection Settings
-3. Click <div className="button darkblue_outline_button"><PlusOutlined /> Add file tag</div> to add a file tag.
+3. Click <div className="button darkblue_outline_button"><PlusOutlined /> Add file tag</div> to add a File Tag.
     1. Type in Connection variables as key: value pairs.
-    2. Click Save to apply the tags to the Connections.  The tag will be visible under Connection file tags if properly applied.
-4. Repeat step 3 for each tag to be applied to files from this specific Connection.
-5. Scroll down to the Labels section of the Connection Settings
-6. Add Labels to the Connection with desired values.
+    2. Click Save to apply the Tags to the Connections.  The Tag will be shown as a chip on the Connection if properly applied.
+4. Repeat step 3 for each Tag to be applied to files from this specific Connection.
+5. Scroll down to the Labels section of the Connection Settings.
+6. Add Labels to the Connection with desired values, which are strings to associate with the Connection.
 
 ## Linux Installation
 
