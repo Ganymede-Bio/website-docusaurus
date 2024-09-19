@@ -54,7 +54,7 @@ To tag a file within a flow, use the `add_file_tag` function in the `ganymede_sd
 - _param_ **input_file_path**: str - The name of the file to tag.  The file path can be obtained from the keys in the dictionary returned by the [retrieve_files](../../sdk/GanymedeClass#method-retrieve_files) for Ganymede class or by calling the [get_gcs_uri method](../../sdk/GanymedeClass#method-get_gcs_uri).
 - _param_ **tag_type_id**: str - The name of the tag type to apply to the file.
 - _param_ **display_value**: str - Value of the tag to display in the file browser.
-- _param_ **tag_id**: Optional[str] - The tag id that acts as a unique identifier for the tag. If not specified, a hash to uniquely identify the tag will be generated as the tag ID.
+- _param_ **tag_id**: Optional[str] - The tag id that acts as a unique identifier for the tag. 
 - _param_ **url**: Optional[str] - URL to associate with the tag, if applicable.
 - _param_ **bucket**: Optional[str] - The bucket to tag the file in; either "input" or "output".  If not specified, the full path to the file in storage must be provided.
 
@@ -114,7 +114,7 @@ You can also tag files programmatically using the `add_file_tag_to_fileparam` fu
 - _param_ **file_param**: FileParam | MultiFileParam - The FileParam object to tag.  FileParam objects hold a single file, while MultiFileParam objects hold multiple files (for use in nodes that take in multiple files).  If a MultiFileParam object is specified, the tag is applied to all files within the object.
 - _param_ **tag_type_id**: str - The name of the tag type to apply to the file.
 - _param_ **display_value**: str - The value of the tag to display in the file browser.
-- _param_ **tag_id**: Optional[str] - The tag id that acts as a unique identifier for the tag. If not specified, a hash to uniquely identify the tag will be generated as the tag ID.
+- _param_ **tag_id**: Optional[str] - The tag id that acts as a unique identifier for the tag. 
 - _param_ **url**: str - A URL to associate with the tag, if applicable.
 
 ```python
