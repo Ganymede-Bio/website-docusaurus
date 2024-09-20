@@ -71,7 +71,7 @@ Agent utility functions are provided in `agent_sdk` for validating data integrit
 
 The `agent_sdk` is only available for Agents v5.0+.  Prior to v5.0, these functions were included in `ganymede_sdk.agent`.
 
-:::note
+:::
 
 ### Computing file checksums
 
@@ -160,11 +160,7 @@ ScanResult stores file paths for files of interest.  It includes:
 
 You can use `scan_for_finished_files` to continuously scan a directory for files, uploading them to Ganymede Cloud for processing when they are older than a specified number of minutes. The Flow could query previously uploaded files using the [list_files](../GanymedeClass.mdx#method-list_files) method to avoid uploading the same file multiple times.
 
-## Agent SDK
-
-The Agent SDK offers access to query the Ganymede database and add logging messages to the web app (for Agents v4.8+).
-
-### Querying Ganymede from Agent Code
+## Querying Ganymede from Agent Code
 
 ```python
 from agent_sdk.query import read_sql_query
