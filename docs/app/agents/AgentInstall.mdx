@@ -1,0 +1,194 @@
+---
+id: AgentInstall
+title: Installing Agent Connections
+displayed_sidebar: webUiSidebar
+---
+
+import { ApiOutlined, EditOutlined, PlusOutlined, DownloadOutlined } from "@ant-design/icons";
+
+To install a Connection, open the Ganymede application in a browser window and navigate to the Connection tab in the left sidebar. Select the desired Agent by name and download the relevant Windows/Linux installation file.
+
+## Windows Installation
+
+### Step 1: Download the Agent
+
+1. Open the Ganymede application in a Google Chrome window: \<tenant\>.ganymede.bio
+2. On the top panel, navigate to the appropriate environment (e.g. - development or production, as appropriate) for your tenant (if not already there).
+3. Navigate to the Connections page by selecting the <div className="button darkblue_button"><ApiOutlined /></div> icon in the left toolbar.
+4. Select the Agents subsection of the Connections page to view all available Agents.
+5. Find your Agent and hover over the <div className="button darkblue_button_mui_reverse"><DownloadOutlined /> Download</div> button. 
+    1. Select the Windows EXE option to download the agent in your browser.
+    1. An executable named \<your_agent>_\<id\>.exe should download to the PC
+
+### Step 2: Run the Agent Installer
+
+<div class="text--center">
+  <img
+    alt="Windows Agent installation"
+    src="https://ganymede-bio.mo.cloudinary.net/agent/Agent_Windows_Setup20230605.png"
+    width="500"
+  />
+</div>
+&nbsp;
+
+- **Connection name**: The name visible to users on the instrument computer and in the Ganymede UI.
+- **Variables**: Strings in the format "var_name=var_value" that allow users to set context variables for use in user-defined Python code.
+- **Labels**: Strings used to identify and group Connections within Ganymede. The label is visible in the Connections UI.
+
+1. After downloading the Agent Connection, launch the agent.exe executable on the instrument PC **as an administrator**.
+2. Select "yes" when prompted by the User Account Control dialog to allow the Agent application to make changes to your device.
+3. Navigate through the installation wizard.
+    1. Specify a descriptive name for the Connection.
+        1. A descriptive name might include the instrument name, asset tag, or other identifiers.
+        2. Leave the "additional params" field blank; while variables and labels can be specified here, they can also be modified later in the Ganymede web app.
+        3. Click **Next** to complete the configuration.
+    2. Specify an installation directory.  The default installation directory is `C:\Program Files\Ganymede\`.
+        1. If you install multiple Connections on the same PC, it is recommended that you create an additional directory within the Ganymede folder for each Connection.
+        2. Select Next to continue.
+    3. Click **Install** to begin the installation process.
+    4. Once the installation is complete, a final popup window will appear.
+        1. Ensure the **Launch Ganymede Agent** checkbox is checked.
+        2. Click **Finish** to exit the installer and start the Agent service.
+
+### Step 3: Check the Connection Status
+
+1. Navigate to the Connections page in Ganymede. 
+    1. Open the Ganymede application in a browser window: \<tenant\>.ganymede.bio
+    2. On the top panel, navigate to the \<tenant\>-\<tenant-env\> environment
+    3. Navigate to the Connections page.
+    4. Find your Connection and click it to open the detailed Connection page.
+    5. On the top of the Connection settings you should see the Status is “Live”
+    
+:::info
+If the Connection is not showing up in Ganymede, or if the status is anything other than Live, please contact [Ganymede Support](../Support.mdx) and send the stderr.log that is in the Agent installation directory
+:::
+
+### Step 4: Credential Setup (Network drives only)
+
+1. Open Windows Service Manager.  To do so, press Windows + R, type `services.msc`, and hit Enter.
+2. Find the Ganymede Agent service in the list of services.
+
+:::note
+- The service name will be in the format `GanymedeAgent-[agent uuid]`.
+- The Connection ID can be identified by navigating to the Connections pane and selecting the newly created Connection.
+:::
+
+3. Right click the Agent service and select **Stop**.
+
+4. Right click the service again and select properties to open the properties menu.
+5. Navigate to the logon section and select the radio button next to “This account:”
+6. Fill in the username and password fields with credentials that allow access to the network drive
+7. Close the properties menu and start the service by right clicking and selecting “start”.
+8. Navigate back to the connections pane in Ganymede to confirm the connection is active and running
+
+:::note
+There may be a slight delay as the service connection resumes.
+:::
+
+### Step 5: Set up Connection Tags and Variables
+
+1. Navigate to the Connections pane in the Ganymede app by selecting the <div className="button darkblue_button"><ApiOutlined /></div> icon in the left toolbar and selecting the Connections pane. 
+2. Find the Connection you just created. Click the <div className="button dark_gray_button"><EditOutlined /> **Edit Connections**</div> button at the bottom right of the Connection Settings
+3. Click <div className="button darkblue_outline_button"><PlusOutlined /> Add File Tag</div> to open the file tag popup.
+    1. Select the appropriate Tag Type Name from the dropdown
+    2. Add a Display Value which will appear next to each file uploaded to Ganymede via this Connection
+        1. Optionally, specify a Tag ID to associate with the tag.  This is generally only used in situations where a non-human interpretable values to identify the tag programmatically
+    3. Click Add Tag to apply the tag to the connection
+        1. The tag will be visible under connection file tags if properly applied.
+4. Repeat step 3 for each Tag to be applied to files from this specific Connection.
+5. Scroll down to the Labels section of the Connection Settings.
+6. Add Labels to the Connection with desired values, which are strings to associate with the Connection.
+
+## Linux Installation
+
+After downloading the agent, modify permissions for the binary to 755.
+
+```bash
+chmod 755 agent_name_<timestamp>_agent
+```
+
+Create a [systemd service file](https://www.freedesktop.org/software/systemd/man/systemd.service.html) similar to this:
+
+```bash
+[Unit]
+Description=Ganymede Example Agent
+After=network.target
+Wants=network.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+Restart=on-failure
+RestartSec=10
+TimeoutSec=30
+User=jane_doe
+ExecStart=/path/to/agent/executable -n GanymedeExampleAgentService -v "input_path=/path/to/watch/dir"
+StandardOutput=append:/var/log/ganymede/GanymedeExampleAgentService.log
+StandardError=append:/var/log/ganymede/GanymedeExampleAgentService_err.log
+
+[Install]
+WantedBy=multi-user.target
+```
+
+- **Description**: Identifies the Connection in logs.
+- **After** and **Wants**: Ensures that basic networking has been set up before launching the Connection.
+- **StartLimitIntervalSec**: set to 0 to avoid service from stopping; by default, the service would stop after a certain number of failures within a specific timeframe.
+- **Restart**: Set to restart the Connection on unclean exit code or abnormal exit; does not restart on clean exit.
+- **User**: The user to associate with Agent runs.  To see the current user, run `whoami`.
+- **ExecStart**: The path to the Agent executable.  The executable takes the following command-line arguments:
+  - -n / --name: The required field for the Connection name used to identify the device and its data, logs, and status throughout Ganymede.
+  - -v / --var: a string in the format "var_name=var_value" that allows setting user context variables accessible from user-defined agent code.  Multiple variables can be specified as shown in the [append configuration setting in argparse](https://docs.python.org/3/library/argparse.html#action).  This argument specifies the folder to watch; if not specified, the folder watched will be the directory containing the Connection binary.
+- **StandardOutput**: log file for Connection output.
+- **StandardError**: log file for Connection errors.  
+- **WantedBy**: Specifies that, if the service has been enabled, it should start when multi-user.target is reached during boot. This occurs when the system is operational and ready for multiple users to log in and use the system in non-graphical mode.
+
+Once the service file is created, start the Agent by copying the file to /etc/systemd/system/ and setting permissions of the service file to 644. For example, if the systemd service file were named _ganymede_example_agent.service_, run:
+
+```bash
+sudo cp /path/to/ganymede_example_agent.service /etc/systemd/system/
+sudo chmod 644 /etc/systemd/system/ganymede_example_agent.service
+```
+
+To launch this service, use the following commands:
+
+```bash
+# to start the Agent Connection service
+sudo systemctl start ganymede_example_agent.service
+
+# to ensure that the Connection service starts on system startup
+sudo systemctl enable ganymede_example_agent.service
+```
+
+Additional commands that can be useful:
+
+```bash
+# observe the status of the Connection service
+sudo systemctl status ganymede_example_agent.service
+
+# Reload the systemd service file after changes have been made to a service file
+# and restart the Connection service after changes have been made
+sudo systemctl daemon-reload
+sudo systemctl restart ganymede_example_agent.service
+```
+
+:::info
+After an Agent binary is executed, a connection.yaml file is generated, similar to the one shown below.  When this file is present in the same directory as the Connection binary, the Agent uses this configuration file to determine inputs.
+
+```bash
+environment: ganymede-dev-multi
+id: <agent uuid>
+inferredData:
+  installPath: /path/to/agent/binary
+  macAddress: <mac address of machine>
+  machineIP: <IP address of machine>
+  machineName: <name of machine>
+  serviceDisplayName: GanymedeAgent-<agent uuid>
+labels: []
+name: ganymede_example_agent
+startTime: '2024-07-17T15:10:00Z'
+tagParams: []
+variables:
+  input_path: /path/to/watch/dir/
+version: <YYYYMMDD-timestamp>
+```
+:::
