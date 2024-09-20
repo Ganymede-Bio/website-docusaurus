@@ -300,3 +300,6 @@ startTime
 agentname
 HamiltonAgent
 AgentInstall
+upsert
+FileTags
+programmatically
