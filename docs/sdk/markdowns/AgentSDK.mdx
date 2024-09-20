@@ -1,6 +1,6 @@
 ---
 id: AgentSDK
-title: AgentSDK
+title: Agent SDK
 displayed_sidebar: SDKSidebar
 sidebar_label: Agent SDK 
 toc_max_heading_level: 4
@@ -8,343 +8,25 @@ toc_max_heading_level: 4
 
 import NodeChip from '@site/src/components/NodeChip.js'
 
-## User-defined code examples by Agent type
-
-This section contains a cookbook of user-defined code examples, which can be helpful for expediting Agent definition.
-
-### Watch for files locally and run Flow
-
-In the user-defined function for Agents executing Flows, the _get_param_mapping_ function is run whenever a file is added or modified
-in the directory that the Agent is watching. The _execute_ function is run whenever all files are observed.  The _get_param_mapping_ function
-is used to specify the parameters to be passed to the Flow, and the _execute_ function specifies the input files and parameters to
-the Flow that is executed.
-
-Below is a skeleton example for the user-defined code with associated types:
-
-```python
-from typing import Callable
-
-def fp(watch_dir: str, parent_dir: str, pattern: str) -> Callable[[str], bool]:
-    """
-    This function returns a function that performs pattern matching against a file path.
-    Use this function as a template for creating your own pattern matching functions, which
-    you can then use in the values of the return object in the get_param_mapping function.
-
-    Returns
-    -------
-    Callable[[str], bool]
-        Function that takes a file as input and returns True if the file matches the pattern.
-    """
-    pass
-
-def get_param_mapping(
-    watch_dir: str,
-    parent_dir: str = "",
-    file_name: str = "",
-    modified_time: str = "",
-    body: bytes = bytes(),
-) -> dict[str, Callable[[str], bool]]:
-    """
-    This function is called when a file is added or modified in the watch directory.
-    Modify this function to capture the files you want to trigger the flow;
-    the function should return a dictionary where the keys are <node name>.<param name>
-    and values are functions for performing pattern matching against the target file.
-
-    For nodes that accept multiple inputs, specify a list of functions to match against;
-    each specified function should uniquely match 1 file.
-
-    This function returns a dictionary of fp objects indexed by `node name`.`param name`
-    """
-    pass
-
-def execute(flow_params_fw: FileWatcherResult) -> TriggerFlowParams:
-    """
-    Called when all glob patterns specified by get_param_mapping have been matched.
-
-    Parameters
-    ----------
-    flow_params_fw : FileWatcherResult
-        Dict of FileParam objects indexed by <node name>.<param name>
-    """
-    pass
-```
-
-#### Delivering files to a Flow with single file input Nodes
-
-This example shows an Agent that delivers a csv file to the [Bioreactor_File Node](../../nodes/File/CSV_Read), an excel file containing the word 'medium' to the [Medium_Composition Node](../../nodes/File/Excel_Read.md), and an excel file containing the word 'eventlog' to the [Event_Log Node](../../nodes/File/Excel_Read.md).
-
-```python
-import glob
-import os
-import re
-from typing import Callable
-from urllib import parse
-
-from agent_sdk import (
-    FileParam,
-    FileWatcherResult,
-    MultiFileParam,
-    TriggerFlowParams,
-)
-
-
-def fp(watch_dir: str, parent_dir: str, pattern: str) -> Callable[[str], bool]:
-    def fp_res(x: str):
-        x = parse.unquote(x)
-        return x in glob.glob(os.path.join(watch_dir, pattern), recursive=True)
-
-    return fp_res
-
-
-def get_param_mapping(
-    watch_dir: str,
-    parent_dir: str = "",
-    file_name: str = "",
-    modified_time: str = "",
-    body: bytes = bytes(),
-) -> dict[str, Callable[[str], bool] | list[Callable[[str], bool]]]:
-    id_group = re.search(r"^(\w+)", file_name)
-    if id_group is None:
-        return {}
-    id = id_group.group()
-    return {
-        "Bioreactor_File.csv": fp(watch_dir, parent_dir, f"*.csv"),
-        "Medium_Composition.excel": fp(watch_dir, parent_dir, f"*medium*.xlsx"),
-        "Event_Log.excel": fp(watch_dir, parent_dir, f"*eventlog*.xlsx"),
-    }
-
-
-def execute(flow_params_fw: FileWatcherResult, **kwargs) -> TriggerFlowParams:
-    return TriggerFlowParams(
-        single_file_params=flow_params_fw.files,
-        multi_file_params=None,
-        benchling_tag=None,
-        additional_params={},
-    )
-```
-
-#### Deliver files to a Flow with a multi-input Node
-
-This example shows an Agent configured to work with an flow with a Node taking multiple inputs, picking up filenames starting with 'Yeast_B1', 'Yeast_B2', 'Yeast_C1', 'Yeast_C2' and delivering the observed files to the Read_FCS_Files node.  The Agent also delivers an input parameter of "exp234" to the [Experiment_ID Node](../../nodes/File/Input_File_Multi.md), which is an [Input_Param node](../../nodes/Tag/Input_Param).
-
-```python
-import glob
-import os
-from typing import Callable
-
-from agent_sdk import (
-    FileWatcherResult,
-    MultiFileParam,
-    TriggerFlowParams,
-    info,
-    file_params_list_to_multi,
-)
-
-
-def fp(watch_dir: str, parent_dir: str, pattern: str) -> Callable[[str], bool]:
-    def fp_res(x: str):
-        return x in glob.glob(os.path.join(watch_dir, pattern), recursive=True)
-
-    return fp_res
-
-def get_param_mapping(
-    watch_dir: str,
-    parent_dir: str = "",
-    file_name: str = "",
-    modified_time: str = "",
-    body: bytes = bytes(),
-) -> dict[str, Callable[[str], bool]]:
-    match_dict = dict()
-
-    # Match files associated with wells B1, B2, C1, and C2 from a flow cytometry run
-    for well_row in range(1, 3):
-        for well_col in ["B", "C"]:
-            well_row_zfill = str(well_row).zfill(2)
-            match_key = f"Yeast_{well_col}{well_row}*"
-            match_dict[f"Yeast_{well_col}{well_row}.fcs"] = fp(
-                watch_dir, parent_dir, f"*{match_key}"
-            )
-
-    return match_dict
-
-
-# Required Function
-def execute(flow_params_fw: FileWatcherResult, **kwargs) -> TriggerFlowParams:
-    fcs_param = "Read_FCS_Files.fcs"
-
-    file_param_list = []
-    for file_param in list(flow_params_fw.files.values()):
-        file_param.content_type = 'application/octet-stream'
-        file_param.param = fcs_param
-        file_param_list.append(file_param)
-    
-    m = file_params_list_to_multi(file_param_list)
-    m.param = fcs_param
-    
-    
-    return TriggerFlowParams(
-        single_file_params=None,
-        multi_file_params={fcs_param: m},
-        benchling_tag=None,
-        additional_params={"Experiment_ID": "exp234"},
-    )
-```
-
-### Watch for flow outputs then save locally
-
-#### Deliver worklist to a liquid handler PC
-
-
-```python
-from agent_sdk import FileParam, info, error
-from pathlib import Path
-import os
-
-
-def execute(new_file: FileParam, **kwargs) -> None:
-    filename = new_file.filename.split("/")[-1]
-    filename_split = filename.split("_")
-    exp_id = f"{filename_split[0]}_{filename_split[1]}"
-
-    default_path = "C:/Users/dev/liquid_handler/worklist/"
-
-    # The vars parameter can be updated by adding variables on the associated Connection page or upon Connection installation using a -v flag for each variable.
-    path = Path(kwargs.get("vars", {}).get("output_path", default_path))
-
-    # add experiment ID to the path variable
-    path = path / exp_id
-
-    # Create directory for writing file if necessary
-    try: 
-        if not os.path.exists(path):
-            os.makedirs(path)
-    except PermissionError:
-        error(f"Permission denied: Cannot create directory at {path}.")
-        return None
-    except FileExistsError:
-        error(f"File exists: A file with the name '{path}' already exists and is not a directory.")
-        return None
-    except OSError as e:
-        error(f"OS error occurred: {e}")
-        return None
-
-    # full_path is C:/Users/dev/liquid_handler/worklist/<exp_id>/<filename>
-    full_path = path / filename
-
-    # Write file to full_path
-    try:    
-        with open(full_path, "wb") as fp:
-            fp.write(new_file.body)
-    except FileNotFoundError:
-        error(f"Error: The directory '{path}' does not exist.")
-        return None
-    except PermissionError:
-        print(f"Error: Permission denied. Cannot write to '{full_path}'.")
-        return None
-    except IsADirectoryError:
-        print(f"Error: '{full_path}' is a directory, not a file.")
-        return None
-    except IOError as e:
-        print(f"IO error occurred: {e}")
-        return None
-    except AttributeError:
-        print("Error: 'new_file.body' is not a bytes-like object.")
-        return None
-    except Exception as e:
-        print(f"An unexpected error occurred while writing to {full_path}: {e}")
-        return None
-
-    if not os.access(full_path, os.R_OK):
-        info(f"Unable to read {full_path} after file write.")
-    else:
-        info(f"File write to {full_path} successful.")
-
-    return None
-```
-
-### Cron Agent
-
-#### Upload file if modified in the last day
-
-This Agent would require _watch_dir_ to be configured.  Recency of last modified date can be configured if desired; if it isn't configured, then the watched file would be uploaded if it was modified in the last hour.
-
-```python
-from pathlib import Path
-import os
-import time
-from agent_sdk import info, error, FileParam, UploadFileParams
-
-# Required Function
-def execute(**kwargs) -> UploadFileParams | None:
-    """
-    Executes on specified cadence.
-
-    Returns
-    -------
-    UploadFileParams | None
-        Files to upload; if set to None, then no files will be uploaded.
-    """
-
-    agent_variables = kwargs.get('vars', {})
-    if not agent_variables:
-        info('Connection requires parent_dir and file_to_watch to be specified.')
-        return None
-
-    # grab watch_dir, recency_min, and recency_max from variables configurable in UI
-    watch_dir = agent_variables.get('parent_dir', None)
-    recency_min = float(agent_variables.get('recency_min', 0))
-    recency_max = float(agent_variables.get('recency_max', 86400))  # last day
-
-    if not watch_dir:
-        error('Connection requires watch_dir to be specified.')
-        return None
-
-    list_of_files = glob.glob(f'{watch_dir}/*.csv')
-
-    file_params = []
-    for file_path in list_of_files:
-        file_elapsed_time = time.time() - os.stat(file_path).st_mtime
-        if file_elapsed_time >= recency_min and file_elapsed_time < recency_max:
-            if not os.access(file_path, os.R_OK):
-                error(f'Do not have read permissions for file {file_path}')
-                return None
-            with open(file_path, 'rb') as f:
-                body = f.read()
-                file_params.append(FileParam(filename=file_path, body=body))
-    if (len(file_params) > 0):    
-        return TriggerFlowParams(single_file_params=file_params)
-
-    return None
-```
-
-Variables can be configured during the installation by [passing additional variables during the installation](../../app/agents/AgentInstall#windows-installation):
-
-```bash
-# example variable configuration at installation
--v parent_dir=C:\Users\dev\experiment_results\output\ -v file_to_watch="output.log" -v recency_min=60 -v recency_max=1800
-```
-
-Post-installation, for Agents v4.8+, the parameters for Windows Connections can be [updated in the Connection UI](../../app/agents/AgentMonitoring#monitoring-agent-connections).
-
 ## Classes for Agent-triggered flows
 
-Objects for triggering a Flow from an [Agent](../../app/agents/Agent) can generally be found in `agent_sdk`.  
+Objects for triggering a Flow from an [Agent](../../app/agents/Agent) can be found in `agent_sdk` for Agents v5.0+.
 
 ### FileWatcherResult Class
 
 FileWatcherResult is a dictionary of FileParam objects indexed by `node name`.`param name`.
 
 - _param_ **files**: dict[str, fileParam] - Dictionary of FileParam objects indexed by `node name`.`param name`
-- _param_ **tags**: Optional[List[FileTag]] - List of tags to be applied to all files
+- _param_ **tags**: list[FileTag] | None - List of tags to be applied to all files
 
 ### TriggerFlowParams Class
 
 TriggerFlowParams specifies the inputs for the Flow executed when all files are observed.  It includes the following parameters:
 
-- _param_ **single_file_params**: Optional[dict[str, FileParam]] - Dict of FileParam objects indexed by `node name`.`param name`.  These parameters are used for Nodes that accept a single file as input.
-- _param_ **multi_file_params**: Optional[dict[str, MultiFileParam]] - Dict of MultiFileParam objects indexed by `node name`.`param name`.  These parameters are used for Nodes that accept multiple files as input.
-- _param_ **benchling_tag**: Optional[Tag] - Additional parameters to be passed to flow.  This parameter is used for inputs to the Input_Benchling node.
-- _param_ **additional_params**: Optional[dict[str, str]] - Additional parameters to be passed to flow.  This parameter is used for inputs to the [Input_Param node](../../nodes/Tag/Input_Param.md); the key is the name if the Node name for the input parameter, and the value is the string to pass into the Node.
+- _param_ **single_file_params**: dict[str, FileParam] | None - Dict of FileParam objects indexed by `node name`.`param name`.  These parameters are used for Nodes that accept a single file as input.
+- _param_ **multi_file_params**: dict[str, MultiFileParam] | None - Dict of MultiFileParam objects indexed by `node name`.`param name`.  These parameters are used for Nodes that accept multiple files as input.
+- _param_ **benchling_tag**: Tag | None - Additional parameters to be passed to flow.  This parameter is used for inputs to the Input_Benchling node.
+- _param_ **additional_params**: dict[str, str] | None - Additional parameters to be passed to flow.  This parameter is used for inputs to the [Input_Param node](../../nodes/Tag/Input_Param.md); the key is the name if the Node name for the input parameter, and the value is the string to pass into the Node.
 
 ### FileParam Class
 
@@ -356,8 +38,8 @@ FileParam specifies files to be uploaded to Ganymede Cloud and their correspondi
 - _param_ **param**: str - Name of parameter to be used in Flow, e.g. `node_name`.`parameter_field_name`
 - _param_ **parent_dir**: str - Path within the Agent watch directory containing the file.  For example. if C:/Users/username/watch_dir/ is being watched and C:/Users/username/watch_dir/abc/def/my_file.txt is found, then parent_dir would be "abc/def"
 - _param_ **upload_ts**: str - Timestamp string in ISO format of when file was uploaded to the Agent watch directory, e.g. "2021-01-01T00:00:00Z"
-- _param_ **upload_path**: Optional[str] - Path in Ganymede storage where file will be uploaded
-- _param_ **tags**: Optional[List[FileTag]] - List of tags to be applied to the file
+- _param_ **upload_path**: str | None - Path in Ganymede storage where file will be uploaded
+- _param_ **tags**: list[FileTag] | None - List of tags to be applied to the file
 - _param_ **bucket_name**: str - Bucket associated with file
 - _param_ **files**: str - Alternative method for specifying file contents, where the key is the filename and the value is the file body.
 
@@ -370,8 +52,8 @@ MultiFileParam is used for submitting multiple files to a single node. It includ
 - _param_ **param**: str - Name of parameter to be used in flow, e.g. `node_name`.`parameter_field_name`
 - _param_ **parent_dir**: str - Path within Agent watch directory that contains file.  For example. if C:/Users/username/watch_dir/ is being watched and C:/Users/username/watch_dir/abc/def/my_file.txt is found, then parent_dir would be "abc/def"
 - _param_ **upload_ts**: str - Timestamp string in ISO format of when file was uploaded to Agent watch directory, e.g. "2021-01-01T00:00:00Z"
-- _param_ **upload_paths**: Optional[List[str]] - Path in Ganymede storage where file will be uploaded
-- _param_ **tags**: Optional[List[FileTag]] - List of tags to be applied to file
+- _param_ **upload_paths**: list[str] | None - Path in Ganymede storage where file will be uploaded
+- _param_ **tags**: list[FileTag] | None - List of tags to be applied to file
 - _param_ **bucket_name**: str - Bucket associated with file
 
 The MultiFileParam object contains a method for initiation from a list of FileParam objects as shown below.  The content type of the object is assumed to take on the content type of the first item in the list.
@@ -383,14 +65,23 @@ m = agent_sdk.file_params_list_to_multi([fp1, fp2])
 
 ## Utility functions
 
-Agent utility functions are provided in `ganymede_sdk.agent.utils` for validating data integrity and interacting with file systems.
+Agent utility functions are provided in `agent_sdk` for validating data integrity and interacting with file systems.
+
+:::note
+
+The `agent_sdk` is only available for Agents v5.0+.  Prior to v5.0, these functions were included in `ganymede_sdk.agent`.
+
+:::note
 
 ### Computing file checksums
 
-Ganymede provides functions to validate file integrity, accessible via `ganymede_sdk.agent.utils`.  These values can be used to verify the integrity of a file uploaded to cloud storage:
+Ganymede provides functions to validate file integrity; these values can be used to verify the integrity of a file uploaded to cloud storage:
 
 ```python
-from ganymede_sdk.agent.utils import calculate_md5, calculate_crc32c
+# Before Agent v5.0
+# from ganymede_sdk.agent.utils import calculate_md5, calculate_crc32c
+
+from agent_sdk import calculate_md5, calculate_crc32c
 
 file_path = "path/to/local/file"
 
@@ -402,7 +93,7 @@ crc32c = calculate_crc32c(file_path)
 You can also calculate the checksum of a file uploaded to Ganymede Cloud by creating a a tempfile.TemporaryFile object, writing the file contents to it, and then calculating the checksum:
 
 ```python
-from ganymede_sdk.agent.utils import calculate_md5, calculate_crc32c
+from agent_sdk import calculate_md5, calculate_crc32c
 import os
 import tempfile
 
@@ -420,7 +111,7 @@ os.remove(tmp_file_name)
 
 ### File system utilities
 
-`ganymede_sdk.agent.utils` provides a number of convenience functions, which can be helpful to use with cron Agents that involve more complex logic prior to invoking a flow.  Some examples of this are when a file is written to multiple times before being processed, or if there is a variable number of files being processed, such that the trigger for invoking a flow requires more than just the presence of a file.
+`agent_sdk` provides a number of convenience functions, which can be helpful to use with cron Agents that involve more complex logic prior to invoking a flow.  Some examples of this are when a file is written to multiple times before being processed, or if there is a variable number of files being processed, such that the trigger for invoking a flow requires more than just the presence of a file.
 
 #### ScanResult Dataclass
 
@@ -438,7 +129,7 @@ ScanResult stores file paths for files of interest.  It includes:
 `matches_pattern` returns True if a file path matches at least one of the specified regex patterns specified and False otherwise.
 
 - _param_ **filename**: str - Name of file
-- _param_ **pattern**: re.Pattern | list[re.Pattern] - Regex pattern or list of regex patterns to match against
+- _param_ **pattern**: str | re.Pattern - Regex pattern or list of regex patterns to match against
 
 `is_file_ready` returns True if a file has the modified time is within the last **interval_in_seconds** seconds, or if the size of the file has changed in that same timespan.
 
@@ -451,7 +142,7 @@ ScanResult stores file paths for files of interest.  It includes:
 
 `filter_by_age` returns a list of files that have not been modified within the last **age_in_minutes** minutes.
 
-- _param_ **scan_results**: List[ScanResult] - List of ScanResult objects
+- _param_ **scan_results**: list[ScanResult] - List of ScanResult objects
 - _param_ **age_in_minutes**: int - Minimum age in minutes
 
 `zip_directory` creates a zip file of a directory and its contents.

@@ -137,6 +137,11 @@ module.exports = {
           },
           {
             type: 'doc',
+            id: 'app/agents/AgentTemplates',
+            label: 'Example Agent Templates'
+          },
+          {
+            type: 'doc',
             id: 'app/agents/DebuggingAgents',
             label: 'Troubleshooting Agents & FAQ'
           },
@@ -316,7 +321,7 @@ module.exports = {
     {
       type: 'category',
       label: 'SDK',
-      collapsed: true,
+      collapsed: false,
       items: [
         {
           type: 'doc',
