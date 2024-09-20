@@ -15,7 +15,7 @@ The **Ganymede** object is a powerful tool used within editor notebooks to acces
 - **initiator_type**: str - Type of the user who initiated the flow run (AGENT, USER, EVENT, FLOW)
 - **ganymede_context**: GanymedeContext - Run context information, detailed in the [GanymedeContext section of this page](#class-ganymedecontext)
 
-As an example, you can create a Ganymede object associated with the most recent run to mirror the prior execution in user-defined code:
+As an example, you can create a **Ganymede** object associated with the most recent run to mirror the prior execution in user-defined code:
 
 ```python
 import pandas as pd
@@ -254,12 +254,12 @@ email_alert.send_email(
 
 _send_email_ sends an email notification to the specified recipient(s).  The method returns the HTML object of the email sent.
 
-- _param_ **to** : Union[str, Iterable[str]] - The recipient(s) of the email. This can be a single email address (str) or a list of email addresses (Iterable).
+- _param_ **to** : str | Iterable[str] - The recipient(s) of the email. This can be a single email address (str) or a list of email addresses (Iterable).
 - _param_ **subject** : str - The subject of the email.
 - _param_ **message** : str - The plain text message content.
-- _param_ **cc** : Optional[Union[str, Iterable[str]]] - The recipient(s) to be copied on the email (CC), by default None.  This can be a single email address or a list of email addresses.
-- _param_ **bcc** : Optional[Union[str, Iterable[str]]] - The recipient(s) to be blindly copied on the email (BCC), by default None.  This can be a single email address or a list of email addresses.
-- _param_ **custom_headers** : Optional[Dict[str, Any]] - A dictionary of custom email headers, by default None.
+- _param_ **cc** : str | Iterable[str] | None - The recipient(s) to be copied on the email (CC), by default None.  This can be a single email address or a list of email addresses.
+- _param_ **bcc** : str | Iterable[str] | None - The recipient(s) to be blindly copied on the email (BCC), by default None.  This can be a single email address or a list of email addresses.
+- _param_ **custom_headers** : dict[str, Any] | None - A dictionary of custom email headers, by default None.
 
 ## Other methods
 

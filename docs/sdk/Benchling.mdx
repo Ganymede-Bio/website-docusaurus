@@ -9,7 +9,7 @@ import NodeChip from '@site/src/components/NodeChip.js'
 
 ## Overview
 
-The Benchling object can be used within editor notebooks and operators to 
+The **Benchling** object can be used within editor notebooks and operators to 
 
 - Upload files to Benchling
 - Upload assay results to Benchling
@@ -58,7 +58,7 @@ Custom entities can be created and updated with
 - **create_or_update_custom_entity**(self, entity_name: str, folder_id: str, schema_id: str, registry_id: str, author_id=None, custom_entity_fields=None, if_exists="fail")
 
 Here is an example of creating a custom entity from the columns of a dataframe. If the entity
-already exsits, the method will update it if if\_exists = "update".
+already exists, the method will update it if if\_exists = "update".
 
 ```python
 from ganymede_sdk.api.benchling import Benchling
@@ -210,7 +210,7 @@ file_ids = b.create_benchling_ids_from_files(
 
 ### Uploading Assay Results - create_assay_results_from_dataframe
 This method can be used to upload assay results to Benchling. You can use create\_ids\_from\_files to
-associate rows in your dataframe with uplaoded benchling files.
+associate rows in your dataframe with uploaded benchling files.
 
 ```python
 from ganymede_sdk.api.benchling import Benchling

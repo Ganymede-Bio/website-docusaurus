@@ -1,12 +1,17 @@
 ---
 id: GanymedeSDKOverview
-title: Ganymede SDK
+title: SDK Overview
 displayed_sidebar: SDKSidebar
 sidebar_label: SDK Overview
 ---
 
 
-The Ganymede SDK offers a suite of methods for interacting with Ganymede directly from editor and analysis notebooks.
+The Ganymede platform contains 2 SDKs:
+
+- [`ganymede_sdk`](#ganymede-sdk): for interacting with Ganymede directly from editor and analysis notebooks
+- [`agent_sdk`](#agent-sdk): for Agents v5.0+, interacting with Ganymede from [Agent notebooks](../app/agents/Agent.mdx)
+
+### Ganymede SDK
 
 ```python
 from ganymede_sdk import Ganymede
@@ -17,6 +22,15 @@ from ganymede_sdk import Ganymede
 - [**Analytical methods**](./markdowns/fcs.md) and [**more granular API documentation**](./markdowns/benchling.benchling.md) can be found under the SDK header on the left
 - [**AI Integration**](./AI): Learn how to interact with Ganymede using natural language.
 - [**Allotrope Schemas**](./markdowns/allotrope_schema.md): Access DataFrame schemas for validating DataFrames against Allotrope standards.
+
+### Agent SDK
+```python
+import agent_sdk
+```
+
+The [Agent SDK](./markdowns/AgentSDK.mdx) contains methods for displaying log messages, sending data to Ganymede, and interacting with the file system that a Connection is running on.  The separation between Agent SDK and Ganymede SDK allows for a more lightweight Agent.
+
+### Tips and Tricks
 
 :::tip
 
