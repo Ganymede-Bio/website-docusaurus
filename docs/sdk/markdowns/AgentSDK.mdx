@@ -1,7 +1,8 @@
 ---
-id: AgentModelsAndMethods
-title: Agent Models and Methods
+id: AgentSDK
+title: AgentSDK
 displayed_sidebar: SDKSidebar
+sidebar_label: Agent SDK 
 toc_max_heading_level: 4
 ---
 
@@ -79,7 +80,7 @@ import re
 from typing import Callable
 from urllib import parse
 
-from ganymede_sdk.agent.models import (
+from agent_sdk import (
     FileParam,
     FileWatcherResult,
     MultiFileParam,
@@ -131,12 +132,12 @@ import glob
 import os
 from typing import Callable
 
-from agent_sdk import info
-
-from ganymede_sdk.agent.models import (
+from agent_sdk import (
     FileWatcherResult,
     MultiFileParam,
     TriggerFlowParams,
+    info,
+    file_params_list_to_multi,
 )
 
 
@@ -177,7 +178,7 @@ def execute(flow_params_fw: FileWatcherResult, **kwargs) -> TriggerFlowParams:
         file_param.param = fcs_param
         file_param_list.append(file_param)
     
-    m = MultiFileParam.from_file_param(file_param_list)
+    m = file_params_list_to_multi(file_param_list)
     m.param = fcs_param
     
     
@@ -195,8 +196,7 @@ def execute(flow_params_fw: FileWatcherResult, **kwargs) -> TriggerFlowParams:
 
 
 ```python
-from agent_sdk import info, error
-from ganymede_sdk.agent.models import FileParam
+from agent_sdk import FileParam, info, error
 from pathlib import Path
 import os
 
@@ -269,11 +269,10 @@ def execute(new_file: FileParam, **kwargs) -> None:
 This Agent would require _watch_dir_ to be configured.  Recency of last modified date can be configured if desired; if it isn't configured, then the watched file would be uploaded if it was modified in the last hour.
 
 ```python
-from ganymede_sdk.agent.models import FileParam, UploadFileParams
 from pathlib import Path
 import os
 import time
-from agent_sdk import info, error
+from agent_sdk import info, error, FileParam, UploadFileParams
 
 # Required Function
 def execute(**kwargs) -> UploadFileParams | None:
@@ -329,7 +328,7 @@ Post-installation, for Agents v4.8+, the parameters for Windows Connections can 
 
 ## Classes for Agent-triggered flows
 
-Objects for triggering a Flow from an [Agent](../../app/agents/Agent) can generally be found in `ganymede_sdk.agent.models`.  
+Objects for triggering a Flow from an [Agent](../../app/agents/Agent) can generally be found in `agent_sdk`.  
 
 ### FileWatcherResult Class
 
@@ -379,7 +378,7 @@ The MultiFileParam object contains a method for initiation from a list of FilePa
 
 ```python
 # assume fp1 and fp2 are FileParam objects
-m = MultiFileParam.from_file_param([fp1, fp2])
+m = agent_sdk.file_params_list_to_multi([fp1, fp2])
 ```
 
 ## Utility functions

@@ -315,7 +315,7 @@ module.exports = {
       items: [
         {
           type: 'doc',
-          id: 'sdk/markdowns/AgentModelsAndMethods',
+          id: 'sdk/markdowns/AgentSDK',
         },
         {
           type: 'doc',
