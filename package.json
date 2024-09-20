@@ -3,7 +3,6 @@
   "version": "0.0.1",
   "license": "Apache-2.0",
   "private": false,
-  "type": "module",
   "scripts": {
     "start": "docusaurus start",
     "build": "docusaurus build",
