@@ -19,6 +19,6 @@ matrix:
       - code
       - pre
   sources:
-  - '**/*.mdx|docs/api/**'
+  - '**/*.mdx|!docs/api/**'
   - '**/*.md'
   default_encoding: utf-8
