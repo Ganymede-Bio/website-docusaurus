@@ -15,6 +15,7 @@ To use the SchemaValidation class, import it, create an instance, and use that i
 ```python
 from ganymede_sdk import SchemaValidation
 import pandas as pd
+from pandera import DataFrameSchema
 
 # typically, this DataFrame would be read in using retrieve_sql or retrieve_tables, or retrieved from a input file widget
 df = pd.DataFrame({
@@ -23,7 +24,9 @@ df = pd.DataFrame({
 })
 
 # obtain a validated DataFrame
-validated_df = SchemaValidation(df)
+validation_dict = SchemaValidation(df)
+schema_df = DataFrameSchema(validation_dict)
+df = schema_df.validate(df)
 ```
 
 ### Constructor Parameters
