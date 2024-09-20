@@ -122,7 +122,7 @@ The _Configuration_ input specifies the action performed by the Agent, with opti
 
 A Connection watches a directory (and associated subdirectories) for new files and updates to existing files.  The Flow configured with the Agent is triggered when all expected files are found.
 
-The _input_path_ variable, configured for each Connection [at installation](#windows-installation), specifies the directory to watch.
+The _input_path_ variable, configured for each Connection [at installation](./AgentInstall#windows-installation), specifies the directory to watch.
 
 #### Input Parameters
 
@@ -373,7 +373,7 @@ Multiple flow cytometers are used to observe cell populations for a related set 
 
 A Connection that monitors Flow file outputs, saving them to local directories as specified by the Agent logic.
 
-The _output_path_ variable, configured for each Connection [at installation](#windows-installation), specifies the directory to store files to.
+The _output_path_ variable, configured for each Connection [at installation](./AgentInstall#windows-installation), specifies the directory to store files to.
 
 #### Input Parameters
 
@@ -436,28 +436,7 @@ A Connection that uploads files to Ganymede Cloud on a scheduled cadence.
 
 A local file is modified at regular intervals and needs to uploaded to Ganymede Cloud after each modification.
 
-## Installing Connections
-
-To install a Connection, open the Ganymede application in a browser window and navigate to the Connection tab in the left sidebar. Select the desired Agent by name and download the relevant Windows/Linux installation file.
-
-### Windows Installation
-
-After downloading the Agent Connection, launch the installer to complete the configuration.
-
-<div class="text--center">
-  <img
-    alt="Windows Agent installation"
-    src="https://ganymede-bio.mo.cloudinary.net/agent/Agent_Windows_Setup20230605.png"
-    width="500"
-  />
-</div>
-&nbsp;
-
-- **Connection name**: The name visible to users on the instrument computer and in the Ganymede UI.
-- **Variable definitions**: Strings in the format "var_name=var_value" that allow users to set context variables for use in user-defined Python code.
-- **Label** A string used to identify and group Connections within Ganymede. The label is visible in the Connections UI.
-
-
+## Variables and Labels in Windows Agent Connections
 
 For Agents that reference local directories, the monitored directory is specified in the Additional Params input box.  All subdirectories of _input_path_ are also monitored.
 
@@ -521,100 +500,6 @@ To do so, follow the steps below:
 
 **Note**: Use IP if systems are on different domains.
 
-:::
-
-### Linux Installation
-
-After downloading the agent, modify permissions for the binary to 755.
-
-```bash
-chmod 755 agent_name_<timestamp>_agent
-```
-
-Create a [systemd service file](https://www.freedesktop.org/software/systemd/man/systemd.service.html) similar to this:
-
-```bash
-[Unit]
-Description=Ganymede Example Agent
-After=network.target
-Wants=network.target
-StartLimitIntervalSec=0
-
-[Service]
-Type=simple
-Restart=on-failure
-RestartSec=10
-TimeoutSec=30
-User=jane_doe
-ExecStart=/path/to/agent/executable -n GanymedeExampleAgentService -v "input_path=/path/to/watch/dir"
-StandardOutput=append:/var/log/ganymede/GanymedeExampleAgentService.log
-StandardError=append:/var/log/ganymede/GanymedeExampleAgentService_err.log
-
-[Install]
-WantedBy=multi-user.target
-```
-
-- **Description**: Identifies the Connection in logs.
-- **After** and **Wants**: Ensures that basic networking has been set up before launching the Connection.
-- **StartLimitIntervalSec**: set to 0 to avoid service from stopping; by default, the service would stop after a certain number of failures within a specific timeframe.
-- **Restart**: Set to restart the Connection on unclean exit code or abnormal exit; does not restart on clean exit.
-- **User**: The user to associate with Agent runs.  To see the current user, run `whoami`.
-- **ExecStart**: The path to the Agent executable.  The executable takes the following command-line arguments:
-  - -n / --name: The required field for the Connection name used to identify the device and its data, logs, and status throughout Ganymede.
-  - -v / --var: a string in the format "var_name=var_value" that allows setting user context variables accessible from user-defined agent code.  Multiple variables can be specified as shown in the [append configuration setting in argparse](https://docs.python.org/3/library/argparse.html#action).  This argument specifies the folder to watch; if not specified, the folder watched will be the directory containing the Connection binary.
-- **StandardOutput**: log file for Connection output.
-- **StandardError**: log file for Connection errors.  
-- **WantedBy**: Specifies that, if the service has been enabled, it should start when multi-user.target is reached during boot. This occurs when the system is operational and ready for multiple users to log in and use the system in non-graphical mode.
-
-Once the service file is created, start the Agent by copying the file to /etc/systemd/system/ and setting permissions of the service file to 644. For example, if the systemd service file were named _ganymede_example_agent.service_, run:
-
-```bash
-sudo cp /path/to/ganymede_example_agent.service /etc/systemd/system/
-sudo chmod 644 /etc/systemd/system/ganymede_example_agent.service
-```
-
-To launch this service, use the following commands:
-
-```bash
-# to start the Agent Connection service
-sudo systemctl start ganymede_example_agent.service
-
-# to ensure that the Connection service starts on system startup
-sudo systemctl enable ganymede_example_agent.service
-```
-
-Additional commands that can be useful:
-
-```bash
-# observe the status of the Connection service
-sudo systemctl status ganymede_example_agent.service
-
-# Reload the systemd service file after changes have been made to a service file
-# and restart the Connection service after changes have been made
-sudo systemctl daemon-reload
-sudo systemctl restart ganymede_example_agent.service
-```
-
-:::info
-After an Agent binary is executed, a connection.yaml file is generated, similar to the one shown below.  When this file is present in the same directory as the Connection binary, the Agent uses this configuration file to determine inputs.
-
-```bash
-environment: ganymede-dev-multi
-id: <agent uuid>
-inferredData:
-  installPath: /path/to/agent/binary
-  macAddress: <mac address of machine>
-  machineIP: <IP address of machine>
-  machineName: <name of machine>
-  serviceDisplayName: GanymedeAgent-<agent uuid>
-labels: []
-name: ganymede_example_agent
-startTime: '2024-07-17T15:10:00Z'
-tagParams: []
-variables:
-  input_path: /path/to/watch/dir/
-version: <YYYYMMDD-timestamp>
-```
 :::
 
 ## Configuring User-Defined Python
