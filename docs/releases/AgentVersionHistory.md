@@ -6,6 +6,17 @@ displayed_sidebar: releaseSideBar
 
 This page contains a summary of key version updates for the Ganymede [Agent](../app/agents/Agent.mdx).  Since the individual instances of Agents (connections) are not updated when the Agent is updated, this page can be helpful for determining the capabilities of specific connections previously installed.
 
+## 5.0.8
+
+- Agent build time and executable size have been reduced by 50%
+- Configuration updates should be more responsive
+- In order to perform the version update follow the steps below:
+    - Do not remote update an agent from version 4 to 5 without first reviewing the code
+    - Full uninstall and reinstallation should work without issue
+    - If the agent is less than 4.7.16: You will need to run a full update or reach out to your Ganymede SSE for help
+    - If the agent is at version 4.7.16 or greater: Any references to `ganymede_sdk` will need to be replaced with `agent_sdk`.
+    - Once the update has been made to the processor, trigger an agent version update to 5.0.8
+
 ## 4.10.0
 
 - Fixed deadlock bug associated with recursive calls for logging
