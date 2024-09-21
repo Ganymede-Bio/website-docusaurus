@@ -52,6 +52,7 @@ Click the <div className="button darkblue_button">**Manage <SettingOutlined />**
 * **Id**: Unique ID for the Flow.
 * **Owner**: Owner of the Flow.  The Flow will appear on the home page for the owner of a flow.
 * [**Retries**](#configuring-retries): How many times the Flow would retry to execute a node, in case of an error or a timeout.
+* **Max Active Runs**: Maximum number of Flow runs that can be active for the Flow at the same time; additional Flow runs requested are queued for later execution.  This can be useful, for example, for preventing contention issues resulting from multiple Flow runs making similar requests to a third-party API in a Flow used for synchronizing systems.
 * **Production Mode**: Toggle to place Flow in *production mode*, which makes all tabular data written by the Flow to be done append-only.  
 
 :::info
@@ -83,7 +84,7 @@ The Run Queue Bar located at the bottom of the screen contains buttons for execu
 
 To create a new Flow, click the <div className="button darkblue_button">**Manage <SettingOutlined />**</div> button in the upper right hand corner of the screen. Then click the <div className="button black_button"><PlusOutlined /> Add New Flow</div> button on the sidebar.  This action exposes a modal for naming and describing the Flow.  
 
-<img alt="Add new flow" src="https://ganymede-bio.mo.cloudinary.net/apiServer/AddNewFlow_20240617.png"/>
+<img alt="Add new flow" src="https://ganymede-bio.mo.cloudinary.net/apiServer/AddNewFlow_20240920.png"/>
 
 ### Documenting Flows
 
