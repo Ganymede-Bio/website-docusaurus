@@ -14,6 +14,12 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "api/download-agent",
+          label: "downloadAgent",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
           id: "api/get-agents",
           label: "getAgents",
           className: "api-method get",

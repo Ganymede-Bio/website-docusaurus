@@ -1,0 +1,177 @@
+---
+id: download-agent
+title: "downloadAgent"
+description: "Get a signed url to download the latest [Agent](https://docs.ganymede.bio/app/agents/Agent) in an Environment by its id"
+sidebar_label: "downloadAgent"
+hide_title: true
+hide_table_of_contents: true
+api: eJzFlD1v2zAQhv8KcVMCsJbTUVuGIAjaqUnQwfBAixeLjUQy5MmJIfC/F0dJjlzHWQq0kyTyvp971YPzGBQZZ+80lKDdq22c0tdbtAQSNMYqGM/3UMItklAimq1FLbrQCHJi8hBUo2gUYSSxyu7ri5rIx7IotKviYqvsvkWNi41xhfK+UGwUi2x7KYwVyoobuzPB2RYtic1eGIrCaJDgVVAtEoYI5aoHq1qEEvDdGiQEfOlMQA0lhQ4lGC7ZK6pBQqxqbBWUPdDes2ukYOwWUpKHaDnR3wZRMSI98PU81pNq4hTspcOwP4qGtmuhXMFPY7V7jSDhu7HdG6zlSaI1R43e2YiRXb8ul/w4xnQ/AHoMDUionCWeT9mD8r4xVYZd/Ips2n/SU0pJQsSqC4b2eerKmy/PyO9rLoTUlmlABhi52hapdrxGW6QMjWooodhdFTNSRT/7SNMW9EanYtolng6G3US7Cw2UMC1TX7tI6WQ3QcJOBaM2zTAZthpG86S6hjgAn6Q8w6mte+5+sD80d5iE8uYbMqmMrUalMYA8gB7teUrGPrnsaKjBoZbT4jDE4eNqsVwsRzKq4iI5hneRWpWZjBk+1WL/DvY/ynKcFOEbFb5RxkKSA65+pL+C3RXIP5RaHn8OGfk8Bz1swVqOFFfQ9xsV8TE0KfHxoCHeDW0iI3/XWGZ4JMOdarpMhclPO/Kx89kRX/wYtXwpzrU9bY3dz3NOBc075t/FP0xtNKR1ktMGc+PDxXVVoaeZy8kPIs1FfXvzwLA6xjoXyXMWyfjC0T8sZ9LLVFXWjjxj3PeD+FI62A9XZz0O8hx75tpTSr8BWJNWCQ==
+sidebar_class_name: "get api-method"
+custom_edit_url: null
+---
+
+import ApiTabs from "@theme/ApiTabs";
+import DiscriminatorTabs from "@theme/DiscriminatorTabs";
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import SecuritySchemes from "@theme/ApiExplorer/SecuritySchemes";
+import MimeTabs from "@theme/MimeTabs";
+import ParamsItem from "@theme/ParamsItem";
+import ResponseSamples from "@theme/ResponseSamples";
+import SchemaItem from "@theme/SchemaItem";
+import SchemaTabs from "@theme/SchemaTabs";
+import Heading from "@theme/Heading";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"downloadAgent"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/v1/environment/{environment}/agents/{id}/download"}
+>
+  
+</MethodEndpoint>
+
+
+
+Get a signed url to download the latest [Agent](https://docs.ganymede.bio/app/agents/Agent) in an Environment by its id
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<details
+  style={{"marginBottom":"1rem"}}
+  className={"openapi-markdown__details"}
+  data-collapsed={false}
+  open={true}
+>
+  <summary
+    style={{}}
+  >
+    <h3
+      className={"openapi-markdown__details-summary-header-params"}
+    >
+      Path Parameters
+    </h3>
+  </summary><div>
+    <ul>
+      <ParamsItem
+        className={"paramsItem"}
+        param={{"name":"environment","required":true,"in":"path","schema":{"type":"string"}}}
+      >
+        
+      </ParamsItem><ParamsItem
+        className={"paramsItem"}
+        param={{"name":"id","required":true,"in":"path","schema":{"type":"string"}}}
+      >
+        
+      </ParamsItem>
+    </ul>
+  </div>
+</details><details
+  style={{"marginBottom":"1rem"}}
+  className={"openapi-markdown__details"}
+  data-collapsed={false}
+  open={true}
+>
+  <summary
+    style={{}}
+  >
+    <h3
+      className={"openapi-markdown__details-summary-header-params"}
+    >
+      Query Parameters
+    </h3>
+  </summary><div>
+    <ul>
+      <ParamsItem
+        className={"paramsItem"}
+        param={{"name":"assetType","required":false,"in":"query","schema":{"enum":["Windows","Linux"],"type":"string"}}}
+      >
+        
+      </ParamsItem>
+    </ul>
+  </div>
+</details><div>
+  <div>
+    <ApiTabs
+      label={undefined}
+      id={undefined}
+    >
+      <TabItem
+        label={"200"}
+        value={"200"}
+      >
+        <div>
+          
+          
+          Signed Url
+          
+          
+        </div><div>
+          <MimeTabs
+            className={"openapi-tabs__mime"}
+            schemaType={"response"}
+          >
+            <TabItem
+              label={"application/json"}
+              value={"application/json"}
+            >
+              <SchemaTabs
+                className={"openapi-tabs__schema"}
+              >
+                <TabItem
+                  label={"Schema"}
+                  value={"Schema"}
+                >
+                  <details
+                    style={{}}
+                    className={"openapi-markdown__details response"}
+                    data-collapsed={false}
+                    open={true}
+                  >
+                    <summary
+                      style={{}}
+                      className={"openapi-markdown__details-summary-response"}
+                    >
+                      <strong>
+                        Schema
+                      </strong>
+                    </summary><div
+                      style={{"textAlign":"left","marginLeft":"1rem"}}
+                    >
+                      
+                    </div><ul
+                      style={{"marginLeft":"1rem"}}
+                    >
+                      <div
+                        style={{"marginTop":".5rem","marginBottom":".5rem"}}
+                      >
+                        
+                        
+                        string
+                        
+                        
+                      </div>
+                    </ul>
+                  </details>
+                </TabItem>
+              </SchemaTabs>
+            </TabItem>
+          </MimeTabs>
+        </div>
+      </TabItem>
+    </ApiTabs>
+  </div>
+</div>
+      

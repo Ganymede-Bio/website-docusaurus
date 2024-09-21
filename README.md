@@ -123,6 +123,15 @@ deactivate
 popd
 ```
 
+### API Server documentation generation
+
+Fetch the latest nodes and generate the docs
+
+```bash
+git submodule update --recursive --remote --init api-server
+yarn run api
+```
+
 ---
 
 ## Notes on Docusaurus, as used in this repo

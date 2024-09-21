@@ -20,6 +20,8 @@ jobs:
       with:
         files: |
            **.mdx
+        files_ignore: |
+           docs/api/**
     - name: List all changed files
       env:
         ALL_CHANGED_FILES: ${{ steps.changed_files.outputs.all_changed_files }}
