@@ -16,6 +16,9 @@ The **flow_run_metadata** table captures a record for each flow execution.
 
 | Field Name | Description |
 |------------|-------------|
+| start_time | Start time of the Flow run |
+| end_time | End time of the Flow run |
+| export_time | Time of the Flow run export |
 | flow_run_id | Unique identifier for the Flow run, stored as epoch time in milliseconds |
 | flow_id | Flow name |
 | inputs_dict | Run context for the Flow; corresponds to the run context described in the [Ganymede Class overview](../../sdk/GanymedeClass.mdx#overview) |
@@ -23,18 +26,7 @@ The **flow_run_metadata** table captures a record for each flow execution.
 | initiator_type | Type of the user who initiated the flow run (AGENT, USER, EVENT, FLOW) |
 | flow_version | Commit hash associated with flow execution |
 | state | Final disposition of Flow run (Success, Failed) |
-
-## Table Writes
-
-The **public_flow_run_output** table contains 1 record per output table written in Ganymede.
-
-| Field Name | Description |
-|------------|-------------|
-| id | ID for table save |
-| node | Name of node that wrote to table |
-| name | Name of table written to Ganymede table storage |
-| timestamp | Time of the table save; stored as epoch time in fractional seconds |
-| datastream_metadata | JSON containing the UUID associated with the table write transaction and Flow run ID |
+| table_output | Database table writes associated with Flow run | 
 
 ## File Writes
 
