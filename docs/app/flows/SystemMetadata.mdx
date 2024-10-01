@@ -26,7 +26,7 @@ The **flow_run_metadata** table captures a record for each flow execution.
 | initiator_type | Type of the user who initiated the flow run (AGENT, USER, EVENT, FLOW) |
 | flow_version | Commit hash associated with flow execution |
 | state | Final disposition of Flow run (Success, Failed) |
-| table_output | Database table writes associated with Flow run | 
+| table_output | JSON containing database table write info associated with Flow run; table, type of write operation (e.g. - replace, append), table columns, and row count are available in data | 
 
 ## File Writes
 
@@ -34,13 +34,14 @@ The **file_metadata** table contains 1 record per file written in Ganymede.
 
 | Field Name | Description |
 |------------|-------------|
-| bucketType | Either "Input" or "Output"; indicates whether the file was input into Ganymede or an output from processing performed in Ganymede |
+| bucketType | Either "Input" or "Results"; indicates whether the file was input into Ganymede or an output from processing performed in Ganymede |
 | uri | Full URI to the file |
 | path | Path within storage bucket to file |
 | size | Size of the file in bytes |
 | createdAt | Time of the file save, stored as epoch time in milliseconds |
 | creator | Name of the file creator (e.g. - email address for users, agent name + MAC address for Agents) |
-| fileTags | List of JSON objects containing [Tags](../files/Tags.mdx#what-are-file-tags) associated with the file |
+| creatorType | Type of the file creator (e.g. - User, Agent) |
+| fileTags | List of JSON objects containing [Tags](../files/Tags.mdx#what-are-file-tags) associated with the file; tag ID, display value, URL, tag type, background color, text color, tag applied date, and tag updated date are present [for each Tag](../../sdk/FileTags) |
 
 ## Python Packages
 
