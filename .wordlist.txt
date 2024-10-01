@@ -344,3 +344,4 @@ SystemMetadata
 bucketType
 createdAt
 env
+creatorType
