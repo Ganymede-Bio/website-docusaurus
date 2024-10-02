@@ -345,3 +345,12 @@ bucketType
 createdAt
 env
 creatorType
+ACS
+IdP
+SAML
+emailAddress
+nameid
+SSO
+Okta
+Okta's
+SSOConfig
