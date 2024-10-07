@@ -8,18 +8,25 @@ toc_max_heading_level: 4
 
 import NodeChip from '@site/src/components/NodeChip.js'
 
-## Classes for Agent-triggered flows
+## Agent-triggered flows
 
 Objects for triggering a Flow from an [Agent](../../app/agents/Agent) can be found in `agent_sdk` for Agents v5.0+.
 
-### FileWatcherResult Class
+:::note
+
+The `agent_sdk` is only available for Agents v5.0+.  Prior to v5.0, these functions were included in `ganymede_sdk.agent`.
+
+:::
+
+
+### `class` FileWatcherResult
 
 FileWatcherResult is a dictionary of FileParam objects indexed by `node name`.`param name`.
 
-- _param_ **files**: dict[str, fileParam] - Dictionary of FileParam objects indexed by `node name`.`param name`
-- _param_ **tags**: list[FileTag] | None - List of tags to be applied to all files
+- _param_ **files**: dict[str, fileParam | list[FileParam]] - Dictionary of FileParam objects indexed by `node name`.`param name`
+- _param_ **tags**: list[UnappliedFileTag] | None - List of tags to be applied to all files
 
-### TriggerFlowParams Class
+### `class` TriggerFlowParams
 
 TriggerFlowParams specifies the inputs for the Flow executed when all files are observed.  It includes the following parameters:
 
@@ -28,7 +35,7 @@ TriggerFlowParams specifies the inputs for the Flow executed when all files are 
 - _param_ **benchling_tag**: Tag | None - Additional parameters to be passed to flow.  This parameter is used for inputs to the Input_Benchling node.
 - _param_ **additional_params**: dict[str, str] | None - Additional parameters to be passed to flow.  This parameter is used for inputs to the [Input_Param node](../../nodes/Tag/Input_Param.md); the key is the name if the Node name for the input parameter, and the value is the string to pass into the Node.
 
-### FileParam Class
+### `class` FileParam
 
 FileParam specifies files to be uploaded to Ganymede Cloud and their corresponding Flow parameters. These parameters are provided to the _execute_ function once all files are detected.
 
@@ -43,7 +50,7 @@ FileParam specifies files to be uploaded to Ganymede Cloud and their correspondi
 - _param_ **bucket_name**: str - Bucket associated with file
 - _param_ **files**: str - Alternative method for specifying file contents, where the key is the filename and the value is the file body.
 
-### MultiFileParam Class
+### `class` MultiFileParam 
 
 MultiFileParam is used for submitting multiple files to a single node. It includes the following parameters:
 
@@ -63,19 +70,71 @@ The MultiFileParam object contains a method for initiation from a list of FilePa
 m = agent_sdk.file_params_list_to_multi([fp1, fp2])
 ```
 
-## Utility functions
+### `class` NoOpFileTagParams
+
+NoOpFileTagParams is a used to specify that tags should be applied to a file, but that no Flow should be triggered upon file upload to Ganymede.
+
+- _param_ **files**: list[FileParam | list[FileParam]] - List of FileParam objects to apply tags to
+
+### `function` fp
+
+`fp` returns a function that performs pattern matching against a file path.  Specifically, the function returns callable[[str], bool] - a function that takes a file path and returns True if the file path matches the pattern, and False otherwise.
+
+This function can be useful as a template for creating your own pattern matching functions.
+
+- _param_ **watch_dir**: str - Directory to watch for files
+- _param_ **pattern**: str - Glob pattern to match against the file path
+- _param_ **seconds_since_modification**: int | None - if set, filters for files last modified within the number of seconds specified, by default None
+- _param_ **seconds_since_access**: int | NOne - if set, filters for files last accessed within the number of seconds specified, by default None
+
+### `function` file_params_list_to_multi
+
+`file_params_list_to_multi` converts a list of FileParam objects to a MultiFileParam object.
+
+- _param_ **file_params**: list[FileParam] - List of FileParam objects to convert to MultiFileParam
+
+## Tag-related classes and functions
+
+### `class` FlowTag
+
+The FlowTag class is used to represent a tag that can be applied to a file.  This class is not used for applying tags, but rather for interacting with tags already applied to files.
+
+- _param_ **tag_id**: str - Name of the tag type applied to a file.
+- _param_ **display_tag**: str - Value of the tag applied to a file.
+- _param_ **upload_ts**: datetime - Timestamp of when tag was applied
+
+### `function` add_file_tag_to_fileparam
+
+`add_file_tag_to_fileparam` adds a Tag to a FileParam object, returning a FileParam | MultiFileParam object with the tag applied.
+
+_param_ **file_param**: FileParam | MultiFileParam - FileParam object to add Tag to
+_param_ **tag_type_id**: str - Tag type of Tag to add
+_param_ **display_value**: str - Value of Tag to add
+_param_ **tag_id**: str | None - Optional Tag ID which can be used to reference the Tag in code
+_param_ **url**: str | None - Optional URL to associate with the Tag
+
+## Checksum functions
 
 Agent utility functions are provided in `agent_sdk` for validating data integrity and interacting with file systems.
 
-:::note
-
-The `agent_sdk` is only available for Agents v5.0+.  Prior to v5.0, these functions were included in `ganymede_sdk.agent`.
-
-:::
-
 ### Computing file checksums
 
-Ganymede provides functions to validate file integrity; these values can be used to verify the integrity of a file uploaded to cloud storage:
+Ganymede provides functions to validate file integrity; these values can be used to verify the integrity of a file uploaded to cloud storage
+
+### `function` calculate_crc32c
+
+The function returns the CRC32C checksum of a file as a string encoded in utf-8.
+
+- _param_ **file_path**: str - Path to file to generate checksum for
+- _param_ **blocksize**: int | None - Block size to use for the checksum calculation.  If not specified, the default block size is 2**20.
+
+### `function` calculate_md5
+
+The function returns the MD5 hash of a file as a string encoded in utf-8.
+
+- _param_ **file_path**: str - Path to file to generate MD5 hash for
+
+### Examples
 
 ```python
 # Before Agent v5.0
@@ -109,58 +168,78 @@ crc32c = calculate_crc32c(tmp_file_name)
 os.remove(tmp_file_name)
 ```
 
-### File system utilities
+## File system utilities
 
 `agent_sdk` provides a number of convenience functions, which can be helpful to use with cron Agents that involve more complex logic prior to invoking a flow.  Some examples of this are when a file is written to multiple times before being processed, or if there is a variable number of files being processed, such that the trigger for invoking a flow requires more than just the presence of a file.
 
-#### ScanResult Dataclass
+### `class` ScanResult
 
-ScanResult stores file paths for files of interest.  It includes:
+ScanResult is a frozen dataclass stores file paths for files of interest.  Two files are considered to be the same if they have the same relative_path amd modified_time.
 
-- _param_ **file_path**: str - Path to file
+- _param_ **relative_path**: str - Path to file
 - _param_ **modified_time**: datetime - Datetime of when file was last modified
 
-#### Functions
+### `function` list_files_recursive
 
-`list_files_recursive` returns a list of all files in a directory and its subdirectories.
+`list_files_recursive` returns a list of all filepaths in a directory and its subdirectories as a list[str].
 
 - _param_ **file_path**: str - Path to directory to list files from
+
+### `function` matches_pattern
 
 `matches_pattern` returns True if a file path matches at least one of the specified regex patterns specified and False otherwise.
 
 - _param_ **filename**: str - Name of file
-- _param_ **pattern**: str | re.Pattern - Regex pattern or list of regex patterns to match against
+- _param_ **pattern**: str | re.Pattern | list[re.Pattern] - Regex pattern or list of regex patterns to match against
 
-`is_file_ready` returns True if a file has the modified time is within the last **interval_in_seconds** seconds, or if the size of the file has changed in that same timespan.
+### `function` is_file_ready
+
+`is_file_ready` returns True if a file has the modified time is within the last **interval_in_seconds** seconds, or if the size of the file has changed in that same timespan; otherwise, it returns False.
 
 - _param_ **file_path**: str - Path to file to watch
-- _param_ **threshold_seconds**: int - Number of seconds to wait between checks, by default 0.1
+- _param_ **threshold_seconds**: float - Number of seconds to wait between checks, by default 0.1
 
-`get_most_recent_access_result` returns a ScanResult object referencing the most recently accessed file in a directory.  Access time is updated when a file is read from or written to.
+### `function` get_most_recent_modified_result
 
-- _param_ **directory**: str - Path to directory to watch
+`get_most_recent_modified_result` returns a ScanResult object referencing the most recently modified file in a directory, or None if no files are found.
 
-`filter_by_age` returns a list of files that have not been modified within the last **age_in_minutes** minutes.
+- _param_ **directory**: Path - Path to directory to watch
 
-- _param_ **scan_results**: list[ScanResult] - List of ScanResult objects
+### `function` filter_by_age
+
+`filter_by_age` returns a list[str] of file paths that have not been modified within the last **age_in_minutes** minutes.
+
+- _param_ **scan_results**: Iterable[ScanResult] - List of ScanResult objects
 - _param_ **age_in_minutes**: int - Minimum age in minutes
 
-`zip_directory` creates a zip file of a directory and its contents.
+### `function` zip_directory
+
+`zip_directory` creates a zip file of a directory and its contents.  
 
 - _param_ **directory**: str - Path to directory to zip
 - _param_ **zip_file**: str - Path to zip file to create
 
-`scan_for_finished_files` scans a directory, returning paths to files with a modified date older than the specified number of minutes
+### `function` scan_for_finished_files
+
+`scan_for_finished_files` scans a directory, returning paths to files with a modified date older than the specified number of minutes as a list[str].
 
 - _param_ **directory**: str - Path to directory to scan
 - _param_ **age_in_minutes**: int - Minimum age in minutes for files to be included in the results
 - _param_ **pattern**: re.Pattern | list[re.Pattern] - Regex pattern to match files against; only files that match against at least one of the specified patterns will be included in results
 
-#### Example Use Case
+#### Example
 
-You can use `scan_for_finished_files` to continuously scan a directory for files, uploading them to Ganymede Cloud for processing when they are older than a specified number of minutes. The Flow could query previously uploaded files using the [list_files](../GanymedeClass.mdx#method-list_files) method to avoid uploading the same file multiple times.
+You can use `scan_for_finished_files` to continuously scan a directory for files, uploading them to Ganymede Cloud for processing when they are older than a specified number of minutes. The Flow could query previously uploaded files using the [list_files_recursive](#function-list_files_recursive) method to avoid uploading the same file multiple times.
 
-## Querying Ganymede from Agent Code
+## Accessing Ganymede Cloud 
+
+### `function` read_sql_query
+
+`read_sql_query` returns a pandas DataFrame object containing the results of a SQL query run against the Ganymede DB.
+
+- _param_ **sql_query**: str - SQL query to run
+
+#### Example
 
 ```python
 from agent_sdk.query import read_sql_query
@@ -168,9 +247,15 @@ from agent_sdk.query import read_sql_query
 df = read_sql_query('SELECT * FROM instrument_methods')
 ```
 
-### Logging Methods
+### `function` get_secret
 
-Ganymede Agents (v4.9+) support user-defined logging messages in the `agent_sdk`, aligning with [logging level for Agent messages](../../app/agents/AgentLogs#logging-level).  Each level corresponds with a separate method in agent_sdk.
+`get_secret` returns the value of a secret stored in Ganymede.
+
+- _param_ **secret_name**: str - Name of the secret to retrieve
+
+## Logging Methods
+
+Ganymede Agents (v5.0+) support user-defined logging messages in the `agent_sdk`, aligning with [logging level for Agent messages](../../app/agents/AgentLogs#logging-level).  Each level corresponds with a separate method in agent_sdk.
 
 ```python
 from agent_sdk import internal, debug, info, activity, error
