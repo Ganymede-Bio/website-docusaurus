@@ -12,6 +12,13 @@ import NodeChip from '@site/src/components/NodeChip.js'
 
 Objects for triggering a Flow from an [Agent](../../app/agents/Agent) can be found in `agent_sdk` for Agents v5.0+.
 
+:::note
+
+The `agent_sdk` is only available for Agents v5.0+.  Prior to v5.0, these functions were included in `ganymede_sdk.agent`.
+
+:::
+
+
 ### `class` FileWatcherResult
 
 FileWatcherResult is a dictionary of FileParam objects indexed by `node name`.`param name`.
@@ -109,12 +116,6 @@ _param_ **url**: str | None - Optional URL to associate with the Tag
 ## Checksum functions
 
 Agent utility functions are provided in `agent_sdk` for validating data integrity and interacting with file systems.
-
-:::note
-
-The `agent_sdk` is only available for Agents v5.0+.  Prior to v5.0, these functions were included in `ganymede_sdk.agent`.
-
-:::
 
 ### Computing file checksums
 
