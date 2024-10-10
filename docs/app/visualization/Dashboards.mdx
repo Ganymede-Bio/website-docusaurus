@@ -159,6 +159,38 @@ template
   a. [From Preset website](https://preset.io/blog/intro-jinja-templating-apache-superset/)  
   b. [From Apache Superset website](https://superset.apache.org/docs/configuration/sql-templating/)  
 
+
+### Having More Control Of Dashboard Filters with Jinja Templates: Regex or Other Variations
+Filters at the dashboard level by default require a dataset and a column to be associated with them.
+To apply the filters, you either need to manually select the individual filters or click
+`Select All`. With Jinja templating, you can have more flexibility in your filters such as the use
+of regex. Follow these steps to have Jinja templated regex filters or other variations
+
+1. Enter the `Edit chart` of the chart you wish to add the filter for
+2. In the `Filters` section, add the following
+
+```sql
+REGEXP_CONTAINS(
+  my_column_to_filter,
+  ARRAY_TO_STRING({{ filter_values('column_that_has_regex') }}, '|')
+)
+```
+
+You do not need to have an if else expression in the Jinja template here.
+
+3. Save the chart
+4. At the dashboard level, click `+ ADD/EDIT FILTERS`
+5. Add a new filter on some dataset that contains the column 'column_that_has_regex'. Make sure the
+column name and dataset name do not exist in your dashboard to prevent your charts from inheriting
+it and doing a hard filter.
+6. This can contain pre-defined regex expressions or you can pre-filter the column in the
+`Pre-filter available values` in the **Filter Configuration** section to remove all values in case
+this is a dummy dataset and you mostly just want the users to type in the regex manually.
+7. Save the filters.
+8. You are now ready to have regex based filters in your dashboard!
+
+
+
 ## Editing dashboards
 
 To edit a dashboard:
