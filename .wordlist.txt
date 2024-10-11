@@ -74,6 +74,7 @@ worklist
 recency
 AWS
 GCP
+CORS
 
 
 ApiOutlined
