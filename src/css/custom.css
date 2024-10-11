@@ -188,6 +188,22 @@
   color: var(--ifm-color-gray-light);
 }
 
+.purple_alt_button {
+  border: 1px;
+  display: inline-block;
+  border-radius: 2px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border-style: solid;
+  vertical-align: text-middle;
+  background-color: #736bdd;
+  stroke-width: 0.1px;
+  color: white;
+}
+
+
 .button.purple_button_dashboard {
   border: 0px;
   padding-left: 6px;
