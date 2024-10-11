@@ -462,12 +462,13 @@ More generally, Variables and Labels can be flexibly used to control Connection 
 
 And [modified in the corresponding Connections panel in the Ganymede web app after installation, for Agent versions 4.5+](AgentMonitoring#monitoring-agent-connections).
 
-
-Variables and labels can be referenced in your user-defined code by extracting the values from `kwargs` in the _execute_ function:
+Variables and labels can be referenced in your user-defined code by extracting the values from `kwargs` in the _execute_ function.
 
 ```python
+# Labels comes back as a list of strings
 labels = kwargs.get('labels', [])
-# -- OR --
+
+# All variables retrieved have a dict[str, str] type
 variables = kwargs.get('vars', {})
 
 # Example: Retrieve the `input_path` variable for use in Agent code

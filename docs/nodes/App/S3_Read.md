@@ -63,9 +63,17 @@ Specify list of S3 keys to upload to GCS
 
 ### Returns
 
-`dict[str, str]`
-  Dictionary specifying files to upload to GCS.  The keys are the keys in S3 and the values
-  are the file names to use in Ganymede
+`dict[str, str] | NodeReturn`
+  If dict, files to upload to GCS.  The keys are the keys in S3 and the values
+  are the file names to use in Ganymede.
+
+  If NodeReturn, object containing data to store in data lake and/or file storage.
+  NodeReturn object takes 2 parameters:
+
+  - tables_to_upload: dict[str, pd.DataFrame]
+      keys are table names, values are pandas DataFrames to upload
+  - files_to_upload: dict[str, bytes]
+      keys are file names, values are file data to upload
 
 ### Examples
 
