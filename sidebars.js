@@ -119,12 +119,12 @@ module.exports = {
         label: 'Agents & Connections',
         collapsed: true,
         items: [
-          'app/configuration/AgentSystemRequirements',
           {
             type: 'doc',
             id: 'app/agents/Agent',
-            label: 'Configuring Agents'
+            label: 'Agent Overview & Configuration'
           },
+          'app/configuration/AgentSystemRequirements',
           {
             type: 'doc', 
             id: 'app/agents/AgentInstall',
