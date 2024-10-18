@@ -237,7 +237,7 @@ def fp(watch_dir: str, parent_dir: str, pattern: str) -> Callable[[str], bool]:
 
 #### Issue: The Ganymede Agent Connection service continues to run after uninstalling the Agent.
 
-A: Open a Command Prompt in Administrator mode and run the following command:
+A: Open a Command Prompt in Administrator mode and run the following command to remove the Connection service:
 
 ```bash
 sc delete GanymedeAgent-\<agent_name\>
