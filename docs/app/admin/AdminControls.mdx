@@ -77,40 +77,37 @@ The Integration panel contains details about the Ganymede environment, which can
 In order to allow Ganymede Flows to read and write to an S3 bucket, follow the steps below for each Ganymede environment that needs access to the bucket:
 
 1. Identify which S3 buckets you would like to connect to Ganymede
-
 1. Create a Policy that allows the desired access to the bucket(s), replacing `my-bucket` with the name of the bucket(s) you would like to connect to.
-Example:
-```
-  {
-      "Version": "2012-10-17",
-      "Statement": [
-          {
-              "Sid": "ListObjectsInBucket",
-              "Effect": "Allow",
-              "Action": [
-                  "s3:ListBucket"
-              ],
-              "Resource": [
-                  "arn:aws:s3:::my-bucket"
-              ]
-          },
-          {
-              "Sid": "AllObjectActions",
-              "Effect": "Allow",
-              "Action": "s3:*Object",
-              "Resource": [
-                  "arn:aws:s3:::my-bucket/*"
-              ]
-          }
-      ]
-  }
-```
-
+    Example:
+    ```
+      {
+          "Version": "2012-10-17",
+          "Statement": [
+              {
+                  "Sid": "ListObjectsInBucket",
+                  "Effect": "Allow",
+                  "Action": [
+                      "s3:ListBucket"
+                  ],
+                  "Resource": [
+                      "arn:aws:s3:::my-bucket"
+                  ]
+              },
+              {
+                  "Sid": "AllObjectActions",
+                  "Effect": "Allow",
+                  "Action": "s3:*Object",
+                  "Resource": [
+                      "arn:aws:s3:::my-bucket/*"
+                  ]
+              }
+          ]
+      }
+    ```
 1. Record the identity number of the Ganymede Environment
   - Navigate to the Environment Settings page
   - Select the Integration tab
   - Record the number in the `accounts.google.com:aud` field
-
 1. Create the Role in AWS
   - In the IAM console, select Roles > Create Role
   - Select 'Web Identity'
@@ -121,7 +118,6 @@ Example:
   - Press Next 
   - Name the role something like 'ganymede-storage-access'
   - Press Create Role
-
 
 ### Environment Detection in the SDK
 
