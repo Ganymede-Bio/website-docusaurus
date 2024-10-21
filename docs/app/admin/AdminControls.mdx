@@ -77,7 +77,7 @@ The Integration panel contains details about the Ganymede environment, which can
 In order to allow Ganymede Flows to read and write to an S3 bucket, follow the steps below for each Ganymede environment that needs access to the bucket:
 
 1. Identify which S3 buckets you would like to connect to Ganymede
-1. Create a Policy that allows the desired access to the bucket(s), replacing `my-bucket` with the name of the bucket(s) you would like to connect to.
+2. Create a Policy that allows the desired access to the bucket(s), replacing `my-bucket` with the name of the bucket(s) you would like to connect to.
     Example:
     ```
       {
@@ -104,11 +104,11 @@ In order to allow Ganymede Flows to read and write to an S3 bucket, follow the s
           ]
       }
     ```
-1. Record the identity number of the Ganymede Environment
+3. Record the identity number of the Ganymede Environment
   - Navigate to the Environment Settings page
   - Select the Integration tab
   - Record the number in the `accounts.google.com:aud` field
-1. Create the Role in AWS
+4. Create the Role in AWS
   - In the IAM console, select Roles > Create Role
   - Select 'Web Identity'
   - Select 'Google' as the Identity Provider
@@ -118,7 +118,7 @@ In order to allow Ganymede Flows to read and write to an S3 bucket, follow the s
   - Press Next 
   - Name the role something like 'ganymede-storage-access'
   - Press Create Role
-1. Add the Role ARN as an [environment secret in the Ganymede environment](#environment-secrets) named _aws_s3_role_arn_.
+5. Add the Role ARN as an [environment secret in the Ganymede environment](#environment-secrets) named _aws_s3_role_arn_.
 
 ### Environment Detection in the SDK
 
