@@ -351,33 +351,6 @@ BIOREACTORS = [
 ]
 
 
-class SubHandler:
-    """
-    Subscription Handler. To receive events from server for a subscription
-    data_change and event methods are called directly from receiving thread.
-    Do not do expensive, slow or network operation there. Create another
-    thread if you need to do such a thing
-    """
-
-    def __init__(self, node_display_names: dict):
-        self.data: list[dict] = []
-        self.node_display_names = node_display_names
-
-    def datachange_notification(self, node: Node, val, data):
-        info(
-            "New data change event",
-            self.node_display_names[node],
-            val,
-            data.monitored_item.Value.SourceTimestamp,
-        )
-
-        self.data.append(
-            {
-                "node": self.node_display_names[node],
-                "value": val,
-                "timestamp": data.monitored_item.Value.SourceTimestamp,
-            }
-        )
 
 
 async def opc_client():
