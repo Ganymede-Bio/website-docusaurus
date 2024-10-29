@@ -1,0 +1,22 @@
+---
+id: AuditLog
+title: Audit Log
+displayed_sidebar: webUiSidebar
+---
+
+The Audit Log keeps track of important events that happen within the Ganymede System such as user login/logout and object
+creation, updates, and deletes.
+
+<img alt="Audit Log" src="https://ganymede-bio.mo.cloudinary.net/apiServer/AuditLog.png" />
+
+### Columns
+
+| Column | Description | Example |
+|----------|----------|----------|
+| Action    | The type of event | LOGGED_IN, CREATE, UPDATE |
+| Actor    | Who or what initiated the event. Can be user email, Connection name, or FlowRun name. Another special case are System Actors which are events triggered automatically by external or internal systems. For example, "Ganymede" which means the event was triggered by Ganymede. | tester@ganymede.bio, my-analysis-flow |
+| Entity Type    | Type of entity or object that the action applies to. | Flow, User, Agent |
+| Entity | Name/Identifier of the entity that the action applies to. | my-analysis-flow, tester@ganymede.bio, my-agent |
+| Timestamp | When the Audit Log event was recorded. Shown in your local timezone. | 10/29/2024, 11:00:12 AM |
+| Before | For UPDATE actions, shows the state of the object before the update. Only fields that were changed will be shown. For Flows and Agents, a link to FlowVersion or AgentVersion will be shown instead of a field by field comparison. | state: Archived |
+| After | For UPDATE actions, shows the state of the object after the update. Only fields that were changed will be shown. For Flows and Agents, a link to FlowVersion or AgentVersion will be shown instead of a field by field comparison. | state: Disabled |
