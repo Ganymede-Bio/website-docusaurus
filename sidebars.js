@@ -272,6 +272,11 @@ module.exports = {
               }
             ]
           },
+          {
+            type: 'doc',
+            id: 'app/configuration/AuditLog',
+            label: 'Audit Log'
+          }
         ]
       },
       {
