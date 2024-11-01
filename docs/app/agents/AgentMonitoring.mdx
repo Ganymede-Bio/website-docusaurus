@@ -93,6 +93,19 @@ def execute(**kwargs) -> Optional[TriggerFlowParams]:  # type: ignore
     logger(f"Local files: {os.listdir('./')}")
 ```
 
+#### Agent Notifications
+
+If the agent is running at least version 5.1.7, you can create send email notifications to all subscribers by using the `agent_sdk.notify` method in your user-defined processor code. For example:
+
+```python
+import agent_sdk
+
+def execute(**kwargs) -> Optional[TriggerFlowParams]:  # type: ignore
+     # ... code here that checks for some condition
+    if(some_condition):
+        agent_sdk.notify(f"The file {file_name} is missing an experiment ID")
+```
+
 ### Updating Agents
 
 To modify Agent settings after creation, select the desired Agent in the Ganymede web app UI to update the Agent. Upon clicking <div className="button blue_button">Update</div>, the Agent will be built and then made available for download.
