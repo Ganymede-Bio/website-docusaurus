@@ -132,13 +132,13 @@ module.exports = {
           },
           {
             type: 'doc',
-            id: 'app/agents/AgentMonitoring',
-            label: 'Monitoring Agents'
+            id: 'app/agents/AgentTemplates',
+            label: 'Example Agent Templates'
           },
           {
             type: 'doc',
-            id: 'app/agents/AgentTemplates',
-            label: 'Example Agent Templates'
+            id: 'app/agents/AgentMonitoring',
+            label: 'Monitoring Agents'
           },
           {
             type: 'doc',

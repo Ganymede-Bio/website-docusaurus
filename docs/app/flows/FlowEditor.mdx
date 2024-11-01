@@ -8,7 +8,11 @@ import {
   BranchesOutlined,
   CaretRightOutlined,
   CheckCircleOutlined,
+  ClockCircleOutlined,
+  CopyOutlined,
+  DeleteOutlined,
   DownOutlined,
+  EyeOutlined,
   NodeIndexOutlined,
   NotificationOutlined,
   PlayCircleOutlined,
@@ -80,11 +84,69 @@ The Run Queue Bar located at the bottom of the screen contains buttons for execu
 * **Re-run**: This requeues the last row that was ran for this specific flow. The button is greyed out if the current session had no prior runs, or if the page has been refreshed. If inputs have changed, this button will fill out all parameters that exist using the existing run.
 * **Processing**: Shows the number of files in the queue for your next run.  Clicking this button brings up the [<div className="button darkblue_button"><CheckCircleOutlined /> **Flow Runs**</div>](FlowRuns.mdx) page.
 
-## Flows
+## Managing Flows
+
+### Creating Flows
 
 To create a new Flow, click the <div className="button darkblue_button">**Manage <SettingOutlined />**</div> button in the upper right hand corner of the screen. Then click the <div className="button black_button"><PlusOutlined /> Add New Flow</div> button on the sidebar.  This action exposes a modal for naming and describing the Flow.  
 
-<img alt="Add new flow" src="https://ganymede-bio.mo.cloudinary.net/apiServer/AddNewFlow_20240920.png"/>
+<img alt="Add new flow" src="https://ganymede-bio.mo.cloudinary.net/apiServer/AddNewFlow_20241101.png"/>
+
+### Copying Flows
+
+Flows can be copied within an environment, or promoted to a different environment within the same tenant by clicking on the <div className="button black_button"><CopyOutlined /> Copy code</div> icon.  This opens a modal that allows you to specify the environment and Flow name for the new Flow.
+
+### Modifying and Deleting Flows
+
+Edges can be removed by selecting them and pressing "delete" or "backspace" on the keyboard.  A selected edge is slightly darker and wider than unselected edges.
+
+To make two nodes dependent on each other within a run, click and drag between two orbs two different nodes.  Flow dependencies run top-to-bottom (if vertical layout is specified) or left-to-right (if horizontal layout is specified).
+
+Flows can be deleted by clicking the <div className="button black_button"><DeleteOutlined /> Delete Flow</div> icon in the Flow Editor sidebar.
+
+### Flow Save Status Indicator
+
+The status of the latest flow save is displayed by an indicator message in the header bar of the Flow Editor page. Flows can’t be run while a flow save is in progress, which can be tracked by this indicator. If no flow is currently saving the status indicator will display the time of the last successful flow save. 
+
+<img width="300" alt="Autorun modal" src="https://ganymede-bio.mo.cloudinary.net/apiServer/FlowSaveSuccess_20240416.png"/>
+
+
+While a flow save is in progress the indicator message will display in sequence "Save in progress", "Build in progress", and "Deploy in progress" depending on which part of the save pipeline that is running. 
+
+<img width="150" alt="Autorun modal" src="https://ganymede-bio.mo.cloudinary.net/apiServer/FlowSaveProgress_20240416.png"/>
+<img width="152" alt="Autorun modal" src="https://ganymede-bio.mo.cloudinary.net/apiServer/FlowBuildProgress_20240416.png"/>
+<img width="162" alt="Autorun modal" src="https://ganymede-bio.mo.cloudinary.net/apiServer/FlowSaveDeploy_20240416.png"/>
+
+If an error is encountered during a flow save then an error message will be displayed.
+
+<img width="130" alt="Autorun modal" src="https://ganymede-bio.mo.cloudinary.net/apiServer/FlowBuildFail_20240416.png"/>
+
+### Historical Flow Versions
+
+All changes to a Flow code and configuration are tracked as new Flow versions. A history of Flow versions can be viewed by clicking on the
+<div className="button darkblue_button">**History <ClockCircleOutlined />**</div> button in the Flow Editor top bar.
+
+<img alt="Flow Version History" src="https://ganymede-bio.mo.cloudinary.net/apiServer/FlowVersionHistory_20240718.png" />
+&nbsp;
+
+Expanding a row will show the changes between the selected version and the <i>current version</i> of the Flow, <i>not</i> just the
+changes introduced in the selected version.
+
+The changes are shown like a side by side `git` diff where the left is old and the right is current.
+
+<img alt="Flow Version History row expanded with diff" src="https://ganymede-bio.mo.cloudinary.net/apiServer/FlowVersionHistory_20241101.png" />
+&nbsp;
+
+Prior code can be copied by clicking on <div className="button dark_gray_button"><EyeOutlined /> **View Code**</div> button on the Flow Version History page, followed by clicking on <div className="button dark_gray_button"><CopyOutlined /> **Copy code**</div> button from the Ganymede Code Viewer panel.
+
+<img alt="Flow Code history" src="https://ganymede-bio.mo.cloudinary.net/apiServer/FlowCodeViewer_20241101.png" />
+&nbsp;
+
+:::note
+Some Flow versions created before July 18th 2024 may not be linked to a "Created By" user.
+:::
+
+## Flow Configuration
 
 ### Documenting Flows
 
@@ -162,55 +224,4 @@ Clicking here will bring up this modal:
 <img width="550" alt="Autorun modal" src="https://ganymede-bio.mo.cloudinary.net/apiServer/RunQueueBar_InputSettingsModalExample_20230405.png"/>
 
 Enabling this feature will allow for runs to start whenever all inputs for a row in the run queue are filled. This button is disabled if any nodes take more than 1 file, or if there are no input parameters for the Flow. This feature melds nicely with file watcher, and will work even after navigating away from the <div className="button darkblue_button"><BranchesOutlined /> **Flow Editor**</div> page.
-
-
-### Modifying and Deleting Flows
-
-Edges can be removed by selecting them and pressing "delete" or "backspace" on the keyboard.  A selected edge is slightly darker and wider than unselected edges.
-
-To make two nodes dependent on each other within a run, click and drag between two orbs two different nodes.  Flow dependencies run top-to-bottom (if vertical layout is specified) or left-to-right (if horizontal layout is specified).
-
-In order to delete flows, click the <div className="button darkblue_button">**Manage <SettingOutlined />**</div>Button on the Flow Editor page, which opens up the right sidebar offering a button to <div className="button black_button">Delete Flow</div>
-
-:::caution
-Deleting flows is not reversible from within the Ganymede UI, so undoing a Flow deletion will require restoring code from a prior commit in the git repo corresponding to the Ganymede cloud tenant.
-:::
-
-
-### Flow Save Status Indicator
-
-The status of the latest flow save is displayed by an indicator message in the header bar of the Flow Editor page. Flows can’t be run while a flow save is in progress, which can be tracked by this indicator. If no flow is currently saving the status indicator will display the time of the last successful flow save. 
-
-<img width="300" alt="Autorun modal" src="https://ganymede-bio.mo.cloudinary.net/apiServer/FlowSaveSuccess_20240416.png"/>
-
-
-While a flow save is in progress the indicator message will display in sequence "Save in progress", "Build in progress", and "Deploy in progress" depending on which part of the save pipeline that is running. 
-
-<img width="150" alt="Autorun modal" src="https://ganymede-bio.mo.cloudinary.net/apiServer/FlowSaveProgress_20240416.png"/>
-<img width="152" alt="Autorun modal" src="https://ganymede-bio.mo.cloudinary.net/apiServer/FlowBuildProgress_20240416.png"/>
-<img width="162" alt="Autorun modal" src="https://ganymede-bio.mo.cloudinary.net/apiServer/FlowSaveDeploy_20240416.png"/>
-
-If an error is encountered during a flow save then an error message will be displayed.
-
-<img width="130" alt="Autorun modal" src="https://ganymede-bio.mo.cloudinary.net/apiServer/FlowBuildFail_20240416.png"/>
-
-### Flow Versions
-
-All changes to a Flow will be tracked as a new Flow Version. A history of all Flow Versions can be viewed by clicking on the
-<b>History</b> button in the Flow Editor page.
-
-<img alt="Go to Flow Version History button" src="https://ganymede-bio.mo.cloudinary.net/apiServer/FlowHistoryButton_20240718.png" />
-
-<img alt="Flow Version History" src="https://ganymede-bio.mo.cloudinary.net/apiServer/FlowVersionHistory_20240718.png" />
-
-:::note
-Some Flow Versions created before July 18th 2024 may not be linked to a "Created By" user.
-:::
-
-Expanding a row will show the changes between the selected version and the <i>current version</i> of the Flow, <i>not</i> just the
-changes introduced in the selected version.
-
-The changes are shown like a side by side `git` diff where the left is old and the right is current.
-
-<img alt="Flow Version History row expanded with diff" src="https://ganymede-bio.mo.cloudinary.net/apiServer/FlowVersionHistory_diff_20240718.png" />
 

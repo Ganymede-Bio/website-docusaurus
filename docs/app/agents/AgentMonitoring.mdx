@@ -4,7 +4,7 @@ title: Monitoring Agents
 displayed_sidebar: webUiSidebar
 ---
 
-import { DiffOutlined, EditOutlined, PlusOutlined, SelectOutlined } from "@ant-design/icons";
+import { DiffOutlined, EditOutlined, EyeOutlined, PlusOutlined, SelectOutlined } from "@ant-design/icons";
 
 ## Maintaining Agents
 
@@ -182,7 +182,7 @@ Once a user clicks to Upgrade an agent, all connections will be told of the new 
 
 ##### Update Process
 
-A full update requires reinstalling the executable, but Ganymede now handles this installation seamlessly. When a Connection receives a command to perform a full update, it continues to operate normally while attempting to start the new version in parallel after verifying the validity of the command and the executable. Once the new version registers with Ganymede as operational, the old Connection stops. The new executable also cleans up the artifacts of the old executable and its dependencies.
+A full update requires reinstalling the executable, but Ganymede now handles this installation seamlessly; as such, after the full update is requested, it is performed for existing Connections after the executable builds. When a Connection receives a command to perform a full update, it continues to operate normally while attempting to start the new version in parallel after verifying the validity of the command and the executable. Once the new version registers with Ganymede as operational, the old Connection stops. The new executable also cleans up the artifacts of the old executable and its dependencies.
 
 There may be a disruption to any ongoing processing on the Agent during the update, so it is safest to request it when no activity occurs on the instruments where the Agent Connections are running.
 
@@ -203,29 +203,6 @@ Changes in the Agent configuration, including the Agent user-defined code, or Co
 ##### Update Process
 
 A runtime update does not require any process restart or executable reinstallation. As a result, the Connection can accept changes to configuration while continuing normal operations. The update is validated for integrity and the information is stored locally for access if the Connection restarts for any reason.
-
-### Viewing Build History
-
-Each iteration of Agent build can be viewed in the History tab of the Agent. This view provides context for each change, either as a log of the configuration change or through a custom commit message from the Agent notebook.
-
-<div class="text--center">
-  <img
-    alt="Agent build history"
-    src="https://ganymede-bio.mo.cloudinary.net/agent/Agent_History20230726.png"
-    width="800"
-  />
-</div>
-&nbsp;
-
-Configuration differences between two Agent builds can be viewed for audit or debugging purposes by clicking <div className="keystroke blue_keystroke"><DiffOutlined /></div> button.
-
-<div class="text--center">
-  <img
-    alt="Agent build history detail"
-    src="https://ganymede-bio.mo.cloudinary.net/agent/Agent_History_Diff20230726.png"
-    width="800"
-  />
-</div>
 
 ### Uninstalling Agent Connections
 
@@ -262,3 +239,40 @@ sudo systemctl stop ganymede_example_agent.service
 sudo rm /etc/systemd/system/ganymede_example_agent.service
 ```
 
+## Agent History
+
+### Viewing Build History
+
+Each iteration of Agent build can be viewed in the History tab of the Agent. This view provides context for each change, either as a log of the configuration change or through a custom commit message from the Agent notebook.
+
+<div class="text--center">
+  <img
+    alt="Agent build history"
+    src="https://ganymede-bio.mo.cloudinary.net/agent/Agent_History20230726.png"
+    width="800"
+  />
+</div>
+&nbsp;
+
+Configuration differences between two Agent builds can be viewed for audit or debugging purposes by clicking <div className="keystroke blue_keystroke"><DiffOutlined /></div> button.
+
+<div class="text--center">
+  <img
+    alt="Agent build history detail"
+    src="https://ganymede-bio.mo.cloudinary.net/agent/Agent_History_Diff20241101.png"
+    width="800"
+  />
+</div>
+&nbsp;
+
+### Viewing Historical Code
+
+The code corresponding to historical commits can be viewed by clicking the <div className="button dark_gray_button"><EyeOutlined /> **View Code**</div> button.  This opens up a modal which allows you to copy the code from the historical commit to the clipboard if desired.
+
+<div class="text--center">
+  <img
+    alt="Agent build history detail"
+    src="https://ganymede-bio.mo.cloudinary.net/agent/Agent_Code_View20241101.png"
+    width="800"
+  />
+</div>

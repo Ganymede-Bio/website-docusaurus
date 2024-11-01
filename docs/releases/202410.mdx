@@ -7,22 +7,19 @@ displayed_sidebar: releaseSideBar
 ### October 31 2024
 
 **Features**
-- **UI**: An audit log is now available for all users to view the actions in an environment
-    - The audit log is available in the environment settings page
+- **UI**: An [audit log](../app/configuration/AuditLog.mdx) is now available for all users to view the actions in an environment
     - Each action is logged with the user, action, affected resource, and timestamp
     - When possible, the corresponding version of the resource is linked
 - **Agent**: Notifications are available from within the Agent code
     - Add subscribers to the Connection using the Connection details page
-    - Call `agent_sdk.notify` to send a notification to all subscribers
+    - Call [agent_sdk.notify](../sdk/markdowns/AgentSDK.mdx) to send a notification to all subscribers
     - Notifications are displayed in the Connection logs
-- **UI**: Agent and Flow code is now viewable without launching the editor
-    - Click the View icon in the Agent page or Flow Editor to view the code
-    - Code is displayed in a read-only editor
-    - This is available for users with all permissions levels in the environment
-- **UI**: Flows can now be copied
+- **UI**: Flows can now be [copied](../app/flows/FlowEditor#copying-flows)
     - Click the Copy icon in the Flow Editor sidebar to create a new Flow with the same code
     - Flows can be copied within the same environment or to a different environment
     - This is available for users with Writer permissions level in the environment
+- **UI**: Code for prior commits can be viewed and quickly copied, for both [Flows](../app/flows/FlowEditor#historical-flow-versions) and [Agents](../app/agents/AgentMonitoring#viewing-historical-code)
+    - This is available for users with all permissions levels in the environment
 
 **Improvements**
 - **Agent**: Improved Agent logging on the local PC when unable to connect to Ganymede
