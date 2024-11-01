@@ -4,7 +4,7 @@ title: Monitoring Agents
 displayed_sidebar: webUiSidebar
 ---
 
-import { DiffOutlined, EditOutlined, PlusOutlined, SelectOutlined } from "@ant-design/icons";
+import { DiffOutlined, EditOutlined, EyeOutlined, PlusOutlined, SelectOutlined } from "@ant-design/icons";
 
 ## Maintaining Agents
 
@@ -259,7 +259,20 @@ Configuration differences between two Agent builds can be viewed for audit or de
 <div class="text--center">
   <img
     alt="Agent build history detail"
-    src="https://ganymede-bio.mo.cloudinary.net/agent/Agent_History_Diff20230726.png"
+    src="https://ganymede-bio.mo.cloudinary.net/agent/Agent_History_Diff20241101.png"
+    width="800"
+  />
+</div>
+&nbsp;
+
+### Viewing Historical Code
+
+The code corresponding to historical commits can be viewed by clicking the <div className="button dark_gray_button"><EyeOutlined /> **View Code**</div> button.  This opens up a modal which allows you to copy the code from the historical commit to the clipboard if desired.
+
+<div class="text--center">
+  <img
+    alt="Agent build history detail"
+    src="https://ganymede-bio.mo.cloudinary.net/agent/Agent_Code_View20241101.png"
     width="800"
   />
 </div>
