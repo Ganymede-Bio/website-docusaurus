@@ -204,29 +204,6 @@ Changes in the Agent configuration, including the Agent user-defined code, or Co
 
 A runtime update does not require any process restart or executable reinstallation. As a result, the Connection can accept changes to configuration while continuing normal operations. The update is validated for integrity and the information is stored locally for access if the Connection restarts for any reason.
 
-### Viewing Build History
-
-Each iteration of Agent build can be viewed in the History tab of the Agent. This view provides context for each change, either as a log of the configuration change or through a custom commit message from the Agent notebook.
-
-<div class="text--center">
-  <img
-    alt="Agent build history"
-    src="https://ganymede-bio.mo.cloudinary.net/agent/Agent_History20230726.png"
-    width="800"
-  />
-</div>
-&nbsp;
-
-Configuration differences between two Agent builds can be viewed for audit or debugging purposes by clicking <div className="keystroke blue_keystroke"><DiffOutlined /></div> button.
-
-<div class="text--center">
-  <img
-    alt="Agent build history detail"
-    src="https://ganymede-bio.mo.cloudinary.net/agent/Agent_History_Diff20230726.png"
-    width="800"
-  />
-</div>
-
 ### Uninstalling Agent Connections
 
 #### Windows
@@ -262,3 +239,27 @@ sudo systemctl stop ganymede_example_agent.service
 sudo rm /etc/systemd/system/ganymede_example_agent.service
 ```
 
+## Agent History
+
+### Viewing Build History
+
+Each iteration of Agent build can be viewed in the History tab of the Agent. This view provides context for each change, either as a log of the configuration change or through a custom commit message from the Agent notebook.
+
+<div class="text--center">
+  <img
+    alt="Agent build history"
+    src="https://ganymede-bio.mo.cloudinary.net/agent/Agent_History20230726.png"
+    width="800"
+  />
+</div>
+&nbsp;
+
+Configuration differences between two Agent builds can be viewed for audit or debugging purposes by clicking <div className="keystroke blue_keystroke"><DiffOutlined /></div> button.
+
+<div class="text--center">
+  <img
+    alt="Agent build history detail"
+    src="https://ganymede-bio.mo.cloudinary.net/agent/Agent_History_Diff20230726.png"
+    width="800"
+  />
+</div>

@@ -365,3 +365,4 @@ NoOpFileTagParams
 UnappliedFileTag
 OPC
 AuditLog
+EyeOutlined
