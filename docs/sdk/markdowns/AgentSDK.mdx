@@ -278,3 +278,18 @@ error('Display error message')
 
 In the UI, these log messages are [viewable and filterable on the corresponding Connections page](../../app/agents/AgentMonitoring#viewing-logs).
 
+## Notifications
+
+Ganymede Agents (v5.1.31+) support sending email notifications to users via the `agent_sdk`.  Email addresses for notifications can be set in the Agent Connection configuration as shown below:
+
+<div class="text--center">
+  <img
+    alt="Configuring Connection Emails"
+    src="https://ganymede-bio.mo.cloudinary.net/agent/ConnectionEmailConfig_20241101.png"
+    width="800"
+  />
+</div>
+
+### `function` notify
+
+- _param_ **msg**: str - Message to send in notification

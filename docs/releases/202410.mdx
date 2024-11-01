@@ -7,13 +7,13 @@ displayed_sidebar: releaseSideBar
 ### October 31 2024
 
 **Features**
-- **UI**: An audit log is now available for all users to view the actions in an environment
+- **UI**: An [audit log](../app/configuration/AuditLog.mdx) is now available for all users to view the actions in an environment
     - The audit log is available in the environment settings page
     - Each action is logged with the user, action, affected resource, and timestamp
     - When possible, the corresponding version of the resource is linked
 - **Agent**: Notifications are available from within the Agent code
     - Add subscribers to the Connection using the Connection details page
-    - Call `agent_sdk.notify` to send a notification to all subscribers
+    - Call [agent_sdk.notify](../sdk/markdowns/AgentSDK.mdx) to send a notification to all subscribers
     - Notifications are displayed in the Connection logs
 - **UI**: Agent and Flow code is now viewable without launching the editor
     - Click the View icon in the Agent page or Flow Editor to view the code
