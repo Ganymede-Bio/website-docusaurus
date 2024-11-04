@@ -155,30 +155,31 @@ module.exports = {
             id: 'releases/AgentVersionHistory',
             label: 'Agent Change Log'
           },
-          {
-            type: 'category',
-            label: 'Instruments',
-            collapsed: false,
-            items: [
-              {
-                type: 'doc',
-                id: 'app/agents/Instruments',
-                label: 'Overview'
-              },
-              {
-                type: 'doc',
-                id: 'app/agents/NewInstrument',
-                label: 'New Instrument'
-              },             
-              {
-                type: 'doc',
-                id: 'app/agents/BulkUploadInstruments',
-                label: 'Bulk Upload'
-              },                          
-            ]
-          },         
         ]
       },
+      {
+        type: 'category',
+        label: 'Instruments',
+        collapsed: true,
+        items: [
+          {
+            type: 'doc',
+            id: 'app/agents/Instruments',
+            label: 'Overview'
+          },
+          {
+            type: 'doc',
+            id: 'app/agents/NewInstrument',
+            label: 'New Instrument'
+          },             
+          {
+            type: 'doc',
+            id: 'app/agents/BulkUploadInstruments',
+            label: 'Bulk Upload'
+          },            
+        ]
+      },
+     
       {
         type: 'category',
         label: 'Files',
