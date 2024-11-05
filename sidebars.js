@@ -154,7 +154,7 @@ module.exports = {
             type: 'ref',
             id: 'releases/AgentVersionHistory',
             label: 'Agent Change Log'
-          }
+          },
         ]
       },
       {

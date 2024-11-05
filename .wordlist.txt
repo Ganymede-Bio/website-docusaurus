@@ -370,3 +370,5 @@ ELN
 LIMS
 reproducibility
 runtimes
+BulkUploadInstruments
+NewInstrument
