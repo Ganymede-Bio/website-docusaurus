@@ -122,8 +122,6 @@ The _Configuration_ input specifies the action performed by the Agent, with opti
 
 A Connection watches a directory (and associated subdirectories) for new files and updates to existing files.  The Flow configured with the Agent is triggered when all expected files are found.
 
-The _input_path_ variable, configured for each Connection [at installation](./AgentInstall#windows-installation), specifies the directory to watch.
-
 #### Input Parameters
 
 - `Flow Name`: The flow to run upon observing new files matching the specified pattern.
@@ -140,6 +138,16 @@ The _input_path_ variable, configured for each Connection [at installation](./Ag
 - `File Tags`: Tags to associate with the files uploaded to Ganymede Cloud.
 - `Image`: An image to associate with agent in the Ganymede UI.
 - `Auto deploy code and configuration changes to Live Connections`: If checked, updates to Agent code will be reflected on current Connections.
+
+#### Reserved Variables
+
+Reserved variables are used to configure Connection behavior.  These can be set [at installation](./AgentInstall#windows-installation) or in the Connections panel post-installation.
+
+- `input_path`: specifies the directory to watch.
+- `check_interval`: for Agents v5.1.28+, specifies frequency (in seconds) with which a Connection will poll the local directory for new files.  If left blank, the default value is 5 seconds.
+- `stable_time`: for Agents v5.1.28+, specifies the time (in seconds) that a file must remain unchanged before being considered stable.  If left blank, the default value is 5 seconds.
+
+#### User-Defined Code
 
 The user-defined code will be generated to map those file patterns to parameters.  Three functions may require modification during configuration:
 
@@ -373,8 +381,6 @@ Multiple flow cytometers are used to observe cell populations for a related set 
 
 A Connection that monitors Flow file outputs, saving them to local directories as specified by the Agent logic.
 
-The _output_path_ variable, configured for each Connection [at installation](./AgentInstall#windows-installation), specifies the directory to store files to.
-
 #### Input Parameters
 
 - `Flow Name`: The flow from which to download output files. This will autopopulate the glob pattern matching field correspondingly.
@@ -392,6 +398,12 @@ The _output_path_ variable, configured for each Connection [at installation](./A
 &nbsp;
 
 Additional examples can be found on the [Agent Templates page](./AgentTemplates.mdx#watch-for-flow-outputs-then-save-locally)
+
+#### Reserved Variables
+
+For this configuration, the following reserved variables are available:
+
+- `output_path`: specifies the directory to store files to.
 
 #### Example use case
 
