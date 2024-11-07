@@ -145,7 +145,7 @@ Reserved variables are used to configure Connection behavior.  These can be set 
 
 - `input_path`: specifies the directory to watch.
 - `check_interval`: for Agents v5.1.28+, specifies frequency (in seconds) with which a Connection will poll the local directory for new files.  If left blank, the default value is 5 seconds.
-- `stable_time`: for Agents v5.1.28+, specifies the time (in seconds) that a file must remain unchanged before being considered stable.  If left blank, the default value is 5 seconds.
+- `stable_time`: for Agents v5.1.28+, specifies the time (in seconds) that must have elapsed since the last modified time before being considered stable.  If left blank, the default value is 5 seconds.
 
 #### User-Defined Code
 
