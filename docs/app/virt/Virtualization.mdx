@@ -2,6 +2,7 @@
 id: Virtualization
 title: Virtualization
 displayed_sidebar: webUiSidebar
+toc_max_heading_level: 4
 ---
 
 import {
@@ -30,7 +31,7 @@ Some examples of analyses that could be suitable are:
 
 To use this feature, scientists select files relevant files for processing from the [File Browser](app/files/FileBrowser.mdx), conduct an analysis in the software, and then store relevant results back to Ganymede File Storage by saving output files in the appropriate location.
 
-Pleaes reach out to [Ganymede](mailto:support@ganymede.bio) to explore your specific use case.
+If you're interested in adding an application (whether external application or internally developed application), please reach out to [Ganymede](mailto:support@ganymede.bio) to explore your specific use case.
 
 ## Using Virtualization
 
@@ -81,7 +82,7 @@ When the session first loads, you will see a Windows lock screen with a Ganymede
 Once the session is opened, a Windows desktop appears. On the desktop, there is a directory called “Input_Files”. This directory contains the files that were selected in the File Browser during session creation.
 
 <div style={{ textAlign: 'center' }}>
-  <img width="800" alt="Virtualization Desktop" src="https://ganymede-bio.mo.cloudinary.net/virtualization/VirtualizationDesktop20240507.png"
+  <img width="800" alt="Virtualization Desktop" src="https://ganymede-bio.mo.cloudinary.net/virtualization/VirtualizationDesktop20241111.png"
   />
 </div>
 &nbsp;
@@ -93,7 +94,7 @@ If additional files are needed, you can add them from either the Sessions page o
 - **From the Sessions Page**: Navigate to the relevant session and click the Add Files (+) icon next to the input files.
 
 <div style={{ textAlign: 'center' }}>
-  <img width="800" alt="Adding files to a Virtualization Session from the Sessions page" src="https://ganymede-bio.mo.cloudinary.net/virtualization/VirtualizationSessionAddFiles20240507.png"
+  <img alt="Adding files to a Virtualization Session from the Sessions page" src="https://ganymede-bio.mo.cloudinary.net/virtualization/VirtualizationSessionAddFiles20240507.png"
   />
 </div>
 &nbsp;
@@ -101,7 +102,7 @@ If additional files are needed, you can add them from either the Sessions page o
 - **From Within the Session**: Navigate to the relevant session and click the Add Files (+) icon next to the input files.
 
 <div style={{ textAlign: 'center' }}>
-  <img width="800" alt="Adding files to a Virtualization Session from the active session" src="https://ganymede-bio.mo.cloudinary.net/virtualization/VirtualizationAddFiles20240507.png"
+  <img alt="Adding files to a Virtualization Session from the active session" src="https://ganymede-bio.mo.cloudinary.net/virtualization/VirtualizationAddFiles20241111.png"
   />
 </div>
 &nbsp;
@@ -109,10 +110,39 @@ If additional files are needed, you can add them from either the Sessions page o
 which launches a modal for selecting files from Ganymede data storage to add.
 
 <div style={{ textAlign: 'center' }}>
-  <img width="800" alt="File select modal for Virtualization Session" src="https://ganymede-bio.mo.cloudinary.net/virtualization/VirtualizationFileSelectModal20240507.png"
+  <img alt="File select modal for Virtualization Session" src="https://ganymede-bio.mo.cloudinary.net/virtualization/VirtualizationFileSelectModal20240507.png"
   />
 </div>
 &nbsp;
+
+### Pausing a session
+
+Virtualization sessions can be paused by clicking on the Pause Session button in the control bar at the bottom of the screen.  
+
+<div style={{ textAlign: 'center' }}>
+  <img alt="Pausing a session" src="https://ganymede-bio.mo.cloudinary.net/virtualization/VirtualizationPauseSession20241111.png"
+  />
+</div>
+&nbsp;
+
+This can be useful for preserving the state of the session; files on the desktop will be retained, and the session will be paused.
+
+:::warning
+
+Application state is not preserved; any unsaved work within the application will be lost.
+
+:::
+
+### Resuming a session
+
+To resume a paused session, navigate to the Sessions page and click the Resume button next to the relevant session.
+
+<div style={{ textAlign: 'center' }}>
+  <img alt="Resuming a session" src="https://ganymede-bio.mo.cloudinary.net/virtualization/VirtualizationResumeSession_20241111.png"
+  />
+</div>
+&nbsp;
+
 
 ### Storing files from a session
 
