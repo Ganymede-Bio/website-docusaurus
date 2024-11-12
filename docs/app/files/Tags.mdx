@@ -118,13 +118,22 @@ You can also tag files programmatically using the `add_file_tag_to_fileparam` fu
 - _param_ **url**: str - A URL to associate with the tag, if applicable.
 
 ```python
-from ganymede_sdk.agent import (
+from agent_sdk import (
     FileParam,
     FileWatcherResult,
     MultiFileParam,
     TriggerFlowParams,
     add_file_tag_to_fileparam,
 )
+
+# pre v5.0
+# from ganymede_sdk.agent import (
+#     FileParam,
+#     FileWatcherResult,
+#     MultiFileParam,
+#     TriggerFlowParams,
+#     add_file_tag_to_fileparam,
+# )
 
 def execute(flow_params_fw: FileWatcherResult, **kwargs) -> TriggerFlowParams:
     """
@@ -161,7 +170,7 @@ Note that Virtualization stores a json file in the `C:/Program Files/Ganymede/` 
 import json
 from pathlib import Path
 
-from ganymede_sdk.agent import FileWatcherResult, NoOpFileTagParams, add_file_tag_to_fileparam
+from agent_sdk import FileWatcherResult, NoOpFileTagParams, add_file_tag_to_fileparam
 from ganymede_sdk.file_tag import get_file_tags
 
 SESSION_JSON_PATH = Path("C:/Program Files/Ganymede/session.json")
