@@ -138,7 +138,7 @@ module.exports = {
           {
             type: 'doc',
             id: 'app/agents/AgentMonitoring',
-            label: 'Monitoring Agents'
+            label: 'Monitoring and Configuring Connections'
           },
           {
             type: 'doc',
