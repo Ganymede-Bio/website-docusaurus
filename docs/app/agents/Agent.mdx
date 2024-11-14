@@ -2,6 +2,7 @@
 id: Agent
 title: Agent Overview & Configuration
 displayed_sidebar: webUiSidebar
+toc_max_heading_level: 4
 ---
 
 import { DiffOutlined, PlusOutlined, SelectOutlined } from "@ant-design/icons";
@@ -472,7 +473,7 @@ More generally, Variables and Labels can be flexibly used to control Connection 
 -v "abc=1" -v "xyz=2" -l "UPLC" -l "Analytical Dev"
 ```
 
-And [modified in the corresponding Connections panel in the Ganymede web app after installation, for Agent versions 4.5+](AgentMonitoring#monitoring-agent-connections).
+And [modified in the corresponding Connections panel in the Ganymede web app after installation, for Agent versions 4.5+](AgentMonitoring#maintaining-agent-connections).
 
 Variables and labels can be referenced in your user-defined code by extracting the values from `kwargs` in the _execute_ function.
 
