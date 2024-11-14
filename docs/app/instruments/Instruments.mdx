@@ -1,0 +1,37 @@
+---
+id: Instruments
+title: Instruments 
+displayed_sidebar: webUiSidebar
+---
+
+import { PlusOutlined } from '@ant-design/icons';
+
+The Instruments page allows you to track equipment within Ganymede, with or without connectivity to the instrument.  This offers a quick way to statefully track instruments and view integration status for instruments with connectivity to Ganymede.
+
+<img alt="Instruments Table" src="https://ganymede-bio.mo.cloudinary.net/apiServer/InstrumentsTable.png" />
+&nbsp;
+Each instrument can be associated with a [Connection](../agents/Agent.mdx), which allows you to monitor instrument uptime and programmatically interact with the lab instrument.
+
+### Adding an instrument
+
+New instruments can be added by clicking on the  <div className="button darkblue_outline_button"><PlusOutlined /> New Instrument</div>  button to open New Instrument form, shown below.
+
+<img width="500" alt="New Instrument" src="https://ganymede-bio.mo.cloudinary.net/apiServer/NewInstrumentForm.png" />
+
+The New Instrument Form allows you to populate instrument characteristics relevant for tracking. The only required field is the **Name** field, which must be unique within the environment.
+
+### Adding instruments in bulk
+
+If you have a list of instruments to add, you can upload them using the Bulk Upload Instruments feature. 
+
+<img width="500" alt="Bulk Upload Instruments" src="https://ganymede-bio.mo.cloudinary.net/apiServer/BulkUploadInstruments.png" />
+
+To use this feature, download the template CSV file in the bulk upload instruments form and fill it out, adding 
+one instrument per row. 
+
+Upon upload, the CSV file will be validated by Ganymede. If any errors are found, a descriptive error message is displayed, explaining the issue.
+
+:::note
+The "Connection Id" column in the instrument bulk upload template file requires Connection ID.  This differs from the form for adding instruments individually, which requests a Connection name from a dropdown list.  Connection ID can be found on the Connection page.
+:::
+
