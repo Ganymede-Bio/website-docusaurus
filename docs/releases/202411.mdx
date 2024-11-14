@@ -4,6 +4,25 @@ title: November 2024
 displayed_sidebar: releaseSideBar
 ---
 
+### November 14 2024
+
+**Features**
+- **UI**: Service Accounts can be exported for use in external applications
+    - Each service account has read-only access to your table data and metadata
+    - Access is scoped to a single environment's data
+    - These can be used in tools that support BigQuery or BigQuery via ODBC
+- ** Agents**: Connections can be monitored for disconnect or shutdown events
+    - Configure this option on the Connection details page
+    - Adjust the monitoring window as needed 
+    - Emails will be sent when the Connection is Disconnected and when it resumes
+
+**Improvements**
+- **Agents**: Improved the robustness of Connections that are restarted after updates were made while they were offline
+- **UI**: Better handling of authentication for customers who have changed their email domain while using Ganymede
+
+**Bug Fixes**
+- **UI**: Fixed an issues where failed Flow Runs were being marked as Platform Error that had other causes
+
 ### November 7 2024
 
 **Features**
