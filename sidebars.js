@@ -132,11 +132,6 @@ module.exports = {
           },
           {
             type: 'doc',
-            id: 'app/agents/AgentTemplates',
-            label: 'Example Agent Templates'
-          },
-          {
-            type: 'doc',
             id: 'app/agents/AgentMonitoring',
             label: 'Monitoring and Configuring Connections'
           },
@@ -144,6 +139,11 @@ module.exports = {
             type: 'doc',
             id: 'app/agents/DebuggingAgents',
             label: 'Troubleshooting Agents & FAQ'
+          },
+          {
+            type: 'doc',
+            id: 'app/agents/AgentTemplates',
+            label: 'Example Agent Templates'
           },
           {
             type: 'doc',
@@ -156,6 +156,11 @@ module.exports = {
             label: 'Agent Change Log'
           },
         ]
+      },
+      {
+        type: 'doc',
+        id: 'app/instruments/Instruments',
+        label: 'Instruments',
       },
       {
         type: 'category',
