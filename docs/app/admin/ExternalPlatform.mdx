@@ -8,8 +8,6 @@ import {
   UserDeleteOutlined
 } from '@ant-design/icons';
 
-## Platform Integration Details
-
 The Integration panel contains details about the Ganymede environment, which can be used for integration with external systems, as well as for IP whitelisting Ganymede.
 
 <img alt="Admin - Integration Panel" src="https://ganymede-bio.mo.cloudinary.net/apiServer/IntegrationPanel_20241018.png" />
@@ -22,8 +20,49 @@ The Integration panel contains details about the Ganymede environment, which can
 - **AWS Trust Policy JSON**: Role configuration for AWS Policy, to establish connectivity between AWS and Ganymede cloud
 - **AWS Bucket CORS**: CORS configuration for AWS S3 buckets
 
+## Using Ganymede to Power External Applications
 
-### Connecting to an S3 Bucket
+Ganymede can generate Service Account credentials for use with other tools. Access using these credentials is restricted to read-only data of the environment in which they were generated.
+
+Some examples of tools that can be connected to Ganymede using this approach include:
+
+### Dashboarding Software
+- [Tableau](https://help.tableau.com/current/pro/desktop/en-us/examples_googlebigquery.htm) - follow the instructions described in Option 2.
+- [Looker](https://cloud.google.com/looker/docs/db-config-google-bigquery#authentication_with_bigquery_service_accounts) - follow the Authentication with BigQuery Service Accounts instructions
+- [PowerBI](https://learn.microsoft.com/en-us/power-query/connectors/google-bigquery) - follow the instructions to connect to BigQuery using a service account.
+
+### Data Analysis Tools
+- [Posit (R)](https://solutions.posit.co/connections/db/databases/big-query/) - follow the *Using the ODBC Package* instructions using the [Simba BigQuery ODBC driver](https://cloud.google.com/bigquery/docs/reference/odbc-jdbc-drivers).
+- [Spotfire](https://community.spotfire.com/articles/spotfire/spotfire-and-odbc-data-sources/) - Follow instructions for connecting to an ODBC data source using the [Simba BigQuery ODBC driver](https://cloud.google.com/bigquery/docs/reference/odbc-jdbc-drivers).
+- [JMP](https://community.jmp.com/t5/Discussions/ODBC-connection-to-Google-BigQuery/td-p/346253) - Establish a connection to BigQuery using the [Simba BigQuery ODBC driver](https://cloud.google.com/bigquery/docs/reference/odbc-jdbc-drivers).
+- [MATLAB](https://github.com/mathworks-ref-arch/matlab-google-bigquery/blob/main/Documentation/Authentication.md) - Provide service account credentials using the matlab-google-bigquery package.
+- [Excel](https://cloud.google.com/blog/products/bigquery/how-to-connect-bigquery-to-microsoft-excel-and-other-apps-with-our-new-odbc-driver) - Install the [Simba BigQuery ODBC driver](https://cloud.google.com/bigquery/docs/reference/odbc-jdbc-drivers) and reference the data source from Excel.
+
+### Generating Service Account Credentials
+
+To do this, follow the steps below:
+1. Navigate to the Environment Settings page, Integration tab
+<img alt="Admin - Integration Panel Add Credentials" src="https://ganymede-bio.mo.cloudinary.net/apiServer/ExportCredentals_NewCredentials20241114.png" />
+2. Select 'New Credentials' and enter a description and name for the Credentials
+3. Click 'Create'
+<img alt="Admin - Integration Panel Copy Key" src="https://ganymede-bio.mo.cloudinary.net/apiServer/ExportCredentals_CopyKey20241114.png" />
+4. Copy the JSON key that is displayed and save it to a file.
+
+:::note
+
+This key is only displayed once, so be sure to save it in a secure location.
+
+:::
+
+:::warning
+
+Treat this key as a password, as it provides access to the Ganymede environment.
+
+:::
+
+5. Use the JSON key to authenticate with the external tool.
+
+## Connecting to an S3 Bucket
 
 In order to allow Ganymede Flows to read and write to an S3 bucket, follow the steps below for each Ganymede environment that needs access to the bucket:
 
@@ -75,45 +114,3 @@ In order to allow Ganymede Flows to read and write to an S3 bucket, follow the s
   - Press Create Role
 
 5. Add the Role ARN as an [environment secret in the Ganymede environment](./AdminControls.mdx#secrets-panel) named _aws_s3_role_arn_.
-
-### Connecting to Ganymede from an External Tool
-
-Ganymede can generate Service Account credentials for use with other tools. Access using these credentials is restricted to read-only data of the environment in which they were generated.
-
-Some examples of tools that can be connected to Ganymede using this approach include:
-
-#### Dashboarding Tools
-- [Tableau](https://help.tableau.com/current/pro/desktop/en-us/examples_googlebigquery.htm) - follow the instructions described in Option 2.
-- [Looker](https://cloud.google.com/looker/docs/db-config-google-bigquery#authentication_with_bigquery_service_accounts) - follow the Authentication with BigQuery Service Accounts instructions
-- [PowerBI](https://learn.microsoft.com/en-us/power-query/connectors/google-bigquery)
-
-#### Data Analysis Tools
-- [Posit (R)](https://solutions.posit.co/connections/db/databases/big-query/) - follow the *Using the ODBC Package* instructions using the [Simba BigQuery ODBC driver](https://cloud.google.com/bigquery/docs/reference/odbc-jdbc-drivers).
-- [Spotfire](https://community.spotfire.com/articles/spotfire/spotfire-and-odbc-data-sources/) - Follow instructions for connecting to an ODBC data source using the [Simba BigQuery ODBC driver](https://cloud.google.com/bigquery/docs/reference/odbc-jdbc-drivers).
-- [JMP](https://community.jmp.com/t5/Discussions/ODBC-connection-to-Google-BigQuery/td-p/346253) - Establish a connection to BigQuery using the [Simba BigQuery ODBC driver](https://cloud.google.com/bigquery/docs/reference/odbc-jdbc-drivers).
-- [MATLAB](https://github.com/mathworks-ref-arch/matlab-google-bigquery/blob/main/Documentation/Authentication.md) - Provide service account credentials using the matlab-google-bigquery package.
-- [Excel](https://cloud.google.com/blog/products/bigquery/how-to-connect-bigquery-to-microsoft-excel-and-other-apps-with-our-new-odbc-driver) - Install the [Simba BigQuery ODBC driver](https://cloud.google.com/bigquery/docs/reference/odbc-jdbc-drivers) and reference the data source from Excel.
-
-#### Generating Service Account Credentials
-
-To do this, follow the steps below:
-1. Navigate to the Environment Settings page, Integration tab
-<img alt="Admin - Integration Panel Add Credentials" src="https://ganymede-bio.mo.cloudinary.net/apiServer/ExportCredentals_NewCredentials20241114.png" />
-2. Select 'New Credentials' and enter a description and name for the Credentials
-3. Click 'Create'
-<img alt="Admin - Integration Panel Copy Key" src="https://ganymede-bio.mo.cloudinary.net/apiServer/ExportCredentals_CopyKey20241114.png" />
-4. Copy the JSON key that is displayed and save it to a file.
-
-:::note
-
-This key is only displayed once, so be sure to save it in a secure location.
-
-:::
-
-:::warning
-
-Treat this key as a password, as it provides access to the Ganymede environment.
-
-:::
-
-5. Use the JSON key to authenticate with the external tool.

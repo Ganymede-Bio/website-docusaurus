@@ -249,7 +249,7 @@ module.exports = {
           {
             type: 'doc',
             id: 'app/admin/ExternalPlatform',
-            label: 'External Platform Configuration'
+            label: 'External Platform Integration'
           },
           {
             type: 'category',
