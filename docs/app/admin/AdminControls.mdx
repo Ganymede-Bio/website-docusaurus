@@ -120,6 +120,22 @@ In order to allow Ganymede Flows to read and write to an S3 bucket, follow the s
   - Press Create Role
 5. Add the Role ARN as an [environment secret in the Ganymede environment](#environment-secrets) named _aws_s3_role_arn_.
 
+#### Connecting to Ganymede from an External Tool
+
+Ganymede can generate Service Account credentials for use with other tools, such as BigQuery or ODBC. Access using these credentials is restricted to read-only data of the environment in which they were generated.
+
+To do this, follow the steps below:
+1. Navigate to the Environment Settings page, Integration tab
+<img alt="Admin - Integration Panel Add Credentials" src="https://ganymede-bio.mo.cloudinary.net/apiServer/ExportCredentals_NewCredentials20241114.png" />
+1. Select 'New Credentials' and enter a description and name for the Credentials
+1. Click 'Create'
+<img alt="Admin - Integration Panel Copy Key" src="https://ganymede-bio.mo.cloudinary.net/apiServer/ExportCredentals_CopyKey20241114.png" />
+1. Copy the JSON key that is displayed and save it to a file.
+    NOTE: This key is only displayed once, so be sure to save it in a secure location.
+    NOTE: Treat this key as a password, as it provides access to the Ganymede environment.
+1. Use the JSON key to authenticate with the external tool.
+
+
 ### Environment Detection in the SDK
 
 The SDK has helper functions to determine the state of the environments, such as production versus

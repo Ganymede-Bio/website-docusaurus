@@ -76,6 +76,7 @@ AWS
 GCP
 CORS
 IAM
+ODBC
 
 ApiOutlined
 AppstoreOutlined
