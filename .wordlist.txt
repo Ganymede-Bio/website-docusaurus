@@ -380,3 +380,8 @@ cytometry
 ddPCR
 electrophoresis
 Scalability
+JMP
+Spotfire
+PowerBI
+Dashboarding
+
