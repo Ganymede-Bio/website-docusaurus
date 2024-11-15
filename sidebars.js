@@ -247,6 +247,11 @@ module.exports = {
         items: [
           'app/admin/AdminControls',
           {
+            type: 'doc',
+            id: 'app/admin/ExternalPlatform',
+            label: 'External Platform Configuration'
+          },
+          {
             type: 'category',
             label: 'Authentication',
             items: [
