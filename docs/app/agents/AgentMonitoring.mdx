@@ -1,6 +1,6 @@
 ---
 id: AgentMonitoring
-title: Monitoring and Configuring Connections
+title: Connections Configuration & Maintenance
 displayed_sidebar: webUiSidebar
 toc_max_heading_level: 4
 ---
@@ -192,6 +192,9 @@ Below the Connection Details box, you'll find Connection-specific configurations
 - **Variables**: [Key-value pairs](./Agent#variables-and-labels-in-windows-agent-connections) that can be referenced in user-defined code.  These are also used to specify [reserved keywords](Agent#reserved-variables) for the Connection, if applicable.
 - **Labels**: [Strings](./Agent#variables-and-labels-in-windows-agent-connections) that can be used to group Connections in the Ganymede UI
 - **Emails**: Email addresses to notify when the Connection encounters an error or has an update in its [Connection status](#connection-status).  These email addresses are also used by the [notify function found in the `agent_sdk`](../../sdk/markdowns/AgentSDK#notifications).
+    - *Send Connection Status Email Notifications*: When enabled, Ganymede will send an email notification to the specified email addresses when the Connection status changes.
+    - *Connection Offline Alert Timeout (min)*: The number of minutes that the Connection must be offline before an email notification is sent.
+    - *Send Email Notification on Connection Shutdown*: When enabled, Ganymede will send an email notification to the specified email addresses when the Connection enters a shutdown state.
 
 ### Connection Status
 

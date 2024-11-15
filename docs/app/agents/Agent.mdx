@@ -9,25 +9,15 @@ import { DiffOutlined, PlusOutlined, SelectOutlined } from "@ant-design/icons";
 
 ## Overview
 
+Agents are Windows/Linux background services that can filter and process data, upload files into Ganymede Cloud, initiate data processing pipelines, and deliver data from Ganymede Cloud to instrument PCs.  Once configured, the executable associated with an Agent is built in the Cloud and downloaded to the instrument PC for installation.
+
+Individual instances of an Agent are called [Connections](./AgentMonitoring.mdx).  Users configure Agent and Connection behavior through a combination of configuration and user-defined code, allowing for flexibility in capturing files and interacting with the Ganymede ecosystem.
+
 <img
   alt="Connections front page"
   src="https://ganymede-bio.mo.cloudinary.net/agent/GanymedeConnectionsFrontPage_20240521.png"
 />
 &nbsp;
-
-Agents can
-
-- filter and process data
-- upload files into Ganymede Cloud
-- initiate data processing pipelines, based on:
-  - files written to the local machine by the instrument
-  - files written to a cloud storage bucket
-  - a scheduled cadence
-- deliver data from Ganymede Cloud to instrument PCs
-
-Users specify these actions by configuring the Agent in the Ganymede app. Doing so creates a Linux binary and Windows executable, which can then be installed on instrument PCs. Optionally, users can [configure a user-defined Python script](#configuring-user-defined-python) associated with the Agent.
-
-After creating an Agent, users can build and install local executables called Connections, individual instances of a given Agent, on instrument PCs. Each Connection consists of a combination of user-defined code and Ganymede configuration, providing flexibility in capturing files and interacting with the Ganymede ecosystem.
 
 For system requirements, see [Agent Network Config & Prerequisites](../configuration/AgentSystemRequirements).
 
