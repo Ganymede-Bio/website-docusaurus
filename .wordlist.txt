@@ -384,4 +384,8 @@ JMP
 Spotfire
 PowerBI
 Dashboarding
-
+EventBridge
+eventbridge
+ExternalPlatform
+EventConfig
+Simba
