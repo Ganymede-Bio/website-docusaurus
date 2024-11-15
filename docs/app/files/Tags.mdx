@@ -47,7 +47,7 @@ Files can be tagged in user-defined code within flows and Agents, though the met
 
 The full set of methods available for interacting with tags can be found on the [File Tag](../../sdk/FileTags.mdx) module in the SDK documentation.
 
-#### Tagging files in flows
+#### Tagging files in Flows
 
 To tag a file within a flow, use the `add_file_tag` function in the `ganymede_sdk.file_tag` module.  This function takes the following arguments:
 
@@ -160,7 +160,13 @@ def execute(flow_params_fw: FileWatcherResult, **kwargs) -> TriggerFlowParams:
             multi_file_params[param] = MultiFileParam.from_file_param(files)
 ```
 
-:::info
+:::note Tagging Agent-Captured Files
+
+Files captured by Agents can be tagged via either the Connections page or by code, but should not be tagged in both spots.
+
+:::
+
+:::info Tagging Files used with Virtualization
 
 Files are passed to and from Virtualization environments using Agents.  Therefore, files passed to and from Virtualization environments can be tagged as well.
 

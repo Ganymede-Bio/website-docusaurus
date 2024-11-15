@@ -124,37 +124,44 @@ module.exports = {
             id: 'app/agents/Agent',
             label: 'Agent Overview & Configuration'
           },
-          'app/configuration/AgentSystemRequirements',
+          {
+            type: 'doc',
+            id: 'app/agents/AgentMonitoring',
+            label: 'Connections Configuration & Maintenance'
+          },
           {
             type: 'doc', 
             id: 'app/agents/AgentInstall',
             label: 'Installing Agent Connections'
           },
           {
-            type: 'doc',
-            id: 'app/agents/AgentMonitoring',
-            label: 'Monitoring and Configuring Connections'
-          },
-          {
-            type: 'doc',
-            id: 'app/agents/DebuggingAgents',
-            label: 'Troubleshooting Agents & FAQ'
-          },
-          {
-            type: 'doc',
-            id: 'app/agents/AgentTemplates',
-            label: 'Example Agent Templates'
-          },
-          {
-            type: 'doc',
-            id: 'app/agents/AgentLogs',
-            label: 'Agent Logging and Reference'
-          },
-          {
-            type: 'ref',
-            id: 'releases/AgentVersionHistory',
-            label: 'Agent Change Log'
-          },
+            type: 'category',
+            label: 'Reference & Troubleshooting',
+            collapsed: false,
+            items: [
+              'app/configuration/AgentSystemRequirements',
+              {
+                type: 'doc',
+                id: 'app/agents/DebuggingAgents',
+                label: 'Troubleshooting Agents & FAQ'
+              },
+              {
+                type: 'doc',
+                id: 'app/agents/AgentTemplates',
+                label: 'Example Agent Templates'
+              },
+              {
+                type: 'doc',
+                id: 'app/agents/AgentLogs',
+                label: 'Agent Logging and Reference'
+              },
+              {
+                type: 'ref',
+                id: 'releases/AgentVersionHistory',
+                label: 'Agent Change Log'
+              },
+            ]
+          }
         ]
       },
       {
