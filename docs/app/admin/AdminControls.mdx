@@ -8,11 +8,9 @@ import {
   UserDeleteOutlined
 } from '@ant-design/icons';
 
-## Summary
-
 The Admin page enables administrators to manage user access, configure environment secrets, and view platform integration details. This page can be accessed by clicking on the bubble containing your email address in the top right corner of the top navbar and selecting Environment Settings.
 
-### Access Levels
+## Access Levels
 
 The Roles panel shown below enables administrators to specify access levels for different users. The Last Seen column is populated in the permissions panel for users that have accessed Ganymede after [August 2024](../../releases/202408#august-15-2024), when the feature was introduced. 
 
@@ -31,7 +29,7 @@ The New User Roles box appears for users with Admin privileges, enabling admins 
 
 For dashboards, permissions can be viewed by navigating to the dashboards page and clicking Settings > List Users.  
 
-### Environment Secrets
+## Environment Secrets
 
 The Secrets panel enables administrators to configure secrets that are used by Ganymede cloud to connect to external services such as Benchling or AWS.  These secrets are specific to the nodes used within a given environment (i.e. - development or production environment).
 The example shown in the image below shows an environment with a AWS S3 Role ARN specified, enabling connectivity between Ganymede cloud and AWS S3 Storage when using the [S3_Read](../../nodes/App/S3_Read) or [S3_Write](../../nodes/App/S3_Write) nodes.
@@ -48,7 +46,7 @@ Secrets cannot be viewed from this panel, so if a secret is lost, it can either 
 
 Any secrets entered here will not be committed into code, but can be printed by environment users with the *Writer* or *Admin* role in notebooks.
 
-### Environment Version
+## Environment Version
 
 The Environment Version panel displays version information for the Ganymede environment:
 
@@ -59,7 +57,7 @@ The Environment Version panel displays version information for the Ganymede envi
 - **Agent Versions**: The latest version of each Agent, along with links to historical Agent binaries
 - **Flow Versions**: The latest version of each Flow, along with links to the Flow Version History page showing commit history for each Flow
 
-### Platform Integration Details
+## Platform Integration Details
 
 The Integration panel contains details about the Ganymede environment, which can be used for integration with external systems, as well as for IP whitelisting Ganymede.
 
@@ -72,14 +70,16 @@ The Integration panel contains details about the Ganymede environment, which can
 - **AWS Trust Policy JSON**: Role configuration for AWS Policy, to establish connectivity between AWS and Ganymede cloud
 
 
-#### Connecting to an S3 Bucket
+### Connecting to an S3 Bucket
 
 In order to allow Ganymede Flows to read and write to an S3 bucket, follow the steps below for each Ganymede environment that needs access to the bucket:
 
 1. Identify which S3 buckets you would like to connect to Ganymede
 2. Create a Policy that allows the desired access to the bucket(s), replacing `my-bucket` with the name of the bucket(s) you would like to connect to.
-    Example:
-    ```
+
+   Example:
+
+    ```json
       {
           "Version": "2012-10-17",
           "Statement": [
@@ -104,10 +104,12 @@ In order to allow Ganymede Flows to read and write to an S3 bucket, follow the s
           ]
       }
     ```
+
 3. Record the identity number of the Ganymede Environment
   - Navigate to the Environment Settings page
   - Select the Integration tab
   - Record the number in the `accounts.google.com:aud` field
+
 4. Create the Role in AWS
   - In the IAM console, select Roles > Create Role
   - Select 'Web Identity'
@@ -118,25 +120,37 @@ In order to allow Ganymede Flows to read and write to an S3 bucket, follow the s
   - Press Next 
   - Name the role something like 'ganymede-storage-access'
   - Press Create Role
+
 5. Add the Role ARN as an [environment secret in the Ganymede environment](#environment-secrets) named _aws_s3_role_arn_.
 
-#### Connecting to Ganymede from an External Tool
+### Connecting to Ganymede from an External Tool
 
 Ganymede can generate Service Account credentials for use with other tools, such as BigQuery or ODBC. Access using these credentials is restricted to read-only data of the environment in which they were generated.
 
 To do this, follow the steps below:
 1. Navigate to the Environment Settings page, Integration tab
 <img alt="Admin - Integration Panel Add Credentials" src="https://ganymede-bio.mo.cloudinary.net/apiServer/ExportCredentals_NewCredentials20241114.png" />
-1. Select 'New Credentials' and enter a description and name for the Credentials
-1. Click 'Create'
+2. Select 'New Credentials' and enter a description and name for the Credentials
+3. Click 'Create'
 <img alt="Admin - Integration Panel Copy Key" src="https://ganymede-bio.mo.cloudinary.net/apiServer/ExportCredentals_CopyKey20241114.png" />
-1. Copy the JSON key that is displayed and save it to a file.
-    NOTE: This key is only displayed once, so be sure to save it in a secure location.
-    NOTE: Treat this key as a password, as it provides access to the Ganymede environment.
-1. Use the JSON key to authenticate with the external tool.
+4. Copy the JSON key that is displayed and save it to a file.
+
+:::note
+
+This key is only displayed once, so be sure to save it in a secure location.
+
+:::
+
+:::warning
+
+Treat this key as a password, as it provides access to the Ganymede environment.
+
+:::
+
+5. Use the JSON key to authenticate with the external tool.
 
 
-### Environment Detection in the SDK
+## Environment Detection in the SDK
 
 The SDK has helper functions to determine the state of the environments, such as production versus
 development. Please see [Environment Detection](../../sdk/markdowns/EnvironmentDetection) for more information.
