@@ -2,7 +2,10 @@
 id: Tags
 title: Tagging Files
 displayed_sidebar: webUiSidebar
+toc_max_heading_level: 4
 ---
+
+import { PlusOutlined, EditOutlined } from '@ant-design/icons';
 
 ## What are File Tags?
 
@@ -15,7 +18,7 @@ Once a file is tagged, it can be easily filtered in the file browser, enabling s
 </div>
 &nbsp;
 
-### Configuring File Tag Types
+## Configuring File Tag Types
 
 Before tagging files, a file tag type must be configured.  This is done in the **Manage Tag Types** section on the Files page.
 
@@ -41,13 +44,13 @@ For each tag type, the following attributes can be specified:
 
 The strict mode setting, if disabled, allows admins to delete or modify tags.  Tags may only be deleted if they are not applied to any files; the delete button will be grayed out if tag type deletion is not permitted.
 
-### Tagging Files
+## Tagging Files
 
-Files can be tagged in user-defined code within flows and Agents, though the methods differ slightly.  In flows, files are tagged by passing the file path to the `add_file_tag` function.  Within Agents, files are tagged by passing the [FileParam](../../sdk/markdowns/AgentSDK#agent-triggered-flows) object into the `add_file_tag_to_fileparam` function.  The FileParam object contains the file that the Agent submits to Ganymede storage (for initiating a flow if the Agent is configured to do so).
+Files can be tagged in user-defined code within Flows and Agents, though the methods differ slightly.  In Flows, files are tagged by passing the file path to the `add_file_tag` function.  Within Agents, files are tagged either in the Connections UI, or by passing the [FileParam](../../sdk/markdowns/AgentSDK#agent-triggered-flows) object into the `add_file_tag_to_fileparam` function.  The FileParam object contains the file that the Agent submits to Ganymede storage (for initiating a flow if the Agent is configured to do so).
 
-The full set of methods available for interacting with tags can be found on the [File Tag](../../sdk/FileTags.mdx) module in the SDK documentation.
+The full set of methods available for programmatically interacting with tags can be found on the [File Tag](../../sdk/FileTags.mdx) module in the SDK documentation.
 
-#### Tagging files in Flows
+### Tagging files in Flow code
 
 To tag a file within a flow, use the `add_file_tag` function in the `ganymede_sdk.file_tag` module.  This function takes the following arguments:
 
@@ -103,7 +106,20 @@ def execute(file_data: Dict[str, bytes], ganymede_context) -> NodeReturn:
     )
 ```
 
-#### Tagging files in Agents or Connections
+### Tagging files captured by Agents 
+
+#### From the Connections UI
+
+To configure file tagging from the Connections UI, navigate to the relevant Connection on the Connections page.  In the Connection Settings box, click on <div className="button darker_gray_button"><EditOutlined /> Edit Connections</div>, followed by <div className="button darkblue_outline_button"><PlusOutlined /> Add file tag</div>.  
+
+Doing so opens up the modal shown below, where you can specify the tag type and value to apply to files delivered by the Connection.
+
+<div class="text--center">
+<img width="600" alt="Add Tag" src="https://ganymede-bio.mo.cloudinary.net/apiServer/AddTagQuickstart_20241118.png"/>
+</div>
+&nbsp;
+
+#### From Agent user-defined code
 
 To tag a file delivered by an Agent to Ganymede, you can configure an Agent or Connection to tag any files submitted from it using the [File tags parameter in Agent configuration](../agents/Agent).
 
