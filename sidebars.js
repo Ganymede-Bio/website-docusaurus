@@ -42,7 +42,7 @@ module.exports = {
               {
                 type: 'doc',
                 id: 'app/agents/QuickstartBuildAgent',
-                label: 'Build an Agent'
+                label: 'Build an Agent / Configure Tags'
               },
               {
                 type: 'doc',
@@ -189,6 +189,11 @@ module.exports = {
             type: 'doc',
             id: 'app/files/TagActivity',
             label: 'Exploring Tag Activity'
+          },
+          {
+            type: 'doc',
+            id: 'app/files/SuggestedTags',
+            label: 'Suggested Tag Types'
           }
         ]
       },

@@ -2,11 +2,12 @@
 id: QuickstartBuildAgent
 title: Build an Agent + Configure a Connection
 displayed_sidebar: webUiSidebar
+toc_max_heading_level: 4
 ---
 
-import { BellOutlined, DownloadOutlined, PlusOutlined, UserOutlined } from '@ant-design/icons';
+import { BellOutlined, DownloadOutlined, PlusOutlined, UserOutlined, EditOutlined } from '@ant-design/icons';
 
-This guide will walk you through the process of creating an Agent to capture and process data from a local instrument PC. You'll create one Connection by installing the Agent on a local PC.
+This guide will walk you through the process of creating an Agent to capture and process data from a local instrument PC. You'll create one Connection by installing the Agent on a local Windows machine.
 
 <div class="text--center">
 <img alt="Agent" src="https://ganymede-bio.mo.cloudinary.net/agent/AgentFrontPage_20240331.png"/>
@@ -109,7 +110,7 @@ To check this configuration, verify the input_path variable on the Connections p
 </div>
 &nbsp;
 
-Choose the desired installation location and proceed through the installer to complete the installation. The default installation location is "C:\Program Files\Ganymede", but if you intend to install multiple Agents on the same PC, you should install each one in a separate subdirectory directory e.g. "C:\Program Files\Ganymede\QuickstartAgent".
+Choose the desired installation location and proceed through the installer to complete the installation. 
 
 <div class="text--center">
 <img width="600" alt="Agent installation location" src="https://ganymede-bio.mo.cloudinary.net/agent/GanymedeAgentInstallationLocation2_20240125.png"/>
@@ -127,11 +128,37 @@ Choose the desired installation location and proceed through the installer to co
 </div>
 &nbsp;
 
-The Agent will launch automatically once installation is complete.
+The Agent Connection will launch automatically once installation is complete.
 
-### Step 4: Test the agent
+### Step 4: Configure Tags for the Connection
 
-Drop the [sample plate reader file](https://github.com/Ganymede-Bio/website-docusaurus/raw/main/PlateReader.xlsx) into the "watch_folder" created in [step 3b](#step-3b-create-a-folder-to-monitor).  The agent will detect the file and upload it to the Ganymede Flow for processing.
+#### Step 4a: Configure a Tag Type
+
+Navigate to the Ganymede web app.  Click on the Files tab in the sidebar of the Ganymede application and select the "Manage Tag Types" tab.  Configure a new tag type with the name "Instrument" and the description "The name of the instrument type", similar to what is shown below:
+
+<div class="text--center">
+<img width="600" alt="Agent installation completion" src="https://ganymede-bio.mo.cloudinary.net/apiServer/ManageTagTypeQuickstart_20241118.png"/>
+</div>
+&nbsp;
+
+#### Step 4b: Configure Connection for Tags
+
+Navigate to the Connections tab in the sidebar and confirm that your Agent Connection is Online.  Click on the Connection name to open the Connection details page.  In the Connection Settings box, click on <div className="button darker_gray_button"><EditOutlined /> Edit Connections</div>, followed by <div className="button darkblue_outline_button"><PlusOutlined /> Add file tag</div>.  Select the "Instrument" tag that you have just created and the value "Plate Reader" to the Connection, click Add Tag, and then Save the configuration.
+
+<div class="text--center">
+<img width="600" alt="Add Tag" src="https://ganymede-bio.mo.cloudinary.net/apiServer/AddTagQuickstart_20241118.png"/>
+</div>
+&nbsp;
+
+:::info
+
+Tags are useful for ensuring raw files retain experiment, user, sample, or other metadata.  A list of potential tags of interest can be found on the [Suggested Tag Types](../files/SuggestedTags.mdx) page.
+
+:::
+
+### Step 5: Test the Connection
+
+On the instrument PC, drop the [sample plate reader file](https://github.com/Ganymede-Bio/website-docusaurus/raw/main/PlateReader.xlsx) into the "watch_folder" created in [step 3b](#step-3b-create-a-folder-to-monitor).  The agent will detect the file and upload it to the Ganymede Flow for processing.
 
 Any window with the environment open will display that the Flow has been initiated. Congratulations on creating your first Agent!
 

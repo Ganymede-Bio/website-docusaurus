@@ -1,0 +1,31 @@
+---
+id: SuggestedTags
+title: Suggested Tags
+displayed_sidebar: webUiSidebar
+---
+
+This page contains a list of potential tag types to use with captured files in your Ganymede environment to facilitate data organization and searchability.
+
+For more detail on how to add tags to your files, see the [Tagging Files](./Tags#tagging-files) page.
+
+For more detail on how to search for files using tags, see the [Searching for Files](./FileBrowser#finding-files) page.
+
+### Agent-Level Tag Types
+
+| Type | Description | Example |
+|------|-------------|---------|
+| Instrument | The name of the instrument type | AKTA Pure 25 L |
+| Instrument Type | Type / category of the instrument that's generating data | Chromatography System
+| Vendor | Manufacturer of Instrument | Cytiva |
+
+### Connection-Level Tag Types
+
+| Type | Description | Example |
+|------|-------------|---------|
+| Program/Function | The program function where the instrument is used, but the same across all connections of that agent | Analytical Dev |
+| User | The user name is listed in file | Callie Saren |
+| Unit of Account | The metadata (Sample ID, Plate ID, etc) for the file, if listed in file name or within file (can only pick one unit, recommend higher level unit) | Sample1234 |
+| Unit of Account Type | Depending on above, set type (sample, plate, etc.) | Sample |
+| Software | Tags instrument software based on file type | .mqd (MacsQuantify), .wsp (FlowJo) |
+| Instrument ID/Serial Number | The identifier of the specific instance that is connected | ID24292 |
+| Location | The lab location of the instrument | Building 4 |
