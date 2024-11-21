@@ -398,3 +398,4 @@ AKTA
 Cytiva
 searchability
 SuggestedTags
+Palantir
