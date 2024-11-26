@@ -10,12 +10,16 @@ displayed_sidebar: webUiSidebar
 
 Sync GCS bucket -\> S3 bucket
 
+Node attributes that begin with "src_" are used to specify the source Ganymede GCS bucket and
+the files to sync.  Node attributes that begin with "dest_" are used to specify the destination
+S3 bucket and the files to write.  The source bucket can be either the input or output bucket of the current run. The destination bucket is specified by the dest_s3_key attribute.
+
 ### Node Attributes
 
 - **src_input_or_output_bucket** : `str`
   - "input" or "output" for the Ganymede cloud storage bucket to sync from
 - **src_object_prefix** : `str`
-  - Prefix of data lake object(s) to write
+  - Prefix of Ganymede data lake object(s) to write
 - **src_all_or_current_run** : `str`
   - "all" or "current" - whether to sync all files or the files in the input or output bucket from the current run
 - **dest_node_name_in_path** : `bool`
