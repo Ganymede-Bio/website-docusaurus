@@ -42,7 +42,7 @@ module.exports = {
               {
                 type: 'doc',
                 id: 'app/agents/QuickstartBuildAgent',
-                label: 'Build an Agent / Configure Tags'
+                label: 'Build an Agent / Configure a Connection'
               },
               {
                 type: 'doc',
