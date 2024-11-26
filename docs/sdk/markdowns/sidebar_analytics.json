@@ -1,1 +1,1 @@
-{"type": "category", "label": "Analytics", "collapsed": true, "items": ["sdk/markdowns/fcs", "sdk/markdowns/msd", "sdk/markdowns/lc.cdf", "sdk/markdowns/lc.lc"]}
+{"type": "category", "label": "Analytics", "collapsed": true, "items": ["sdk/markdowns/fcs", "sdk/markdowns/msd", "sdk/markdowns/statistical_process_control", "sdk/markdowns/lc.cdf", "sdk/markdowns/lc.lc"]}

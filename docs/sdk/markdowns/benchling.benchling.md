@@ -73,6 +73,9 @@ Get schema by name
 &nbsp; &nbsp; &nbsp; &nbsp; Schema ID for specified schema  
 
 
+## `function` Benchling.is_http_429_error
+Check if the exception is a Benchling HTTP 429 (rate limit) error.
+
 ## `function` Benchling.create_or_update_custom_entity
   
 Creates custom entity in Benchling.&nbsp; &nbsp; If the entity does not exist, first create it.  
@@ -811,6 +814,33 @@ Archives assay results based on assay result schema and condition.
   
 `list[dict]`  
 &nbsp; &nbsp; &nbsp; &nbsp; List of assay results to archive  
+
+
+## `function` Benchling.get_notebook_entry_as_pdf
+  
+Fetch a notebook entry as a PDF by making a series of requests to the server.  
+  
+This function initiates an export task, then polls the task status until it succeeds.  
+It then downloads the resulting PDF and returns its contents.  
+  
+### Parameters  
+  
+**entry_id** : `str`  
+&nbsp; &nbsp; &nbsp; &nbsp; The ID of the notebook entry to export. Has the form 'etr_...'  
+**sleep_time_seconds** : `int, optional`  
+&nbsp; &nbsp; &nbsp; &nbsp; The number of seconds to wait between each attempt to check the task status, by default 5.  
+**max_attempts** : `int, optional`  
+&nbsp; &nbsp; &nbsp; &nbsp; The maximum number of attempts to check the task status, by default 10.  
+  
+### Returns  
+  
+`bytes`  
+&nbsp; &nbsp; &nbsp; &nbsp; The contents of the exported PDF.  
+  
+### Raises  
+  
+**HTTPError**  
+&nbsp; &nbsp; &nbsp; &nbsp; If any of the requests fail.  
 
 
 ## `class` SchemaError
