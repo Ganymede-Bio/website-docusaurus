@@ -100,12 +100,29 @@ query_sql = 'SELECT * FROM tbl WHERE flow_run_id = "{{flow_run_id}}";'
 result = g.retrieve_sql(query_sql)
 ```
 
+## `class` GanymedeException
+
+The **GanymedeException** class is a custom exception class that can be used to raise exceptions to attribute error type.
+
+```python
+from ganymede_sdk.flow_runtime import GanymedeException
+
+# available exception types are: Validation, Connection, Function
+raise GanymedeException('Only 1 replicate detected in sample; expected 3.', exception_type="Validation")
+```
+
+### Error Types
+
+- **Validation**: Schema validation errors. An example use case would be a Pandas DataFrame failing to validate against a Pandera schema.
+- **Connection**: Errors related to connecting to external services. Check for errors related to authentication, service availability, and access methods.
+- **Function**: Errors related to function logic. For example, a failed function call to a Python package would fall under this category.
+
 ## `function` compare_df_to_table
 
 *compare_df_to_table* allows users to compare the columns and schema on a Pandas DataFrame to a corresponding table in the Ganymede database.
 The function returns differences in column names and data types between the DataFrame and the table, and can be used to validate that the DataFrame matches the table schema before writing the DataFrame to the table.
 
-###  Parameters
+### Parameters
 - **ganymede_context** : `GanymedeContext`
     - Ganymede context to get run attributes
 - **df** : `pd.DataFrame`
