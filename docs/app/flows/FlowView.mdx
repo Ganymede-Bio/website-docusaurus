@@ -119,7 +119,7 @@ Logs for each flow step can be accessed by clicking on the corresponding colored
 
 ### Error Attribution
 
-Developers using the platform can specify error types and messages associated with failed nodes. These are displayed on the status tag in the Run History table. Below is an example code snippet that would be placed within a node to raise an error:
+Developers using the platform can specify error types and messages associated with failed nodes using the GanymedeException class. These are displayed on the status tag in the Run History table. Below is an example code snippet that would be placed within a node to raise an error:
 
 ```python
 from ganymede_sdk.flow_runtime import GanymedeException
@@ -128,8 +128,4 @@ from ganymede_sdk.flow_runtime import GanymedeException
 raise GanymedeException(message=”Peaks not detected in results”, exception_type=”Function”)
 ```
 
-#### Categories of Errors
-
-- **Validation**: Schema validation errors. An example use case would be a Pandas DataFrame failing to validate against a Pandera schema.
-- **Connection**: Errors related to connecting to external services. Check for errors related to authentication, service availability, and access methods.
-- **Function**: Errors related to function logic. For example, a failed function call to a Python package would fall under this category.
+More detail on error types can be found in the [GanymedeException section of the Ganymede SDK documentation](../../sdk/DataValidation#class-ganymedeexception).
