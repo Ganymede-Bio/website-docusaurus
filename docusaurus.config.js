@@ -32,6 +32,16 @@ module.exports = {
       },
     ],
     [
+      "@orama/plugin-docusaurus-v3",
+      {
+        cloud: {
+          indexId: "r7xcs2eyvybley4eufdvlvbx", // This is your index ID
+          oramaCloudAPIKey: process.env.ORAMACLOUD_PRIVATE_API_KEY, // This is your Private API key. Keep it safe!
+          deploy: "default"
+        },
+      },
+    ],
+    [
       '@docusaurus/plugin-client-redirects',
       {
         redirects: [
@@ -55,13 +65,6 @@ module.exports = {
     prism: {
       additionalLanguages: ['python', 'bash', 'powershell'],
       theme: prismThemes.nightOwl
-    },
-    algolia: {
-      appId: 'SMEM8QA2TD',
-      apiKey: 'd7fb51ca85e14d48eb21e1fd4e08c1f6',
-      indexName: 'ganymede',
-      contextualSearch: false,
-      optionalFilters: ['category:-releases'],
     },
     navbar: {
       title: 'Ganymede',
