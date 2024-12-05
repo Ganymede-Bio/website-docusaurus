@@ -244,15 +244,8 @@ You can save notebooks in a few ways:
 - Clicking the <SaveFilled className="button dark_gray_button"/>   button in the upper right hand corner of the notebook.
 - Typing `Cmd+S` (Mac) or `Ctrl+S` (Windows/Linux) to save the pipeline cell(s).
 - Selecting the _Kernel_ menu and then selecting _Save Commit and Deploy_.
-- In a cell, typing `save()` and then executing the cell.
 
 Executing any of these actions will lint the pipeline cell(s), and then commit and deploy the pipeline code to the workflow orchestrator.  A pop-up will box will appear for each of these actions; lint warnings/errors will be displayed in the initial pop-up, and commit confirmation will be displayed on the second pop-up.
-
-:::info custom commit message
-
-If you would like to submit a custom commit message, you can do so by typing `save(msg="Your custom commit message")` in a cell and executing it.
-
-:::
 
 :::info
 
