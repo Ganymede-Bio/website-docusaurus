@@ -402,3 +402,4 @@ Palantir
 GanymedeException
 FlowView
 useBaseURL
+DataExplorer
