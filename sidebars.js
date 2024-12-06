@@ -369,7 +369,7 @@ module.exports = {
       type: 'category',
       label: '2024',
       collapsed: false,
-      items: ['releases/202411', 'releases/202410', 'releases/202409', 'releases/202408', 'releases/202407', 'releases/202406', 'releases/202405', 'releases/202404', 'releases/202403', 'releases/202402', 'releases/202401']
+      items: ['releases/202412', 'releases/202411', 'releases/202410', 'releases/202409', 'releases/202408', 'releases/202407', 'releases/202406', 'releases/202405', 'releases/202404', 'releases/202403', 'releases/202402', 'releases/202401']
     },
     {
       type: 'category',
