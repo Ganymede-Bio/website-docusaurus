@@ -145,6 +145,7 @@ The _retrieve_files_ method allows you to retrieve files from Ganymede cloud sto
 
 - _param_ **file_names**: str | list[str] - The file(s) to retrieve.
 - _param_ **flow_input_or_output**: str, by default "input" - Either "input" or "output" - to reference whether to retrieve files that are inputs to Flows or outputs from Flow Nodes
+- _param_ **flow_name**: str | None, by default None - Flow name to filter files for, if input
 - _param_ **current_flow_flag**: bool, by default True - Filters for files associated with the current Flow
 - _param_ **run_id**: Optional[int], by default None - If set, filters for results with specified flow_run_id; if not specified, retrieve file(s) associated with most recent run ID
 - _param_ **use_cache_in_notebook**: bool, by default False - If set to True, retrieves files from local cache when in editor or analysis notebooks rather than querying Ganymede to expedite development.  Note that flow runs will not reference cached files.  Cache can be cleared by calling the clear_cache() function.
