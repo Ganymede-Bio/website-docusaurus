@@ -69,50 +69,6 @@ Treat this key as a password, as it provides access to the Ganymede environment.
 In order to allow Ganymede Flows to read and write to an S3 bucket, follow the steps below for each Ganymede environment that needs access to the bucket:
 
 1. Identify which S3 buckets you would like to connect to Ganymede
-2. Create a Policy that allows the desired access to the bucket(s), replacing `my-bucket` with the name of the bucket(s) you would like to connect to.
-
-   Example:
-
-    ```json
-      {
-          "Version": "2012-10-17",
-          "Statement": [
-              {
-                  "Sid": "ListObjectsInBucket",
-                  "Effect": "Allow",
-                  "Action": [
-                      "s3:ListBucket"
-                  ],
-                  "Resource": [
-                      "arn:aws:s3:::my-bucket"
-                  ]
-              },
-              {
-                  "Sid": "AllObjectActions",
-                  "Effect": "Allow",
-                  "Action": "s3:*Object",
-                  "Resource": [
-                      "arn:aws:s3:::my-bucket/*"
-                  ]
-              }
-          ]
-      }
-    ```
-
-3. Record the identity number of the Ganymede Environment
-  - Navigate to the Environment Settings page
-  - Select the Integration tab
-  - Record the number in the `accounts.google.com:aud` field
-
-4. Create the Role in AWS
-  - In the IAM console, select Roles > Create Role
-  - Select 'Web Identity'
-  - Select 'Google' as the Identity Provider
-  - Enter the identity number from above as the audience
-  - Press Next
-  - Select the Policy you created above as the permissions for the Role
-  - Press Next 
-  - Name the role something like 'ganymede-storage-access'
-  - Press Create Role
-
-5. Add the Role ARN as an [environment secret in the Ganymede environment](./AdminControls.mdx#secrets-panel) named _aws_s3_role_arn_.
+2. Navigate to the Environment Settings page, Integration tab, and copy the AWS Trust Policy JSON.
+3. Create a role in AWS with the contents of the AWS Trust Policy JSON.
+4. Add the Role ARN as an [environment secret in the Ganymede environment](./AdminControls.mdx#secrets-panel) named _aws_s3_role_arn_.
