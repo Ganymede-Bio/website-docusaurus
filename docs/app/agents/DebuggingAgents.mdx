@@ -67,30 +67,35 @@ A Windows batch script, such as the one shown below, saved to a .bat file:
 @ECHO OFF
 
 :: Agent name (used for defining install path) defined by passed argument:
-set agentname=%1
+set connectionname=%~1
+set watchdir=%~2
+set installpath=%~3
 
-:: Set install path assuming agentname was passed:
-set installpath=C:\Program Files\Ganymede\%agentname%\
+ECHO connection_name: %connectionname%
+ECHO watch_dir: %watchdir%
 
-:: If agentname was not passed, remove double filesep:
-IF "%~1" == "" (
-	set installpath=C:\Program Files\Ganymede\
-)
+:: Default value for install_path if not passed:
+IF "%~3" == "" (set installpath=C:\Program Files\Ganymede)
 ECHO Step 1: Creating install path: %installpath%
-mkdir "%installpath%"
+if not exist "%installpath%" mkdir "%installpath%"
 
 ECHO Step 2: Copying exe file
 :: Note: %~dp0 is the path of the script (needed when running as admin)
 :: Note: /v verifies the copied file, /y forces a replace if file with same name exists
 copy "%~dp0agent.exe" "%installpath%" /v /y
 
-ECHO Step 3: Copying config file
+ECHO Step 3: Adding user-provided variables to config file
+echo name: %connectionname%>>"%~dp0connection.yaml"
+echo variables:>>"%~dp0connection.yaml"
+echo   input_path: %watchdir%>>"%~dp0connection.yaml"
+
+ECHO Step 4: Copying config file
 copy "%~dp0connection.yaml" "%installpath%" /v /y
 
-ECHO Step 4: Running installer
-start "%installpath%" "%installpath%agent.exe"
+ECHO Step 5: Running installer
+start "%installpath%" "%installpath%\agent.exe"
 :: Uncomment next line for testing purposes if needed
-:: PAUSE
+PAUSE
 ```
 
 ##### Execution steps
