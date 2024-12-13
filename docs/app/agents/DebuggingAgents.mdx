@@ -98,6 +98,21 @@ start "%installpath%" "%installpath%\agent.exe"
 PAUSE
 ```
 
+An example for the configuration file (YAML) used with headless install is shown below:
+
+```yaml
+environment: env-prod
+tagParams:
+- displayValue: Microlab STAR 1
+  tagId: null
+  tagTypeId: instrument
+  url: null
+- displayValue: Hamilton
+  tagId: null
+  tagTypeId: vendor
+  url: null
+```
+
 ##### Execution steps
 
 1. Rename agent installer “agent.exe”
