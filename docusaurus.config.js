@@ -53,7 +53,7 @@ module.exports = {
   themes: ["docusaurus-theme-openapi-docs", '@docusaurus/theme-mermaid'], 
   themeConfig: {
     prism: {
-      additionalLanguages: ['python', 'bash', 'powershell'],
+      additionalLanguages: ['python', 'bash', 'powershell', 'yaml'],
       theme: prismThemes.nightOwl
     },
     algolia: {
