@@ -245,18 +245,19 @@ You can save notebooks in a few ways:
 - Typing `Cmd+S` (Mac) or `Ctrl+S` (Windows/Linux) to save the pipeline cell(s).
 - Selecting the _Kernel_ menu and then selecting _Save Commit and Deploy_.
 
-Executing any of these actions will lint the pipeline cell(s), and then commit and deploy the pipeline code to the workflow orchestrator.  A pop-up will box will appear for each of these actions; lint warnings/errors will be displayed in the initial pop-up, and commit confirmation will be displayed on the second pop-up.
-
-:::info
-
-A more detailed view of lint issues in pipeline cells can be observed by running `lint()` in a notebook cell.
+Executing any of these actions will lint the pipeline cell(s).  If the code passes linting, the following pop-up will be shown, allowing you to customize a commit message, and pipeline code cells will be saved and deployed.
 
 <div style={{textAlign: 'center'}}>
-  <img width="800" alt="Full lint output" src="https://ganymede-bio.mo.cloudinary.net/apiServer/Example_Lint_Output_20240905.png"
+  <img width="400" alt="Full lint output" src="https://ganymede-bio.mo.cloudinary.net/apiServer/CommitMessageLintSuccess_20241213.png"
   />
 </div>
 
-:::
+If the code does not pass linting, the following pop-up will be shown.  You can click on the **Cancel** button to return to the notebook and correct the errors, or **Save and Commit** to commit the code.
+
+<div style={{textAlign: 'center'}}>
+  <img width="400" alt="Full lint output" src="https://ganymede-bio.mo.cloudinary.net/apiServer/CommitMessageLintFailure_20241213.png"
+  />
+</div>
 
 :::note
 
