@@ -3,6 +3,25 @@ id: 202412
 title: December 2024
 displayed_sidebar: releaseSideBar
 ---
+### December 12 2024
+
+**Features**
+**UI** Commits to code can now have a commit message
+  - A pop-up window will appear when saving in a notebook editor
+  - These messages can be captured for both Flow and Agent code changes
+  - If there are linting errors, you can click on Cancel to fix the errors, or on Save and Commit to continue with the commit.
+  - Supplying a message is optional
+
+**Improvements**
+- **UI**: File page loading performance with filters applied has been improved
+- **UI**: Notification times should match the timing of the flow run more closely
+
+**Bug Fixes**
+- **UI**: Tags that include slash characters are now handled properly
+- **UI**: The Tag Activity view is displayed correctly when there are very few tag values
+- **Agents**: Disabling connection emails via the UI is now applied correctly
+- **Applications**: Application session modals are now handled properly when pausing a session
+
 ### December 05 2024
 
 **Features**
@@ -14,6 +33,7 @@ displayed_sidebar: releaseSideBar
 **Bug Fixes**
 - **Admin**: Secret names are now validated to prevent special characters
 - **Agents**: Fixed a bug preventing older Agents from updating to the latest version
+- **Agents**: Fixed an issue where multiple status change emails were sent concurrently
 - **Virtualization**: Fixed bug associated with typing in the Add Files dialog box
 - **Flows**: Cleaned up the user-defined code template associated with Trigger Python nodes
 
