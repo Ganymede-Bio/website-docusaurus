@@ -327,6 +327,7 @@ module.exports = {
         {
           type: 'doc',
           id: 'sdk/DataValidation',
+          label: 'Data Validation / Schema Enforcement'
         },
         {
           type: 'doc',
