@@ -5,6 +5,8 @@ displayed_sidebar: webUiSidebar
 toc_max_heading_level: 4
 ---
 
+import { EditOutlined } from "@ant-design/icons";
+
 ### Tips
 
 #### Including headers, text, dividers, and tabs to dashboard
@@ -23,11 +25,11 @@ dashboards with unique links that will point to that tab in the dashboard.
 The images below display a common use case for dashboards during development - as a means for tracking outstanding tasks to perform.
 
 <div style={{textAlign: 'center'}}>
-  <img alt="Ganymede hero image" 
+  <img alt="Edit dashboard" 
       src="https://ganymede-bio.mo.cloudinary.net/apiServer/DashboardToDoEdit_20240617.png"
   />
 
-  <img alt="Ganymede hero image" 
+  <img alt="View dashboard" 
       src="https://ganymede-bio.mo.cloudinary.net/apiServer/DashboardToDoView_20240617.png"
   />
 </div>
@@ -39,7 +41,54 @@ underscores. However, you can change the label shown in tables with something mo
 as adding spaces, units, etc in the `Edit dataset` from `Chart Source`. In the `Columns` tab, click
 the dropdown for the variable you want to add a label to and fill in the LABEL field. For an
 example, if your variable is `my_variable` you can set the label to be `My Variable (units)` and
-this would automically set the column name in your table chart types to this new label.
+this would automatically set the column name in your table chart types to this new label.
+
+#### Customizing chart colors
+
+Chart colors can be customized at the dashboard level, or at the label level for dashboards.  To customize dashboard colors, select
+the Dashboards panel in the top bar, navigate to your dashboard row, hover over the `Actions` column, and
+click on the <div className="button darkblue_inverted_button"><EditOutlined /></div> button as shown below:
+
+<div style={{textAlign: 'center'}}>
+  <img alt="Edit dashboard" 
+      src="https://ganymede-bio.mo.cloudinary.net/apiServer/EditDashboardSuperset_20241220.png"
+  />
+</div>
+&nbsp;
+
+Doing so opens up a Dashboard properties window, which contains a Color Scheme dropdown for specifying dashboard colors:
+
+<div style={{textAlign: 'center'}}>
+  <img alt="Dashboard properties" 
+      src="https://ganymede-bio.mo.cloudinary.net/apiServer/DashboardProperties_20241220.png"
+  />
+</div>
+&nbsp;
+
+##### Customizing label colors
+
+Within the Dashboard properties window, expand the Advanced section.  This opens up a JSON editor, where you can specify 
+label colors by hex code.  An example specification is shown below:
+
+```json
+{
+  "label_colors": {
+    "error": "#B22222",
+    "running": "#01FF70",
+    "success": "#2ECC40",
+    "warning": "#FFFF00",
+    "caution": "#FFA500"
+  }
+}
+```
+
+:::info
+
+It's important to ensure that the colors can be readily distinguished.  As a starting point, you can use a [color palette generator](https://sashamaps.net/docs/resources/20-colors/) 
+to generate a set of colors that are visually distinct.
+
+:::
+
 
 ### Troubleshooting
 
