@@ -60,8 +60,7 @@ The following files are needed:
     - inferredData (any)
     - startTime
     - Version
-
-A Windows batch script, such as the one shown below, saved to a .bat file:
+- A Windows batch script, such as the one shown below, saved to a .bat file:
 
 ```shell
 @ECHO OFF
@@ -103,17 +102,17 @@ An example for the configuration file (YAML) used with headless install is shown
 ```yaml
 environment: env-prod
 tagParams:
-- displayValue: Microlab STAR 1
-  tagId: null
-  tagTypeId: instrument
-  url: null
-- displayValue: Hamilton
-  tagId: null
-  tagTypeId: vendor
-  url: null
+  - displayValue: Microlab STAR 1
+    tagId: null
+    tagTypeId: instrument
+    url: null
+  - displayValue: Hamilton
+    tagId: null
+    tagTypeId: vendor
+    url: null
 ```
 
-##### Execution steps
+##### Execution Steps
 
 1. Rename agent installer “agent.exe”
 1. Name configuration file “connection.yaml” (if it has a different name)
@@ -134,6 +133,92 @@ Once set, invoke the task using `schtasks`:
 
 ```powershell
 schtasks /run /tn "TaskName"
+```
+
+#### Q: Can Windows Agents be installed via a Powershell script?
+
+A: Yes - Agent installers (v4.10+) can be installed via a Powershell script.
+
+##### Requirements
+
+- Agent installer (EXE, not MSI) with a minimum core Agent version of 4.10
+- A Powershell script (.ps1 file), such as the one shown below:
+
+```powershell
+param (
+    [string]$environment,
+    [string]$connectionName,
+    [array]$tagParams,
+    [string]$installPath
+)
+
+# Get install path or use default
+if ($installPath -eq '') {
+    $installPath = "C:\Program Files\Ganymede"
+}
+Write-Output "Will install to $installPath"
+
+# Get connection name or use computer name as default
+if ($connectionName -eq '') {
+    $connectionName = $env:COMPUTERNAME
+}
+Write-Output "Connection will be named $connectionName"
+
+# Define the content of the YAML file
+$content = @"
+environment: $environment
+name: $connectionName
+tagParams:`n
+"@
+
+foreach ($tag in $tagParams) {
+    $content += "  - tagTypeId: $($tag.tagTypeId)`n    displayValue: $($tag.displayValue)`n"
+}
+
+# Save the content to connection.yaml in the same folder
+$filePath = Join-Path -Path $PSScriptRoot -ChildPath "connection.yaml"
+$content | Out-File -FilePath $filePath -Encoding utf8
+Write-Output "File 'connection.yaml' created successfully at $filePath"
+
+# Create the install directory if it doesn't exist
+New-Item -Path $installPath -Type "directory" -Force >$null
+
+# Copy the connection.yaml to the install directory
+Copy-Item -Path $PSScriptRoot\connection.yaml -Destination $installPath -Force
+Write-Output "File 'connection.yaml' copied to $installPath"
+
+# Copy the agent exe to the install directory
+$agentFileName = Get-ChildItem -Path $PSScriptRoot -Filter *.exe |Select -First 1
+Copy-Item -Path $PSScriptRoot\$agentFileName -Destination $installPath -Force
+Write-Output "File $agentFileName copied to $installPath"
+
+# Run agent.exe and wait for it to finish
+$agentInstallerPath = Join-Path -Path $installPath -ChildPath $agentFileName
+Start-Process -FilePath $agentInstallerPath -Wait
+
+Write-Output "$agentFileName has finished running"
+```
+
+##### Execution Steps
+
+1. Ensure PowerShell is installed on your system.
+1. Ensure the agent executable (.exe) and script file (.ps1) are in the same directory.
+1. From a Powershell terminal, navigate to this directory.
+1. Run the script using the following command:
+
+```powershell
+.\<script_file>.ps1 -environment <Environment> -connectionName <ConnectionName> -tagParams <TagsArray> -installPath <InstallPath>
+```
+
+- Parameters are defined as follows:
+  - **-environment** (string, required): Specifies the full environment name to install the agent in (e.g., development, staging, production).
+  - **-tagParams** (array, required): An array of tags to include in the YAML file. Each tag should be an object with tagTypeId and displayValue properties.
+  - **-connectionName** (string, optional): Sets the name for the connection. Defaults to the computer name if not provided.
+  - **-installPath** (string, optional): Path to the installation directory. Defaults to C:\Program Files\Ganymede if not specified.
+- Example:
+
+```powershell
+.\agent_installer_script.ps1 -environment "env-prod" -connectionName "Hamilton PC 6" -tagParams @(@{tagTypeId="instrument"; displayValue="H6"}, @{tagTypeId="site"; displayValue="New York"}) -installPath "C:\Install\Agent\Here"
 ```
 
 #### Q: Are there any command-line scripts (e.g. - .vbs or .bat) that need to run for Windows Agents to work?
@@ -264,4 +349,3 @@ sc delete GanymedeAgent-<agent_name>
 ```
 
 where _agent_name_ is the name of the Agent Connection.
-
