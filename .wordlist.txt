@@ -410,3 +410,7 @@ walkthroughs
 PlateReader
 QuickstartBuildFlow
 DashboardTips
+displayValue
+tagTypeId
+connectionName
+installPath
