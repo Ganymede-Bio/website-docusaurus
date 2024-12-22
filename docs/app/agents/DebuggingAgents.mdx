@@ -2,12 +2,12 @@
 id: DebuggingAgents
 title: Agent FAQ and Troubleshooting
 displayed_sidebar: webUiSidebar
-toc_max_heading_level: 4
+toc_max_heading_level: 5
 ---
 
 ## FAQ
 
-### Q: How do I exclude specific files from a watch folder from being uploaded for an agent that uploads files and runs flows?
+#### Q: How do I exclude specific files from a watch folder from being uploaded for an agent that uploads files and runs flows?
 
 A: To exclude specific files from being uploaded, you can use the `fp` function to specify which files should be included. For example, to exclude files that contain the string "exclude" in the filename, you can use the following code:
 
@@ -23,15 +23,15 @@ def fp_res(x: str):
 return fp_res
 ```
 
-### Q: How do I capture a file that is periodically overwritten by an instrument?
+#### Q: How do I capture a file that is periodically overwritten by an instrument?
 
 A: File watcher Agents automatically capture modified files, which they then upload for processing in flows. You can implement logic within the flow or agent to handle the intended behavior, depending on whether the instrument appends to or overwrites the file.
 
-### Q: Can I access environment secrets from the Agent?
+#### Q: Can I access environment secrets from the Agent?
 
 A: Yes, environment secrets can be accessed from the Agent by using the [get_secret](../../sdk/GanymedeClass#method-get_secret) method.
 
-### Q: Can I access an environment variable from a cron Agent? For example, can I access the `input_path` variable configured upon installation?
+#### Q: Can I access an environment variable from a cron Agent? For example, can I access the `input_path` variable configured upon installation?
 
 A: Yes, environment variables can be accessed from a cron Agent through the `kwargs` dictionary. For example, to access the `input_path` variable, you can use the following code:
 
@@ -41,13 +41,13 @@ A: Yes, environment variables can be accessed from a cron Agent through the `kwa
 watch_directory = Path(kwargs.get("vars", {}).get("input_path", DEFAULT_PATH))
 ```
 
-### Q: Can Windows Agents be installed headlessly?
+#### Q: Can Windows Agents be installed headlessly?
 
 A: Yes - Agent installers (v4.10+) can be installed headlessly, either with a [Powershell script](#using-a-powershell-script) or a [Windows batch script](#using-a-batch-script).
 
-#### Using a Powershell Script
+##### Using a Powershell Script
 
-##### Prerequisites
+###### Prerequisites
 
 - Agent installer (EXE, not MSI) with a minimum core Agent version of 4.10
 - A Powershell script (.ps1 file), such as the one shown below:
@@ -108,7 +108,7 @@ Start-Process -FilePath $agentInstallerPath -Wait
 Write-Output "$agentFileName has finished running"
 ```
 
-##### Steps for executing headless installation script
+###### Steps for executing headless installation script
 
 1. Ensure PowerShell is installed on your system.
 1. Ensure the agent executable (.exe) and script file (.ps1) are in the same directory.
@@ -125,15 +125,15 @@ Parameters are defined as follows:
 - **-connectionName** (string, optional): Sets the name for the connection. Defaults to the computer name if not provided.
 - **-installPath** (string, optional): Path to the installation directory. Defaults to C:\Program Files\Ganymede if not specified.
 
-##### Example
+###### Example
 
 ```powershell
 .\agent_installer_script.ps1 -environment "env-prod" -connectionName "Hamilton PC 6" -tagParams @(@{tagTypeId="instrument"; displayValue="H6"}, @{tagTypeId="site"; displayValue="New York"}) -installPath "C:\Install\Agent\Here"
 ```
 
-#### Using a Batch Script
+##### Using a Batch Script
 
-##### Prerequisites
+###### Prerequisites
 
 - Agent installer (EXE, not MSI) with a minimum core Agent version of 4.10
 - Configuration file (YAML); examples of this can be found in the directory specified by the installer when not installed headlessly. Start with an existing YAML configuration and modify as follows:
@@ -199,7 +199,7 @@ tagParams:
     url: null
 ```
 
-##### Steps for executing headless installation script
+###### Steps for executing headless installation script
 
 1. Rename agent installer “agent.exe”
 1. Name configuration file “connection.yaml” (if it has a different name)
@@ -222,11 +222,11 @@ Once set, invoke the task using `schtasks`:
 schtasks /run /tn "TaskName"
 ```
 
-### Q: Are there any command-line scripts (e.g. - .vbs or .bat) that need to run for Windows Agents to work?
+#### Q: Are there any command-line scripts (e.g. - .vbs or .bat) that need to run for Windows Agents to work?
 
 A: No, there are no command-line scripts that need to execute for the Windows Agent.
 
-### Q: Are there any known application dependencies or pre-requisites for the Windows Agent (e.g. - .NET, KBs, Redist)?
+#### Q: Are there any known application dependencies or pre-requisites for the Windows Agent (e.g. - .NET, KBs, Redist)?
 
 A: No, the full set of Agent requirements can be found on the [Agent System Requirements page](../configuration/AgentSystemRequirements.mdx).
 
