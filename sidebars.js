@@ -70,12 +70,7 @@ module.exports = {
                 id: 'app/flows/NotebookTips',
                 label: 'Notebook Tips and Tricks'
               },
-              {
-                type: 'doc',
-                id: 'app/flows/TroubleshootingFlows',
-                label: 'Agent FAQ and Troubleshooting'
-              }
-              
+              'app/flows/TroubleshootingFlows'
               ],
           },
           {
@@ -148,7 +143,7 @@ module.exports = {
               {
                 type: 'doc',
                 id: 'app/agents/DebuggingAgents',
-                label: 'Troubleshooting Agents & FAQ'
+                label: 'Agent FAQ and Troubleshooting'
               },
               {
                 type: 'doc',
