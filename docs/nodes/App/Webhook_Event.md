@@ -13,10 +13,6 @@ displayed_sidebar: webUiSidebar
 - **input_filter_path**
   - Input [JSONPath](https://jsonpath.com) used for applying filtering logic
 
-### Notes
-
-Webhook secrets will need to be configured prior to usage; please reach out to [Ganymede support](../../app/Support) to configure secrets.
-
 ## User-Defined Python
 
 Get raw event from webhook and store in table or file for further processing
@@ -30,4 +26,3 @@ Get raw event from webhook and store in table or file for further processing
 
 `NodeReturn`
   Object containing data to store in data lake and/or file storage.
-

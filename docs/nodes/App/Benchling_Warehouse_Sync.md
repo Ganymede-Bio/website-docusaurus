@@ -52,7 +52,7 @@ Ganymede.
 ### Parameters
 
 - **ganymede_context** : `GanymedeContext`
-  - Ganymede context variable, which stores flow run metadata
+    - Ganymede context variable, which stores flow run metadata
 
 ### Returns
 

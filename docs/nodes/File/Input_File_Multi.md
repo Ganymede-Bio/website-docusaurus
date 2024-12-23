@@ -31,9 +31,9 @@ Processes file data for saving in cloud storage
 ### Parameters
 
 - **file_data** : `dict[str, bytes]`
-  - Bytes object to process, indexed by filename
+    - Bytes object to process, indexed by filename
 - **ganymede_context** : `GanymedeContext`
-  - Ganymede context variable, which stores flow run metadata
+    - Ganymede context variable, which stores flow run metadata
 
 ### Returns
 

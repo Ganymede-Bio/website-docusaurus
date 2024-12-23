@@ -27,7 +27,6 @@ the specified eLabNext page.
 ### Notes
 
 Prior to usage, the following secrets must be configured in your Ganymede environment:
-
 - **elabnext_base_url**: eLabNext Base URL
 - **elabnext_user**: eLabNext Username
 - **elabnext_pass**: eLabNext Password
@@ -43,15 +42,15 @@ Example demonstrating submission of user-defined SQL query into eLabNext
 ### Parameters
 
 - **df_sql_result** : `pd.DataFrame | list[pd.DataFrame]`
-  - Table(s) to retrieve from data lake
+    - Table(s) to retrieve from data lake
 - **data_input** : `dict[str, bytes]`
-  - Objects to retrieve from cloud storage
+    - Objects to retrieve from cloud storage
 - **base_url** : `str`
-  - Base URL for eLabNext to retrieve data from / post data to
+    - Base URL for eLabNext to retrieve data from / post data to
 - **token** : `str`
-  - token used for API access
+    - token used for API access
 - **ganymede_context** : `GanymedeContext`
-  - Ganymede context variable, which stores flow run metadata
+    - Ganymede context variable, which stores flow run metadata
 
 ### Returns
 

@@ -28,9 +28,9 @@ Function to process LC file data
 ### Parameters
 
 - **lc_file_paths** : `list[str]`
-  - Paths to LC files to be read
+    - Paths to LC files to be read
 - **ganymede_context** : `GanymedeContext`
-  - Ganymede context variable, which stores flow run metadata
+    - Ganymede context variable, which stores flow run metadata
 
 ### Returns
 

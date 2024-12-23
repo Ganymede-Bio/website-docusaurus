@@ -13,7 +13,7 @@ datalake table if it already exists, otherwise create a new one.
 
 ### Node Attributes
 
-- **table_name: str**
+- **table_name**
   - The new or existing table name in the datalake
-- **storage_regex: str**
+- **storage_regex**
   - Regex to identify parquet files

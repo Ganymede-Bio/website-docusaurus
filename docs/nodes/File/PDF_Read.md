@@ -32,9 +32,9 @@ data tables stored in the data lake
 ### Parameters
 
 - **pdf_file** : `dict[str, BytesIO]`
-  - pdf files, indexed by file name
+    - pdf files, indexed by file name
 - **ganymede_context** : `GanymedeContext`
-  - Ganymede context variable, which stores flow run metadata
+    - Ganymede context variable, which stores flow run metadata
 
 ### Returns
 
