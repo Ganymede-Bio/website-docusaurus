@@ -37,7 +37,7 @@ The table below provides a list of available Nodes, along with details on whethe
 | Analysis   | Trigger_Python            | Table(s) and/or File(s) | FlowInputs               | True          | False      |
 | App        | APINode                   | API                     | NodeReturn               | True          | False      |
 | App        | Airtable_Export           | Table                   | API                      | True          | False      |
-| App        | Airtable_Import           | API                     | NodeReturn               | False         | False      |
+| App        | Airtable_Import           | API                     | NodeReturn               | True          | False      |
 | App        | Azure_Query               | Table                   | NodeReturn               | True          | False      |
 | App        | Azure_Read                | API                     | FileAny                  | False         | False      |
 | App        | Azure_Read_Multi          | API                     | FileAny                  | False         | True       |
@@ -68,7 +68,6 @@ The table below provides a list of available Nodes, along with details on whethe
 | File       | Excel_Read                | FileExcel               | NodeReturn               | True          | False      |
 | File       | Excel_Read_Multi          | Set[FileExcel]          | NodeReturn               | True          | True       |
 | File       | Excel_Write               | Table(s)                | NodeReturn               | True          | False      |
-| File       | FCS_Extract_Load          | FileFCS                 | NodeReturn               | True          | False      |
 | File       | HDF5_Read                 | FileHDF5                | NodeReturn               | True          | False      |
 | File       | Image_Read                | FileImage               | NodeReturn               | True          | False      |
 | File       | Image_Read_Multi          | Set[FileImage]          | NodeReturn               | True          | True       |
@@ -271,7 +270,6 @@ The _execute_ function may call classes and functions found within the User-Defi
 | File       | Excel_Read                | Read Excel spreadsheet                                                       |
 | File       | Excel_Read_Multi          | Read Excel spreadsheets                                                      |
 | File       | Excel_Write               | Write Excel spreadsheet                                                      |
-| File       | FCS_Extract_Load          | Load FCS file to data lake                                                   |
 | File       | HDF5_Read                 | Read HDF5 data                                                               |
 | File       | Image_Read                | Process image data; store processed images to data store                     |
 | File       | Image_Read_Multi          | Process image data for multiple images; store processed images to data store |

@@ -28,9 +28,9 @@ Function to process LCMS file data
 ### Parameters
 
 - **lcms_file_paths** : `list[str]`
-  - Paths to LCMS files to be read
+    - Paths to LCMS files to be read
 - **ganymede_context** : `GanymedeContext`
-  - Ganymede context variable, which stores flow run metadata
+    - Ganymede context variable, which stores flow run metadata
 
 ### Returns
 

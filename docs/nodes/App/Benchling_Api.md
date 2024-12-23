@@ -25,10 +25,9 @@ in the relevant Benchling tenant.
 
 Prior to usage, the secrets below must be configured in your Ganymede environment.  More information
 on acquiring these credentials can be found [here](https://docs.benchling.com/docs/authentication).
-
 - **benchling_url**: URL for Benchling tenant; has form https://\<tenant\>.benchling.com
-- **benchling_app_client_id**: Client_ID
-- **benchling_client_secret**: Client_Secret
+- **benchling_app_client_id**: Client ID for Benchling application
+- **benchling_client_secret**: Client Secret for Benchling application
 
 Secrets can be configured by clicking on your username in the upper-right hand of the Ganymede
 application, then selecting Environment Settings and navigating to the Secrets tab.  If you need
@@ -44,9 +43,9 @@ conjunction with the Input_Param node.
 ### Parameters
 
 - **benchling_context** : `BenchlingContext`
-  - Benchling context variable, which stores Benchling connection information
+    - Benchling context variable, which stores Benchling connection information
 - **ganymede_context** : `GanymedeContext`
-  - Ganymede context variable, which stores flow run metadata
+    - Ganymede context variable, which stores flow run metadata
 
 ### Returns
 

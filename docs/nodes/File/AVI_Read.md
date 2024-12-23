@@ -34,11 +34,11 @@ data tables stored in the data lake
 ### Parameters
 
 - **avi_file** : `dict[str, BytesIO]`
-  - avi files, indexed by file name
+    - avi files, indexed by file name
 - **df_sql_result** : `pd.DataFrame | list[pd.DataFrame]`
-  - Table(s) or list of tables retrieved from user-defined SQL query
+    - Table(s) or list of tables retrieved from user-defined SQL query
 - **ganymede_context** : `GanymedeContext`
-  - Ganymede context variable, which stores flow run metadata
+    - Ganymede context variable, which stores flow run metadata
 
 ### Returns
 

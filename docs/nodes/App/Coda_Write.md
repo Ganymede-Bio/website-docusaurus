@@ -17,7 +17,6 @@ the specified Coda.io page.
 ### Notes
 
 Prior to usage, the following secrets must be configured in your Ganymede environment:
-
 - **coda_api_key**: Coda API Key
 
 Secrets can be configured by clicking on your username in the upper-right hand of the Ganymede
@@ -32,9 +31,9 @@ are populated, with the doc_id from the generated document returned.
 ### Parameters
 
 - **df_sql_result** : `pd.DataFrame | list[pd.DataFrame]`
-  - Table(s) to retrieve from data lake
+    - Table(s) to retrieve from data lake
 - **ganymede_context** : `GanymedeContext`
-  - Ganymede context variable, which stores flow run metadata
+    - Ganymede context variable, which stores flow run metadata
 
 ### Returns
 

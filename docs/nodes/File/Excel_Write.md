@@ -29,11 +29,11 @@ Write table(s) from SQL query and stores Excel sheet in cloud storage.
 ### Parameters
 
 - **df_sql_result** : `pd.DataFrame | list[pd.DataFrame], optional`
-  - Table(s) or list of tables retrieved from user-defined SQL query
+    - Table(s) or list of tables retrieved from user-defined SQL query
 - **output_spreadsheet_name** : `str`
-  - Name of the output spreadsheet
+    - Name of the output spreadsheet
 - **ganymede_context** : `GanymedeContext`
-  - Ganymede context variable, which stores flow run metadata
+    - Ganymede context variable, which stores flow run metadata
 
 ### Returns
 

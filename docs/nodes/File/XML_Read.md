@@ -29,9 +29,9 @@ Parse XML file into table for storage in data lake
 ### Parameters
 
 - **xml_file** : `BytesIO`
-  - Contents of input XML file
+    - Contents of input XML file
 - **ganymede_context** : `GanymedeContext`
-  - Ganymede context variable, which stores flow run metadata
+    - Ganymede context variable, which stores flow run metadata
 
 ### Returns
 
