@@ -454,6 +454,10 @@ For Agents that reference local directories, the monitored directory is specifie
 # If the directory is in a network drive, be sure to use the UNC path or IP like so:
 -v "input_path=//server/share/path"
 # where `server` is the name of the server and `share` is the name of the shared folder
+
+# When using administrative shares, the path should be specified with the $ symbol at the end of the drive letter:
+-v "input_path=\\computername\d$\path\to\folder"
+
 ```
 
 More generally, Variables and Labels can be flexibly used to control Connection behavior.  Additional Variables and Labels can be defined as show in the example below:
