@@ -167,10 +167,11 @@ in the plot.
 
 This could mean that superset is having trouble recognizing your time series variable as a time stamp
 or datetime variable. You can try creating a calculated variable in the `Edit dataset` from `Chart
-Source` and do
+Source`; for example, if your time variable is in epoch time, then you can convert it to a datetime variable with
 
 ```sql
-CAST(my_time_variable AS TIMESTAMP)
+-- use TIMESTAMP_SECONDS or TIMESTAMP_MICROS if your time is in seconds or microseconds
+DATETIME(TIMESTAMP_MILLIS(my_time_variable))
 ```
 
-Then set the variable type to DATETIME in the DATA TYPE section.
+And then ensure that the variable type to DATETIME in the DATA TYPE section.
