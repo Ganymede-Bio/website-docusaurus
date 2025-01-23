@@ -4,15 +4,14 @@ title: "Connection"
 description: ""
 sidebar_label: "Connection"
 hide_title: true
+hide_table_of_contents: true
 schema: true
+sample: {"id":"string","name":"string","state":"Live","version":"string","startTime":"string","agentId":"string","environment":"string","tags":[{"id":"string","type":"string","value":"string"}],"labels":["string"]}
 custom_edit_url: null
 ---
 
-import DiscriminatorTabs from "@theme/DiscriminatorTabs";
-import SchemaItem from "@theme/SchemaItem";
-import SchemaTabs from "@theme/SchemaTabs";
+import Schema from "@theme/Schema";
 import Heading from "@theme/Heading";
-import TabItem from "@theme/TabItem";
 
 <Heading
   as={"h1"}
@@ -25,148 +24,10 @@ import TabItem from "@theme/TabItem";
 
 
 
-<ul>
-  <SchemaItem
-    collapsible={false}
-    name={"id"}
-    required={true}
-    schemaName={"string"}
-    qualifierMessage={undefined}
-    schema={{"type":"string"}}
-  >
-    
-  </SchemaItem><SchemaItem
-    collapsible={false}
-    name={"name"}
-    required={true}
-    schemaName={"string"}
-    qualifierMessage={undefined}
-    schema={{"type":"string"}}
-  >
-    
-  </SchemaItem><SchemaItem
-    collapsible={false}
-    name={"state"}
-    required={true}
-    schemaName={"ConnectionState (string)"}
-    qualifierMessage={"**Possible values:** [`Live`, `Updating`, `Disconnected`, `Shutdown`, `Deprecated`]"}
-    schema={{"type":"string","enum":["Live","Updating","Disconnected","Shutdown","Deprecated"],"title":"ConnectionState"}}
-  >
-    
-  </SchemaItem><SchemaItem
-    collapsible={false}
-    name={"version"}
-    required={true}
-    schemaName={"string"}
-    qualifierMessage={undefined}
-    schema={{"type":"string"}}
-  >
-    
-  </SchemaItem><SchemaItem
-    collapsible={false}
-    name={"startTime"}
-    required={true}
-    schemaName={"string"}
-    qualifierMessage={undefined}
-    schema={{"type":"string"}}
-  >
-    
-  </SchemaItem><SchemaItem
-    collapsible={false}
-    name={"agentId"}
-    required={true}
-    schemaName={"string"}
-    qualifierMessage={undefined}
-    schema={{"type":"string"}}
-  >
-    
-  </SchemaItem><SchemaItem
-    collapsible={false}
-    name={"environment"}
-    required={true}
-    schemaName={"string"}
-    qualifierMessage={undefined}
-    schema={{"type":"string"}}
-  >
-    
-  </SchemaItem><SchemaItem
-    collapsible={true}
-    className={"schemaItem"}
-  >
-    <details
-      style={{}}
-      className={"openapi-markdown__details"}
-    >
-      <summary
-        style={{}}
-      >
-        <span
-          className={"openapi-schema__container"}
-        >
-          <strong
-            className={"openapi-schema__property"}
-          >
-            tags
-          </strong><span
-            className={"openapi-schema__name"}
-          >
-             object[]
-          </span>
-        </span>
-      </summary><div
-        style={{"marginLeft":"1rem"}}
-      >
-        <li>
-          <div
-            style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem","paddingBottom":".5rem"}}
-          >
-            Array [
-          </div>
-        </li><SchemaItem
-          collapsible={false}
-          name={"id"}
-          required={true}
-          schemaName={"string"}
-          qualifierMessage={undefined}
-          schema={{"type":"string"}}
-        >
-          
-        </SchemaItem><SchemaItem
-          collapsible={false}
-          name={"type"}
-          required={true}
-          schemaName={"string"}
-          qualifierMessage={undefined}
-          schema={{"type":"string"}}
-        >
-          
-        </SchemaItem><SchemaItem
-          collapsible={false}
-          name={"value"}
-          required={true}
-          schemaName={"string"}
-          qualifierMessage={undefined}
-          schema={{"type":"string"}}
-        >
-          
-        </SchemaItem><li>
-          <div
-            style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem"}}
-          >
-            ]
-          </div>
-        </li>
-      </div>
-    </details>
-  </SchemaItem><SchemaItem
-    collapsible={false}
-    name={"labels"}
-    required={false}
-    schemaName={"string[]"}
-    qualifierMessage={undefined}
-    schema={{"nullable":true,"description":"identifier metadata for a connection","type":"array","items":{"type":"string"}}}
-  >
-    
-  </SchemaItem>
-</ul>
+<Schema
+  schema={{"type":"object","properties":{"id":{"type":"string"},"name":{"type":"string"},"state":{"type":"string","enum":["Live","Updating","Disconnected","Shutdown","Deprecated"],"title":"ConnectionState"},"version":{"type":"string"},"startTime":{"type":"string"},"agentId":{"type":"string"},"environment":{"type":"string"},"tags":{"type":"array","items":{"type":"object","properties":{"id":{"type":"string"},"type":{"type":"string"},"value":{"type":"string"}},"required":["id","type","value"],"title":"Tag"}},"labels":{"nullable":true,"description":"identifier metadata for a connection","type":"array","items":{"type":"string"}}},"required":["id","name","state","version","startTime","agentId","environment"],"title":"Connection"}}
+  schemaType={"response"}
+>
+  
+</Schema>
             
