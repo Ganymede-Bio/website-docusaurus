@@ -8,15 +8,13 @@ import {
   BranchesOutlined,
 } from '@ant-design/icons';
 
-Analysis notebooks offer a scratch space for analyzing data in Ganymede Cloud.  A fresh notebook instantiation has templates to retrieve data and save notebooks.  To access a fresh notebook instance, go to the <div className="button darkblue_button"><BranchesOutlined /> **Flow Editor**</div> page, click on the **Analysis** button in the header and select `default`.  The image below shows an example of what this notebook would contain:
+Analysis notebooks offer a scratch space for analyzing data in Ganymede Cloud.  To access a fresh notebook instance, go to the <div className="button darkblue_button"><BranchesOutlined /> **Flow Editor**</div> page, click on the **Analysis** button in the header and select `default`.  The image below shows an example of what this notebook could contain:
 
-![Ganymede Notebook](https://ganymede-bio.mo.cloudinary.net/apiServer/GanymedeNotebook_20230405.png)
+![Ganymede Notebook](https://ganymede-bio.mo.cloudinary.net/apiServer/GanymedeNotebook_20250124.png)
 
-The first 2 cells in the image provide templates for validating and querying data, while the last cell enables the notebook to be saved to git.
+:::info creating additional notebooks
 
-:::info
-
-To save the notebook to a different name, modify the `dest` key (i.e. - replace `new_notebook` with the desired notebook name) and execute the cell.
+To create additional notebooks, duplicate the notebook that you are in by pressing Alt+N in Windows/Linux or Option+N in MacOS.
 
 :::
 
@@ -58,13 +56,3 @@ from ganymede_sdk import Ganymede
 g.retrieve_sql(query_sql)
 ```
 
-### Saving notebooks
-
-The final cell contains a code that commits the notebook to the HEAD of the Github repository containing the stored Flow.  The `src` entry in the `files` dictionary specifies the location of the notebook within the repository, and the `dest` entry specifies the name under which the notebook is committed.
-
-```python
-from ganymede_sdk.notebook import save
-
-files = [{'src': 'default', 'dest': 'notebook_to_save_to'}]
-save(files)
-```
