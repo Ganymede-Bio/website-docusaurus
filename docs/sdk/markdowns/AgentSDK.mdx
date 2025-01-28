@@ -257,6 +257,26 @@ df = read_sql_query('SELECT * FROM instrument_methods')
 
 Ganymede Agents (v5.0+) support user-defined logging messages in the `agent_sdk`, aligning with [logging level for Agent messages](../../app/agents/AgentLogs#logging-level).  Each level corresponds with a separate method in agent_sdk.
 
+### `function` internal
+
+`internal` logs a message at the internal level.
+
+### `function` debug
+
+`debug` logs a message at the debug level.
+
+### `function` info
+
+`info` logs a message at the info level.
+
+### `function` activity
+
+`activity` logs a message at the activity level.
+
+### `function` error
+
+`error` logs a message at the error level.
+
 ```python
 from agent_sdk import internal, debug, info, activity, error
 
