@@ -37,12 +37,16 @@ df = schema_df.validate(df)
 **required_cols**: `list[str] | None`: List of columns that are required in the schema. If not specified, all columns are considered optional.
 
 ### Attributes
-**property** df: `pd.DataFrame`: Pandas DataFrame to validate
-**property** schema_dict: `dict[str, Column]`: Dictionary of column names and Pandera Column objects
-**property** schema: `DataFrameSchema`: Pandera DataFrameSchema object
-**property** validated_df: `pd.DataFrame`: Validated Pandas DataFrame
 
-:::info customizing types
+**df**: `pd.DataFrame`: Pandas DataFrame to validate
+
+**schema_dict**: `dict[str, Column]`: Dictionary of column names and Pandera Column objects
+
+**schema**: `DataFrameSchema`: Pandera DataFrameSchema object
+
+**validated_df**: `pd.DataFrame`: Validated Pandas DataFrame
+
+## Enforcing Schema Types
 Sometimes, it can be useful to tweak the Pandera schema types generated from a file.  An example of this is a column that contains fluorescence readings which could take on values specifying that a reading is above the limits of quantification or below the limits of quantification.
 
 In this case, modifying the types for a schema is a two-step process.
@@ -80,11 +84,10 @@ new_schema = DataFrameSchema(
 )
 df_new = new_schema.validate(df)
 ```
-:::
 
 More granular control over schema generation can be achieved by calling the `generate_pandera_schema` method on the SchemaValidation object.  This method returns a Pandera DataFrameSchema object that can be modified before validation.
 
-### Jinja templating for SQL Queries
+## Jinja templating for SQL Queries
 
 Variables from the **Ganymede** object can be used in SQL queries by using [Jinja templating](https://jinja.palletsprojects.com/en/3.0.x/templates/).  The full set of variables available for Jinja templates can be found in the params attribute of either the **GanymedeContext** or **MockGanymedeContext** objects.
 
