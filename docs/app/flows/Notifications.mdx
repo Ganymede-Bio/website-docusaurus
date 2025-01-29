@@ -8,7 +8,7 @@ import { BellOutlined } from '@ant-design/icons';
 
 The <div className="button darkblue_button"><BellOutlined /> **Notifications**</div> page provides real-time updates on the status of flow saves and runs. 
 
-<img alt="Flow Editor header" src="https://ganymede-bio.mo.cloudinary.net/apiServer/EnvironmentNotifications_20240331.png" />
+<img alt="Flow Editor header" src="https://ganymede-bio.mo.cloudinary.net/apiServer/EnvironmentNotifications_20250128.png" />
 <br />
 
 The notifications table provides the following information per event.
@@ -25,3 +25,10 @@ The notifications table provides the following information per event.
     - **Error**: An unexpected error occurred. Users should retry the operation or contact [Ganymede Support](../Support.mdx) for assistance.
     - **Timeout**: The notification timed out 180 seconds after the event started. Users should check the Flow that triggered the event for the latest status or try the operation again.
 - **User**: The login of the user who triggered the associated event.
+
+Notification popup settingss can be configured for each user in each environment.
+
+- **All**: Receive a notification for all events, associated with the actions of any user.
+- **Errors**: Only show notifications related to error events.
+- **My notifications**: Only show notifications related to events where the logged-in user is the source.
+- **None**: Disable all notifications.
