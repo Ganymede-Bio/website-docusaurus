@@ -6,6 +6,31 @@ displayed_sidebar: releaseSideBar
 
 This page contains a summary of key version updates for the Ganymede [Agent](../app/agents/Agent.mdx).  Since the individual instances of Agents (connections) are not updated when the Agent is updated, this page can be helpful for determining the capabilities of specific connections previously installed.
 
+## 5.3.0
+
+- Add capability to store Windows service identity for Connections
+
+## 5.2.0
+
+- Add capability for using AWS as base storage provider for Agent
+
+## 5.1.31
+
+- Emails can be sent from Agents using the [notify function in the Agent SDK](../sdk/markdowns/AgentSDK.mdx)
+
+## 5.1.28
+
+- Reserved keywords [check_interval and stable_time](../app/agents/Agent#reserved-variables) added to the file watcher agent added to facilitate specifying tradeoff between file acquisition stability and responsiveness
+
+## 5.1.7
+
+- [Notify log level](../app/agents/AgentMonitoring#connection-notifications) added to Agent SDK
+
+## 5.1.6
+
+- Connection name and agent version used as default path for installation
+- Improved Agent logging upon file changes, and when local PC is unable to connect to Ganymede Cloud
+
 ## 5.1.0
 
 - Full update support added for Linux Agents
