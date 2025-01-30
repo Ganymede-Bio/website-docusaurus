@@ -75,8 +75,34 @@ The Windows Agent installer can be [run headlessly](./DebuggingAgents.mdx#q-can-
 If the Connection is not showing up in Ganymede, or if the status is anything other than Live, please contact [Ganymede Support](../Support.mdx) and send the stderr.log that is in the Agent installation directory
 :::
 
-### Step 4: Credential Setup (Network drives only)
+### Step 4: Service Identity Setup (Optional, as needed)
+Note: Currently this feature is supported from connection installed on Windows only
+Introduced in core version 5.3.20, a section below describes a workaround for earlier versions
 
+#### Add Identity Secrets to Ganymede
+1. Click your username in the top-right corner of the Ganymede UI
+2. Click Environment Settings
+3. Select the Secrets tab
+4. Click “Add Secret” and add both your username and password separately, remember the name of the secrets for each
+:::note
+  Important: The domain must be included as part of the username. If the username is created local as mentioned in “Setting Up Local Account” then “.\” should be prepended to the username to indicate it is a local account.
+:::
+
+#### Attach an Identity to a Connection
+1. Install a connection and ensure it is running successfully
+2. Verify the connection appears in the UI healthy
+3. On the connection’s page, the Service Installation Identity section includes the form for the username and password.
+4. Click Edit Connection.
+5. Select the username and password secrets
+6. Save Connection.
+7. A log should appear within a few seconds that says “Auth full-update with current exe”
+8. The services window should show the connection running as the designated user
+:::note
+  Important: Any changes to the secret values will propagate to the connection and force the service to restart with that information.
+:::
+<img alt="Admin - Access Panel" src="https://ganymede-bio.mo.cloudinary.net/agent/WindowsIdentitySettings.png" />
+
+#### For connections prior to 5.3.20:
 1. Open Windows Service Manager.  To do so, press Windows + R, type `services.msc`, and hit Enter.
 2. Find the Ganymede Agent service in the list of services.
 
