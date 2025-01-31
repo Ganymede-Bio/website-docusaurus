@@ -141,20 +141,6 @@ There may be a slight delay as the service connection resumes.
 
 :::
 
-### Step 5: Set up Connection Tags and Variables
-
-1. Navigate to the Connections pane in the Ganymede app by selecting the <div className="button darkblue_button"><ApiOutlined /></div> icon in the left toolbar and selecting the Connections pane. 
-2. Find the Connection you just created. Click the <div className="button dark_gray_button"><EditOutlined /> **Edit Connections**</div> button at the bottom right of the Connection Settings
-3. Click <div className="button darkblue_outline_button"><PlusOutlined /> Add file tag</div> to open the file tag popup.
-    1. Select the appropriate Tag Type Name from the dropdown
-    2. Add a Display Value which will appear next to each file uploaded to Ganymede via this Connection
-        1. Optionally, specify a Tag ID to associate with the tag.  This is generally only used in situations where a non-human interpretable values to identify the tag programmatically
-    3. Click Add Tag to apply the tag to the connection
-        1. The tag will be visible under connection file tags if properly applied.
-4. Repeat step 3 for each Tag to be applied to files from this specific Connection.
-5. Scroll down to the Labels section of the Connection Settings.
-6. Add Labels to the Connection with desired values, which are strings to associate with the Connection.
-
 ## Linux Installation
 
 ### Step 1: Download the Agent
@@ -269,3 +255,34 @@ variables:
 version: <YYYYMMDD-timestamp>
 ```
 :::
+
+### Step 4: Check the Connection Status
+
+1. Navigate to the Connections page in Ganymede. 
+    1. Open the Ganymede application in a browser window: \<tenant\>.ganymede.bio
+    2. On the top panel, navigate to the \<tenant\>-\<tenant-env\> environment
+    3. Navigate to the Connections page.
+    4. Find your Connection and click it to open the detailed Connection page.
+    5. On the top of the Connection settings you should see the Status is “Live”
+    
+:::note
+
+If the Connection is not showing up in Ganymede, or if the status is anything other than Live, please contact [Ganymede Support](../Support.mdx) and send the stderr.log that is in the Agent installation directory
+
+:::
+
+## Post-Installation Activities
+
+### Set up Connection Tags and Variables
+
+1. Navigate to the Connections pane in the Ganymede app by selecting the <div className="button darkblue_button"><ApiOutlined /></div> icon in the left toolbar and selecting the Connections pane. 
+2. Find the Connection you just created. Click the <div className="button dark_gray_button"><EditOutlined /> **Edit Connections**</div> button at the bottom right of the Connection Settings
+3. Click <div className="button darkblue_outline_button"><PlusOutlined /> Add file tag</div> to open the file tag popup.
+    1. Select the appropriate Tag Type Name from the dropdown
+    2. Add a Display Value which will appear next to each file uploaded to Ganymede via this Connection
+        1. Optionally, specify a Tag ID to associate with the tag.  This is generally only used in situations where a non-human interpretable values to identify the tag programmatically
+    3. Click Add Tag to apply the tag to the connection
+        1. The tag will be visible under connection file tags if properly applied.
+4. Repeat step 3 for each Tag to be applied to files from this specific Connection.
+5. Scroll down to the Labels section of the Connection Settings.
+6. Add Labels to the Connection with desired values, which are strings to associate with the Connection.
