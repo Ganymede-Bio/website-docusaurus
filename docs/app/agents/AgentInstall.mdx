@@ -20,7 +20,7 @@ To install a Connection, open the Ganymede application in a browser window and n
     1. Select the Windows EXE option to download the agent in your browser.
     1. An executable named \<your_agent>_\<id\>.exe should download to the PC
 
-:::info
+:::tip programmatically downloading the agent
 
 If you would like to download the Windows Agent through a script, you can do so [through the Ganymede API](../../api/download-agent.api.mdx).
 
@@ -48,7 +48,7 @@ If you would like to download the Windows Agent through a script, you can do so 
         1. A descriptive name might include the instrument name, asset tag, or other identifiers.
         2. Leave the "additional params" field blank; while variables and labels can be specified here, they can also be modified later in the Ganymede web app.
         3. Click **Next** to complete the configuration.
-    2. Specify an installation directory.  The default installation directory is `C:\Program Files\Ganymede\`.
+    2. Specify an installation directory.  The default installation directory is `C:\Program Files\Ganymede\<connection-name>\`.
         1. If you install multiple Connections on the same PC, it is recommended that you create an additional directory within the Ganymede folder for each Connection.
         2. Select Next to continue.
     3. Click **Install** to begin the installation process.
@@ -56,7 +56,7 @@ If you would like to download the Windows Agent through a script, you can do so 
         1. Ensure the **Launch Ganymede Agent** checkbox is checked.
         2. Click **Finish** to exit the installer and start the Agent service.
 
-:::info
+:::tip headless installation
 
 The Windows Agent installer can be [run headlessly](./DebuggingAgents.mdx#q-can-windows-agents-be-installed-headlessly) if desired.
 
@@ -71,56 +71,74 @@ The Windows Agent installer can be [run headlessly](./DebuggingAgents.mdx#q-can-
     4. Find your Connection and click it to open the detailed Connection page.
     5. On the top of the Connection settings you should see the Status is “Live”
     
-:::info
+:::note
+
 If the Connection is not showing up in Ganymede, or if the status is anything other than Live, please contact [Ganymede Support](../Support.mdx) and send the stderr.log that is in the Agent installation directory
+
 :::
 
-### Step 4: Service Identity Setup (Optional, as needed)
-Note: Currently this feature is supported from connection installed on Windows only  
-Introduced in core version 5.3.20, a section below describes a workaround for earlier versions
+### Step 4 (if desired): Service Identity Setup
+
+:::info
+
+This feature was introduced in Agent version 5.3.20; if you have an earlier version, jump down to the [For connections prior to 5.3.20 section](#for-connections-prior-to-5320).
+
+:::
 
 #### Add Identity Secrets to Ganymede
 1. Click your username in the top-right corner of the Ganymede UI
 2. Click Environment Settings
 3. Select the Secrets tab
-4. Click “Add Secret” and add both your username and password separately, remember the name of the secrets for each
-:::note
-  Important: The domain must be included as part of the username. If the username is created local as mentioned in “Setting Up Local Account” then “.\” should be prepended to the username to indicate it is a local account.
+4. Click “Add Secret” and add enter in the username for your Windows service identity.  Note the name of the secret, since you will reference this name when you configure the service identity credential for a Connection.
+5. Repeat step 4 for your password.
+
+:::warning Usernames must contain domain
+
+The domain must be included as part of the username. If the username is created local as described in “Setting Up Local Account” then “.\” should be prepended to the username to indicate it is a local account.
+
 :::
 
 #### Attach an Identity to a Connection
 1. Install a connection and ensure it is running successfully
 2. Verify the connection appears in the UI healthy
-3. On the connection’s page, the Service Installation Identity section includes the form for the username and password.
-4. Click Edit Connection.
+3. On the connection's page, the Service Installation Identity section includes the form for the username and password
+4. Click Edit Connection
 5. Select the username and password secrets
-6. Save Connection.
+6. Save the Connection
 7. A log should appear within a few seconds that says “Auth full-update with current exe”
 8. The services window should show the connection running as the designated user
-:::note
-  Important: Any changes to the secret values will propagate to the connection and force the service to restart with that information.
+
+:::warning Connection service restarts on identity config
+
+Any changes to the secret values will propagate to the connection and force the service to restart with that information.
+
 :::
+&nbsp;
+
 <img alt="Admin - Access Panel" src="https://ganymede-bio.mo.cloudinary.net/agent/WindowsIdentitySettings.png" />
 
-#### For connections prior to 5.3.20:
+#### For connections prior to 5.3.20
 1. Open Windows Service Manager.  To do so, press Windows + R, type `services.msc`, and hit Enter.
 2. Find the Ganymede Agent service in the list of services.
 
 :::note
+
 - The service name will be in the format `GanymedeAgent-[agent uuid]`.
 - The Connection ID can be identified by navigating to the Connections pane and selecting the newly created Connection.
+
 :::
 
 3. Right click the Agent service and select **Stop**.
-
 4. Right click the service again and select properties to open the properties menu.
 5. Navigate to the logon section and select the radio button next to “This account:”
 6. Fill in the username and password fields with credentials that allow access to the network drive
-7. Close the properties menu and start the service by right clicking and selecting “start”.
-8. Navigate back to the connections pane in Ganymede to confirm the connection is active and running
+7. Close the properties menu and start the service by right clicking and selecting “Start”.
+8. Navigate back to the Connections pane in Ganymede to confirm the connection is active and running
 
 :::note
+
 There may be a slight delay as the service connection resumes.
+
 :::
 
 ### Step 5: Set up Connection Tags and Variables
