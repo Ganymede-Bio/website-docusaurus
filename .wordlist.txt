@@ -414,3 +414,5 @@ displayValue
 tagTypeId
 connectionName
 installPath
+prepended
+Auth
