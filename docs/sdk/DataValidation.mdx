@@ -26,7 +26,7 @@ df = pd.DataFrame({
 # obtain a validated DataFrame
 validation_dict = SchemaValidation(df)
 schema_df = DataFrameSchema(validation_dict)
-df = schema_df.validate(df)
+df = schema_df.validate(df, lazy=True)
 ```
 
 ### Constructor Parameters
@@ -82,7 +82,9 @@ new_schema = DataFrameSchema(
     "column2": Column('str', nullable=True, required=False, coerce=True)
     }
 )
-df_new = new_schema.validate(df)
+
+# Specifying lazy=True ensures that casting errors for all columns are displayed at once
+df_new = new_schema.validate(df, lazy=True)
 ```
 
 More granular control over schema generation can be achieved by calling the `generate_pandera_schema` method on the SchemaValidation object.  This method returns a Pandera DataFrameSchema object that can be modified before validation.
