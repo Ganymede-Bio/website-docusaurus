@@ -15,6 +15,7 @@ To use the SchemaValidation class, import it, create an instance, and use that i
 ```python
 from ganymede_sdk import SchemaValidation
 import pandas as pd
+import pandera as pa
 from pandera import DataFrameSchema
 
 # typically, this DataFrame would be read in using retrieve_sql or retrieve_tables, or retrieved from a input file widget
@@ -26,7 +27,13 @@ df = pd.DataFrame({
 # obtain a validated DataFrame
 validation_dict = SchemaValidation(df)
 schema_df = DataFrameSchema(validation_dict)
-df = schema_df.validate(df, lazy=True)
+
+try:
+    df = schema_df.validate(df, lazy=True)
+except pa.errors.SchemaErrors as e:
+    raise GanymedeException(
+        message=f"File failed schema type validation: {e}", exception_type="Validation",
+    )
 ```
 
 ### Constructor Parameters
@@ -84,7 +91,12 @@ new_schema = DataFrameSchema(
 )
 
 # Specifying lazy=True ensures that casting errors for all columns are displayed at once
-df_new = new_schema.validate(df, lazy=True)
+try:
+    df_new = new_schema.validate(df, lazy=True)
+except pa.errors.SchemaErrors as e:
+    raise GanymedeException(
+        message=f"File failed schema type validation: {e}", exception_type="Validation",
+    )
 ```
 
 More granular control over schema generation can be achieved by calling the `generate_pandera_schema` method on the SchemaValidation object.  This method returns a Pandera DataFrameSchema object that can be modified before validation.
