@@ -14,7 +14,10 @@ To use the SchemaValidation class, import it, create an instance, and use that i
 
 ```python
 from ganymede_sdk import SchemaValidation
+from ganymede_sdk.flow_runtime import GanymedeException
+
 import pandas as pd
+import pandera as pa
 from pandera import DataFrameSchema
 
 # typically, this DataFrame would be read in using retrieve_sql or retrieve_tables, or retrieved from a input file widget
@@ -26,7 +29,14 @@ df = pd.DataFrame({
 # obtain a validated DataFrame
 validation_dict = SchemaValidation(df)
 schema_df = DataFrameSchema(validation_dict)
-df = schema_df.validate(df)
+
+try:
+    # specifying lazy=True ensures that casting errors for all columns are displayed at once
+    df = schema_df.validate(df, lazy=True)
+except pa.errors.SchemaErrors as e:
+    raise GanymedeException(
+        message=f"File failed schema type validation: {e}", exception_type="Validation",
+    )
 ```
 
 ### Constructor Parameters
@@ -54,6 +64,7 @@ In this case, modifying the types for a schema is a two-step process.
 Step 1: Generate the schema using the SchemaValidation class.
 ```python
 from ganymede_sdk import SchemaValidation
+
 import pandas as pd
 
 df = pd.DataFrame({
@@ -76,13 +87,22 @@ The output would be something a dictionary like the following:
 Step 2: Copy and modify the schema definition as needed, and use for validation
 ```python
 from pandera import Column, DataFrameSchema
+from ganymede_sdk.flow_runtime import GanymedeException
+
 new_schema = DataFrameSchema(
     {
     "column1": Column('int64', nullable=True, required=False, coerce=True),
     "column2": Column('str', nullable=True, required=False, coerce=True)
     }
 )
-df_new = new_schema.validate(df)
+
+try:
+    # specifying lazy=True ensures that casting errors for all columns are displayed at once
+    df_new = new_schema.validate(df, lazy=True)
+except pa.errors.SchemaErrors as e:
+    raise GanymedeException(
+        message=f"File failed schema type validation: {e}", exception_type="Validation",
+    )
 ```
 
 More granular control over schema generation can be achieved by calling the `generate_pandera_schema` method on the SchemaValidation object.  This method returns a Pandera DataFrameSchema object that can be modified before validation.
