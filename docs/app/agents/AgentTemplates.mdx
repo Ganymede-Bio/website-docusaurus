@@ -236,14 +236,18 @@ def execute(flow_params_fw: FileWatcherResult, **kwargs) -> TriggerFlowParams | 
     stable_time = float(kwargs.get("vars", {}).get("stable_time", 0))
 
     if not input_path:
-        raise GanymedeException("input_path not specified in Agent variables.", exception_type="Validation")
+        raise GanymedeException(
+            "input_path not specified in Agent variables.", exception_type="Validation"
+        )
 
     # ensure that enough time has elapsed since when the last file was captured
     time.sleep(stable_time)
 
     for file_param in flow_params_fw.files.values():
         if isinstance(file_param, FileParam):
-            if current_time - os.path.getmtime(os.path.join(input_path, file_param.filename)) < timedelta(seconds=stable_time):    
+            if current_time - os.path.getmtime(
+                os.path.join(input_path, file_param.filename)
+            ) < timedelta(seconds=stable_time):
                 return None
         else:
             # handle list of files
