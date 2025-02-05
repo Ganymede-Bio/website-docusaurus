@@ -245,12 +245,6 @@ def execute(flow_params_fw: FileWatcherResult, **kwargs) -> TriggerFlowParams | 
             "input_path not specified in Agent variables.", exception_type="Validation"
         )
 
-    # avoid sleeping every time the Agent is triggered
-    for file_param in flow_params_fw.files.values():
-        file_upload_time = datetime.strptime(file_param.upload_ts, "%Y-%m-%dT%H:%M:%SZ")
-        if current_time - file_upload_time < timedelta(seconds=stable_time):
-            return None
-
     # ensure that enough time has elapsed since when the last file was captured
     time.sleep(stable_time)
 
