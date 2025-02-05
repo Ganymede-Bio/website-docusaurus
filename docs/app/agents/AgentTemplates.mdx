@@ -54,7 +54,7 @@ def get_param_mapping(
     """
     pass
 
-def execute(flow_params_fw: FileWatcherResult) -> TriggerFlowParams:
+def execute(flow_params_fw: FileWatcherResult) -> TriggerFlowParams | None:
     """
     Called when all glob patterns specified by get_param_mapping have been matched.
 
@@ -111,7 +111,7 @@ def get_param_mapping(
     }
 
 
-def execute(flow_params_fw: FileWatcherResult, **kwargs) -> TriggerFlowParams:
+def execute(flow_params_fw: FileWatcherResult, **kwargs) -> TriggerFlowParams | None:
     return TriggerFlowParams(
         single_file_params=flow_params_fw.files,
         multi_file_params=None,
@@ -140,7 +140,7 @@ from agent_sdk import (
 
 def fp(watch_dir: str, parent_dir: str, pattern: str) -> Callable[[str], bool]:
     def fp_res(x: str):
-        return x in glob.glob(os.path.join(watch_dir, pattern), recursive=True)
+        return x in glob.glob(os.path.join(watch_dir, parent_dir, pattern), recursive=True)
 
     return fp_res
 
@@ -166,7 +166,7 @@ def get_param_mapping(
 
 
 # Required Function
-def execute(flow_params_fw: FileWatcherResult, **kwargs) -> TriggerFlowParams:
+def execute(flow_params_fw: FileWatcherResult, **kwargs) -> TriggerFlowParams | None:
     fcs_param = "Read_FCS_Files.fcs"
 
     file_param_list = []
@@ -178,12 +178,105 @@ def execute(flow_params_fw: FileWatcherResult, **kwargs) -> TriggerFlowParams:
     m = file_params_list_to_multi(file_param_list)
     m.param = fcs_param
     
-    
     return TriggerFlowParams(
         single_file_params=None,
         multi_file_params={fcs_param: m},
         benchling_tag=None,
         additional_params={"Experiment_ID": "exp234"},
+    )
+```
+
+### Trigger Flow when all files in watch directory are older than _stable_time_ seconds
+
+This example shows an Agent that captures a CSV file and an indeterminate number of Excel files from a directory.  The Agent will trigger a Flow if all files in the directory are older than [_stable_time_](./Agent#reserved-variables) seconds.
+
+```python
+import glob
+import os
+from typing import Callable
+from datetime import datetime, timedelta
+from time import sleep
+
+from agent_sdk import (
+    FileWatcherResult,
+    TriggerFlowParams,
+    file_params_list_to_multi,
+)
+
+
+def fp(watch_dir: str, parent_dir: str, pattern: str) -> Callable[[str], bool]:
+    def fp_res(x: str):
+        return x in glob.glob(os.path.join(watch_dir, parent_dir, pattern), recursive=True)
+
+    return fp_res
+
+
+def get_param_mapping(
+    watch_dir: str,
+    parent_dir: str = "",
+    file_name: str = "",
+    modified_time: str = "",
+    body: bytes = bytes(),
+) -> dict[str, Callable[[str], bool]]:
+    match_dict = dict()
+
+    match_dict["Read_CSV.csv"] = fp(watch_dir, parent_dir, "*csv")
+
+    excel_files = glob.glob(os.path.join(watch_dir, parent_dir, "*.xlsx"))
+    match_dict.update(dict(zip(excel_files, excel_files)))  # match each excel file uniquely
+
+    return match_dict
+
+
+# Required Function
+def execute(flow_params_fw: FileWatcherResult, **kwargs) -> TriggerFlowParams | None:
+    current_time = datetime.utcnow()
+    excel_param = "Excel_Read_Multi.excel"
+    input_path = kwargs.get("vars", {}).get("input_path", "")
+    stable_time = float(kwargs.get("vars", {}).get("stable_time", 0))
+
+    if not input_path:
+        raise GanymedeException("input_path not specified in Agent variables.", exception_type="Validation")
+
+    # ensure that enough time has elapsed since when the last file was captured
+    time.sleep(stable_time)
+
+    for file_param in flow_params_fw.files.values():
+        if isinstance(file_param, FileParam):
+            if current_time - os.path.getmtime(os.path.join(input_path, file_param.filename)) < timedelta(seconds=stable_time):    
+                return None
+        else:
+            # handle list of files
+            for f in file_param:
+                if current_time - datetime.strptime(f.upload_ts, "%Y-%m-%dT%H:%M:%SZ") < timedelta(
+                    seconds=stable_time
+                ):
+                    return None
+
+    excel_file_param_list = []
+    for file_param in list(flow_params_fw.files.values()):
+        if isinstance(file_obj, list):
+            for file_param in file_obj:
+                if not file_param.filename.endswith(".xlsx"):
+                    continue
+                file_param.content_type = "application/vnd.ms-excel"
+                file_param.param = excel_param
+                excel_file_param_list.append(file_param)
+        else:
+            if not file_obj.filename.endswith(".xlsx"):
+                continue
+            file_obj.content_type = "application/vnd.ms-excel"
+            file_obj.param = excel_param
+            excel_file_param_list.append(file_obj)
+
+    m = file_params_list_to_multi(excel_file_param_list)
+    m.param = excel_param
+
+    return TriggerFlowParams(
+        single_file_params={"Read_CSV.csv": flow_params_fw.files["Read_CSV.csv"]},
+        multi_file_params={excel_param: m},
+        benchling_tag=None,
+        additional_params=None,
     )
 ```
 
