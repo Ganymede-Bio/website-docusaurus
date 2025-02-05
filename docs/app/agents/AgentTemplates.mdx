@@ -186,7 +186,7 @@ def execute(flow_params_fw: FileWatcherResult, **kwargs) -> TriggerFlowParams | 
     )
 ```
 
-### Trigger Flow with indeterminate number of files when all files in watch directory are older than _stable_time_ seconds
+### Trigger Flow with indeterminate number of files when all files in watch directory are older than _stable_time_ seconds and no file is older than 1 day.
 
 This example shows an Agent that captures a CSV file and an indeterminate number of Excel files from a directory.  The Agent will trigger a Flow if all files in the directory are older than [_stable_time_](./Agent#reserved-variables) seconds.
 
@@ -234,6 +234,7 @@ def execute(flow_params_fw: FileWatcherResult, **kwargs) -> TriggerFlowParams | 
     excel_param = "Excel_Read_Multi.excel"
     input_path = kwargs.get("vars", {}).get("input_path", "")
     stable_time = float(kwargs.get("vars", {}).get("stable_time", 0))
+    max_age = float(kwargs.get("vars", {}).get("max_age_time", 86400))  # 1 day by default
 
     if not input_path:
         raise GanymedeException(
@@ -244,13 +245,17 @@ def execute(flow_params_fw: FileWatcherResult, **kwargs) -> TriggerFlowParams | 
     for file_param in flow_params_fw.files.values():
         if isinstance(file_param, FileParam):
             file_upload_time = datetime.strptime(file_param.upload_ts, "%Y-%m-%dT%H:%M:%SZ")
-            if current_time - file_upload_time < timedelta(seconds=stable_time):
+            if (current_time - file_upload_time < timedelta(seconds=stable_time)) or (
+                current_time - file_upload_time > timedelta(seconds=max_age)
+            ):
                 return None
         else:
             # handle list of files
             for f in file_param:
                 file_upload_time = datetime.strptime(f.upload_ts, "%Y-%m-%dT%H:%M:%SZ")
-                if current_time - file_upload_time < timedelta(seconds=stable_time):
+                if (current_time - file_upload_time < timedelta(seconds=stable_time)) or (
+                    current_time - file_upload_time > timedelta(seconds=max_age)
+                ):
                     return None
 
     # ensure that enough time has elapsed since when the last file was captured
