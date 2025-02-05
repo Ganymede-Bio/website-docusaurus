@@ -140,7 +140,7 @@ from agent_sdk import (
 
 def fp(watch_dir: str, parent_dir: str, pattern: str) -> Callable[[str], bool]:
     def fp_res(x: str):
-        return x in glob.glob(os.path.join(watch_dir, parent_dir, pattern), recursive=True)
+        return x in glob.glob(os.path.join(watch_dir, pattern), recursive=True)
 
     return fp_res
 
@@ -206,7 +206,7 @@ from agent_sdk import (
 
 def fp(watch_dir: str, parent_dir: str, pattern: str) -> Callable[[str], bool]:
     def fp_res(x: str):
-        return x in glob.glob(os.path.join(watch_dir, parent_dir, pattern), recursive=True)
+        return x in glob.glob(os.path.join(watch_dir, pattern), recursive=True)
 
     return fp_res
 
@@ -236,6 +236,9 @@ def execute(flow_params_fw: FileWatcherResult, **kwargs) -> TriggerFlowParams | 
     stable_time = float(kwargs.get("vars", {}).get("stable_time", 0))
 
     # ensure that all files have been captured
+    # 
+    # in this case, it's assumed that the files are located in the watch_dir; 
+    # a common pattern is to repeat this logic based on parent_dir (not shown here for conciseness)
     file_count = sum(1 for entry in os.scandir(input_path) if entry.is_file())
     if file_count > len(flow_params_fw.files):
         return None
