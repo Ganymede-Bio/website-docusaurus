@@ -261,7 +261,7 @@ def execute(new_file: FileParam, **kwargs) -> None:
 
 ## Cron Agent
 
-### Upload file if modified in the last day
+### Upload files if modified in the last day
 
 This Agent would require _watch_dir_ to be configured.  Recency of last modified date can be configured if desired; if it isn't configured, then the watched file would be uploaded if it was modified in the last hour.
 
@@ -269,17 +269,17 @@ This Agent would require _watch_dir_ to be configured.  Recency of last modified
 from pathlib import Path
 import os
 import time
-from agent_sdk import info, error, FileParam, UploadFileParams
+from agent_sdk import info, error, FileParam, TriggerFlowParams
 
 # Required Function
-def execute(**kwargs) -> UploadFileParams | None:
+def execute(**kwargs) -> TriggerFlowParams | None:
     """
     Executes on specified cadence.
 
     Returns
     -------
-    UploadFileParams | None
-        Files to upload; if set to None, then no files will be uploaded.
+    TriggerFlowParams | None
+        Files to upload for triggering Flow; if set to None, then no files will be uploaded.
     """
 
     agent_variables = kwargs.get('vars', {})
