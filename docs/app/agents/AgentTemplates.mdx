@@ -256,19 +256,11 @@ def execute(flow_params_fw: FileWatcherResult, **kwargs) -> TriggerFlowParams | 
         
     excel_file_param_list = []
     for file_param in list(flow_params_fw.files.values()):
-        if isinstance(file_obj, list):
-            for file_param in file_obj:
-                if not file_param.filename.endswith(".xlsx"):
-                    continue
-                file_param.content_type = "application/vnd.ms-excel"
-                file_param.param = excel_param
-                excel_file_param_list.append(file_param)
-        else:
-            if not file_obj.filename.endswith(".xlsx"):
-                continue
-            file_obj.content_type = "application/vnd.ms-excel"
-            file_obj.param = excel_param
-            excel_file_param_list.append(file_obj)
+        if not file_obj.filename.endswith(".xlsx"):
+            continue
+        file_obj.content_type = "application/vnd.ms-excel"
+        file_obj.param = excel_param
+        excel_file_param_list.append(file_obj)
 
     m = file_params_list_to_multi(excel_file_param_list)
     m.param = excel_param
