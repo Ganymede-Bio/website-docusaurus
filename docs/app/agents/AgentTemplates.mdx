@@ -269,17 +269,17 @@ This Agent would require _watch_dir_ to be configured.  Recency of last modified
 from pathlib import Path
 import os
 import time
-from agent_sdk import info, error, FileParam, TriggerFlowParams
+from agent_sdk import info, error, FileParam, UploadFileParams
 
 # Required Function
-def execute(**kwargs) -> TriggerFlowParams | None:
+def execute(**kwargs) -> UploadFileParams | None:
     """
     Executes on specified cadence.
 
     Returns
     -------
-    TriggerFlowParams | None
-        Files to upload for triggering Flow; if set to None, then no files will be uploaded.
+    UploadFileParams | None
+        Files to upload; if set to None, then no files will be uploaded.
     """
 
     agent_variables = kwargs.get('vars', {})
@@ -309,7 +309,7 @@ def execute(**kwargs) -> TriggerFlowParams | None:
                 body = f.read()
                 file_params.append(FileParam(filename=file_path, body=body))
     if (len(file_params) > 0):    
-        return TriggerFlowParams(single_file_params=file_params)
+        return UploadFileParams(files=file_params)
 
     return None
 ```
@@ -322,6 +322,7 @@ Variables (e.g. - _parent_dir_ and _recency_min_) can be configured during the i
 ```
 
 Post-installation, for Agents v4.8+, the parameters for Windows Connections can be [updated in the Connection UI](../../app/agents/AgentMonitoring#maintaining-agent-connections).
+
 
 ### Querying OPC server
 
