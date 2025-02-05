@@ -272,14 +272,14 @@ import time
 from agent_sdk import info, error, FileParam, UploadFileParams
 
 # Required Function
-def execute(**kwargs) -> UploadFileParams | None:
+def execute(**kwargs) -> TriggerFlowParams | None:
     """
     Executes on specified cadence.
 
     Returns
     -------
-    UploadFileParams | None
-        Files to upload; if set to None, then no files will be uploaded.
+    TriggerFlowParams | None
+        Files to upload for triggering Flow; if set to None, then no files will be uploaded.
     """
 
     agent_variables = kwargs.get('vars', {})
