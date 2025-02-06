@@ -416,3 +416,4 @@ connectionName
 installPath
 prepended
 Auth
+Integrations
