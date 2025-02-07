@@ -7,13 +7,14 @@ displayed_sidebar: releaseSideBar
 
 **Features**
 - **UI**: S3 Buckets can now be mounted and used for storing Files collected by Agents and Flows
-  - Add the S3 bucket to an Environment via the Integrations tab
+  - Add the S3 bucket to an Environment via the Integrations tab on the [Environment Settings page](../app/admin/AdminControls.mdx)
   - The S3 bucket can be selected when creating a Flow or an Agent
   - Files can be browsed and search through the normal Files interfaces
 
-
 **Improvements**
-- **Agents**: Functions to get Tags and delete Tags are available in the Agent SDK
+- **Agents**: Functions to [get Tags](../sdk/markdowns/AgentSDK#function-get_file_tags) and [delete Tags](../sdk/markdowns/AgentSDK#function-delete_file_tag) are available in the Agent SDK
+- **Analysis**: [Analysis notebooks](../app/visualization/AnalysisNotebook) can be duplicated by typing `Alt`+`N` on Windows or `Option`+`N` on Macs within the notebook.
+- **Analysis**: Flows can be programmatically executed from within an Analysis notebook using [GanymedeFlowRun](../sdk/FlowRunAutomation)
 
 **Bug Fixes**
 - **Agents**: Fixed an issue where File detection could result in a File being detected twice

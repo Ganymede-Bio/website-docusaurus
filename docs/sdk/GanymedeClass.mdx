@@ -228,39 +228,6 @@ _list_files_all_ returns a listing of all files in the specified bucket in the e
 - _param_ **flow_input_or_output**: str, by default "input" - Either "input" or "output" - to reference whether to retrieve files that are inputs to flows or outputs from flow nodes
 - _param_ **flow_name**: str, by default None - Flow name to filter for, if input
 
-## Sending emails from execute function
-
-Templated email notifications can be sent from the execute function by using the GanymedeEmailAlert object in ganymede_sdk.util.
-
-GanymedeEmailAlert takes 2 parameters
-
-- _param_ **ganymede_context**: GanymedeContext - GanymedeContext object associated with the flow run
-- _param_ **html_template**: str - HTML Jinja template for the email, rendered using the ganymede_context object.  A Ganymede-specific template is used by default.
-
-```python
-from ganymede_sdk import Ganymede
-from ganymede_sdk.util.email import GanymedeEmailAlert
-
-g = Ganymede()
-
-email_alert = GanymedeEmailAlert(g.ganymede_context)
-email_alert.send_email(
-    "user@email.com", "My subject", "My message to send",
-    cc="user@ganymede.bio",
-    bcc="user@email.com"
-)
-```
-
-### `method` send_email
-
-_send_email_ sends an email notification to the specified recipient(s).  The method returns the HTML object of the email sent.
-
-- _param_ **to** : str | Iterable[str] - The recipient(s) of the email. This can be a single email address (str) or a list of email addresses (Iterable).
-- _param_ **subject** : str - The subject of the email.
-- _param_ **message** : str - The plain text message content.
-- _param_ **cc** : str | Iterable[str] | None - The recipient(s) to be copied on the email (CC), by default None.  This can be a single email address or a list of email addresses.
-- _param_ **bcc** : str | Iterable[str] | None - The recipient(s) to be blindly copied on the email (BCC), by default None.  This can be a single email address or a list of email addresses.
-- _param_ **custom_headers** : dict[str, Any] | None - A dictionary of custom email headers, by default None.
 
 ## Other methods
 
