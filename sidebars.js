@@ -317,10 +317,6 @@ module.exports = {
       id: 'sdk/GanymedeClass',
     },
     {
-      type: 'doc',
-      id: 'sdk/BenchlingClass',
-    },
-    {
       type: 'category',
       label: 'Flow Helpers',
       collapsed: false,
@@ -372,6 +368,10 @@ module.exports = {
         {
           type: 'doc',
           id: 'sdk/markdowns/EnvironmentDetection',
+        },
+        {
+          type: 'doc',
+          id: 'sdk/BenchlingClass',
         },
         nodeSDKAPI,
         nodeSDKAnalytics
