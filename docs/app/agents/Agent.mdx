@@ -107,6 +107,12 @@ The _Configuration_ input specifies the action performed by the Agent, with opti
 - [**Load local files into Ganymede with a custom filter**](#load-local-files-into-ganymede-with-a-custom-filter): Send specified files on local instrument PC and process on Ganymede Cloud
 - [**Set a cron job to upload files periodically**](#set-a-cron-job-to-upload-files-periodically): Periodically deliver files to Ganymede Cloud
 
+:::tip Skipping execution
+
+The _execute_ function in user-defined code for every Agent type can return `None` to skip execution. This can be useful for conditional execution based on the state of the system or the data being processed.
+
+:::
+
 ## Configuration Options
 
 ### Watch for files locally then run flow
@@ -199,7 +205,7 @@ def get_param_mapping(
     }
 
 
-def execute(flow_params_fw: FileWatcherResult) -> TriggerFlowParams:
+def execute(flow_params_fw: FileWatcherResult) -> TriggerFlowParams | None:
     """
     Called when all glob patterns specified by get_param_mapping have been matched.
 
@@ -207,6 +213,11 @@ def execute(flow_params_fw: FileWatcherResult) -> TriggerFlowParams:
     ----------
     flow_params_fw : FileWatcherResult
         Dict of FileParam objects indexed by <node name>.<param name>
+    
+    Returns
+    -------
+    TriggerFlowParams | None
+        Object specifying the inputs to the flow that is executed when all files are observed.  If None is returned, no Flow is triggered.
     """
     return TriggerFlowParams(
         single_file_params=flow_params_fw.files,
