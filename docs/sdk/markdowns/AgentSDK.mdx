@@ -113,6 +113,23 @@ _param_ **display_value**: str - Value of Tag to add
 _param_ **tag_id**: str | None - Optional Tag ID which can be used to reference the Tag in code
 _param_ **url**: str | None - Optional URL to associate with the Tag
 
+### `function` delete_file_tag
+
+`delete_file_tag` deletes all Tags associated with a Tag Type ID from a file.
+
+_param_ **tag_type_id**: str - Tag type of Tag to delete
+_param_ **input_file_path**: str - Path of file (GCS or S3) to delete Tag from
+_param_ **bucket_name**: str - Bucket name of file to delete Tag from
+_param_ **storage_provider**: str - Storage provider of file to delete Tag from, either 'gcs' or 's3'
+
+### `function` get_file_tags
+
+`get_file_tags` returns a list of Tag objects associated with a file.
+
+_param_ **input_file_path**: str - Path of file (GCS or S3) to get Tags from
+_param_ **bucket_name**: str - Bucket name of file to delete Tag from
+_param_ **storage_provider**: str - Storage provider of file to delete Tag from, either 'gcs' or 's3'
+
 ## Checksum functions
 
 Agent utility functions are provided in `agent_sdk` for validating data integrity and interacting with file systems.

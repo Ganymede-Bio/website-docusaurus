@@ -9,6 +9,13 @@ import NodeChip from '@site/src/components/NodeChip.js'
 
 This section contains a cookbook of user-defined code examples, which can be helpful for expediting Agent definition.
 
+:::tip Conditional execution
+
+The _execute_ function in user-defined code for every Agent type can return `None` to skip execution. This can be useful for conditional execution based on the state of the system or the data being processed.
+
+:::
+
+
 ## Watch for files locally and run Flow
 
 In the user-defined function for Agents executing Flows, the _get_param_mapping_ function is run whenever a file is added or modified
@@ -62,6 +69,11 @@ def execute(flow_params_fw: FileWatcherResult) -> TriggerFlowParams | None:
     ----------
     flow_params_fw : FileWatcherResult
         Dict of FileParam objects indexed by <node name>.<param name>
+
+    Returns
+    -------
+    TriggerFlowParams | None
+        Parameters to use in triggered Flow.  If None is specified, then Flow will not be triggered.
     """
     pass
 ```
