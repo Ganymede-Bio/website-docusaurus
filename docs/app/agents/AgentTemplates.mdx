@@ -9,6 +9,13 @@ import NodeChip from '@site/src/components/NodeChip.js'
 
 This section contains a cookbook of user-defined code examples, which can be helpful for expediting Agent definition.
 
+:::tip Conditional execution
+
+The _execute_ function in user-defined code for every Agent type can return `None` to skip execution. This can be useful for conditional execution based on the state of the system or the data being processed.
+
+:::
+
+
 ## Watch for files locally and run Flow
 
 In the user-defined function for Agents executing Flows, the _get_param_mapping_ function is run whenever a file is added or modified
@@ -54,7 +61,7 @@ def get_param_mapping(
     """
     pass
 
-def execute(flow_params_fw: FileWatcherResult) -> TriggerFlowParams:
+def execute(flow_params_fw: FileWatcherResult) -> TriggerFlowParams | None:
     """
     Called when all glob patterns specified by get_param_mapping have been matched.
 
@@ -62,6 +69,11 @@ def execute(flow_params_fw: FileWatcherResult) -> TriggerFlowParams:
     ----------
     flow_params_fw : FileWatcherResult
         Dict of FileParam objects indexed by <node name>.<param name>
+
+    Returns
+    -------
+    TriggerFlowParams | None
+        Parameters to use in triggered Flow.  If None is specified, then Flow will not be triggered.
     """
     pass
 ```
@@ -111,7 +123,7 @@ def get_param_mapping(
     }
 
 
-def execute(flow_params_fw: FileWatcherResult, **kwargs) -> TriggerFlowParams:
+def execute(flow_params_fw: FileWatcherResult, **kwargs) -> TriggerFlowParams | None:
     return TriggerFlowParams(
         single_file_params=flow_params_fw.files,
         multi_file_params=None,
@@ -166,7 +178,7 @@ def get_param_mapping(
 
 
 # Required Function
-def execute(flow_params_fw: FileWatcherResult, **kwargs) -> TriggerFlowParams:
+def execute(flow_params_fw: FileWatcherResult, **kwargs) -> TriggerFlowParams | None:
     fcs_param = "Read_FCS_Files.fcs"
 
     file_param_list = []
