@@ -247,7 +247,7 @@ module.exports = {
       },
       {
         type: 'category',
-        label: 'Environment Administration',
+        label: 'Environment Configuration',
         collapsed: true,
         items: [
           'app/admin/AdminControls',
@@ -319,6 +319,20 @@ module.exports = {
     {
       type: 'doc',
       id: 'sdk/BenchlingClass',
+    },
+    {
+      type: 'category',
+      label: 'Flow Helpers',
+      collapsed: false,
+      items: [{
+          type: 'doc',
+          id: 'sdk/SendingAlerts',
+        },
+        {
+          type: 'doc',
+          id: 'sdk/FlowRunAutomation',
+        }
+      ]
     },
     {
       type: 'category',
