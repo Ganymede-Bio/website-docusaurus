@@ -44,8 +44,6 @@ The table below provides a list of available Nodes, along with details on whethe
 | App        | Azure_Write               | FileAny                 | API                      | False         | False      |
 | App        | Benchling_Api             | API                     | NodeReturn               | True          | False      |
 | App        | Benchling_Event           | Event                   | FlowInputs or NodeReturn | True          | False      |
-| App        | Benchling_Read            | API                     | NodeReturn               | True          | False      |
-| App        | Benchling_Read_Object     | API                     | NodeReturn               | True          | False      |
 | App        | Benchling_Warehouse_Query | Table                   | NodeReturn               | True          | False      |
 | App        | Benchling_Warehouse_Sync  | API                     | NodeReturn               | True          | False      |
 | App        | Benchling_Write           | Table                   | NodeReturn               | True          | False      |
@@ -88,7 +86,6 @@ The table below provides a list of available Nodes, along with details on whethe
 | Instrument | Synergy_Read              | FileTxt                 | NodeReturn               | True          | False      |
 | Instrument | Synergy_Read_Multi        | Set[FileTxt]            | NodeReturn               | True          | True       |
 | Instrument | WSP_Read                  | FileWSP                 | NodeReturn               | True          | False      |
-| Tag        | Benchling_Tag             | TagBenchling            | string                   | False         | False      |
 | Tag        | Input_Param               |                         | string                   | False         | False      |
 
 #### Node Categories
@@ -185,11 +182,6 @@ To initialize a `FlowInputs` object, use the following parameters from `ganymede
   - _param_ **node_name**: str - Name of the Node within triggered Flow to pass parameter(s) to.
   - _param_ **param_name**: str - Node parameter in the triggered Flow Node that is used to specify the string pattern that the parameter must match (e.g., "param" for the Input_Param Node).
   - _param_ **param_value**: str - Value to pass into Node.
-
-`Tag` is a dataclass used to pass Benchling Tags into a node, and is used exclusively with the [Benchling_Tag Node](./Tag/Benchling_Tag.md).  It has the following attributes:
-  - _param_ **node_name**: str - Name of the node within triggered Flow to pass tag(s) into.
-  - _param_ **display_tag**: str - Value displayed in the dropdown in the Ganymede UI.  For Benchling_Tag Nodes, this is the name of the tag displayed in the dropdown in Flow View / Flow Editor.
-  - _param_ **run_tag**: str - Underlying value of the tag.  For Benchling_Tag Nodes, this is the Benchling ID associated with the value selected in the dropdown.
 
 #### Other input/output types
 
