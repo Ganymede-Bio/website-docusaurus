@@ -9,9 +9,9 @@ This page contains a summary of key version updates for the Ganymede [Agent](../
 ## 5.4.0
 
 - Stability improvements in file capture
-- Bug fixes for robustness in [applying tags in Agents](../sdk/markdowns/AgentSDK#function-add_file_tag_to_fileparam)
 - Improved robustness in capturing Connection configuration in UI
-- Bug fix for robustness in Agent full update
+- Improved file cleanup, robustness when conducting Agent full update
+- Bug fixes for robustness in [applying tags in Agents](../sdk/markdowns/AgentSDK#function-add_file_tag_to_fileparam)
 
 ## 5.3.0
 
