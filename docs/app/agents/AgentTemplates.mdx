@@ -198,22 +198,33 @@ def execute(flow_params_fw: FileWatcherResult, **kwargs) -> TriggerFlowParams | 
     )
 ```
 
-### Trigger Flow with indeterminate number of files when all files in watch directory are older than _stable_time_ seconds.
+### Trigger Flow with indeterminate number of files
 
-This example shows an Agent that captures a CSV file and an indeterminate number of Excel files from a directory.  The Agent will trigger a Flow if all files in the directory are older than [_stable_time_](./Agent#reserved-variables) seconds.
+This example shows an Agent that captures a CSV file and an indeterminate number of Excel files from a directory.  The Agent will trigger a Flow if after observing the CSV file and waiting for _settle_time_ seconds.  Files are associated by experiment ID + project ID, and then tagged with the experiment ID and project ID.
 
 ```python
+from typing import Callable
+
 import glob
 import os
-from typing import Callable
-from datetime import datetime, timedelta
-from time import sleep
+import time
+import re
+from urllib import parse
 
 from agent_sdk import (
+    FileParam,
     FileWatcherResult,
     TriggerFlowParams,
+    MultiFileParam,
+    info,
+    error,
+    debug,
     file_params_list_to_multi,
+    add_file_tag_to_fileparam,
 )
+
+single_file_param_key = "Read_CSV.csv"
+multi_file_param_key = "Read_Excel_Multi.excel"
 
 
 def fp(watch_dir: str, parent_dir: str, pattern: str) -> Callable[[str], bool]:
@@ -230,60 +241,72 @@ def get_param_mapping(
     modified_time: str = "",
     body: bytes = bytes(),
 ) -> dict[str, Callable[[str], bool]]:
-    match_dict = dict()
 
-    match_dict["Read_CSV.csv"] = fp(watch_dir, parent_dir, "*csv")
-
-    excel_files = glob.glob(os.path.join(watch_dir, parent_dir, "*.xlsx"))
-    match_dict.update(dict(zip(excel_files, excel_files)))  # match each excel file uniquely
+    # Only match using the single csv:
+    match_dict = {single_file_param_key: fp(watch_dir, parent_dir, "*csv")}
 
     return match_dict
 
 
 # Required Function
 def execute(flow_params_fw: FileWatcherResult, **kwargs) -> TriggerFlowParams | None:
-    current_time = datetime.utcnow()
-    excel_param = "Excel_Read_Multi.excel"
-    input_path = kwargs.get("vars", {}).get("input_path", "")
-    stable_time = float(kwargs.get("vars", {}).get("stable_time", 0))
 
-    # ensure that all files have been captured
-    # 
-    # in this case, it's assumed that the files are located in the watch_dir; 
-    # a common pattern is to repeat this logic based on parent_dir (not shown here for conciseness)
-    file_count = sum(1 for entry in os.scandir(input_path) if entry.is_file())
-    if file_count > len(flow_params_fw.files):
-        return None
+    input_path = kwargs.get("vars", {}).get("input_path", "")
+    settle_time = float(kwargs.get("vars", {}).get("settle_time", 10))
 
     if not input_path:
         raise GanymedeException(
             "input_path not specified in Agent variables.", exception_type="Validation"
         )
 
-    # ensure that enough time has elapsed since when the last file was captured
-    time.sleep(stable_time)
+    # Ensure all Excel files have been moved.
+    # Note this may need more checks as well if the files are being copied (whether directly or by moving to network drive, etc)
+    # Also may need more time if drive is local but external, etc
+    info(f"Waiting {settle_time} sec for all moved Excel files to settle...")
+    time.sleep(settle_time)
 
-    for file_param in flow_params_fw.files.values():
-        if current_time - os.path.getmtime(
-            os.path.join(input_path, file_param.filename)
-        ) < timedelta(seconds=stable_time):
-            return None
-        
-    excel_file_param_list = []
-    for file_param in flow_params_fw.files.values():
-        if not file_obj.filename.endswith(".xlsx"):
-            continue
-        file_obj.content_type = "application/vnd.ms-excel"
-        file_obj.param = excel_param
-        excel_file_param_list.append(file_obj)
+    # There should be one and only one csv here:
+    csv_fileparam = list(flow_params_fw.files.values())[0]
+    filename = csv_fileparam.filename
 
-    m = file_params_list_to_multi(excel_file_param_list)
-    m.param = excel_param
+    # Now find all excel files with matching exp_id and prj_id
+    filename_spl = filename.split("_")
+    exp_id = filename_spl[0]
+    prj_id = filename_spl[1]
+    excel_files = glob.glob(os.path.join(input_path, f"{exp_id}_{prj_id}_*.xlsx"))
+
+    # Tag csv with experiment ID and project ID
+    try:
+        add_file_tag_to_fileparam(
+            flow_params_fw.files[single_file_param_key], "experiment_id", exp_id
+        )
+    except Exception as e:
+        error(f"Error adding value {exp_id} to experiment_id tag type: {e}")
+    try:
+        add_file_tag_to_fileparam(flow_params_fw.files[single_file_param_key], "project_id", prj_id)
+    except Exception as e:
+        error(f"Error adding value {exp_id} to project_id tag type: {e}")
+
+    # Wrap up all excel files as a multifileparam
+    excel_files_list = [
+        FileParam(filename=filepath, param=multi_file_param_key) for filepath in excel_files
+    ]
+    multi_param = file_params_list_to_multi(excel_files_list)
+    multi_param.param = multi_file_param_key
+
+    # Tag excel files with experiment ID and project ID
+    try:
+        add_file_tag_to_fileparam(multi_param, "experiment_id", exp_id)
+    except Exception as e:
+        error(f"Error adding value {exp_id} to experiment_id tag type: {e}")
+    try:
+        add_file_tag_to_fileparam(multi_param, "project_id", prj_id)
+    except Exception as e:
+        error(f"Error adding value {exp_id} to project_id tag type: {e}")
 
     return TriggerFlowParams(
-        single_file_params={"Read_CSV.csv": flow_params_fw.files["Read_CSV.csv"]},
-        multi_file_params={excel_param: m},
-        benchling_tag=None,
+        single_file_params={single_file_param_key: flow_params_fw.files[single_file_param_key]},
+        multi_file_params={multi_file_param_key: multi_param},
         additional_params=None,
     )
 ```
