@@ -6,6 +6,17 @@ displayed_sidebar: releaseSideBar
 
 This page contains a summary of key version updates for the Ganymede [Agent](../app/agents/Agent.mdx).  Since the individual instances of Agents (connections) are not updated when the Agent is updated, this page can be helpful for determining the capabilities of specific connections previously installed.
 
+## 5.4.7
+
+- Host PC metrics are visible in the UI (i.e. - CPU, memory, and disk usage for Agent Connection are available in UI)
+
+## 5.4.0
+
+- Stability improvements in file capture
+- Improved robustness in capturing Connection configuration in UI
+- Improved file cleanup, robustness when conducting Agent full update
+- Bug fixes for robustness in [applying tags in Agents](../sdk/markdowns/AgentSDK#function-add_file_tag_to_fileparam)
+
 ## 5.3.0
 
 - Add capability to store Windows service identity for Connections
