@@ -252,6 +252,8 @@ def get_param_mapping(
 def execute(flow_params_fw: FileWatcherResult, **kwargs) -> TriggerFlowParams | None:
 
     input_path = kwargs.get("vars", {}).get("input_path", "")
+
+    # number of seconds to wait for files to settle; default is 10 seconds
     settle_time = float(kwargs.get("vars", {}).get("settle_time", 10))
 
     if not input_path:
