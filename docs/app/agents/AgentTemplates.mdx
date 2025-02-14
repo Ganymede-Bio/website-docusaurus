@@ -190,12 +190,126 @@ def execute(flow_params_fw: FileWatcherResult, **kwargs) -> TriggerFlowParams | 
     m = file_params_list_to_multi(file_param_list)
     m.param = fcs_param
     
-    
     return TriggerFlowParams(
         single_file_params=None,
         multi_file_params={fcs_param: m},
         benchling_tag=None,
         additional_params={"Experiment_ID": "exp234"},
+    )
+```
+
+### Trigger Flow with indeterminate number of files
+
+This example shows an Agent that captures a CSV file and an indeterminate number of Excel files from a directory.  The Agent will trigger a Flow if after observing the CSV file and waiting for _settle_time_ seconds.  Files are associated by experiment ID + project ID, and then tagged with the experiment ID and project ID.
+
+```python
+from typing import Callable
+
+import glob
+import os
+import time
+import re
+from urllib import parse
+
+from agent_sdk import (
+    FileParam,
+    FileWatcherResult,
+    TriggerFlowParams,
+    MultiFileParam,
+    info,
+    error,
+    debug,
+    file_params_list_to_multi,
+    add_file_tag_to_fileparam,
+)
+
+single_file_param_key = "Read_CSV.csv"
+multi_file_param_key = "Read_Excel_Multi.excel"
+
+
+def fp(watch_dir: str, parent_dir: str, pattern: str) -> Callable[[str], bool]:
+    def fp_res(x: str):
+        return x in glob.glob(os.path.join(watch_dir, pattern), recursive=True)
+
+    return fp_res
+
+
+def get_param_mapping(
+    watch_dir: str,
+    parent_dir: str = "",
+    file_name: str = "",
+    modified_time: str = "",
+    body: bytes = bytes(),
+) -> dict[str, Callable[[str], bool]]:
+
+    # Only match using the single csv:
+    match_dict = {single_file_param_key: fp(watch_dir, parent_dir, "*csv")}
+
+    return match_dict
+
+
+# Required Function
+def execute(flow_params_fw: FileWatcherResult, **kwargs) -> TriggerFlowParams | None:
+
+    input_path = kwargs.get("vars", {}).get("input_path", "")
+
+    # number of seconds to wait for files to settle; default is 10 seconds
+    settle_time = float(kwargs.get("vars", {}).get("settle_time", 10))
+
+    if not input_path:
+        raise GanymedeException(
+            "input_path not specified in Agent variables.", exception_type="Validation"
+        )
+
+    # Ensure all Excel files have been moved.
+    # Note this may need more checks as well if the files are being copied (whether directly or by moving to network drive, etc)
+    # Also may need more time if drive is local but external, etc
+    info(f"Waiting {settle_time} sec for all moved Excel files to settle...")
+    time.sleep(settle_time)
+
+    # There should be one and only one csv here:
+    csv_fileparam = list(flow_params_fw.files.values())[0]
+    filename = csv_fileparam.filename
+
+    # Now find all excel files with matching exp_id and prj_id
+    filename_spl = filename.split("_")
+    exp_id = filename_spl[0]
+    prj_id = filename_spl[1]
+    excel_files = glob.glob(os.path.join(input_path, f"{exp_id}_{prj_id}_*.xlsx"))
+
+    # Tag csv with experiment ID and project ID
+    try:
+        add_file_tag_to_fileparam(
+            flow_params_fw.files[single_file_param_key], "experiment_id", exp_id
+        )
+    except Exception as e:
+        error(f"Error adding value {exp_id} to experiment_id tag type: {e}")
+    try:
+        add_file_tag_to_fileparam(flow_params_fw.files[single_file_param_key], "project_id", prj_id)
+    except Exception as e:
+        error(f"Error adding value {exp_id} to project_id tag type: {e}")
+
+    # Wrap up all excel files as a multifileparam
+    excel_files_list = [
+        FileParam(filename=filepath, param=multi_file_param_key) for filepath in excel_files
+    ]
+    multi_param = file_params_list_to_multi(excel_files_list)
+    multi_param.param = multi_file_param_key
+
+    # Tag excel files with experiment ID and project ID
+    try:
+        add_file_tag_to_fileparam(multi_param, "experiment_id", exp_id)
+    except Exception as e:
+        error(f"Error adding value {exp_id} to experiment_id tag type: {e}")
+    try:
+        add_file_tag_to_fileparam(multi_param, "project_id", prj_id)
+    except Exception as e:
+        error(f"Error adding value {exp_id} to project_id tag type: {e}")
+
+    return TriggerFlowParams(
+        single_file_params={single_file_param_key: flow_params_fw.files[single_file_param_key]},
+        multi_file_params={multi_file_param_key: multi_param},
+        additional_params=None,
     )
 ```
 
