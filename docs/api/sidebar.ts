@@ -90,6 +90,18 @@ const sidebar: SidebarsConfig = {
           label: "getFlows",
           className: "api-method get",
         },
+        {
+          type: "doc",
+          id: "api/get-flow-inputs",
+          label: "getFlowInputs",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "api/trigger-flow",
+          label: "triggerFlow",
+          className: "api-method post",
+        },
       ],
     },
     {
@@ -152,6 +164,12 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "api/schemas/agentversion",
+          label: "AgentVersion",
+          className: "schema",
+        },
+        {
+          type: "doc",
           id: "api/schemas/agent",
           label: "Agent",
           className: "schema",
@@ -184,6 +202,24 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "api/schemas/flow",
           label: "Flow",
+          className: "schema",
+        },
+        {
+          type: "doc",
+          id: "api/schemas/flowinputschema",
+          label: "FlowInputSchema",
+          className: "schema",
+        },
+        {
+          type: "doc",
+          id: "api/schemas/flowinput",
+          label: "FlowInput",
+          className: "schema",
+        },
+        {
+          type: "doc",
+          id: "api/schemas/triggerflowbody",
+          label: "TriggerFlowBody",
           className: "schema",
         },
         {

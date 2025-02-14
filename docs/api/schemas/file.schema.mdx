@@ -4,15 +4,14 @@ title: "File"
 description: ""
 sidebar_label: "File"
 hide_title: true
+hide_table_of_contents: true
 schema: true
+sample: {"uri":"string","name":"string","creator":"string","createdAt":0,"size":0,"tags":[{"id":"string","type":"string","value":"string"}]}
 custom_edit_url: null
 ---
 
-import DiscriminatorTabs from "@theme/DiscriminatorTabs";
-import SchemaItem from "@theme/SchemaItem";
-import SchemaTabs from "@theme/SchemaTabs";
+import Schema from "@theme/Schema";
 import Heading from "@theme/Heading";
-import TabItem from "@theme/TabItem";
 
 <Heading
   as={"h1"}
@@ -25,121 +24,10 @@ import TabItem from "@theme/TabItem";
 
 
 
-<ul>
-  <SchemaItem
-    collapsible={false}
-    name={"uri"}
-    required={true}
-    schemaName={"string"}
-    qualifierMessage={undefined}
-    schema={{"type":"string"}}
-  >
-    
-  </SchemaItem><SchemaItem
-    collapsible={false}
-    name={"name"}
-    required={true}
-    schemaName={"string"}
-    qualifierMessage={undefined}
-    schema={{"type":"string"}}
-  >
-    
-  </SchemaItem><SchemaItem
-    collapsible={false}
-    name={"creator"}
-    required={false}
-    schemaName={"string"}
-    qualifierMessage={undefined}
-    schema={{"type":"string"}}
-  >
-    
-  </SchemaItem><SchemaItem
-    collapsible={false}
-    name={"createdAt"}
-    required={true}
-    schemaName={"number"}
-    qualifierMessage={undefined}
-    schema={{"type":"number"}}
-  >
-    
-  </SchemaItem><SchemaItem
-    collapsible={false}
-    name={"size"}
-    required={true}
-    schemaName={"number"}
-    qualifierMessage={undefined}
-    schema={{"type":"number"}}
-  >
-    
-  </SchemaItem><SchemaItem
-    collapsible={true}
-    className={"schemaItem"}
-  >
-    <details
-      style={{}}
-      className={"openapi-markdown__details"}
-    >
-      <summary
-        style={{}}
-      >
-        <span
-          className={"openapi-schema__container"}
-        >
-          <strong
-            className={"openapi-schema__property"}
-          >
-            tags
-          </strong><span
-            className={"openapi-schema__name"}
-          >
-             object[]
-          </span>
-        </span>
-      </summary><div
-        style={{"marginLeft":"1rem"}}
-      >
-        <li>
-          <div
-            style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem","paddingBottom":".5rem"}}
-          >
-            Array [
-          </div>
-        </li><SchemaItem
-          collapsible={false}
-          name={"id"}
-          required={true}
-          schemaName={"string"}
-          qualifierMessage={undefined}
-          schema={{"type":"string"}}
-        >
-          
-        </SchemaItem><SchemaItem
-          collapsible={false}
-          name={"type"}
-          required={true}
-          schemaName={"string"}
-          qualifierMessage={undefined}
-          schema={{"type":"string"}}
-        >
-          
-        </SchemaItem><SchemaItem
-          collapsible={false}
-          name={"value"}
-          required={true}
-          schemaName={"string"}
-          qualifierMessage={undefined}
-          schema={{"type":"string"}}
-        >
-          
-        </SchemaItem><li>
-          <div
-            style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem"}}
-          >
-            ]
-          </div>
-        </li>
-      </div>
-    </details>
-  </SchemaItem>
-</ul>
+<Schema
+  schema={{"type":"object","properties":{"uri":{"type":"string"},"name":{"type":"string"},"creator":{"type":"string"},"createdAt":{"type":"number"},"size":{"type":"number"},"tags":{"type":"array","items":{"type":"object","properties":{"id":{"type":"string"},"type":{"type":"string"},"value":{"type":"string"}},"required":["id","type","value"],"title":"Tag"}}},"required":["uri","name","createdAt","size"],"title":"File"}}
+  schemaType={"response"}
+>
+  
+</Schema>
             

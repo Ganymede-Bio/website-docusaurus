@@ -1,0 +1,33 @@
+---
+id: agentversion
+title: "AgentVersion"
+description: ""
+sidebar_label: "AgentVersion"
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: {"agentVersion":"string","author":"string","processor":"string","configuration":"string","coreAgentVersion":"string","createdAt":"2024-07-29T15:51:28.071Z","message":"string","requireFullUpdate":true}
+custom_edit_url: null
+---
+
+import Schema from "@theme/Schema";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"AgentVersion"}
+>
+</Heading>
+
+
+
+
+
+<Schema
+  schema={{"type":"object","properties":{"agentVersion":{"type":"string"},"author":{"type":"string"},"processor":{"type":"string"},"configuration":{"type":"string"},"coreAgentVersion":{"type":"string"},"createdAt":{"format":"date-time","type":"string"},"message":{"type":"string"},"requireFullUpdate":{"type":"boolean"}},"required":["agentVersion","processor","configuration","coreAgentVersion","createdAt","message"],"title":"AgentVersion"}}
+  schemaType={"response"}
+>
+  
+</Schema>
+            
