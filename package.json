@@ -108,7 +108,7 @@
     "local-pkg": "0.5.0",
     "markdown-table": "2.0.0",
     "marked": "13.0.3",
-    "mermaid": "11.4.0",
+    "mermaid": "^11.4.0",
     "mlly": "1.7.2",
     "package-manager-detector": "0.2.2",
     "path-data-parser": "0.1.0",
