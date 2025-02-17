@@ -96,8 +96,8 @@ module.exports = {
           label: 'Release Notes'
         },
         {
-          href: 'https://github.com/Ganymede-Bio/website-docusaurus',
-          label: 'GitHub',
+          href: 'https://chatgpt.com/g/g-67b0b562425881919087cb95e30876cb-ganymede-documentation',
+          label: 'Docs GPT',
           position: 'right',
         }
       ],
@@ -157,7 +157,7 @@ module.exports = {
           ],
         },
       ],
-      copyright: `Copyright © 2024 Ganymede Bio, Inc.  Built with Docusaurus`,
+      copyright: `Copyright © 2022-25 Ganymede Bio, Inc.  Built with Docusaurus`,
     },
   },
   presets: [
