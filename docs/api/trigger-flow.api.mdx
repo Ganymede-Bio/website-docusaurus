@@ -1,0 +1,70 @@
+---
+id: trigger-flow
+title: "triggerFlow"
+description: "Trigger a [Flow](https://docs.ganymede.bio/app/flows/FlowEditor#flows) in an Environment."
+sidebar_label: "triggerFlow"
+hide_title: true
+hide_table_of_contents: true
+api: eJy9VcFu2zAM/RWDu7SAF6fBTr5tQwsUO2xos1OQA2MziVrbUiU5bWDo3wdKcuw2aYet2E62JeqJfHyP7kAq0miFbK5LyMFqsdmQvqrkI6RQkim0ULwLOczDXoLJgveXZ1trlcmzrJSFmWyw2ddU0mQlZIZKZetKPpqMIy9LYaX+4BfOE9Ek2CSXzU5o2dTU2AmkoFBjTZa0gXzRQYM1QQ40BEEKmh5aoamE3OqWUhCclEK7hRRMsaUaIe/A7hUfNVaLZgPOpQe0dSjq72CW4SAZ+0WWe454iVPIxnKieQeoVCUKz2p2Z5i87hharu6o4LqU5h5YQYZ3OcvrRrXWjGJRa9xDCsJSbX6PYdHcnygi0nxyZ4dVSyd3SrQ494snyB2xsAjX9pf0kCOAZQpW2IoRrvoqwb1EGREwOjAfhOkb4OI5o2RjQtWz6ZQfz0XLaDcti/vPO3Qok6+aTS+O0d8L+mk2OwYNxSdWJpx8gpoS0eywEmUidVILYxjgXTe7FAwVrRZ27/2GSny8J35fstItbtiHvku+CzXZreT5oKTxcmO75JDtLrKRR7Nu9OHiAOj44bI4WNhjpHe9z1tdQQ79HOm20lh3NHe8lLTAVRX6zFGBtTW2lWUAXnHepH1Zt1x9iD8UN9hJiW/k/cT4W8LSZxbnRB/PLDGZN4PvL5+wVhW99Omit1zP8cFpw0I02LAw+OrQmaXjlNbSpxqFf5IO0iZ8XEymk2nUAhZMC2fNXarRqyDW9MZc7wYh/dMRH7m39GQzVaFoeLh4AXRRTwvYXUD6Yurnzz/9Dbwcp3mvq2UadbGArluhoZ+6co6XH1rSXtmDjHzHSmH4vYR8jZWhN1g5u4nj6Tx5rY5eWM1+1GpIwevuWUX8Q/qPV3uavLCizLn0sPU13PLRi3A4ejRLOONw4nNRkLJvxo6HxY/vt3NIYRV/mLUs+YxG/xfGx5Cm9FV7o/q1DipsNi1uODZgsqSxZYWMHXzvHRxfvAVPEdGbuefDGzt9JbjrwmRw7hAftl49cZgdIZo7snTO/QI+xjQ7
+sidebar_class_name: "post api-method"
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"triggerFlow"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/v1/environment/{environment}/flows/{flow}/trigger"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Trigger a [Flow](https://docs.ganymede.bio/app/flows/FlowEditor#flows) in an Environment.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"name":"environment","required":true,"in":"path","schema":{"type":"string"}},{"name":"flow","required":true,"in":"path","schema":{"type":"string"}}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{"required":true,"content":{"application/json":{"schema":{"type":"object","properties":{"flowInputs":{"type":"array","items":{"type":"object","properties":{"task":{"type":"string"},"param":{"type":"string"},"value":{"type":"string"},"dataType":{"type":"string"}},"required":["task","param","value","dataType"],"title":"FlowInput"}}},"required":["flowInputs"],"title":"TriggerFlowBody"}}}}}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":"flowRunId","content":{"application/json":{"schema":{"type":"string"}}}},"201":{"description":"","content":{"application/json":{"schema":{"type":"string"}}}},"422":{"description":"Inputs to flow are invalid or missing","content":{"application/json":{"schema":{"type":"string"}}}}}}
+>
+  
+</StatusCodes>
+
+
+      

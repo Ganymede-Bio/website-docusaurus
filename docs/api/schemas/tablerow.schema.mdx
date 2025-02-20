@@ -4,15 +4,14 @@ title: "TableRow"
 description: ""
 sidebar_label: "TableRow"
 hide_title: true
+hide_table_of_contents: true
 schema: true
+sample: {"row":{},"error":"string"}
 custom_edit_url: null
 ---
 
-import DiscriminatorTabs from "@theme/DiscriminatorTabs";
-import SchemaItem from "@theme/SchemaItem";
-import SchemaTabs from "@theme/SchemaTabs";
+import Schema from "@theme/Schema";
 import Heading from "@theme/Heading";
-import TabItem from "@theme/TabItem";
 
 <Heading
   as={"h1"}
@@ -25,64 +24,10 @@ import TabItem from "@theme/TabItem";
 
 
 
-<ul>
-  <SchemaItem
-    collapsible={true}
-    className={"schemaItem"}
-  >
-    <details
-      style={{}}
-      className={"openapi-markdown__details"}
-    >
-      <summary
-        style={{}}
-      >
-        <span
-          className={"openapi-schema__container"}
-        >
-          <strong
-            className={"openapi-schema__property"}
-          >
-            row
-          </strong><span
-            className={"openapi-schema__name"}
-          >
-             object
-          </span><span
-            className={"openapi-schema__divider"}
-          >
-            
-          </span><span
-            className={"openapi-schema__required"}
-          >
-            required
-          </span>
-        </span>
-      </summary><div
-        style={{"marginLeft":"1rem"}}
-      >
-        <SchemaItem
-          name={"property name*"}
-          required={false}
-          schemaName={"string"}
-          qualifierMessage={undefined}
-          schema={{"type":"string"}}
-          collapsible={false}
-          discriminator={false}
-        >
-          
-        </SchemaItem>
-      </div>
-    </details>
-  </SchemaItem><SchemaItem
-    collapsible={false}
-    name={"error"}
-    required={false}
-    schemaName={"string"}
-    qualifierMessage={undefined}
-    schema={{"type":"string"}}
-  >
-    
-  </SchemaItem>
-</ul>
+<Schema
+  schema={{"type":"object","properties":{"row":{"type":"object","additionalProperties":{"type":"string"}},"error":{"type":"string"}},"required":["row"],"title":"TableRow"}}
+  schemaType={"response"}
+>
+  
+</Schema>
             
