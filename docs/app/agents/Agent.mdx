@@ -9,9 +9,9 @@ import { DiffOutlined, PlusOutlined, SelectOutlined } from "@ant-design/icons";
 
 ## Overview
 
-Agents are Windows/Linux background services that can filter and process data, upload files into Ganymede Cloud, initiate data processing pipelines, and deliver data from Ganymede Cloud to instrument PCs. Once configured, the executable associated with an Agent is built in the Cloud and downloaded to the instrument PC for installation.
+Agents are Windows/Linux background services that can filter and process data, upload files into Ganymede Cloud, initiate data processing pipelines, and deliver data from Ganymede Cloud to instrument PCs.  Once configured, the executable associated with an Agent is built in the Cloud and downloaded to the instrument PC for installation.
 
-Individual instances of an Agent are called [Connections](./AgentMonitoring.mdx). Users configure Agent and Connection behavior through a combination of configuration and user-defined code, allowing for flexibility in capturing files and interacting with the Ganymede ecosystem.
+Individual instances of an Agent are called [Connections](./AgentMonitoring.mdx).  Users configure Agent and Connection behavior through a combination of configuration and user-defined code, allowing for flexibility in capturing files and interacting with the Ganymede ecosystem.
 
 <img
   alt="Connections front page"
@@ -26,9 +26,16 @@ For system requirements, see [Agent Network Config & Prerequisites](../configura
 #### Agent structure
 
 <div class="text--center">
-  ```mermaid stateDiagram-v2 direction LR [*] --> Trigger Trigger --> Processor
-  Processor --> Trigger Processor --> Action Action --> Trigger Action --> [*]
-  ```
+```mermaid
+stateDiagram-v2 
+  direction LR
+  [*] --> Trigger
+  Trigger --> Processor 
+  Processor --> Trigger
+  Processor --> Action 
+  Action --> Trigger
+  Action --> [*]
+```
 </div>
 
 - **Agent**: A combination of a trigger, processor, and action configuration to move data from a remote user device into Ganymede.
@@ -40,7 +47,7 @@ For system requirements, see [Agent Network Config & Prerequisites](../configura
 
 #### Agent / Connection configuration
 
-- **Runtime Update**: An in-place update to the latest processor and configuration (Agent and Connection levels) without stopping the process. The pipeline loop temporarily pauses to reload files, but no data is lost.
+- **Runtime Uptime**: An in-place update to the latest processor and configuration (Agent and Connection levels) without stopping the process. The pipeline loop temporarily pauses to reload files, but no data is lost.
 - **Full Update**: A complete update of the Connection binary, useful for incorporating new dependency updates or core-codebase changes. A new Connection executable must be brought up in parallel.
 - **Connection Configuration**: Each installed executable maintains its own name, labels, variables, and file tags. This configuration, along with the “parent-level” Agent configuration and processor, makes a Connection unique. Some metadata, like ID, start time, version, and generated metadata, is not configurable.
 - **Connection Version**: Updated whenever the Connection configuration is modified. It follows the standard Ganymede version scheme of YYYYMMDD_HHmmSSssss.
@@ -93,9 +100,8 @@ The _Configuration_ input specifies the action performed by the Agent, with opti
   For Cloud Watcher agents that download files from Ganymede Cloud, you can specify that they watch for flow _inputs_ (instead of the flow outputs) by adding the following to the Additional Params input box:
 
   ```bash
-  -v "input_bucket=true"
+  -v "input_bucket=true" 
   ```
-
   :::
 
 - [**Load local files into Ganymede with a custom filter**](#load-local-files-into-ganymede-with-a-custom-filter): Send specified files on local instrument PC and process on Ganymede Cloud
@@ -111,7 +117,7 @@ The _execute_ function in user-defined code for every Agent type can return `Non
 
 ### Watch for files locally then run flow
 
-A Connection watches a directory (and associated subdirectories) for new files and updates to existing files. The Flow configured with the Agent is triggered when all expected files are found.
+A Connection watches a directory (and associated subdirectories) for new files and updates to existing files.  The Flow configured with the Agent is triggered when all expected files are found.
 
 #### Input Parameters
 
@@ -121,7 +127,7 @@ A Connection watches a directory (and associated subdirectories) for new files a
 - `File pattern to parameter mapping`: A [glob pattern](<https://en.wikipedia.org/wiki/Glob_(programming)>) associated with the input parameter(s) for the selected flow.
 
   :::note
-
+  
   This option is only available during Agent creation. Further configuration updates will occur inside the notebook, not inside the agent configuration
 
   :::
@@ -132,23 +138,24 @@ A Connection watches a directory (and associated subdirectories) for new files a
 
 #### Reserved Variables
 
-Reserved variables are used to configure Connection behavior. These can be set [at installation](./AgentInstall#windows-installation) or in the Connections panel post-installation.
+Reserved variables are used to configure Connection behavior.  These can be set [at installation](./AgentInstall#windows-installation) or in the Connections panel post-installation.
 
 - `input_path`: specifies the directory to watch.
-- `check_interval`: for Agents v5.1.28+, specifies frequency (in seconds) with which a Connection will poll the local directory for new, stable files. If left blank, the default value is 5 seconds.
-- `stable_time`: for Agents v5.1.28+, specifies the time (in seconds) that a file must remain unchanged before being considered stable. If left blank, the default value is 5 seconds.
+- `check_interval`: for Agents v5.1.28+, specifies frequency (in seconds) with which a Connection will poll the local directory for new, stable files.  If left blank, the default value is 5 seconds.
+- `stable_time`: for Agents v5.1.28+, specifies the time (in seconds) that a file must remain unchanged before being considered stable.  If left blank, the default value is 5 seconds.
 - `ignore_list`: A comma-separated list of patterns that tell the Agent which files/directories to skip watching entirely (events will not hit the agent logs or processor code). Useful for ignoring large volumes of events from backup, log, or other oft-modified but irrelevant files.
   - NOTE: These patterns use a simplified "glob" syntax where the double asterisk `**` can only appear at the start of a pattern. For example, `**/*.txt` is valid (matches text files in any directory), but `backup/**/*.txt` is not valid (`**` is not at the left). To match files in subdirectories, use single asterisks `*`. You'll need multiple patterns, one for each directory level - e.g. `**/backup/*.txt` AND `**/backup/*/*.txt` for files one level deeper, and so on for each additional subdirectory level (since right `**` doesn't work). Full pattern syntax details are in the [Python `pathlib` documentation](https://docs.python.org/3/library/pathlib.html#pathlib.PurePath.match).
 
+
 #### User-Defined Code
 
-The user-defined code will be generated to map those file patterns to parameters. Three functions may require modification during configuration:
+The user-defined code will be generated to map those file patterns to parameters.  Three functions may require modification during configuration:
 
-- `get_param_mapping`: This function is called whenever a file is added or modified in the watch directory. Modify this function to specify the files you want to look for prior to triggering a flow.
+- `get_param_mapping`: This function is called whenever a file is added or modified in the watch directory.  Modify this function to specify the files you want to look for prior to triggering a flow.
 - `execute`: Called when all glob patterns specified by `get_param_mapping` have been matched, this object returned by this function specifies the inputs to the flow that is executed when all files are observed.
-- `fp`: This function returns a function that performs pattern matching against a file path. Use this function as a template for matching files.
+- `fp`: This function returns a function that performs pattern matching against a file path.  Use this function as a template for matching files.
 
-For example, if the instrument outputs a CSV file called "\{id\}\_lc_output\<YYYYMMDD\>.csv" that is to be ingested by a [CSV_Read node](../../nodes/File/CSV_Read.md) called "Ingest_Data", an appropriate configuration would be "\{id\}\_lc_output\*.csv" for the input box associated with the "Ingest_Data.csv" node. The corresponding user-defined code would be:
+For example, if the instrument outputs a CSV file called "\{id\}\_lc_output\<YYYYMMDD\>.csv" that is to be ingested by a [CSV_Read node](../../nodes/File/CSV_Read.md) called "Ingest_Data", an appropriate configuration would be "\{id\}\_lc_output\*.csv" for the input box associated with the "Ingest_Data.csv" node.  The corresponding user-defined code would be:
 
 ```python
 from ganymede_sdk.agent.models import TriggerFlowParams, FileWatcherResult
@@ -209,7 +216,7 @@ def execute(flow_params_fw: FileWatcherResult) -> TriggerFlowParams | None:
     ----------
     flow_params_fw : FileWatcherResult
         Dict of FileParam objects indexed by <node name>.<param name>
-
+    
     Returns
     -------
     TriggerFlowParams | None
@@ -298,7 +305,7 @@ An instrument outputs files to a directory as it completes runs, which are proce
 
 ### Set a cron job to run flows periodically
 
-A Connection executes a Python script on a set cadence. Commonly, this Agent type is used as a more flexible version of the Agent type that runs flows upon detecting file change, to allow for greater logic customization in triggering Flows.
+A Connection executes a Python script on a set cadence.  Commonly, this Agent type is used as a more flexible version of the Agent type that runs flows upon detecting file change, to allow for greater logic customization in triggering Flows.
 
 Cron Agents can conditionally trigger code, depending on the return value of the execute function; no Flow is triggered if None is returned.
 
@@ -350,7 +357,7 @@ A user-defined script runs once a day to poll and capture updates from telemetry
 
 ### Watch for files locally and upload
 
-A Connection that monitors a local directory (and associated subdirectories) for new files and file updates, uploading them to Ganymede Cloud when observed. This type of Agent does not kick off a Flow.
+A Connection that monitors a local directory (and associated subdirectories) for new files and file updates, uploading them to Ganymede Cloud when observed.  This type of Agent does not kick off a Flow.
 
 #### Input Parameters
 
@@ -373,7 +380,7 @@ A Connection that monitors a local directory (and associated subdirectories) for
 
 #### Example use case
 
-Multiple flow cytometers are used to observe cell populations for a related set of experiments. Ganymede Connections associated with an Agent are configured to systematically capture these runs.
+Multiple flow cytometers are used to observe cell populations for a related set of experiments.  Ganymede Connections associated with an Agent are configured to systematically capture these runs.
 
 ### Watch for flow outputs then save locally
 
@@ -409,7 +416,7 @@ Instructions for lab execution are generated in Ganymede Cloud and downloaded to
 
 ### Load local files into Ganymede with a custom filter
 
-A Connection that loads local files into Ganymede one time (as opposed to persistently monitoring a directory for new files and updates). This can be useful for conducting data backfills.
+A Connection that loads local files into Ganymede one time (as opposed to persistently monitoring a directory for new files and updates).  This can be useful for conducting data backfills.
 
 <div class="text--center">
   <img
@@ -450,7 +457,7 @@ A local file is modified at regular intervals and needs to uploaded to Ganymede 
 
 ## Variables and Labels in Windows Agent Connections
 
-For Agents that reference local directories, the monitored directory is specified in the Additional Params input box. All subdirectories of _input_path_ are also monitored.
+For Agents that reference local directories, the monitored directory is specified in the Additional Params input box.  All subdirectories of _input_path_ are also monitored.
 
 ```shell
 -v "input_path=/absolute/path"
@@ -467,7 +474,7 @@ For Agents that reference local directories, the monitored directory is specifie
 
 ```
 
-More generally, Variables and Labels can be flexibly used to control Connection behavior. Additional Variables and Labels can be defined as show in the example below:
+More generally, Variables and Labels can be flexibly used to control Connection behavior.  Additional Variables and Labels can be defined as show in the example below:
 
 ```shell
 # Example: multiple variables and labels passed in
@@ -505,8 +512,8 @@ Windows services use the Local System User, which does not have network privileg
 To do so, follow the steps below:
 
 1. **Set Up Authentication**:
-   - Use Windows Credential Manager to store the remote user's credentials on the local system.
-   - Or, create matching local (if cross-domain) or domain (if on the same domain, e.g. AD) user accounts on both the remote and local systems.
+    - Use Windows Credential Manager to store the remote user's credentials on the local system.
+    - Or, create matching local (if cross-domain) or domain (if on the same domain, e.g. AD) user accounts on both the remote and local systems.
 2. **Check Network**:
    - Ensure both systems can communicate as described on the [Agent Network Config page](../configuration/AgentSystemRequirements)
 3. **Service Configuration**:
@@ -542,3 +549,4 @@ To modify user-defined code executed by the Agent, select the Agent in the Ganym
 &nbsp;
 
 Previously built Agents remain available for download in Ganymede in the [History tab](./AgentMonitoring#viewing-build-history).
+
