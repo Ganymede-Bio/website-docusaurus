@@ -47,7 +47,7 @@ stateDiagram-v2
 
 #### Agent / Connection configuration
 
-- **Runtime Uptime**: An in-place update to the latest processor and configuration (Agent and Connection levels) without stopping the process. The pipeline loop temporarily pauses to reload files, but no data is lost.
+- **Runtime Update**: An in-place update to the latest processor and configuration (Agent and Connection levels) without stopping the process. The pipeline loop temporarily pauses to reload files, but no data is lost.
 - **Full Update**: A complete update of the Connection binary, useful for incorporating new dependency updates or core-codebase changes. A new Connection executable must be brought up in parallel.
 - **Connection Configuration**: Each installed executable maintains its own name, labels, variables, and file tags. This configuration, along with the “parent-level” Agent configuration and processor, makes a Connection unique. Some metadata, like ID, start time, version, and generated metadata, is not configurable.
 - **Connection Version**: Updated whenever the Connection configuration is modified. It follows the standard Ganymede version scheme of YYYYMMDD_HHmmSSssss.
