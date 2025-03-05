@@ -255,7 +255,12 @@ module.exports = {
             type: 'doc',
             id: 'app/admin/ExternalPlatform',
             label: 'External Platform Integration'
+          },              {
+            type: 'doc',
+            id: 'app/configuration/AgentToS3BucketConfig',
+            label: 'Connect Agent to S3 Bucket'
           },
+
           {
             type: 'category',
             label: 'Authentication',
@@ -269,7 +274,7 @@ module.exports = {
                 type: 'doc',
                 id: 'app/configuration/SSOConfig',
                 label: 'SSO/SAML Configuration'
-              }              
+              }
             ]
           },
           {
