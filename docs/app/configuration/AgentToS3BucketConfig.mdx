@@ -17,6 +17,11 @@ The following steps outline the process to enable **Ganymede Agents** to write d
 First, create the S3 bucket where files will be uploaded via the AWS Console. If your bucket already exists, you can skip this section.
 
 1. Navigate to **Amazon S3** in the AWS Console.
+    <div style={{textAlign: 'center', width:'700px'}}>
+      <img alt="Environment Settings"
+          src="https://storage.googleapis.com/ganymede-bio-website/public/apiServer/agent_s3_aws_bucket.png"
+      />
+    </div>
 2. Click the **Create Bucket** button.
 3. In the **Bucket Name** field, provide a name for your bucket.
    *We suggest including "ganymede" in the name to make buckets easier to manage.*
@@ -32,6 +37,11 @@ Next, we need to add the S3 bucket to your Ganymede environment:
 1. Navigate to your tenant in the **Ganymede web app** (https://[your-tenant].ganymede.bio)
 2. Select the environment you want to add the S3 bucket to.
 3. Access **Environment Settings** in the top right corner.
+    <div style={{textAlign: 'center', width:'700px'}}>
+      <img alt="Environment Settings"
+          src="https://storage.googleapis.com/ganymede-bio-website/public/apiServer/agent_s3_environment_settings.png"
+      />
+    </div>
 4. Navigate to the **Integration** tab.
 5. Click the **Add Bucket** button.
 6. Input the following details:
@@ -48,6 +58,11 @@ Next, we need to add the S3 bucket to your Ganymede environment:
 Next, we need to set up an AWS role with the appropriate permissions to access the bucket. If you already have a role ARN set up within Ganymede, you can modify it to ensure it has the correct permissions for your bucket.
 
 1. Navigate to the **IAM Console** in AWS: [https://console.aws.amazon.com/iam/](https://console.aws.amazon.com/iam/)
+    <div style={{textAlign: 'center', width:'700px'}}>
+      <img alt="IAM Role Section"
+          src="https://storage.googleapis.com/ganymede-bio-website/public/apiServer/agent_s3_aws_role_page.png"
+      />
+    </div>
 2. In the left-hand menu, click on **Roles**.
 3. Click the **Create Role** button.
 4. Select **Trusted Entity**:
@@ -56,6 +71,11 @@ Next, we need to set up an AWS role with the appropriate permissions to access t
 5. Click **Next**.
 6. **Attach Permissions Policies**:
    - Attach the **AmazonS3FullAccess** policy to the role.
+       <div style={{textAlign: 'center', width:'700px'}}>
+         <img alt="AWS Role Access Policy"
+             src="https://storage.googleapis.com/ganymede-bio-website/public/apiServer/agent_s3_aws_full_access_policy.png"
+         />
+       </div>
 7. Click **Next**.
 8. Provide a name for your role (e.g., `MyS3Role`).
 9. Leave the trust policy as is for now and click **Create Role**.
@@ -74,6 +94,11 @@ Once the role is created:
 3. Access **Environment Settings** in the top right corner.
 4. Navigate to the **Integration** tab.
 5. Find the **AWS Ganymede Role ARN** field and paste the **Role ARN** you just copied.
+    <div style={{textAlign: 'center', width:'700px'}}>
+      <img alt="AWS Role ARN"
+          src="https://storage.googleapis.com/ganymede-bio-website/public/apiServer/agent_s3_role_arn.png"
+      />
+    </div>
 6. Refresh the Ganymede page to ensure the Role ARN is propagated.
 
 ---
@@ -87,6 +112,11 @@ Now that your role is created in AWS, we can update its permissions. It is recom
 3. In the AWS Console, click on the **Trust Relationships** tab.
 4. Click **Edit Trust Policy**.
 5. In your **Ganymede** window, locate the **Trust Policy** under **AWS Trust Policy JSON**.
+       <div style={{textAlign: 'center', width:'700px'}}>
+         <img alt="AWS Trust Policy JSON"
+             src="https://storage.googleapis.com/ganymede-bio-website/public/apiServer/agent_s3_json_and_cors.png"
+         />
+       </div>
 6. Copy the elements from the **“Statement”** section of the **AWS Trust Policy JSON**.
 7. Append these copied elements into the existing **“Statement”** array in the AWS console.
 8. Click **Update Policy**.
@@ -98,6 +128,11 @@ Now that your role is created in AWS, we can update its permissions. It is recom
 1. In your **AWS Console** tab/window, navigate to **IAM Policies** and click **Create Policy**.
 2. In your **Ganymede** tab/window, copy the **IAM Policy JSON** by clicking the copy icon next to your bucket.
    - It is advised to **refresh your page** before copying to ensure the policy is updated with any changes you may have made.
+          <div style={{textAlign: 'center', width:'700px'}}>
+            <img alt="IAM Policy Copy"
+                src="https://storage.googleapis.com/ganymede-bio-website/public/apiServer/agent_s3_iam_policy_copy.png"
+            />
+          </div>
 3. Save the policy with a name in the format `ganymede-BUCKET-NAME-access`.
 4. Navigate back to the AWS role you created and click **Add Permissions**.
 5. Select **Attach Policies**, then search for and select the policy you just created.
@@ -113,6 +148,11 @@ The last step is to update your bucket policies to control access. Again, we rec
 2. Select the **Permissions** tab.
 3. In the **Bucket Policy** section, select **Edit** to open the JSON editor.
 4. In your **Ganymede** tab/window, navigate to the **Integrations** tab and copy the **Bucket Policy JSON** by clicking the copy icon next to your bucket.
+          <div style={{textAlign: 'center', width:'700px'}}>
+            <img alt="Bucket Policy Copy"
+                src="https://storage.googleapis.com/ganymede-bio-website/public/apiServer/agent_s3_bucket_policy_copy.png"
+            />
+          </div>
 5. Paste the copied JSON into the JSON editor in the **AWS Console**.
 6. Click **Save Changes**.
 
@@ -121,6 +161,11 @@ Next, configure **CORS** (Cross-Origin Resource Sharing):
 1. In the **Permissions** tab of your S3 bucket, scroll down to the **Cross-origin resource sharing (CORS)** section.
 2. Click **Edit**.
 3. In your **Ganymede** tab/window, copy the **AWS Bucket CORS JSON**.
+          <div style={{textAlign: 'center', width:'700px'}}>
+            <img alt="CORS Copy"
+                src="https://storage.googleapis.com/ganymede-bio-website/public/apiServer/agent_s3_json_and_cors.png"
+            />
+          </div>
 4. Paste the copied JSON into the AWS CORS editor.
 5. Click **Save Changes**.
 
@@ -132,6 +177,11 @@ With the setup complete, the final step is to test your connection.
 
 1. Navigate to the **Integrations** tab within the **Ganymede web app**.
 2. Next to your bucket, click the **Validate Setup** button.
+          <div style={{textAlign: 'center', width:'700px'}}>
+            <img alt="Validate Setup"
+                src="https://storage.googleapis.com/ganymede-bio-website/public/apiServer/agent_s3_validate_setup.png"
+            />
+          </div>
 3. A successful test will result in a **success message**.
 4. If testing does not succeed, please reach out to **Ganymede support** for assistance.
 
