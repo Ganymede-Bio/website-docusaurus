@@ -54,7 +54,7 @@ FileParam specifies files to be uploaded to Ganymede Cloud and their correspondi
 
 MultiFileParam is used for submitting multiple files to a single node. It includes the following parameters:
 
-- _param_ **files**: str - Alternative method for specifying file contents, where the key is the filename and the value is the file body.
+- _param_ **files**: list[ObservedFile] - Alternative method for specifying file contents, where the key is the filename and the value is the file body.
 - _param_ **content_type**: str - Content type of file, e.g. "text/plain".  If not specified, the content type of the first file in the files dict will be used.
 - _param_ **param**: str - Name of parameter to be used in flow, e.g. `node_name`.`parameter_field_name`
 - _param_ **parent_dir**: str - Path within Agent watch directory that contains file.  For example. if C:/Users/username/watch_dir/ is being watched and C:/Users/username/watch_dir/abc/def/my_file.txt is found, then parent_dir would be "abc/def"
