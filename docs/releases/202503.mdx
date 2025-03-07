@@ -8,9 +8,12 @@ displayed_sidebar: releaseSideBar
 **Improvements**
 - **UI**: Incorrect AWS regions will be highlighted in red when adding an S3 bucket to an Environment
 - **Agents**: Tags will be applied more reliably and consistently to Files
+- **Nodes**: The [Load_Parquet_To_Table](../nodes/App/Load_Parquet_to_Table.md) node has been updated to support loading multiple tables.  This Node allows users to load Parquet files in Ganymede storage to Ganymede tables, enabling users to load larger datasets more efficiently.
+- **Flows**: The [retrieve_sql](../sdk/GanymedeClass#method-retrieve_sql) and [retrieve_tables](../sdk/GanymedeClass#method-retrieve_tables) methods now retrieve data in parallel if multiple queries or tables are passed in
 
 **Bug Fixes**
 - **Agents**: Agents were not properly honoring the stable_time parameter 
 - **Agents**: Agents triggering flows with multiple files will now capture those more consistently
+- **Notebooks**: The [lint()](../app/flows/NodeEditor#saving-and-deploying-pipeline-code) function call now works more reliably in notebooks
 
 **Agent Version**: 5.4.25
