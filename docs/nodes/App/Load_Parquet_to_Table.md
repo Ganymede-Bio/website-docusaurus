@@ -8,8 +8,7 @@ displayed_sidebar: webUiSidebar
 
 ### Node Description
 
-Loads parquet files saved in Ganymede storage into datalake tables. Data will be appended to the
-datalake table if it already exists, otherwise create a new one.  
+Loads parquet files saved in Ganymede storage into data lake tables.
 
 ## User-Defined Python
 
