@@ -11,13 +11,12 @@ displayed_sidebar: webUiSidebar
 Sync Benchling Warehouse Postgres database to Ganymede data lake, creating table if it does not
 exist or appending new records
 
-- **if_exists_replace_or_append** : `str`
-If the table already exists, whether to replace the table or append new records.  Options
-are ["replace", "append"].  Default is "replace".
+- **if_exists_replace_or_append**: If the table already exists, whether to replace the table or append new records.  Options are ["replace", "append"].  Default is "replace".
 
 ### Notes
 
 Prior to usage, the following secrets must be configured in your Ganymede environment:
+
 - **benchling_postgres_host**: Host for Benchling warehouse database.  Of the form:
 postgres-warehouse.\<tenant\>.benchling.com
 - **benchling_postgres_username**: Username for Benchling warehouse database.  Note that this is
@@ -36,7 +35,7 @@ assistance, please don't hesitate to reach out to Ganymede.
 
 ## User-Defined Python
 
-This node helps to sync tables from Benchling warehouse to Ganymede data lake. A dataframe is
+This node helps to sync tables from Benchling warehouse to Ganymede datalake. A dataframe is
 constructed with the following columns
 
 - schema: str
@@ -52,7 +51,7 @@ Ganymede.
 ### Parameters
 
 - **ganymede_context** : `GanymedeContext`
-    - Ganymede context variable, which stores flow run metadata
+  - Ganymede context variable, which stores flow run metadata
 
 ### Returns
 

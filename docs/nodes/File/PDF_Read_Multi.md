@@ -8,14 +8,14 @@ displayed_sidebar: webUiSidebar
 
 ### Node Description
 
-Reads contents of multiple pdf files into data lake
+Reads contents of a pdf file into data lake
 
-The contents of the pdf files are passed to the user-defined function, which
+The contents of pdf file are passed to the user-defined function, which
 return one or more tables for storage in Ganymede data lake.
 
 ### Node Attributes
 
-- **input_multi_pdf**
+- **pdf**
   - File extension for valid PDF files submitted.  For example, filling in this attribute with "*.pdf" will only allow files with the extension .pdf to be uploaded.
 - **output_table_results**
   - Table displayed on [Table Head](https://docs.ganymede.bio/app/intro/Concepts#table-head) in Ganymede UI.

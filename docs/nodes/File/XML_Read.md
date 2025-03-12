@@ -13,7 +13,7 @@ table in Ganymede data lake
 
 ### Node Attributes
 
-- **input_file_xml**
+- **xml**
   - File extension for valid XML files submitted.  For example, filling in this attribute with "*.xml" will only allow files with the extension .xml to be uploaded.
 - **output_table_results**
   - Table displayed on [Table Head](https://docs.ganymede.bio/app/intro/Concepts#table-head) in Ganymede UI.
@@ -29,9 +29,9 @@ Parse XML file into table for storage in data lake
 ### Parameters
 
 - **xml_file** : `BytesIO`
-    - Contents of input XML file
+  - Contents of input XML file
 - **ganymede_context** : `GanymedeContext`
-    - Ganymede context variable, which stores flow run metadata
+  - Ganymede context variable, which stores flow run metadata
 
 ### Returns
 

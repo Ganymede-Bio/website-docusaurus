@@ -10,26 +10,19 @@ displayed_sidebar: webUiSidebar
 
 Ingests and processes an image file
 
-Takes multiple images as input, processes via user-defined function, and stores a dict of processed
-images to the storage bucket
+Takes an image as input, processes via user-defined function, and stores a dict of processed
+image(s) to the storage bucket
 
 ### Node Attributes
 
-- **input_multi_image**
+- **image**
   - File extension for valid image files submitted.  For example, filling in this attribute with "*.bmp" will only allow files with the extension .bmp to be uploaded.
 - **output_table_image_info**
-  - Metadata table displayed on [Table Head](https://docs.ganymede.bio/app/intro/Concepts#table-head) in Ganymede UI.
+  - Table to write metadata into.  This table is displayed on the [Table Head](https://docs.ganymede.bio/app/intro/Concepts#table-head) in Ganymede UI.
 
 ### Notes
 
 In the execute function, returning NodeReturn(tables_to_upload=\{'image_info': df\}) would render the DataFrame df in the Flow Editor if Table Head visualization is enabled.
-
-### Example
-
-The example Node configuration captures PNG files and would render image_info_tbl in Flow Editor if Table Heads are enabled
-
-- **image**: *.png
-- **image_info**: image_info_tbl
 
 ## User-Defined Python
 

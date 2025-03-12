@@ -1,6 +1,6 @@
 ---
-sidebar_label: Coda_Write
-title: Coda_Write
+sidebar_label: Coda_Read
+title: Coda_Read
 displayed_sidebar: webUiSidebar
 ---
 
@@ -8,16 +8,15 @@ displayed_sidebar: webUiSidebar
 
 ### Node Description
 
-Writes a table or set of tables to a Coda.io page.
+Reads a table or set of tables from a Coda.io page.
 
-Retrieves one or more tables from Ganymede data lake, which are processed by user-defined
-function.  The tables returned by the user-defined function are uploaded to
-the specified Coda.io page.
+Retrieves one or more tables from the specified Coda.io page, which are processed by
+user-defined function.  The tables returned by the user-defined function are written to the
+Ganymede data lake.
 
 ### Notes
 
 Prior to usage, the following secrets must be configured in your Ganymede environment:
-
 - **coda_api_key**: Coda API Key
 
 Secrets can be configured by clicking on your username in the upper-right hand of the Ganymede

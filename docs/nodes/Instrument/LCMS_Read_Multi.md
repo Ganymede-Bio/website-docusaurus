@@ -8,11 +8,11 @@ displayed_sidebar: webUiSidebar
 
 ### Node Description
 
-Parse and ingest data from multiple LCMS files into Ganymede data lake.
+Parse and ingest data from an LCMS file into Ganymede data lake.
 
 ### Node Attributes
 
-- **input_multi_lcms**
+- **lcms**
   - Glob pattern matching the LCMS file to be read.
 
 ### Example
@@ -28,9 +28,9 @@ Function to process LCMS file data
 ### Parameters
 
 - **lcms_file_paths** : `list[str]`
-    - Paths to LCMS files to be read
+  - Paths to LCMS files to be read
 - **ganymede_context** : `GanymedeContext`
-    - Ganymede context variable, which stores flow run metadata
+  - Ganymede context variable, which stores flow run metadata
 
 ### Returns
 

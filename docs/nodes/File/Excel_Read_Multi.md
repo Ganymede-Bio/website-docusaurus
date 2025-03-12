@@ -16,7 +16,7 @@ uploaded to the Ganymede data lake.
 
 ### Node Attributes
 
-- **input_file_excel**
+- **excel**
   - File extension for valid Excel files submitted.  For example, filling in this attribute with "*.xls*" will allow any file containing extension .xls, .xlsx, .xlsm, and .xlsb to be uploaded.
 - **output_table_results**
   - Table displayed on [Table Head](https://docs.ganymede.bio/app/intro/Concepts#table-head) in Ganymede UI.
@@ -29,7 +29,8 @@ In the execute function, returning NodeReturn(tables_to_upload=\{'results': df\}
 
 The Node attribute configuration below captures all files ending in xls, xlsx, xlsm.
 
-- **excel**: *.\{xls,xlsx,xlsm\}
+excel: *.\{xls,xlsx,xlsm\}
+
 - **results**: instrument_output_results
 
 ## User-Defined Python

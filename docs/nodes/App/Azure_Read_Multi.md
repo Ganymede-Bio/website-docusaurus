@@ -20,6 +20,7 @@ Read all files from a Azure Blob Storage container into Ganymede.
 ### Notes
 
 Prior to usage, the following secrets must be configured in your Ganymede environment:
+
 - **azure_client_id**: App client ID
 - **azure_tenant_id**: App tenant ID
 - **azure_subscription_id**: Azure subscription ID

@@ -20,9 +20,9 @@ Processes table(s) from user-defined SQL query into Powerpoint output
 ### Parameters
 
 - **df_sql_result** : `Optional[pd.DataFrame | list[pd.DataFrame]]`
-    - table or list of tables from SQL query to process
+  - table or list of tables from SQL query to process
 - **ganymede_context** : `GanymedeContext`
-    - Ganymede context variable, which stores flow run metadata
+  - Ganymede context variable, which stores flow run metadata
 
 ### Returns
 

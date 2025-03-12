@@ -41,4 +41,4 @@ An example configuration is shown below:
 - **azure_storage_uri**: https://abc123.blob.core.windows.net
 - **src_object_name**: filename.parquet
 - **dest_azure_container_Name**: abc123
-- **dest_azure_blob_name**: \{dag.dag_id\}/filename.parquet
+- **dest_azure_blob_name**: "\{\{dag.dag_id\}\}/filename.parquet"

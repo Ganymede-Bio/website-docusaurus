@@ -15,7 +15,7 @@ image(s) to the storage bucket
 
 ### Node Attributes
 
-- **input_file_image**
+- **image**
   - File extension for valid image files submitted.  For example, filling in this attribute with "*.bmp" will only allow files with the extension .bmp to be uploaded.
 - **output_table_image_info**
   - Table to write metadata into.  This table is displayed on the [Table Head](https://docs.ganymede.bio/app/intro/Concepts#table-head) in Ganymede UI.
@@ -31,9 +31,9 @@ Process image data into a dictionary of images indexed by filename to save in cl
 ### Parameters
 
 - **img** : `bytes`
-    - Image file, represented as bytes
+  - Image file, represented as bytes
 - **ganymede_context** : `GanymedeContext`
-    - Ganymede context variable, which stores flow run metadata
+  - Ganymede context variable, which stores flow run metadata
 
 ### Returns
 

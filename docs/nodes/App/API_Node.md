@@ -1,6 +1,6 @@
 ---
-sidebar_label: APINode
-title: APINode
+sidebar_label: API_Node
+title: API_Node
 displayed_sidebar: webUiSidebar
 ---
 
@@ -26,6 +26,6 @@ Demonstrates access of generic API
   2 parameters:
 
 - **tables_to_upload**: `dict[str, pd.DataFrame]`
-  keys are table names, values are pandas DataFrames to upload
+  - keys are table names, values are pandas DataFrames to upload
 - **files_to_upload**: `dict[str, bytes]`
-  keys are file names, values are file data to upload
+  - keys are file names, values are file data to upload

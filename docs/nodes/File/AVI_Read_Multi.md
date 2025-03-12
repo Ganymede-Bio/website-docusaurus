@@ -15,7 +15,7 @@ return one or more tables for storage in Ganymede data lake.
 
 ### Node Attributes
 
-- **input_multi_avi**
+- **avi**
   - File extension for valid avi files submitted.  For example, filling in this attribute with "*.avi" limits the node to only accepting files ending in .avi.
 - **output_table_results**
   - Table to display on [Table Head](https://docs.ganymede.bio/app/intro/Concepts#table-head) referencing table output from the Node in the Flow Editor.
@@ -34,11 +34,11 @@ data tables stored in the data lake
 ### Parameters
 
 - **avi_file** : `dict[str, BytesIO]`
-    - avi files, indexed by file name
+  - avi files, indexed by file name
 - **df_sql_result** : `pd.DataFrame | list[pd.DataFrame]`
-    - Table(s) or list of tables retrieved from user-defined SQL query
+  - Table(s) or list of tables retrieved from user-defined SQL query
 - **ganymede_context** : `GanymedeContext`
-    - Ganymede context variable, which stores flow run metadata
+  - Ganymede context variable, which stores flow run metadata
 
 ### Returns
 
