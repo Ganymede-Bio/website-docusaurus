@@ -35,38 +35,33 @@ The table below provides a list of available Nodes, along with details on whethe
 | Analysis   | Python                    | Table(s) and/or File(s) | NodeReturn               | True          | False      |
 | Analysis   | Transform_SQL             | Table(s)                | Table                    | True          | False      |
 | Analysis   | Trigger_Python            | Table(s) and/or File(s) | FlowInputs               | True          | False      |
-| App        | APINode                   | API                     | NodeReturn               | True          | False      |
+| App        | API_Node                  | API                     | NodeReturn               | True          | False      |
 | App        | Airtable_Export           | Table                   | API                      | True          | False      |
 | App        | Airtable_Import           | API                     | NodeReturn               | True          | False      |
 | App        | Azure_Query               | Table                   | NodeReturn               | True          | False      |
 | App        | Azure_Read                | API                     | FileAny                  | False         | False      |
-| App        | Azure_Read_Multi          | API                     | FileAny                  | False         | True       |
 | App        | Azure_Write               | FileAny                 | API                      | False         | False      |
-| App        | Benchling_Api             | API                     | NodeReturn               | True          | False      |
 | App        | Benchling_Event           | Event                   | FlowInputs or NodeReturn | True          | False      |
 | App        | Benchling_Warehouse_Query | Table                   | NodeReturn               | True          | False      |
 | App        | Benchling_Warehouse_Sync  | API                     | NodeReturn               | True          | False      |
 | App        | Benchling_Write           | Table                   | NodeReturn               | True          | False      |
 | App        | Benchling_Write_Object    | Table(s) and/or File(s) | NodeReturn               | True          | False      |
+| App        | Coda_Read                 | Table                   | NodeReturn               | True          | False      |
 | App        | Coda_Write                | Table                   | NodeReturn               | True          | False      |
 | App        | ELabNext_Write            | Table                   | NodeReturn               | True          | False      |
-| App        | Load_Parquet_to_Table     | API                     | FileAny                  | False         | False      |
+| App        | Load_Parquet_to_Table     | API                     | FileAny                  | True          | False      |
 | App        | S3_Event                  | Event                   | FlowInputs               | True          | False      |
 | App        | S3_Read                   | API                     | FileAny                  | True          | False      |
 | App        | S3_Write                  | FileAny                 | API                      | False         | False      |
-| App        | SciNote_API               | Table                   | NodeReturn               | True          | False      |
 | App        | Smartsheet_Read           | API                     | NodeReturn               | True          | False      |
 | App        | Snowflake_Write           | Table                   | NodeReturn               | False         | False      |
 | App        | Webhook_Event             | Event                   | NodeReturn               | True          | False      |
-| File       | AVI_Read                  | FileAVI                 | NodeReturn               | True          | False      |
-| File       | AVI_Read_Multi            | Set[FileAVI]            | NodeReturn               | True          | True       |
 | File       | CSV_Read                  | FileCSV                 | NodeReturn               | True          | False      |
 | File       | CSV_Read_Multi            | Set[FileCSV]            | NodeReturn               | True          | True       |
 | File       | CSV_Write                 | Table(s)                | NodeReturn               | True          | False      |
 | File       | Excel_Read                | FileExcel               | NodeReturn               | True          | False      |
 | File       | Excel_Read_Multi          | Set[FileExcel]          | NodeReturn               | True          | True       |
 | File       | Excel_Write               | Table(s)                | NodeReturn               | True          | False      |
-| File       | HDF5_Read                 | FileHDF5                | NodeReturn               | True          | False      |
 | File       | Image_Read                | FileImage               | NodeReturn               | True          | False      |
 | File       | Image_Read_Multi          | Set[FileImage]          | NodeReturn               | True          | True       |
 | File       | Image_Write               | Table(s)                | NodeReturn               | True          | False      |
@@ -77,14 +72,10 @@ The table below provides a list of available Nodes, along with details on whethe
 | File       | Powerpoint_Write          | Table(s)                | NodeReturn               | True          | False      |
 | File       | XML_Read                  | FileXML                 | NodeReturn               | True          | False      |
 | File       | Zip_Read                  | FileZip                 | NodeReturn               | True          | False      |
-| Instrument | Instron_Tensile_Read      | FileIsTens              | NodeReturn               | True          | False      |
 | Instrument | LCMS_Read                 | File                    | NodeReturn               | True          | False      |
 | Instrument | LCMS_Read_Multi           | File                    | NodeReturn               | True          | True       |
 | Instrument | LC_Read                   | File                    | NodeReturn               | True          | False      |
 | Instrument | LC_Read_Multi             | File                    | NodeReturn               | True          | True       |
-| Instrument | Profilometer_Read         | FileHDF5                | NodeReturn               | True          | False      |
-| Instrument | Synergy_Read              | FileTxt                 | NodeReturn               | True          | False      |
-| Instrument | Synergy_Read_Multi        | Set[FileTxt]            | NodeReturn               | True          | True       |
 | Instrument | WSP_Read                  | FileWSP                 | NodeReturn               | True          | False      |
 | Tag        | Input_Param               |                         | string                   | False         | False      |
 
@@ -194,7 +185,6 @@ Some other input and output types characteristic to Nodes are:
   - **FileCSV**: CSV file
   - **FileExcel**: Excel file (xls, xlsx, ..)
   - **FileImage**: Image file (png, bmp, ..)
-  - **FileHDF5**: HDF5 file
   - **FileXML**: XML file
   - **FileZip**: Zip file
   - **FileAny**: generic data file, which may be unstructured
@@ -228,40 +218,33 @@ The _execute_ function may call classes and functions found within the User-Defi
 | Analysis   | Python                    | Process data with python                                                     |
 | Analysis   | Transform_SQL             | SQL analysis Function                                                        |
 | Analysis   | Trigger_Python            | Process data with Python and trigger subsequent flow                         |
-| App        | APINode                   | Generic API Access Node                                                      |
+| App        | API_Node                  | Generic API Access Node                                                      |
 | App        | Airtable_Export           | Export data from Ganymede data lake to Airtable                              |
 | App        | Airtable_Import           | Import data from Airtable into Ganymede data lake                            |
 | App        | Azure_Query               | Query data from Azure SQL Server                                             |
 | App        | Azure_Read                | Read data from Azure Blob Storage                                            |
-| App        | Azure_Read_Multi          | Read all data from Azure Blob Storage                                        |
 | App        | Azure_Write               | Write data to Azure Blob storage                                             |
-| App        | Benchling_Api             | Read Benchling data into data lake                                           |
 | App        | Benchling_Event           | Capture events from Benchling for triggering flows or saving data            |
-| App        | Benchling_Read            | Read Benchling data into data lake using run tag                             |
-| App        | Benchling_Read_Object     | Read Benchling data into data lake using object ID                           |
 | App        | Benchling_Warehouse_Query | Query Benchling Warehouse from Ganymede                                      |
 | App        | Benchling_Warehouse_Sync  | Sync Benchling Warehouse to Ganymede                                         |
 | App        | Benchling_Write           | Write to Benchling                                                           |
 | App        | Benchling_Write_Object    | Write object to Benchling                                                    |
+| App        | Coda_Read                 | Read Coda tables                                                             |
 | App        | Coda_Write                | Write Coda tables                                                            |
 | App        | ELabNext_Write            | Create and write eLabNext entry                                              |
-| App        | Load_Parquet_to_Table     | Create data lake table from parquet files                                     |
+| App        | Load_Parquet_to_Table     | Create data lake table from parquet files                                    |
 | App        | S3_Event                  | Capture events from AWS S3 for triggering flows                              |
 | App        | S3_Read                   | Ingest data into Ganymede data storage from AWS S3 storage                   |
 | App        | S3_Write                  | Write data to an S3 bucket                                                   |
-| App        | SciNote_API               | Create and write SciNote entry                                               |
 | App        | Smartsheet_Read           | Read sheet from Smartsheet                                                   |
 | App        | Snowflake_Write           | Sync tables in Ganymede data lake to Snowflake                               |
 | App        | Webhook_Event             | Capture events from a webhook for triggering flows                           |
-| File       | AVI_Read                  | Read in contents of an AVI file to a table                                   |
-| File       | AVI_Read_Multi            | Read in contents of multiple avi files to a table                            |
 | File       | CSV_Read                  | Read in contents of a CSV file                                               |
 | File       | CSV_Read_Multi            | Read in contents of multiple CSV files                                       |
 | File       | CSV_Write                 | Write table to CSV file                                                      |
 | File       | Excel_Read                | Read Excel spreadsheet                                                       |
 | File       | Excel_Read_Multi          | Read Excel spreadsheets                                                      |
 | File       | Excel_Write               | Write Excel spreadsheet                                                      |
-| File       | HDF5_Read                 | Read HDF5 data                                                               |
 | File       | Image_Read                | Process image data; store processed images to data store                     |
 | File       | Image_Read_Multi          | Process image data for multiple images; store processed images to data store |
 | File       | Image_Write               | Process tabular data; write an image to data lake                            |
@@ -272,14 +255,9 @@ The _execute_ function may call classes and functions found within the User-Defi
 | File       | Powerpoint_Write          | Process tabular data; write a powerpoint presentation to data lake           |
 | File       | XML_Read                  | Read XML file into data lake                                                 |
 | File       | Zip_Read                  | Extract Zip file                                                             |
-| Instrument | Instron_Tensile_Read      | Load .is_tens file to data lake                                              |
 | Instrument | LCMS_Read                 | Read and process LCMS file in mzML format                                    |
 | Instrument | LCMS_Read_Multi           | Read and process multiple LCMS files                                         |
 | Instrument | LC_Read                   | Read and process an Agilent Chemstation / MassStation HPLC file              |
 | Instrument | LC_Read_Multi             | Read and process multiple Agilent Chemstation / MassStation HPLC files       |
-| Instrument | Profilometer_Read         | Read Mx Profiler data file                                                   |
-| Instrument | Synergy_Read              | Load Synergy text file to data lake                                          |
-| Instrument | Synergy_Read_Multi        | Load multiple Synergy texts file to data lake                                |
 | Instrument | WSP_Read                  | Read FlowJo WSP file into data lake                                          |
-| Tag        | Benchling_Tag             | Read benchling tag                                                           |
 | Tag        | Input_Param               | Input parameter into Flow                                                    |

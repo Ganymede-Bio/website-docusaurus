@@ -32,6 +32,7 @@ S3 bucket and the files to write.  The source bucket can be either the input or 
 ### Notes
 
 Prior to usage, the following secrets must be configured in the environment:
+
 - **aws_s3_role_arn**: AWS Service Account Name
 
 This ARN will be used to enable the Airflow connection to the S3 bucket. Configuring this ARN

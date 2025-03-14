@@ -14,7 +14,7 @@ which are written to the Ganymede data lake.
 
 ### Node Attributes
 
-- **input_file_zip**
+- **zip**
   - File extension for valid zip files submitted.  For example, filling in this attribute with "*.zip" will only allow files with the extension .zip to be uploaded.
 - **output_table_results**
   - Table displayed on [Table Head](https://docs.ganymede.bio/app/intro/Concepts#table-head) in Ganymede UI.
@@ -30,9 +30,9 @@ Reads Zip file and stores extracted files in the data lake.
 ### Parameters
 
 - **input_zip_file** : `bytes`
-    - Zip file as a bytes object
+  - Zip file as a bytes object
 - **ganymede_context** : `Optional[GanymedeContext]`
-    - Ganymede context variable, which stores flow run metadata
+  - Ganymede context variable, which stores flow run metadata
 
 ### Returns
 

@@ -22,6 +22,7 @@ Query Azure SQL database, process data in Python, and upload results to Ganymede
 ### Notes
 
 Prior to usage, the following secrets must be configured in your Ganymede environment:
+
 - **azure_client_id**: App client ID
 - **azure_object_id**: App object ID
 - **azure_tenant_id**: App tenant ID
@@ -54,9 +55,9 @@ Process tabular data from user-defined SQL query, writing results back to data l
 ### Parameters
 
 - **df_sql_result** : `pd.DataFrame | list[pd.DataFrame]`
-    - Table(s) or list of tables retrieved from user-defined SQL query
+  - Table(s) or list of tables retrieved from user-defined SQL query
 - **ganymede_context** : `GanymedeContext`
-    - Ganymede context variable, which stores flow run metadata
+  - Ganymede context variable, which stores flow run metadata
 
 ### Returns
 

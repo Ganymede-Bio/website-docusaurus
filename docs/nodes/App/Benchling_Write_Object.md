@@ -29,6 +29,7 @@ in the relevant Benchling tenant.
 
 Prior to usage, the secrets below must be configured in your Ganymede environment.  More information
 on acquiring these credentials can be found [here](https://docs.benchling.com/docs/authentication).
+
 - **benchling_url**: URL for Benchling tenant; has form https://\<tenant\>.benchling.com
 - **benchling_app_client_id**: Client ID for Benchling application
 - **benchling_client_secret**: Client Secret for Benchling application
@@ -46,13 +47,13 @@ If new custom entities are created, returns DataFrame associated with custom ent
 ### Parameters
 
 - **data** : `dict[str, bytes]`
-    - Data to retrieve from Ganymede cloud storage
+  - Data to retrieve from Ganymede cloud storage
 - **df_sql_result** : `pd.DataFrame | list[pd.DataFrame]`
-    - Tabular results of user-defined SQL query
+  - Tabular results of user-defined SQL query
 - **benchling_context** : `BenchlingContext`
-    - Benchling context variable, which stores Benchling connection information
+  - Benchling context variable, which stores Benchling connection information
 - **ganymede_context** : `GanymedeContext`
-    - Ganymede context variable, which stores flow run metadata
+  - Ganymede context variable, which stores flow run metadata
 
 ### Returns
 

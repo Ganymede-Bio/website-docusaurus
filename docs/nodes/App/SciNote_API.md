@@ -27,6 +27,7 @@ the specified SciNote page.
 ### Notes
 
 Prior to usage, the following secrets must be configured in your Ganymede environment:
+
 - **scinote_server_url**: SciNote Server Name
 - **scinote_api_uid**: SciNote Client ID
 - **scinote_api_secret**: SciNote Client Secret
@@ -58,9 +59,9 @@ Example demonstrating access to SciNote API
 ### Parameters
 
 - **df_sql_result** : `pd.DataFrame | pd.DataFrame`
-    - Table(s) to retrieve from data lake
+  - Table(s) to retrieve from data lake
 - **ganymede_context** : `GanymedeContext`
-    - Ganymede context variable, which stores flow run metadata
+  - Ganymede context variable, which stores flow run metadata
 
 ### Returns
 

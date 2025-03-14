@@ -8,11 +8,11 @@ displayed_sidebar: webUiSidebar
 
 ### Node Description
 
-Parse data from multiple LC files and ingest into Ganymede data lake.
+Parse data from CDF files with LC data and ingest into Ganymede data lake.
 
 ### Node Attributes
 
-- **input_multi_lc**
+- **lc**
   - Glob pattern matching the LC file to be read.
 
 ### Example
@@ -28,9 +28,9 @@ Function to process LC file data
 ### Parameters
 
 - **lc_file_paths** : `list[str]`
-    - Paths to LC files to be read
+  - Paths to LC files to be read
 - **ganymede_context** : `GanymedeContext`
-    - Ganymede context variable, which stores flow run metadata
+  - Ganymede context variable, which stores flow run metadata
 
 ### Returns
 

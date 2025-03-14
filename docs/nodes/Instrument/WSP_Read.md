@@ -8,13 +8,13 @@ displayed_sidebar: webUiSidebar
 
 ### Node Description
 
-Reads an XML file, processes via user-defined function, and stores result
+Reads a FlowJo WSP file, processes via user-defined function, and stores result
 table in Ganymede data lake
 
 ### Node Attributes
 
-- **input_file_xml**
-  - File extension for valid XML files submitted.  For example, filling in this attribute with "*.xml" will only allow files with the extension .xml to be uploaded.
+- **wsp**
+  - File extension for valid WSP files submitted.  For example, filling in this attribute with "*.wsp" will only allow files with the extension .wsp to be uploaded.
 - **output_table_results**
   - Table displayed on [Table Head](https://docs.ganymede.bio/app/intro/Concepts#table-head) in Ganymede UI.
 
@@ -29,9 +29,9 @@ Parse WSP file
 ### Parameters
 
 - **wsp_file** : `BytesIO`
-    - Contents of WSP file
+  - Contents of WSP file
 - **ganymede_context** : `GanymedeContext`
-    - Ganymede context variable, which stores flow run metadata
+  - Ganymede context variable, which stores flow run metadata
 
 ### Returns
 

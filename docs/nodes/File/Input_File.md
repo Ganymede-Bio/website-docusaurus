@@ -13,7 +13,7 @@ result to Ganymede cloud storage.
 
 ### Node Attributes
 
-- **input_file_file_pattern**
+- **file_pattern**
   - Filename pattern for specifying valid input files.  For example, filling in this attribute
   - with "exp_*.xml" will only allow files with the prefix "exp_" and the extension ".xml" to
   - be uploaded.
@@ -31,9 +31,9 @@ Processes file data for saving in cloud storage
 ### Parameters
 
 - **file_data** : `dict[str, bytes]`
-    - Bytes object to process, indexed by filename
+  - Bytes object to process, indexed by filename
 - **ganymede_context** : `GanymedeContext`
-    - Ganymede context variable, which stores flow run metadata
+  - Ganymede context variable, which stores flow run metadata
 
 ### Returns
 

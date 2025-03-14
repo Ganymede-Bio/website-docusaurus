@@ -12,7 +12,7 @@ Parse and ingest data from an LCMS file into Ganymede data lake.
 
 ### Node Attributes
 
-- **input_file_lcms**
+- **lcms**
   - Glob pattern matching the LCMS file to be read.
 
 ### Example
@@ -28,9 +28,9 @@ Function to process LCMS file data
 ### Parameters
 
 - **lcms_file_paths** : `str`
-    - Path to LCMS file to be read
+  - Path to LCMS file to be read
 - **ganymede_context** : `GanymedeContext`
-    - Ganymede context variable, which stores flow run metadata
+  - Ganymede context variable, which stores flow run metadata
 
 ### Returns
 
