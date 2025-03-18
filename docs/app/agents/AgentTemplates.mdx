@@ -392,6 +392,7 @@ def execute(new_file: FileParam, **kwargs) -> None:
 This Agent would require _watch_dir_ to be configured.  Recency of last modified date can be configured if desired; if it isn't configured, then the watched file would be uploaded if it was modified in the last hour.
 
 ```python
+import glob
 from pathlib import Path
 import os
 import time
