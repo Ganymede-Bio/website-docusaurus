@@ -26,7 +26,7 @@ the Flow that is executed.
 Below is a skeleton example for the user-defined code with associated types:
 
 ```python
-from typing import Callable
+from collections.abc import Callable
 
 def fp(watch_dir: str, parent_dir: str, pattern: str) -> Callable[[str], bool]:
     """
@@ -86,7 +86,7 @@ This example shows an Agent that delivers a csv file to the [Bioreactor_File Nod
 import glob
 import os
 import re
-from typing import Callable
+from collections.abc import Callable
 from urllib import parse
 
 from agent_sdk import (
@@ -139,13 +139,11 @@ This example shows an Agent configured to work with an flow with a Node taking m
 ```python
 import glob
 import os
-from typing import Callable
+from collections.abc import Callable
 
 from agent_sdk import (
     FileWatcherResult,
-    MultiFileParam,
     TriggerFlowParams,
-    info,
     file_params_list_to_multi,
 )
 
@@ -169,8 +167,8 @@ def get_param_mapping(
     for well_row in range(1, 3):
         for well_col in ["B", "C"]:
             well_row_zfill = str(well_row).zfill(2)
-            match_key = f"Yeast_{well_col}{well_row}*"
-            match_dict[f"Yeast_{well_col}{well_row}.fcs"] = fp(
+            match_key = f"Yeast_{well_col}{well_row_zfill}*"
+            match_dict[f"Yeast_{well_col}{well_row_zfill}.fcs"] = fp(
                 watch_dir, parent_dir, f"*{match_key}"
             )
 
@@ -203,24 +201,20 @@ def execute(flow_params_fw: FileWatcherResult, **kwargs) -> TriggerFlowParams | 
 This example shows an Agent that captures a CSV file and an indeterminate number of Excel files from a directory.  The Agent will trigger a Flow if after observing the CSV file and waiting for _settle_time_ seconds.  Files are associated by experiment ID + project ID, and then tagged with the experiment ID and project ID.
 
 ```python
-from typing import Callable
+from collections.abc import Callable
 
 import glob
 import os
 import time
-import re
-from urllib import parse
 
 from agent_sdk import (
     FileParam,
     FileWatcherResult,
     TriggerFlowParams,
-    MultiFileParam,
-    info,
-    error,
-    debug,
-    file_params_list_to_multi,
     add_file_tag_to_fileparam,
+    error,
+    file_params_list_to_multi,
+    info
 )
 
 single_file_param_key = "Read_CSV.csv"
@@ -257,9 +251,8 @@ def execute(flow_params_fw: FileWatcherResult, **kwargs) -> TriggerFlowParams | 
     settle_time = float(kwargs.get("vars", {}).get("settle_time", 10))
 
     if not input_path:
-        raise GanymedeException(
-            "input_path not specified in Agent variables.", exception_type="Validation"
-        )
+        error("input_path not specified in Agent variables.")
+        return None
 
     # Ensure all Excel files have been moved.
     # Note this may need more checks as well if the files are being copied (whether directly or by moving to network drive, etc)
@@ -392,7 +385,7 @@ def execute(new_file: FileParam, **kwargs) -> None:
 This Agent would require _watch_dir_ to be configured.  Recency of last modified date can be configured if desired; if it isn't configured, then the watched file would be uploaded if it was modified in the last hour.
 
 ```python
-from pathlib import Path
+import glob
 import os
 import time
 from agent_sdk import info, error, FileParam, UploadFileParams
@@ -449,6 +442,113 @@ Variables (e.g. - _parent_dir_ and _recency_min_) can be configured during the i
 
 Post-installation, for Agents v4.8+, the parameters for Windows Connections can be [updated in the Connection UI](../../app/agents/AgentMonitoring#maintaining-agent-connections).
 
+### Watch directory and upload zip of directory after stable
+
+This Agent watches a directory and uploads a zip of the directory if the directory has been stable for a specified amount of time and has also not been previously uploaded.  The Agent will also tag the uploaded file with the experiment ID and project ID, which are extracted from the directory name.
+
+```python
+import os
+import re
+import time
+from zipfile import ZipFile
+from io import BytesIO
+
+from agent_sdk import (
+    add_file_tag_to_fileparam,
+    debug,
+    info,
+    UploadFileParams,
+    FileParam,
+)
+
+from agent_sdk.query import read_sql_query
+
+
+# Required Function
+def execute(**kwargs) -> UploadFileParams | None:
+    """
+    Executes on specified cadence.
+
+    Returns
+    -------
+    UploadFileParams | None
+        Files to upload; if set to None, then no files will be uploaded.
+    """
+
+    # Get list of captured directories from Ganymede
+    # This assumes that a table called captured_dirs is being written to downstream of this process
+    try:
+        df_captured_dirs = read_sql_query(
+            "SELECT dirname FROM captured_dirs WHERE status = 'captured'"
+        )
+        captured_dirs = df_captured_dirs['dirname'].tolist()
+    except Exception:
+        captured_dirs = []
+
+    watch_dir = kwargs.get("vars", {}).get("input_path", "")
+    settle_time = float(kwargs.get("vars", {}).get("settle_time", 60))  # number of seconds since directory has been last modified, by default 60 seconds
+    max_settle_time = float(kwargs.get("vars", {}).get("max_settle_time", 86400))  # max number of seconds since file has been last modified, by default 1 day
+
+    if not watch_dir:
+        print("Connection requires input_path to be specified.")
+        return None
+
+    directories = [d for d in os.listdir(f"{watch_dir}") if os.path.isdir(os.path.join(watch_dir, d))]
+
+    for d in directories:
+        if d.startswith("."):
+            continue
+
+        last_modified_time = os.stat(d).st_mtime
+        d_seconds_since_stable = time.time() - last_modified_time
+        d_parent_path, d_name = os.path.split(d)
+
+        if d_name in captured_dirs:
+            continue
+
+        if (d_seconds_since_stable > settle_time) and (d_seconds_since_stable < max_settle_time):
+            info(f"{d_name} modified {d_seconds_since_stable} sec ago; ingesting")
+
+            # Get experiment and project IDs for tagging:
+            match = re.match(d_name, r"^experiment(\d+)_project(\d+)")
+            
+            if match:
+                exp_id = match.group(1)
+                prj_id = match.group(2)
+            else:
+                debug(f"Unable to extract experiment and project IDs from {d_name}")
+                continue    
+            
+            # Create zip file
+            d_file_zipped = BytesIO()
+            with ZipFile(d_file_zipped, "w") as zip_ref:
+
+                # First write top-level
+                zip_ref.write(d, arcname=d_name)
+                # Now write all files contained inside (excluding OS-created metadata)
+                for contained_dirpath, _, contained_filenames in os.walk(d):
+                    for contained_fname in contained_filenames:
+                        if contained_fname.endswith("desktop.ini") or contained_fname.startswith(
+                            "."
+                        ):
+                            continue
+
+                        # Preserve file/folder structure:
+                        full_path = os.path.join(contained_dirpath, contained_fname)
+                        arc_path = os.path.relpath(full_path, d_parent_path)
+                        zip_ref.write(full_path, arc_path)
+
+            d_file_zipped.seek(0)
+
+            zipped_d_name = f"{d_name}.zip"
+            new_file_param = FileParam(filename=zipped_d_name, body=d_file_zipped.read())
+            
+            # Now apply tags
+            new_file_param = add_file_tag_to_fileparam(new_file_param, "experiment_id", exp_id)
+            new_file_param = add_file_tag_to_fileparam(new_file_param, "project_id", prj_id)
+
+    return UploadFileParams(files=[new_file_param])
+```
 
 ### Querying OPC server
 
@@ -460,7 +560,7 @@ from agent_sdk import info
 import pandas as pd
 
 import asyncio
-from asyncua import Client, Node
+from asyncua import Client
 
 import time
 from functools import reduce
@@ -476,9 +576,6 @@ BIOREACTORS = [
     "Cytiva Wave",
     "Cytiva XDR",
 ]
-
-
-
 
 async def opc_client():
     client = Client(url=OPC_SERVER_URL)
