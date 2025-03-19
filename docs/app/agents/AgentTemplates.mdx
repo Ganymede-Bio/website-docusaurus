@@ -442,7 +442,7 @@ Variables (e.g. - _parent_dir_ and _recency_min_) can be configured during the i
 
 Post-installation, for Agents v4.8+, the parameters for Windows Connections can be [updated in the Connection UI](../../app/agents/AgentMonitoring#maintaining-agent-connections).
 
-### Watch directory and upload zip of directory after stable
+### Watch directory and upload zip of directory after files in the directory have stabilized
 
 This Agent watches a directory and uploads a zip of the directory if the directory has been stable for a specified amount of time and has also not been previously uploaded.  The Agent will also tag the uploaded file with the experiment ID and project ID, which are extracted from the directory name.
 
@@ -477,6 +477,7 @@ def execute(**kwargs) -> UploadFileParams | None:
 
     # Get list of captured directories from Ganymede
     # This assumes that a table called captured_dirs is being written to downstream of this process
+    # via a cron Flow
     try:
         df_captured_dirs = read_sql_query(
             "SELECT dirname FROM captured_dirs WHERE status = 'captured'"
