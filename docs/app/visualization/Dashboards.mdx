@@ -145,21 +145,6 @@ physical datasets. The if statement is required here as well in order for the ch
 when a filter is not selected on `some_column_name`.
 
 
-### Notes
-
-Its important to make sure that you have 
-1. if statements to check if a filter value is present
-2. You are referencing the column name that is being filtered on in the dashboard  
-  a. For instance you have a filter defined in the dashboard named `My Filter` created on dataset
-`my_dataset` on column `some_column_name` where `some_column_name` is referenced in the Jinja
-template
-3. The column name is not contained in the dataset you are using the Jinja template in (unless you actually want your chart to be filtered as well) 
-4. You may need to wrap your Jinja template in a CAST to convert to INT or NUMERIC if necessary
-5. Other useful links for more detail or other use cases of Jinja:  
-  a. [From Preset website](https://preset.io/blog/intro-jinja-templating-apache-superset/)  
-  b. [From Apache Superset website](https://superset.apache.org/docs/configuration/sql-templating/)  
-
-
 ### Having More Control Of Dashboard Filters with Jinja Templates: Regex or Other Variations
 Filters at the dashboard level by default require a dataset and a column to be associated with them.
 To apply the filters, you either need to manually select the individual filters or click
@@ -190,6 +175,76 @@ this is a dummy dataset and you mostly just want the users to type in the regex 
 8. You are now ready to have regex based filters in your dashboard!
 
 
+### Filters to control aggregation metrics
+The chart editor allows you to specify which aggregation function to use in the
+metric. Jinja templating can be used in the metric editor to specify which one
+to use through filters.
+
+#### Dataset for Metric Filters
+Create a virtual dataset in SQL lab with the following query and name it Metric
+
+```sql
+SELECT 'COUNT' AS Metric
+UNION ALL
+SELECT 'SUM' AS Metric
+UNION ALL
+SELECT 'MAX' AS Metric
+UNION ALL
+SELECT 'MIN' AS Metric
+UNION ALL
+SELECT 'PROPORTION' AS Metric
+```
+
+And add or remove aggregate methods as appropriate.
+
+#### The Metric in the Chart Editor
+Place the following, or a modified version, in the custom query of the metric editor.
+
+```
+{% set metric = filter_values('Metric')[0] %}
+{% set variable = 'my_variable' %}
+{% if metric == 'PROPORTION' %}
+    COUNT({{ variable }}) / SUM(COUNT(*)) OVER ()
+{% else %}
+    {{ metric }}({{ variable }})
+{% endif %}
+```
+where my_variable is a column in the dataset to apply the aggregation to. The
+IF-ELSE is handled by Jinja rendering to prevent issues where SQL tries to
+evaluate metrics that aren't appropriate aggregate functions i.e.
+PROPORTION(size) which would fail. This method will properly construct the
+query before it is validated by SQL. For simpler metrics, you can directly do
+something like
+```
+{{ filter_values('Metric')[0] + '(my_variable)' }}
+```
+in the metric.
+
+The variable can also be inherited from a filter as well, something like
+```
+{% set variable = filter_values('Variable')[0] %}
+```
+would work.
+
+#### Example
+
+<img alt="Dashboard - Jinja SQL" src="https://storage.googleapis.com/ganymede-bio-website/public/dashboard/aggregate_jinja_rendering.png" />
+
+
+### Notes
+
+Its important to make sure that you have 
+1. if statements to check if a filter value is present
+2. You are referencing the column name that is being filtered on in the dashboard
+  a. For instance you have a filter defined in the dashboard named `My Filter` created on dataset
+`my_dataset` on column `some_column_name` where `some_column_name` is referenced in the Jinja
+template
+3. The column name is not contained in the dataset you are using the Jinja template in (unless you actually want your chart to be filtered as well)
+4. You may need to wrap your Jinja template in a CAST to convert to INT or NUMERIC if necessary
+5. filter_values returns a list and needs to be handled appropriately i.e. filter_values('Column')[0] or ARRAY_TO_STRING(filter_values('Column'))
+6. Other useful links for more detail or other use cases of Jinja:  
+  a. [From Preset website](https://preset.io/blog/intro-jinja-templating-apache-superset/)  
+  b. [From Apache Superset website](https://superset.apache.org/docs/configuration/sql-templating/)  
 
 ## Editing dashboards
 
