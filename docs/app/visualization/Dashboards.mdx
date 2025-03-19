@@ -190,6 +190,60 @@ this is a dummy dataset and you mostly just want the users to type in the regex 
 8. You are now ready to have regex based filters in your dashboard!
 
 
+### Filters to control aggregation metrics
+The chart editor allows you to specify which aggregation function to use in the
+metric. Jinja templating can be used in the metric editor to specify which one
+to use through filters.
+
+#### Dataset for Metric Filters
+Create a virtual dataset in SQL lab with the following query and name it Metric
+
+```sql
+SELECT 'COUNT' AS Metric
+UNION ALL
+SELECT 'SUM' AS Metric
+UNION ALL
+SELECT 'MAX' AS Metric
+UNION ALL
+SELECT 'MIN' AS Metric
+UNION ALL
+SELECT 'PROPORTION' AS Metric
+```
+
+And add or remove aggregate methods as appropriate.
+
+#### The Metric in the Chart Editor
+Place the following, or a modified version, in the custom query of the metric editor.
+
+```
+{% set metric = filter_values('Metric')[0] %}
+{% set variable = 'my_variable' %}
+{% if metric == 'PROPORTION' %}
+    COUNT({{ variable }}) / SUM(COUNT(*)) OVER ()
+{% else %}
+    {{ metric }}({{ variable }})
+{% endif %}
+```
+where my_variable is a column in the dataset to apply the aggregation to. The
+IF-ELSE is handled by Jinja rendering to prevent issues where SQL tries to
+evaluate metrics that aren't appropriate aggregate functions i.e.
+PROPORTION(size) which would fail. This method will properly construct the
+query before it is validated by SQL. For simpler metrics, you can directly do
+something like
+```
+{{ filter_values('Metric')[0] + '(my_variable)' }}
+```
+in the metric.
+
+The variable can also be inherited from a filter as well, something like
+```
+{% set variable = filter_values('Variable')[0] %}
+```
+would work.
+
+### Example
+
+<img alt="Dashboard - Jinja SQL" src="https://storage.googleapis.com/ganymede-bio-website/public/dashboard/aggregate_jinja_rendering.png" />
 
 ## Editing dashboards
 
