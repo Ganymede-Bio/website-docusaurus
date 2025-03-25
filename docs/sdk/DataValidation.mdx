@@ -131,7 +131,7 @@ The **GanymedeException** class is a custom exception class that can be used to 
 from ganymede_sdk.flow_runtime import GanymedeException
 
 # available exception types are: Validation, Connection, Function
-raise GanymedeException('Only 1 replicate detected in sample; expected 3.', exception_type="Validation")
+raise GanymedeException(message="Only 1 replicate detected in sample; expected 3.", exception_type="Validation")
 ```
 
 ### Error Types
