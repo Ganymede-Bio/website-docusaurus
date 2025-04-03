@@ -5,7 +5,7 @@ description: "Get a [Table](https://docs.ganymede.bio/app/tables/DataExplorer) i
 sidebar_label: "getTable"
 hide_title: true
 hide_table_of_contents: true
-api: eJy9VD1v2zAQ/SvCTQnAWk5HbQWaBkW3Np0MD7R0sZhIJEOejBgE/3txpGTLsJ0hBTKJ4n29u/eOAYxFJ0kZ/bOBCrZIj3LTIQho0NdOWTZBBQ9IhSxWybi+aYmsr8qyMbVfbKXe99jgYqNMKa0tiZ18+V2SvH+znXHobgulC6mLe71TzugeNRWbfaHIF1r2uAABVjrZI6HzUK0C8DVUgMcAEODwdVAOG6jIDShAMTQrqQUBvm6xl1AFoL3lUE9O6S3EKA7Z0uejadYc6K3RHj3bvy6X/Dmd0zS92mhizFUAaW2n6jTj8tmzVzivYjbPWHOL1jEjpHKNjPsMiziZyyX7CaoL9jMA0jm5BwGKsPf/ASxfXDD0prlseB9qnNO1mhhMTmsBpKhj7z+pnR8KuwbilZhTKc2rzhJl/mJMSTzWg1O0T4KUVn15QT6vWQoktyzUHOA5RY/UmnGJkp6phQrK3V05q1yG2U+cViUwxMjqQ7ebNmBwHVQwrVpojad4tpcgYCedyiCqAOyVVfkkh444Ad/EJN+pnzSt7H/o6igEq35hUgLnb1E26EBMGzT583iUfjIpcJzdRXDofP65WywXy3EzZM0gOYc1nnqpj5K6+gSF4059wms0DoPwjUrbSaVZqYmRMDK7gt3dmaqq099cm+9Tc2sx8rOCEDbS41/XxcjXrwO6JK0jnUkDjfJ8bqB6kp3Hd0Zy83tU/G1xDf5EsN4n1XTDSFri/6QRfjI/sXQaTlxHMcmNW8+mb3WNlmZBZ69pnK/ew/0jCJADEzRX9EtS9Hjg7BcBTeKecCWhiyvOIeRNifHgn01XIw67lL15MusY4z8Lvo3/
+api: eJy9Vctu2zAQ/BVhTwnAWk6PuqWoEzQFemhd5GD4QEsbm4lEMuTKiEvw34ulpNiO5RZogZwsch+cHc7QAYxFJ0kZ/aWCAtZIc7mqEQRU6EunLIeggFukTGaLFFxebIisL/K8MqWfrKXeNVjhZKVMLq3NiZN8/lmSnL3Y2jh0l5nSmdTZTG+VM7pBTdlqlynymZYNTkCAlU42SOg8FIsAvA0F4L4ABDh8bpXDCgpyLQpQDM1K2oAAX26wkVAEoJ3lUk9O6TXEKF67pZ9/bbPkQm+N9ug5/nE65Z9jngb2SqOJMRcBpLW1KhPH+aPnrHB6ilk9YskjWsc3Qqo7o8N9gkUc8TIWP0I1Ej8BIJ2TOxCgCBv/H8C6jZFAY6rxwN+g2upGYV3NzzXu49/GEcXD614MCkhJSwGkqObsH4mO1AfimZpDyg9KuxuPMZV5LFunaJck/AmlQ3fd0gaKxZJlKK368IS7tOQWcs1i71p4btogbUxvxOQJroV8e5UfnJ6Hg0Uc7BYYZmQFo9sOLmpdDQUMdg0b4ymeeBsEbKVTHYgiAGd1yn6QbU3cgHdissAwYWKsy3+dai8mq75iUhP336Cs0IEYXDjkR3FEUe8KzlilbRD9x41xjWQcd/fz4fK6qfZNuYdx6lfy2cmIM03osrv7eUbmCfUbZHxzSj+YNEF/raMsofPd4moynUx7m8uS2eIe1nhqpN774+x7GvYPxDs8rT1hhC+U21oqzdQnaYReYgvYXr2RuIDieNmdzftpuKXohbKAEFbS409Xx8jbzy26pPG9rpIYK+X5u4LiQdYe/0DJxffefpfZOfiD0vQuybdu+0tLQjwahI33jkcncuIyikFdPHoXui5LtHRQdPLXEA/fgNsZq1325uhPfWON1H0UUAhdxpwFH+Mrvs4AcRlj/A2gG7j1
 sidebar_class_name: "get api-method"
 custom_edit_url: null
 ---
@@ -61,7 +61,7 @@ Get a [Table](https://docs.ganymede.bio/app/tables/DataExplorer) in an Environme
 <StatusCodes
   id={undefined}
   label={undefined}
-  responses={{"200":{"description":"Table","content":{"application/json":{"schema":{"type":"object","properties":{"name":{"type":"string"},"environment":{"type":"string"},"description":{"type":"string"},"schema":{"type":"array","items":{"type":"object","properties":{"name":{"type":"string"},"type":{"type":"string"},"mode":{"type":"string"},"description":{"type":"string"}},"required":["name","type"],"title":"SchemaField"}}},"required":["name","environment","description"],"title":"Table"}}}}}}
+  responses={{"200":{"description":"Table","content":{"application/json":{"schema":{"type":"object","properties":{"name":{"type":"string"},"environment":{"type":"string"},"description":{"type":"string"},"schema":{"type":"array","items":{"type":"object","properties":{"name":{"type":"string"},"type":{"type":"string"},"mode":{"type":"string"},"description":{"type":"string"},"pdFieldType":{"type":"string"},"pdFieldName":{"type":"string"}},"required":["name","type"],"title":"SchemaField"}}},"required":["name","environment"],"title":"Table"}}}}}}
 >
   
 </StatusCodes>

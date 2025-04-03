@@ -6,7 +6,7 @@ sidebar_label: "FileUploadBody"
 hide_title: true
 hide_table_of_contents: true
 schema: true
-sample: {"name":"string","initiator":"string","bucket":"string"}
+sample: {"hostPath":"string","name":"string","initiator":"string","bucket":"string"}
 custom_edit_url: null
 ---
 
@@ -25,7 +25,7 @@ import Heading from "@theme/Heading";
 
 
 <Schema
-  schema={{"type":"object","properties":{"name":{"type":"string"},"initiator":{"type":"string"},"bucket":{"type":"string"}},"required":["name","initiator"],"title":"FileUploadBody"}}
+  schema={{"type":"object","properties":{"hostPath":{"type":"string","description":"hostPath is the full file path of the file on the host, used to store additional metadata and check for file upload completeness within an environment."},"name":{"type":"string"},"initiator":{"type":"string"},"bucket":{"type":"string"}},"required":["name","initiator"],"title":"FileUploadBody"}}
   schemaType={"response"}
 >
   
