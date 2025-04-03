@@ -432,3 +432,14 @@ BucketConfig
 prepending
 FullAccess
 ObservedFile
+
+PlateBasedApp
+CurveFittingApp
+CDSApp
+BioprocessApp
+Bioprocess
+ligand
+qPCR
+atline
+natively
+ModularAnalysisOverview
