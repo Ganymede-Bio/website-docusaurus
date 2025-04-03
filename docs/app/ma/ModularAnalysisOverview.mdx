@@ -5,13 +5,31 @@ sidebar_label: Overview
 displayed_sidebar: webUiSidebar
 ---
 
+import {
+  DotChartOutlined, EditOutlined, PlayCircleOutlined, PlusOutlined
+} from '@ant-design/icons';
+
 Modular Analysis (MA) enables users to develop interactive web apps from Jupyter notebooks and deploy them to users in their Ganymede tenant.  These applications are natively integrated with Ganymede data storage, enabling them to present context-rich interfaces for data capture and analyses.
 
-The platform offers a set of base applications, which could then be modified and adapted to your workflows.  For example, the base bioprocess MA application could be configured with campaign and run information specific to your labs, drawing from your LIMS or metadata derived from relevant instruments.
+## Accessing Modular Analysis
+
+To access MA, click on the <div className="button darkblue_button"><DotChartOutlined /> **Analysis**</div> icon in the left sidebar.
+
+<div style={{textAlign: 'center'}}>
+    <img
+        alt="Navigating to Modular Analysis"
+        src="https://ganymede-bio.mo.cloudinary.net/ma/NavigatingToModularAnalysis_20250403.png"  
+    />
+</div>
+&nbsp;
+
+New notebooks for MA Applications can be created by clicking the <div className="button darkblue_outline_button"><PlusOutlined /> New</div> icon.
+
+Each MA application receives its own tile, containing the name, description, and icon for the app, as well as buttons for modifying and running the app.
 
 ## Base Applications
 
-This section provides the primary use case for a set of base applications offered by Ganymede.  Components from these applications can also be mix-and-matched to tailor an application for any given workflow.
+Ganymede offers a set of base applications, which could then be modified and adapted to your workflows.  For example, the base bioprocess MA application could be configured with campaign and run information specific to your labs, drawing from your LIMS or metadata derived from relevant instruments.  Components from these applications can also be mix-and-matched to tailor an application for any given workflow.
 
 ### [Upstream Bioprocess](./apps/BioprocessApp.mdx)
 
@@ -19,8 +37,8 @@ Provides a single, vendor-agnostic interface for viewing online and atline data 
 
 <div style={{textAlign: 'center'}}>
     <img
-          alt="CDS Example"
-          src="https://ganymede-bio.mo.cloudinary.net/ma/BioprocessExample_20250403.png"
+        alt="CDS Example"
+        src="https://ganymede-bio.mo.cloudinary.net/ma/BioprocessExample_20250403.png"
     />
 </div>
 &nbsp;
@@ -31,8 +49,8 @@ Enables human-in-the-loop validation on machine learning workflows for chromatog
 
 <div style={{textAlign: 'center'}}>
     <img
-          alt="CDS Example"
-          src="https://ganymede-bio.mo.cloudinary.net/ma/ModularAnalysisExample_20250403.png"
+        alt="CDS Example"
+        src="https://ganymede-bio.mo.cloudinary.net/ma/ModularAnalysisExample_20250403.png"
     />
 </div>
 &nbsp;
@@ -43,8 +61,8 @@ Visualize plate layout and results for qPCR, ELISA, protein quantification, repo
 
 <div style={{textAlign: 'center'}}>
     <img
-          alt="Plate-Based Example"
-          src="https://ganymede-bio.mo.cloudinary.net/ma/qPCRExample_20250403.png"
+        alt="Plate-Based Example"
+        src="https://ganymede-bio.mo.cloudinary.net/ma/qPCRExample_20250403.png"
     />
 </div>
 &nbsp;
@@ -55,13 +73,8 @@ Fit nonlinear regressions for dose-response / receptor-ligand binding assays, st
 
 <div style={{textAlign: 'center'}}>
     <img
-          alt="Curve Fitting Example"
-          src="https://ganymede-bio.mo.cloudinary.net/ma/CurveFittingExample_20250403.png"
+        alt="Curve Fitting Example"
+        src="https://ganymede-bio.mo.cloudinary.net/ma/CurveFittingExample_20250403.png"
     />
 </div>
 &nbsp;
-
-## Customizing Applications
-
-The logic for each Modular Analysis application can be modified in hosted Jupyter notebooks.
-
