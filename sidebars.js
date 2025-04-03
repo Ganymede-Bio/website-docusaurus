@@ -165,6 +165,25 @@ module.exports = {
         ]
       },
       {
+        type: 'category',
+        label: 'Modular Analysis',
+        collapsed: true,
+        items: [
+          'app/ma/ModularAnalysisOverview',
+          {
+            type: 'category',
+            label: 'Base Applications',
+            collapsed: false,
+            items: [
+              'app/ma/apps/BioprocessApp',
+              'app/ma/apps/CDSApp',
+              'app/ma/apps/PlateBasedApp',
+              'app/ma/apps/CurveFittingApp'
+            ]
+          }
+        ]
+      },
+      {
         type: 'doc',
         id: 'app/instruments/Instruments',
         label: 'Instruments',

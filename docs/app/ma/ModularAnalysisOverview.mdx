@@ -1,0 +1,67 @@
+---
+id: ModularAnalysisOverview
+title: Modular Analysis Overview
+sidebar_label: Overview
+displayed_sidebar: webUiSidebar
+---
+
+Modular Analysis (MA) enables users to develop interactive web apps from Jupyter notebooks and deploy them to users in their Ganymede tenant.  These applications are natively integrated with Ganymede data storage, enabling them to present context-rich interfaces for data capture and analyses.
+
+The platform offers a set of base applications, which could then be modified and adapted to your workflows.  For example, the base bioprocess MA application could be configured with campaign and run information specific to your labs, drawing from your LIMS or metadata derived from relevant instruments.
+
+## Base Applications
+
+This section provides the primary use case for a set of base applications offered by Ganymede.  Components from these applications can also be mix-and-matched to tailor an application for any given workflow.
+
+### [Upstream Bioprocess](./apps/BioprocessApp.mdx)
+
+Provides a single, vendor-agnostic interface for viewing online and atline data from your bioreactors.
+
+<div style={{textAlign: 'center'}}>
+    <img
+          alt="CDS Example"
+          src="https://ganymede-bio.mo.cloudinary.net/ma/BioprocessExample_20250403.png"
+    />
+</div>
+&nbsp;
+
+### [Chromatography](./apps/CDSApp.mdx)
+
+Enables human-in-the-loop validation on machine learning workflows for chromatography.
+
+<div style={{textAlign: 'center'}}>
+    <img
+          alt="CDS Example"
+          src="https://ganymede-bio.mo.cloudinary.net/ma/ModularAnalysisExample_20250403.png"
+    />
+</div>
+&nbsp;
+
+### [Plate-Based](./apps/PlateBasedApp.mdx)
+
+Visualize plate layout and results for qPCR, ELISA, protein quantification, reporter gene, and other plate-based assays.
+
+<div style={{textAlign: 'center'}}>
+    <img
+          alt="Plate-Based Example"
+          src="https://ganymede-bio.mo.cloudinary.net/ma/qPCRExample_20250403.png"
+    />
+</div>
+&nbsp;
+
+### [Curve Fitting](./apps/CurveFittingApp.mdx)
+
+Fit nonlinear regressions for dose-response / receptor-ligand binding assays, statefully capturing user and annotation for any identified outliers.
+
+<div style={{textAlign: 'center'}}>
+    <img
+          alt="Curve Fitting Example"
+          src="https://ganymede-bio.mo.cloudinary.net/ma/CurveFittingExample_20250403.png"
+    />
+</div>
+&nbsp;
+
+## Customizing Applications
+
+The logic for each Modular Analysis application is available for modification in hosted Jupyter notebooks.
+
