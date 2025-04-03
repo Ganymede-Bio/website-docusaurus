@@ -6,7 +6,7 @@ sidebar_label: "Table"
 hide_title: true
 hide_table_of_contents: true
 schema: true
-sample: {"name":"string","environment":"string","description":"string","schema":[{"name":"string","type":"string","mode":"string","description":"string"}]}
+sample: {"name":"string","environment":"string","description":"string","schema":[{"name":"string","type":"string","mode":"string","description":"string","pdFieldType":"string","pdFieldName":"string"}]}
 custom_edit_url: null
 ---
 
@@ -25,7 +25,7 @@ import Heading from "@theme/Heading";
 
 
 <Schema
-  schema={{"type":"object","properties":{"name":{"type":"string"},"environment":{"type":"string"},"description":{"type":"string"},"schema":{"type":"array","items":{"type":"object","properties":{"name":{"type":"string"},"type":{"type":"string"},"mode":{"type":"string"},"description":{"type":"string"}},"required":["name","type"],"title":"SchemaField"}}},"required":["name","environment","description"],"title":"Table"}}
+  schema={{"type":"object","properties":{"name":{"type":"string"},"environment":{"type":"string"},"description":{"type":"string"},"schema":{"type":"array","items":{"type":"object","properties":{"name":{"type":"string"},"type":{"type":"string"},"mode":{"type":"string"},"description":{"type":"string"},"pdFieldType":{"type":"string"},"pdFieldName":{"type":"string"}},"required":["name","type"],"title":"SchemaField"}}},"required":["name","environment"],"title":"Table"}}
   schemaType={"response"}
 >
   
