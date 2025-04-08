@@ -5,17 +5,56 @@ sidebar_label: Curve Fitting
 displayed_sidebar: webUiSidebar
 ---
 
-The curve fitting application enables users to iteratively perform nonlinear curve fits, excluding points and capturing reasons for excluding points.  A common use case would be to fit data excluding outliers, capturing the user and the data points that are excluded upon inspection.
+The curve fitting application enables users to iteratively perform linear or nonlinear curve fits, excluding points and capturing reasons for excluding points.  A common use case would be to fit data excluding outliers, capturing the user and the data points that are excluded upon inspection.
 
-## App Walkthrough
+In this demo, plate data is fitted to a 4 parameter logistic regression.
 
-When loaded, users are presented with instructions on base app usage.
+:::note
+
+The instructions and components used in this application can be readily configured by you or our [Implementation team](../../Support.mdx) to suit each assay.
+
+:::
+
+## Demo App Walkthrough
+
+1. When loaded, users are presented with instructions on base app usage.
 
 <div style={{textAlign: 'center'}}>
     <img
           alt="Curve Fitting Instructions"
           src="https://ganymede-bio.mo.cloudinary.net/ma/CurveFittingInstructions_20250403.png"
+          width="80%"
+    />
+</div>
+
+2. Clicking on the **Load Data** button yields a plot with 4PL fit.  Hovering over a data point gives information about the data point itself.
+
+<div style={{textAlign: 'center'}}>
+    <img
+          alt="4PL curve fit initial"
+          src="https://ganymede-bio.mo.cloudinary.net/ma/CurveFittingInitialFit_20250408.png"
+          width="80%"
     />
 </div>
 &nbsp;
 
+3. Outliers can be adjusted by clicking on the point in the graph.  The data point turns red upon doing so (and can alternatively be modified to a different shape to be color-blind friendly):
+
+<div style={{textAlign: 'center'}}>
+    <img
+          alt="4PL curve fit adjusted"
+          src="https://ganymede-bio.mo.cloudinary.net/ma/CurveFittingAdjustedFit_20250408.png"
+          width="80%"
+    />
+</div>
+&nbsp;
+
+4. Scrolling to metrics, the associated fit is updated.  Excluded points can be annotated in the Excluded Points table and stored once any adjustments are complete and this data is synchronized with Ganymede data lake.
+
+<div style={{textAlign: 'center'}}>
+    <img
+          alt="4PL curve fit input reason"
+          src="https://ganymede-bio.mo.cloudinary.net/ma/CurveFittingInputReason_20250408.png"
+    />
+</div>
+&nbsp;
