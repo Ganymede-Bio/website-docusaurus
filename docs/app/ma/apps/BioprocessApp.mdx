@@ -5,4 +5,263 @@ sidebar_label: Bioprocess
 displayed_sidebar: webUiSidebar
 ---
 
-The 
+# The Bioprocess Application
+
+The bioprocess application enables users to aggregate, visualize, and analyze measurements from bioreactor samples.
+
+In this demo, we will:
+1. Visualize online and atline data for a bioreactor experiment
+2. Overlay multiple experiments to evaluate batch-to-batch variation
+3. Estimate growth rate and doubling time via regression
+4. Visualize and explore correlation and PCA analyses
+5. Visualize and explore results of a partial least squares (PLS) analysis
+6. Identify anomalies across bioprocess parameters via an isolation forest
+7. Design a bioprocess experiment using PLS optimized parameters
+
+:::note
+The instructions and components used in this application can be readily configured by you or our [Implementation team](../../Support.mdx) to suit your specific process and analysis.
+
+Some examples of out-of-the-box customizations are:
+- Model choices for growth rate estimation
+- Tailored monitored parameters across bioprocess experiments
+- Partial least squares response and predictor variables
+:::
+
+## Demo App Walkthrough
+
+The following walkthrough will guide you through all components of Ganymede's Bioprocess Modular Analysis offering. The walkthrough is split into four sections, corresponding to the four highest-level tabs available in the app: Online Data, Atline Data, Analysis, and Experimental Design.
+
+### Online Data
+
+The Online Data section of the Bioprocess app provides visualizations of real-time measurements collected during bioreactor operation. Measurements can be used to trigger alerts when process parameters drift out of range.
+
+1. Measurements are presented as individual line plots with the option to overlay multiple experiments. All plots share the same x-axis and are synced as you zoom in/out. Hover over individual points to see details about a specific measurement.
+
+<div style={{textAlign: 'center'}}>
+    <img
+          alt="Bioprocess Online Data"
+          src="https://storage.googleapis.com/ganymede-bio-website/public/ma/bioprocess_online_data_page.png"
+          width="90%"
+    />
+</div>
+
+2. By default, the online data tab displays the 3 most recent experiments overlaid. The red, dashed lines represent boundaries used to identify outliers. Thresholds are unique to each process parameter and can be set based on a method of your choosing. When an outlier is detected, an email alert is sent to email addresses specified in Ganymede.
+
+<div style={{textAlign: 'center'}}>
+    <img
+          alt="Bioprocess Email Alert"
+          src="https://storage.googleapis.com/ganymede-bio-website/public/ma/bioprocess_email_alert.png"
+          width="80%"
+    />
+</div>
+&nbsp;
+
+3. Summary tables are made available for each parameter to enable quantitative batch-to-batch comparisons.
+
+<div style={{textAlign: 'center'}}>
+    <img
+          alt="Bioprocess Online Data Summary"
+          src="https://storage.googleapis.com/ganymede-bio-website/public/ma/bioprocess_online_data_page.png"
+          width="80%"
+    />
+</div>
+&nbsp;
+
+### Atline Data
+
+The Atline data section of the Bioprocess application provides interactive visualizations of measurements collected from withdrawn samples. Ganymede Agents and Flows collect data from your laboratory instrumentation and link it to experimental context.
+
+1. The Atline Data section is separated by a series of sub-tabs: Nutrients/Metabolites, Cell Culture Performance, and Product Titer.
+
+<div style={{textAlign: 'center'}}>
+    <img
+          alt="Bioprocess Atline Tabs"
+          src="https://storage.googleapis.com/ganymede-bio-website/public/ma/bioprocess_atline_subtabs.png"
+          width="80%"
+    />
+</div>
+&nbsp;
+
+2. Starting on the Nutrients/Metabolites page, we see an overlaid series of linked plots corresponding to each measured metabolite stored in Ganymede. Hover over individual points to see details about a specific measurement.
+
+<div style={{textAlign: 'center'}}>
+    <img
+          alt="Bioprocess Metabolites Plot"
+          src="https://storage.googleapis.com/ganymede-bio-website/public/ma/bioprocess_metabolites_plot_hover.png"
+          width="80%"
+    />
+</div>
+&nbsp;
+
+3. Navigating to the Cell Culture Performance tab allows you to explore growth-related measurements stored in Ganymede via linked plots and summary data tables. Similar to other tabs, hovering over individual points provides additional details.
+
+<div style={{textAlign: 'center'}}>
+    <img
+          alt="Bioprocess Cell Culture Plot"
+          src="https://storage.googleapis.com/ganymede-bio-website/public/ma/bioprocess_cell_culture_plot_hover.png"
+          width="80%"
+    />
+</div>
+&nbsp;
+
+4. Navigating to the Product Titer tab brings us to the final subsection where you can evaluate target(s) via scatter plot and bar chart.
+
+<div style={{textAlign: 'center'}}>
+    <img
+          alt="Bioprocess Product Titer Plot"
+          src="https://storage.googleapis.com/ganymede-bio-website/public/ma/bioprocess_product_titer_plot_hover.png"
+          width="80%"
+    />
+</div>
+&nbsp;
+
+### Analysis
+
+The Analysis section of the Bioprocess app provides exploratory visualizations of analyses performed in Ganymede Flows. Analyses performed include:
+
+1. Correlation analysis to identify relationships between process parameters
+2. Principal component analysis to identify sources of variation that impact process performance
+3. Partial least squares regression to characterize and predict process outcomes based on parameter values
+4. Growth rate estimation via regression
+
+Beyond exploration, the Analysis section enables human-in-the-loop workflows that maintain data traceability.
+
+1. The Analysis section is separated by a series of sub-tabs: Cell Culture Growth Kinetics, Process Investigation, Process Optimization and Modeling, and Outlier Detection.
+
+<div style={{textAlign: 'center'}}>
+    <img
+          alt="Bioprocess Analysis Sub Tabs"
+          src="https://storage.googleapis.com/ganymede-bio-website/public/ma/bioprocess_analysis_subtabs.png"
+          width="80%"
+    />
+</div>
+&nbsp;
+
+2. The Cell Culture Growth Kinetics tab enables growth rate calculation via regression on an experiment-by-experiment basis. Estimated exponential growth is determined automatically and plotted via dashed green vertical lines. Update the active experiment by selecting an experiment from the dropdown.
+
+<div style={{textAlign: 'center'}}>
+    <img
+          alt="Bioprocess Growth Kinetics Plot"
+          src="https://storage.googleapis.com/ganymede-bio-website/public/ma/bioprocess_growth_kinetics_plot.png"
+          width="80%"
+    />
+</div>
+&nbsp;
+
+3. Growth models can be changed and updated by specifying a new growth model in the Model Select dropdown. Similarly, you can update the growth range by pressing the Edit Growth Range button and following the on-plot prompts.
+
+<div style={{textAlign: 'center'}}>
+    <img
+          alt="Bioprocess Growth Range Prompt"
+          src="https://storage.googleapis.com/ganymede-bio-website/public/ma/bioprocess_growth_range_prompts.png"
+          width="80%"
+    />
+</div>
+&nbsp;
+
+4. When satisfied with your changes, pressing the Submit Updates button records your changes and uploads them back to Ganymede and/or your ELN.
+
+<div style={{textAlign: 'center'}}>
+    <img
+          alt="Bioprocess Growth Analysis Control Bar"
+          src="https://storage.googleapis.com/ganymede-bio-website/public/ma/bioprocess_growth_analysis_control_bar.png"
+          width="80%"
+    />
+</div>
+&nbsp;
+
+5. The Process Investigation tab allows you to explore correlations between key process parameters via heatmaps. Both correlation values and p-values are reported for configured process variables.
+
+<div style={{textAlign: 'center'}}>
+    <img
+          alt="Bioprocess Correlation Heatmaps"
+          src="https://storage.googleapis.com/ganymede-bio-website/public/ma/bioprocess_correlation_analysis_heatmaps.png"
+          width="80%"
+    />
+</div>
+&nbsp;
+
+6. This tab also provides a PCA analysis visualization. Individual experiments can be identified by hovering over points.
+
+<div style={{textAlign: 'center'}}>
+    <img
+          alt="Bioprocess PCA Plot"
+          src="https://storage.googleapis.com/ganymede-bio-website/public/ma/bioprocess_pca_plots.png"
+          width="80%"
+    />
+</div>
+&nbsp;
+
+7. The Process Optimization and Modeling tab displays the outputs of a partial least squares (PLS) model trained on historical experiments.
+
+<div style={{textAlign: 'center'}}>
+    <img
+          alt="Bioprocess Process Optimization and Modeling"
+          src="https://storage.googleapis.com/ganymede-bio-website/public/ma/bioprocess_process_opt_and_modeling.png"
+          width="80%"
+    />
+</div>
+&nbsp;
+
+8. Model accuracy can be evaluated via a correlation plot of predicted outcomes vs. measured values. The PLS model is trained to predict a series of response variables which can each be changed via the Modeled Variable dropdown. Updating the Modeled Variable selection updates the underlying data for the correlation plot, contour plot, and model weights.
+
+<div style={{textAlign: 'center'}}>
+    <img
+          alt="Bioprocess Model Evaluation and Contour"
+          src="https://storage.googleapis.com/ganymede-bio-website/public/ma/bioprocess_model_evaluation_and_contour.png"
+          width="80%"
+    />
+</div>
+&nbsp;
+
+9. The predicted value landscape is visualized via contour plots. Toggle predictor variables by updating Predictor Variable Select 1/2.
+
+10. Predictor variable importances and weights are displayed via bar charts. Note that the PLS model importances are calculated against the entire set of response variables, thus importances reflect how each process parameter affects both growth and product titer. Model training methods can be modified based on your needs.
+
+<div style={{textAlign: 'center'}}>
+    <img
+          alt="Bioprocess PLS Importances and Weights"
+          src="https://storage.googleapis.com/ganymede-bio-website/public/ma/bioprocess_pls_importances_and_weights.png"
+          width="80%"
+    />
+</div>
+&nbsp;
+
+11. The Outlier Detection tab visualizes the output of an Isolation Forest model. Experiments are grouped into outliers and inliers based on all available data from historical experiments.
+
+<div style={{textAlign: 'center'}}>
+    <img
+          alt="Bioprocess Outlier Detection"
+          src="https://storage.googleapis.com/ganymede-bio-website/public/ma/bioprocess_online_data_page.png"
+          width="80%"
+    />
+</div>
+&nbsp;
+
+12. Outliers can be visualized across parameters by toggling values of Feature Select dropdowns. Individual experiments can be identified by hovering over datapoints.
+
+<div style={{textAlign: 'center'}}>
+    <img
+          alt="Bioprocess Isolation Forest"
+          src="https://storage.googleapis.com/ganymede-bio-website/public/ma/bioprocess_isolation_forest.png"
+          width="80%"
+    />
+</div>
+&nbsp;
+
+### Experimental Design
+
+The Experimental Design section of the Bioprocess application enables scientists to explore predicted response variable values based on process parameter setpoints.
+
+1. The Experimental Design tab allows users to plan future experiments with adjustable ranges for controlled parameters. Users can retrieve optimal ranges as determined by sampling our PLS model in regions of maximum production/growth.
+
+<div style={{textAlign: 'center'}}>
+    <img
+          alt="Bioprocess Experimental Design"
+          src="https://storage.googleapis.com/ganymede-bio-website/public/ma/bioprocess_experimental_design.png"
+          width="80%"
+    />
+</div>
+&nbsp;
+
+2. Setting your sampling method and bioreactor model via dropdown enables the app to suggest media recipes and parameter setpoints for future experiments.
