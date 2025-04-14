@@ -165,6 +165,14 @@ module.exports = {
         ]
       },
       {
+        type: 'category',
+        label: 'Modular Analysis',
+        collapsed: true,
+        items: [
+          'app/ma/ModularAnalysisOverview'
+        ]
+      },
+      {
         type: 'doc',
         id: 'app/instruments/Instruments',
         label: 'Instruments',
