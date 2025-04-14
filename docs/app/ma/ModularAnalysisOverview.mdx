@@ -1,0 +1,88 @@
+---
+id: ModularAnalysisOverview
+title: Modular Analysis Overview
+sidebar_label: Overview
+displayed_sidebar: webUiSidebar
+---
+
+import {
+  DotChartOutlined, EditOutlined, PlayCircleOutlined, PlusOutlined, CodeOutlined
+} from '@ant-design/icons';
+
+Modular Analysis (MA) enables users to develop interactive web apps from Jupyter notebooks and deploy them to users in their Ganymede tenant.  These applications are natively integrated with Ganymede data storage, enabling them to present context-rich interfaces for data capture and analyses.
+
+## Accessing Modular Analysis
+
+To access MA, click on the <div className="button darkblue_button"><DotChartOutlined /> **Analysis**</div> icon in the left sidebar.
+
+<div style={{ textAlign: 'center' }}>
+    <img
+        alt="Bioprocess and CDS Modular Analysis demo apps"
+        src="https://ganymede-bio.mo.cloudinary.net/ma/NavigatingToModularAnalysis_20250403.png"
+        width="80%"
+    />
+</div>
+
+Each MA application receives its own tile, containing the name, description, and icon for the app, as well as the following buttons:
+
+- <div className="button lightblue_noborder_button"><PlayCircleOutlined /></div>: launch the MA application
+- <div className="button lightblue_noborder_button"><CodeOutlined /></div>: edit the code behind an MA application in a Jupyter notebook
+- <div className="button lightblue_noborder_button"><EditOutlined /></div>: edit the name, description, and or icon on the tile for the app
+
+New MA Applications can be created by clicking the <div className="button darkblue_outline_button"><PlusOutlined /> New</div> icon.
+
+
+
+## Base Applications
+
+Ganymede offers a set of base applications, which could then be modified and adapted for your workflows.  
+
+For example, the base bioprocess MA application could be configured with campaign and run information specific to your labs, drawing from your LIMS or metadata derived from relevant instruments.
+
+### Upstream Bioprocess
+
+Provides a single, vendor-agnostic interface for viewing online and atline data from your bioreactors.
+
+<div style={{textAlign: 'center'}}>
+    <img
+        alt="CDS Example"
+        src="https://ganymede-bio.mo.cloudinary.net/ma/BioprocessExample_20250403.png"
+    />
+</div>
+&nbsp;
+
+### Chromatography
+
+Enables human-in-the-loop validation on machine learning workflows for chromatography.
+
+<div style={{textAlign: 'center'}}>
+    <img
+        alt="CDS Example"
+        src="https://ganymede-bio.mo.cloudinary.net/ma/ModularAnalysisExample_20250403.png"
+    />
+</div>
+&nbsp;
+
+### qPCR / ELISA / Plate-Based Assays
+
+Visualize plate layout and results for qPCR, ELISA, protein quantification, reporter gene, and other plate-based assays.
+
+<div style={{textAlign: 'center'}}>
+    <img
+        alt="Plate-Based Example"
+        src="https://ganymede-bio.mo.cloudinary.net/ma/qPCRExample_20250403.png"
+    />
+</div>
+&nbsp;
+
+### Dose Response / Receptor-Ligand Binding
+
+Fit nonlinear regressions for dose-response / receptor-ligand binding assays, statefully capturing user and annotation for any identified outliers.
+
+<div style={{textAlign: 'center'}}>
+    <img
+        alt="Curve Fitting Example"
+        src="https://ganymede-bio.mo.cloudinary.net/ma/CurveFittingExample_20250403.png"
+    />
+</div>
+&nbsp;

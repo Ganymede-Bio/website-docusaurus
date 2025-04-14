@@ -292,6 +292,13 @@
   color: white;
 }
 
+.button.lightblue_noborder_button {
+  border: 0px;
+  border-color: var(--ifm-color-black);
+  background-color: var(--ifm-color-white);
+  color: #669ff4;
+}
+
 .button.blue_button {
   border-radius: 8px;
   padding-left: 10px;
