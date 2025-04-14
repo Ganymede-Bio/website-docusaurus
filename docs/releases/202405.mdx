@@ -11,6 +11,7 @@ displayed_sidebar: releaseSideBar
 
 **Improvements**
 - **Flows**: [S3 read](../nodes/App/S3_Read.md) node now has a parameter for specifying behavior of duplicate files and a parameter for only syncing files with specific aging
+- **Agents**: _ignore_hidden_files_ has been added as a [reserved variable for File Watcher Agents](../app/agents/Agent#reserved-variables).  Setting the variable to true for a connection ignores hidden files from being observed, which can reduce memory usage when observing directories with many temporary files written.
 
 **Bug Fixes**
 - **SDK**: Fixed an issue in the [create_assay_results_from_dataframe](../sdk/markdowns/benchling.benchling#function-benchlingcreate_assay_results_from_dataframe) function where upload was failing on bulk upload.
