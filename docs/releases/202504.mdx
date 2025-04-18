@@ -7,7 +7,8 @@ displayed_sidebar: releaseSideBar
 ### April 17 2025
 
 **Improvements** 
-- **Agents**: _stream_contents_ has been added as a [reserved variable for File Watcher Agents](../app/agents/Agent#reserved-variables).  Setting the variable to true for a connection streams the contents of the file to the agent, which can be useful for large files that are not easily read in their entirety.
+- **Agents**: _ignore_hidden_directories_ has been added as a [reserved variable for File Watcher Agents](../app/agents/Agent#reserved-variables).  Setting this variable will ignore any files in hidden directories from being observed, which can reduce memory usage when observing directories with many files written to temp directories.
+
 
 **Agent Version**: 5.4.68
 
