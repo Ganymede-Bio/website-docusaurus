@@ -243,6 +243,10 @@ Agents that watch for files locally then run Flow require file inputs to be pass
 
 ### Agent installation
 
+#### Issue: I am unable to install an Agent Connection; the installer succeeds, but I see an issue related to expired certs in the logs.
+
+This is likely due to the Agent Connection being on a version prior to 5.5.1, which referenced the root cert on the computer that may have expired.
+
 #### Issue: I am unable to install an Agent Connection on Windows; the installer is failing at the final step.
 
 Ensure that you are running the installer as an administrator.
@@ -297,6 +301,9 @@ On Linux:
 ### Agent execution
 
 #### Issue: Agent Connection is showing as disconnected after running for a while
+
+- If you observe an error in local logs related to expired cert, verify that the Agent Connection is on version 5.5.1+. 
+Prior to this, the Agent referenced the root cert on the computer, which may have expired.  
 
 On Windows:
 
