@@ -1,0 +1,18 @@
+---
+id: 202505
+title: May 2025
+displayed_sidebar: releaseSideBar
+---
+### May 1 2025
+
+**Features**
+- **UI**: Agents can now detect errors with the Connection identity
+  - Agents will now detect errors or misconfigurations with the Connection identity and display them in the UI
+  - These errors should be resolvable by modifying the Connection identity
+  - Additional error states will be detected in the future
+
+**Improvements** 
+- **Agents**: _skip_host_metrics_ has been added as a [reserved variable for File Watcher Agents](../app/agents/Agent#reserved-variables). Setting this variable to true for a connection will skip the collection of host metrics, if the collection of those metrics is not needed.
+
+**Agent Version**: 5.5.5
+
