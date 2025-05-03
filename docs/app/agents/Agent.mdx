@@ -115,6 +115,12 @@ The _execute_ function in user-defined code for every Agent type can return `Non
 
 ## Configuration Options
 
+### Generic reserved variables
+
+Reserved variables are used to configure Connection behavior; these can be set [at installation](./AgentInstall#windows-installation) or in the Connections panel post-installation.  The following reserved variables are available for all Agent types:
+
+- `get_process_metrics`: for Agents v5.5.5+, specifies whether to collect host metrics (CPU, memory, disk) during file processing. Set to "false" to skip this collection if not needed; the default value is "true". 
+
 ### Watch for files locally then run flow
 
 A Connection watches a directory (and associated subdirectories) for new files and updates to existing files.  The Flow configured with the Agent is triggered when all expected files are found.
@@ -147,7 +153,6 @@ Reserved variables are used to configure Connection behavior.  These can be set 
 - `ignore_hidden_directories`: for Agents v5.4.68+, specifies that files in hidden directories should be ignored if set to "true".  If left blank, the default value is "false".
 - `ignore_list`: A comma-separated list of patterns that tell the Agent which files/directories to skip watching entirely (events will not hit the agent logs or processor code). Useful for ignoring large volumes of events from backup, log, or other oft-modified but irrelevant files.
   - NOTE: These patterns use a simplified "glob" syntax where the double asterisk `**` can only appear at the start of a pattern. For example, `**/*.txt` is valid (matches text files in any directory), but `backup/**/*.txt` is not valid (`**` is not at the left). To match files in subdirectories, use single asterisks `*`. You'll need multiple patterns, one for each directory level - e.g. `**/backup/*.txt` AND `**/backup/*/*.txt` for files one level deeper, and so on for each additional subdirectory level (since right `**` doesn't work). Full pattern syntax details are in the [Python `pathlib` documentation](https://docs.python.org/3/library/pathlib.html#pathlib.PurePath.match).
-
 
 #### User-Defined Code
 
