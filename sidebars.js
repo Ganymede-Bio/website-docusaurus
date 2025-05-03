@@ -397,7 +397,7 @@ module.exports = {
       type: 'category',
       label: '2025',
       collapsed: false,
-      items: ['releases/202504', 'releases/202503', 'releases/202502', 'releases/202501']
+      items: ['releases/202505', 'releases/202504', 'releases/202503', 'releases/202502', 'releases/202501']
     },
     {
       type: 'category',

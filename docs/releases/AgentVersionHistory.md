@@ -6,6 +6,14 @@ displayed_sidebar: releaseSideBar
 
 This page contains a summary of key version updates for the Ganymede [Agent](../app/agents/Agent.mdx).  Since the individual instances of Agents (connections) are not updated when the Agent is updated, this page can be helpful for determining the capabilities of specific connections previously installed.
 
+## 5.5.5
+
+- Improved memory efficiency for file watcher and cron Agents on Windows
+- Use bundled certs to avoid issues with expired certs on instrument PCs
+- Fixed issue related to duplicate files being uploaded to Ganymede
+- Improved stability of tag application and Flow triggering when observing multiple files simultaneously
+- Added logging for concurrent processes on host PC to help with debugging
+
 ## 5.4.7
 
 - Host PC metrics are visible in the UI (i.e. - CPU, memory, and disk usage for Agent Connection are available in UI)
