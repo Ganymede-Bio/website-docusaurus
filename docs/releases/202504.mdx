@@ -21,6 +21,8 @@ displayed_sidebar: releaseSideBar
 
 **Improvements** 
 - **Agents**: _ignore_hidden_directories_ has been added as a [reserved variable for File Watcher Agents](../app/agents/Agent#reserved-variables-for-file-watcher-agents).  Setting this variable will ignore any files in hidden directories from being observed, which can reduce memory usage when observing directories with many files written to temp directories.
+- **Agents**: Add _stream_contents_ flag, which, if set to true, delivers the file contents at the time of upload (by execute function), rather than file contents captured by get_param_mapping.  This can be useful for improving memory efficiency of Agents watching for groups of files.  By default, this is set to false.
+- **Agent Notebook**: Add _is_notebook_ function to the Agent SDK, which returns True when customizing user-defined code in the notebook.  This can be useful for specifying test cases in the Agent notebook.
 
 
 **Agent Version**: 5.4.68

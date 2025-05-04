@@ -15,6 +15,7 @@ This page contains a summary of key version updates for the Ganymede [Agent](../
 - Added logging for concurrent processes on host PC to help with debugging
 - Improved ability to configure resource intensity with `max_concurrent_workers` and `allow_overlapping_runs` flags in file watcher and cron Agents.
 - Added `ignore_hidden_files` and `ignore_hidden_directories` flags to file watcher Agents on Windows; when set to true, hidden files and files in hidden directories are ignored, which can help with memory efficiency.
+- Added `stream_contents` flag to file watcher Agents, which, if set to true, delivers the file contents at the time of upload (by execute function), rather than file contents captured by get_param_mapping.  This can be useful for improving memory efficiency of Agents watching for groups of files.  By default, this is set to false.
 
 ## 5.4.7
 
