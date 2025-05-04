@@ -12,7 +12,11 @@ displayed_sidebar: releaseSideBar
   - Additional error states will be detected in the future
 
 **Improvements** 
-- **Agents**: _get_process_metrics_ has been added as a [reserved variable for Agents](../app/agents/Agent#generic-reserved-variables). Setting this variable to false for a connection will skip the collection of host metrics, if the collection of those metrics is not needed.
+- **Agents**: _get_process_metrics_ has been added as a [reserved variable for Agents](../app/agents/Agent#reserved-variables-for-all-agents). Setting this variable to false for a connection will skip the collection of host metrics, if the collection of those metrics is not needed.
+- **Agents**: _max_concurrent_workers_ has been added as a [reserved variable for file watcher Agents](../app/agents/Agent#reserved-variables-for-file-watcher-agents), which specifies the maximum number of concurrent workers used to process files.  By default, this is set to 10.
+- **Agents**: _allow_overlapping_runs_ has been added as a [reserved variable for file watcher Agents](../app/agents/Agent#reserved-variables-for-file-watcher-agents), which specifies whether file processing (file upload / Flow run) can overlap with the next file processing.  By default, this is set to true; if set to false, the Agent will wait for the current file processing to complete before starting the next file processing.
+- **Agents**: _max_concurrent_workers_ has been added as a [reserved variable for cron Agents](../app/agents/Agent#reserved-variables-for-cron-agents), which specifies the maximum number of concurrent workers used to process files.  By default, this is set to 10.
+- **Agents**: _allow_overlapping_runs_ has been added as a [reserved variable for cron Agents](../app/agents/Agent#reserved-variables-for-cron-agents), which specifies whether file processing (file upload / Flow run) can overlap with the next file processing.  By default, this is set to true; if set to false, the Agent will wait for the current file processing to complete before starting the next file processing.
 
 **Bug Fixes**
 - **Agents**: Fixed an issue where expired certs on instrument PCs could prevent Agent from starting, and prevent the Agent from being able to trigger Flows.  Agents v5.5.1 and later will rely on bundled certs to avoid this issue.

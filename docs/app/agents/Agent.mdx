@@ -115,7 +115,7 @@ The _execute_ function in user-defined code for every Agent type can return `Non
 
 ## Configuration Options
 
-### Generic reserved variables
+### Reserved variables for all Agents
 
 Reserved variables are used to configure Connection behavior; these can be set [at installation](./AgentInstall#windows-installation) or in the Connections panel post-installation.  The following reserved variables are available for all Agent types:
 
@@ -142,7 +142,7 @@ A Connection watches a directory (and associated subdirectories) for new files a
 - `Image`: An image to associate with agent in the Ganymede UI.
 - `Auto deploy code and configuration changes to Live Connections`: If checked, updates to Agent code will be reflected on current Connections.
 
-#### Reserved Variables
+#### Reserved variables for File Watcher Agents
 
 Reserved variables are used to configure Connection behavior.  These can be set [at installation](./AgentInstall#windows-installation) or in the Connections panel post-installation.
 
@@ -153,6 +153,9 @@ Reserved variables are used to configure Connection behavior.  These can be set 
 - `ignore_hidden_directories`: for Agents v5.4.68+, specifies that files in hidden directories should be ignored if set to "true".  If left blank, the default value is "false".
 - `ignore_list`: A comma-separated list of patterns that tell the Agent which files/directories to skip watching entirely (events will not hit the agent logs or processor code). Useful for ignoring large volumes of events from backup, log, or other oft-modified but irrelevant files.
   - NOTE: These patterns use a simplified "glob" syntax where the double asterisk `**` can only appear at the start of a pattern. For example, `**/*.txt` is valid (matches text files in any directory), but `backup/**/*.txt` is not valid (`**` is not at the left). To match files in subdirectories, use single asterisks `*`. You'll need multiple patterns, one for each directory level - e.g. `**/backup/*.txt` AND `**/backup/*/*.txt` for files one level deeper, and so on for each additional subdirectory level (since right `**` doesn't work). Full pattern syntax details are in the [Python `pathlib` documentation](https://docs.python.org/3/library/pathlib.html#pathlib.PurePath.match).
+- `stream_contents`: for Agents v5.4.66+, specifies whether to deliver the file contents at the time of upload (by execute function), rather than file contents captured by get_param_mapping.  This can be useful for improving memory efficiency of Agents watching for groups of files if set to True.  By default, this is set to false.
+- `max_concurrent_workers`: for Agents v5.4.79+, specifies the maximum number of concurrent workers used to process files.  By default, this is set to 10.  The true number of maximum concurrent workers is the minimum of this value, 4 * number of CPU cores, and 64.
+- `allow_overlapping_runs`: for Agents v5.4.79+, specifies whether file processing (file upload / Flow run) can overlap with the next file processing.  By default, this is set to true; if set to false, the Agent will wait for the current file processing to complete before starting the next file processing.
 
 #### User-Defined Code
 
@@ -358,6 +361,13 @@ Additional examples can be found on the [Agent Templates page](./AgentTemplates.
 </div>
 &nbsp;
 
+#### Reserved variables for cron Agents
+
+Reserved variables are used to configure Connection behavior.  These can be set [at installation](./AgentInstall#windows-installation) or in the Connections panel post-installation.
+
+- `max_concurrent_workers`: for Agents v5.4.78+, specifies the maximum number of concurrent workers used to process files.  By default, this is set to 10.  The true number of maximum concurrent workers is the minimum of this value, 4 * number of CPU cores, and 64.
+- `allow_overlapping_runs`: for Agents v5.4.78+, specifies whether file processing (file upload / Flow run) can overlap with the next file processing.  By default, this is set to true; if set to false, the Agent will wait for the current file processing to complete before starting the next file processing.
+
 #### Example use case
 
 A user-defined script runs once a day to poll and capture updates from telemetry devices, which are then processed in a Ganymede flow.
@@ -411,7 +421,7 @@ A Connection that monitors Flow file outputs, saving them to local directories a
 
 Additional examples can be found on the [Agent Templates page](./AgentTemplates.mdx#watch-for-flow-outputs-then-save-locally)
 
-#### Reserved Variables
+#### Reserved Variables for Download Agents
 
 For this configuration, the following reserved variables are available:
 
