@@ -121,6 +121,16 @@ Reserved variables are used to configure Connection behavior; these can be set [
 
 - `get_process_metrics`: for Agents v5.5.5+, specifies whether to collect host metrics (CPU, memory, disk) during file processing. Set to "false" to skip this collection if not needed; the default value is "true". 
 
+#### Reserved variables for Agents that run flows
+
+Agents will retry flows using exponential backoff if they fail.  The following reserved variables are available for Agents that run flows for Agents v5.1.44+:
+
+- `max_flow_retries`: Number of times the Agent will retry running a flow if it fails.  If not specified, the default value is 6.
+- `flow_retry_multiplier`: The multiplier for the time that the Agent will wait between flow retries.  If not specified, the default value is 2; this means that each subsequent retry will wait twice as long as the previous one.
+- `flow_retry_min_time`: The minimum time (in seconds) that the Agent will wait before retrying a flow.  If not specified, the default value is 2 seconds.
+- `flow_retry_max_time`: The maximum time (in seconds) that the Agent will wait before retrying a flow.  If not specified, the default value is 60 seconds.
+- `flow_retry_request_timeout`: Number of seconds that the internal request from Agent to Ganymede Cloud to run a flow will wait before timing out.  If not specified, the default value is 30 seconds.
+
 ### Watch for files locally then run flow
 
 A Connection watches a directory (and associated subdirectories) for new files and updates to existing files.  The Flow configured with the Agent is triggered when all expected files are found.
