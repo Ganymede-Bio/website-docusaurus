@@ -350,6 +350,12 @@ def fp(watch_dir: str, parent_dir: str, pattern: str) -> Callable[[str], bool]:
     return fp_res
 ```
 
+#### Issue: I'm seeing 'WUDFHost.exe' appear frequently in the Event Viewer logs.
+
+A: This is a known issue with the Intel Innovation Platform Framework Service (WUDFHost.exe) that can cause high CPU usage and frequent log entries in the Event Viewer on laptops. It is not directly related to the Ganymede Agent but can affect system performance.
+
+To resolve this issue, you can try adjusting the power settings of your laptop as described [here](https://answers.microsoft.com/en-us/windows/forum/all/multiple-usermodepowerservice-log-in-eventviewer/c2bc8a39-ec43-49bf-adbd-66d73d18afe0).
+
 ### Agent uninstall
 
 #### Issue: A Windows Ganymede Agent Connection service continues to run after uninstalling the Agent.
