@@ -125,14 +125,14 @@ module.exports = {
             label: 'Agent Overview & Configuration'
           },
           {
-            type: 'doc',
-            id: 'app/agents/AgentMonitoring',
-            label: 'Connections Configuration & Maintenance'
-          },
-          {
             type: 'doc', 
             id: 'app/agents/AgentInstall',
             label: 'Installing Agent Connections'
+          },
+          {
+            type: 'doc',
+            id: 'app/agents/AgentMonitoring',
+            label: 'Connections Configuration & Maintenance'
           },
           {
             type: 'category',
