@@ -162,13 +162,18 @@ If you would like to download the Linux Agent installer through a script, you ca
 
 ### Step 2: Run the Agent Installer / launch the Agent
 
-After downloading the agent installer, modify permissions for the installer to 755 and run the installer.  The connection name is how the connection will be identified in the Ganymede UI.  
+After downloading the agent installer, modify permissions for the installer to 755 and run the installer, which registers the Agent service with systemd and starts the service.
 
 ```bash
 # make the agent installer executable
 chmod 755 agent_name_<timestamp>_agent
-
-# run the agent installer, replacing the user name with your user name (viewable using the whoami command) and the desired connection name
+ 
+# run the agent installer, replacing the user name with your user name (viewable using the whoami command) and the desired connection name.  
+# The connection name is something you choose, and represents how the connection will be visible in the Ganymede UI.
+# 
+# Ex: if timestamp is 20000101-1234567890 and desired connection name is "test-connection": 
+# HOME=/home/username/Ganymede ./agent_name_2025-1234567890_agent test-connection
+# 
 HOME=/home/\<user\>/Ganymede ./agent_name_<timestamp>_agent \<connection name\>
 ```
 
@@ -183,7 +188,7 @@ This Agent installer will install the Agent in /home/\<user\>/Ganymede/\<connect
     4. Find your Connection and click it to open the detailed Connection page.
     5. On the top of the Connection settings you should see the Status is “Live”
 
-2. Configure any desired tags and labels for the Connection.
+2. Configure any desired tags and labels for the Connection in the Ganymede UI, as described in the [Post-Installation Activities section](#post-installation-activities).
     
 :::note
 
@@ -191,10 +196,9 @@ If the Connection is not showing up in Ganymede, or if the status is anything ot
 
 :::
 
-
 #### Additional useful commands
 
-Additional commands that can be useful:
+Additional commands that can be useful for debugging and configuring the Connection service are listed below.  These commands should be run from the terminal on the instrument computer.
 
 ```bash
 # view the name of the systemd service
