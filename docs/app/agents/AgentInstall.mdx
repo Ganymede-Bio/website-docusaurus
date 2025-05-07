@@ -216,6 +216,47 @@ sudo systemctl restart \<service name\>.service
 journalctl -u \<service name\>.service
 ```
 
+##### Systemd service background info
+
+The service file for the Connection is located at `/etc/systemd/system/<service name>.service`.  The service file is created by the Agent installer and can be modified as needed.
+
+Below is a description of the fields in the systemd service file; more information can be found in the [systemd documentation](https://www.freedesktop.org/software/systemd/man/latest/systemd.service.html).
+
+```bash
+[Unit]
+Description=Ganymede Example Agent
+After=network.target
+Wants=network.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+Restart=on-failure
+RestartSec=10
+TimeoutSec=30
+User=jane_doe
+ExecStart=/path/to/agent/executable
+StandardOutput=append:/var/log/ganymede/GanymedeExampleAgentService.log
+StandardError=append:/var/log/ganymede/GanymedeExampleAgentService_err.log
+
+[Install]
+WantedBy=multi-user.target
+# run the agent installer, replacing the user name with your user name (viewable using the whoami command) and the desired connection name
+HOME=/home/\<user\>/Ganymede ./agent_name_<timestamp>_agent \<connection name\>
+```
+
+- **Description**: Identifies the Connection in logs.
+- **After** and **Wants**: Ensures that basic networking has been set up before launching the Connection.
+- **StartLimitIntervalSec**: set to 0 to avoid service from stopping; by default, the service would stop after a certain number of failures within a specific timeframe.
+- **Restart**: Set to restart the Connection on unclean exit code or abnormal exit; does not restart on clean exit.
+- **User**: The user to associate with Agent runs.  To see the current user, run `whoami`.
+- **ExecStart**: The path to the Agent executable.  The executable takes the following command-line arguments:
+  - -n / --name: The required field for the Connection name used to identify the device and its data, logs, and status throughout Ganymede.
+  - -v / --var: a string in the format "var_name=var_value" that allows setting user context variables accessible from user-defined agent code.  Multiple variables can be specified as shown in the [append configuration setting in argparse](https://docs.python.org/3/library/argparse.html#action).  This argument specifies the folder to watch; if not specified, the folder watched will be the directory containing the Connection binary.
+- **StandardOutput**: log file for Connection output.
+- **StandardError**: log file for Connection errors.  
+- **WantedBy**: Specifies that, if the service has been enabled, it should start when multi-user.target is reached during boot. This occurs when the system is operational and ready for multiple users to log in and use the system in non-graphical mode.
+
 ## Post-Installation Activities
 
 ### Set up Connection Tags and Variables
