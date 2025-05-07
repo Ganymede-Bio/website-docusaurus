@@ -143,7 +143,7 @@ There may be a slight delay as the service connection resumes.
 
 ## Linux Installation
 
-### Step 1: Download the Agent
+### Step 1: Download the Agent Installer
 
 1. Open the Ganymede application in a Google Chrome window: \<tenant\>.ganymede.bio
 2. On the top panel, navigate to the appropriate environment (e.g. - development or production, as appropriate) for your tenant (if not already there).
@@ -155,20 +155,31 @@ There may be a slight delay as the service connection resumes.
 
 :::info
 
-If you would like to download the Linux Agent through a script, you can do so [through the Ganymede API](../../api/download-agent.api.mdx).
+If you would like to download the Linux Agent installer through a script, you can do so [through the Ganymede API](../../api/download-agent.api.mdx).
 
 :::
 
 
-### Step 2: Create the Agent Service file
+### Step 2: Run the Agent Installer
 
-After downloading the agent, modify permissions for the binary to 755.
-
+After downloading the agent installer, modify permissions for the installer to 755 and run the installer.  The connection name is how the connection will be identified in the Ganymede UI.  
 ```bash
+# make the agent installer executable
 chmod 755 agent_name_<timestamp>_agent
+
+./agent_name_<timestamp>_agent \<connection name\>
 ```
 
-Create a [systemd service file](https://www.freedesktop.org/software/systemd/man/systemd.service.html) similar to this:
+
+Running the agent installer will yield the following items in ~/\<connection name\>/:
+
+- LinuxAgent_\<timestamp\>: The agent executable
+- connection.yaml: The configuration file for the agent
+- uninstall.sh: The uninstallation script
+
+### Step 3: Configure the Agent Service
+
+Create a [systemd service file](https://www.freedesktop.org/software/systemd/man/systemd.service.html) similar to this named _connection_name_.service_ in the same directory as the agent executable.  The service file should contain the following:
 
 ```bash
 [Unit]
@@ -203,13 +214,13 @@ WantedBy=multi-user.target
 - **StandardError**: log file for Connection errors.  
 - **WantedBy**: Specifies that, if the service has been enabled, it should start when multi-user.target is reached during boot. This occurs when the system is operational and ready for multiple users to log in and use the system in non-graphical mode.
 
-### Step 3: Start the Agent Service
+### Step 4: Start the Agent Service
 
 Once the service file is created, start the Agent by copying the file to /etc/systemd/system/ and setting permissions of the service file to 644. For example, if the systemd service file were named _ganymede_example_agent.service_, run:
 
 ```bash
-sudo cp /path/to/ganymede_example_agent.service /etc/systemd/system/
-sudo chmod 644 /etc/systemd/system/ganymede_example_agent.service
+sudo cp /path/to/_connection_name_.service /etc/systemd/system/
+sudo chmod 644 /etc/systemd/system/_connection_name_.service
 ```
 
 To launch this service, use the following commands:
@@ -256,7 +267,7 @@ version: <YYYYMMDD-timestamp>
 ```
 :::
 
-### Step 4: Check the Connection Status
+### Step 5: Check the Connection Status
 
 1. Navigate to the Connections page in Ganymede. 
     1. Open the Ganymede application in a browser window: \<tenant\>.ganymede.bio
