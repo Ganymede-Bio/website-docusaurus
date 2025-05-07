@@ -318,6 +318,29 @@ On Windows:
   - Right-click on the time in the bottom right corner of the screen and select "Adjust date/time."
   - Ensure that "Set time automatically" is enabled, and click "Sync now."
 
+#### Issue: The Agent Connection does not restart when the computer is restarted.
+
+On Windows:
+
+- Open up Task Manager and navigate to the Services tab.
+- Look for the Connection of interest (a service with a name starting with "GanymedeAgent-") and double click on it.
+- Navigate to the "Recovery" tab and ensure that the "First failure", "Second failure", and "Subsequent failure" options are set to "Restart the Service" with 0 recover time:
+
+<div class="text--center">
+  <img
+    alt="Agent configuration - File Watcher"
+    src="https://ganymede-bio.mo.cloudinary.net/agent/4XGev.jpg"
+    width="500"
+  />
+</div>
+&nbsp;
+
+On Linux, run the following command to ensure the Agent is set to start on boot:
+
+```bash
+sudo systemctl enable GanymedeAgent-<agent_name>
+```
+
 #### Issue: The flow is failing to trigger when files are being dropped
 
 On Windows:
