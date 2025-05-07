@@ -143,7 +143,7 @@ There may be a slight delay as the service connection resumes.
 
 ## Linux Installation
 
-### Step 1: Download the Agent
+### Step 1: Download the Agent Installer
 
 1. Open the Ganymede application in a Google Chrome window: \<tenant\>.ganymede.bio
 2. On the top panel, navigate to the appropriate environment (e.g. - development or production, as appropriate) for your tenant (if not already there).
@@ -155,20 +155,72 @@ There may be a slight delay as the service connection resumes.
 
 :::info
 
-If you would like to download the Linux Agent through a script, you can do so [through the Ganymede API](../../api/download-agent.api.mdx).
+If you would like to download the Linux Agent installer through a script, you can do so [through the Ganymede API](../../api/download-agent.api.mdx).
 
 :::
 
 
-### Step 2: Create the Agent Service file
+### Step 2: Run the Agent Installer / launch the Agent
 
-After downloading the agent, modify permissions for the binary to 755.
+After downloading the agent installer, modify permissions for the installer to 755 and run the installer, which registers the Agent service with systemd and starts the service.
 
 ```bash
+# make the agent installer executable
 chmod 755 agent_name_<timestamp>_agent
+ 
+# run the agent installer, replacing the user name with your user name (viewable using the whoami command) and the desired connection name.  
+# The connection name is something you choose, and represents how the connection will be visible in the Ganymede UI.
+# 
+# Ex: if timestamp is 20000101-1234567890 and desired connection name is "test-connection": 
+# HOME=/home/username/Ganymede ./agent_name_2025-1234567890_agent test-connection
+# 
+HOME=/home/\<user\>/Ganymede ./agent_name_<timestamp>_agent \<connection name\>
 ```
 
-Create a [systemd service file](https://www.freedesktop.org/software/systemd/man/systemd.service.html) similar to this:
+This Agent installer will install the Agent in /home/\<user\>/Ganymede/\<connection name\> and launch the systemd service for the Agent.
+
+### Step 3: Check the Connection Status / Configure the Connection
+
+1. Navigate to the Connections page in Ganymede. 
+    1. Open the Ganymede application in a browser window: \<tenant\>.ganymede.bio
+    2. On the top panel, navigate to the \<tenant\>-\<tenant-env\> environment
+    3. Navigate to the Connections page.
+    4. Find your Connection and click it to open the detailed Connection page.
+    5. On the top of the Connection settings you should see the Status is “Live”
+
+2. Configure any desired [file tags](../files/Tags.mdx) and [variables](./Agent#reserved-variables-for-all-agents) for the Connection in the Ganymede UI, as described in the [Post-Installation Activities section](#post-installation-activities).
+    
+:::note
+
+If the Connection is not showing up in Ganymede, or if the status is anything other than Live, please contact [Ganymede Support](../Support.mdx) and send log and yaml files that are in the Agent installation directory.
+
+:::
+
+#### Additional useful commands
+
+Additional commands that can be useful for debugging and configuring the Connection service are listed below.  These commands should be run from the terminal on the instrument computer.
+
+```bash
+# view the name of the systemd service
+cat /home/\<user\>/Ganymede/\<connection name\>/connection.yaml | grep service_display_name
+
+# observe the status of the Connection service
+systemctl status \<service name\>.service
+
+# Reload the systemd service file after changes have been made to a service file
+# and restart the Connection service after changes have been made
+sudo systemctl daemon-reload
+sudo systemctl restart \<service name\>.service
+
+# view the logs for the Connection service
+journalctl -u \<service name\>.service
+```
+
+##### Systemd service background info
+
+The service file for the Connection is located at `/etc/systemd/system/<service name>.service`.  The service file is created by the Agent installer and can be modified as needed.
+
+Below is a description of the fields in the systemd service file; more information can be found in the [systemd documentation](https://www.freedesktop.org/software/systemd/man/latest/systemd.service.html).
 
 ```bash
 [Unit]
@@ -183,7 +235,7 @@ Restart=on-failure
 RestartSec=10
 TimeoutSec=30
 User=jane_doe
-ExecStart=/path/to/agent/executable -n GanymedeExampleAgentService -v "input_path=/path/to/watch/dir"
+ExecStart=/path/to/agent/executable
 StandardOutput=append:/var/log/ganymede/GanymedeExampleAgentService.log
 StandardError=append:/var/log/ganymede/GanymedeExampleAgentService_err.log
 
@@ -202,74 +254,6 @@ WantedBy=multi-user.target
 - **StandardOutput**: log file for Connection output.
 - **StandardError**: log file for Connection errors.  
 - **WantedBy**: Specifies that, if the service has been enabled, it should start when multi-user.target is reached during boot. This occurs when the system is operational and ready for multiple users to log in and use the system in non-graphical mode.
-
-### Step 3: Start the Agent Service
-
-Once the service file is created, start the Agent by copying the file to /etc/systemd/system/ and setting permissions of the service file to 644. For example, if the systemd service file were named _ganymede_example_agent.service_, run:
-
-```bash
-sudo cp /path/to/ganymede_example_agent.service /etc/systemd/system/
-sudo chmod 644 /etc/systemd/system/ganymede_example_agent.service
-```
-
-To launch this service, use the following commands:
-
-```bash
-# to start the Agent Connection service
-sudo systemctl start ganymede_example_agent.service
-
-# to ensure that the Connection service starts on system startup
-sudo systemctl enable ganymede_example_agent.service
-```
-
-Additional commands that can be useful:
-
-```bash
-# observe the status of the Connection service
-sudo systemctl status ganymede_example_agent.service
-
-# Reload the systemd service file after changes have been made to a service file
-# and restart the Connection service after changes have been made
-sudo systemctl daemon-reload
-sudo systemctl restart ganymede_example_agent.service
-```
-
-:::info
-After an Agent binary is executed, a connection.yaml file is generated, similar to the one shown below.  When this file is present in the same directory as the Connection binary, the Agent uses this configuration file to determine inputs.
-
-```bash
-environment: ganymede-dev-multi
-id: <agent uuid>
-inferredData:
-  installPath: /path/to/agent/binary
-  macAddress: <mac address of machine>
-  machineIP: <IP address of machine>
-  machineName: <name of machine>
-  serviceDisplayName: GanymedeAgent-<agent uuid>
-labels: []
-name: ganymede_example_agent
-startTime: '2024-07-17T15:10:00Z'
-tagParams: []
-variables:
-  input_path: /path/to/watch/dir/
-version: <YYYYMMDD-timestamp>
-```
-:::
-
-### Step 4: Check the Connection Status
-
-1. Navigate to the Connections page in Ganymede. 
-    1. Open the Ganymede application in a browser window: \<tenant\>.ganymede.bio
-    2. On the top panel, navigate to the \<tenant\>-\<tenant-env\> environment
-    3. Navigate to the Connections page.
-    4. Find your Connection and click it to open the detailed Connection page.
-    5. On the top of the Connection settings you should see the Status is “Live”
-    
-:::note
-
-If the Connection is not showing up in Ganymede, or if the status is anything other than Live, please contact [Ganymede Support](../Support.mdx) and send the stderr.log that is in the Agent installation directory
-
-:::
 
 ## Post-Installation Activities
 
