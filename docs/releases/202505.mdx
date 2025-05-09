@@ -3,6 +3,28 @@ id: 202505
 title: May 2025
 displayed_sidebar: releaseSideBar
 ---
+### May 8 2025
+
+**Features**
+- **UI**: Tags can now be updated directly from the Files Page
+  - Select multiple files and click the "Edit Tags" button to update Tags for all selected Files
+  - Tags can be added or removed from the selected Files (if the Environment is not in Strict Mode)
+  - This functionality is limited to Environment Admins only
+
+**Improvements** 
+- **Agents**: Errors around log file uploads will no longer be marked as errors in the agent logs
+- **Agents**: Agents services on Windows are now set to restart automatically if they fail
+- **Agents**: Improved robustness around agent file upload, flow trigger, and tagging
+- **UI**: A loading indicator will be displayed on the Files page while the page is loading and filters are applied with no results
+- **Virtualization**: Sessions that have encountered an error will not be deleted by default
+
+**Bug Fixes**
+- **UI**: The pagination settings of the Files page are now displayed when a filter is applied
+- **Virtualization**: Fixed an issue where the Virtualization window would not resize correctly in some cases
+
+**Agent Version**: 5.5.13
+
+
 ### May 1 2025
 
 **Features**
