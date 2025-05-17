@@ -230,7 +230,7 @@ module.exports = {
               {
                 type: 'doc',
                 label: 'Ganymede Metadata Tables',
-                id: 'app/flows/SystemMetadata'
+                id: 'app/visualization/SystemMetadata'
               },
               'app/visualization/DashboardTips']
           },
