@@ -49,7 +49,7 @@ This table contains a record for each user associated with an application sessio
 | Field Name | Data Type | Description |
 |-------------|-----------|-------------|
 | `applicationSessionId` | string | The id of the application session |
-| `userId` | integer | The ID of a user who accessed an application session |
+| `userId` | integer | The id of a user who accessed an application session |
 
 ## Files
 
@@ -58,7 +58,7 @@ This table contains a record for each user associated with an application sessio
 | Field Name | Data Type | Description |
 |-------------|-----------|-------------|
 | `createdAt` | bigint | Time of the file save, stored as epoch time in milliseconds |
-| `creator` | string | Name of the file creator (e.g. - email address for users, connectionId for Agents) |
+| `creator` | string | Name of the file creator (e.g. - email address for users, Connection id for Agents) |
 | `creatorType` | string | Type of the file creator (e.g. - User, Agent) |
 | `hostPath` | string | The path of the file on the host PC |
 | `path` | string | Path within storage bucket to file |
@@ -72,8 +72,8 @@ This table contains a record for each user associated with an application sessio
 | `appliedDate` | timestamp with time zone | The time the File Tag was applied to the File |
 | `displayValue` | string | The display value of the File Tag |
 | `file_uri` | string | The uri of the File |
-| `tagId` | string | The unique ID assoicated with the File Tag value |
-| `tagTypeId` | string | The ID of the File Tag Type |
+| `tagId` | string | The unique id assoicated with the File Tag value |
+| `tagTypeId` | string | The id of the File Tag Type |
 | `updatedDate` | timestamp with time zone | The time the File Tag was updated (if allowed) |
 | `url` | string | The URL associated with the File Tag value |
 
@@ -81,12 +81,12 @@ This table contains a record for each user associated with an application sessio
 | Field Name | Data Type | Description |                                     
 |-------------|-----------|-------------|                                    
 | `allowMultiple` | boolean | Whether the File Tag is allowed to have multiple Tag Values applied to one File |                                                
-| `backgroundColor` | string | The hexcode of the File Tag color |                                    
+| `backgroundColor` | string | The hex code of the File Tag color |                                    
 | `description` | string | The description of the File Tag Type |
 | `hasUrl` | boolean | Whether or not the File Tag Type supports URLs |                                                       
 | `icon` | string | The icon of the File Tag Type |                                               
 | `id` | string | The id of the File Tag Type |                                                 
-| `textColor` | string | The hexcode of the File Tag text color |
+| `textColor` | string | The hex code of the File Tag text color |
 | `type` | string | The name of the File Tag Type |  
 
 ## Flow Runs
