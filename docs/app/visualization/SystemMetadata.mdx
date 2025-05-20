@@ -1,0 +1,143 @@
+---
+id: SystemMetadata
+title: Ganymede Metadata Tables
+displayed_sidebar: webUiSidebar
+---
+
+import { CheckCircleOutlined } from '@ant-design/icons';
+
+Ganymede metadata tables allow users to query and reference details about flow runs, tables, and files stored within the Ganymede platform. These tables can be utilized for various purposes, such as debugging previous runs, locating specific files or table records associated with past runs, and systematically displaying tags used to contextualize and ensure traceability of captured data.
+
+The tables described below are found in the Ganymede database under the metadata schema, and can be referenced in [Dashboards](../visualization/Dashboards.mdx).
+
+## Flow Runs
+
+The **flow_run_metadata** table captures a record for each flow execution.
+
+| Field Name | Description |
+|------------|-------------|
+| `start_time` | Start time of the Flow run |
+| `end_time` | End time of the Flow run |
+| `export_time` | Time of the Flow run export |
+| `flow_run_id` | Unique identifier for the Flow run, stored as epoch time in milliseconds |
+| `flow_id` | Flow name |
+| `inputs_dict` | Run context for the Flow; corresponds to the run context described in the [Ganymede Class overview](../../sdk/GanymedeClass.mdx#overview) |
+| `initiator` | Flow run initiator; agent name + MAC address for agent-initiated Flows, user email for user-initiated flows, event name for event-triggered Flows, or Flow name if triggered from another Flow |
+| `initiator_type` | Type of the user who initiated the flow run (AGENT, USER, EVENT, FLOW) |
+| `flow_version` | Commit hash associated with flow execution |
+| `state` | Final disposition of Flow run (Success, Failed) |
+| `table_output` | JSON containing database table write info associated with Flow run; table, type of write operation (e.g. - replace, append), table columns, and row count are available in data | 
+
+## Application Sessions
+
+**public_application_session**
+
+| Field Name | Data Type | Description |
+|-------------|-----------|-------------|
+| `application` | string | The name of the application |
+| `endTime` | string | The end time of the application session |
+| `id` | string | The id of the application session |                                                 
+| `initiator` | string | The user who started the session |
+| `inputFiles` | text | A comma delimited list of file URIs that were provided to the application session |
+| `outputFiles` | text  |A comma delimited list of file URIs that were generate by the application session | |
+| `startTime` | string |The start time of the application session  |
+
+**public_application_session_users_user**
+
+This table contains a record for each user associated with an application session.  The table is joined to the `public_application_session`table by the `applicationSessionId` field.
+
+| Field Name | Data Type | Description |
+|-------------|-----------|-------------|
+| `applicationSessionId` | string | The id of the application session |
+| `userId` | integer | The id of a user who accessed an application session |
+
+## Files
+
+**public_file**
+
+| Field Name | Data Type | Description |
+|-------------|-----------|-------------|
+| `createdAt` | bigint | Time of the file save, stored as epoch time in milliseconds |
+| `creator` | string | Name of the file creator (e.g. - email address for users, Connection id for Agents) |
+| `creatorType` | string | Type of the file creator (e.g. - User, Agent) |
+| `hostPath` | string | The path of the file on the host PC |
+| `path` | string | Path within storage bucket to file |
+| `size` | bigint | The size of the file in bytes |
+| `uri` | string | Full URI to the file |
+
+
+**public_file_tag**
+| Field Name | Data Type | Description |
+|-------------|-----------|-------------|
+| `appliedDate` | timestamp with time zone | The time the File Tag was applied to the File |
+| `displayValue` | string | The display value of the File Tag |
+| `file_uri` | string | The uri of the File |
+| `tagId` | string | The unique id associated with the File Tag value |
+| `tagTypeId` | string | The id of the File Tag Type |
+| `updatedDate` | timestamp with time zone | The time the File Tag was updated (if allowed) |
+| `url` | string | The URL associated with the File Tag value |
+
+**public_file_tag_type**
+| Field Name | Data Type | Description |                                     
+|-------------|-----------|-------------|                                    
+| `allowMultiple` | boolean | Whether the File Tag is allowed to have multiple Tag Values applied to one File |                                                
+| `backgroundColor` | string | The hex code of the File Tag color |                                    
+| `description` | string | The description of the File Tag Type |
+| `hasUrl` | boolean | Whether or not the File Tag Type supports URLs |                                                       
+| `icon` | string | The icon of the File Tag Type |                                               
+| `id` | string | The id of the File Tag Type |                                                 
+| `textColor` | string | The hex code of the File Tag text color |
+| `type` | string | The name of the File Tag Type |  
+
+## Flow Runs
+
+**public_flow**
+| Field Name | Data Type | Description |
+|-------------|-----------|-------------|
+| `description` | string | Description of the Flow |
+| `displayName` | string | The display name of the Flow |
+| `docsMarkdown` | string | The Markdown description of the Flow |
+| `id` | integer | The id of the Flow |
+| `name` | string | The name of the Flow |
+| `owner` | string | The email of the User that owns the Flow |
+| `schedule` | string | The cron schedule of the Flow |
+
+**public_flow_run**
+| Field Name | Data Type | Description |
+|-------------|-----------|-------------|
+| `end_time` | timestamp with time zone | The time that the Flow Run ended |
+| `execution_time` | timestamp with time zone | The time that the Flow Run started running |
+| `flowId` | integer | The id of the Flow |
+| `id` | integer | The id of the Flow Run |
+| `initiator` | string | Name of the Flow run initiator (e.g. - email address for users, Connection id for Agents) |
+| `initiator_type` | USER-DEFINED | Type of the user who initiated the flow run (AGENT, USER, EVENT, FLOW)  |
+| `run_id` | string | The id of the Flow RUn as used by the orchestrator |
+| `start_time` | timestamp with time zone | The time that the Flow Run was requested to start |
+| `state` | string | Final disposition of Flow run (Success, Failed) |
+
+## Instruments
+
+**public_instrument**
+| Field Name | Data Type | Description |
+|-------------|-----------|-------------|
+| `connectionId` | string | The Connection id that is associated with this Instrument |
+| `costPerRun` | string | The user-defined cost per run |
+| `id` | integer | The id of the instrument |
+| `location` | string | The user-defined location of the instrument |
+| `manufacturer` | string | The user-defined location of the instrument |
+| `metadata` | string | The user-configurable metadata of the instrument |
+| `model` | string | The user-defined model of the instrument |
+| `name` | string | The user-defined name of the instrument |
+| `serial` | string |The user-defined serial number of the instrument |
+
+## Users
+
+### public_user
+| Field Name | Data Type | Description |
+|-------------|-----------|-------------|
+| `email` | string | The User's email address |
+| `id` | integer | The internal id of the User |
+| `lastActiveAt` | timestamp with time zone | The last time the User made an auditable action in the Ganymede platform |
+| `lastSeenAt` | timestamp with time zone | The last time the User was seen by the Ganymede platform |
+| `role` | string | The users role within the environment |
+
