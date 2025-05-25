@@ -9,6 +9,7 @@ displayed_sidebar: releaseSideBar
 - **Modular Analysis**: Improved error handling for Modular Analysis
   - The Modular Analysis page will now display a message if the analysis fails to load
   - Use the Logs tab to view the detailed error message
+- **Agents**: File watcher Agents will now restart automatically if the input_path directory (the directory being watched) is deleted or becomes inaccessible
 
 **Bug Fixes**
 - **UI**: The default Agent version will now be set to the latest version when creating a new Agent
@@ -19,7 +20,7 @@ displayed_sidebar: releaseSideBar
 
 **Improvements** 
 - **Agents**: Agents will now ignore file uploads where both the file name and MD5 hash are the same as a previously uploaded file
-
+- **Agents**: Added _restart_cron_utc_ reserved variable for Windows Agents, which restarts the Windows service associated with an Agent at a specified UTC time.  
 
 **Bug Fixes**
 - **UI**: The pagination settings of the Files page will now include all file when launched from the Application Session list
@@ -36,7 +37,6 @@ displayed_sidebar: releaseSideBar
 
 **Improvements** 
 - **Agents**: Errors around log file uploads will no longer be marked as errors in the agent logs
-- **Agents**: Agents services on Windows are now set to restart automatically if they fail
 - **Agents**: Improved robustness around agent file upload, flow trigger, and tagging
 - **UI**: A loading indicator will be displayed on the Files page while the page is loading and filters are applied with no results
 - **Virtualization**: Sessions that have encountered an error will not be deleted by default
