@@ -120,6 +120,7 @@ The _execute_ function in user-defined code for every Agent type can return `Non
 Reserved variables are used to configure Connection behavior; these can be set [at installation](./AgentInstall#windows-installation) or in the Connections panel post-installation.  The following reserved variables are available for all Agent types:
 
 - `get_process_metrics`: for Agents v5.5.5+, specifies whether to collect host metrics (CPU, memory, disk) during file processing. Set to "false" to skip this collection if not needed; the default value is "true". 
+- `restart_cron_utc`: for Windows Agents v5.5.21+, specifies the UTC time at which the Windows service associated with the Agent will be restarted.  For example, setting this to "0 * * * *" will restart the service every hour on the hour.  This can be helpful for limiting memory usage for frequently executed Agents. Note: restarts will drop the state of captured files, and so generally usage aligns best with cron and file watcher agents with the "ignore_duplicates" toggle set.
 
 #### Reserved variables for Agents that run flows
 
