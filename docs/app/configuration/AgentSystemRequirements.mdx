@@ -44,12 +44,11 @@ $ IWR -URI pubsub.googleapis.com
 $ IWR -URI <tenant_name>.ganymede.bio
 ```
 
-This test is successful if the responses do not time out.
-
 :::info
 
-storage.googleapis.com should return a message like "MissingSecurityHeaderYour request was missing a required header.Authorization" if successful
-pubsub.googleapis.com should return a 404 error if successful
+- storage.googleapis.com should return a message like "MissingSecurityHeaderYour request was missing a required header.Authorization" if successful
+- pubsub.googleapis.com should return a 404 error if successful
+- \<tenant_name\>.ganymede.bio should return a 200 OK response if successful
 
 :::
 
