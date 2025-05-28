@@ -44,6 +44,8 @@ $ IWR -URI pubsub.googleapis.com
 $ IWR -URI <tenant_name>.ganymede.bio
 ```
 
+Note that the `googleapis.com` pings should immediately return with an authentication error (demonstrating connectivity was made; full authentication is not required for this test). If no connectivity is possible, the requests will time out.
+
 ### Linux Agents
 
 For Linux Agents, connectivity can be tested by installing [netcat](https://netcat.sourceforge.net/) and running the following commands in a terminal:
