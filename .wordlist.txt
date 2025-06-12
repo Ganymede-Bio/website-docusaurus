@@ -453,3 +453,4 @@ WUDFHost
 bigint
 auditable
 MissingSecurityHeaderYour
+SelfManagedRepo
