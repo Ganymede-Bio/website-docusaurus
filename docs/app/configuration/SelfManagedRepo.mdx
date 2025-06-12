@@ -18,7 +18,7 @@ The setup instructions in the document explain how to configure the necessary Gi
 
 * Create a Github repo in your organization, or if you have an existing repo you can use that 
 * Create a new repo from this [templated repo](https://github.com/Ganymede-Bio/self-managed-repo-template). If you have an existing repo you can copy Github Workflows (deploy-from-action.yaml & pull-from-action.yaml) found in this repo into your repo. They should be in the .github/workflows folder
-* In your repo go to Settings > Secrets & Variables > Actions and set a Github repo variable named GANYMEDE_SUBDOMAIN to the corresponding Ganymede subdomain value. If you log into Ganymede at https://mycompany.ganymede.bio, this would be mycompany
+* In your repo go to Settings > Secrets & Variables > Actions and set a Github repo variable named GANYMEDE_SUBDOMAIN to the corresponding Ganymede subdomain value. If you log into Ganymede at https://customer.ganymede.bio, this would be customer.
 * Generate an API token for each Ganymede environment. (Create an environment secret in the Ganymede UI with a name starting with “ganymede_api_key” and a randomly generated value).
 * Set environment secrets and variables.
   * If using Github environments (recommended), create an environment corresponding to each Ganymede environment.
