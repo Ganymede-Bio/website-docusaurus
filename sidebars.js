@@ -263,10 +263,16 @@ module.exports = {
             type: 'doc',
             id: 'app/admin/ExternalPlatform',
             label: 'External Platform Integration'
-          },              {
+          },             
+          {
             type: 'doc',
             id: 'app/configuration/AgentToS3BucketConfig',
             label: 'Connect Agent to S3 Bucket'
+          },
+          {
+            type: 'doc',
+            id: 'app/configuration/SelfManagedRepo',
+            label: 'Self Managed Repo'
           },
 
           {
