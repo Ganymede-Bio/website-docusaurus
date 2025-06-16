@@ -59,6 +59,7 @@ backfills
 cytometers
 autopopulate
 repo
+repos
 HHmmSSssss
 YYYYMMDD
 codebase
@@ -452,3 +453,4 @@ WUDFHost
 bigint
 auditable
 MissingSecurityHeaderYour
+SelfManagedRepo

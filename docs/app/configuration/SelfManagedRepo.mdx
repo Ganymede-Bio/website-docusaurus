@@ -1,0 +1,43 @@
+---
+id: SelfManagedRepo
+title: Self Managed Repo
+displayed_sidebar: webUiSidebar
+---
+
+Self-managed repos allow you to host and manage your Ganymede flow code in your organization, giving you greater control over version control, CI/CD, and code governance. With this approach, you can:
+
+* Store your code in your own Git based repo
+* Use standard Git workflows for code reviews, branching, and versioning
+* Implement your own CI/CD pipelines for testing and deploying flows to Ganymede
+* Maintain code ownership within your organization's infrastructure
+* Integrate with existing development practices and tools familiar to your team
+
+The setup instructions in the document explain how to configure the necessary GitHub Actions workflows to synchronize code between your repo and Ganymede environments, ensuring changes can flow both ways while maintaining proper version control.
+
+## Setup
+
+* Create a Github repo in your organization, or if you have an existing repo you can use that 
+* Create a new repo from this [templated repo](https://github.com/Ganymede-Bio/self-managed-repo-template). If you have an existing repo you can copy Github Workflows (deploy-from-action.yaml & pull-from-action.yaml) found in this repo into your repo. They should be in the .github/workflows folder
+* In your repo go to Settings > Secrets & Variables > Actions and set a Github repo variable named GANYMEDE_SUBDOMAIN to the corresponding Ganymede subdomain value. If you log into Ganymede at https://customer.ganymede.bio, this would be customer.
+* Generate an API token for each Ganymede environment. (Create an environment secret in the Ganymede UI with a name starting with “ganymede_api_key” and a randomly generated value).
+* Set environment secrets and variables.
+  * If using Github environments (recommended), create an environment corresponding to each Ganymede environment.
+  * Set the secret GANYMEDE_API_TOKEN with the generated API token in the corresponding Ganymede environment.
+* **pull-from-action.yaml**
+    * Update the github_username and github_email environment variables to your desired values. These will only be used for creating pull requests in your Github repo.
+    * Update the ENVIRONMENT variable to the Ganymede environment name.
+    * Run `pull-from-action.yaml` via workflow dispatch for the desired environment to populate repo with current flows.
+* **deploy-from-action.yaml**
+  * Define the variable ENVIRONMENT to match the environment for deployment. This should correspond to the directory structure of your repo as well. (ENVIRONMENT/…) (You may want multiple actions or have multiple jobs if you want multiple environments)
+
+## Usage
+
+### Syncing
+* Run workflow dispatch on the `pull-from-action.yaml` workflow to pull the latest flow code. This will create a pull request with the changes. You can optionally specify a single flow to sync code from.
+* The workflow can also be scheduled to run on a cron schedule.
+### Deploying
+* Code changes merged into the Main branch will be automatically deployed to Ganymede. The Ganymede commit message will be based on the pull request's commit message.
+* Deployment can also be triggered using the workflow dispatch action, provided a user email matching a Ganymede user is supplied.
+
+## Limitations
+* The author email in the deploy-from-action must match an email that is registered in Ganymede. If using the push github event, then the committer email address is used by default
