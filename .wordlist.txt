@@ -454,3 +454,4 @@ bigint
 auditable
 MissingSecurityHeaderYour
 SelfManagedRepo
+APISetup

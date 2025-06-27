@@ -1,0 +1,26 @@
+---
+id: APISetup
+title: Connect to Ganymede API
+displayed_sidebar: webUiSidebar
+---
+
+
+Ganymede provides a REST API that can be used to interact with the platform programmatically. This page describes how to set up the API and use it to access Ganymede resources. 
+For details regarding the API endpoints, see the [API Reference](https://docs.ganymede.bio/api).
+
+
+## Add an API Key
+
+To use the Ganymede API, you need to create an API key. This key will be used to authenticate your requests. 
+
+Create a secure string outside of Ganymede, such as a password manager, and then add a secret to your Ganymede environment with the key prefix `ganymede_api_key` and a meaningful name (ex: `ganymede_api_key_github_repo`) and the value set to the secure string you created.
+
+## Use the API Key
+
+Supply the API key in the `api-key` header of your HTTP requests. The header should look like this:
+
+```http
+api-key: <your_secure_string>
+``` 
+
+The provided sample code in the API Reference shows how to use the API key in various programming languages, such as curl, Python, JavaScript, and others.
