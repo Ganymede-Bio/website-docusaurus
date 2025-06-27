@@ -271,6 +271,11 @@ module.exports = {
           },
           {
             type: 'doc',
+            id: 'app/configuration/APISetup',
+            label: 'Connect to Ganymede API'
+          },
+          {
+            type: 'doc',
             id: 'app/configuration/SelfManagedRepo',
             label: 'Self Managed Repo'
           },
