@@ -26,6 +26,51 @@
   --ifm-code-font-size: 80%;
 }
 
+/* Font smoothing and text rendering for consistent appearance */
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-synthesis: none;
+}
+
+/* Ensure font weights are preserved in production builds */
+body {
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Force consistent text rendering for all elements */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Preserve bold text in production */
+b, strong {
+  font-weight: 700 !important;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Ensure headings maintain their weight */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700 !important;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Ensure paragraph text maintains proper weight */
+p, li, td, th, dd, dt {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Force font weight for elements that might lose it in production */
+.markdown > *, 
+.theme-doc-markdown > * {
+  -webkit-font-smoothing: antialiased;
+}
+
 .menu__list-item {
   margin: 0.25rem 0; /* Less space between items */
 }
@@ -34,6 +79,8 @@
   padding: 0.25rem 0.5rem; /* Tighter padding around links */
   font-size: 0.85rem;
   color: var(--ifm-color-gray-dark);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .menu__link:hover {
@@ -91,7 +138,7 @@
 .keystroke {
   display: inline;
   color: var(--ifm-color-gray-darker);
-  font-weight: 700;
+  font-weight: 700 !important;
   border-style: solid;
   border: 1px;
   padding-left: 2px;
@@ -105,22 +152,22 @@
 .button.darker_gray_button {
   background-color: var(--ifm-color-white);
   color: var(--ifm-color-gray-darker);
-  font-weight: 700;
+  font-weight: 700 !important;
 }
 
 .button.dark_gray_button {
   color: var(--ifm-color-gray-dark);
-  font-weight: 700;
+  font-weight: 700 !important;
 }
 
 .button.gray_button {
   color: var(--ifm-color-gray);
-  font-weight: 500;
+  font-weight: 500 !important;
 }
 
 .button.black_button {
   color: var(--ifm-color-black);
-  font-weight: 700;
+  font-weight: 700 !important;
 }
 
 .button.darkblue_button {
@@ -229,7 +276,7 @@
   padding-right: 3px;
   padding-top: 1px;
   padding-bottom: 2px;
-  font-weight: 500;
+  font-weight: 500 !important;
 }
 
 .white_icon {
@@ -305,7 +352,7 @@
   padding-right: 10px;
   background-color: #387fd3;
   color: white;
-  font-weight: 400;
+  font-weight: 400 !important;
 }
 
 .button.blue_keystroke {
@@ -337,4 +384,60 @@
 
 .hidden {
   display: none !important;
+}
+
+/* Production-specific font weight preservation */
+@media screen {
+  /* Ensure all text with explicit font-weight maintains it */
+  [style*="font-weight: 700"],
+  [style*="font-weight: bold"],
+  [style*="font-weight:700"],
+  [style*="font-weight:bold"] {
+    font-weight: 700 !important;
+    -webkit-font-smoothing: antialiased;
+  }
+  
+  /* Preserve font weights for inline styles */
+  [style*="font-weight: 600"],
+  [style*="font-weight:600"] {
+    font-weight: 600 !important;
+    -webkit-font-smoothing: antialiased;
+  }
+  
+  [style*="font-weight: 500"],
+  [style*="font-weight:500"] {
+    font-weight: 500 !important;
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+/* Ensure code blocks and inline code maintain proper rendering */
+code, pre {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Specific rules for Docusaurus content that might lose weight in production */
+.docusaurus-highlight-code-line,
+.prism-code,
+.token {
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Ensure table content maintains weight */
+table {
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Fix for markdown content that might appear lighter in production */
+article p,
+article li,
+article h1,
+article h2,
+article h3,
+article h4,
+article h5,
+article h6 {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
