@@ -13,10 +13,6 @@ module.exports = {
   markdown: {
     mermaid: true
   },
-  future: {
-    experimental_faster: true,
-    v4: true
-  },
   plugins: [
     [
       'docusaurus-plugin-openapi-docs',
