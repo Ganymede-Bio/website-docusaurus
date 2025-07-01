@@ -25,22 +25,27 @@ To ensure that the [Agent](../agents/Agent) is able to communicate with Ganymede
 
 Administrative access is required so that the Agent can be installed to run as a service, which enables the Agent to launch automatically on system startup.  Once configured, users are not required to log in as an admin.  
 
-## Testing Connectivity 
+## Proxy and Firewall Configuration
 
 If direct access to the internet is allowed (no proxy), configure your Firewall to allow Outbound HTTPS (port 443) connections from the PC where the agent is running. 
 If direct access to the internet is not allowed (proxy), configure your Proxy to allow the following  connections from the PC where the agent is running.
 
-- storage.googleapis.com on port 443
-- pubsub.googleapis.com on port 443
+- *.googleapis.com on port 443
+- accounts.google.com on port 443
+- 1e100.net on port 443
+- api.ipify.org on port 443
 - \<tenant_name\>.ganymede.bio port 443
 
-### Windows Agents
+### Testing Connectivity - Windows
 
 For Windows Agents, connectivity can be tested by running the following commands in PowerShell:
 
 ```powershell
 $ IWR -URI storage.googleapis.com
+$ IWR -URI firebase.googleapis.com
+$ IWR -URI oauth2.googleapis.com
 $ IWR -URI pubsub.googleapis.com
+$ IWR -URI api.ipify.org
 $ IWR -URI <tenant_name>.ganymede.bio
 ```
 
@@ -52,13 +57,16 @@ $ IWR -URI <tenant_name>.ganymede.bio
 
 :::
 
-### Linux Agents
+### Testing Connectivity - Linux
 
 For Linux Agents, connectivity can be tested by installing [netcat](https://netcat.sourceforge.net/) and running the following commands in a terminal:
 
 ```shell 
 $ nc -vz storage.googleapis.com -Port 443
 $ nc -vz pubsub.googleapis.com -Port 443
+$ nc -vz firebase.googleapis.com -Port 443
+$ nc -vz oauth2.googleapis.com -Port 443
+$ nc -vz api.ipify.org -Port 443
 $ nc -vz <tenant_name>.ganymede.bio -Port 443
 ```
 
