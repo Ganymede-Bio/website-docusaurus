@@ -1,0 +1,70 @@
+---
+id: create-process-run
+title: "createProcessRun"
+description: "Create a Process Run in an Environment."
+sidebar_label: "createProcessRun"
+hide_title: true
+hide_table_of_contents: true
+api: eJztWFtv4jgU/iuWn3YlKFB1NLu80ctI7K7ULqVaaREPJjHgabAztkOHjfLf9xzbIQm3TqdonuYFkeTcL98XJ6cxN5EWqRVK0j690ZxZThh50CrixpBRJomQhElyJ9dCK7ni0l7QFlUp1wy1hjHoRU4vKIEOCKRMsxW3XBvan+RUwgUI8soKyGj+JROagwWrM96iAmNImV3CMxMt+YrRfk7tJkVVY7WQC1oUU6/Ijb1W8QYldu1ESlr0AI9YmiYicpF2PhtMMt83rWafeYQBpRrzsoIbfJr6fDDDrajMVjOuQbRZuOEtUXNil5wEJTJXGq6FIRrKUUA+lmk7FliF3ZR2jT2iKLEgu2tUu9KC6RWD7GgMRW+jHDrgMv4283cyfrNxiN460xwKAA2l0GTpjd+oVZpAo2MKjXk1MXvEbcznLEvQb2kZvM5Fwp+0cM1oWhpozTZoCUXI02hoiFWEGaMigT5ehF1W5d/GxVANLoXlK3NotsBnol4ghGF80isIoWUyvH2f4zBO6DiTwt6XW/VqBChNtkt47lhSJnnyCN1xC34qDidJjBd9dwi1Psy+jNks4ae9X/9NLEqdM3f+FUBLssSv/c7qhGdExIAvYi64Bnj0K4P5+6XfnW2WJPdzh4Kn8UbE37C8ByIovQoJShlia3AssyTB8nhcxBnTyesunkZ/VYWMy0pywvdd7/sAJ1ZYvNyGCoUspviggulJDVunlcbNDo04fC8Kr2tSJY0v1GW3t9+bOmV5PoqJySK8N4cYsetn4gVxgBAgxOB0YA8MdOt9ZFIOMpnxRMkFzvpPTgmvLJnWOPHmGLe8lUf2R/+HsMj3uz03h5wlkvcwyFk68Hb+OEveP9njR7AH5FrH2zq6lrhSo5WKUG7H94FPrrpXxylEKgtlyWTsWmp4lGlhN64HLBXtZ47/p0Urp9ecaa4HGRxZ8A46ZQs88dCHbAYEM0gFRFSjJoOBwbloqfDclCrjoscjT5921r1O7YDUyWsXRSek2NZoBKPS6/Jw5RpDl9ampt/p5EuwWuw1Bm6smRZYbTcvKOVLUL55uzuFO2CVOT8iJXr5bebbCYA7f3K3D2h/yVnse+qPeqU8VLBepUCzKDFzt0HD//lUssQf/4yrncOsKqNoQ2nxn1uYAywEM0NAHfjxmcudyLCXSPWj6vB495Uh0ewc9roNZoW3jcurdvdj+/L3ce9D/0Ovf/nbRfdj719a48dTQoHnavRW8dGkXKNpkzMm3ekRNHdP9tC1bqeOfE66iUmIE9Xy+tGp4SYCkutxWJ6DcwSD5y96F92LbnizYhHOkwN/GKQVc+9UoW8HPhA0rObVu9kbPkKEEbGQYCdNmHBkH1DK79SErnuuT/XPDv3mZWOxoFx+MSY0z2fMQJ+SosDbMDTa7X21R275YmHwP1R1zhLDTyT2yyhA2K/kWPDlZsmNW9ckCy1wi9dIA0CxVU42huElbryz9hjtVBb23nYRu7zGAN6QU3tSto5YD/ePuJyz8OVlpWLU0ewFP+fAr4tWueQdarh7OU2YXGRsgbLeJo4JC4BQwcmzg5Pwp0Z5zXqUyFKWxaPMEeE89zBVFFt5/+ioxhbIvDQ2Bgio+B94YZ43
+sidebar_class_name: "post api-method"
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"createProcessRun"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/v1/environment/{environment}/process-runs"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Create a Process Run in an Environment.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"name":"environment","required":true,"in":"path","schema":{"type":"string"}}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{"required":true,"content":{"application/json":{"schema":{"type":"object","properties":{"processId":{"type":"number","description":"ID of the process for this run"},"startTime":{"type":"string","description":"Start time of the process run","format":"date-time"},"endTime":{"type":"string","description":"End time of the process run","format":"date-time"},"state":{"enum":["Running","Completed"],"type":"string","description":"State of the process run","default":"Running"},"fileUris":{"description":"Array of file URIs to associate with this run","type":"array","items":{"type":"string"}},"flowRunIds":{"description":"Array of flow run IDs to associate with this run","type":"array","items":{"type":"number"}},"unitOperationRunIds":{"description":"Array of unit operation run IDs to associate with this run","type":"array","items":{"type":"number"}},"panelSessionIds":{"description":"Array of panel session IDs to associate with this run","type":"array","items":{"type":"string"}},"bqTableIds":{"description":"Array of BQ table IDs to associate with this run","type":"array","items":{"type":"number"}},"externalId":{"description":"External identifier information for the process run","allOf":[{"type":"object","properties":{"id":{"type":"string","description":"External identifier for the instrument run","nullable":true},"url":{"type":"string","description":"URL associated with the external identifier","nullable":true}},"title":"ExternalId"}]}},"required":["processId"],"title":"CreateProcessRunBody"}}}}}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"201":{"description":"Process Run created successfully","content":{"application/json":{"schema":{"type":"object","properties":{"id":{"type":"number"},"createdAt":{"type":"string"},"processId":{"type":"number","description":"ID of the process this run belongs to"},"startTime":{"type":"string","description":"Start time of the process run","format":"date-time"},"endTime":{"type":"string","description":"End time of the process run","format":"date-time"},"state":{"enum":["Running","Completed"],"type":"string","description":"Current state of the process run"},"fileUris":{"description":"Array of file URIs associated with this run","type":"array","items":{"type":"string"}},"flowRunIds":{"description":"Array of flow run IDs associated with this run","type":"array","items":{"type":"number"}},"unitOperationRunIds":{"description":"Array of unit operation run IDs associated with this run","type":"array","items":{"type":"number"}},"panelSessionIds":{"description":"Array of panel session IDs associated with this run","type":"array","items":{"type":"string"}},"bqTableIds":{"description":"Array of BQ table IDs associated with this run","type":"array","items":{"type":"number"}},"externalId":{"description":"External identifier information for the process run","allOf":[{"type":"object","properties":{"id":{"type":"string","description":"External identifier for the instrument run","nullable":true},"url":{"type":"string","description":"URL associated with the external identifier","nullable":true}},"title":"ExternalId"}]}},"required":["id","createdAt","processId","state"],"title":"ProcessRunDTO"}}}},"404":{"description":"Process not found"}}}
+>
+  
+</StatusCodes>
+
+
+      

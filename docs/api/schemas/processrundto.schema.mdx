@@ -1,0 +1,33 @@
+---
+id: processrundto
+title: "ProcessRunDTO"
+description: ""
+sidebar_label: "ProcessRunDTO"
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: {"id":0,"createdAt":"string","processId":0,"startTime":"2024-07-29T15:51:28.071Z","endTime":"2024-07-29T15:51:28.071Z","state":"Running","fileUris":["string"],"flowRunIds":[0],"unitOperationRunIds":[0],"panelSessionIds":["string"],"bqTableIds":[0],"externalId":{"id":"string","url":"string"}}
+custom_edit_url: null
+---
+
+import Schema from "@theme/Schema";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"ProcessRunDTO"}
+>
+</Heading>
+
+
+
+
+
+<Schema
+  schema={{"type":"object","properties":{"id":{"type":"number"},"createdAt":{"type":"string"},"processId":{"type":"number","description":"ID of the process this run belongs to"},"startTime":{"type":"string","description":"Start time of the process run","format":"date-time"},"endTime":{"type":"string","description":"End time of the process run","format":"date-time"},"state":{"enum":["Running","Completed"],"type":"string","description":"Current state of the process run"},"fileUris":{"description":"Array of file URIs associated with this run","type":"array","items":{"type":"string"}},"flowRunIds":{"description":"Array of flow run IDs associated with this run","type":"array","items":{"type":"number"}},"unitOperationRunIds":{"description":"Array of unit operation run IDs associated with this run","type":"array","items":{"type":"number"}},"panelSessionIds":{"description":"Array of panel session IDs associated with this run","type":"array","items":{"type":"string"}},"bqTableIds":{"description":"Array of BQ table IDs associated with this run","type":"array","items":{"type":"number"}},"externalId":{"description":"External identifier information for the process run","allOf":[{"type":"object","properties":{"id":{"type":"string","description":"External identifier for the instrument run","nullable":true},"url":{"type":"string","description":"URL associated with the external identifier","nullable":true}},"title":"ExternalId"}]}},"required":["id","createdAt","processId","state"],"title":"ProcessRunDTO"}}
+  schemaType={"response"}
+>
+  
+</Schema>
+            

@@ -1,0 +1,33 @@
+---
+id: updateinstrumentrunbody
+title: "UpdateInstrumentRunBody"
+description: ""
+sidebar_label: "UpdateInstrumentRunBody"
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: {"startTime":"2024-07-29T15:51:28.071Z","endTime":"2024-07-29T15:51:28.071Z","state":"Running","fileUris":["string"],"flowRunIds":[0],"externalId":{"id":"string","url":"string"},"bqTableIds":[0],"panelSessionIds":["string"]}
+custom_edit_url: null
+---
+
+import Schema from "@theme/Schema";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"UpdateInstrumentRunBody"}
+>
+</Heading>
+
+
+
+
+
+<Schema
+  schema={{"type":"object","properties":{"startTime":{"type":"string","description":"Start time of the instrument run","format":"date-time"},"endTime":{"type":"string","description":"End time of the instrument run","format":"date-time"},"state":{"enum":["Running","Completed"],"type":"string","description":"State of the instrument run"},"fileUris":{"description":"Array of file URIs to associate with this run","type":"array","items":{"type":"string"}},"flowRunIds":{"description":"Array of flow run IDs to associate with this run","type":"array","items":{"type":"number"}},"externalId":{"description":"External identifier information for the instrument run","allOf":[{"type":"object","properties":{"id":{"type":"string","description":"External identifier for the instrument run","nullable":true},"url":{"type":"string","description":"URL associated with the external identifier","nullable":true}},"title":"ExternalId"}]},"bqTableIds":{"description":"Array of BqTable IDs to associate with this run","type":"array","items":{"type":"number"}},"panelSessionIds":{"description":"Array of panel session IDs to associate with this run","type":"array","items":{"type":"string"}}},"title":"UpdateInstrumentRunBody"}}
+  schemaType={"response"}
+>
+  
+</Schema>
+            

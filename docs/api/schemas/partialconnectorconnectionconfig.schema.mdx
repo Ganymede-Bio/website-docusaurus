@@ -1,0 +1,33 @@
+---
+id: partialconnectorconnectionconfig
+title: "PartialConnectorConnectionConfig"
+description: ""
+sidebar_label: "PartialConnectorConnectionConfig"
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: {"name":"string","connectorId":"string","environment":"string","variables":{},"tagParams":[{"tagTypeId":"string","type":{"id":"string","description":"string","type":"string","hasUrl":true,"allowMultiple":true,"icon":"string","textColor":"string","backgroundColor":"string","tagCount":0},"tagId":"string","displayValue":"string","url":"string","file_uri":"string"}],"labels":["string"]}
+custom_edit_url: null
+---
+
+import Schema from "@theme/Schema";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"PartialConnectorConnectionConfig"}
+>
+</Heading>
+
+
+
+
+
+<Schema
+  schema={{"type":"object","properties":{"name":{"type":"string","description":"Display name of the connection"},"connectorId":{"type":"string","description":"ID of the connector this connection is based on"},"environment":{"type":"string","description":"Environment (e.g., prod, dev) where this connection runs"},"variables":{"type":"object","additionalProperties":{"type":"string"},"description":"Key value metadata for a connector to reference throughout code","default":{}},"tagParams":{"description":"Tags that the connector will apply to all files uploaded","default":[],"type":"array","items":{"type":"object","properties":{"tagTypeId":{"type":"string"},"type":{"type":"object","properties":{"id":{"type":"string"},"description":{"type":"string","nullable":true},"type":{"type":"string"},"hasUrl":{"type":"boolean"},"allowMultiple":{"type":"boolean"},"icon":{"type":"string","nullable":true},"textColor":{"type":"string"},"backgroundColor":{"type":"string"},"tagCount":{"type":"number"}},"required":["id","type","hasUrl","allowMultiple","icon","textColor","backgroundColor"],"title":"FileTagType"},"tagId":{"type":"string","nullable":true},"displayValue":{"type":"string"},"url":{"type":"string","nullable":true,"description":"The external url that the User sets to be associated with tagged file"},"file_uri":{"type":"string","description":"The gcs url for the file that the tag is attached to"}},"required":["tagTypeId","displayValue"],"title":"UnappliedFileTag"}},"labels":{"description":"Identifier metadata for a connection","default":[],"type":"array","items":{"type":"string"}}},"required":["name","connectorId","environment","variables","tagParams","labels"],"title":"PartialConnectorConnectionConfig"}}
+  schemaType={"response"}
+>
+  
+</Schema>
+            

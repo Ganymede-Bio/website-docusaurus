@@ -1,0 +1,70 @@
+---
+id: create-instrument-run
+title: "createInstrumentRun"
+description: "Create a new Instrument Run in an Environment."
+sidebar_label: "createInstrumentRun"
+hide_title: true
+hide_table_of_contents: true
+api: eJztWFuP2jgU/iuWn7bSMMBoqu7yxlxWYnelqRhGKy3iwSQG3DF2ajtM2Sj/fc+xE5IQYNoOqvahLyhxzv3yHR8yGnMbGZE4oRUd0FvDmeOEEcVfyEhZZ9I1V46MU0WEIkyRe7URRis8vaQXVCfcMGQexcAeefaKD9iAJmGGrbnjxtLBNKMKXoCWV4KAxvDPqTAchAArv6ACrUmYW8E3G634mtFBRt02QVYQL9SS5vksMHLrbnS8RYp9OZFWDjXAJ5YkUkTe2O4ni+5mbdF6/olHaFBi0DUnuMWvYucS+rmjVul6zg1QN6M4uiN6QdyKk4qPLLSBI2GJgaDk4JVjxk0ExmLfsX15j0hKHNAekGt8jEH6moGbNIYEdJAUdXAVf52GexV/j3zwwXnpHCIByaWQcBXk3+p1IiHpMYUkveqeO6455guWSlRdCgfFCyH5kxE+N01hQ2PYFoUhCXkajyxxmjBrdSRQzYtwqyoPO9MYssGrcHxtD5Ua6JT6BUwYxSe1AhFKJqO7tykuSgsV8y/QO4rJUHp7iSu+ERFDyMRCcAMhDNkCiqLqDoSVSfmw8P34SuXHX1E9B4w4qlilUrK55KFDwb3UyNdVPI3/qmIZl8HkhLdVt3WAEiccvu5MhVjmMziff54g4emk3gSic+Y0YYrLR26th85Tyj0lsYH0zSbs6jmvY+60CXCzKl63bUT3UJsXEmyilQ2VctXrt93YmyFhQMTEplEEHi0gT2jluVD6ADaDlYXSoTsQh4tzQHsZfjLnUqslZugnwjeuFakxqMmeQPpvRfU2GvwQTP9+tT8R/f+J6GfJ6Fvw/AyVvI/mMa3D3h7IlV1dg/kGwN9NHgp8v+712p7csJiMw62bdGBJ2DApYqiKJHUEsINRz3h9chYojRfiVMU+eJZHqRFu64uXJaLzzPEZspnRG84MN8MUNgE8QZvZEhcJ+jGdw6QYJgIcao4Zi67BxrHSuJQk2vomwGViQLubfre2enSz2kvereLUMSgHbTObcnPxdU1XziV20O1mKxCct+oaDjbMCCwvnyqkCrEo77H+JPfbS+n5I064QL/zf5dlOPmT+/Sj/BVncWiJsEeV9BDHeqyKqYkUc38MHOHh9xLo//h7UpUYelUJRRnaiH895ByYJdByBNhh0D1ztWcZZhQn97jazO6/MJwV7U2q15iScIW4uu70PnSufpv03w/e9wdXv172PvT/obVBd4qomFa1IVWNlGnZLbMm7E97s31ARoSsYCtkvbow1AHGM7d6v1Ll7xcL7ZNZtNrBgoEKCy/9y95lr7gRsQgLx6MLVMya+btQkaDDm3ZDcFZdq759ry+qwkFguolkws/nAtdDJ03ppu/zUl/jB83X/XaCYIV2mNIsmzMLqZF5jsdQKsb3fNU9vuViYfEZErJg0vITLv4yLgDwHTlmf9lPauubVKZFPny7NTzxk6SoZzQjUNwGZZ0JyqkktK6siFuBYwjX3MSdpK1D1ceHR2zJefFnxlrHyGPYC/5DAr/eWu2d91jhzzIqmVqmbIm0QSbWDCtgoAKRZw8ixUPtntCMR4knZVgCthwhzrIATnm+ow+fjnLs4CtQY2JmYO9/b3JqgA==
+sidebar_class_name: "post api-method"
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"createInstrumentRun"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/v1/environment/{environment}/instrument-runs"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Create a new Instrument Run in an Environment.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"name":"environment","required":true,"in":"path","schema":{"type":"string"}}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{"required":true,"content":{"application/json":{"schema":{"type":"object","properties":{"instrumentId":{"type":"number","description":"ID of the instrument for this run"},"startTime":{"type":"string","description":"Start time of the instrument run","format":"date-time"},"endTime":{"type":"string","description":"End time of the instrument run","format":"date-time"},"state":{"enum":["Running","Completed"],"type":"string","description":"State of the instrument run","default":"Running"},"fileUris":{"description":"Array of file URIs to associate with this run","type":"array","items":{"type":"string"}},"flowRunIds":{"description":"Array of flow run IDs to associate with this run","type":"array","items":{"type":"number"}},"externalId":{"description":"External identifier information for the instrument run","allOf":[{"type":"object","properties":{"id":{"type":"string","description":"External identifier for the instrument run","nullable":true},"url":{"type":"string","description":"URL associated with the external identifier","nullable":true}},"title":"ExternalId"}]},"bqTableIds":{"description":"Array of BqTable IDs to associate with this run","type":"array","items":{"type":"number"}},"panelSessionIds":{"description":"Array of panel session IDs to associate with this run","type":"array","items":{"type":"string"}}},"required":["instrumentId"],"title":"CreateInstrumentRunBody"}}}}}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"201":{"description":"Instrument Run created successfully","content":{"application/json":{"schema":{"type":"object","properties":{"id":{"type":"number"},"createdAt":{"type":"string"},"instrumentId":{"type":"number","description":"ID of the instrument this run belongs to"},"startTime":{"type":"string","description":"Start time of the instrument run","format":"date-time"},"endTime":{"type":"string","description":"End time of the instrument run","format":"date-time"},"state":{"enum":["Running","Completed"],"type":"string","description":"Current state of the instrument run"},"fileUris":{"description":"Array of file URIs associated with this run","type":"array","items":{"type":"string"}},"flowRunIds":{"description":"Array of flow run IDs associated with this run","type":"array","items":{"type":"number"}},"externalId":{"description":"External identifier information for the instrument run","allOf":[{"type":"object","properties":{"id":{"type":"string","description":"External identifier for the instrument run","nullable":true},"url":{"type":"string","description":"URL associated with the external identifier","nullable":true}},"title":"ExternalId"}]},"bqTableIds":{"description":"Array of BqTable IDs associated with this run","type":"array","items":{"type":"number"}},"panelSessionIds":{"description":"Array of panel session IDs associated with this run","type":"array","items":{"type":"string"}}},"required":["id","createdAt","instrumentId","state"],"title":"InstrumentRunDTO"}}}},"400":{"description":"Bad Request - Invalid input data"},"404":{"description":"Instrument not found"}}}
+>
+  
+</StatusCodes>
+
+
+      

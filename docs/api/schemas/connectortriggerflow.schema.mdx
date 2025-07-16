@@ -1,0 +1,33 @@
+---
+id: connectortriggerflow
+title: "ConnectorTriggerFlow"
+description: ""
+sidebar_label: "ConnectorTriggerFlow"
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: {"action":"trigger_flow","flowName":"string","flowParams":["string"]}
+custom_edit_url: null
+---
+
+import Schema from "@theme/Schema";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"ConnectorTriggerFlow"}
+>
+</Heading>
+
+
+
+
+
+<Schema
+  schema={{"type":"object","properties":{"action":{"allOf":[{"type":"string","enum":["trigger_flow","upload_file","no_op","tag_without_upload"],"title":"ConnectorActionOptions"}]},"flowName":{"type":"string"},"flowParams":{"type":"array","items":{"type":"string"}}},"required":["action","flowName","flowParams"],"title":"ConnectorTriggerFlow"}}
+  schemaType={"response"}
+>
+  
+</Schema>
+            

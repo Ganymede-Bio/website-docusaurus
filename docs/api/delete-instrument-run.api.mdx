@@ -1,0 +1,70 @@
+---
+id: delete-instrument-run
+title: "deleteInstrumentRun"
+description: "Delete an Instrument Run from an Environment."
+sidebar_label: "deleteInstrumentRun"
+hide_title: true
+hide_table_of_contents: true
+api: eJy9U01v2zAM/SuGThuQxsnQU24dmgHddhi6DjsEPSg2XQuRJVcfwTJB/32kbMdx2gzrZSdLFPlMPr4XWAm2MKJ1Qiu2YrcgwUHGVXanrDO+AeWye6+yyuiGwmu1F0Yris/ZjOkWDKfauxKry1Q9VmIh5rTc8AbjxrLVJjCFF8yFEQhzDDx7YQBBsBRmTFAzLXc1vtmihoazVWDu0FIpwgv1xGKcHdFE+VYQ5ZstGAR5pELbamXB0vuHxTV9prycsdENWmbWFwVYW3kpDyzO2PU/1Crtskp7VdIAzELhjXCHRA1vxdUO6PxIs30EbsDceByAItio409EIvvmt1IUN63AyabwlmEasl3rcSFpBwTC8v0yPyE+DyeXmIsj0pVBpDyIMhJ1YPbD8ryRCFM719pVnodaW0cp04ExsOdG8K3sGKWsjpaKe+kIgCIxcT8Q8J0W1OUfaTguCyNfMNCvtAZe4upmw/KHfKTzlLLQLZ0ytimMFd3hkzYNpz4+/3zAYP8TmmoEJQxtxO+k7hcjrhXqOcPyzOkdqLPOaLFCVTpNIJyEjpSXLCGt3WU5X8wXGCm0crwgtgijRZoargim7+p1h02AQwIhW73dzj0TDn65vJUcZ8Iu0s5DL6EN2y8xcere1fR6piNKQH/irjshbFgIW27hh5ExUvjZg0miH3WTxFYKS2cUcsWlhb/M+e6+t/777NIUg5LUIclT+n4pSWiTech6//HXSE1Eu4+mvV1/XT+s8Z33Mh5NsEsm6A9E0avQgx+GP3TeuJAcQmeuGI/53dPFiqP9+v4V9R/jH7BYI+w=
+sidebar_class_name: "delete api-method"
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"deleteInstrumentRun"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"delete"}
+  path={"/v1/environment/{environment}/instrument-runs/{id}"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Delete an Instrument Run from an Environment.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"name":"environment","required":true,"in":"path","schema":{"type":"string"}},{"name":"id","required":true,"in":"path","schema":{"type":"number"}}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={undefined}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"204":{"description":"Instrument Run deleted successfully"},"404":{"description":"Instrument Run not found"}}}
+>
+  
+</StatusCodes>
+
+
+      

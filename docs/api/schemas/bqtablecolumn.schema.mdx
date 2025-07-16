@@ -1,0 +1,33 @@
+---
+id: bqtablecolumn
+title: "BqTableColumn"
+description: ""
+sidebar_label: "BqTableColumn"
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: {"id":0,"bqTable":{"id":0,"name":"string","description":"string","createdAt":"2024-07-29T15:51:28.071Z","lastModified":"2024-07-29T15:51:28.071Z","columns":[null],"numRows":"string"},"name":"string","type":"ARRAY","description":"string","pdColumnName":"string","pdColumnType":"string","createdAt":"2024-07-29T15:51:28.071Z","lastModified":"2024-07-29T15:51:28.071Z"}
+custom_edit_url: null
+---
+
+import Schema from "@theme/Schema";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"BqTableColumn"}
+>
+</Heading>
+
+
+
+
+
+<Schema
+  schema={{"type":"object","properties":{"id":{"type":"number"},"bqTable":{"type":"object","properties":{"id":{"type":"number"},"name":{"type":"string"},"description":{"type":"string"},"createdAt":{"format":"date-time","type":"string"},"lastModified":{"format":"date-time","type":"string"},"columns":{"type":"array","items":"circular(BqTableColumn)"},"numRows":{"type":"string"}},"required":["name","numRows"],"title":"BqTable"},"name":{"type":"string"},"type":{"type":"string","enum":["ARRAY","BOOL","BYTES","DATE","DATETIME","GEOGRAPHY","INTERVAL","JSON","INT64","NUMERIC","BIGNUMERIC","FLOAT64","RANGE","STRING","STRUCT","TIME","TIMESTAMP"]},"description":{"type":"string"},"pdColumnName":{"type":"string"},"pdColumnType":{"type":"string"},"createdAt":{"format":"date-time","type":"string"},"lastModified":{"format":"date-time","type":"string"}},"required":["bqTable","name","type"],"title":"BqTableColumn"}}
+  schemaType={"response"}
+>
+  
+</Schema>
+            
