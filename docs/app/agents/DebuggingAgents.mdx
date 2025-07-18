@@ -5,6 +5,197 @@ displayed_sidebar: webUiSidebar
 toc_max_heading_level: 5
 ---
 
+import PrintPageButton from '@site/src/components/PrintPageButton';
+
+<div className="text--right">
+  <PrintPageButton />
+</div>
+
+## Troubleshooting
+
+### Checklist
+
+- [ ] Agent Build
+  - [ ] Windows executable and Linux binary are successfully built
+- [ ] Agent Installation
+  - [ ] Installation successfully runs without error
+  - [ ] Logs are appearing in installation folder (Windows) or in systemd (Linux)
+  - [ ] Connection appears in UI
+  - [ ] Logs associated with Connection are appearing in UI
+- [ ] Agent Execution
+   - [ ] Connection is connected initially
+   - [ ] Connection remains connected (after 12 hours)
+   - [ ] Connection remains connected after startup
+   - [ ] (If file capture expected) Connection is capturing local files successfully
+   - [ ] (If Flow trigger expected) Connection is successfully triggering Flow
+   - [ ] (If cloud trigger expected) Connection is performing action upon expected cloud event
+   - [ ] (If cron) Connection is executing when expected
+- [ ] Agent Uninstall
+  - [ ] Service has stopped after uninstall
+
+### Agent build
+
+#### Issue: The build for a "Watch for files locally then run flow" Agent keeps failing, with no Windows executable or Linux binary created.
+
+Agents that watch for files locally then run Flow require file inputs to be passed to the Flow for execution.
+
+1. Ensure that the Flow being triggered by the Agent has at least one Node for ingesting files.
+2. Ensure that Agent creation occurs after Nodes for input files have been created; if necessary, create a new Agent after the Flow has input Nodes; to see that this is the case, you should see dropdown selectors for specifying glob patterns to associate with the input Nodes of the Flow corresponding to the new Agent.
+
+### Agent installation
+
+#### Issue: I am unable to install an Agent Connection; the installer succeeds, but I see an issue related to expired certs in the logs.
+
+This is likely due to the Agent Connection being on a version prior to 5.5.1, which referenced the root cert on the computer that may have expired.
+
+#### Issue: I am unable to install an Agent Connection on Windows; the installer is failing at the final step.
+
+Ensure that you are running the installer as an administrator.
+
+Check for existing installations that might conflict with the current installation:
+
+- Open Task Manager and navigate to the Services tab.
+- Look for any service starting with "GanymedeAgent-" and stop it by right-clicking and selecting "Stop."
+- Open "Add or Remove Programs" and uninstall any existing Ganymede Agent installations.
+- Try installing the Agent again.
+
+#### Issue: I need change the agent service to "Log on as" a specific user account, but after I make the change, the service won't start back up.
+
+Ensure that the user account has the necessary permissions to read/write to `C:\Program Files\Ganymede` (or wherever the Agent is installed).
+
+#### Issue: I've installed an Agent Connection, but do not see the Connection in logs.
+
+This is likely a network issue, which can be confirmed by [testing connectivity](../configuration/AgentSystemRequirements.mdx#testing-connectivity).
+
+Another way to confirm this is to see
+
+```bash
+ssl.SSLCertVerificationError: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate`
+```
+
+in the Connection logs file found locally on the computer. These logs can be found in the directory that the Agent Connection is installed in.
+
+To resolve, ensure that outbound port 443 communication is available to the web addresses mentioned on the [Agent System Requirements page](../configuration/AgentSystemRequirements#testing-connectivity).
+
+#### Issue: The Agent Connection is not actively running. How do I check?
+
+First, make sure that the Agent was installed with admin privileges.
+
+On Windows:
+
+- Open Task Manager and navigate to the Services tab.
+- Look for the Connection of interest (a service with a name starting with "GanymedeAgent-") and verify that its status is "Running."
+- If the service is not running, right-click on it and select "Start." Connections are configured to start upon reboot by default.
+
+If you still do not see the Agent Connection in the Ganymede App, check the startup log in the folder that the Agent was installed to (C:\\Program Files\\Ganymede\\\<Connection Name\>).
+
+On Linux:
+
+- Open a terminal and run the following command to check the Agent's status:
+
+  ```bash
+  sudo systemctl status GanymedeAgent-<agent_name>
+  ```
+
+  If the Agent is installed but not running, you can start it by running:
+
+  ```bash
+  sudo systemctl start GanymedeAgent-<agent_name>
+  ```
+
+### Agent execution
+
+#### Issue: Agent Connection is showing as disconnected after running for a while
+
+- If you observe an error in local logs related to expired cert, verify that the Agent Connection is on version 5.5.1+. 
+Prior to this, the Agent referenced the root cert on the computer, which may have expired.  
+
+On Windows:
+
+- Ensure that the PC where the Agent is installed is not asleep. PCs running cron Agents should be configured to never sleep:
+  - Open the Control Panel and navigate to "Hardware and Sound" -> "Power Options."
+  - Select "Change when the computer sleeps" and set "Put the computer to sleep" to "Never."
+- Verify that the system time is properly synced:
+  - Right-click on the time in the bottom right corner of the screen and select "Adjust date/time."
+  - Ensure that "Set time automatically" is enabled, and click "Sync now."
+
+#### Issue: The Agent Connection does not restart when the computer is restarted.
+
+On Windows:
+
+- Open up Task Manager and navigate to the Services tab.
+- Look for the Connection of interest (a service with a name starting with "GanymedeAgent-") and double click on it.
+- Navigate to the "Recovery" tab and ensure that the "First failure", "Second failure", and "Subsequent failure" options are set to "Restart the Service" with 0 recover time:
+
+<div class="text--center">
+  <img
+    alt="Agent configuration - File Watcher"
+    src="https://ganymede-bio.mo.cloudinary.net/agent/4XGev.jpg"
+    width="500"
+  />
+</div>
+&nbsp;
+
+On Linux, run the following command to ensure the Agent is set to start on boot:
+
+```bash
+sudo systemctl enable GanymedeAgent-<agent_name>
+```
+
+#### Issue: The flow is failing to trigger when files are being dropped
+
+On Windows:
+
+Look at the logs for the agent in Ganymede App. If you see the JWT error below, click on the system clock in the lower right corner of the screen and select "Adjust date/time". Ensure that the "Set time automatically" option is enabled, and click "Sync now".
+
+```bash
+_thread.ExceptHookArgs(exc_type=<class 'google.auth.exceptions.RefreshError'>, exc_value=RefreshError('invalid_grant: Invalid JWT: Token must be a short-lived token (60 minutes) and in a reasonable timeframe. Check your iat and exp values in the JWT claim.', {'error': 'invalid_grant', 'error_description': 'Invalid JWT: Token must be a short-lived token (60 minutes) and in a reasonable timeframe. Check your iat and exp values in the JWT claim.'})
+```
+
+    - Right-click on the system clock and select "Adjust date/time."
+    - Ensure that "Set time automatically" is enabled, and click "Sync now."
+
+Verify that the watch folder is correctly specified during [Agent installation](./AgentInstall#windows-installation).
+
+```bash
+-v "input_path=C:/Users/<username>/Desktop/watch_folder"
+```
+
+:::warning Take care when copying and pasting commands
+Be careful when copying and pasting commands. The quote character `"` can sometimes be replaced with left or right quotes (`“` or `”`), which may cause issues. Always ensure that the straight quote character `"` is used.
+:::
+
+#### Issue: All files are present in the watched directory, but the flow does not trigger. The logs show files being collected in two different waiting groups.
+
+A: Unquote the string referenced within the fp function, which specifies which filename patterns the Agent should watch for. An example is shown below:
+
+```python
+def fp(watch_dir: str, parent_dir: str, pattern: str) -> Callable[[str], bool]:
+    def fp_res(x: str):
+        x = parse.unquote(x)
+        return x in glob.glob(os.path.join(watch_dir, pattern), recursive=True)
+
+    return fp_res
+```
+
+#### Issue: I'm seeing 'WUDFHost.exe' appear frequently in the Event Viewer logs.
+
+A: This is a known issue with the Intel Innovation Platform Framework Service (WUDFHost.exe) that can cause high CPU usage and frequent log entries in the Event Viewer on laptops. It is not directly related to the Ganymede Agent but can affect system performance.
+
+To resolve this issue, you can try adjusting the power settings of your laptop as described [here](https://answers.microsoft.com/en-us/windows/forum/all/multiple-usermodepowerservice-log-in-eventviewer/c2bc8a39-ec43-49bf-adbd-66d73d18afe0).
+
+### Agent uninstall
+
+#### Issue: A Windows Ganymede Agent Connection service continues to run after uninstalling the Agent.
+
+A: Stop the service in the Task Manager or Services tab, and then remove the service by running the following command in a Command Prompt (not PowerShell) in Administrator mode:
+
+```bash
+sc delete GanymedeAgent-<agent_name>
+```
+
+where _agent_name_ is the name of the Agent Connection.
+
 ## FAQ
 
 #### Q: How do I exclude specific files from a watch folder from being uploaded for an agent that uploads files and runs flows?
@@ -229,168 +420,3 @@ A: No, there are no command-line scripts that need to execute for the Windows Ag
 #### Q: Are there any known application dependencies or pre-requisites for the Windows Agent (e.g. - .NET, KBs, Redist)?
 
 A: No, the full set of Agent requirements can be found on the [Agent System Requirements page](../configuration/AgentSystemRequirements.mdx).
-
-## Troubleshooting
-
-### Agent build
-
-#### Issue: The build for a "Watch for files locally then run flow" Agent keeps failing, with no Windows executable or Linux binary created.
-
-Agents that watch for files locally then run Flow require file inputs to be passed to the Flow for execution.
-
-1. Ensure that the Flow being triggered by the Agent has at least one Node for ingesting files.
-2. Ensure that Agent creation occurs after Nodes for input files have been created; if necessary, create a new Agent after the Flow has input Nodes; to see that this is the case, you should see dropdown selectors for specifying glob patterns to associate with the input Nodes of the Flow corresponding to the new Agent.
-
-### Agent installation
-
-#### Issue: I am unable to install an Agent Connection; the installer succeeds, but I see an issue related to expired certs in the logs.
-
-This is likely due to the Agent Connection being on a version prior to 5.5.1, which referenced the root cert on the computer that may have expired.
-
-#### Issue: I am unable to install an Agent Connection on Windows; the installer is failing at the final step.
-
-Ensure that you are running the installer as an administrator.
-
-Check for existing installations that might conflict with the current installation:
-
-- Open Task Manager and navigate to the Services tab.
-- Look for any service starting with "GanymedeAgent-" and stop it by right-clicking and selecting "Stop."
-- Open "Add or Remove Programs" and uninstall any existing Ganymede Agent installations.
-- Try installing the Agent again.
-
-#### Issue: I need change the agent service to "Log on as" a specific user account, but after I make the change, the service won't start back up.
-
-Ensure that the user account has the necessary permissions to read/write to `C:\Program Files\Ganymede` (or wherever the Agent is installed).
-
-#### Issue: I've installed an Agent Connection, but do not see the Connection in logs.
-
-This is likely a network issue, which can be confirmed by [testing connectivity](../configuration/AgentSystemRequirements.mdx#testing-connectivity).
-
-Another way to confirm this is to see
-
-```bash
-ssl.SSLCertVerificationError: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate`
-```
-
-in the Connection logs file found locally on the computer. These logs can be found in the directory that the Agent Connection is installed in.
-
-To resolve, ensure that outbound port 443 communication is available to the web addresses mentioned on the [Agent System Requirements page](../configuration/AgentSystemRequirements#testing-connectivity).
-
-#### Issue: The Agent Connection is not actively running. How do I check?
-
-First, make sure that the Agent was installed with admin privileges.
-
-On Windows:
-
-- Open Task Manager and navigate to the Services tab.
-- Look for the Connection of interest (a service with a name starting with "GanymedeAgent-") and verify that its status is "Running."
-- If the service is not running, right-click on it and select "Start." Connections are configured to start upon reboot by default.
-
-If you still do not see the Agent Connection in the Ganymede App, check the startup log in the folder that the Agent was installed to (C:\\Program Files\\Ganymede\\\<Connection Name\>).
-
-On Linux:
-
-- Open a terminal and run the following command to check the Agent's status:
-
-  ```bash
-  sudo systemctl status GanymedeAgent-<agent_name>
-  ```
-
-  If the Agent is installed but not running, you can start it by running:
-
-  ```bash
-  sudo systemctl start GanymedeAgent-<agent_name>
-  ```
-
-### Agent execution
-
-#### Issue: Agent Connection is showing as disconnected after running for a while
-
-- If you observe an error in local logs related to expired cert, verify that the Agent Connection is on version 5.5.1+. 
-Prior to this, the Agent referenced the root cert on the computer, which may have expired.  
-
-On Windows:
-
-- Ensure that the PC where the Agent is installed is not asleep. PCs running cron Agents should be configured to never sleep:
-  - Open the Control Panel and navigate to "Hardware and Sound" -> "Power Options."
-  - Select "Change when the computer sleeps" and set "Put the computer to sleep" to "Never."
-- Verify that the system time is properly synced:
-  - Right-click on the time in the bottom right corner of the screen and select "Adjust date/time."
-  - Ensure that "Set time automatically" is enabled, and click "Sync now."
-
-#### Issue: The Agent Connection does not restart when the computer is restarted.
-
-On Windows:
-
-- Open up Task Manager and navigate to the Services tab.
-- Look for the Connection of interest (a service with a name starting with "GanymedeAgent-") and double click on it.
-- Navigate to the "Recovery" tab and ensure that the "First failure", "Second failure", and "Subsequent failure" options are set to "Restart the Service" with 0 recover time:
-
-<div class="text--center">
-  <img
-    alt="Agent configuration - File Watcher"
-    src="https://ganymede-bio.mo.cloudinary.net/agent/4XGev.jpg"
-    width="500"
-  />
-</div>
-&nbsp;
-
-On Linux, run the following command to ensure the Agent is set to start on boot:
-
-```bash
-sudo systemctl enable GanymedeAgent-<agent_name>
-```
-
-#### Issue: The flow is failing to trigger when files are being dropped
-
-On Windows:
-
-Look at the logs for the agent in Ganymede App. If you see the JWT error below, click on the system clock in the lower right corner of the screen and select "Adjust date/time". Ensure that the "Set time automatically" option is enabled, and click "Sync now".
-
-```bash
-_thread.ExceptHookArgs(exc_type=<class 'google.auth.exceptions.RefreshError'>, exc_value=RefreshError('invalid_grant: Invalid JWT: Token must be a short-lived token (60 minutes) and in a reasonable timeframe. Check your iat and exp values in the JWT claim.', {'error': 'invalid_grant', 'error_description': 'Invalid JWT: Token must be a short-lived token (60 minutes) and in a reasonable timeframe. Check your iat and exp values in the JWT claim.'})
-```
-
-    - Right-click on the system clock and select "Adjust date/time."
-    - Ensure that "Set time automatically" is enabled, and click "Sync now."
-
-Verify that the watch folder is correctly specified during [Agent installation](./AgentInstall#windows-installation).
-
-```bash
--v "input_path=C:/Users/<username>/Desktop/watch_folder"
-```
-
-:::warning Take care when copying and pasting commands
-Be careful when copying and pasting commands. The quote character `"` can sometimes be replaced with left or right quotes (`“` or `”`), which may cause issues. Always ensure that the straight quote character `"` is used.
-:::
-
-#### Issue: All files are present in the watched directory, but the flow does not trigger. The logs show files being collected in two different waiting groups.
-
-A: Unquote the string referenced within the fp function, which specifies which filename patterns the Agent should watch for. An example is shown below:
-
-```python
-def fp(watch_dir: str, parent_dir: str, pattern: str) -> Callable[[str], bool]:
-    def fp_res(x: str):
-        x = parse.unquote(x)
-        return x in glob.glob(os.path.join(watch_dir, pattern), recursive=True)
-
-    return fp_res
-```
-
-#### Issue: I'm seeing 'WUDFHost.exe' appear frequently in the Event Viewer logs.
-
-A: This is a known issue with the Intel Innovation Platform Framework Service (WUDFHost.exe) that can cause high CPU usage and frequent log entries in the Event Viewer on laptops. It is not directly related to the Ganymede Agent but can affect system performance.
-
-To resolve this issue, you can try adjusting the power settings of your laptop as described [here](https://answers.microsoft.com/en-us/windows/forum/all/multiple-usermodepowerservice-log-in-eventviewer/c2bc8a39-ec43-49bf-adbd-66d73d18afe0).
-
-### Agent uninstall
-
-#### Issue: A Windows Ganymede Agent Connection service continues to run after uninstalling the Agent.
-
-A: Stop the service in the Task Manager or Services tab, and then remove the service by running the following command in a Command Prompt (not PowerShell) in Administrator mode:
-
-```bash
-sc delete GanymedeAgent-<agent_name>
-```
-
-where _agent_name_ is the name of the Agent Connection.
