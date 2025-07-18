@@ -1,24 +1,27 @@
 // src/components/TaskCheckbox.tsx
-import React, { useEffect, useState } from 'react';
+import React, { useState, useRef } from 'react';
 
 interface Props extends React.InputHTMLAttributes<HTMLInputElement> {}
 
 export default function TaskCheckbox({ id, disabled, ...rest }: Props) {
-  // ❶ throw away `disabled` (ignore the variable or rename it to _)
-  const key =
+  /* 1 ─ generate the key once and remember it in a ref */
+  const keyRef = useRef<string>(
     id ??
-    rest['data-checkbox-id'] ??   // GitHub’s attr
-    rest['aria-label'] ??
-    Math.random().toString(36);
+      rest['data-checkbox-id'] ??
+      rest['data-sourcepos'] ??        // remark‑gfm always sets this
+      Math.random().toString(36)       // fallback, but now only ONCE
+  );
+  const key = keyRef.current;
 
-  const [checked, setChecked] = useState(false);
-
-  useEffect(() => {
+  /* 2 ─ initialise state directly from localStorage */
+  const [checked, setChecked] = useState<boolean>(() => {
     if (typeof window !== 'undefined') {
-      setChecked(localStorage.getItem(`task:${key}`) === '1');
+      return localStorage.getItem(`task:${key}`) === '1';
     }
-  }, [key]);
+    return false; // during SSR
+  });
 
+  /* 3 ─ handle clicks */
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.checked;
     setChecked(value);
@@ -29,13 +32,12 @@ export default function TaskCheckbox({ id, disabled, ...rest }: Props) {
 
   return (
     <input
-      {...rest}                 // all other original props
+      {...rest}                /* keep any other props, but… */
       type="checkbox"
-      id={key}
       checked={checked}
       onChange={handleChange}
-      /* no disabled here! */
       style={{ cursor: 'pointer' }}
+      /* …do NOT forward `disabled` unless you really want it */
     />
   );
 }

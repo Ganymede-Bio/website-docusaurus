@@ -1,4 +1,3 @@
-// src/theme/MDXComponents/index.tsx
 import React from 'react';
 import MDXComponents from '@theme-original/MDXComponents';
 import TaskCheckbox from '@site/src/components/TaskCheckbox';
