@@ -25,7 +25,7 @@ import Heading from "@theme/Heading";
 
 
 <Schema
-  schema={{"type":"object","properties":{"id":{"type":"string"},"type":{"type":"string"},"value":{"type":"string"}},"required":["id","type","value"],"title":"Tag"}}
+  schema={{"type":"object","properties":{"id":{"type":"string","description":"User defined unique identifier for the tag"},"type":{"type":"string","description":"Id of the tag type"},"value":{"type":"string","description":"User defined display value for the tag"}},"required":["type","value"],"title":"Tag"}}
   schemaType={"response"}
 >
   

@@ -1,0 +1,33 @@
+---
+id: hostversionmetadata
+title: "HostVersionMetadata"
+description: ""
+sidebar_label: "HostVersionMetadata"
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: {"runtimeVersion":"string","gatewayVersion":"string"}
+custom_edit_url: null
+---
+
+import Schema from "@theme/Schema";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"HostVersionMetadata"}
+>
+</Heading>
+
+
+
+
+
+<Schema
+  schema={{"type":"object","properties":{"runtimeVersion":{"type":"string","description":"version of the host configuration"},"gatewayVersion":{"type":"string","description":"the version of the remote-agent repo used to build exes"}},"required":["runtimeVersion","gatewayVersion"],"title":"HostVersionMetadata"}}
+  schemaType={"response"}
+>
+  
+</Schema>
+            

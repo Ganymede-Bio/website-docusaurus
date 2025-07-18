@@ -1,0 +1,70 @@
+---
+id: update-instrument-run
+title: "updateInstrumentRun"
+description: "Update an existing Instrument Run in an Environment."
+sidebar_label: "updateInstrumentRun"
+hide_title: true
+hide_table_of_contents: true
+api: eJztWFuP2jgU/iuWn7bSMMBoqu7yxlxWy+5KrRjQSot4MLEBd4Kd2g4zNMp/33PshIRwmXYGVfvQF5Q45375zjEZ5cJGRiZOakV7dJxw5gRhiohnaZ1UCzJQ1pl0JZQjw1QRqfDrvVpLoxWeXtILqhNhGIoYcBCSeiEVH7ABTcIMWwknjKW9SUYVvACtqAQBjRFfUmkECAFWcUEl2pQwt4RvNlqKFaO9jLpNgqwgHuyjeX6xlSb59wpR6WomDAiZBkZh3Y3mG6Royom0cmgmfGJJEsvIe9z+bDFy2b5oPfssIvQqMRgfJ4X1dI4ZN5Job9OVi0Y2HpCUOKAlek7cUkD0t8kwPqpzbVYMbKIY8haS0vwCosq/TcO94q+RDz44L11A/CCdFFKsgvxbvUpiSDOnENEX3XPHNIOSuYzF2EgftF3GvjFsg4xIQsbDgSVOE2atjiSKfJJuCUKlLZwozGDIBq/SiZU9WEh0Husn8GXAT2oFIpRMBndvU7wtPsjYM3SGYjE2UFPxffGNSA7hkXMpDIQrZAYoCDwdTh6L449z322nS1Lyb6iUA0YcVazSOGazWITWAfdSE7+sYjz8u4olL4MpiNhXva8DlDjp8HVrKsQyn8L57MsICU8n9SYQnTOnCVMifhDWemA8pdxTEhtI32zCtp5rMRnvY7LHudxTGWETrWyohqtOZ9/UxhQIEM+JTaMIrJ5DLtCSM0HkTj2WAQXpRqDSvjvgK8J8aeHgAHuz1gZ3B4CnDDGZiVirBWahQLufiO2V36bGoCZ7RuTe7/gfgtuvV/sTtf+fqH2WjL4Fs89QyXl9fZ2EfbaCvQbIlV09rYK4A/B3o48Fvl8fgvQbxskwrLykBWv+msWSQ1UkqSOAHYx6xusXZ4HSDmoqVdwH0IooNdJtfAGzRLYeBT5PcUu/EcwI009hFccTtJst8DpAP6UzmBb9RIJTu+Itugf3hqXmYY2Plv4ygTJoe91t124Q7az2krerYLUgC7adSZ5j0IRZl7cQX+F06Vxie+12ttTW5XsVDgdrZiQWmk8aUoWozFkaI9T6k9xfIkr/H3DWBfptFLb5hpO/hC8ElL8UjIfmCLeYkh6iWY9YMT+RYuaPgSM8/F5C/p//jKpiQ68qoShDG/nVg8+BqQLNR4AdRt6jUA3LMK84w4fVBen+meHUaFxoYHe4um51PrSufht13/fed3tXv152PnT/pbUJd4qoGFO16VTNkknZJtNdvJ90pk0kRmis8CokudoU6sjimfeavlLlF4u59rkreuxgfUBBhZfuZeeyU6xCLMI68bACBbJifgkq8nH4krwjOKv2qddezItScBCedhIz6cdzAeuhhyZ03fXZqd/De7uvjUZCAum3hdAJE5plM2YhTXGe4zFUifFNXzWO7zYuLT5DcuYstuKEu78MCxR8R455UbaS2vj+jNMiN77TdvxB6PmBqmUxwIrmQcfDh9ugozVC9opxb1NGewNHH7brxJ2kraPjp/7o9g9EheIfjJXmyGTYE/4tAr/eSu2d9sjkzzIaM7VI2QJpg1AsWVaATgVZjx6yiofafrIbhxK9ynAEJDtCnGUBCvN8Sx8+HeXYgmURbAwB2Psfusp9PQ==
+sidebar_class_name: "patch api-method"
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"updateInstrumentRun"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"patch"}
+  path={"/v1/environment/{environment}/instrument-runs/{id}"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Update an existing Instrument Run in an Environment.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"name":"environment","required":true,"in":"path","schema":{"type":"string"}},{"name":"id","required":true,"in":"path","schema":{"type":"number"}}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{"required":true,"content":{"application/json":{"schema":{"type":"object","properties":{"startTime":{"type":"string","description":"Start time of the instrument run","format":"date-time"},"endTime":{"type":"string","description":"End time of the instrument run","format":"date-time"},"state":{"enum":["Running","Completed"],"type":"string","description":"State of the instrument run"},"fileUris":{"description":"Array of file URIs to associate with this run","type":"array","items":{"type":"string"}},"flowRunIds":{"description":"Array of flow run IDs to associate with this run","type":"array","items":{"type":"number"}},"externalId":{"description":"External identifier information for the instrument run","allOf":[{"type":"object","properties":{"id":{"type":"string","description":"External identifier for the instrument run","nullable":true},"url":{"type":"string","description":"URL associated with the external identifier","nullable":true}},"title":"ExternalId"}]},"bqTableIds":{"description":"Array of BqTable IDs to associate with this run","type":"array","items":{"type":"number"}},"panelSessionIds":{"description":"Array of panel session IDs to associate with this run","type":"array","items":{"type":"string"}}},"title":"UpdateInstrumentRunBody"}}}}}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":"Instrument Run updated successfully","content":{"application/json":{"schema":{"type":"object","properties":{"id":{"type":"number"},"createdAt":{"type":"string"},"instrumentId":{"type":"number","description":"ID of the instrument this run belongs to"},"startTime":{"type":"string","description":"Start time of the instrument run","format":"date-time"},"endTime":{"type":"string","description":"End time of the instrument run","format":"date-time"},"state":{"enum":["Running","Completed"],"type":"string","description":"Current state of the instrument run"},"fileUris":{"description":"Array of file URIs associated with this run","type":"array","items":{"type":"string"}},"flowRunIds":{"description":"Array of flow run IDs associated with this run","type":"array","items":{"type":"number"}},"externalId":{"description":"External identifier information for the instrument run","allOf":[{"type":"object","properties":{"id":{"type":"string","description":"External identifier for the instrument run","nullable":true},"url":{"type":"string","description":"URL associated with the external identifier","nullable":true}},"title":"ExternalId"}]},"bqTableIds":{"description":"Array of BqTable IDs associated with this run","type":"array","items":{"type":"number"}},"panelSessionIds":{"description":"Array of panel session IDs associated with this run","type":"array","items":{"type":"string"}}},"required":["id","createdAt","instrumentId","state"],"title":"InstrumentRunDTO"}}}},"400":{"description":"Bad Request - Invalid input data"},"404":{"description":"Instrument Run not found"}}}
+>
+  
+</StatusCodes>
+
+
+      

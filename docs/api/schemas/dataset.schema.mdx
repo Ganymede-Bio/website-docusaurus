@@ -1,0 +1,33 @@
+---
+id: dataset
+title: "Dataset"
+description: ""
+sidebar_label: "Dataset"
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: {"kind":"physical","id":0,"displayName":"string","createdAt":"2024-07-29T15:51:28.071Z","updatedAt":"2024-07-29T15:51:28.071Z","bqDataset":"string","tableName":"string","charts":[{"id":0,"displayName":"string","createdAt":"2024-07-29T15:51:28.071Z","updatedAt":"2024-07-29T15:51:28.071Z","permaLink":true,"dashboards":[{"ownerType":"Ganymede","name":"string","displayName":"string","supersetId":0,"createdAt":"2024-07-29T15:51:28.071Z","updatedAt":"2024-07-29T15:51:28.071Z","owner":{"id":0,"role":"admin","email":"string","saml_id":"string","assigned_flows":[{"id":"string","name":"string","environment":"string","version":"string","docsMarkdown":"string","assignees":["string"]}],"githubLogin":"string","application_sessions":[{"id":"string","application":"string","initiator":"string","status":"Initializing","initializationStatus":"Preparing Session Infrastructure","inputFiles":["string"],"outputFiles":["string"],"startTime":"string","endTime":"string","users":[null],"password":"string","domain":"string","port":0,"vmName":"string","timeout":"string","vncPassword":"string","preWarm":true}],"lastSeenAt":"2024-07-29T15:51:28.071Z","lastActiveAt":"2024-07-29T15:51:28.071Z","deletedAt":"2024-07-29T15:51:28.071Z","showSidebarTour":true,"showHomepageTour":true,"showConnectionsTour":true,"showFilesTour":true,"showFlowRunsTour":true,"showFlowEditorTour":true,"notificationPopupSetting":"All"},"version":"string","charts":[null]}]}]}
+custom_edit_url: null
+---
+
+import Schema from "@theme/Schema";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Dataset"}
+>
+</Heading>
+
+
+
+
+
+<Schema
+  schema={{"type":"object","properties":{"kind":{"allOf":[{"type":"string","enum":["physical","virtual"],"title":"datasetKind"}]},"id":{"type":"number"},"displayName":{"type":"string"},"createdAt":{"format":"date-time","type":"string"},"updatedAt":{"format":"date-time","type":"string"},"bqDataset":{"type":"string"},"tableName":{"type":"string"},"charts":{"type":"array","items":{"type":"object","properties":{"id":{"type":"number"},"displayName":{"type":"string"},"createdAt":{"format":"date-time","type":"string"},"updatedAt":{"format":"date-time","type":"string"},"permaLink":{"type":"boolean"},"dataset":"circular(Dataset)","dashboards":{"type":"array","items":{"type":"object","properties":{"ownerType":{"allOf":[{"type":"string","enum":["Ganymede","Customer"],"title":"ownerType"}]},"name":{"type":"string"},"displayName":{"type":"string"},"supersetId":{"type":"number"},"createdAt":{"format":"date-time","type":"string"},"updatedAt":{"format":"date-time","type":"string"},"owner":{"type":"object","properties":{"id":{"type":"number"},"role":{"allOf":[{"type":"string","enum":["admin","reader","runner","writer","none"],"title":"AccessType"}]},"email":{"type":"string"},"saml_id":{"type":"string"},"assigned_flows":{"type":"array","items":{"type":"object","properties":{"id":{"type":"string"},"name":{"type":"string"},"environment":{"type":"string"},"version":{"type":"string"},"docsMarkdown":{"type":"string"},"assignees":{"type":"array","items":{"type":"string"}}},"required":["id","name","environment"],"title":"Flow"}},"githubLogin":{"type":"string"},"application_sessions":{"type":"array","items":{"type":"object","properties":{"id":{"type":"string"},"application":{"type":"string"},"initiator":{"type":"string"},"status":{"enum":["Initializing","Live","Stopped","Error","Standby","Paused","Resuming"],"type":"string"},"initializationStatus":{"enum":["Preparing Session Infrastructure","Creating VM from template","Generating VM Password","Creating Network","Scheduling VM Management","Starting VM","Sending VM Hello Message","Waiting for Response","Initialization Complete"],"type":"string"},"inputFiles":{"type":"array","items":{"type":"string"}},"outputFiles":{"nullable":true,"type":"array","items":{"type":"string"}},"startTime":{"type":"string"},"endTime":{"type":"string"},"users":{"type":"array","items":"circular(User)"},"password":{"type":"string"},"domain":{"type":"string"},"port":{"type":"number"},"vmName":{"type":"string"},"timeout":{"type":"string"},"vncPassword":{"type":"string"},"preWarm":{"type":"boolean"}},"required":["id","application","initiator","status","initializationStatus","inputFiles","outputFiles","startTime","password","domain","port","vmName","timeout"],"title":"ApplicationSession"}},"lastSeenAt":{"format":"date-time","type":"string"},"lastActiveAt":{"format":"date-time","type":"string"},"deletedAt":{"format":"date-time","type":"string","nullable":true},"showSidebarTour":{"type":"boolean"},"showHomepageTour":{"type":"boolean"},"showConnectionsTour":{"type":"boolean"},"showFilesTour":{"type":"boolean"},"showFlowRunsTour":{"type":"boolean"},"showFlowEditorTour":{"type":"boolean"},"notificationPopupSetting":{"type":"string","enum":["All","Errors","My Notifications","None"]}},"required":["id","role","email","saml_id","showSidebarTour","showHomepageTour","showConnectionsTour","showFilesTour","showFlowRunsTour","showFlowEditorTour","notificationPopupSetting"],"title":"User"},"version":{"type":"string"},"charts":{"type":"array","items":"circular(Chart)"}},"required":["name","createdAt","updatedAt","version"],"title":"Dashboard"}}},"required":["id","createdAt","updatedAt","dataset"],"title":"Chart"}}},"required":["id","createdAt","updatedAt","bqDataset","tableName"],"title":"Dataset"}}
+  schemaType={"response"}
+>
+  
+</Schema>
+            

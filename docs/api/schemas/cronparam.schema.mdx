@@ -1,0 +1,33 @@
+---
+id: cronparam
+title: "CronParam"
+description: ""
+sidebar_label: "CronParam"
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: {"trigger":"cron","cron_expression":"string"}
+custom_edit_url: null
+---
+
+import Schema from "@theme/Schema";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"CronParam"}
+>
+</Heading>
+
+
+
+
+
+<Schema
+  schema={{"type":"object","properties":{"trigger":{"type":"string","default":"cron"},"cron_expression":{"type":"string"}},"required":["trigger","cron_expression"],"title":"CronParam"}}
+  schemaType={"response"}
+>
+  
+</Schema>
+            

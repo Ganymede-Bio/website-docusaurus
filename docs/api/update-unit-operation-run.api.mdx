@@ -1,0 +1,70 @@
+---
+id: update-unit-operation-run
+title: "updateUnitOperationRun"
+description: "Update an existing Unit Operation Run in an Environment."
+sidebar_label: "updateUnitOperationRun"
+hide_title: true
+hide_table_of_contents: true
+api: eJztWFuP2jgU/iuWn7YSDDCaqru8MZfVsrvSdBnQSot4MLEBd4KT2g4zNMp/33PshCQQmGmH9qkviDjH536+z05KuTCBlrGVkaJ9Ook5s4IwRcSzNFaqJZkoacl9LDRDGTJKFJEKJe7URupIrYWyF7RFo0JkyEFR4hTh3t1W2AliMdNsLazQhvanKVXwAOKi1AUyWnxOpBagx+pEtKhE12JmV/DOBCuxZrSfUruNcauxGtykWdbaaZP8a5WoZD0XGpTM/EZh7HXEtyixryeIlEU34RWL41AGLrjOJ4MJTA9VR/NPIsCoYo0pslIYJ2eZtmOJ/u6H0torygOKEguyJFoQuxIkwZrsEk60y+wi0msGflHMfBvFadaCzPLXWblT/FttQCzWWRCQRygrhVIrb+MmWschlJtTyOyLYdpT1sHQQoZioqVLYH3zQGu2xc0oQiajoSE2IsyYKJCo9knaFSiWJg8kd4XhNniUVqxNY1PRRRg9QTxDftIqCKFmMrx9m+FdI2LDghcJjsSL5kvRczsRMyXCB2GMG+xTPjhJYrzom12oFGD+eczmoTht/fofYlHqnLGLZ4ApxUIEtH3Dd/k7IjlkXS6k0FAFPx4YP/w7PkUsDO8XDv5OY4TkrxjbBkcK4/W2gK0qCUPMkscyCDHR4csmJqO/y3zyIqGCiEPThzbAiJUWH3euQj6zWfXFpJEsHABnGQpqYeJIGZ+Vy273sB4NLOUpiBOTBAF05QL8woKfCb9rtSmaBrRrgUYHtqGXId3VEIcNGvZTP7w9AohFQ5O5CCO1xJ7Pkfgnq9QcuEm0xgEwZ2aXw4H4Idzy7WbPxixnceEtvHKW1H89q5wl7p+c8p05pTyuT/09oETkQ/wtQGZW4aI9Frod3+ckdNXEO9eMk5G/MJA2GaoNCyWHJMWJJYBmjLqNV68iLBVZSHOiuOsUI4JES7t1NWWxbD8K/D/De861YFroQQKXGVxB99kSL1T0YzIHShvEEmI7NGEwUrh9rSLuL0PByl3JUA/tbHqdyj2sk1Yesg6mrr1rujbU3nRSyTPModCb4j7nik9X1sam3+mkq8jY7KD4sLBhWmJFXU+ilM/QgiUhEoFbydx1rMjDAxKzl99lY9dlsPKXcKOH+leCcd83/j5YyENWq5nLyR4l5m4Zdvg/vxeE9Oe/43K8MapSKeqItPzi8tHAe9CXBLYDMT8KtecZ1hcPHKPyqnn3zJDT9q6GcNi5vGp3P7Qvfxv33vff9/qXv150P/T+oxUOPiWUk2iFO0uWmxbDOasz0bQ7a+IIt3yA21UlVUx10nW0Q+gp8cB3SgWREepcSfNJbGwb6DP/0LvoXnTz4xwLsH0crUDfrJk7yOVlOvohoqY7LY+Fb/kGkjeKhbg7ccikO1bkeOinbEo3PVe76veOfv2xYdRQSLrTjp+VKU3TOTNQyDDLcBn6SDt4KEfLzSOXBv9D5hcsNOJE2L+McuR8R45FUgyb2roJDpO8TG4WazEhSP1A09Khf6sYLwzcv7jxNtpj3F5uPDj4o79+xwAuC7E9KVvF0I+D8c0fiBv516J1xHGTZk/4CQp+nZeRC9phl1tLacjUMmFLlPVKsXtZDkslqD06UMv/VMi9nocC34p0eKw7IpymHiyzbCfvXx3dsYPTPNnKUW32PwsW/2g=
+sidebar_class_name: "patch api-method"
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"updateUnitOperationRun"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"patch"}
+  path={"/v1/environment/{environment}/unit-operation-runs/{id}"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Update an existing Unit Operation Run in an Environment.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"name":"environment","required":true,"in":"path","schema":{"type":"string"}},{"name":"id","required":true,"in":"path","schema":{"type":"number"}}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{"required":true,"content":{"application/json":{"schema":{"type":"object","properties":{"startTime":{"type":"string","description":"Start time of the unit operation run","format":"date-time"},"endTime":{"type":"string","description":"End time of the unit operation run","format":"date-time"},"state":{"enum":["Running","Completed"],"type":"string","description":"State of the unit operation run"},"fileUris":{"description":"Array of file URIs to associate with this run","type":"array","items":{"type":"string"}},"flowRunIds":{"description":"Array of flow run IDs to associate with this run","type":"array","items":{"type":"number"}},"instrumentRunIds":{"description":"Array of instrument run IDs to associate with this run","type":"array","items":{"type":"number"}},"panelSessionIds":{"description":"Array of panel session IDs to associate with this run","type":"array","items":{"type":"string"}},"bqTableIds":{"description":"Array of BQ table IDs to associate with this run","type":"array","items":{"type":"number"}},"externalId":{"description":"External identifier information for the unit operation run","allOf":[{"type":"object","properties":{"id":{"type":"string","description":"External identifier for the instrument run","nullable":true},"url":{"type":"string","description":"URL associated with the external identifier","nullable":true}},"title":"ExternalId"}]}},"title":"UpdateUnitOperationRunBody"}}}}}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":"Unit Operation Run updated successfully","content":{"application/json":{"schema":{"type":"object","properties":{"id":{"type":"number"},"createdAt":{"type":"string"},"unitOperationId":{"type":"number","description":"ID of the unit operation this run belongs to"},"startTime":{"type":"string","description":"Start time of the unit operation run","format":"date-time"},"endTime":{"type":"string","description":"End time of the unit operation run","format":"date-time"},"state":{"enum":["Running","Completed"],"type":"string","description":"Current state of the unit operation run"},"fileUris":{"description":"Array of file URIs associated with this run","type":"array","items":{"type":"string"}},"flowRunIds":{"description":"Array of flow run IDs associated with this run","type":"array","items":{"type":"number"}},"instrumentRunIds":{"description":"Array of instrument run IDs associated with this run","type":"array","items":{"type":"number"}},"panelSessionIds":{"description":"Array of panel session IDs associated with this run","type":"array","items":{"type":"string"}},"bqTableIds":{"description":"Array of BQ table IDs associated with this run","type":"array","items":{"type":"number"}},"externalId":{"description":"External identifier information for the unit operation run","allOf":[{"type":"object","properties":{"id":{"type":"string","description":"External identifier for the instrument run","nullable":true},"url":{"type":"string","description":"URL associated with the external identifier","nullable":true}},"title":"ExternalId"}]}},"required":["id","createdAt","unitOperationId","state"],"title":"UnitOperationRunDTO"}}}},"400":{"description":"Bad Request - Invalid input data"},"404":{"description":"Unit Operation Run not found"}}}
+>
+  
+</StatusCodes>
+
+
+      
