@@ -4,22 +4,27 @@ title: Agent System Requirements
 displayed_sidebar: webUiSidebar
 ---
 
-## System Requirements
+import PrintPageButton from '@site/src/components/PrintPageButton';
+
+<div className="text--right">
+  <PrintPageButton />
+</div>
+<br/>
 
 To ensure that the [Agent](../agents/Agent) is able to communicate with Ganymede Cloud, ensure that your computer meets the following specs:
 
 ### Hardware Requirements
-- Intel i3 processor or newer, with x86/x64 architecture
-- At least 4GB of RAM, though more may be needed for heavy workloads.
-- At least 10GB of free disk space
+- [ ] Intel i3 processor or newer, with x86/x64 architecture
+- [ ] At least 4GB of RAM, though more may be needed for heavy workloads.
+- [ ] At least 10GB of free disk space
 
 ### Network Requirements
-- Ability to access relevant network-limited resources (network drives, VPN, databases, etc.)
-- has outbound HTTPS (port 443)
+- [ ] Ability to access relevant network-limited resources (network drives, VPN, databases, etc.)
+- [ ] has outbound HTTPS (port 443)
 
 ### OS Requirements
-- Either Windows 10 or newer with display, or Ubuntu/Debian Linux prior to EOL
-- Operating system should be up to date with latest patches and updates
+- [ ] Either Windows 10 or newer with display, or Ubuntu/Debian Linux prior to EOL
+- [ ] Operating system should be up to date with latest patches and updates
 
 ## Installation permissions
 
@@ -30,13 +35,15 @@ Administrative access is required so that the Agent can be installed to run as a
 If direct access to the internet is allowed (no proxy), configure your Firewall to allow Outbound HTTPS (port 443) connections from the PC where the agent is running. 
 If direct access to the internet is not allowed (proxy), configure your Proxy to allow the following  connections from the PC where the agent is running.
 
-- *.googleapis.com on port 443
-- accounts.google.com on port 443
-- 1e100.net on port 443
-- api.ipify.org on port 443
-- \<tenant_name\>.ganymede.bio port 443
+- [ ] *.googleapis.com on port 443
+- [ ] accounts.google.com on port 443
+- [ ] 1e100.net on port 443
+- [ ] api.ipify.org on port 443
+- [ ] \<tenant_name\>.ganymede.bio port 443
 
-### Testing Connectivity - Windows
+## Testing Connectivity
+
+### Windows
 
 For Windows Agents, connectivity can be tested by running the following commands in PowerShell:
 
@@ -57,7 +64,7 @@ $ IWR -URI <tenant_name>.ganymede.bio
 
 :::
 
-### Testing Connectivity - Linux
+### Linux
 
 For Linux Agents, connectivity can be tested by installing [netcat](https://netcat.sourceforge.net/) and running the following commands in a terminal:
 
@@ -106,3 +113,4 @@ Frequently, the data producer is not the same person who is configuring Agents. 
   - User
 
 - Where do the metadata fields live?  Are they in the file name, file contents, or contents of the captured files?
+
