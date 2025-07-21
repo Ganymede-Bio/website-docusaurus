@@ -42,7 +42,7 @@ The setup instructions below explain how to configure the necessary GitHub Actio
 4. **Generate API Tokens**
    - Generate an API token for each Ganymede environment
    - In the Ganymede UI, create an environment secret with:
-     - Name starting with "ganymede_api_key"
+     - Name starting with "ganymede_api_key_"
      - A randomly generated value (e.g., from [random.org](https://www.random.org/passwords/?num=5&len=32&format=html&rnd=new))
 
 5. **Configure Environment Secrets**
@@ -68,7 +68,7 @@ The setup instructions below explain how to configure the necessary GitHub Actio
 ### Syncing Code from Ganymede
 
 - **Pull Latest Changes**: Run workflow dispatch on the `pull-from-action.yaml` workflow to pull the latest flow code
-- **Automatic PRs**: This will create a pull request with the changes
+- **Automatic Pull Requests**: This will create a pull request with the changes
 - **Selective Sync**: You can optionally specify a single flow to sync code from
 - **Scheduled Sync**: The workflow can also be scheduled to run on a cron schedule
 
