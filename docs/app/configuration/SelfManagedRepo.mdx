@@ -1,44 +1,86 @@
 ---
 id: SelfManagedRepo
-title: Self Managed Repo
+title: Self-Managed Repository
 displayed_sidebar: webUiSidebar
 ---
 
-Self-managed repos allow you to host and manage your Ganymede flow code in your organization, giving you greater control over version control, CI/CD, and code governance. With this approach, you can:
+## Overview
 
-* Store your code in your own Git based repo
-* Use standard Git workflows for code reviews, branching, and versioning
-* Implement your own CI/CD pipelines for testing and deploying flows to Ganymede
-* Maintain code ownership within your organization's infrastructure
-* Integrate with existing development practices and tools familiar to your team
+Self-managed repositories allow you to host and manage your Ganymede flow code within your organization, giving you greater control over version control, CI/CD, and code governance.
 
-The setup instructions in the document explain how to configure the necessary GitHub Actions workflows to synchronize code between your repo and Ganymede environments, ensuring changes can flow both ways while maintaining proper version control.
+### Benefits
+
+With this approach, you can:
+
+- **Version Control**: Store your code in your own Git-based repository
+- **Standard Git Workflows**: Use familiar Git workflows for code reviews, branching, and versioning
+- **Custom CI/CD**: Implement your own CI/CD pipelines for testing and deploying flows to Ganymede
+- **Code Ownership**: Maintain code ownership within your organization's infrastructure
+- **Tool Integration**: Integrate with existing development practices and tools familiar to your team
+
+The setup instructions below explain how to configure the necessary GitHub Actions workflows to synchronize code between your repository and Ganymede environments, ensuring changes can flow both ways while maintaining proper version control.
 
 ## Setup
 
-* Create a Github repo in your organization, or if you have an existing repo you can use that 
-* Create a new repo from this [templated repo](https://github.com/Ganymede-Bio/self-managed-repo-template). If you have an existing repo you can copy Github Workflows (deploy-from-action.yaml & pull-from-action.yaml) found in this repo into your repo. They should be in the .github/workflows folder
-* In your repo go to Settings > Secrets & Variables > Actions and set a Github repo variable named GANYMEDE_SUBDOMAIN to the corresponding Ganymede subdomain value. This can be found in the URL that you access; for example, if you log into Ganymede at https://\<tenant\>.ganymede.bio, this would be \<tenant\>.
-* Generate an API token for each Ganymede environment. (Create an environment secret in the Ganymede UI with a name starting with “ganymede_api_key” and a randomly generated value - e.g., from [random.org](https://www.random.org/passwords/?num=5&len=32&format=html&rnd=new)).
-* Set environment secrets and variables.
-  * If using Github environments (recommended), create an environment corresponding to each Ganymede environment.
-  * Set the secret GANYMEDE_API_TOKEN with the generated API token in the corresponding Ganymede environment.
-* **pull-from-action.yaml**
-    * Update the github_username and github_email environment variables to your desired values. These will only be used for creating pull requests in your Github repo.
-    * Update the ENVIRONMENT variable to the Ganymede environment name.
-    * Run `pull-from-action.yaml` via workflow dispatch for the desired environment to populate repo with current flows.
-* **deploy-from-action.yaml**
-  * Define the variable ENVIRONMENT to match the environment for deployment. This should correspond to the directory structure of your repo as well. (ENVIRONMENT/…) (You may want multiple actions or have multiple jobs if you want multiple environments)
+### Initial Repository Setup
+
+1. **Create a GitHub Repository**
+   - Create a new GitHub repository in your organization, or use an existing repository
+
+2. **Set Up from Template**
+   - Create a new repository from this [templated repository](https://github.com/Ganymede-Bio/self-managed-repo-template)
+   - If you have an existing repository, copy the GitHub Workflows (`deploy-from-action.yaml` & `pull-from-action.yaml`) from the template repository
+   - Place these workflows in the `.github/workflows` folder of your repository
+
+### Configure Repository Variables and Secrets
+
+3. **Set Repository Variables**
+   - Navigate to **Settings** > **Secrets & Variables** > **Actions** in your GitHub repository
+   - Create a repository variable named `GANYMEDE_SUBDOMAIN`
+   - Set the value to your corresponding Ganymede subdomain (e.g., if you access Ganymede at `https://<tenant>.ganymede.bio`, use `<tenant>`)
+
+4. **Generate API Tokens**
+   - Generate an API token for each Ganymede environment
+   - In the Ganymede UI, create an environment secret with:
+     - Name starting with "ganymede_api_key_"
+     - A randomly generated value (e.g., from [random.org](https://www.random.org/passwords/?num=5&len=32&format=html&rnd=new))
+
+5. **Configure Environment Secrets**
+   - **Recommended**: Create GitHub environments corresponding to each Ganymede environment
+   - Set the secret `GANYMEDE_API_TOKEN` with the generated API token in the corresponding Ganymede environment
+   - Set the variable `GANYMEDE_ENVIRONMENT` with the name of the Ganymede environment (find this in the URL for the environment in Ganymede, e.g., `https://<tenant>.ganymede.bio/<environment>`)
+
+### Configure Workflows
+
+6. **Configure pull-from-action.yaml**
+   - Update the `github_username` and `github_email` environment variables to your desired values
+   - These credentials will be used for creating pull requests in your GitHub repository
+   - Update the `environment` input choices to match the environments you configured
+   - Run the workflow via **workflow dispatch** for the desired environment to populate your repository with current flows
+
+7. **Configure deploy-from-action.yaml**
+   - Update the `environment` input choices to match the environments you configured
+   - These environments will correspond to the directory structure of your repository (e.g., `dev/...`, `prod/...`)
+   - Consider creating multiple actions or jobs if you need to support multiple environments
 
 ## Usage
 
-### Syncing
-* Run workflow dispatch on the `pull-from-action.yaml` workflow to pull the latest flow code. This will create a pull request with the changes. You can optionally specify a single flow to sync code from.
-* The workflow can also be scheduled to run on a cron schedule.
+### Syncing Code from Ganymede
 
-### Deploying
-* Code changes merged into the main branch will be automatically deployed to Ganymede. The Ganymede commit message will be based on the pull request's commit message.
-* Deployment can also be triggered using the workflow dispatch action, provided a user email matching a Ganymede user is supplied.
+- **Pull Latest Changes**: Run workflow dispatch on the `pull-from-action.yaml` workflow to pull the latest flow code
+- **Automatic Pull Requests**: This will create a pull request with the changes
+- **Selective Sync**: You can optionally specify a single flow to sync code from
+- **Scheduled Sync**: The workflow can also be scheduled to run on a cron schedule
+
+### Deploying Code to Ganymede
+
+- **Automatic Deployment**: Code changes merged into the main branch will be automatically deployed to Ganymede
+- **Commit Messages**: The Ganymede commit message will be based on the pull request's commit message
+- **Manual Deployment**: Deployment can also be triggered using the workflow dispatch action, provided a user email matching a Ganymede user is supplied
 
 ## Limitations
-* The author email in the deploy-from-action must match an email that is registered in Ganymede. If using the push github event, then the committer email address is used by default.
+
+:::warning Important Requirements
+- The author email in the `deploy-from-action` must match an email that is registered in Ganymede
+- If using the push GitHub event, the committer email address is used by default
+:::
