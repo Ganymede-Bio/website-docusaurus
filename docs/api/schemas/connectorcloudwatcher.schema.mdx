@@ -1,0 +1,33 @@
+---
+id: connectorcloudwatcher
+title: "ConnectorCloudWatcher"
+description: ""
+sidebar_label: "ConnectorCloudWatcher"
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: {"trigger":"file_watcher","flowName":"string","globs":["string"],"topicId":"string"}
+custom_edit_url: null
+---
+
+import Schema from "@theme/Schema";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"ConnectorCloudWatcher"}
+>
+</Heading>
+
+
+
+
+
+<Schema
+  schema={{"type":"object","properties":{"trigger":{"allOf":[{"type":"string","enum":["file_watcher","cron","cloud_watcher","one_shot"],"title":"ConnectorTriggerOptions"}]},"flowName":{"type":"string"},"globs":{"type":"array","items":{"type":"string"}},"topicId":{"type":"string"}},"required":["trigger","topicId"],"title":"ConnectorCloudWatcher"}}
+  schemaType={"response"}
+>
+  
+</Schema>
+            

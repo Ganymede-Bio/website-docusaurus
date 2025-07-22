@@ -1,0 +1,33 @@
+---
+id: eventfilewatcherparam
+title: "EventFileWatcherParam"
+description: ""
+sidebar_label: "EventFileWatcherParam"
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: {"trigger":"event_file_watcher","check_period":0,"use_existing_file":true,"ignore_duplicate":false,"globs":[{"file_extension":"string","param_node":"string"}]}
+custom_edit_url: null
+---
+
+import Schema from "@theme/Schema";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"EventFileWatcherParam"}
+>
+</Heading>
+
+
+
+
+
+<Schema
+  schema={{"type":"object","properties":{"trigger":{"type":"string","default":"event_file_watcher"},"check_period":{"type":"number"},"use_existing_file":{"type":"boolean"},"ignore_duplicate":{"type":"boolean","default":false},"globs":{"type":"array","items":{"type":"object","properties":{"file_extension":{"type":"string"},"param_node":{"type":"string"}},"required":["file_extension","param_node"],"title":"GlobParam"}}},"required":["trigger","check_period","use_existing_file","globs"],"title":"EventFileWatcherParam"}}
+  schemaType={"response"}
+>
+  
+</Schema>
+            

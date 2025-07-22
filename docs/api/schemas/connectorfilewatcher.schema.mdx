@@ -1,0 +1,33 @@
+---
+id: connectorfilewatcher
+title: "ConnectorFileWatcher"
+description: ""
+sidebar_label: "ConnectorFileWatcher"
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: {"trigger":"file_watcher","duplicateHandling":"create_new_version","globs":["string"],"inputPath":"string","ignorePatterns":["string"],"ingestBucket":{"cloudProvider":"GCP","bucketOwner":"Ganymede","name":"string","displayName":"string","createdAt":"2024-07-29T15:51:28.071Z","region":"string","validated":true,"lastValidated":"2024-07-29T15:51:28.071Z","deletedAt":"2024-07-29T15:51:28.071Z"},"streamContents":true,"ignoreHiddenFiles":true,"ignoreHiddenDirectories":true,"stableTime":5}
+custom_edit_url: null
+---
+
+import Schema from "@theme/Schema";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"ConnectorFileWatcher"}
+>
+</Heading>
+
+
+
+
+
+<Schema
+  schema={{"type":"object","properties":{"trigger":{"allOf":[{"type":"string","enum":["file_watcher","cron","cloud_watcher","one_shot"],"title":"ConnectorTriggerOptions"}]},"duplicateHandling":{"default":"create_new_version","allOf":[{"type":"string","enum":["use_existing_file","ignore_duplicate","create_new_version"],"title":"DuplicateHandling"}]},"globs":{"type":"array","items":{"type":"string"}},"inputPath":{"type":"string"},"ignorePatterns":{"type":"array","items":{"type":"string"}},"ingestBucket":{"type":"object","properties":{"cloudProvider":{"allOf":[{"type":"string","enum":["GCP","AWS"],"title":"CloudProvider"}]},"bucketOwner":{"allOf":[{"type":"string","enum":["Ganymede","Customer"],"title":"BucketOwner"}]},"name":{"type":"string"},"displayName":{"type":"string"},"createdAt":{"format":"date-time","type":"string"},"region":{"type":"string"},"validated":{"type":"boolean"},"lastValidated":{"format":"date-time","type":"string"},"deletedAt":{"format":"date-time","type":"string","nullable":true}},"required":["cloudProvider","bucketOwner","name","createdAt","validated","deletedAt"],"title":"IngestBucket"},"streamContents":{"type":"boolean","default":true},"ignoreHiddenFiles":{"type":"boolean","default":true},"ignoreHiddenDirectories":{"type":"boolean","default":true},"stableTime":{"type":"number","default":5}},"required":["trigger","duplicateHandling","globs","inputPath","ignorePatterns"],"title":"ConnectorFileWatcher"}}
+  schemaType={"response"}
+>
+  
+</Schema>
+            

@@ -25,7 +25,7 @@ import Heading from "@theme/Heading";
 
 
 <Schema
-  schema={{"type":"object","properties":{"uri":{"type":"string"},"name":{"type":"string"},"creator":{"type":"string"},"createdAt":{"type":"number"},"size":{"type":"number"},"tags":{"type":"array","items":{"type":"object","properties":{"id":{"type":"string"},"type":{"type":"string"},"value":{"type":"string"}},"required":["id","type","value"],"title":"Tag"}}},"required":["uri","name","createdAt","size"],"title":"File"}}
+  schema={{"type":"object","properties":{"uri":{"type":"string"},"name":{"type":"string"},"creator":{"type":"string"},"createdAt":{"type":"number"},"size":{"type":"number"},"tags":{"type":"array","items":{"type":"object","properties":{"id":{"type":"string","description":"User defined unique identifier for the tag"},"type":{"type":"string","description":"Id of the tag type"},"value":{"type":"string","description":"User defined display value for the tag"}},"required":["type","value"],"title":"Tag"}}},"required":["uri","name","createdAt","size"],"title":"File"}}
   schemaType={"response"}
 >
   

@@ -1,0 +1,33 @@
+---
+id: filetagupdatebody
+title: "FileTagUpdateBody"
+description: ""
+sidebar_label: "FileTagUpdateBody"
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: {"tagsToRemove":[{"id":"string","type":"string","value":"string"}],"tagsToAdd":[{"id":"string","type":"string","value":"string"}],"files":["string"]}
+custom_edit_url: null
+---
+
+import Schema from "@theme/Schema";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"FileTagUpdateBody"}
+>
+</Heading>
+
+
+
+
+
+<Schema
+  schema={{"type":"object","properties":{"tagsToRemove":{"default":[],"type":"array","items":{"type":"object","properties":{"id":{"type":"string","description":"User defined unique identifier for the tag"},"type":{"type":"string","description":"Id of the tag type"},"value":{"type":"string","description":"User defined display value for the tag"}},"required":["type","value"],"title":"Tag"}},"tagsToAdd":{"default":[],"type":"array","items":{"type":"object","properties":{"id":{"type":"string","description":"User defined unique identifier for the tag"},"type":{"type":"string","description":"Id of the tag type"},"value":{"type":"string","description":"User defined display value for the tag"}},"required":["type","value"],"title":"Tag"}},"files":{"minItems":1,"type":"array","items":{"type":"string"}}},"required":["tagsToRemove","tagsToAdd","files"],"title":"FileTagUpdateBody"}}
+  schemaType={"response"}
+>
+  
+</Schema>
+            

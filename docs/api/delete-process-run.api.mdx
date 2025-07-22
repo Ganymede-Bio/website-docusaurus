@@ -1,0 +1,70 @@
+---
+id: delete-process-run
+title: "deleteProcessRun"
+description: "Delete a Process Run from an Environment."
+sidebar_label: "deleteProcessRun"
+hide_title: true
+hide_table_of_contents: true
+api: eJy9U01v2zAM/SuGThuQ1snQU24dmgH7OBRdhx2CHhSbroXYkquPYJmg/z5SsmO7bTb0spNlinwi33v0rARTaNFZoSRbsxtowELGs1utCjAmu3Myq7RqMy6zjTwIrWQL0l6yBVMdaE51n0usLGNlX4ZVmNBxzVsMasPWW88k/mAijCiYo+HJCQ2IYLWDBRPURcdtjXemqKHlbO2ZPXZUaqwW8pGFsDihifKtINK1O9AI8kCFplPSgKH7D8sr+swJmfKQRiwz4wqKVa5pjiws2NW/CqWyWaWcLKl1ZqBwWthjJIV34mIPdH6gqT4C16CvHbZOEWzR8keij926XSOK607gTBNswzAHSa7VKEKknhBYfljlE75zP/kJeZdgLjTC5F6UgegCfRgEc7pBjNrazqzz3NfKWEqZz4mBA9eC75rEImUlNiruGksAFAmR72H07yRKyj8RcBIII18x0MtYAy9RrsUg+JCPRE7J8kloytjFMFakwyelW059fPl5j8H+EZpqBCUMpcXvaOcXI24kejjD8syqPchnnZGkQlYqTiBsA4mUlywhrelndbm8XGKkUNLygtgijA5parkkmL6rV1ZqhuojAu3R2xa3p8DCL5t3Dcdh8Pkotu+Ns2WHFSbOV3U9/526h25xE1HhJP+Web/jBn7oJgQKPznQ0eSjW6LFSmHojN6teGPgLwO+u+uX/H12boTBP/IYTdm4Xopor9kwtGr/8WmkJuB6j3t6s/m2ud/gPe/NO1p/H63fH4iiV6GHLRheSBtxJtn7tFIhnPLT1dmK09L1/UvqP4Q/rxkW5g==
+sidebar_class_name: "delete api-method"
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"deleteProcessRun"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"delete"}
+  path={"/v1/environment/{environment}/process-runs/{id}"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Delete a Process Run from an Environment.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"name":"environment","required":true,"in":"path","schema":{"type":"string"}},{"name":"id","required":true,"in":"path","schema":{"type":"number"}}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={undefined}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"204":{"description":"Process Run deleted successfully"},"404":{"description":"Process Run not found"}}}
+>
+  
+</StatusCodes>
+
+
+      
