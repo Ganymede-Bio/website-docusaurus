@@ -447,7 +447,7 @@ module.exports = {
         This table includes information about each resources\' unique identifier and where to find them in the Ganymede Platform.`,
         slug: "/api",
       },
-      items: require("./docs/api/sidebar.ts"),
+      items: require("./docs/api/sidebar.ts").default,
     },
   ],
 };

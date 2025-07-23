@@ -14,7 +14,10 @@ module.exports = {
     mermaid: true
   },
   future: {
-    experimental_faster: true
+    experimental_faster: true,
+    v4: {
+      removeLegacyPostBuildHeadAttribute: true,
+    },
   },
   plugins: [
     [
