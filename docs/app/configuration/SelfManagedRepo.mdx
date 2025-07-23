@@ -74,9 +74,11 @@ The setup instructions below explain how to configure the necessary GitHub Actio
 
 ### Deploying Code to Ganymede
 
-- **Automatic Deployment**: Code changes merged into the main branch will be automatically deployed to Ganymede
-- **Commit Messages**: The Ganymede commit message will be based on the pull request's commit message
-- **Manual Deployment**: Deployment can also be triggered using the workflow dispatch action, provided a user email matching a Ganymede user is supplied
+- **Manual Deployment**: Deployment can be triggered using the workflow dispatch action, provided a user email matching a Ganymede user is supplied
+- **Automatic Deployment**: For automatic deployments, you can set up a GitHub Action to trigger on push events to the repository and use a modified version of the [`flow-commit-action`](https://github.com/Ganymede-Bio/flow-commit-action/blob/main/action.yml)
+
+### Customizing Code Management
+- The APIs to manage committing to your environments are available in the [Ganymede API documentation](https://docs.ganymede.bio/api)
 
 ## Limitations
 
