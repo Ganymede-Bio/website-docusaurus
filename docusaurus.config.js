@@ -14,7 +14,7 @@ module.exports = {
     mermaid: true
   },
   future: {
-    experimental_faster: true
+    experimental_faster: true,
   },
   plugins: [
     [
