@@ -123,6 +123,7 @@ On Windows:
 
 On Windows:
 
+1. Ensure the Agent is set to restart on failure.
 - Open up Task Manager and navigate to the Services tab.
 - Look for the Connection of interest (a service with a name starting with "GanymedeAgent-") and double click on it.
 - Navigate to the "Recovery" tab and ensure that the "First failure", "Second failure", and "Subsequent failure" options are set to "Restart the Service" with 0 recover time:
@@ -135,6 +136,18 @@ On Windows:
   />
 </div>
 &nbsp;
+
+2. Increase services timeout.
+- Ensure the agent is at the latest version (older agent versions could be slower to startup).
+- Open Registry Editor: Press Win + R, type regedit, and press Enter.
+- Navigate to the key `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control`
+- Create or modify ServicesPipeTimeout
+  - If the ServicesPipeTimeout value doesn't exist, create a new DWORD (32-bit) Value named ServicesPipeTimeout.
+  - Right-click on the value and select Modify, then select Decimal as the base and type the value
+  - Set the value in milliseconds.
+    - Default is 30,000 ms (30 seconds). 90,000 ms (90 seconds) is recommended.
+- Restart your computer. The change takes effect after a reboot.
+
 
 On Linux, run the following command to ensure the Agent is set to start on boot:
 
