@@ -458,3 +458,4 @@ APISetup
 PrintPageButton
 DWORD
 ServicesPipeTimeout
+regedit
