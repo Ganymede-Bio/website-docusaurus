@@ -456,3 +456,6 @@ MissingSecurityHeaderYour
 SelfManagedRepo
 APISetup
 PrintPageButton
+DWORD
+ServicesPipeTimeout
+regedit
