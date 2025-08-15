@@ -121,9 +121,62 @@ On Windows:
 
 #### Issue: The Agent Connection does not restart when the computer is restarted.
 
-On Windows:
+##### Windows - Determine whether the Agent Connection is timing out on startup
 
-1. Ensure the Agent is set to restart on failure.
+Run the following command as the machine Administrator in Powershell, and look for any errors recorded by Agents during the startup process.  
+If these errors all indicate timeouts then proceed to the step [Increasing Agent Startup Timeout](#increasing-agent-startup-timeout)
+
+```powershell
+Get-WinEvent -FilterHashtable @{ LogName='System'; ProviderName='Service Control Manager'; Level=2 } |
+  Where-Object { $_.Message -match 'GanymedeAgent-' } |
+  Select-Object TimeCreated, Id,
+    @{n='ServiceName';e={[regex]::Match($_.Message,'GanymedeAgent-[^\s]+').Value}},
+    Message |
+  Sort-Object TimeCreated
+```
+
+To look for any errors recorded during startup run this command to see which agents have startup log files.  If files are found, look at the error messages contained within. 
+If there are no stack traces or specific error messages, then you may need to increase the startup time for services on your machine. If there are specific errors or stack traces please report them to [Ganymede](../Support.mdx).
+
+```powershell
+Get-CimInstance Win32_Service -Filter "Name LIKE 'GanymedeAgent-%'" |
+ForEach-Object {
+  $svcName = $_.Name
+  $path = $_.PathName
+  $exe = if ($path -match '^(?:"([^"]+)"|([^ ]+))') { if ($matches[1]){$matches[1]} else {$matches[2]} } else { $path }
+  $exe = [Environment]::ExpandEnvironmentVariables($exe)
+  $dir = Split-Path -Path $exe -Parent
+  if ($dir -and (Test-Path -LiteralPath $dir)) {
+    Get-ChildItem -LiteralPath $dir -Filter 'startup_*' -File -Recurse -ErrorAction SilentlyContinue |
+      Where-Object { $_.Length -gt 0 } |
+      Select-Object @{n='File';e={$_.FullName}},
+                    @{n='SizeBytes';e={$_.Length}}
+  }
+}
+```
+
+##### Windows - Increasing Agent Startup Timeout
+
+If you are seeing startup timeout issues, increase your service startup timeout (which has a 30 second default) to 90 seconds:
+
+```powershell
+New-ItemProperty -Path 'HKLM:\SYSTEM\CurrentControlSet\Control' -Name 'ServicesPipeTimeout' -Value 90000 -PropertyType DWord -Force
+```
+
+##### Windows - Configuring the Agent Connection to restart on failure
+
+1. Increase services timeout
+- Ensure the agent is at the latest version (older agent versions could be slower to startup).
+- Open Registry Editor: Press Win + R, type regedit, and press Enter.
+- Navigate to the key `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control`
+- Create or modify ServicesPipeTimeout
+  - If the ServicesPipeTimeout value doesn't exist, create a new DWORD (32-bit) Value named ServicesPipeTimeout.
+  - Right-click on the value and select Modify, then select Decimal as the base and type the value
+  - Set the value in milliseconds.
+    - Default is 30,000 ms (30 seconds). 90,000 ms (90 seconds) is recommended.
+- Restart your computer. The change takes effect after a reboot.
+
+2. Ensure the Agent is set to restart on failure.
 - Open up Task Manager and navigate to the Services tab.
 - Look for the Connection of interest (a service with a name starting with "GanymedeAgent-") and double click on it.
 - Navigate to the "Recovery" tab and ensure that the "First failure", "Second failure", and "Subsequent failure" options are set to "Restart the Service" with 0 recover time:
@@ -137,17 +190,7 @@ On Windows:
 </div>
 &nbsp;
 
-2. Increase services timeout.
-- Ensure the agent is at the latest version (older agent versions could be slower to startup).
-- Open Registry Editor: Press Win + R, type regedit, and press Enter.
-- Navigate to the key `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control`
-- Create or modify ServicesPipeTimeout
-  - If the ServicesPipeTimeout value doesn't exist, create a new DWORD (32-bit) Value named ServicesPipeTimeout.
-  - Right-click on the value and select Modify, then select Decimal as the base and type the value
-  - Set the value in milliseconds.
-    - Default is 30,000 ms (30 seconds). 90,000 ms (90 seconds) is recommended.
-- Restart your computer. The change takes effect after a reboot.
-
+##### Linux - Ensuring Agent is set to start on boot
 
 On Linux, run the following command to ensure the Agent is set to start on boot:
 
