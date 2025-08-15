@@ -121,7 +121,49 @@ On Windows:
 
 #### Issue: The Agent Connection does not restart when the computer is restarted.
 
-On Windows:
+##### Windows - Determine whether the Agent Connection is timing out on startup
+
+Run the following command as the machine Administrator in Powershell, and look for any errors recorded by Agents during the startup process.  
+If these errors all indicate timeouts then proceed to the step [Increasing Agent Startup Timeout](#increasing-agent-startup-timeout)
+
+```powershell
+Get-WinEvent -FilterHashtable @{ LogName='System'; ProviderName='Service Control Manager'; Level=2 } |
+  Where-Object { $_.Message -match 'GanymedeAgent-' } |
+  Select-Object TimeCreated, Id,
+    @{n='ServiceName';e={[regex]::Match($_.Message,'GanymedeAgent-[^\s]+').Value}},
+    Message |
+  Sort-Object TimeCreated
+```
+
+To look for any errors recorded during startup run this command to see which agents have startup log files.  If files are found, look at the error messages contained within. 
+If there are no stacktraces or specific error messages, then you may need to increase the startup time for services on your machine. If there are specific errors or stacktraces please report them to [Ganymede](../Support.mdx).
+
+```powershell
+Get-CimInstance Win32_Service -Filter "Name LIKE 'GanymedeAgent-%'" |
+ForEach-Object {
+  $svcName = $_.Name
+  $path = $_.PathName
+  $exe = if ($path -match '^(?:"([^"]+)"|([^ ]+))') { if ($matches[1]){$matches[1]} else {$matches[2]} } else { $path }
+  $exe = [Environment]::ExpandEnvironmentVariables($exe)
+  $dir = Split-Path -Path $exe -Parent
+  if ($dir -and (Test-Path -LiteralPath $dir)) {
+    Get-ChildItem -LiteralPath $dir -Filter 'startup_*' -File -Recurse -ErrorAction SilentlyContinue |
+      Where-Object { $_.Length -gt 0 } |
+      Select-Object @{n='File';e={$_.FullName}},
+                    @{n='SizeBytes';e={$_.Length}}
+  }
+}
+```
+
+##### Windows - Increasing Agent Startup Timeout
+
+If you are seeing startup timeout issues, increase your service startup timeout (which has a 30 second default) to 90 seconds:
+
+```powershell
+New-ItemProperty -Path 'HKLM:\SYSTEM\CurrentControlSet\Control' -Name 'ServicesPipeTimeout' -Value 90000 -PropertyType DWord -Force
+```
+
+##### Windows - Configuring the Agent Connection to restart on failure
 
 - Open up Task Manager and navigate to the Services tab.
 - Look for the Connection of interest (a service with a name starting with "GanymedeAgent-") and double click on it.
@@ -136,7 +178,7 @@ On Windows:
 </div>
 &nbsp;
 
-On Linux, run the following command to ensure the Agent is set to start on boot:
+##### Linux - Ensuring command is set to start on boot
 
 ```bash
 sudo systemctl enable GanymedeAgent-<agent_name>
