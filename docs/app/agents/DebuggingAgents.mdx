@@ -136,7 +136,7 @@ Get-WinEvent -FilterHashtable @{ LogName='System'; ProviderName='Service Control
 ```
 
 To look for any errors recorded during startup run this command to see which agents have startup log files.  If files are found, look at the error messages contained within. 
-If there are no stacktraces or specific error messages, then you may need to increase the startup time for services on your machine. If there are specific errors or stacktraces please report them to [Ganymede](../Support.mdx).
+If there are no stack traces or specific error messages, then you may need to increase the startup time for services on your machine. If there are specific errors or stacktraces please report them to [Ganymede](../Support.mdx).
 
 ```powershell
 Get-CimInstance Win32_Service -Filter "Name LIKE 'GanymedeAgent-%'" |
