@@ -30,15 +30,23 @@ If you run into any challenges configuring the repo, you can compare your self-m
 
 ### Initial Repository Setup
 
-1. **Create a GitHub Repository**
-   - Create a new GitHub repository in your organization, or use an existing repository
-
-2. **Set Up from Template**
+1. **Set Up from Template**
    - Create a new repository from this [templated repository](https://github.com/Ganymede-Bio/self-managed-repo-template)
-   - If you have an existing repository, copy the GitHub Workflows (`deploy-from-action.yaml` & `pull-from-action.yaml`) from the template repository
-   - Place these workflows in the `.github/workflows` folder of your repository
+
+**OR**
+
+1. **Use an Existing GitHub Repository**
+   - Copy the GitHub Workflows (`deploy-from-action.yaml` & `pull-from-action.yaml`) from the [template repository](https://github.com/Ganymede-Bio/self-managed-repo-template)
+   - Place these workflows in the `.github/workflows` folder of your existing repository
 
 ### Configure Repository Variables and Secrets
+
+2. **Set Action Permissions**
+   - Navigate to **Settings** > **Actions** > **General** in your GitHub repository
+   - Under **Workflow permissions**
+      - Select **Read and write permissions**
+      - Check the box for **Allow GitHub Actions to create and approve pull requests** 
+   - This will allow the GitHub Actions workflows to push changes back to the repository
 
 3. **Set Repository Variables**
    - Navigate to **Settings** > **Secrets & Variables** > **Actions** in your GitHub repository
@@ -52,7 +60,7 @@ If you run into any challenges configuring the repo, you can compare your self-m
      - A randomly generated value (e.g., from [random.org](https://www.random.org/passwords/?num=5&len=32&format=html&rnd=new))
 
 5. **Configure Environment Secrets**
-   - **Recommended**: Create GitHub environments corresponding to each Ganymede environment
+   - Create GitHub environments named corresponding to each Ganymede environment (e.g. `dev` and/or `prod`)
    - Set the secret `GANYMEDE_API_TOKEN` with the generated API token in the corresponding Ganymede environment
    - Set the variable `GANYMEDE_ENVIRONMENT` with the name of the Ganymede environment (find this in the URL for the environment in Ganymede, e.g., `https://<tenant>.ganymede.bio/<environment>`)
 
@@ -61,12 +69,12 @@ If you run into any challenges configuring the repo, you can compare your self-m
 6. **Configure pull-from-action.yaml**
    - Update the `github_username` and `github_email` environment variables to your desired values
    - These credentials will be used for creating pull requests in your GitHub repository
-   - Update the `environment` input choices to match the environments you configured
+   - Update the `environment` input choices to match the environments you configured (e.g., `dev`, `prod`)
    - Run the workflow via **workflow dispatch** for the desired environment to populate your repository with current flows
 
 7. **Configure deploy-from-action.yaml**
    - Update the `environment` input choices to match the environments you configured
-   - These environments will correspond to the directory structure of your repository (e.g., `dev/...`, `prod/...`)
+      - These environments will correspond to the directory structure of your repository (e.g., `dev/...`, `prod/...`)
    - Consider creating multiple actions or jobs if you need to support multiple environments
 
 ## Usage
