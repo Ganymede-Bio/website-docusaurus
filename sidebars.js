@@ -170,7 +170,7 @@ module.exports = {
       {
         type: 'doc',
         id: 'app/processes/Processes',
-        label: 'Processes',
+        label: 'Processes, Unit Operations, and Instruments',
       },
       {
         type: 'category',
