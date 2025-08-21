@@ -1,8 +1,39 @@
 ---
-id: Instruments
-title: Instruments 
+id: Processes
+title: Processes, Unit Operations, and Instruments
 displayed_sidebar: webUiSidebar
 ---
+
+# Processes, Unit Operations, and Instruments
+
+The Processes, Unit Operations, and Instruments documentation provides an overview of the Ganymede components involved in managing laboratory workflows.
+By organizing Flows, Tables, Dashboards, and Analysis apps into Processes and Unit Operations, navigation in Ganymede is simplified, allowing users to track and manage their laboratory data more effectively.
+
+## Processes
+
+Creating a Process with associated Unit Operations and Instrument Types will display a unified view of the constituent elements.
+
+Each Process can also have Flows, Tables, Dashboards, and Analysis apps associated with it.
+
+
+<img width="800" alt="Process View" src="https://ganymede-bio.mo.cloudinary.net/apiServer/ProcessView.png" />
+
+
+## Unit Operations
+
+Unit Operations represent the individual steps or stages within a Process. Each Unit Operation consists of a sequence of Instrument Types which define the specific tasks to be performed.
+
+<img width="800" alt="Unit Operations" src="https://ganymede-bio.mo.cloudinary.net/apiServer/UnitOperations.png" />
+
+## Instrument Types
+
+Instrument Types categorize the various instruments used within a Process. Each Instrument Type represents a specific model of an instrument, your lab may have multiple Instruments of a single Instrument Type.
+
+<img width="800" alt="Instrument Types" src="https://ganymede-bio.mo.cloudinary.net/apiServer/InstrumentType.png" />
+
+## Instruments
+
+Instruments are the physical devices or equipment used to perform tasks within a Process. Each Instrument is associated with a specific Instrument Type and can be associated to a Connection.
 
 import { PlusOutlined } from '@ant-design/icons';
 

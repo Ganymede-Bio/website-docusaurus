@@ -169,8 +169,8 @@ module.exports = {
       },
       {
         type: 'doc',
-        id: 'app/instruments/Instruments',
-        label: 'Instruments',
+        id: 'app/processes/Processes',
+        label: 'Processes, Unit Operations, and Instruments',
       },
       {
         type: 'category',
