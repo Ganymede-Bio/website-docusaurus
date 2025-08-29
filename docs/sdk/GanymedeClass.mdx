@@ -188,7 +188,7 @@ most_recent_input_files = g.get_last_run_input_files()
 
 ### `method` list_files
 
-_list_files_ lists files in the environment
+_list_files_ lists files in the environment, will return up to 250,000 records.
 
 - _param_ **flow_input_or_output**: str, by default "input" - Either "input" or "output" - to reference whether to retrieve files that are inputs to flows or outputs from flow nodes
 - _param_ **flow_name**: str, optional, by default True - Flow name to filter for.  If set to specific flow name, filter to include records based on
