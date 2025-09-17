@@ -124,7 +124,7 @@ On Windows:
 ##### Windows - Determine whether the Agent Connection is timing out on startup
 
 Run the following command as the machine Administrator in Powershell, and look for any errors recorded by Agents during the startup process.  
-If these errors all indicate timeouts then proceed to the step [Increasing Agent Startup Timeout](#increasing-agent-startup-timeout)
+If these errors all indicate timeouts then proceed to the step [Increasing Agent Startup Timeout](#windows---increasing-agent-startup-timeout)
 
 ```powershell
 Get-WinEvent -FilterHashtable @{ LogName='System'; ProviderName='Service Control Manager'; Level=2 } |

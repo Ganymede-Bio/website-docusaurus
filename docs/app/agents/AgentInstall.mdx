@@ -196,6 +196,14 @@ If the Connection is not showing up in Ganymede, or if the status is anything ot
 
 :::
 
+### Step 4: Set the Connection to start on boot
+
+By default, the Agent service is not set to start on boot.  Enable start on boot with the following command:
+
+```bash
+sudo systemctl enable <service name\>.service
+```
+
 #### Additional useful commands
 
 Additional commands that can be useful for debugging and configuring the Connection service are listed below.  These commands should be run from the terminal on the instrument computer.
