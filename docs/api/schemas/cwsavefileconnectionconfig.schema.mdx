@@ -1,0 +1,33 @@
+---
+id: cwsavefileconnectionconfig
+title: "CWSaveFileConnectionConfig"
+description: ""
+sidebar_label: "CWSaveFileConnectionConfig"
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: {"triggerConfig":{"trigger":"file_watcher","topicId":"string"},"connectorType":"legacy_file_watcher_upload_run_flow"}
+custom_edit_url: null
+---
+
+import Schema from "@theme/Schema";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"CWSaveFileConnectionConfig"}
+>
+</Heading>
+
+
+
+
+
+<Schema
+  schema={{"type":"object","properties":{"triggerConfig":{"description":"Cloud watcher trigger configuration","allOf":[{"type":"object","properties":{"trigger":{"allOf":[{"type":"string","enum":["file_watcher","cron","cloud_watcher","one_shot"],"title":"ConnectorTriggerOptions"}]},"topicId":{"type":"string"}},"required":["trigger","topicId"],"title":"ConnectionCloudWatcher"}]},"connectorType":{"allOf":[{"type":"string","enum":["legacy_file_watcher_upload_run_flow","legacy_file_watcher_upload","legacy_cloud_watcher_save_file","file_watcher_upload_run_flow","file_watcher_upload","cron_upload_run_flow","cron_upload","cloud_watcher_save_file","one_shot_upload_run_flow","one_shot_upload","application_startup_agent","application_cleanup_agent","application_cleanup_flow_agent","automatic_flow_grouping","upload_after_pause","cron_stream_data"],"title":"ConfigurableConnectorsTypes"}]}},"required":["triggerConfig","connectorType"],"title":"CWSaveFileConnectionConfig"}}
+  schemaType={"response"}
+>
+  
+</Schema>
+            

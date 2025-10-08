@@ -80,9 +80,120 @@ git push
 
 `yarn api` will generate new docs based on the openapi yaml definition that is linked via api-server.
 
+## Make Commands
+
+The project includes a Makefile with various commands to help manage documentation and builds. Run `make help` to see all available commands.
+
+### Development Commands
+
+```bash
+make start          # Start development server
+make build          # Build for production (with exclusions for optimized build)
+make clean          # Clean build artifacts
+make dev            # Start dev server with all files restored
+```
+
+### API Documentation Management
+
+Commands for managing API documentation generation and file exclusions:
+
+```bash
+make api-generate   # Generate API docs and apply exclusions
+make api-exclude    # Exclude large API documentation files (>350KB)
+make api-restore    # Restore all excluded API files for development
+make api-list       # List API files that would be excluded
+make api-status     # Show current API exclusion status
+make api-clean      # Remove all API documentation
+```
+
+#### Common API Workflows
+
+**Generate new API documentation:**
+```bash
+make api-generate
+```
+This will:
+1. Run `yarn api` to generate docs from OpenAPI spec
+2. Automatically exclude large files (>350KB) to optimize builds
+3. Update sidebar to remove references to excluded files
+
+**Develop with all API docs:**
+```bash
+make api-restore    # Restore all files
+make start          # Start dev server
+```
+
+**Production build:**
+```bash
+make build          # Automatically excludes large files before building
+```
+
+### Node Documentation
+
+```bash
+make node-docs      # Generate node documentation from submodules
+```
+
+### Combined Workflows
+
+```bash
+make docs-all       # Generate all documentation (API + nodes)
+make build-optimized # Build with optimizations (excludes large files)
+```
+
+### Utility Commands
+
+```bash
+make check-size     # Check size of documentation folders
+make validate       # Validate that build will work
+make install        # Install dependencies
+make setup          # Setup project (install + build)
+```
+
+### API Build Optimization
+
+The build system automatically excludes large API documentation files (>350KB) that contain circular references or excessive nested structures. These files can cause memory issues during builds. The exclusion system:
+
+- Identifies files larger than 350KB
+- Renames them to `.excluded` extension
+- Updates the sidebar to remove references
+- Reduces build size from ~15MB to ~0.36MB
+
+To see which files are excluded: `make api-status`
+To restore all files for development: `make api-restore`
+
+### Sidebar Management Script
+
+The `scripts/update-sidebar.js` script manages the API documentation sidebar (`docs/api/sidebar.ts`). It performs several important functions:
+
+#### Features
+
+1. **Remove Excluded Files**: Removes references to excluded documentation files from the sidebar
+2. **Remove PublicApi Category**: Automatically removes the duplicate PublicApi category that contains the same endpoints as other categories
+3. **Sort Schemas Alphabetically**: Sorts all schema entries in the Schemas section alphabetically for easier navigation
+
+#### Usage
+
+```bash
+# Run directly
+node scripts/update-sidebar.js
+
+# Or via make command (runs automatically with api-generate)
+make api-generate
+```
+
+#### How It Works
+
+- **Exclusion Processing**: Reads `.exclude-list` file and removes any matching entries from sidebar
+- **PublicApi Removal**: Detects and removes the entire PublicApi category to avoid duplication
+- **Schema Sorting**: Parses the Schemas section and sorts all entries alphabetically by label
+- **Cleanup**: Removes any formatting issues like double commas or trailing commas
+
+The script runs automatically as part of `make api-generate` to ensure the sidebar stays clean and organized.
+
 ## Dependencies
 
-Docusaurus v2.4.0 requires Node 16.14+; this website is known to run under Node v18.12.  You can install node by visiting the [node](https://nodejs.org/en/download) website.  If you run into unexpected issues, rebuild the dependencies by running
+Docusaurus v2.6 requires Node 18+; this website is known to run under Node v18.12.  You can install node by visiting the [node](https://nodejs.org/en/download) website.  If you run into unexpected issues, rebuild the dependencies by running
 
 ```bash
 yarn clear

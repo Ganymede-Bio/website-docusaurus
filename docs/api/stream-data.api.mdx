@@ -1,0 +1,71 @@
+---
+id: stream-data
+title: "streamData"
+description: "Ingest data into a specified table. If the table does not exist, it will be created automatically."
+sidebar_label: "streamData"
+hide_title: true
+hide_table_of_contents: true
+api: eJy9lU1z2zgMhv8KB6fuDGsle9St7XZn0j1sp8lOD6kPsATbbCRSJSEnXg3/ewekZFlxsoc99GSJBvHx4gE0QE2h8qZj4yyUcGN3FFjVyKiMZadQhY4qszVUK8ZNQyt1s1W8p/ymakdBWceKnkxgrQyrR9M0akOq8oRMtcKeXYtsKmya4+qbVQo0uI48StCbGkoI7AnbP5ARNHTosSUmH6C8H8BiS1AC2YPxzrZkGTR4+tEbTzWU7HvSYCT5DnkPGkK1pxahHICPHWXvxu4gRn3ylpK/qf+3p3W+SIHfu/ooFs/9VM6y5FoOgF3XmCpVW3wPovNw6dptvlMlpXVetGFDIdm53leS6UUS+nnrauVyZ/IdFcjWxu7SkTR0BRroCduuES+Vs5aqsQNRVD82DuuXMlrGkS4pdtLh3DaqRdozAe7nrGe/aw1sOIW+TdeScDHmq6FzNuSKf7+6lp9l0BQhUNV7w8eEBXbm7QPJ81r6+p7Qk3/X8z6dSDTcCUDwud80pnrXGdBwJ20PkktLvHeCXudCUl06XkJxuC7OSCuGs5dYJGpCMYz0xCILIKSQP0zA9r6BEvbMXSiLYti7wPFCRdBwQG9yPuUAYpXL3mLfsDiQk5hQmwq/FWiy/an8U7uwM3/REUaC94Q1edAT8JN91AupRhDFYpOOQY8PfzrfouTx6esd6CmIVDU7FR/Om38T2hclfrRMXn36eqfYPZB9lpk0VIbhyzxGHyc4z7FfgnrOqXgwduuSBiNaL+pMPuSX69XV6grybGLFow8hoMU0lWNdi3W08DfMc/3rduWoPdMTF12DxkoXE2XDyO09HK5luhc7sly+ZnjlfF5+I79rPfJ3D8OwwUD/+CZGOf7Rk08zNuOaGK9NkOcayi02gf5DpTdfxr3w26ulTADbY5qKph87mfheFCWT/gtDT0LFddQTt1J9/vdDDvT2TnzMty+2fTxfN5//vpVx2oxfjdbVcsfjo3yK8DFHd6mYNOfpbIAG7a7HndhmnwIujiM8L4CHtADGB8n0xfqmXTCVmffCK8bDkBdLjCf7/NerN06rJ1uL0OsY40/F2N0n
+sidebar_class_name: "post api-method"
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"streamData"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/v1/environment/{environment}/tables/{tableId}/stream"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Ingest data into a specified table. If the table does not exist, it will be created automatically.
+  
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"name":"environment","required":true,"in":"path","schema":{"type":"string"}},{"name":"tableId","required":true,"in":"path","schema":{"type":"string"}}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{"required":true,"content":{"application/json":{"schema":{"type":"object","properties":{"sourceId":{"type":"string","description":"Id of the source sending the data.","example":"connectionId"},"payload":{"type":"object","description":"Data to be streamed"}},"required":["sourceId","payload"],"title":"StreamBody"}}}}}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"201":{"description":""}}}
+>
+  
+</StatusCodes>
+
+
+      

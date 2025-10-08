@@ -1,7 +1,7 @@
 ---
 id: upload-file
 title: "uploadFile"
-description: "Get a signed url to upload a [File](https://docs.ganymede.bio/app/files/FileBrowser) in an Environment. The url will valid for 15 minutes."
+description: "Get a signed url to upload a [File](https://docs.ganymede.bio/app/files/FileBrowser) in an Environment. The url will be valid for 15 minutes."
 sidebar_label: "uploadFile"
 hide_title: true
 hide_table_of_contents: true
@@ -35,8 +35,18 @@ import Heading from "@theme/Heading";
 
 
 
-Get a signed url to upload a [File](https://docs.ganymede.bio/app/files/FileBrowser) in an Environment. The url will valid for 15 minutes.
-Uploads to a Ganymede bucket will require a PUT request with the header "x-goog-content-length-range" set with value "0,10000000", the header "x-goog-meta-initiatortype" set with value "API", and the header "x-goog-meta-initiatorid" set with the initiator value that was passed in the request body.
+Get a signed url to upload a [File](https://docs.ganymede.bio/app/files/FileBrowser) in an Environment. The url will be valid for 15 minutes.
+
+Uploads to a Ganymede bucket will require a PUT request with these header elements:
+
+```json
+{
+  "x-goog-content-length-range": "0,10000000",
+  "x-goog-meta-initiatortype": "API",
+  "x-goog-meta-initiatorid": initiator value passed in the request body
+}
+```
+
 Uploads to a customer S3 Bucket managed by Ganymede will require a "POST" request with formData including all "formData" returned with the upload response from Ganymede as well as the field "file" with the file string contents. 
       
 

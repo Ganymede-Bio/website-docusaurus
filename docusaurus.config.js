@@ -13,9 +13,9 @@ module.exports = {
   markdown: {
     mermaid: true
   },
-  // future: {
-  //   experimental_faster: true,
-  // },
+  future: {
+    experimental_faster: true,
+  },
   plugins: [
     [
       'docusaurus-plugin-openapi-docs',

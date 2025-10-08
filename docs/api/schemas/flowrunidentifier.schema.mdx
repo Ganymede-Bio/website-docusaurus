@@ -1,0 +1,33 @@
+---
+id: flowrunidentifier
+title: "FlowRunIdentifier"
+description: ""
+sidebar_label: "FlowRunIdentifier"
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: {"runId":"string","flowId":"string"}
+custom_edit_url: null
+---
+
+import Schema from "@theme/Schema";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"FlowRunIdentifier"}
+>
+</Heading>
+
+
+
+
+
+<Schema
+  schema={{"type":"object","properties":{"runId":{"type":"string","pattern":"/^\\d+$/","description":"Flow run ID associated with this run"},"flowId":{"type":"string","pattern":"/^\\S+$/","description":"Flow ID associated with this run"}},"required":["runId","flowId"],"title":"FlowRunIdentifier"}}
+  schemaType={"response"}
+>
+  
+</Schema>
+            

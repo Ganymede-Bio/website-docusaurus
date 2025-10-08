@@ -1,0 +1,33 @@
+---
+id: assetlist
+title: "AssetList"
+description: ""
+sidebar_label: "AssetList"
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: {"linuxExe":{"created":"string","checksum":"string","storageUrl":"string","signedUrl":"string"},"windowsExe":{"created":"string","checksum":"string","storageUrl":"string","signedUrl":"string"},"windowsMsi":{"created":"string","checksum":"string","storageUrl":"string","signedUrl":"string"}}
+custom_edit_url: null
+---
+
+import Schema from "@theme/Schema";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"AssetList"}
+>
+</Heading>
+
+
+
+
+
+<Schema
+  schema={{"type":"object","properties":{"linuxExe":{"description":"linux exe asset that can be downloaded","allOf":[{"type":"object","properties":{"created":{"type":"string","nullable":true,"description":"Date the asset was created. The bin should never be updated so confirm when downloaded the lastupdated is this"},"checksum":{"type":"string","nullable":true,"description":"crc32 checksum"},"storageUrl":{"type":"string","nullable":true,"description":"gsutil uri"},"signedUrl":{"type":"string","nullable":true,"description":"signed url that will be generated after pulling from db"}},"title":"GeneratedAsset"}]},"windowsExe":{"description":"windows exe asset that can be downloaded","allOf":[{"type":"object","properties":{"created":{"type":"string","nullable":true,"description":"Date the asset was created. The bin should never be updated so confirm when downloaded the lastupdated is this"},"checksum":{"type":"string","nullable":true,"description":"crc32 checksum"},"storageUrl":{"type":"string","nullable":true,"description":"gsutil uri"},"signedUrl":{"type":"string","nullable":true,"description":"signed url that will be generated after pulling from db"}},"title":"GeneratedAsset"}]},"windowsMsi":{"description":"windows msi asset that can be downloaded","allOf":[{"type":"object","properties":{"created":{"type":"string","nullable":true,"description":"Date the asset was created. The bin should never be updated so confirm when downloaded the lastupdated is this"},"checksum":{"type":"string","nullable":true,"description":"crc32 checksum"},"storageUrl":{"type":"string","nullable":true,"description":"gsutil uri"},"signedUrl":{"type":"string","nullable":true,"description":"signed url that will be generated after pulling from db"}},"title":"GeneratedAsset"}]}},"required":["linuxExe","windowsExe"],"title":"AssetList"}}
+  schemaType={"response"}
+>
+  
+</Schema>
+            
