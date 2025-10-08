@@ -69,6 +69,8 @@ popd
 - `core-dev-operators` - Development operator code
 - `pylib` - Python library documentation source
 
+**IMPORTANT**: Do not modify files in submodule directories. These are external repositories that should only be updated through proper git submodule commands. Any changes needed in submodules should be made in their respective source repositories.
+
 ## Development Workflow
 
 ### Creating/Updating Documentation

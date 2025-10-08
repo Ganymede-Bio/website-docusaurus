@@ -162,6 +162,35 @@ The build system automatically excludes large API documentation files (>350KB) t
 To see which files are excluded: `make api-status`
 To restore all files for development: `make api-restore`
 
+### Sidebar Management Script
+
+The `scripts/update-sidebar.js` script manages the API documentation sidebar (`docs/api/sidebar.ts`). It performs several important functions:
+
+#### Features
+
+1. **Remove Excluded Files**: Removes references to excluded documentation files from the sidebar
+2. **Remove PublicApi Category**: Automatically removes the duplicate PublicApi category that contains the same endpoints as other categories
+3. **Sort Schemas Alphabetically**: Sorts all schema entries in the Schemas section alphabetically for easier navigation
+
+#### Usage
+
+```bash
+# Run directly
+node scripts/update-sidebar.js
+
+# Or via make command (runs automatically with api-generate)
+make api-generate
+```
+
+#### How It Works
+
+- **Exclusion Processing**: Reads `.exclude-list` file and removes any matching entries from sidebar
+- **PublicApi Removal**: Detects and removes the entire PublicApi category to avoid duplication
+- **Schema Sorting**: Parses the Schemas section and sorts all entries alphabetically by label
+- **Cleanup**: Removes any formatting issues like double commas or trailing commas
+
+The script runs automatically as part of `make api-generate` to ensure the sidebar stays clean and organized.
+
 ## Dependencies
 
 Docusaurus v2.6 requires Node 18+; this website is known to run under Node v18.12.  You can install node by visiting the [node](https://nodejs.org/en/download) website.  If you run into unexpected issues, rebuild the dependencies by running
