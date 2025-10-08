@@ -1,0 +1,33 @@
+---
+id: inferreddata
+title: "InferredData"
+description: ""
+sidebar_label: "InferredData"
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: {"installPath":"string","macAddress":"string","machineName":"string","machineIP":"string","serviceDisplayName":"string","runningAsUser":"string","operatingSystem":"Unsupported","machineArchitecture":"Unsupported"}
+custom_edit_url: null
+---
+
+import Schema from "@theme/Schema";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"InferredData"}
+>
+</Heading>
+
+
+
+
+
+<Schema
+  schema={{"type":"object","properties":{"installPath":{"type":"string","description":"The location where the connection executable and local logs can be found"},"macAddress":{"type":"string","description":"The MAC Address for the network interface of the equipment that the agent is installed"},"machineName":{"type":"string","description":"The hostname or node name for the machine where the agent exists"},"machineIP":{"type":"string","description":"The external IP of the network that the agent uses to send data"},"serviceDisplayName":{"type":"string","description":"The display name that the agent service can be found under in a service manager"},"runningAsUser":{"type":"string","description":"The user that the service is installed and executing as"},"operatingSystem":{"description":"The operating system that the connection is running on","allOf":[{"type":"string","enum":["Unsupported","Windows","Linux","Darwin"],"description":"The operating system that the connection is running on","title":"SupportedConnectionOperatingSystems"}]},"machineArchitecture":{"description":"The machine architecture (e.g. arm64, amd64) that the connection is running on","allOf":[{"type":"string","enum":["Unsupported","arm64","amd64","x86_64"],"description":"The machine architecture (e.g. arm64, amd64) that the connection is running on","title":"SupportedConnectionMachineArchitectures"}]}},"title":"InferredData"}}
+  schemaType={"response"}
+>
+  
+</Schema>
+            

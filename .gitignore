@@ -26,3 +26,9 @@ yarn-error.log*
 .vercel
 .env
 .venv
+
+# Excluded large API documentation files
+# These files are excluded to improve build performance
+# Use 'make api-restore' to restore them for development
+docs/api/*.excluded
+docs/api/schemas/*.excluded

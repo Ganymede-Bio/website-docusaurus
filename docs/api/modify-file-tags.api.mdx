@@ -1,0 +1,71 @@
+---
+id: modify-file-tags
+title: "modifyFileTags"
+description: "Add or remove file tags in bulk. Only 100 files are supported per request."
+sidebar_label: "modifyFileTags"
+hide_title: true
+hide_table_of_contents: true
+api: eJztVk1v2zgQ/SvEnFpAiewedUuLFEj3sEHqoAevD7Q5stlIJENSblWB/30xJGXLdrNZFLu36kRRM8M3H+9RAwh0GyuNl1pBBTdCMG2ZxVbvkdWyQeb51jGp2Lprnq7Zn6rp2Xw2i98c4xaZ64zR1qNgBsn1uUPnr/9SLD5QgDZoOR1wJ6CCVgtZ9x9lgwu+dVCA4Za36NE6qJYDKN4iVIBqL61WLSoPBVBUaVFA5W2HBUgCa7jfQQFus8OWQzWA7w25Om+l2kIIq+SIzr/XoieL8zgbrTydUA3AjWnkJuIsvzqqxnAZWq+/4oYAGUtZeYkufuVbt9APsWr0LrDmXeOhWq6K0ZVby3soQHps3eshpbjMqDjr1qNDywTWUqFgnZLPHTIpUHlZS7Ss1pb5XewghBHHazHvBNP16MaibShgz5vuXzifABLSmYb3LPqeggnTji5T0PEQqpj0DZ2yyLapvDdC/K7tf17byGM6vZXqLpVv/mpdDww7P2zKg2nfxnMmALICPBrBPUZ+hhzPGa1cAvVuNks9n1Yi4na46az0fdQMbuTVE9J6FYoB3iO3aG86v4s7q4SEAN5360ZuboyEIgKIiFr0O03SZLo4KyQrFZT7eTkRoXKYvIQyplP6pGAO7X6Ur842UMHOe+Oqshx22vlw0cvYECv5OteerE5mO+2EKGFjpp9JjJL9Id9DR7iRf2BsFcXfIRdooRjFdLQPxUltssCRxTpuQ5EXH7VtOeH49GUBh3GgrI5BKYa28keUzIsUb5VHyz59WTCvn1CdIaMOksg+HOX59jtvTYOXcrpMhD3y4pwnmUCHqVydKMavuGdSLMe9VSD4tY7g8vz+tKloXXqZX8+uZ5AuGL6h5lLKRjvf8ni15CJe3IYnMYfjBfX/XM25Fh6/+9I0XCoakTjCQ+bBEvZzKM6u4+r0NZUrs2xV5HFewjCsucNH24RA288d2j7p9jj9sT1COloLqGreOPyHGrx5yGLz9kXwIx9UP2ktFBDpcpJGoK7meSQYyeJDOuxqMdXN6vLvIEyF4/6RWLLOPxmtFuRi+Tf6c+HfEgAd84n0jXsDNFxtO74l2xSSRoRnZh55/RR5nRcE9KcpjhQfM010f8F4GJJehHCwT59e9DgoSrKmWq9CCH8Dp/57DQ==
+sidebar_class_name: "put api-method"
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"modifyFileTags"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"put"}
+  path={"/v1/environment/{environment}/files/tags"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Add or remove file tags in bulk. Only 100 files are supported per request.
+      
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"name":"environment","required":true,"in":"path","schema":{"type":"string"}}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{"required":true,"content":{"application/json":{"schema":{"type":"object","properties":{"tagsToRemove":{"default":[],"type":"array","items":{"type":"object","properties":{"id":{"type":"string","description":"User defined unique identifier for the tag"},"type":{"type":"string","description":"Id of the tag type"},"value":{"type":"string","description":"User defined display value for the tag"}},"required":["type","value"],"title":"Tag"}},"tagsToAdd":{"default":[],"type":"array","items":{"type":"object","properties":{"id":{"type":"string","description":"User defined unique identifier for the tag"},"type":{"type":"string","description":"Id of the tag type"},"value":{"type":"string","description":"User defined display value for the tag"}},"required":["type","value"],"title":"Tag"}},"files":{"minItems":1,"type":"array","items":{"type":"string"}}},"required":["tagsToRemove","tagsToAdd","files"],"title":"FileTagUpdateBody"}}}}}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":""}}}
+>
+  
+</StatusCodes>
+
+
+      

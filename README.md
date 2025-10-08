@@ -80,9 +80,91 @@ git push
 
 `yarn api` will generate new docs based on the openapi yaml definition that is linked via api-server.
 
+## Make Commands
+
+The project includes a Makefile with various commands to help manage documentation and builds. Run `make help` to see all available commands.
+
+### Development Commands
+
+```bash
+make start          # Start development server
+make build          # Build for production (with exclusions for optimized build)
+make clean          # Clean build artifacts
+make dev            # Start dev server with all files restored
+```
+
+### API Documentation Management
+
+Commands for managing API documentation generation and file exclusions:
+
+```bash
+make api-generate   # Generate API docs and apply exclusions
+make api-exclude    # Exclude large API documentation files (>350KB)
+make api-restore    # Restore all excluded API files for development
+make api-list       # List API files that would be excluded
+make api-status     # Show current API exclusion status
+make api-clean      # Remove all API documentation
+```
+
+#### Common API Workflows
+
+**Generate new API documentation:**
+```bash
+make api-generate
+```
+This will:
+1. Run `yarn api` to generate docs from OpenAPI spec
+2. Automatically exclude large files (>350KB) to optimize builds
+3. Update sidebar to remove references to excluded files
+
+**Develop with all API docs:**
+```bash
+make api-restore    # Restore all files
+make start          # Start dev server
+```
+
+**Production build:**
+```bash
+make build          # Automatically excludes large files before building
+```
+
+### Node Documentation
+
+```bash
+make node-docs      # Generate node documentation from submodules
+```
+
+### Combined Workflows
+
+```bash
+make docs-all       # Generate all documentation (API + nodes)
+make build-optimized # Build with optimizations (excludes large files)
+```
+
+### Utility Commands
+
+```bash
+make check-size     # Check size of documentation folders
+make validate       # Validate that build will work
+make install        # Install dependencies
+make setup          # Setup project (install + build)
+```
+
+### API Build Optimization
+
+The build system automatically excludes large API documentation files (>350KB) that contain circular references or excessive nested structures. These files can cause memory issues during builds. The exclusion system:
+
+- Identifies files larger than 350KB
+- Renames them to `.excluded` extension
+- Updates the sidebar to remove references
+- Reduces build size from ~15MB to ~0.36MB
+
+To see which files are excluded: `make api-status`
+To restore all files for development: `make api-restore`
+
 ## Dependencies
 
-Docusaurus v2.4.0 requires Node 16.14+; this website is known to run under Node v18.12.  You can install node by visiting the [node](https://nodejs.org/en/download) website.  If you run into unexpected issues, rebuild the dependencies by running
+Docusaurus v2.6 requires Node 18+; this website is known to run under Node v18.12.  You can install node by visiting the [node](https://nodejs.org/en/download) website.  If you run into unexpected issues, rebuild the dependencies by running
 
 ```bash
 yarn clear

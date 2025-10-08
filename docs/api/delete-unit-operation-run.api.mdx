@@ -1,0 +1,70 @@
+---
+id: delete-unit-operation-run
+title: "deleteUnitOperationRun"
+description: "Delete a Unit Operation Run from an Environment."
+sidebar_label: "deleteUnitOperationRun"
+hide_title: true
+hide_table_of_contents: true
+api: eJy9VEtvEzEQ/iurOYHkdlvU095ADRIFCVRa9VDl4KwnXau79tYeRwTL/x2N95GmTRBw4BSvPf488z0SQaGvne5JWwMVXGKLhIUsbo2m4muPTvJJcR1MsXa2K6QpFmajnTUdGjoFAXYq+qSgApUB+PZ8+ToYENBLJzskdB6q+whGdggV4A4LBDh8CtqhgopcQAGaW+olNSDA1w12EqoItO35qienzQOkJGY0rf4WxIRuhQ5SWvJF31vj0fP5u7ML/tln5wApw7yq8KGu0ft1aNstJAEXf3jfWCrWNhjFg4DHOjhN20yR7PXJI/J6yTN+QOnQvQ/U5J2lAJIPTCZ8C6tW1+97DeLAEx6WAjqkxu70yXowEJSb8/KZCGV89pHKYDSdzAKfuGB8GbVKTCW6zSRmcC1U0BD1virL2FhPXLI/PAjYSKflqh0Y5qqBorUMLTEA76SsxUTEdxZsqJ/pmMWTvf6MWxglblAqdCAmM0z1SexRFwcTcMUqb4MYFx+t6yT3cXV3A2J6hKfagTKGdfpn5uPViAtD6Iqru5uC7COaF52xwNqsbZ5AU4sDKa9ZQueHj/PTs9MzEFBbQ7Jmthijt546aRhm7Opo6PawY8bhpP1Tzkc+CH9Q2bdSG2Y2Kx9HM93D5hzEi0xX+58HHMVFWrFLB0vcQ4wr6fHWtSnx9lNAl2Owc1C2ndKe1wqqtWw9/mbcN9fjn8Lb4tgkk6fMNhu1DaM82XJ7M3EY/+PTWkFapmcRvlx8WdwsQIAcDb2Lw2OOw7hgig5CT8mYXhhScqQ4xiFmKc31w9HRG3MQx/4N95/SLw0MLiI=
+sidebar_class_name: "delete api-method"
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"deleteUnitOperationRun"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"delete"}
+  path={"/v1/environment/{environment}/unit-operation-runs/{id}"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Delete a Unit Operation Run from an Environment.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"name":"environment","required":true,"in":"path","schema":{"type":"string"}},{"name":"id","required":true,"in":"path","schema":{"type":"number"}}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={undefined}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"204":{"description":"Unit Operation Run deleted successfully"},"404":{"description":"Unit Operation Run not found"}}}
+>
+  
+</StatusCodes>
+
+
+      

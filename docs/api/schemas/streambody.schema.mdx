@@ -1,0 +1,33 @@
+---
+id: streambody
+title: "StreamBody"
+description: ""
+sidebar_label: "StreamBody"
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: {"sourceId":"connectionId","payload":{}}
+custom_edit_url: null
+---
+
+import Schema from "@theme/Schema";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"StreamBody"}
+>
+</Heading>
+
+
+
+
+
+<Schema
+  schema={{"type":"object","properties":{"sourceId":{"type":"string","description":"Id of the source sending the data.","example":"connectionId"},"payload":{"type":"object","description":"Data to be streamed"}},"required":["sourceId","payload"],"title":"StreamBody"}}
+  schemaType={"response"}
+>
+  
+</Schema>
+            
