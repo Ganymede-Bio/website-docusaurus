@@ -500,3 +500,21 @@ ARW
 CFR
 
 ReactPlayer
+
+BarChartOutlined
+PercentageOutlined
+PCR
+mRNA
+duplications
+genomic
+CRISPR
+RNAi
+Biomarker
+miRNA
+microRNA
+SEM
+Cq
+dimers
+pipetting
+Grubbs
+SVG
