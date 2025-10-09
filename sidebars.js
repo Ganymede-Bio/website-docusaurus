@@ -171,7 +171,8 @@ module.exports = {
             collapsed: false,
             items: [
               'app/ma/apps/CDSApp',
-              'app/ma/apps/CurveFittingApp'
+              'app/ma/apps/qPCR',
+              'app/ma/apps/CurveFittingApp',
             ]
           }
         ]
