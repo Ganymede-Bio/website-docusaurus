@@ -29,19 +29,19 @@ Each MA application receives its own tile, containing the name, description, and
 - <div className="button lightblue_noborder_button"><CodeOutlined /></div>: edit the code behind an MA application in a Jupyter notebook
 - <div className="button lightblue_noborder_button"><EditOutlined /></div>: edit the name, description, and or icon on the tile for the app
 
-New MA Applications can be created by clicking the <div className="button darkblue_outline_button"><PlusOutlined /> New</div> icon.
-
 
 
 ## Base Applications
 
-Ganymede offers a set of base applications, which could then be modified and adapted for your workflows.  
+Ganymede offers a set of base applications, which can be modified and adapted for your workflows.  
 
 For example, the base bioprocess MA application could be configured with campaign and run information specific to your labs, drawing from your LIMS or metadata derived from relevant instruments.
 
 ### Upstream Bioprocess
 
 Provides a single, vendor-agnostic interface for viewing online and atline data from your bioreactors.
+
+[Learn more about the Bioprocess app →](./apps/BioprocessApp)
 
 <div style={{textAlign: 'center'}}>
     <img
@@ -55,6 +55,8 @@ Provides a single, vendor-agnostic interface for viewing online and atline data 
 
 Enables human-in-the-loop validation on machine learning workflows for chromatography.
 
+[Learn more about the Chromatography app →](./apps/CDSApp)
+
 <div style={{textAlign: 'center'}}>
     <img
         alt="CDS Example"
@@ -67,17 +69,23 @@ Enables human-in-the-loop validation on machine learning workflows for chromatog
 
 Visualize plate layout and results for qPCR, ELISA, protein quantification, reporter gene, and other plate-based assays.
 
-<div style={{textAlign: 'center'}}>
+[Learn more about the qPCR app →](./apps/qPCR)
+
+<div style={{ textAlign: 'center' }}>
     <img
-        alt="Plate-Based Example"
-        src="https://ganymede-bio.mo.cloudinary.net/ma/qPCRExample_20250403.png"
+        alt="Plate-based example"
+        src="https://storage.googleapis.com/ganymede-bio-website/public/ma/qpcr/qPCRPlateViewAndCt_20251009.png"
+        width="90%"
     />
 </div>
+
 &nbsp;
 
 ### Dose Response / Receptor-Ligand Binding
 
 Fit nonlinear regressions for dose-response / receptor-ligand binding assays, statefully capturing user and annotation for any identified outliers.
+
+[Learn more about the Curve Fitting app →](./apps/CurveFittingApp)
 
 <div style={{textAlign: 'center'}}>
     <img

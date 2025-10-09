@@ -5,4 +5,350 @@ sidebar_label: Bioprocess
 displayed_sidebar: webUiSidebar
 ---
 
-The 
+import {
+  LineChartOutlined, DashboardOutlined, ExperimentOutlined, AlertOutlined, DatabaseOutlined, SyncOutlined, TeamOutlined, RocketOutlined
+} from '@ant-design/icons';
+
+The Bioprocess app transforms bioreactor monitoring by unifying real-time online and atline data into customizable, role-specific dashboards that accelerate decision-making from bench to production scale. This vendor-agnostic solution supports all major bioreactor platforms, enabling standardized monitoring workflows across your organization.
+
+## Overview
+
+The Bioprocess app revolutionizes how laboratories interact with bioreactor data by providing immediate access to both online sensor measurements and atline analytical results in a single, unified interface. Users can monitor critical process parameters in real-time, visualize trends across multiple runs, and leverage advanced analytics for process optimization — all while maintaining complete data traceability for regulatory compliance.
+
+What sets the Bioprocess app apart is its ability to deliver customized visualizations for different user groups. Operators see real-time deviations and alarms, scientists access detailed analytical tools, and management views high-level KPIs — all from the same underlying data platform. This rapid visualization capability means teams can identify issues, compare batches, and make data-driven decisions faster than ever before.
+
+### Common Use Cases
+
+The Bioprocess app excels in various bioprocessing scenarios:
+
+- **Real-Time Production Monitoring** — Track production runs with immediate deviation alerts
+- **Process Development** — Optimize growth conditions and feeding strategies
+- **Scale-Up and Tech Transfer** — Ensure consistency from bench to production scale
+- **Deviation Investigation** — Rapidly identify root causes of process excursions
+- **Campaign Comparison** — Analyze performance trends across multiple production campaigns
+- **Multi-Site Harmonization** — Standardize monitoring across different manufacturing sites
+- **PAT Implementation** — Enable Process Analytical Technology initiatives
+- **Continuous Processing** — Monitor perfusion and continuous manufacturing operations
+
+The features shown below provide a representative set of capabilities available in the Bioprocess app. Your implementation will be tailored to your specific bioprocess workflows, scales, and analytical requirements. Production implementations typically include campaign and run selection interfaces, enabling systematic navigation through your complete process history.
+
+## Representative Analysis Workflows
+
+The Bioprocess app adapts to different user needs and scenarios, providing multiple pathways to insights:
+
+### Real-Time Monitoring Workflow (Production Teams)
+
+| **Step** | **Action** | **Description** |
+|:--------:|-----------|-----------------|
+| 1️⃣ | **Access Dashboard** | Open role-specific monitoring view with current batches |
+| 2️⃣ | **Monitor Parameters** | Track temperature, pH, DO, and feeding in real-time |
+| 3️⃣ | **Respond to Alerts** | Investigate deviations and anomalies as they occur |
+| 4️⃣ | **Document Actions** | Log observations and corrective actions taken |
+| 5️⃣ | **Handoff Report** | Generate shift summary with key events |
+
+### Process Investigation Workflow (Scientists & Engineers)
+
+| **Step** | **Action** | **Description** |
+|:--------:|-----------|-----------------|
+| 1️⃣ | **Select Batches** | Choose specific runs or campaigns to analyze |
+| 2️⃣ | **Compare Performance** | Overlay with golden batches or historical data |
+| 3️⃣ | **Apply Analytics** | Use PCA, correlation matrices, or growth kinetics |
+| 4️⃣ | **Identify Root Causes** | Drill into specific timeframes and parameters |
+| 5️⃣ | **Generate Insights** | Document findings and recommendations |
+
+### Optimization Workflow (Process Development)
+
+| **Step** | **Action** | **Description** |
+|:--------:|-----------|-----------------|
+| 1️⃣ | **Design Experiment** | Set up DoE with parameter ranges |
+| 2️⃣ | **Execute & Monitor** | Track experiment progress in real-time |
+| 3️⃣ | **Analyze Results** | Apply PLS modeling and outlier detection |
+| 4️⃣ | **Validate Improvements** | Compare against baseline performance |
+| 5️⃣ | **Plan Scale-Up** | Use insights for next iteration |
+
+:::note
+
+These workflows are representative of common usage patterns. The Bioprocess app's flexible architecture allows users to navigate directly to the tools they need based on their immediate objectives, whether that's responding to a deviation, investigating a trend, or optimizing a process. Your implementation will be customized to match your specific operational workflows.
+
+:::
+
+## Key Features
+
+### <SyncOutlined /> Real-Time Unified Data Platform
+
+Experience the power of having all bioprocess data in one place, updating in real-time:
+
+<div style={{ textAlign: 'center' }}>
+    <img
+        alt="Unified online and atline data visualization"
+        src="https://storage.googleapis.com/ganymede-bio-website/public/ma/bioprocess/BioprocessOnlineDataViz_20251009.png"
+        width="90%"
+    />
+</div>
+&nbsp;
+
+- **Live data streaming** — See process changes as they happen
+- **Unified visualization** — Online sensors and atline analytics on the same timeline
+- **Multi-parameter overlay** — Compare temperature, pH, DO, and agitation simultaneously
+- **Automatic scaling** — Intelligent Y-axis management for different parameter ranges
+- **Time synchronization** — Align all data streams to process time or real time
+
+### <TeamOutlined /> Customizable Role-Based Dashboards
+
+Deliver the right information to the right users without requiring configuration changes:
+
+- **Operator views** — Focus on alarms, deviations, and critical parameters
+- **Scientist dashboards** — Access to analytical tools and model predictions
+- **Management summaries** — High-level KPIs and batch performance metrics
+- **Custom layouts** — Tailored visualizations for specific products or processes
+- **Persistent preferences** — Users' dashboard configurations are remembered
+
+### <DashboardOutlined /> Online Process Monitoring
+
+Monitor critical process parameters with sophisticated visualization tools:
+
+<div style={{ textAlign: 'center' }}>
+    <img
+        alt="Real-time monitoring of temperature, pH, and agitation"
+        src="https://storage.googleapis.com/ganymede-bio-website/public/ma/bioprocess/BioprocessOnlineDataViz_20251009.png"
+        width="90%"
+    />
+</div>
+&nbsp;
+
+#### Monitored Parameters
+
+| **Category** | **Parameters** | **Update Frequency** |
+|-------------|---------------|---------------------|
+| **Environmental** | Temperature, pH, Dissolved Oxygen | Real-time (1-60 sec) |
+| **Mechanical** | Agitation, Gas Flow Rates, Pressure | Real-time (1-60 sec) |
+| **Metabolic** | OUR, CER, RQ | Every 5-15 minutes |
+| **Feed & Base** | Feed Rate, Base Addition, Antifoam | On addition events |
+
+### <ExperimentOutlined /> Atline Data Integration
+
+Seamlessly incorporate offline analytical results with online data:
+
+<div style={{ textAlign: 'center' }}>
+    <img
+        alt="Cell culture performance metrics including viability and cell density"
+        src="https://storage.googleapis.com/ganymede-bio-website/public/ma/bioprocess/BioprocessAtlineCellCulture_20251009.png"
+        width="90%"
+    />
+</div>
+&nbsp;
+
+Track cell culture performance with integrated atline measurements:
+- **Cell density and viability** — Monitor growth and health trends
+- **Total cell count** — Track biomass accumulation
+- **Specific productivity** — Calculate per-cell production rates
+- **Multi-experiment comparison** — Overlay data from multiple runs
+
+<div style={{ textAlign: 'center' }}>
+    <img
+        alt="Metabolite tracking over time"
+        src="https://storage.googleapis.com/ganymede-bio-website/public/ma/bioprocess/BioprocessAtlineMetabolite_20251009.png"
+        width="90%"
+    />
+</div>
+&nbsp;
+
+Monitor nutrient consumption and metabolite production:
+- **Glucose and lactate** — Track primary metabolism
+- **Amino acids** — Monitor essential nutrient levels
+- **Ammonia** — Identify toxic byproduct accumulation
+- **Custom metabolites** — Add project-specific analytes
+
+<div style={{ textAlign: 'center' }}>
+    <img
+        alt="Product titer tracking and comparison across experiments"
+        src="https://storage.googleapis.com/ganymede-bio-website/public/ma/bioprocess/BioprocessAtlineProductTiter_20251009.png"
+        width="90%"
+    />
+</div>
+&nbsp;
+
+Track product formation and quality:
+- **Titer progression** — Monitor product accumulation over time
+- **Max titer comparison** — Benchmark against historical performance
+- **Quality attributes** — Track glycosylation, aggregation, charge variants
+- **Productivity metrics** — Calculate volumetric and specific productivity
+
+### <LineChartOutlined /> Growth Kinetics Analysis
+
+Automatically calculate and visualize key growth parameters:
+
+<div style={{ textAlign: 'center' }}>
+    <img
+        alt="Growth kinetics analysis with automatic calculation of specific growth rate"
+        src="https://storage.googleapis.com/ganymede-bio-website/public/ma/bioprocess/BioprocessAnalysisGrowthKinetics_20251009.png"
+        width="90%"
+    />
+</div>
+&nbsp;
+
+- **Growth models** — Gompertz, Logistic, Exponential curve fitting
+- **Specific growth rate (μ)** — Automatic calculation with confidence intervals
+- **Doubling time** — Real-time updates as culture progresses
+- **Growth phase detection** — Identify lag, exponential, and stationary phases
+- **Model comparison** — Select best-fit model for your process
+
+### <AlertOutlined /> Intelligent Outlier Detection
+
+Identify process anomalies before they impact product quality:
+
+<div style={{ textAlign: 'center' }}>
+    <img
+        alt="Outlier detection using Isolation Forest algorithm"
+        src="https://storage.googleapis.com/ganymede-bio-website/public/ma/bioprocess/BioprocessAnalysisOutlierDetection_20251009.png"
+        width="90%"
+    />
+</div>
+&nbsp;
+
+- **Isolation Forest algorithm** — Machine learning-based anomaly detection
+- **Multi-parameter analysis** — Detect outliers across correlated variables
+- **Visual identification** — Color-coded normal vs outlier classification
+- **Historical comparison** — Learn normal behavior from golden batches
+- **Root cause analysis** — Drill down into contributing factors
+
+### <ExperimentOutlined /> Process Investigation Tools
+
+Understand complex relationships in your bioprocess data:
+
+<div style={{ textAlign: 'center' }}>
+    <img
+        alt="Process investigation with correlation matrices and PCA analysis"
+        src="https://storage.googleapis.com/ganymede-bio-website/public/ma/bioprocess/BioprocessAnalysisProcessInvestigation_20251009.png"
+        width="90%"
+    />
+</div>
+&nbsp;
+
+- **Correlation matrices** — Identify relationships between parameters
+- **PCA analysis** — Reduce dimensionality and find key drivers
+- **Scree plots** — Determine optimal number of principal components
+- **Biplot visualization** — Understand variable contributions
+- **Time-series decomposition** — Separate trends from noise
+
+### <RocketOutlined /> Process Optimization
+
+Leverage advanced modeling for process improvement:
+
+<div style={{ textAlign: 'center' }}>
+    <img
+        alt="Process optimization with PLS modeling and contour visualization"
+        src="https://storage.googleapis.com/ganymede-bio-website/public/ma/bioprocess/BioprocessAnalysisProcessOptimization_20251009.png"
+        width="90%"
+    />
+</div>
+&nbsp;
+
+- **PLS regression modeling** — Predict outcomes from process parameters
+- **Contour plot visualization** — Identify optimal operating regions
+- **Feature importance ranking** — Understand critical control parameters
+- **Model validation** — Assess prediction accuracy with test data
+- **What-if scenarios** — Simulate process changes before implementation
+
+### <DatabaseOutlined /> Experimental Design
+
+Plan and analyze designed experiments directly within the platform:
+
+<div style={{ textAlign: 'center' }}>
+    <img
+        alt="Design of Experiments interface with Plackett-Burman design"
+        src="https://storage.googleapis.com/ganymede-bio-website/public/ma/bioprocess/BioprocessExperimentalDesign_20251009.png"
+        width="90%"
+    />
+</div>
+&nbsp;
+
+- **Design strategies** — Plackett-Burman, Box-Behnken, Central Composite
+- **Factor management** — Define ranges for process parameters
+- **Predicted outcomes** — Visualize expected results before running
+- **Power analysis** — Ensure sufficient runs for statistical significance
+- **Integration with execution** — Direct connection to bioreactor control
+
+## Data Types Analyzed
+
+The Bioprocess app processes and manages comprehensive bioprocess data:
+
+### Real-Time Sensor Data
+- **Process parameters** — Temperature, pH, DO, pressure, agitation
+- **Gas analysis** — O₂, CO₂, flow rates, OUR, CER, RQ
+- **Feed and additions** — Nutrient feeds, base/acid, antifoam
+- **Bioreactor events** — Sampling, inoculation, harvesting
+- **Alarm states** — Deviation alerts and acknowledgments
+
+### Atline Analytical Data
+- **Cell metrics** — Density, viability, diameter, aggregation
+- **Metabolites** — Glucose, lactate, glutamine, glutamate, ammonia
+- **Product quality** — Titer, glycosylation, charge variants, aggregates
+- **Process intermediates** — Host cell proteins, DNA, endotoxin
+- **Custom assays** — Project-specific analytical methods
+
+### Calculated and Derived Metrics
+- **Growth kinetics** — Specific growth rate, doubling time, yield coefficients
+- **Productivity** — Volumetric, specific, instantaneous production rates
+- **Mass balances** — Carbon, nitrogen, oxygen utilization
+- **Scale-up parameters** — P/V, kLa, tip speed, Reynolds number
+- **CPP/CQA correlations** — Critical parameter relationships
+
+## Data Integration
+
+The Bioprocess app seamlessly integrates with Ganymede's data infrastructure:
+
+### Real-Time Connectivity
+- **OPC UA/DA connectivity** — Industrial standard protocols
+- **Automatic synchronization** — Align timestamps across data sources
+- **Gap handling** — Intelligent interpolation for missing data points
+- **Latency optimization** — Sub-second updates for critical parameters
+
+### Data Management Features
+- **Campaign organization** — Hierarchical structure for experiments
+- **Run comparison** — Side-by-side analysis of multiple batches
+- **Golden batch overlay** — Compare against reference runs
+- **Version control** — Track analysis iterations and model updates
+
+### Export and Reporting
+
+| **Export Type** | **Formats** | **Contents** |
+|----------------|-------------|--------------|
+| **Raw Data** | CSV, Excel, Parquet | Time-series data with full resolution |
+| **Reports** | PDF, Word, HTML | Formatted analysis with figures |
+| **Models** | JSON, PMML | Trained models for deployment |
+| **Dashboards** | PNG, SVG | High-resolution visualizations |
+| **Compliance** | XML, CSV | 21 CFR Part 11 audit packages |
+
+## Workflow Benefits
+
+### Overall Impact
+- **Reduction in data review time** — Through automated visualization
+- **Earlier deviation detection** — Prevent batch losses with real-time alerts
+- **Improved process understanding** — Through integrated multi-variate analysis
+- **Accelerated tech transfer** — With standardized monitoring tools
+- **Enhanced compliance** — Through comprehensive data capture
+
+Implementing the Bioprocess app delivers significant advantages across different user groups:
+
+#### For Process Operators
+- **Real-time deviation alerts** — Respond immediately to process excursions
+- **Unified monitoring interface** — Eliminate switching between multiple systems
+- **Clear action guidance** — Know exactly when intervention is needed
+- **Reduced manual data entry** — Automatic capture of all measurements
+
+#### For Process Scientists
+- **Rapid hypothesis testing** — Quickly analyze relationships in data
+- **Advanced analytics access** — Use sophisticated tools without coding
+- **Historical comparison** — Learn from entire process history
+- **Model deployment** — Apply predictive models in real-time
+
+#### For Management
+- **Real-time KPI tracking** — Monitor campaign performance metrics
+- **Cross-site standardization** — Ensure consistent operations globally
+- **Predictive insights** — Anticipate batch outcomes early
+- **Regulatory readiness** — Maintain audit-ready documentation
+
+## Learn More
+
+The Bioprocess app transforms bioprocess monitoring from fragmented data silos into a unified, real-time platform that empowers teams to make faster, more informed decisions. To explore how the Bioprocess app can be tailored to your specific bioprocessing needs, contact your [Ganymede representative](mailto:support@ganymede.bio) or [our sales team to learn more](mailto:hello@ganymede.bio).

@@ -5,62 +5,235 @@ sidebar_label: Curve Fitting
 displayed_sidebar: webUiSidebar
 ---
 
-The curve fitting application enables users to iteratively perform linear or nonlinear curve fits, excluding points and capturing reasons for excluding points.  A common use case would be to fit data excluding outliers, capturing the user and the data points that are excluded upon inspection.
+import {
+  LineChartOutlined, DotChartOutlined, FunctionOutlined, CheckCircleOutlined, CalculatorOutlined
+} from '@ant-design/icons';
 
-In this demo, plate data is fitted to a 4 parameter logistic regression.
+The Curve Fitting app within the Ganymede platform provides a comprehensive solution for analyzing dose-response, standard curves, and binding assays. This specialized application automates regression analysis while enabling interactive outlier management and maintaining complete audit trails. The app supports various regression models including linear, 4-parameter logistic (4PL), 5-parameter logistic (5PL), and custom equations, enabling standardized curve fitting workflows across your organization.
+
+## Overview
+
+As part of the Ganymede data platform, the Curve Fitting app transforms how laboratories analyze concentration-response data by providing interactive visualization, automated regression fitting, and outlier management in a single unified interface. The app eliminates manual curve fitting in spreadsheets while ensuring consistency across different users and experiments. Users can iteratively refine fits, document exclusion decisions, and generate validated results while maintaining full traceability for regulatory compliance.
+
+### Common Use Cases
+
+The Curve Fitting app excels in various analytical scenarios:
+
+- **Dose-Response Analysis** — Determine IC50/EC50 values for drug discovery
+- **Antibody Titer Determination** — Quantify antibody concentrations from serial dilutions
+- **Protein Quantification** — Generate standard curves for BCA, Bradford, and other assays
+- **Receptor-Ligand Binding** — Analyze binding kinetics and affinity constants
+- **ELISA Standard Curves** — Fit calibration curves for immunoassays
+- **Cell Viability Assays** — Calculate growth inhibition and cytotoxicity
+- **Bioassay Potency** — Determine relative potency for lot release
+- **Enzyme Kinetics** — Fit Michaelis-Menten and inhibition curves
+
+The features shown below provide a representative set of capabilities available in the Curve Fitting app. Your implementation will be tailored to your specific assay types, regression models, and analytical requirements.
+
+## Representative Analysis Workflow
+
+The Curve Fitting app follows a logical workflow that guides users through data analysis:
+
+| **Step** | **Action** | **Description** |
+|:--------:|-----------|-----------------|
+| 1️⃣ | **Data Import** | Load experimental data from Ganymede's data lake with automatic parsing |
+| 2️⃣ | **Model Selection** | Choose appropriate regression model (linear, 4PL, 5PL, custom) |
+| 3️⃣ | **Initial Fit** | Generate curve with calculated parameters and goodness-of-fit metrics |
+| 4️⃣ | **Interactive Refinement** | Click data points to exclude outliers with real-time updates |
+| 5️⃣ | **Documentation** | Annotate exclusion decisions for complete audit trail |
+| 6️⃣ | **Results Export** | Save validated curves and parameters back to Ganymede |
 
 :::note
 
-The instructions and components used in this application can be readily configured by you or our [Implementation team](../../Support.mdx) to suit each assay.
-
-Some examples of out-of-the-box customizations are:
-- customizing definitions for standards and baselines
-- determining linear range in logistic fits
-- customizing functional form for logistic fit (e.g. - 5PL curve fit)
+The workflow steps shown are representative. Your implementation will be customized to integrate seamlessly with your existing processes, performing only the relevant steps within the Ganymede app while maintaining your established laboratory workflows.
 
 :::
 
-## Demo App Walkthrough
+## Key Features
 
-1. When loaded, users are presented with instructions on base app usage.
+### <LineChartOutlined /> Data Loading and Visualization
+
+Efficiently load and visualize concentration-response data with comprehensive metadata:
 
 <div style={{textAlign: 'center'}}>
     <img
-          alt="Curve Fitting Instructions"
+          alt="Curve Fitting initial data loading screen with instructions"
           src="https://ganymede-bio.mo.cloudinary.net/ma/CurveFittingInstructions_20250403.png"
           width="80%"
     />
 </div>
 
-2. Clicking on the **Load Data** button yields a plot with 4PL fit.  Hovering over a data point gives information about the data point itself.
+*The app provides clear instructions and intuitive controls for data loading and analysis setup.*
+
+&nbsp;
+
+- **Multiple data sources** — Import from plates, tubes, or custom formats
+- **Automatic plotting** — Instant visualization of concentration-response relationships
+- **Metadata integration** — Display sample names, conditions, and experimental details
+- **Interactive tooltips** — Hover to view detailed information for each data point
+
+### <FunctionOutlined /> Advanced Curve Fitting
+
+Generate regression fits with multiple model options and real-time parameter calculation:
 
 <div style={{textAlign: 'center'}}>
     <img
-          alt="4PL curve fit initial"
+          alt="4PL curve fit showing dose-response relationship with calculated parameters"
           src="https://ganymede-bio.mo.cloudinary.net/ma/CurveFittingInitialFit_20250408.png"
           width="80%"
     />
 </div>
+
+*The app automatically fits data to the selected regression model, displaying the curve with confidence bands and calculated parameters.*
+
 &nbsp;
 
-3. Outliers can be adjusted by clicking on the point in the graph.  The data point turns red upon doing so (and can alternatively be modified to a different shape to be color-blind friendly):
+#### Supported Regression Models
+
+| **Model Type** | **Parameters** | **Common Applications** |
+|---------------|---------------|------------------------|
+| **Linear** | Slope, Intercept | Standard curves with narrow range |
+| **4PL (Four Parameter Logistic)** | Min, Max, IC50, Hill Slope | Dose-response, ELISA |
+| **5PL (Five Parameter Logistic)** | Min, Max, IC50, Hill Slope, Asymmetry | Asymmetric curves, immunoassays |
+| **Hill Equation** | Vmax, Km, n | Enzyme kinetics, cooperativity |
+| **Exponential** | A, k | Growth curves, decay kinetics |
+| **Custom Equations** | User-defined | Specialized assay requirements |
+
+### <DotChartOutlined /> Interactive Outlier Management
+
+Identify and exclude outliers with full documentation and real-time fit updates:
 
 <div style={{textAlign: 'center'}}>
     <img
-          alt="4PL curve fit adjusted"
+          alt="Curve fit with outliers marked in red, showing interactive point exclusion"
           src="https://ganymede-bio.mo.cloudinary.net/ma/CurveFittingAdjustedFit_20250408.png"
           width="80%"
     />
 </div>
+
+*Click any data point to toggle its inclusion in the fit. Excluded points are marked in red (configurable for accessibility).*
+
 &nbsp;
 
-4. Scrolling to metrics, the associated fit is updated.  Excluded points can be annotated in the Excluded Points table and stored once any adjustments are complete and this data is synchronized with Ganymede data lake.
+- **Click-to-exclude** — Simple point selection for outlier identification
+- **Visual feedback** — Color and shape changes for excluded points
+- **Real-time updates** — Instant recalculation of fit parameters
+- **Undo/redo support** — Easily revert exclusion decisions
+- **Batch operations** — Exclude multiple points based on criteria
+
+### <CheckCircleOutlined /> Results Validation and Metrics
+
+Comprehensive metrics display with annotation capabilities for excluded points:
 
 <div style={{textAlign: 'center'}}>
     <img
-          alt="4PL curve fit input reason"
+          alt="Metrics table showing fit parameters, R-squared, and excluded points with annotation fields"
           src="https://ganymede-bio.mo.cloudinary.net/ma/CurveFittingInputReason_20250408.png"
           width="80%"
     />
 </div>
+
+*Document reasons for point exclusion and review all fit metrics in a comprehensive summary table.*
+
 &nbsp;
+
+#### Quality Metrics
+
+| **Metric** | **Description** | **Acceptance Criteria** |
+|-----------|----------------|------------------------|
+| **R²** | Coefficient of determination | Typically >0.95 |
+| **IC50/EC50** | Half-maximal concentration | Within expected range |
+| **Hill Slope** | Curve steepness | -3 to -0.3 for typical assays |
+| **95% CI** | Confidence intervals | Narrow bands indicate good fit |
+| **Residuals** | Difference from fit | Random distribution expected |
+| **Z-factor** | Assay quality metric | >0.5 for screening assays |
+
+### <CalculatorOutlined /> Advanced Analysis Features
+
+Additional capabilities for specialized analyses:
+
+- **Parallelism testing** — Compare curves for similarity
+- **Relative potency** — Calculate potency ratios between samples
+- **Linear range detection** — Identify optimal quantification range
+- **Weighting options** — 1/Y, 1/Y², or custom weighting schemes
+- **Constraint setting** — Fix parameters or set bounds
+- **Global fitting** — Fit multiple curves with shared parameters
+
+## Data Types Analyzed
+
+The Curve Fitting app processes various types of concentration-response data:
+
+### Raw Measurement Data
+- **Absorbance values** — Colorimetric assay readouts
+- **Fluorescence intensities** — Fluorescent assay signals
+- **Luminescence counts** — Reporter gene and viability assays
+- **Concentration series** — Dilution schemes and stock concentrations
+- **Replicate measurements** — Technical and biological replicates
+
+### Calculated Parameters
+- **IC50/EC50 values** — Half-maximal inhibitory/effective concentrations
+- **Slope parameters** — Hill slope, linear slope coefficients
+- **Dynamic range** — Minimum and maximum asymptotes
+- **Confidence intervals** — Parameter uncertainty estimates
+- **Goodness-of-fit** — R², adjusted R², RMSE
+
+### Quality Control Data
+- **Outlier flags** — Automated and manual exclusions
+- **Exclusion reasons** — User annotations for audit trail
+- **Replicate statistics** — CV%, standard deviations
+- **Assay controls** — Positive/negative control values
+
+## Data Integration
+
+The Curve Fitting app seamlessly integrates with Ganymede's data infrastructure:
+
+### Data Management Features
+- **Direct data lake connection** — Access all assay data stored in Ganymede tables
+- **Automatic data parsing** — Extract concentration-response pairs and metadata
+- **Template management** — Save and reuse analysis configurations
+- **Batch processing** — Analyze multiple curves simultaneously
+- **Version control** — Track analysis iterations and parameter changes
+- **Audit trail maintenance** — Complete record of exclusions and decisions
+
+### Export Capabilities
+
+| **Export Type** | **Formats** | **Contents** |
+|----------------|------------|------------|
+| **Raw Data** | CSV, Excel | Original measurements with metadata |
+| **Fitted Curves** | CSV, Excel, JSON | Parameters, fitted values, residuals |
+| **Reports** | PDF, HTML | Complete analysis with figures and annotations |
+| **Figures** | PNG, SVG, PDF | Publication-ready plots |
+| **Analysis Log** | JSON, CSV | Audit trail of all user actions |
+
+## Customization Options
+
+The Curve Fitting app can be readily configured to suit specific assay requirements:
+
+- **Custom regression models** — Add proprietary equations
+- **Assay-specific validations** — Define acceptance criteria
+- **Automated outlier detection** — Statistical methods for flagging
+- **Report templates** — Customized output formats
+- **Integration workflows** — Connect to LIMS or ELN systems
+
+:::note
+The Implementation team can help customize:
+- Standard and baseline definitions
+- Linear range determination algorithms
+- Specialized curve fitting models
+- Validation rules and acceptance criteria
+:::
+
+## Workflow Benefits
+
+Implementing the Curve Fitting app in your laboratory workflows provides significant advantages:
+
+- **Reduced analysis time** — Automate curve fitting that typically requires manual work
+- **Improved consistency** — Standardize regression methods across all users
+- **Enhanced traceability** — Document all exclusion decisions with reasons
+- **Better collaboration** — Share validated curves across teams
+- **Regulatory compliance** — Maintain complete audit trails for submissions
+- **Increased accuracy** — Eliminate manual transcription and calculation errors
+
+## Learn More
+
+The Curve Fitting app transforms concentration-response analysis from manual spreadsheet work into an efficient, validated workflow. To explore how the Curve Fitting app can be tailored to your specific assay requirements, contact your [Ganymede representative](mailto:support@ganymede.bio) or [our sales team to learn more](mailto:hello@ganymede.bio).
