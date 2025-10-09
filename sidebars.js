@@ -170,9 +170,7 @@ module.exports = {
             label: 'Base Applications',
             collapsed: false,
             items: [
-              'app/ma/apps/BioprocessApp',
               'app/ma/apps/CDSApp',
-              'app/ma/apps/PlateBasedApp',
               'app/ma/apps/CurveFittingApp'
             ]
           }
