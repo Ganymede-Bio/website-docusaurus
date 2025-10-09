@@ -567,3 +567,4 @@ Handoff
 AlertOutlined
 DatabaseOutlined
 RocketOutlined
+Downsampling

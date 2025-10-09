@@ -93,15 +93,66 @@ Experience the power of having all bioprocess data in one place, updating in rea
 - **Automatic scaling** — Intelligent Y-axis management for different parameter ranges
 - **Time synchronization** — Align all data streams to process time or real time
 
-### <TeamOutlined /> Customizable Role-Based Dashboards
+### <DatabaseOutlined /> Run Browser and Data Selection
 
-Deliver the right information to the right users without requiring configuration changes:
+Navigate and select bioprocess runs with powerful filtering and search capabilities:
 
+<div style={{ textAlign: 'center' }}>
+    <img
+        alt="Run Browser interface showing campaign organization and filtering options"
+        src="https://storage.googleapis.com/ganymede-bio-website/public/ma/bioprocess/BioprocessRunBrowser_20251009.png"
+        width="90%"
+    />
+</div>
+&nbsp;
+
+The Run Browser serves as your gateway to all bioprocess data:
+- **Campaign organization** — Hierarchical view of campaigns and experiments
+- **Advanced filtering** — Filter by Campaign ID, Batch ID, Run Dates, Bioreactor ID, Input Sample, Media Type
+- **Multi-run selection** — Compare multiple runs side-by-side with checkbox selection
+- **Metadata visibility** — View cell lines, media types, and volumes at a glance
+- **Quick search** — Find specific runs instantly with the search bar
+- **Direct data loading** — One-click "Load Data" to visualize selected runs
+
+### <TeamOutlined /> Customizable Dashboards
+
+Create personalized dashboard views tailored to specific preferences:
+
+<div style={{ textAlign: 'center' }}>
+    <img
+        alt="Customizable dashboard interface with parameter selection and real-time plots"
+        src="https://storage.googleapis.com/ganymede-bio-website/public/ma/bioprocess/BioprocessCustomizableDashboards_20251009.png"
+        width="90%"
+    />
+</div>
+&nbsp;
+
+The dashboard customization features enable each user to create their ideal monitoring view:
+
+#### Dashboard Configuration
+- **Multiple dashboard tabs** — Create Dashboard A, B, or custom views for different scenarios
+- **Parameter selection** — Choose which parameters to display via interactive checkboxes
+- **Active datasets** — Toggle visibility of different runs and experiments
+- **Persistent configurations** — Dashboard layouts are saved per user/group
+
+#### Interactive Controls
+- **Global plot controls** — Adjust time ranges, axis settings, and data smoothing
+- **Quick time ranges** — Select 1H, 1D, or 1W views, or custom date ranges
+- **Auto Y-axis scaling** — Automatic or manual axis range control
+- **Smoothing options** — Apply rolling mean or other data smoothing methods
+- **Downsampling controls** — Optimize performance for large datasets
+
+#### Visualization Features
+- **Real-time updates** — Live data streams appear automatically as new values arrive
+- **Multi-run overlay** — Compare temperature, pH, DO, agitation across different batches
+- **Color-coded runs** — Each run gets a unique color for easy identification
+- **Synchronized axes** — Time axes align across all parameter plots
+
+#### Role-Specific Benefits
 - **Operator views** — Focus on alarms, deviations, and critical parameters
 - **Scientist dashboards** — Access to analytical tools and model predictions
 - **Management summaries** — High-level KPIs and batch performance metrics
 - **Custom layouts** — Tailored visualizations for specific products or processes
-- **Persistent preferences** — Users' dashboard configurations are remembered
 
 ### <DashboardOutlined /> Online Process Monitoring
 
@@ -118,12 +169,12 @@ Monitor critical process parameters with sophisticated visualization tools:
 
 #### Monitored Parameters
 
-| **Category** | **Parameters** | **Update Frequency** |
-|-------------|---------------|---------------------|
-| **Environmental** | Temperature, pH, Dissolved Oxygen | Real-time (1-60 sec) |
-| **Mechanical** | Agitation, Gas Flow Rates, Pressure | Real-time (1-60 sec) |
-| **Metabolic** | OUR, CER, RQ | Every 5-15 minutes |
-| **Feed & Base** | Feed Rate, Base Addition, Antifoam | On addition events |
+| **Category** | **Parameters** |
+|-------------|---------------|
+| **Environmental** | Temperature, pH, Dissolved Oxygen |
+| **Mechanical** | Agitation, Gas Flow Rates, Pressure |
+| **Metabolic** | OUR, CER, RQ |
+| **Feed & Base** | Feed Rate, Base Addition, Antifoam |
 
 ### <ExperimentOutlined /> Atline Data Integration
 
