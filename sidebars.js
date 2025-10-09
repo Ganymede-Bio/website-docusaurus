@@ -164,7 +164,16 @@ module.exports = {
         label: 'Modular Analysis',
         collapsed: true,
         items: [
-          'app/ma/ModularAnalysisOverview'
+          'app/ma/ModularAnalysisOverview',
+          {
+            type: 'category',
+            label: 'Base Applications',
+            collapsed: false,
+            items: [
+              'app/ma/apps/CDSApp',
+              'app/ma/apps/CurveFittingApp'
+            ]
+          }
         ]
       },
       {

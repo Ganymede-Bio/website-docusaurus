@@ -32,3 +32,6 @@ yarn-error.log*
 # Use 'make api-restore' to restore them for development
 docs/api/*.excluded
 docs/api/schemas/*.excluded
+
+.claude
+.mypy_cache

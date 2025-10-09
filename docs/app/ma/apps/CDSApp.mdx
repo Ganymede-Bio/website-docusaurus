@@ -1,0 +1,199 @@
+---
+id: CDSApp
+title: Chromatography
+sidebar_label: Chromatography
+displayed_sidebar: webUiSidebar
+---
+
+import {
+  AreaChartOutlined, LineChartOutlined, ExperimentOutlined, ControlOutlined, DashboardOutlined
+} from '@ant-design/icons';
+
+import ReactPlayer from 'react-player';
+
+The Chromatography app provides functionality to collect, process, and interpret chromatographic data from analytical and biopharma laboratories. This vendor-agnostic solution supports HPLC, UHPLC, GC, Waters Acquity, Agilent Infinity, and other chromatography instruments, as well as capillary electrophoresis systems (CE-SDS), enabling standardized analysis workflows across your organization for both chromatograms and electropherograms.
+
+## Overview
+
+The Chromatography app transforms how laboratories interact with chromatography data by providing real-time visualization, intelligent peak detection, and quality control tracking in a single unified interface. Users can review, validate, and adjust peak integration results while maintaining full audit trails for compliance requirements.
+
+### Common Use Cases
+
+The Chromatography app excels in various analytical scenarios:
+
+- **Stability Studies** — Track degradation products and impurity profiles over time
+- **Method Transfer and Validation** — Ensure consistent results across laboratories and instruments
+- **QC Batch Release Testing** — Streamline routine quality control analyses
+- **Forced Degradation Studies** — Identify and quantify degradation pathways
+- **Bioanalytical Method Development** — Optimize separation conditions and detection parameters
+- **Process Analytical Technology (PAT)** — Monitor critical quality attributes in real-time
+
+The features shown below provide a representative set of capabilities available in the Chromatography app. Your implementation will be tailored to your specific use case, workflows, and analytical requirements.
+
+<div style={{ textAlign: 'center' }}>
+    <img
+        alt="Chromatography View with Peak Editing"
+        src="https://storage.googleapis.com/ganymede-bio-website/public/ma/cds/CDSChromatogramViewEditBaseline_20251009.png"
+        width="90%"
+    />
+</div>
+&nbsp;
+
+## Key Features
+
+### <DashboardOutlined /> Batch-to-Batch Analysis
+
+Ensure consistency across production batches with longitudinal quality control monitoring:
+
+<div style={{ textAlign: 'center' }}>
+    <img
+        alt="Chromatography Batch-to-Batch Summary"
+        src="https://storage.googleapis.com/ganymede-bio-website/public/ma/cds/CDSBatchToBatchSummary_20251009.png"
+        width="90%"
+    />
+</div>
+&nbsp;
+
+- **Comprehensive control charts**: Monitor R² values, slope, and intercept trends
+- **Instrument-specific tracking**: Group data by Asset Tag for equipment qualification
+- **Multi-molecule analysis**: Compare performance across different analytes
+- **Operator filtering**: Assess method reproducibility across different users
+- **Statistical indicators**: Min, Max, and Average values for quick assessment
+
+### <ExperimentOutlined /> Experiment Summary
+
+Monitor chromatographic method performance across runs with comprehensive quality metrics:
+
+<div style={{ textAlign: 'center' }}>
+    <img
+        alt="Chromatography Experiment Summary Control Charts"
+        src="https://storage.googleapis.com/ganymede-bio-website/public/ma/cds/CDSExperimentSummary_20251009.png"
+        width="90%"
+    />
+</div>
+&nbsp;
+
+- **Multiple quality indicators**: Track Retention Time, Peak Width, and Peak Asymmetry
+- **Control charts**: Visual identification of trends and outliers
+- **Statistical process control**: Automated calculation of control limits
+- **Flexible filtering**: Focus on specific experiments or molecules of interest
+- **Outlier detection**: Distinguish between normal variation (circles) and outliers (triangles)
+
+### <AreaChartOutlined /> Regression Analysis
+
+Build and validate calibration curves with sophisticated regression modeling:
+
+<div style={{ textAlign: 'center' }}>
+    <img
+        alt="Chromatography Regression Analysis with Calibration Curve"
+        src="https://storage.googleapis.com/ganymede-bio-website/public/ma/cds/CDSRegressionAnalysis_20251009.png"
+        width="90%"
+    />
+</div>
+&nbsp;
+
+- **Multiple model types**: Power, Linear, and Exponential regression models
+- **Molecule-specific analysis**: Generate separate calibration curves for each analyte
+- **Interactive data exploration**: Hover over points to see Sample ID and Peak Area values
+- **Residuals analysis**: Histogram visualization for assessing model fit quality
+- **Flexible scaling**: Log-axis transformation for wide concentration ranges
+
+### <LineChartOutlined /> Interactive Chromatogram Analysis
+
+The main chromatogram view provides comprehensive visualization and interactive tools for refining peak detection and integration:
+
+- **Real-time peak visualization** with color-coded peak areas for easy identification
+- **Dynamic metadata display** showing Asset Tag, Instrument Type, and Operator information
+- **Flexible selection controls** for experiments and individual chromatograms
+- **Detailed peak table** displaying peak names, retention times, heights, and integrated areas
+
+#### Edit Baseline
+Adjust baseline correction to improve peak integration accuracy. The interface provides:
+- Interactive baseline drawing tools
+- Commit Baseline to save adjustments
+- Clear Line to remove temporary edits
+- Reset Data to restore original baseline
+
+#### Split Peak
+Divide overlapping or shouldered peaks for accurate quantitation of co-eluting compounds. The following video demonstrates the split peak functionality in action:
+
+<ReactPlayer playing={false} controls={true} url="https://storage.googleapis.com/ganymede-bio-website/public/ma/cds/CDSChromatogramViewSplitPeak_20251009.mp4" />
+&nbsp;
+
+#### Update Boundaries
+Fine-tune peak integration start and end points to ensure accurate area calculations.
+
+<div style={{ textAlign: 'center' }}>
+    <img
+        alt="Chromatography Update Peak Boundaries"
+        src="https://storage.googleapis.com/ganymede-bio-website/public/ma/cds/CDSChromatogramViewUpdateBoundaries_20251009.png"
+        width="90%"
+    />
+</div>
+&nbsp;
+
+#### Add Peak
+Manually identify peaks that automated detection may have missed, particularly for low-abundance analytes.
+
+#### Remove Peak
+Eliminate false positive detections from noise or system peaks.
+
+All changes can be staged for review before committing, and the Upload to ELN button enables seamless integration with electronic laboratory notebooks.
+
+## Data Types Analyzed
+
+The Chromatography app processes and manages multiple types of analytical data:
+
+### Raw Signal and Chromatogram Data
+- **Detector signal intensity vs. time** — the chromatogram itself from UV, MS, RID, FLD detectors
+- **Baseline signal** — noise, drift, and background correction data
+- **Integration results** — automatically or manually defined peak boundaries
+- **Retention time (RT)** — time taken for each analyte to elute
+- **Peak area and height** — proportional to analyte concentration
+- **Signal-to-noise ratio (S/N)** — used for quantitation limits
+
+### Processed and Derived Data
+- **Concentrations and quantities** based on calibration curves
+- **Relative retention times (RRTs)** for method comparison
+- **Resolution (Rs) and tailing factors** for peak shape assessment
+- **Percent area or composition** — for purity and related substances testing
+- **Method validation metrics** — accuracy, precision, linearity, LOD/LOQ
+- **Derived chromatograms** — overlay plots, averaged runs, normalized signals
+
+### Calibration and Reference Data
+- **Calibration standards** and **standard curves** for quantitative accuracy
+- **Internal standard ratios** for normalization
+- **System suitability parameters (SST)** — retention time repeatability, peak symmetry
+- **Instrument response factors** and dilution factors
+
+### Sample and Metadata
+- **Sample identifiers** (batch, lot, vial, sequence position)
+- **Injection metadata** — sample set, sequence number, operator, timestamp
+- **Acquisition conditions** — column ID, solvent lot, system pressure profile
+- **Project or study linkage** for LIMS integration
+
+## Data Integration
+
+The Chromatography app seamlessly integrates with Ganymede's data infrastructure:
+
+- **Direct data lake connection**: Access all chromatography data types stored in Ganymede tables
+- **Real-time updates**: Automatically incorporate new detector signals, calibration data, and sample metadata from completed Flows
+- **Persistent annotations**: Save peak adjustments, integration changes, and user comments for future reference
+- **Cross-platform compatibility**: Import raw data files from various vendors (Waters .ARW, Agilent .D, Thermo .RAW)
+- **LIMS connectivity**: Link sample information and results for seamless lab workflows
+- **Audit trail maintenance**: Track all data processing events for 21 CFR Part 11 compliance
+
+## Workflow Benefits
+
+Implementing the Chromatography app in your laboratory workflows provides significant advantages:
+
+- **Reduced review time**: Streamline manual chromatography data review processes
+- **Improved consistency**: Standardize peak integration methods across all analysts
+- **Enhanced traceability**: Maintain complete audit trails of all data adjustments
+- **Better collaboration**: Enable remote teams to review and validate chromatography data
+- **Proactive quality control**: Identify method drift before it impacts results
+- **Regulatory compliance**: Support 21 CFR Part 11 requirements with comprehensive logging
+
+## Learn More
+
+The Chromatography app transforms chromatography data analysis from a time-consuming manual process into an efficient, standardized workflow. To explore how the Chromatography app can be tailored to your specific analytical needs, contact your Ganymede representative or [reach out to us](mailto:hello@ganymede.bio).
