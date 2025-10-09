@@ -1,0 +1,239 @@
+---
+id: qPCR
+title: qPCR
+sidebar_label: qPCR
+displayed_sidebar: webUiSidebar
+---
+
+import {
+  TableOutlined, ExperimentOutlined, BarChartOutlined, DotChartOutlined, PercentageOutlined
+} from '@ant-design/icons';
+
+The qPCR app within the Ganymede platform provides a comprehensive solution for analyzing quantitative PCR data from gene expression and viral load studies. This specialized application automates the complex calculations required for qPCR analysis (quantitative real-time PCR), a molecular biology technique used to amplify and simultaneously detect targeted DNA molecules. The app supports both qPCR and RT-qPCR (reverse transcription qPCR) experiments, enabling standardized analysis workflows across your organization.
+
+## Overview
+
+As part of the Ganymede data platform, the qPCR app transforms how laboratories analyze gene expression data by providing interactive visualization, automated ΔΔCt calculations, and multi-condition analysis in a single unified interface. The app eliminates the need for error-prone spreadsheet calculations while ensuring consistency across different users and experiments. Users can analyze complex experimental designs, normalize data across multiple reference genes and controls, and generate publication-ready visualizations while maintaining full traceability for regulatory compliance.
+
+### Common Use Cases
+
+The qPCR app excels in various qPCR analytical scenarios:
+
+- **Gene Expression Analysis** — Quantify mRNA levels using RT-qPCR with multiple reference genes
+- **Copy Number Variation** — Detect genomic duplications and deletions
+- **Viral Load Testing** — Quantify pathogen levels in clinical samples
+- **Gene Knockdown Validation** — Assess RNAi or CRISPR efficiency
+- **Quality Control** — Validate primer efficiency and standard curves
+- **Biomarker Discovery** — Compare expression profiles across conditions
+- **Pathway Analysis** — Monitor gene networks and signaling cascades
+- **miRNA Quantification** — Measure microRNA expression levels
+
+The features shown below provide a representative set of capabilities available in the qPCR app. Your implementation will be tailored to your specific qPCR workflows, gene panels, and analytical requirements.
+
+## Key Features
+
+### <TableOutlined /> Run Selection and Management
+
+Efficiently navigate and select from multiple experimental runs with comprehensive filtering options:
+
+<div style={{ textAlign: 'center' }}>
+    <img
+        alt="qPCR Run Selection Interface showing filtering options for date, ELN, genes, and run IDs with metadata display"
+        src="https://storage.googleapis.com/ganymede-bio-website/public/ma/qpcr/qPCRRunSelection_20251009.png"
+        width="90%"
+    />
+</div>
+
+*The Run Selection interface allows filtering by multiple parameters to quickly locate specific experiments from the Ganymede data lake.*
+
+- **Multi-parameter filtering** — Search by date, ELN ID, genes, and run identifiers
+- **Run metadata display** — View experimental details including instrument and operator
+- **Batch selection** — Process multiple plates simultaneously
+- **Clear selection controls** — Reset filters and selections with one click
+
+### <DotChartOutlined /> Plate Visualization and Ct Analysis
+
+Interactive plate layouts with real-time Ct value visualization and comprehensive analysis controls:
+
+<div style={{ textAlign: 'center' }}>
+    <img
+        alt="qPCR Plate View showing 384-well plate heatmap with Ct values color-coded from blue (low) to red (high), including layout controls and analysis configuration panels"
+        src="https://storage.googleapis.com/ganymede-bio-website/public/ma/qpcr/qPCRPlateViewAndCt_20251009.png"
+        width="90%"
+    />
+</div>
+
+*The Plate View displays Ct values as a heatmap with interactive controls for layout definition, normalization setup, and metric selection.*
+
+### Key Capabilities:
+
+**Dynamic Plate Heatmap Visualization**
+
+The plate view supports visualization of multiple calculated metrics, organized by analysis type:
+
+| **Metric Category** | **Available Metrics** | **Use Case** |
+|-------------------|-------------------|------------|
+| **Basic Measurements** | CT, Delta_CT, Mean_Delta_CT | Initial data review and quality assessment |
+| **Comparative Analysis** | Delta_Delta_CT, Fold_Induction, Mean_Fold_Induction | Gene expression comparisons |
+| **Normalized Results** | Normalized_Fold_Induction, Mean_Normalized_Fold_Induction | Multi-experiment comparisons |
+| **Inhibition Analysis** | Percent_Inhibition, Mean_Percent_Inhibition, SEM_Percent_Inhibition | Knockdown and drug studies |
+
+**Interactive Well Selection and Editing**
+- **Lasso selection tool** — Draw custom selections to exclude problematic wells from analysis
+- **Individual well toggle** — Click specific wells to include/exclude
+- **Automatic outlier flagging** — Visual indicators for wells outside quality thresholds
+
+**Plate Format and Layout Configuration**
+- **Flexible plate formats** — Support for 96 and 384 well plates
+- **Layout controls** — Define conditions, controls, and treatment groups
+- **Primary layout editor** — Assign samples, controls, and conditions to wells
+- **Template saving** — Store and reuse common plate layouts
+- **Normalization setup** — Select reference genes and control conditions
+
+### <BarChartOutlined /> Results Analysis and Visualization
+
+Comprehensive data tables with interactive bar chart visualizations for multi-condition comparisons:
+
+<div style={{ textAlign: 'center' }}>
+    <img
+        alt="qPCR Results Table and Condition Bar Chart"
+        src="https://storage.googleapis.com/ganymede-bio-website/public/ma/qpcr/qPCRResultsTableAndConditionBarChart_20251009.png"
+        width="90%"
+    />
+</div>
+&nbsp;
+
+- **Detailed results table** — View all wells with associated metadata
+- **Multi-gene analysis** — Compare expression across different targets
+- **Condition grouping** — Aggregate technical replicates automatically
+- **Statistical calculations** — Mean, standard deviation, and confidence intervals
+- **Interactive bar charts** — Click to filter and explore specific conditions
+- **Export capabilities** — Download analysis and plots for reports
+
+### <ExperimentOutlined /> Fold Induction Analysis
+
+Calculate and visualize gene expression changes with flexible normalization options:
+
+<div style={{ textAlign: 'center' }}>
+    <img
+        alt="qPCR Fold Induction Analysis"
+        src="https://storage.googleapis.com/ganymede-bio-website/public/ma/qpcr/qPCRFoldInduction_20251009.png"
+        width="90%"
+    />
+</div>
+&nbsp;
+
+- **Multiple normalization methods**:
+  - **ΔΔCt Method**: Standard 2^-ΔΔCt calculation for equal efficiency
+  - **Pfaffl Method**: Efficiency-corrected calculation for variable amplification
+  - **Custom calculations**: User-defined formulas for specialized analyses
+- **Reference gene selection** — Normalize to single or multiple housekeeping genes (geometric mean for multiple)
+- **Control condition flexibility** — Choose any sample or condition average as baseline
+- **Automatic fold change calculation** — Real-time updates using formula: Fold Change = 2^-ΔΔCt
+- **Statistical significance** — Calculate p-values and confidence intervals for expression changes
+- **Grouped visualizations** — Compare fold changes across multiple conditions with error bars
+
+### <PercentageOutlined /> Gene Knockdown and Inhibition Analysis
+
+Specialized calculations for gene knockdown and pathway inhibition studies:
+
+<div style={{ textAlign: 'center' }}>
+    <img
+        alt="qPCR Percent Inhibition Analysis"
+        src="https://storage.googleapis.com/ganymede-bio-website/public/ma/qpcr/qPCRPercentInhibition_20251009.png"
+        width="90%"
+    />
+</div>
+&nbsp;
+
+- **Knockdown efficiency calculations** — Quantify RNAi or CRISPR effectiveness
+- **Positive and negative controls** — Define baseline and complete knockdown references
+- **Time course analysis** — Track knockdown kinetics over multiple time points
+- **Multi-target validation** — Compare knockdown across different genes
+- **Off-target assessment** — Monitor unintended gene suppression
+- **Statistical validation** — Calculate significance and confidence intervals
+
+## Data Types Analyzed
+
+The qPCR app processes and manages multiple types of qPCR data:
+
+### Raw qPCR Data
+- **Amplification curves** — Real-time fluorescence intensities across cycles
+- **Ct/Cq values** — Threshold cycle determinations for each well
+- **Melt curve data** — Temperature dissociation curves for specificity validation
+- **Baseline corrections** — Automatic or manual baseline adjustments
+- **Threshold settings** — Fluorescence threshold for Ct determination
+
+### Processed Calculations
+- **ΔCt values** — Target normalized to reference genes
+- **ΔΔCt values** — Treatment relative to control conditions
+- **Fold change** — Linear expression differences
+- **Percent inhibition/activation** — Drug effect quantification
+- **Standard curve interpolation** — Absolute quantification
+- **Efficiency corrections** — Adjusted calculations for non-ideal amplification
+
+### Quality Metrics
+
+#### Automated Quality Control Features
+
+The qPCR app includes comprehensive quality control capabilities.  These are customizable; by default, they are:
+
+| **QC Metric** | **Threshold** | **Purpose** |
+|--------------|--------------|------------|
+| **Amplification Efficiency** | 90-110% (slope: -3.1 to -3.6) | Validates primer performance |
+| **R² Value** | >0.98 for standard curves | Ensures linearity |
+| **CV (Coefficient of Variation)** | &lt;5% for technical replicates | Confirms reproducibility |
+| **Ct Standard Deviation** | &lt;0.5 between replicates | Identifies pipetting errors |
+| **Melt Curve Analysis** | Single peak expected | Detects primer dimers/non-specific binding |
+| **No Template Control** | Ct >35 or undetermined | Confirms no contamination |
+
+#### Replicate Handling
+- **Technical Replicates**: Automatically averaged with outlier detection
+- **Biological Replicates**: Maintained separately for statistical analysis
+- **Outlier Detection**: Grubbs' test or 2SD exclusion methods
+- **Failed Well Handling**: Automatic exclusion with manual override option
+
+### Experimental Metadata
+- **Plate layouts** — Sample positions and dilutions
+- **Treatment conditions** — Compound names and concentrations
+- **Time points** — Kinetic experiment tracking
+- **Operator information** — User and timestamp data
+- **Instrument parameters** — Cycling conditions and detection settings
+
+## Data Integration
+
+The qPCR app seamlessly integrates with Ganymede's data infrastructure:
+
+### Data Management Features
+- **Direct data lake connection** — Access all qPCR data stored in Ganymede tables via SQL queries
+- **Automatic data parsing** — Extract Ct values, amplification curves, melt curves, and metadata
+- **Batch import** — Process multiple runs simultaneously with validation checks
+- **Template management** — Save and reuse plate layouts, gene panels, and analysis parameters
+- **LIMS connectivity** — Automatic linking of sample IDs, patient data, and experimental metadata
+- **Version control** — Track analysis versions and parameter changes
+- **Audit trail maintenance** — Complete record of all analysis steps for 21 CFR Part 11 compliance
+
+### Export Capabilities
+
+| **Export Type** | **Formats** | **Contents** |
+|----------------|------------|------------|
+| **Raw Data** | CSV, Excel | Ct values, sample names, well positions |
+| **Processed Results** | CSV, Excel, JSON | All calculated metrics with statistics |
+| **Reports** | PDF, HTML | Complete analysis with figures and tables |
+| **Figures** | PNG, SVG, PDF | Publication-ready plots |
+| **Analysis Parameters** | JSON | Complete configuration for reproducibility |
+
+## Workflow Benefits
+
+Implementing the qPCR app in your laboratory workflows provides significant advantages:
+
+- **Reduced analysis time** — Automate calculations that typically require manual spreadsheet work
+- **Improved consistency** — Standardize normalization and calculation methods across users
+- **Enhanced accuracy** — Eliminate manual transcription errors and calculation mistakes
+- **Better visualization** — Generate publication-quality figures instantly
+- **Increased throughput** — Analyze multiple plates and conditions simultaneously
+- **Complete traceability** — Maintain records of all analysis parameters and decisions
+
+## Learn More
+
+The qPCR app transforms plate-based assay analysis from tedious manual calculations into an efficient, standardized workflow. To explore how the qPCR app can be tailored to your specific assay requirements, contact your Ganymede representative or [reach out to us](mailto:hello@ganymede.bio).
