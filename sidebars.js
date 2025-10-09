@@ -31,8 +31,8 @@ module.exports = {
           },
           {
             type: 'category',
-            label: 'Quickstart',
-            collapsed: false,
+            label: 'Developer Quickstart',
+            collapsed: true,
             items: [
               {
                 type: 'doc',
@@ -49,6 +49,75 @@ module.exports = {
                 id: 'app/visualization/QuickstartCreateDashboard',
                 label: 'Create a Dashboard'
               }
+            ]
+          }
+        ]
+      },
+      {
+        type: 'category',
+        label: 'Modular Analysis',
+        collapsed: false,
+        items: [
+          'app/ma/ModularAnalysisOverview',
+          {
+            type: 'category',
+            label: 'Example Applications',
+            collapsed: false,
+            items: [
+              'app/ma/apps/BioprocessApp',
+              'app/ma/apps/CDSApp',
+              'app/ma/apps/qPCR',
+              'app/ma/apps/CurveFittingApp',
+            ]
+          }
+        ]
+      },
+      {
+        type: 'category',
+        label: 'Agents & Connections',
+        collapsed: true,
+        items: [
+          {
+            type: 'doc',
+            id: 'app/agents/Agent',
+            label: 'Agent Overview & Configuration'
+          },
+          {
+            type: 'doc', 
+            id: 'app/agents/AgentInstall',
+            label: 'Installing Agent Connections'
+          },
+          {
+            type: 'doc',
+            id: 'app/agents/AgentMonitoring',
+            label: 'Connections Configuration & Maintenance'
+          },
+          {
+            type: 'category',
+            label: 'Reference & Troubleshooting',
+            collapsed: false,
+            items: [
+              'app/configuration/AgentSystemRequirements',
+              {
+                type: 'doc',
+                id: 'app/agents/DebuggingAgents',
+                label: 'Agent FAQ and Troubleshooting'
+              },
+              {
+                type: 'doc',
+                id: 'app/agents/AgentTemplates',
+                label: 'Example Agent Templates'
+              },
+              {
+                type: 'doc',
+                id: 'app/agents/AgentLogs',
+                label: 'Agent Logging and Reference'
+              },
+              {
+                type: 'ref',
+                id: 'releases/AgentVersionHistory',
+                label: 'Agent Change Log'
+              },
             ]
           }
         ]
@@ -107,74 +176,6 @@ module.exports = {
               },
               'app/flows/FlowRuns', 'app/flows/Notifications']
           },
-        ]
-      },
-      {
-        type: 'category',
-        label: 'Agents & Connections',
-        collapsed: true,
-        items: [
-          {
-            type: 'doc',
-            id: 'app/agents/Agent',
-            label: 'Agent Overview & Configuration'
-          },
-          {
-            type: 'doc', 
-            id: 'app/agents/AgentInstall',
-            label: 'Installing Agent Connections'
-          },
-          {
-            type: 'doc',
-            id: 'app/agents/AgentMonitoring',
-            label: 'Connections Configuration & Maintenance'
-          },
-          {
-            type: 'category',
-            label: 'Reference & Troubleshooting',
-            collapsed: false,
-            items: [
-              'app/configuration/AgentSystemRequirements',
-              {
-                type: 'doc',
-                id: 'app/agents/DebuggingAgents',
-                label: 'Agent FAQ and Troubleshooting'
-              },
-              {
-                type: 'doc',
-                id: 'app/agents/AgentTemplates',
-                label: 'Example Agent Templates'
-              },
-              {
-                type: 'doc',
-                id: 'app/agents/AgentLogs',
-                label: 'Agent Logging and Reference'
-              },
-              {
-                type: 'ref',
-                id: 'releases/AgentVersionHistory',
-                label: 'Agent Change Log'
-              },
-            ]
-          }
-        ]
-      },
-      {
-        type: 'category',
-        label: 'Modular Analysis',
-        collapsed: true,
-        items: [
-          'app/ma/ModularAnalysisOverview',
-          {
-            type: 'category',
-            label: 'Base Applications',
-            collapsed: false,
-            items: [
-              'app/ma/apps/CDSApp',
-              'app/ma/apps/qPCR',
-              'app/ma/apps/CurveFittingApp',
-            ]
-          }
         ]
       },
       {
