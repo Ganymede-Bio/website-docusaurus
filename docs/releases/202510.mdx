@@ -7,7 +7,8 @@ displayed_sidebar: releaseSideBar
 ### October 10 2025
 
 **Features**
-- **API**: Added a new streaming data endpoint to allow for real-time data processing. This endpoint will store data in a table that can be queried via the API or from Flows. For more information, see the [API documentation](../api/stream-data).
+- **API**: Added a new [streaming data endpoint](../api/stream-data) to allow for real-time data processing. This endpoint will store data in a table that can be queried via the API or from Flows.
+- **API**: Added a new endpoint for [modifying file tags](../api/modify-file-tags.api.mdx).
 
 **Improvements**
 - **Flows**: A new orchestration engine has been implemented to improve the reliability and performance of Flows. This new engine will be rolled out gradually to all users over the next few weeks and requires no changes to existing Flows. With this new engine, users can expect:
@@ -16,6 +17,11 @@ displayed_sidebar: releaseSideBar
   - Clearer Flow logging and error messages
 - **Flows**: Specifications for event-triggered Flow now support the leading `.@` syntax for matching event properties.
 - **Web UI**: The name of the Agent Template is now displayed on the editor notebook tab
+- **Modular Analysis**: Added example Modular Analysis applications to documentation
+  - [Bioprocess](../app/ma/apps/BioprocessApp.mdx)
+  - [Chromatography](../app/ma/apps/CDSApp.mdx)
+  - [qPCR](../app/ma/apps/qPCR.mdx)
+  - [Curve Fitting](../app/ma/apps/CurveFittingApp.mdx)
 
 **Agent Version**: 5.5.65
 
