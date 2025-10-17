@@ -17,7 +17,6 @@ EXCLUDE_PATTERNS=(
   "process.schema"
   "unitoperation.schema"
   "instrumenttype.schema"
-  "get-process.api"
   "connectionv-4.schema"
   "agentv-4.schema"
   "host.schema"
