@@ -6,7 +6,7 @@ sidebar_label: "StreamBody"
 hide_title: true
 hide_table_of_contents: true
 schema: true
-sample: {"sourceId":"connectionId","payload":{}}
+sample: {"sourceId":"connectionId","payload":{},"dry_run":true}
 custom_edit_url: null
 ---
 
@@ -25,7 +25,7 @@ import Heading from "@theme/Heading";
 
 
 <Schema
-  schema={{"type":"object","properties":{"sourceId":{"type":"string","description":"Id of the source sending the data.","example":"connectionId"},"payload":{"type":"object","description":"Data to be streamed"}},"required":["sourceId","payload"],"title":"StreamBody"}}
+  schema={{"type":"object","properties":{"sourceId":{"type":"string","description":"Id of the source sending the data.","example":"connectionId"},"payload":{"type":"object","description":"Data to be streamed"},"dry_run":{"type":"boolean","description":"If true, perform a dry run without actually streaming data"}},"required":["sourceId","payload"],"title":"StreamBody"}}
   schemaType={"response"}
 >
   

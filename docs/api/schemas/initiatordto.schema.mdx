@@ -6,7 +6,7 @@ sidebar_label: "InitiatorDTO"
 hide_title: true
 hide_table_of_contents: true
 schema: true
-sample: {"userEmail":"string","flowRun":{"runId":"1234567890124","flowId":"my-flow-2"},"connectionId":"string","connectorConnectionId":"string","systemActorId":0}
+sample: {"userEmail":"user@example.com","flowRun":{"runId":"1234567890124","flowId":"my-flow-2"},"connectionId":"string","connectorConnectionId":"string","systemActorId":0}
 custom_edit_url: null
 ---
 
@@ -25,7 +25,7 @@ import Heading from "@theme/Heading";
 
 
 <Schema
-  schema={{"type":"object","properties":{"userEmail":{"type":"string","description":"User email if the initiator is a user"},"flowRun":{"description":"Flow run identifier consisting of the Flow runId and flowId","example":{"runId":"1234567890124","flowId":"my-flow-2"},"allOf":[{"type":"object","properties":{"runId":{"type":"string","pattern":"/^\\d+$/","description":"Flow run ID associated with this run"},"flowId":{"type":"string","pattern":"/^\\S+$/","description":"Flow ID associated with this run"}},"required":["runId","flowId"],"title":"FlowRunIdentifier"}]},"connectionId":{"type":"string","description":"Connection ID if the initiator is a connection"},"connectorConnectionId":{"type":"string","description":"Connector Connection ID if the initiator is a connector connection"},"systemActorId":{"type":"number","description":"System Actor ID if the initiator is a system actor"}},"title":"InitiatorDTO"}}
+  schema={{"type":"object","properties":{"userEmail":{"type":"string","format":"email","description":"User email if the initiator is a user"},"flowRun":{"description":"Flow run identifier consisting of the Flow runId and flowId","example":{"runId":"1234567890124","flowId":"my-flow-2"},"allOf":[{"type":"object","properties":{"runId":{"type":"string","pattern":"/^\\d+$/","description":"Flow run ID associated with this run"},"flowId":{"type":"string","pattern":"/^\\S+$/","description":"Flow ID associated with this run"}},"required":["runId","flowId"],"title":"FlowRunIdentifier"}]},"connectionId":{"type":"string","description":"Connection ID if the initiator is a connection"},"connectorConnectionId":{"type":"string","description":"Connector Connection ID if the initiator is a connector connection"},"systemActorId":{"type":"number","description":"System Actor ID if the initiator is a system actor"}},"title":"InitiatorDTO"}}
   schemaType={"response"}
 >
   
