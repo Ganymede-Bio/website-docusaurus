@@ -168,9 +168,6 @@ function updateSidebar() {
   // Categories to exclude from sidebar
   const categoriesToExclude = [
     'PublicApi',
-    'Instrument Runs',
-    'Unit Operation Runs',
-    'Process Runs',
     'Schemas',
     'Secrets'
   ];

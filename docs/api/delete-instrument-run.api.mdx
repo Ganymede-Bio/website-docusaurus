@@ -5,7 +5,7 @@ description: "Delete an Instrument Run from an Environment."
 sidebar_label: "deleteInstrumentRun"
 hide_title: true
 hide_table_of_contents: true
-api: eJy9U01v2zAM/SsGTxug1s3Qk28dmgHtdhiyDj0UOSgWUwu1JZeSgmWC/vtA2c5X22G97GSJJp/Ix/ciKHQ16d5ra6CCa2zRYyFNcWOcp9Ch8cUimGJNtuPw3Gw0WcPxcxBgeyTJtTcKKlC5el+5CAYE9JJkhx7JQfUQwcgOoQLcA4EAwuegCRVUngIK0NxML30DAlzdYCehiuC3PZc6T9o8Qkpih6bVe0FM6FZIkNKSC11vjUPH/z9dXPLnmJcTNoZBVeFCXaNz69C2W0gCLv+h1lhfrG0wigcAh3Ug7beZGtnrsyfk85Jn+4ySkK6Cb3JkKcDLRyYRvodVq+urXoM4gXewFNChb+x+IXkHDALlZlYeEF/Gg0sq9Q7pjIJxZdQqMXVIm2l5gVqooPG+d1VZxsY6zynHA4OAjSQtV+3AKGcNtKxlaD0DcCRl7icCfvCChvwdDbtlyV5/xS2MK21QKiQQ0/Kn/CSOKIvD0jljlcMgxsMXS53kPm7v70BMj/BUe1DGsKR/Z3W/GHFuPFJxe39XePuE5qQzXqw2a5sn0L7FgZSXLCG54TI7vzi/AAG1NV7WzBZj9Nb5ThqGGbt63WFHwDGDsK3eb+eRCY+/fNm3UhvmNO88jhJ6gM0MxIl7q+PriY44QSvW5SCEB4hxJR3+pDYlDj8HpCz6vW6y2JR2fFZQrWXr8C9zfliM1v9YvDXFpCSzzfJsw7iULLSjedh6//FprSAt04Fpr+ff5ndzECBHGe9N8JRNMB6YolehJz9MLwzeeCM5xsFcKe3yh19vVuzsN/ZvuP+U/gCwWCPs
+api: eJy9VMFu2zAM/RWDpw1Q62boybcOzYB2OwxZhx6KYFBsphYqSy4lBcsM/ftA2Y6TNAHWy06RGfKJfHxPHVToSlKtV9ZAAbeo0WMmTXZnnKfQoPHZIphsTbbh8NxsFFnD8UsQYFskybV3FRRQpeqpchEMCGglyQY9koPiqQMjG4QCcAICAYSvQRFWUHgKKEBxM630NQhwZY2NhKIDv2251HlS5hliFDs0Vb0XxIRmhXQAUtH2F6WWJ6S11G6Eeg1I21NYK2s1SgMxLrnWtdY4dJzw6eqafw5JPqK2Z63KXChLdG4dtN5CFHD9D7XG+mxtg6l4EHBYBlJ+m3iWrbp4QT4vecbPKAnpJvg6RZYCvHzmjcD3sNKqvGkViCN4B0sBDfraTttNC2UQyDezfG+Lebf3EXO1Q7qgYFzeqSoyd0ibUQmBNBRQe9+6Is+72jrPKYcDg4CNJCVXumeUs3pa1jJozwAciYn7kYAfvKE+f0fDbluyVV+R95iWWqOskECMIhjzozigrOu3nradwiCGwxdLjeQ+7h8fQIyX8FQTKGNYUn+SVd6MODceKbt/fMi8fUFz1BkvVpm1TRMor7En5S1LSK7/mF1eXV6BgNIaL0tmizFa63wjDcOMej9p1wPgLoGwR9//NgxMePzt81ZLZZjTtPNukNATbGYgjp6C4vDzSEecoCrWZS+EJ+i6lXT4k3SMHO5NyvKqlGPVTCZOMthz+UbqkNhk6YwiO116lpQPi+Gp+JidG3mUndnu3zm2sz8t+/Q/Xq0qiMu45/Db+bf5wxwEyEHzk2NekmOGA1N0Eno0z3hDb6QzyV3XOzHGXX7/19mKnVeH/g33H+NfI/FM/A==
 sidebar_class_name: "delete api-method"
 custom_edit_url: null
 ---
@@ -46,7 +46,7 @@ Delete an Instrument Run from an Environment.
 </Heading>
 
 <ParamsDetails
-  parameters={[{"name":"environment","required":true,"in":"path","schema":{"type":"string"}},{"name":"id","required":true,"in":"path","schema":{"type":"number"}}]}
+  parameters={[{"name":"environment","required":true,"in":"path","schema":{"type":"string"}},{"name":"id","required":true,"in":"path","schema":{"type":"number"}},{"name":"dry_run","required":false,"in":"query","schema":{"type":"boolean"}}]}
 >
   
 </ParamsDetails>

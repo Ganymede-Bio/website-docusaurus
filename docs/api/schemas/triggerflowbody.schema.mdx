@@ -6,7 +6,7 @@ sidebar_label: "TriggerFlowBody"
 hide_title: true
 hide_table_of_contents: true
 schema: true
-sample: {"flowInputs":[{"task":"string","param":"string","value":"string","dataType":"string"}]}
+sample: {"flowInputs":[{"task":"string","param":"string","value":"string","dataType":"string"}],"dry_run":true}
 custom_edit_url: null
 ---
 
@@ -25,7 +25,7 @@ import Heading from "@theme/Heading";
 
 
 <Schema
-  schema={{"type":"object","properties":{"flowInputs":{"type":"array","items":{"type":"object","properties":{"task":{"type":"string"},"param":{"type":"string"},"value":{"type":"string"},"dataType":{"type":"string"}},"required":["task","param","value","dataType"],"title":"FlowInput"}}},"required":["flowInputs"],"title":"TriggerFlowBody"}}
+  schema={{"type":"object","properties":{"flowInputs":{"type":"array","items":{"type":"object","properties":{"task":{"type":"string"},"param":{"type":"string"},"value":{"type":"string"},"dataType":{"type":"string"}},"required":["task","param","value","dataType"],"title":"FlowInput"}},"dry_run":{"type":"boolean","description":"If true, perform a dry run without actually triggering the flow"}},"required":["flowInputs"],"title":"TriggerFlowBody"}}
   schemaType={"response"}
 >
   

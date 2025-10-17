@@ -6,7 +6,7 @@ sidebar_label: "postRepositoryCommitsBody"
 hide_title: true
 hide_table_of_contents: true
 schema: true
-sample: {"authorEmail":"user@example.com","message":"string","fileMap":{}}
+sample: {"dry_run":true,"authorEmail":"user@example.com","message":"string","fileMap":{}}
 custom_edit_url: null
 ---
 
@@ -25,7 +25,7 @@ import Heading from "@theme/Heading";
 
 
 <Schema
-  schema={{"type":"object","properties":{"authorEmail":{"type":"string","format":"email"},"message":{"type":"string"},"fileMap":{"type":"object"}},"required":["authorEmail","message","fileMap"],"title":"postRepositoryCommitsBody"}}
+  schema={{"type":"object","properties":{"dry_run":{"type":"boolean","description":"If true, perform a dry run without actually committing files"},"authorEmail":{"type":"string","format":"email"},"message":{"type":"string"},"fileMap":{"type":"object"}},"required":["authorEmail","message","fileMap"],"title":"postRepositoryCommitsBody"}}
   schemaType={"response"}
 >
   
