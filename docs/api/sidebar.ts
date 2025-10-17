@@ -128,38 +128,8 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
-          id: "api/get-host",
-          label: "getHost",
-          className: "api-method get",
-        },
-        {
-          type: "doc",
-          id: "api/get-hosts",
-          label: "getHosts",
-          className: "api-method get",
-        },
-        {
-          type: "doc",
           id: "api/download-gateway",
           label: "downloadGateway",
-          className: "api-method get",
-        },
-        {
-          type: "doc",
-          id: "api/add-host-connection",
-          label: "addHostConnection",
-          className: "api-method post",
-        },
-        {
-          type: "doc",
-          id: "api/get-agent-templates",
-          label: "getAgentTemplates",
-          className: "api-method get",
-        },
-        {
-          type: "doc",
-          id: "api/get-secret",
-          label: "getSecret",
           className: "api-method get",
         },
         {
