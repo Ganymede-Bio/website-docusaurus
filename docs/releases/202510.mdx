@@ -7,6 +7,21 @@ displayed_sidebar: releaseSideBar
 ### October 10 2025
 
 **Features**
+- **Web UI**: Added a new "Runs" tracking feature which will organize and display all Files, Flow Runs, Modular Analysis Sessions, and Table modifications in a single view. 
+  - This view can be accessed from the sidebar and will allow users to filter and search through all recent activity in their organization
+  - Runs are populated based on API calls in Agents, Flows, and Modular Analysis applications
+  - The Runs view can be used to launch Virtualization Sessions based on the Files included in the Run
+
+**Bug Fixes**
+- **Agent**: Fixed an issue where Linux Agents would fail to start or update. Addressing this issue will require users to manually reinstall their Linux Agents once after updating to this version. Future updates will not require a manual restart.
+- **Flows**: Fixed an issue where Flow code wasn't ready when a Flow is first created
+
+**Agent Version**: 5.5.73
+
+
+### October 10 2025
+
+**Features**
 - **API**: Added a new [streaming data endpoint](../api/stream-data) to allow for real-time data processing. This endpoint will store data in a table (designated by TableId) that can be queried via the API or from Flows.
 - **API**: Added a new endpoint for [modifying file tags](../api/modify-file-tags.api.mdx).
 
