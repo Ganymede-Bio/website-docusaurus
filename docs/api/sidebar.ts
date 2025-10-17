@@ -490,42 +490,6 @@ const sidebar: SidebarsConfig = {
     },
     {
       type: "category",
-      label: "Hosts",
-      items: [
-        {
-          type: "doc",
-          id: "api/get-host",
-          label: "getHost",
-          className: "api-method get",
-        },
-        {
-          type: "doc",
-          id: "api/get-hosts",
-          label: "getHosts",
-          className: "api-method get",
-        },
-        {
-          type: "doc",
-          id: "api/download-gateway",
-          label: "downloadGateway",
-          className: "api-method get",
-        },
-        {
-          type: "doc",
-          id: "api/add-host-connection",
-          label: "addHostConnection",
-          className: "api-method post",
-        },
-        {
-          type: "doc",
-          id: "api/get-agent-templates",
-          label: "getAgentTemplates",
-          className: "api-method get",
-        },
-      ],
-    },
-    {
-      type: "category",
       label: "Commits",
       items: [
         {
