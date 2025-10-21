@@ -1,0 +1,70 @@
+---
+id: delete-app-config
+title: "Delete an app configuration. This endpoint is only available to users and not when using API key"
+description: "Delete an app configuration. This endpoint is only available to users and not when using API key"
+sidebar_label: "Delete an app configuration. This endpoint is only available to users and not when using API key"
+hide_title: true
+hide_table_of_contents: true
+api: eJy9VMtu2zAQ/BViTy3AREmRk25ukwJJewhaFzkEPtDi2iJCkQwfbl2B/14sJfmVBmgvOYmP5e7Mzqx6sA69iMqaWwk1SNQYcebcJ2tWag0cnPCiw4g+QP3YgxEdQg1oNspb06GJwMHjc1IeJdTRJ+SgDNTgRGyBQ2ha7ATUPcSto6chemXWkDPfZVPyf5OY1C3RQ84LehicNQED3X+4uKKPxNB45YgX1DBzjjWFUBq4soGnZCE1DYawSlpvIXO4+rfnxka2sslIogEBm+RV3JYGCafOnpDWC2L4EYVHP0uxLScLDlGsqZVwn5ZaNTOngJcKQ8cDLPhJ+euClQnDxCmQczZvVWBopLPKRKYCs0ZvmdgIpcVSI4uWpYA+MGFkgf2zRcNSUGbNZve3jKBy6DC2dq9/kZ0QQ7W5rA60rvqDTa6Ec2cDnlD1SmZSCv1m8kryGmpoY3Shrqq+tSFSyDE74LARXhHYIiBFDRKsRNKREtBJLlJPnf5Ofhjid/3eeUM49aWwKg5qUUj0wCevTfGZH2nTDx6jiGU5Bj4uPlvfCcJx9zAHPhUhVvuklMN69buI8oLijYno2d3DnEX7hOYEGTlImZUtDFTUODTlZZfQh2FzeX5xfgEcGmuiaKhblMPZEDthKM2I6g2Mc4Ryp0DEX7FyWihDbS426EdHPcLmEvjJ/6M+3h7Yii6VpJkYfPEIfb8UAX94nTMdPyf0Zdj2NirekyrQWkK9EjrgC6TUO6pWw7tv44/nPdvLe8xgMpbZFrfqNGpUfHfEhUb+DUsrCXmRD+b3+ubrzfyGeji6ej8Tg2Djglr019TTeEwVhlF5Jbjvh1nLeRc/XL36YjeNI35D+HP+A5AgNxo=
+sidebar_class_name: "delete api-method"
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Delete an app configuration. This endpoint is only available to users and not when using API key"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"delete"}
+  path={"/v1/environment/{environment}/app-configs/{id}"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Delete an app configuration. This endpoint is only available to users and not when using API key
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"name":"environment","required":true,"in":"path","schema":{"type":"string"}},{"name":"id","required":true,"in":"path","schema":{"type":"number"}}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={undefined}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"204":{"description":"App configuration deleted successfully"},"404":{"description":"App configuration not found"}}}
+>
+  
+</StatusCodes>
+
+
+      
