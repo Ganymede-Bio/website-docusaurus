@@ -1,0 +1,70 @@
+---
+id: delete-app-config
+title: "deleteAppConfig"
+description: "Delete an app configuration. This endpoint is only available to users and not when using API key"
+sidebar_label: "deleteAppConfig"
+hide_title: true
+hide_table_of_contents: true
+api: eJy9VE1v1DAQ/SuWTyBtmxb1lNtCF6nAoYIiDqsKeZPZxqrXdv0RCFH+OzN2sh/trgSXnhKPx88z771xz2vwlZM2SKN5ya9BQQAmNBPWssrotXyITtDuObtrpGega2ukDgz/jVYdE62QSqwUsGBY9OA8Hq+ZNoH9akBjSOoHNr+9YY/Q8Rk3FjLgTY0X1unCubUf0l24b4UTG4w5z8tlzzUuMA90K53RG9ABcxw8RekAAYKLMOOSarciNLjnqwY2gpc9D52loz44rIAPw2yLJuv/BdFxswJ3AFK77qeL+gBpLZSfoJ4iuO4Y1soYBUIj2D2d9dZoD54S3l1c0edQk/lzJVgmrWY+VhV4v45KdXyY8at/O07SrE3UNbXDPVTRydAltoWVZyRTubynTt+DcODmETmhCJYbxAPpwm/jSslqbiU2SDdk+TzHFBSvMTttk6QEwIv2stjTsej3FkOBhjvLdfqil/VAzIFrJx9EpxCiCcH6sij6xvhAKYe9YqAVTpIbE5+UlRlZi6gCAVBkSMxPjX8jfXL+tv2tVhj5nGybJG1A1OiC2WSBKR9p3Keqz5onrVMYT+Sfj8ZtBNXx6ccdBsdLqKsdKGEYJ/8ksV60uNA4GgyP47g9gn5WGQkq9dqkDmRQkEl5yRLSmheX5xfnFxhB6oOoiC3CsEjTBi1a7tz+YlAPQPsEQNP5Ko/ISFyA36GwSiAFWHSySD+6bcnbS0w8fDfKw+We5WgTXwW0RfbMkvf9Snj47tQwUDhPMzmxlp4q3U17cszec9AKFRPx5LLJj8ePnuTwzdfxTXnLTrU7OVR3+3dO5ex3SqP8ilcjjwM+H7uH4HrxZXG3IMLH8dgNV5Zz/CGKjkJPczbdkGfuRHLf56Edhm1+3jp5YjvWY/2a6h+Gv2LTaf0=
+sidebar_class_name: "delete api-method"
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"deleteAppConfig"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"delete"}
+  path={"/v1/environment/{environment}/app-configs/{id}"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Delete an app configuration. This endpoint is only available to users and not when using API key
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"name":"environment","required":true,"in":"path","schema":{"type":"string"}},{"name":"id","required":true,"in":"path","schema":{"type":"number"}},{"name":"dry_run","required":false,"in":"query","schema":{"type":"boolean"}}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={undefined}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"204":{"description":"App configuration deleted successfully"},"404":{"description":"App configuration not found"}}}
+>
+  
+</StatusCodes>
+
+
+      
