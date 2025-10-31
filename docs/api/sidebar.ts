@@ -125,7 +125,7 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "api/stream-data",
           label: "streamData",
-          className: "api-method post"}]},
+          className: "api-method post"},
         {
           type: "doc",
           id: "api/download-gateway",
@@ -144,7 +144,7 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "api/post-repository-commits",
           label: "postRepositoryCommits",
-          className: "api-method put"}]},
+          className: "api-method put"},
     {
       type: "category",
       label: "Instrument Runs",
@@ -188,7 +188,8 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "api/get-instrument-runs-by-instrument-id",
           label: "getInstrumentRunsByInstrumentId",
-          className: "api-method get"}]},
+          className: "api-method get"}
+        ]},
     {
       type: "category",
       label: "Unit Operation Runs",
@@ -276,7 +277,7 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "api/get-process-runs-by-process-id",
           label: "getProcessRunsByProcessId",
-          className: "api-method get"}]}]},
+          className: "api-method get"}]},
     {
       type: "category",
       label: "ModularAnalysis",
