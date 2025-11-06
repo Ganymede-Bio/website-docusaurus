@@ -7646,7 +7646,7 @@ instantsearch-ui-components@0.13.0:
     zod "^3.25.76 || ^4"
     zod-to-json-schema "3.24.6"
 
-instantsearch.js@^4.67.0:
+instantsearch.js@^4.82.0:
   version "4.82.0"
   resolved "https://registry.yarnpkg.com/instantsearch.js/-/instantsearch.js-4.82.0.tgz#d189930e5b1f5b694bcab2f546ea28e56d228d25"
   integrity sha512-K1iJ2/Zx3omHieFi0K/zUVtmxlectXiIdOFp3nLm6L+uSIR7jVvlPd0LLokJ5tgsG1TYn8uEF2TB/inaCWSepQ==
