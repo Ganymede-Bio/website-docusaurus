@@ -105,6 +105,17 @@ On Linux:
 
 ### Agent execution
 
+#### Issue: Agent unable to connect with access token expiration error in logs
+
+This is a Windows-specific issue that can occur if the system time is not properly synced. 
+
+First, verify that there are [no issues with connectivity](../configuration/AgentSystemRequirements.mdx#testing-connectivity).  If you are able to pass all of the connectivity tests, check the system time on the machine where the Agent is installed.
+
+To resolve this:
+
+- Right-click on the time in the bottom right corner of the screen and select "Adjust date/time."
+- Ensure that "Set time automatically" is enabled, and click "Sync now."
+
 #### Issue: Agent Connection is showing as disconnected after running for a while
 
 - If you observe an error in local logs related to expired cert, verify that the Agent Connection is on version 5.5.1+. 

@@ -1,0 +1,119 @@
+---
+id: ConfiguringProcesses
+title: Configuring Processes
+displayed_sidebar: webUiSidebar
+---
+
+import { PlusOutlined } from '@ant-design/icons';
+
+[Configuring Processes](./ConfiguringProcesses.mdx) is done bottoms-up, starting with Instruments, then Instrument Types, then Unit Operations, and finally Processes in the Web UI.
+
+Once a Process is defined, individual Run creation can be performed either manually from the Web UI on the corresponding Instrument Run, Unit Operations, or Process page, or programmatically via API calls.
+
+Run tracking and retrieval are done by API calls from Agents and Flows, referencing the corresponding run + scoped to the relevant unit of execution.  This maximizes flexibility in how Processes are executed and tracked.
+
+- [Instrument Runs](../../api/get-instrument-run.api.mdx) track execution of individual Instruments.
+- [Unit Operation Runs](../../api/get-unit-operation-run.api.mdx) track execution of Unit Operations.
+- [Process Runs](../../api/get-process-run.api.mdx) track execution of entire Processes.
+
+:::tip
+
+InstrumentId, unitOperationId, and processId are each small integers that can be found in the URL when navigating to the corresponding Instrument, Unit Operation, or Process page in the Web UI.  Each integer increments by 1 for each new item created.
+
+:::
+
+## Instruments
+
+### Adding an instrument
+
+New instruments can be added by clicking on the  <div className="button darkblue_outline_button"><PlusOutlined /> New Instrument</div>  button to open New Instrument form, shown below.
+
+<img width="500" alt="New Instrument" src="https://ganymede-bio.mo.cloudinary.net/apiServer/NewInstrumentForm.png" />
+
+The New Instrument Form allows you to populate instrument characteristics relevant for tracking, associate an instrument with a Connection, and associate an instrument with an Instrument Type. The only required field is the **Name** field, which must be unique within the environment.
+
+### Adding instruments in bulk
+
+If you have a list of instruments to add, you can upload them using the Bulk Upload Instruments feature. 
+
+<img width="500" alt="Bulk Upload Instruments" src="https://ganymede-bio.mo.cloudinary.net/apiServer/BulkUploadInstruments.png" />
+
+To use this feature, download the template CSV file in the bulk upload instruments form and fill it out, adding 
+one instrument per row. 
+
+Upon upload, the CSV file will be validated by Ganymede. If any errors are found, a descriptive error message is displayed, explaining the issue.
+
+:::note
+The "Connection Id" column in the instrument bulk upload template file requires Connection ID.  This differs from the form for adding instruments individually, which requests a Connection name from a dropdown list.  Connection ID can be found on the Connection page.
+:::
+
+## Instrument Types
+
+### Adding an instrument type
+
+New Instrument Types can be added by clicking on the  <div className="button darkblue_outline_button"><PlusOutlined /> New Instrument Type</div>  button to open New Instrument Type form, shown below.
+
+<img width="500" alt="Add New Instrument Type" src="https://ganymede-bio.mo.cloudinary.net/apiServer/AddNewInstrumentType_20251110.png" />
+
+Once created, click on the Instrument Type to open the Instrument Type Edit page, where you can associate Instrument types with Flows, Dashboards, Tables, and MA applications.
+
+<img width="800" alt="Edit Instrument Type Detail" src="https://ganymede-bio.mo.cloudinary.net/apiServer/EditInstrumentTypeDetail_20251110.png" />
+
+After doing so, you can view all associated items from the Instrument Type Details page.
+
+<img width="800" alt="View Instrument Type Detail" src="https://ganymede-bio.mo.cloudinary.net/apiServer/InstrumentTypeDetail_20251110.png" />
+
+### Creating runs for instrument types
+
+To create a unique run for an instrument type, click on the  <div className="button darkblue_outline_button"><PlusOutlined /> Create Run</div>  button on the Instrument Type page or calling the [API](../../api/create-instrument-run.api.mdx).
+
+<img width="800" alt="View Instrument Type Detail" src="https://ganymede-bio.mo.cloudinary.net/apiServer/CreateInstrumentRunUI_20251110.png" />
+&nbsp;
+
+:::note
+
+The instrument type ID can be found in the URL https://\<subtenant\>.ganymede.bio/\<environment\>/instrument-types/\<**instrument_type_id**\>.
+
+:::
+
+## Unit Operations
+
+### Associating instrument types with unit operations
+
+Instrument Types can be grouped into Unit Operations on the Edit tab.
+
+<img width="800" alt="Associate instrument types with unit ops" src="https://ganymede-bio.mo.cloudinary.net/apiServer/EditUnitOps_20251110.png" />
+
+### Creating runs for instrument types
+
+To create a unique run for a unit operation, click on the  <div className="button darkblue_outline_button"><PlusOutlined /> Create Run</div>  button on the corresponding Unit Operation page or calling the [API](../../api/create-unit-operation-run.api.mdx).
+
+<img width="800" alt="View Instrument Type Detail" src="https://ganymede-bio.mo.cloudinary.net/apiServer/CreateUnitOperationRunUI_20251110.png" />
+&nbsp;
+
+:::note
+
+The unit operation ID can be found in the URL https://\<subtenant\>.ganymede.bio/\<environment\>/unit-operations/\<**unit_operation_id**\>.
+
+:::
+
+## Processes
+
+### Associating unit operations with processes
+
+Unit Operations can be grouped into Processes on the Edit tab.
+
+<img width="800" alt="Associate unit ops with processes" src="https://ganymede-bio.mo.cloudinary.net/apiServer/ConfigureProcess_20251110.png" />
+
+### Creating runs for instrument types
+
+To create a unique run for a process, click on the  <div className="button darkblue_outline_button"><PlusOutlined /> Create Run</div>  button on the corresponding Process page or calling the [API](../../api/create-process-run.api.mdx).
+
+<img width="800" alt="View Instrument Type Detail" src="https://ganymede-bio.mo.cloudinary.net/apiServer/CreateProcessRunUI_20251110.png" />
+&nbsp;
+
+:::note
+
+The process ID can be found in the URL https://\<subtenant\>.ganymede.bio/\<environment\>/processes/\<**process_id**\>.
+
+:::

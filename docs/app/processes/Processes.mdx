@@ -4,65 +4,88 @@ title: Processes, Unit Operations, and Instruments
 displayed_sidebar: webUiSidebar
 ---
 
-# Processes, Unit Operations, and Instruments
+import { PlusOutlined } from '@ant-design/icons';
 
-The Processes, Unit Operations, and Instruments documentation provides an overview of the Ganymede components involved in managing laboratory workflows.
-By organizing Flows, Tables, Dashboards, and Analysis apps into Processes and Unit Operations, navigation in Ganymede is simplified, allowing users to track and manage their laboratory data more effectively.
+The Processes page provides a way to map laboratory workflows to Ganymede, allowing you to pull up the relevant [Modular Analyses](../ma/ModularAnalysisOverview.mdx), [Agents](../agents/Agent.mdx),
+[Flows](../flows/FlowEditor.mdx), tables, and files associated with a given Process.  This frames the various components of Ganymede in the context of your lab's workflows, making it easier
+for users with different roles to navigate to the pieces of a Process relevant for them.
 
-## Processes
+<img alt="Process Runs" src="https://ganymede-bio.mo.cloudinary.net/apiServer/ProcessRuns_20251110.png" />
+
+## Concepts
+
+The Processes page is built around the key concepts laid out below, which each have their own dedicated pages within the Processes section in the Web UI.  
+
+- [**Processes**](#processes): High-level representations of laboratory workflows.
+- [**Unit Operations**](#unit-operations): Individual steps within a Process, each defined by a set of Instrument Types.
+- [**Instrument Types**](#instrument-types): Categories of Instruments used within Unit Operations.  
+- [**Instruments**](#instruments): Physical devices associated with specific Instrument Types.  These can be linked 1:1 to individual [Agent Connections](../agents/Agent.mdx).
+
+[**Runs**](#runs) are instances of Instrument, Unit Operation, or Process execution, scoping data and Flow runs to the relevant unit of execution.
+
+### Example Workflow - DNA Extraction
+
+To contextualize these concepts, consider the following example workflow:
+
+- A lab has a Process for "DNA Extraction", which involves several Unit Operations such as "Sample Preparation", "Lysis", and "Purification".
+- Each Unit Operation consists of specific Instrument Types, such as "Centrifuge", "Pipette", and "Thermocycler".
+- The lab has multiple Instruments of each Instrument Type, such as "Centrifuge Model A" and "Centrifuge Model B", each associated with a Connection to monitor their status.
+- When the lab performs a DNA Extraction, they create a Run of the "DNA Extraction" Process, which tracks the progress and data generated during the workflow.
+
+:::tip workflow tracking without connectivity
+
+Instruments do not require connectivity to Ganymede to be tracked.  Instruments can be added and tracked without being associated with a Connection, allowing labs to track all their equipment in one place.
+
+Similarly, Unit Operations and Instrument Types can also be tracked without direct connectivity to Ganymede, providing flexibility in how labs manage their workflows.
+
+:::
+
+### Example Usage Scenarios
+
+- A lab technician can quickly navigate to the "DNA Extraction" Process to view the associated Flows and data generated during execution.
+- A lab manager can monitor the status of Instruments and ensure they are functioning correctly during a Process run.
+- A data analyst can access the data generated from specific Unit Operations within a Process for analysis.
+- A quality control specialist can review the execution of a Process and its associated Runs to ensure compliance with protocols.
+- A lab administrator can configure new Processes, Unit Operations, and Instrument Types to reflect changes in laboratory workflows.
+- A maintenance team can track the uptime and performance of Instruments associated with specific Processes.
+- A researcher can analyze the efficiency of different Unit Operations within a Process to optimize workflows.
+
+## Workflow Configuration
+
+### Processes
 
 Creating a Process with associated Unit Operations and Instrument Types will display a unified view of the constituent elements.
 
 Each Process can also have Flows, Tables, Dashboards, and Analysis apps associated with it.
 
+<img alt="Process View" src="https://ganymede-bio.mo.cloudinary.net/apiServer/ProcessView.png" />
 
-<img width="800" alt="Process View" src="https://ganymede-bio.mo.cloudinary.net/apiServer/ProcessView.png" />
-
-
-## Unit Operations
+### Unit Operations
 
 Unit Operations represent the individual steps or stages within a Process. Each Unit Operation consists of a sequence of Instrument Types which define the specific tasks to be performed.
 
-<img width="800" alt="Unit Operations" src="https://ganymede-bio.mo.cloudinary.net/apiServer/UnitOperations.png" />
+<img alt="Unit Operations" src="https://ganymede-bio.mo.cloudinary.net/apiServer/UnitOperations.png" />
 
-## Instrument Types
+### Instrument Types
 
 Instrument Types categorize the various instruments used within a Process. Each Instrument Type represents a specific model of an instrument, your lab may have multiple Instruments of a single Instrument Type.
 
-<img width="800" alt="Instrument Types" src="https://ganymede-bio.mo.cloudinary.net/apiServer/InstrumentType.png" />
+<img alt="Instrument Types" src="https://ganymede-bio.mo.cloudinary.net/apiServer/InstrumentType.png" />
 
-## Instruments
+### Instruments
 
 Instruments are the physical devices or equipment used to perform tasks within a Process. Each Instrument is associated with a specific Instrument Type and can be associated to a Connection.
-
-import { PlusOutlined } from '@ant-design/icons';
 
 The Instruments page allows you to track equipment within Ganymede, with or without connectivity to the instrument.  This offers a quick way to statefully track instruments and view integration status for instruments with connectivity to Ganymede.
 
 <img alt="Instruments Table" src="https://ganymede-bio.mo.cloudinary.net/apiServer/InstrumentsTable.png" />
-&nbsp;
+
 Each instrument can be associated with a [Connection](../agents/Agent.mdx), which allows you to monitor instrument uptime and programmatically interact with the lab instrument.
 
-### Adding an instrument
+## Execution Tracking
 
-New instruments can be added by clicking on the  <div className="button darkblue_outline_button"><PlusOutlined /> New Instrument</div>  button to open New Instrument form, shown below.
+### Runs
 
-<img width="500" alt="New Instrument" src="https://ganymede-bio.mo.cloudinary.net/apiServer/NewInstrumentForm.png" />
+Runs are instances of Process execution, tracking the progress and data generated during the workflow.  
 
-The New Instrument Form allows you to populate instrument characteristics relevant for tracking. The only required field is the **Name** field, which must be unique within the environment.
-
-### Adding instruments in bulk
-
-If you have a list of instruments to add, you can upload them using the Bulk Upload Instruments feature. 
-
-<img width="500" alt="Bulk Upload Instruments" src="https://ganymede-bio.mo.cloudinary.net/apiServer/BulkUploadInstruments.png" />
-
-To use this feature, download the template CSV file in the bulk upload instruments form and fill it out, adding 
-one instrument per row. 
-
-Upon upload, the CSV file will be validated by Ganymede. If any errors are found, a descriptive error message is displayed, explaining the issue.
-
-:::note
-The "Connection Id" column in the instrument bulk upload template file requires Connection ID.  This differs from the form for adding instruments individually, which requests a Connection name from a dropdown list.  Connection ID can be found on the Connection page.
-:::
-
+<img alt="Process Runs" src="https://ganymede-bio.mo.cloudinary.net/apiServer/ProcessRuns_20251110.png" />
