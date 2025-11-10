@@ -289,6 +289,7 @@ module.exports = {
           {
             type: 'category',
             label: 'Developer Configuration',
+            collapsed: false,
             items: [
               {
                 type: 'doc',
