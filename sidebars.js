@@ -14,7 +14,7 @@ module.exports = {
       {
         type: 'category',
         label: 'Introduction',
-        collapsed: false,
+        collapsed: true,
         items: [
           {
             type: 'doc',
@@ -183,7 +183,7 @@ module.exports = {
       {
         type: 'category',
         label: 'Processes, Unit Operations, and Instruments',
-        collapsed: false,
+        collapsed: true,
         items: [
           {
             type: 'doc',
@@ -239,27 +239,20 @@ module.exports = {
       },
       {
         type: 'category',
-        label: 'Dashboards and Visualization',
+        label: 'Dashboards',
         collapsed: true,
         items: [
           {
-            type: 'category',
-            label: 'Dashboards',
-            collapsed: false,
-            items: [
-              {
-                type: 'doc',
-                id: 'app/visualization/Dashboards',
-                label: 'Building Dashboards'
-              },
-              {
-                type: 'doc',
-                label: 'Ganymede Metadata Tables',
-                id: 'app/visualization/SystemMetadata'
-              },
-              'app/visualization/DashboardTips']
+            type: 'doc',
+            id: 'app/visualization/Dashboards',
+            label: 'Building Dashboards'
           },
-          'app/visualization/AnalysisNotebook'
+          {
+            type: 'doc',
+            label: 'Ganymede Metadata Tables',
+            id: 'app/visualization/SystemMetadata'
+          },
+          'app/visualization/DashboardTips'
         ]
       },
       {
@@ -281,50 +274,38 @@ module.exports = {
       {
         type: 'category',
         label: 'Environment Configuration',
-        collapsed: true,
+        collapsed: false,
         items: [
-          'app/admin/AdminControls',
           {
             type: 'doc',
-            id: 'app/admin/ExternalPlatform',
-            label: 'External Platform Integration'
-          },             
-          {
-            type: 'doc',
-            id: 'app/configuration/AgentToS3BucketConfig',
-            label: 'Connect Agent to S3 Bucket'
+            id: 'app/configuration/SSOConfig',
+            label: 'SSO/SAML Configuration'
           },
           {
             type: 'doc',
-            id: 'app/configuration/APISetup',
-            label: 'Connect to Ganymede API'
+            id: 'app/admin/AdminControls',
+            label: 'Ganymede Admin Settings'
           },
-          {
-            type: 'doc',
-            id: 'app/configuration/SelfManagedRepo',
-            label: 'Self Managed Repo'
-          },
-
           {
             type: 'category',
-            label: 'Authentication',
+            label: 'Developer Configuration',
             items: [
               {
                 type: 'doc',
-                id: 'app/configuration/SharedComputerAutoLogout',
-                label: 'Shared Computer Auto Logout'
+                id: 'app/configuration/SelfManagedRepo',
+                label: 'Self-Managed Git Repositories'
               },
               {
                 type: 'doc',
-                id: 'app/configuration/SSOConfig',
-                label: 'SSO/SAML Configuration'
+                id: 'app/configuration/APISetup',
+                label: 'Accessing Ganymede API'
               }
             ]
           },
           {
             type: 'category',
             label: 'Events',
-            collapsed: false,
+            collapsed: true,
             items: [
               {
                 type: 'doc',
@@ -342,6 +323,16 @@ module.exports = {
                 label: 'Webhook Event-Driven Flows'
               }
             ]
+          },
+          {
+            type: 'doc',
+            id: 'app/admin/ExternalPlatform',
+            label: 'External Platform Integration'
+          },
+          {
+            type: 'doc',
+            id: 'app/configuration/AgentToS3BucketConfig',
+            label: 'Connect Agent to S3 Bucket'
           },
           {
             type: 'doc',
