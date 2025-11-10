@@ -572,3 +572,6 @@ TableId
 ConfiguringProcesses
 Lysis
 Thermocycler
+InstrumentId
+processId
+unitOperationId
