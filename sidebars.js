@@ -1,3 +1,5 @@
+const { type } = require('os')
+
 nodeAnalysis = require('./docs/nodes/Analysis/sidebar.json')
 nodeApp = require('./docs/nodes/App/sidebar.json')
 nodeFile = require('./docs/nodes/File/sidebar.json')
@@ -179,9 +181,21 @@ module.exports = {
         ]
       },
       {
-        type: 'doc',
-        id: 'app/processes/Processes',
+        type: 'category',
         label: 'Processes, Unit Operations, and Instruments',
+        collapsed: false,
+        items: [
+          {
+            type: 'doc',
+            id: 'app/processes/Processes',
+            label: 'Overview'
+          },
+          {
+            type: 'doc',
+            id: 'app/processes/ConfiguringProcesses',
+            label: 'Configuring Processes'
+          }
+        ]
       },
       {
         type: 'category',
