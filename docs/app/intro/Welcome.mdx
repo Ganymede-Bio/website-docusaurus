@@ -35,20 +35,21 @@ Some common use cases for Ganymede are:
 
 The Ganymede Platform consists of a set of flexible, interchangeable components that enable data acquisition, processing, observation, and delivery to other systems.
 
-### [Flows](app/flows/FlowEditor)
+### [Modular Analysis](app/ma/ModularAnalysisOverview.mdx)
 
-Flows provide a Python/SQL development environment where [code changes are tracked](app/flows/FlowEditor#historical-flow-versions) and runtime execution occurs on versioned runtimes, ensuring processing stability and reproducibility.  
+Modular Analysis enables interactive web applications to be developed in Python notebooks and deployed to users in Ganymede.
 
 <div style={{textAlign: 'center'}}>
-  <a href="app/flows/FlowEditor">
-    <img alt="Ganymede sample flow"
-          src="https://ganymede-bio.mo.cloudinary.net/apiServer/Ganymede_Runtime_Architecture20240814.png"
-          width="70%" />
+  <a href="app/ma/ModularAnalysisOverview">
+    <img
+          alt="Example Modular Analysis"
+          src="https://ganymede-bio.mo.cloudinary.net/apiServer/ModularAnalysisExample_20250403.png"
+          width="80%"
+      
+    />
   </a>
 </div>
 &nbsp;
-
-[Nodes](../flows/NodeEditor.mdx) within a Flow are equipped with editor notebooks, providing a testing environment for quickly recreating [run contexts from prior executions](sdk/GanymedeClass.mdx).  This enables users to rapidly debug, develop, and deploy pipeline jobs.
 
 ### [Agents](app/agents/Agent)
 
@@ -66,19 +67,30 @@ Agents are locally installed executables for delivering data to and acquiring da
 </div>
 &nbsp;
 
+### [Flows](app/flows/FlowEditor)
 
-### [Modular Analysis](app/ma/ModularAnalysisOverview.mdx)
-
-Modular Analysis enables interactive web applications to be developed in Python notebooks and deployed to users in Ganymede.
+Flows provide a Python/SQL development environment where [code changes are tracked](app/flows/FlowEditor#historical-flow-versions) and runtime execution occurs on versioned runtimes, ensuring processing stability and reproducibility.  
 
 <div style={{textAlign: 'center'}}>
-  <a href="app/ma/ModularAnalysisOverview">
-    <img
-          alt="Example Modular Analysis"
-          src="https://ganymede-bio.mo.cloudinary.net/apiServer/ModularAnalysisExample_20250403.png"
-          width="80%"
-      
-    />
+  <a href="app/flows/FlowEditor">
+    <img alt="Ganymede sample flow"
+          src="https://ganymede-bio.mo.cloudinary.net/apiServer/Ganymede_Runtime_Architecture20251110.png"
+          width="70%" />
+  </a>
+</div>
+&nbsp;
+
+[Nodes](../flows/NodeEditor.mdx) within a Flow are equipped with editor notebooks, providing a testing environment for quickly recreating [run contexts from prior executions](sdk/GanymedeClass.mdx).  This enables users to rapidly debug, develop, and deploy pipeline jobs.
+
+### [Processes and Unit Operations](app/processes/Processes.mdx)
+
+Processes and Unit Operations allow users to model and track lab workflows, linking data capture and processing to specific steps in a process.
+
+<div style={{textAlign: 'center'}}>
+  <a href="app/flows/FlowEditor">
+    <img alt="Ganymede sample flow"
+          src="https://ganymede-bio.mo.cloudinary.net/apiServer/ProcessView.png"
+          width="70%" />
   </a>
 </div>
 &nbsp;
@@ -116,9 +128,9 @@ Data Explorer lets users execute SQL queries on tabular data captured by Agents 
 </div>
 &nbsp;
 
-### [Dashboards](app/visualization/Dashboards) and [Analysis Notebooks](app/visualization/AnalysisNotebook)
+### [Dashboards](app/visualization/Dashboards)
 
-These tools offer different modes for exploring and visualizing data within Ganymede.  Dashboards offer no-code interfaces for filtering subsets of data, and are updated as underlying data collected is updated.
+Dashboards offer no-code interfaces for filtering subsets of data, and are updated as underlying data collected is updated.
 
 <div style={{textAlign: 'center'}}>
   <a href="app/visualization/Dashboards">
@@ -161,3 +173,11 @@ Or check out one or more of our Quickstart guides:
 * [Create an Agent](app/agents/QuickstartBuildAgent.mdx) to automatically capture data from lab PCs
 * [Build a Flow](app/flows/QuickstartBuildFlow.mdx) to process structured and unstructured data
 * [Create a dashboard](app/visualization/QuickstartCreateDashboard.mdx) to visualize data
+
+For administrators, check out our [Admin Settings](app/admin/AdminControls.mdx) documentation to manage users and environment settings.
+
+For developers, check out our [self-managed repo](app/configuration/SelfManagedRepo.mdx) and [API setup](app/configuration/APISetup.mdx) documentation.
+
+## Need Help?
+
+If you need assistance, please reach out to Ganymede Support through the [Support page](app/Support) or contact your organization's Ganymede administrator.

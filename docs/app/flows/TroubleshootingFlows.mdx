@@ -51,3 +51,7 @@ If you are still unable to run the Flow, please [reach out to Ganymede Support](
 Error committing file 400 - \{“statusCode”: 400, “message”: “Creating a file with this API is prohibited, attempted to create dags/…/function.py\}
 
 This error occurs when you try to save a notebook after modifying the name of the respective node in the Flow. You can copy and paste your new code into a reopened notebook to save the changes.
+
+#### Issue: I received a 5xx status code while saving a notebook.
+
+This error may occur due to intermittent network issues or client-side problems.  To resolve it, copy and paste all code in the execute cell of the notebook to a text editor, close the notebook, reopen it, and paste the code back into the execute cell before saving again.

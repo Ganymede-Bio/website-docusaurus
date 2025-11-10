@@ -8,10 +8,18 @@ displayed_sidebar: releaseSideBar
 **Improvements**
 - **Web UI**: Added a table view of Instrument Types to allow for easier scanning and sorting of Instrument Types
 - **Web UI**: When connecting Instrument Types to Instruments, the model is now displayed to help differentiate between similar Instrument Types
-- **Node**: Added file_recency_days attribute to S3_Write node to allow users to limit the number of days back to look for files to sync, improving sync performance
+- **Node**: Added file_recency_days attribute to S3_Write node to allow users to limit the number of days back to look for files to sync, improving sync performance.
 
 **Bug Fixes**
-- **API**: Fixed an issue where API calls to retrieve Flow code was failing
 - **Flow**: Fixed an issue where Table writes in Flows were not being tracked
+- **API**: Fixed an issue where API calls to [retrieve Flow code](../api/get-repository-commits.api.mdx) was failing
+- **Self-Managed Repos**: Fixed various issues related to self-managed Git repositories:
+  - Flow and Node deletions were not synced to local repos
+  - Local repo changes were not being detected properly
+
+  To address these issues, users with self-managed Git repositories will need to update their local versions of [flow-commit-action](https://github.com/Ganymede-Bio/flow-commit-action/tree/main) and [flow-pull-action](https://github.com/Ganymede-Bio/flow-pull-action) to latest.
+
+**Documentation**
+- **Processes**: Added documentation for setting up [Processes, Unit Operations, and Instruments](../app/processes/Processes.mdx)
 
 **Agent Version**: 5.5.84

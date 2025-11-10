@@ -92,6 +92,7 @@ If you run into any challenges configuring the repo, you can compare your self-m
 - **Automatic Deployment**: For automatic deployments, you can set up a GitHub Action to trigger on push events to the repository and use a modified version of the [`flow-commit-action`](https://github.com/Ganymede-Bio/flow-commit-action/blob/main/action.yml)
 
 ### Customizing Code Management
+
 - The APIs to manage committing to your environments are available in the [Ganymede API documentation](https://docs.ganymede.bio/api)
 
 ## Limitations
@@ -100,3 +101,8 @@ If you run into any challenges configuring the repo, you can compare your self-m
 - The author email in the `deploy-from-action` must match an email that is registered in Ganymede
 - If using the push GitHub event, the committer email address is used by default
 :::
+
+## Troubleshooting
+
+- If you encounter issues with syncing or deploying flows, ensure that the GitHub Actions workflows have the correct permissions and that the API tokens are valid.
+- Ensure that you are on the latest version of the [flow-commit-action](https://github.com/Ganymede-Bio/flow-commit-action/tree/main) and [flow-pull-action](https://github.com/Ganymede-Bio/flow-pull-action) actions.
