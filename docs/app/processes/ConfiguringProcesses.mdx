@@ -12,9 +12,15 @@ Once a Process is defined, individual Run creation can be performed either manua
 
 Run tracking and retrieval are done by API calls from Agents and Flows, referencing the corresponding run + scoped to the relevant unit of execution.  This maximizes flexibility in how Processes are executed and tracked.
 
-- [Instrument Runs](../../api/create-instrument-run.api.mdx) track execution of individual Instruments.
-- [Unit Operation Runs](../../api/create-unit-operation-run.api.mdx) track execution of Unit Operations.
-- [Process Runs](../../api/create-process-run.api.mdx) track execution of entire Processes.
+- [Instrument Runs](../../api/get-instrument-run.api.mdx) track execution of individual Instruments.
+- [Unit Operation Runs](../../api/get-unit-operation-run.api.mdx) track execution of Unit Operations.
+- [Process Runs](../../api/get-process-run.api.mdx) track execution of entire Processes.
+
+:::tip
+
+InstrumentId, unitOperationId, and processId are each small integers that can be found in the URL when navigating to the corresponding Instrument, Unit Operation, or Process page in the Web UI.  Each integer increments by 1 for each new item created.
+
+:::
 
 ## Instruments
 
