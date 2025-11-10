@@ -16,13 +16,14 @@ for users with different roles to navigate to the pieces of a Process relevant f
 
 The Processes page is built around the key concepts laid out below, which each have their own dedicated pages within the Processes section in the Web UI.  
 
-- [**Runs**](#runs): Instances of Process execution, tracking the progress and data generated during the workflow.
 - [**Processes**](#processes): High-level representations of laboratory workflows.
-- [**Unit Operations**](#unit-operations): Individual steps within a Process, each defined by a sequence of Instrument Types.
+- [**Unit Operations**](#unit-operations): Individual steps within a Process, each defined by a set of Instrument Types.
 - [**Instrument Types**](#instrument-types): Categories of Instruments used within Unit Operations.  
-- [**Instruments**](#instruments): Physical devices associated with specific Instrument Types.  These can be associated with individual [Connections](../agents/Agent.mdx) for a given Agent.
+- [**Instruments**](#instruments): Physical devices associated with specific Instrument Types.  These can be linked 1:1 to individual [Agent Connections](../agents/Agent.mdx).
 
-In general, configuration would be done from bottom to top, starting with Instruments, then Instrument Types, then Unit Operations, and finally Processes.  Once a Process is defined, users can create Runs to track execution of the Process.
+[**Runs**](#runs) are instances of Instrument, Unit Operation, or Process execution, scoping data and Flow runs to the relevant unit of execution.
+
+### Example Workflow - DNA Extraction
 
 To contextualize these concepts, consider the following example workflow:
 
@@ -39,11 +40,17 @@ Similarly, Unit Operations and Instrument Types can also be tracked without dire
 
 :::
 
-### Runs
+### Example Usage Scenarios
 
-Runs are instances of Process execution, tracking the progress and data generated during the workflow.  
+- A lab technician can quickly navigate to the "DNA Extraction" Process to view the associated Flows and data generated during execution.
+- A lab manager can monitor the status of Instruments and ensure they are functioning correctly during a Process run.
+- A data analyst can access the data generated from specific Unit Operations within a Process for analysis.
+- A quality control specialist can review the execution of a Process and its associated Runs to ensure compliance with protocols.
+- A lab administrator can configure new Processes, Unit Operations, and Instrument Types to reflect changes in laboratory workflows.
+- A maintenance team can track the uptime and performance of Instruments associated with specific Processes.
+- A researcher can analyze the efficiency of different Unit Operations within a Process to optimize workflows.
 
-<img alt="Process Runs" src="https://ganymede-bio.mo.cloudinary.net/apiServer/ProcessRuns_20251110.png" />
+## Workflow Configuration
 
 ### Processes
 
@@ -74,3 +81,11 @@ The Instruments page allows you to track equipment within Ganymede, with or with
 <img alt="Instruments Table" src="https://ganymede-bio.mo.cloudinary.net/apiServer/InstrumentsTable.png" />
 
 Each instrument can be associated with a [Connection](../agents/Agent.mdx), which allows you to monitor instrument uptime and programmatically interact with the lab instrument.
+
+## Execution Tracking
+
+### Runs
+
+Runs are instances of Process execution, tracking the progress and data generated during the workflow.  
+
+<img alt="Process Runs" src="https://ganymede-bio.mo.cloudinary.net/apiServer/ProcessRuns_20251110.png" />

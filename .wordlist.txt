@@ -568,5 +568,7 @@ AlertOutlined
 DatabaseOutlined
 RocketOutlined
 Downsampling
-
 TableId
+ConfiguringProcesses
+Lysis
+Thermocycler
