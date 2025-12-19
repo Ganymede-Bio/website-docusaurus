@@ -340,6 +340,24 @@ const sidebar: SidebarsConfig = {
         },
       ],
     },
+        {
+      type: "category",
+      label: "Instruments",
+      items: [
+        {
+          type: "doc",
+          id: "api/get-instruments",
+          label: "getInstruments",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "api/get-instrument",
+          label: "getInstrument",
+          className: "api-method get",
+        },
+      ],
+    },
     {
       type: "category",
       label: "ModularAnalysis",
