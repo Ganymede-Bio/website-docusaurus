@@ -370,6 +370,37 @@ const sidebar: SidebarsConfig = {
         },
       ],
     },
+    {
+      type: "category",
+      label: "AppConfigs",
+      items: [
+        {
+          type: "doc",
+          id: "api/get-app-configs",
+          label: "getAppConfigs",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "api/create-app-configs",
+          label: "createAppConfigs",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "api/delete-app-configs",
+          label: "deleteAppConfigs",
+          className: "api-method delete",
+        },
+        {
+          type: "doc",
+          id: "api/update-app-configs",
+          label: "updateAppConfigs",
+          className: "api-method patch",
+        },        
+      ],
+    },
+
   ],
 };
 
