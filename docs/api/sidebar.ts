@@ -382,6 +382,12 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "api/get-app-config",
+          label: "getAppConfig",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
           id: "api/create-app-config",
           label: "createAppConfig",
           className: "api-method post",
@@ -396,7 +402,7 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "api/update-app-config",
           label: "updateAppConfig",
-          className: "api-method patch",
+          className: "api-method put",
         },        
       ],
     },
