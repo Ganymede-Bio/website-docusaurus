@@ -376,8 +376,8 @@ const sidebar: SidebarsConfig = {
       items: [
         {
           type: "doc",
-          id: "api/get-app-config",
-          label: "getAppConfig",
+          id: "api/get-app-configs",
+          label: "getAppConfigs",
           className: "api-method get",
         },
         {
