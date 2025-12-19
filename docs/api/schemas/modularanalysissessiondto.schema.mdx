@@ -6,7 +6,7 @@ sidebar_label: "ModularAnalysisSessionDTO"
 hide_title: true
 hide_table_of_contents: true
 schema: true
-sample: {"id":"string","modularAnalysis":{"id":0,"appName":"string","appFolder":"string","description":"string"},"user":"string","startTime":"2024-01-15T10:00:00Z","endTime":"2024-01-15T12:00:00Z","lastActivityTime":"2024-01-15T12:00:00Z"}
+sample: {"id":"string","modularAnalysis":{"id":0,"appName":"string","appFolder":"string","description":"string","hidden":false},"user":"string","startTime":"2024-01-15T10:00:00Z","endTime":"2024-01-15T12:00:00Z","lastActivityTime":"2024-01-15T12:00:00Z"}
 custom_edit_url: null
 ---
 
@@ -25,7 +25,7 @@ import Heading from "@theme/Heading";
 
 
 <Schema
-  schema={{"type":"object","properties":{"id":{"type":"string","description":"Unique identifier for the modular analysis session"},"modularAnalysis":{"description":"Modular analysis associated with session","nullable":true,"allOf":[{"type":"object","properties":{"id":{"type":"number","description":"Unique identifier for the modular analysis","nullable":true},"appName":{"type":"string","description":"Name of the modular analysis"},"appFolder":{"type":"string","description":"Folder name where the modular analysis is stored"},"description":{"type":"string","description":"Description of the modular analysis"}},"required":["appName","appFolder","description"],"title":"ModularAnalysisDTO"}]},"user":{"type":"string","description":"User who started the session"},"startTime":{"format":"date-time","type":"string","description":"Start date and time of the modular analysis session","example":"2024-01-15T10:00:00Z"},"endTime":{"format":"date-time","type":"string","nullable":true,"description":"End date and time of the modular analysis session","example":"2024-01-15T12:00:00Z"},"lastActivityTime":{"format":"date-time","type":"string","description":"Last activity date and time of the modular analysis session","example":"2024-01-15T12:00:00Z"}},"required":["id","user","startTime","lastActivityTime"],"title":"ModularAnalysisSessionDTO"}}
+  schema={{"type":"object","properties":{"id":{"type":"string","description":"Unique identifier for the modular analysis session"},"modularAnalysis":{"description":"Modular analysis associated with session","nullable":true,"allOf":[{"type":"object","properties":{"id":{"type":"number","description":"Unique identifier for the modular analysis","nullable":true},"appName":{"type":"string","description":"Name of the modular analysis"},"appFolder":{"type":"string","description":"Folder name where the modular analysis is stored"},"description":{"type":"string","description":"Description of the modular analysis"},"hidden":{"type":"boolean","description":"Whether the modular analysis is hidden from non-internal users","default":false}},"required":["appName","appFolder","description"],"title":"ModularAnalysisDTO"}]},"user":{"type":"string","description":"User who started the session"},"startTime":{"format":"date-time","type":"string","description":"Start date and time of the modular analysis session","example":"2024-01-15T10:00:00Z"},"endTime":{"format":"date-time","type":"string","nullable":true,"description":"End date and time of the modular analysis session","example":"2024-01-15T12:00:00Z"},"lastActivityTime":{"format":"date-time","type":"string","description":"Last activity date and time of the modular analysis session","example":"2024-01-15T12:00:00Z"}},"required":["id","user","startTime","lastActivityTime"],"title":"ModularAnalysisSessionDTO"}}
   schemaType={"response"}
 >
   

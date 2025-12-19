@@ -1,0 +1,70 @@
+---
+id: get-instruments
+title: "getInstruments"
+description: "Get all Instruments in an Environment."
+sidebar_label: "getInstruments"
+hide_title: true
+hide_table_of_contents: true
+api: eJyNVcFy2zgM/RUOTt0ZNk72qJvbph132+7ONp0eMj7QEhyxkUiWhNx1Nfz3Dijakmyn2VxCUcATHvAe3EOFofTakbYGCniHJFTTiJUJ5LsWDQWhjVBG3Jqd9tbw1RVIsA694qRVBQU8IE0yQIJTXrVI6AMU9z0Y1SIUgCMGSPD4vdMeKyjIdyhBcwFOUQ0SQlljq6DogfaOUwN5bR4gxjUnBmdNwMDv/7y+5n9zGh90IGG3Yl5UaQ3xp4selHONLhOBxbfAOf35N5X3ag8SNGEbJvd28w1LZuA8t4H0UImuJjGmazfoIUooPSrCakkX2MjcmdMX8oTPJ9Ui86EahT5y4vzGDiyex/iQIy/jBPRaNc+jfE5xlzFaJFUpujC2U5SPOfIyTmmNwZKsfz0cksrC+ZSXPB+GKI9xYlUFQVaoEGypFaH4oakWVOsgfGdAPjfbo85Yj4ei7vYOVxeme0prlJvgFLF6I7bWnzBMR2VKTB8ZTXDPAprKJYtjLYE0NTjDf3P3N8T0x6MrO69pn5ymnH75iHxeR9nDK1Qe/bKjOt0wlnpgT8I/3abR5dJpkDC1yTrNsbbZ1snLnA2L3c1iYuBFP3mICz1zWkC/O3i/8w0UUBO5UCwWfW0DxbPOgYSd8lptmsFLHDUMfKu6hhiAb2Ly/4HwZzbsEH+kPZrX6b8wTZjxa1RVGljeRIf4KGctykuAIzbpGmQ+vLW+VVzH+693o4qY1QjKGNbrn4MhTyneGkIv3n+9E2Qf0ZxUNghuaxODPO6LXUIfhoebq+ur67zVVMndYgxnA7UqrYNc1dlunmH241b8/8s/syf8jxauUdpwH9Oc+6yWe9jdgDxZ+MX8Uc9VN4z8Hvp+owJ+8U2MfP29Q5/kPCokyarSgc8VFFvVBPwNrRf/Zo/9IZ6q/aAZs09CbLrc/iSpGYu4jvIwMy5jiFiWJTqa5J79vsSpr97dsoZUltwo2Mck2Hxg9It1HbR7KG/Q8RPBfT8YIcZj/PDqyYyjVYZobtA6xvgLvt3P3g==
+sidebar_class_name: "get api-method"
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"getInstruments"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/v1/environment/{environment}/instruments"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Get all Instruments in an Environment.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"name":"environment","required":true,"in":"path","schema":{"type":"string"}}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={undefined}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":"List of Instruments","content":{"application/json":{"schema":{"type":"array","items":{"type":"object","properties":{"id":{"type":"number"},"createdAt":{"type":"string"},"name":{"type":"string","description":"Name of the instrument"},"location":{"type":"string","description":"Location of the instrument"},"serial":{"type":"string","description":"Serial of the instrument"},"metadata":{"type":"string","description":"Metadata of the instrument"},"connectorConnectionIds":{"description":"Array of connection Ids to associate with this run","type":"array","items":{"type":"string"}},"instrumentTypeId":{"type":"number","description":"Instrument Type ID for the instrument instance"}},"required":["id","createdAt","name"],"title":"InstrumentDTO"}}}}}}}
+>
+  
+</StatusCodes>
+
+
+      

@@ -177,7 +177,7 @@ const sidebar: SidebarsConfig = {
       {
         type: "doc",
         id: "api/create-instrument-run",
-        label: "createInstrumentRun",
+        label: "createInstrumentRun"
         className: "api-method post"},
       {
         type: "doc",

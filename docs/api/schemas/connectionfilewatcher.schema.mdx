@@ -6,7 +6,7 @@ sidebar_label: "ConnectionFileWatcher"
 hide_title: true
 hide_table_of_contents: true
 schema: true
-sample: {"trigger":"file_watcher","inputPath":"string","ignorePatterns":["string"],"streamContents":true,"ignoreHiddenFiles":true,"ignoreHiddenDirectories":true,"stableTime":5}
+sample: {"trigger":"file_watcher","inputPath":"","ignorePatterns":["string"],"streamContents":true,"ignoreHiddenFiles":true,"ignoreHiddenDirectories":true,"stableTime":5}
 custom_edit_url: null
 ---
 
@@ -25,7 +25,7 @@ import Heading from "@theme/Heading";
 
 
 <Schema
-  schema={{"type":"object","properties":{"trigger":{"allOf":[{"type":"string","enum":["file_watcher","cron","cloud_watcher","one_shot"],"title":"ConnectorTriggerOptions"}]},"inputPath":{"type":"string"},"ignorePatterns":{"default":[],"type":"array","items":{"type":"string"}},"streamContents":{"type":"boolean","default":true},"ignoreHiddenFiles":{"type":"boolean","default":true},"ignoreHiddenDirectories":{"type":"boolean","default":true},"stableTime":{"type":"number","default":5}},"required":["trigger","inputPath"],"title":"ConnectionFileWatcher"}}
+  schema={{"type":"object","properties":{"trigger":{"allOf":[{"type":"string","enum":["file_watcher","cron","cloud_watcher","one_shot"],"title":"ConnectorTriggerOptions"}]},"inputPath":{"type":"string","default":""},"ignorePatterns":{"default":[],"type":"array","items":{"type":"string"}},"streamContents":{"type":"boolean","default":true},"ignoreHiddenFiles":{"type":"boolean","default":true},"ignoreHiddenDirectories":{"type":"boolean","default":true},"stableTime":{"type":"number","default":5}},"required":["trigger","inputPath"],"title":"ConnectionFileWatcher"}}
   schemaType={"response"}
 >
   

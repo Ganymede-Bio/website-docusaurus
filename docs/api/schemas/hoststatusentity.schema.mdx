@@ -6,7 +6,7 @@ sidebar_label: "HostStatusEntity"
 hide_title: true
 hide_table_of_contents: true
 schema: true
-sample: {"status":"Live","id":"string","latestPingTimestamp":"2024-07-29T15:51:28.071Z"}
+sample: {"status":"Live","errorMessage":"string","id":"string","latestPingTimestamp":"2024-07-29T15:51:28.071Z"}
 custom_edit_url: null
 ---
 
@@ -25,7 +25,7 @@ import Heading from "@theme/Heading";
 
 
 <Schema
-  schema={{"type":"object","properties":{"status":{"allOf":[{"type":"string","enum":["Live","Updating","Disconnected","Shutdown","Deprecated","Error"],"title":"HostStatus"}]},"id":{"type":"string"},"latestPingTimestamp":{"format":"date-time","type":"string"}},"required":["status","id"],"title":"HostStatusEntity"}}
+  schema={{"type":"object","properties":{"status":{"allOf":[{"type":"string","enum":["Live","Updating","Disconnected","Shutdown","Deprecated","Error"],"title":"HostStatus"}]},"errorMessage":{"type":"string"},"id":{"type":"string"},"latestPingTimestamp":{"format":"date-time","type":"string"}},"required":["status","id"],"title":"HostStatusEntity"}}
   schemaType={"response"}
 >
   
