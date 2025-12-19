@@ -25,7 +25,6 @@ EXCLUDE_PATTERNS=(
   "connector.schema"
   "connectorconnection.schema"
   "customimage.schema"
-  "panelapp.schema"
   "dashboard.schema"
   "chart.schema"
   "dataset.schema"

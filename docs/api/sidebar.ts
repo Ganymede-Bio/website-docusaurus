@@ -2,6 +2,7 @@ import type { SidebarsConfig } from "@docusaurus/plugin-content-docs";
 
 const sidebar: SidebarsConfig = {
   apisidebar: [
+
     {
       type: "category",
       label: "Agents",
@@ -334,6 +335,18 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "api/get-process-runs-by-process-id",
           label: "getProcessRunsByProcessId",
+          className: "api-method get",
+        },
+      ],
+    },
+    {
+      type: "category",
+      label: "Processes",
+      items: [
+        {
+          type: "doc",
+          id: "api/get-process",
+          label: "getProcess",
           className: "api-method get",
         },
       ],
