@@ -24,7 +24,6 @@ EXCLUDE_PATTERNS=(
   "get-agent-templates"
   "connector.schema"
   "connectorconnection.schema"
-  "customimage.schema"
   "dashboard.schema"
   "chart.schema"
   "dataset.schema"
