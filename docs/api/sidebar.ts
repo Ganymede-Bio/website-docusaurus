@@ -2,7 +2,6 @@ import type { SidebarsConfig } from "@docusaurus/plugin-content-docs";
 
 const sidebar: SidebarsConfig = {
   apisidebar: [
-
     {
       type: "category",
       label: "Agents",
@@ -372,42 +371,6 @@ const sidebar: SidebarsConfig = {
           id: "api/get-modular-analysis-sessions",
           label: "getModularAnalysisSessions",
           className: "api-method get",
-        },
-      ],
-    },
-    {
-      type: "category",
-      label: "App Configs",
-      items: [
-        {
-          type: "doc",
-          id: "api/create-app-config",
-          label: "createAppConfig",
-          className: "api-method post",
-        },
-        {
-          type: "doc",
-          id: "api/update-app-config",
-          label: "updateAppConfig",
-          className: "api-method put",
-        },
-        {
-          type: "doc",
-          id: "api/get-app-configs",
-          label: "getAppConfigs",
-          className: "api-method get",
-        },
-        {
-          type: "doc",
-          id: "api/get-app-config",
-          label: "getAppConfig",
-          className: "api-method get",
-        },
-        {
-          type: "doc",
-          id: "api/delete-app-config",
-          label: "deleteAppConfig",
-          className: "api-method delete",
         },
       ],
     },
