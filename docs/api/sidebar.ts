@@ -341,18 +341,6 @@ const sidebar: SidebarsConfig = {
     },
     {
       type: "category",
-      label: "Processes",
-      items: [
-        {
-          type: "doc",
-          id: "api/get-process",
-          label: "getProcess",
-          className: "api-method get",
-        },
-      ],
-    },
-    {
-      type: "category",
       label: "Instruments",
       items: [
         {
