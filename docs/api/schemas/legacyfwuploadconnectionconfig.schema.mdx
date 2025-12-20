@@ -6,7 +6,7 @@ sidebar_label: "LegacyFWUploadConnectionConfig"
 hide_title: true
 hide_table_of_contents: true
 schema: true
-sample: {"triggerConfig":{"trigger":"file_watcher","inputPath":"string","ignorePatterns":["string"],"streamContents":true,"ignoreHiddenFiles":true,"ignoreHiddenDirectories":true,"stableTime":5},"connectorType":"legacy_file_watcher_upload_run_flow"}
+sample: {"triggerConfig":{"trigger":"file_watcher","inputPath":"","ignorePatterns":["string"],"streamContents":true,"ignoreHiddenFiles":true,"ignoreHiddenDirectories":true,"stableTime":5},"connectorType":"legacy_file_watcher_upload_run_flow"}
 custom_edit_url: null
 ---
 
@@ -25,7 +25,7 @@ import Heading from "@theme/Heading";
 
 
 <Schema
-  schema={{"type":"object","properties":{"triggerConfig":{"type":"object","properties":{"trigger":{"allOf":[{"type":"string","enum":["file_watcher","cron","cloud_watcher","one_shot"],"title":"ConnectorTriggerOptions"}]},"inputPath":{"type":"string"},"ignorePatterns":{"default":[],"type":"array","items":{"type":"string"}},"streamContents":{"type":"boolean","default":true},"ignoreHiddenFiles":{"type":"boolean","default":true},"ignoreHiddenDirectories":{"type":"boolean","default":true},"stableTime":{"type":"number","default":5}},"required":["trigger","inputPath"],"title":"ConnectionFileWatcher"},"connectorType":{"allOf":[{"type":"string","enum":["legacy_file_watcher_upload_run_flow","legacy_file_watcher_upload","legacy_cloud_watcher_save_file","file_watcher_upload_run_flow","file_watcher_upload","cron_upload_run_flow","cron_upload","cloud_watcher_save_file","one_shot_upload_run_flow","one_shot_upload","application_startup_agent","application_cleanup_agent","application_cleanup_flow_agent","automatic_flow_grouping","upload_after_pause","cron_stream_data"],"title":"ConfigurableConnectorsTypes"}]}},"required":["triggerConfig","connectorType"],"title":"LegacyFWUploadConnectionConfig"}}
+  schema={{"type":"object","properties":{"triggerConfig":{"type":"object","properties":{"trigger":{"allOf":[{"type":"string","enum":["file_watcher","cron","cloud_watcher","one_shot"],"title":"ConnectorTriggerOptions"}]},"inputPath":{"type":"string","default":""},"ignorePatterns":{"default":[],"type":"array","items":{"type":"string"}},"streamContents":{"type":"boolean","default":true},"ignoreHiddenFiles":{"type":"boolean","default":true},"ignoreHiddenDirectories":{"type":"boolean","default":true},"stableTime":{"type":"number","default":5}},"required":["trigger","inputPath"],"title":"ConnectionFileWatcher"},"connectorType":{"allOf":[{"type":"string","enum":["legacy_file_watcher_upload_run_flow","legacy_file_watcher_upload","legacy_cloud_watcher_save_file","file_watcher_upload_run_flow","file_watcher_upload","cron_upload_run_flow","cron_upload","cloud_watcher_save_file","one_shot_upload_run_flow","one_shot_upload","application_startup_agent","application_cleanup_agent","application_cleanup_flow_agent","automatic_flow_grouping","upload_after_pause","cron_stream_data"],"title":"ConfigurableConnectorsTypes"}]}},"required":["triggerConfig","connectorType"],"title":"LegacyFWUploadConnectionConfig"}}
   schemaType={"response"}
 >
   

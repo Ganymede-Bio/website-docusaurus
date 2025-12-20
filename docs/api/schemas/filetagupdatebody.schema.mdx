@@ -6,7 +6,7 @@ sidebar_label: "FileTagUpdateBody"
 hide_title: true
 hide_table_of_contents: true
 schema: true
-sample: {"tagsToRemove":[{"id":"string","type":"string","value":"string"}],"tagsToAdd":[{"id":"string","type":"string","value":"string"}],"files":["string"],"dry_run":true}
+sample: {"tagsToRemove":[{"id":"string","type":"string","value":"string","url":"string"}],"tagsToAdd":[{"id":"string","type":"string","value":"string","url":"string"}],"files":[{"uri":"string","name":"string","creator":"string","createdAt":0,"size":0,"tags":[{"id":"string","type":"string","value":"string","url":"string"}]}],"dry_run":true}
 custom_edit_url: null
 ---
 
@@ -25,7 +25,7 @@ import Heading from "@theme/Heading";
 
 
 <Schema
-  schema={{"type":"object","properties":{"tagsToRemove":{"default":[],"type":"array","items":{"type":"object","properties":{"id":{"type":"string","description":"User defined unique identifier for the tag"},"type":{"type":"string","description":"Id of the tag type"},"value":{"type":"string","description":"User defined display value for the tag"}},"required":["type","value"],"title":"Tag"}},"tagsToAdd":{"default":[],"type":"array","items":{"type":"object","properties":{"id":{"type":"string","description":"User defined unique identifier for the tag"},"type":{"type":"string","description":"Id of the tag type"},"value":{"type":"string","description":"User defined display value for the tag"}},"required":["type","value"],"title":"Tag"}},"files":{"minItems":1,"type":"array","items":{"type":"string"}},"dry_run":{"type":"boolean","description":"If true, perform a dry run without actually modifying file tags"}},"required":["tagsToRemove","tagsToAdd","files"],"title":"FileTagUpdateBody"}}
+  schema={{"type":"object","properties":{"tagsToRemove":{"default":[],"type":"array","items":{"type":"object","properties":{"id":{"type":"string","description":"User defined unique identifier for the tag"},"type":{"type":"string","description":"Id of the tag type"},"value":{"type":"string","description":"User defined display value for the tag"},"url":{"type":"string","nullable":true,"description":"External URL to associate with the tag"}},"required":["type","value"],"title":"Tag"}},"tagsToAdd":{"default":[],"type":"array","items":{"type":"object","properties":{"id":{"type":"string","description":"User defined unique identifier for the tag"},"type":{"type":"string","description":"Id of the tag type"},"value":{"type":"string","description":"User defined display value for the tag"},"url":{"type":"string","nullable":true,"description":"External URL to associate with the tag"}},"required":["type","value"],"title":"Tag"}},"files":{"minItems":1,"type":"array","items":{"type":"object","properties":{"uri":{"type":"string"},"name":{"type":"string"},"creator":{"type":"string"},"createdAt":{"type":"number"},"size":{"type":"number"},"tags":{"type":"array","items":{"type":"object","properties":{"id":{"type":"string","description":"User defined unique identifier for the tag"},"type":{"type":"string","description":"Id of the tag type"},"value":{"type":"string","description":"User defined display value for the tag"},"url":{"type":"string","nullable":true,"description":"External URL to associate with the tag"}},"required":["type","value"],"title":"Tag"}}},"required":["uri","name","createdAt","size"],"title":"File"}},"dry_run":{"type":"boolean","description":"If true, perform a dry run without actually modifying file tags"}},"required":["tagsToRemove","tagsToAdd","files"],"title":"FileTagUpdateBody"}}
   schemaType={"response"}
 >
   

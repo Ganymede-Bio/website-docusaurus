@@ -1,0 +1,33 @@
+---
+id: createinstrumentbody
+title: "CreateInstrumentBody"
+description: ""
+sidebar_label: "CreateInstrumentBody"
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: {"name":"string","location":"string","serial":"string","metadata":"string","connectorConnectionIds":["string"],"instrumentTypeId":0,"dry_run":true}
+custom_edit_url: null
+---
+
+import Schema from "@theme/Schema";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"CreateInstrumentBody"}
+>
+</Heading>
+
+
+
+
+
+<Schema
+  schema={{"type":"object","properties":{"name":{"type":"string","description":"Name of the instrument"},"location":{"type":"string","description":"Location of the instrument"},"serial":{"type":"string","description":"Serial of the instrument"},"metadata":{"type":"string","description":"Metadata of the instrument"},"connectorConnectionIds":{"description":"Array of connection Ids to associate with this instrument","type":"array","items":{"type":"string"}},"instrumentTypeId":{"type":"number","description":"Instrument Type ID for the instrument instance"},"dry_run":{"type":"boolean","description":"If true, perform a dry run without actually creating the instrument"}},"required":["name"],"title":"CreateInstrumentBody"}}
+  schemaType={"response"}
+>
+  
+</Schema>
+            
