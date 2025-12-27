@@ -9,8 +9,7 @@
     "clear": "docusaurus clear",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
-    "serve": "docusaurus serve",
-    "api": "docusaurus clean-api-docs all && docusaurus gen-api-docs all"
+    "serve": "docusaurus serve"
   },
   "dependencies": {
     "@ai-sdk/gateway": "2.0.7",
@@ -75,6 +74,7 @@
     "@opentelemetry/api": "1.9.0",
     "@rspack/binding": "1.6.1",
     "@rspack/core": "1.6.1",
+    "@scalar/api-reference": "^1.40.9",
     "@standard-schema/spec": "1.0.0",
     "@swc/html": "1.15.0",
     "@types/bonjour": "3.5.13",
@@ -125,6 +125,7 @@
     "confbox": "0.1.8",
     "consola": "3.2.3",
     "copy-to-clipboard": "^3.3.3",
+    "core-js": "^3.47.0",
     "css-loader": "6.11.0",
     "cytoscape": "3.30.3",
     "cytoscape-fcose": "2.2.0",
@@ -132,9 +133,7 @@
     "dayjs": "1.11.13",
     "default-browser": "5.2.1",
     "default-browser-id": "5.0.0",
-    "docusaurus-plugin-openapi-docs": "^4.5.1",
     "docusaurus-plugin-sass": "^0.2.6",
-    "docusaurus-theme-openapi-docs": "^4.5.1",
     "dompurify": "3.2.4",
     "eventemitter3": "4.0.7",
     "eventsource-parser": "3.0.6",
@@ -211,6 +210,7 @@
     "webpack-dev-middleware": "7.4.5",
     "webpack-dev-server": "5.2.2",
     "wsl-utils": "0.1.0",
+    "yaml": "^2.8.2",
     "zod": "4.1.12"
   },
   "devDependencies": {
@@ -220,6 +220,7 @@
     "@types/node": "^18.15.11",
     "@types/react": "^18.0.26",
     "dotenv": "^16.0.3",
+    "js-yaml": "^4.1.1",
     "typescript": "^5.3.2"
   },
   "browserslist": {

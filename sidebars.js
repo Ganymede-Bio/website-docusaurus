@@ -451,16 +451,4 @@ module.exports = {
       label: 'Agent Change Log'
     }
   ],
-  ganymedeapi: [
-    {
-      type: "category",
-      label: "API",
-      link: {
-        type: "doc",
-        id: "api/index",
-        
-      },
-      items: require("./docs/api/sidebar.ts").default,
-    },
-  ],
 };

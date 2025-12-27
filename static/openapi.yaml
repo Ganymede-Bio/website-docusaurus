@@ -1,0 +1,4795 @@
+openapi: 3.0.0
+paths:
+  /v1/environment/{environment}/agents/{id}:
+    get:
+      description: Get an [Agent](https://docs.ganymede.bio/app/agents/Agent) in an Environment by its id.
+      operationId: getAgent
+      parameters:
+        - name: environment
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: withHistory
+          required: false
+          in: query
+          schema:
+            default: false
+            type: boolean
+        - name: historyPageSize
+          required: false
+          in: query
+          schema:
+            default: 100
+            type: number
+        - name: historyPageNumber
+          required: false
+          in: query
+          schema:
+            default: 0
+            type: number
+      responses:
+        '200':
+          description: Agent
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Agent'
+      security:
+        - api-key: []
+        - BearerAuth: []
+      summary: getAgent
+      tags:
+        - Agents
+  /v1/environment/{environment}/agents/{id}/download:
+    get:
+      description: Get a signed url to download the latest [Agent](https://docs.ganymede.bio/app/agents/Agent) in an Environment by its id
+      operationId: downloadAgent
+      parameters:
+        - name: environment
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: assetType
+          required: false
+          in: query
+          schema:
+            enum:
+              - Windows
+              - Linux
+            type: string
+        - name: version
+          required: false
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Signed Url
+          content:
+            application/json:
+              schema:
+                type: string
+      security:
+        - api-key: []
+        - BearerAuth: []
+      summary: downloadAgent
+      tags:
+        - Agents
+  /v1/environment/{environment}/agents:
+    get:
+      description: A list of all [Agents](https://docs.ganymede.bio/app/agents/Agent) for an Environment.
+      operationId: getAgents
+      parameters:
+        - name: environment
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A list of all Agents for an Environment.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Agent'
+      security:
+        - api-key: []
+        - BearerAuth: []
+      summary: getAgents
+      tags:
+        - Agents
+  /v1/environment/{environment}/connections/{id}:
+    get:
+      description: Get a [Connection](https://docs.ganymede.bio/app/agents/Agent#installing-connections) in an Environment by its id.
+      operationId: getConnection
+      parameters:
+        - name: environment
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Connection
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Connection'
+      security:
+        - api-key: []
+        - BearerAuth: []
+      summary: getConnection
+      tags:
+        - Connections
+  /v1/environment/{environment}/connections:
+    get:
+      description: A list of all [Connections](https://docs.ganymede.bio/app/agents/Agent#installing-connections) for an Environment.
+      operationId: getConnections
+      parameters:
+        - name: environment
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: agentId
+          required: false
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A list of all Connections for an Environment.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Connection'
+      security:
+        - api-key: []
+        - BearerAuth: []
+      summary: getConnections
+      tags:
+        - Connections
+  /v1/environment/{environment}/files/{uri}:
+    get:
+      description: Get a [File](https://docs.ganymede.bio/app/files/FileBrowser) in an Environment by its url-encoded [URI](https://docs.ganymede.bio/sdk/FileTags#get_file_url).
+      operationId: getFile
+      parameters:
+        - name: environment
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: uri
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: File
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/File'
+      security:
+        - api-key: []
+        - BearerAuth: []
+      summary: getFile
+      tags:
+        - Files
+  /v1/environment/{environment}/files:
+    get:
+      description: A list of filtered [Files](https://docs.ganymede.bio/app/files/FileBrowser). Each File response contains its [URI](https://docs.ganymede.bio/sdk/FileTags#get_file_url), which is its unique identifier.
+      operationId: getFiles
+      parameters:
+        - name: environment
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: createdBefore
+          required: false
+          in: query
+          description: epoch time in milliseconds
+          schema:
+            type: number
+        - name: createdAfter
+          required: false
+          in: query
+          description: epoch time in milliseconds
+          schema:
+            type: number
+        - name: pageNumber
+          required: false
+          in: query
+          schema:
+            type: number
+        - name: pageSize
+          required: false
+          in: query
+          description: number between 1 and 10000. default is 10000
+          schema:
+            type: number
+        - name: tag
+          required: false
+          in: query
+          description: a tag in the format of tagName:tagValue
+          schema:
+            type: string
+        - name: name
+          required: false
+          in: query
+          description: name of the file
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A list of filtered Files
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/File'
+      security:
+        - api-key: []
+        - BearerAuth: []
+      summary: getFiles
+      tags:
+        - Files
+  /v1/environment/{environment}/files/{uri}/download:
+    get:
+      description: Get a signed url to download a [File](https://docs.ganymede.bio/app/files/FileBrowser) in an Environment by its url-encoded [URI](https://docs.ganymede.bio/sdk/FileTags#get_file_url).
+      operationId: downloadFile
+      parameters:
+        - name: environment
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: uri
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Signed Url
+          content:
+            application/json:
+              schema:
+                type: string
+      security:
+        - api-key: []
+        - BearerAuth: []
+      summary: downloadFile
+      tags:
+        - Files
+  /v1/environment/{environment}/files/upload:
+    post:
+      description: |-
+        Get a signed url to upload a [File](https://docs.ganymede.bio/app/files/FileBrowser) in an Environment. The url will valid for 15 minutes.
+        Uploads to a Ganymede bucket will require a PUT request with the header "x-goog-content-length-range" set with value "0,10000000", the header "x-goog-meta-initiatortype" set with value "API", and the header "x-goog-meta-initiatorid" set with the initiator value that was passed in the request body.
+        Uploads to a customer S3 Bucket managed by Ganymede will require a "POST" request with formData including all "formData" returned with the upload response from Ganymede as well as the field "file" with the file string contents. 
+              
+      operationId: uploadFile
+      parameters:
+        - name: environment
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FileUploadBody'
+      responses:
+        '200':
+          description: Signed Url
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FileUpload'
+        '409':
+          description: File Already Exists
+          content:
+            application/json:
+              schema:
+                type: string
+      security:
+        - api-key: []
+        - BearerAuth: []
+      summary: uploadFile
+      tags:
+        - Files
+  /v1/environment/{environment}/files/tags:
+    put:
+      description: |-
+        Add or remove file tags in bulk. Only 100 files are supported per request.
+              
+      operationId: modifyFileTags
+      parameters:
+        - name: environment
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FileTagUpdateBody'
+      responses:
+        '200':
+          description: ''
+      security:
+        - api-key: []
+        - BearerAuth: []
+      summary: modifyFileTags
+      tags:
+        - Files
+  /v1/environment/{environment}/flows/{id}:
+    get:
+      description: Get a [Flow](https://docs.ganymede.bio/app/flows/FlowEditor#flows) in an Environment by its id.
+      operationId: getFlow
+      parameters:
+        - name: environment
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Flow
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Flow'
+      security:
+        - api-key: []
+        - BearerAuth: []
+      summary: getFlow
+      tags:
+        - Flows
+  /v1/environment/{environment}/flows:
+    get:
+      description: Get all [Flows](https://docs.ganymede.bio/app/flows/FlowEditor#flows) in an Environment.
+      operationId: getFlows
+      parameters:
+        - name: environment
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Get all Flows in an Environment
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Flow'
+      security:
+        - api-key: []
+        - BearerAuth: []
+      summary: getFlows
+      tags:
+        - Flows
+  /v1/environment/{environment}/flows/{flow}/inputs:
+    get:
+      description: Get all required inputs for a [Flow](https://docs.ganymede.bio/app/flows/FlowEditor#flows) in an Environment.
+      operationId: getFlowInputs
+      parameters:
+        - name: environment
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: flow
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FlowInputSchema'
+      security:
+        - api-key: []
+        - BearerAuth: []
+      summary: getFlowInputs
+      tags:
+        - Flows
+  /v1/environment/{environment}/flows/{flow}/trigger:
+    post:
+      description: Trigger a [Flow](https://docs.ganymede.bio/app/flows/FlowEditor#flows) in an Environment.
+      operationId: triggerFlow
+      parameters:
+        - name: environment
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: flow
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TriggerFlowBody'
+      responses:
+        '200':
+          description: flowRunId
+          content:
+            application/json:
+              schema:
+                type: string
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: string
+        '422':
+          description: Inputs to flow are invalid or missing
+          content:
+            application/json:
+              schema:
+                type: string
+      security:
+        - api-key: []
+        - BearerAuth: []
+      summary: triggerFlow
+      tags:
+        - Flows
+  /v1/environment/{environment}/flows/{flowId}/flowruns/{flowRunId}:
+    get:
+      description: Get a [FlowRun](https://docs.ganymede.bio/app/flows/FlowView#running-flows) in an Environment by its id.
+      operationId: getFlowRun
+      parameters:
+        - name: environment
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: flowId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: flowRunId
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: FlowRun
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlowRun'
+      security:
+        - api-key: []
+        - BearerAuth: []
+      summary: getFlowRun
+      tags:
+        - FlowRuns
+  /v1/environment/{environment}/flows/{flowId}/flowruns:
+    get:
+      description: Get all [FlowRuns](https://docs.ganymede.bio/app/flows/FlowView#running-flows) for a specific [Flow](https://docs.ganymede.bio/app/flows/FlowEditor#flows) in an Environment.
+      operationId: getFlowRuns
+      parameters:
+        - name: environment
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: flowId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: runBefore
+          required: false
+          in: query
+          description: epoch time in milliseconds
+          schema:
+            type: number
+        - name: runAfter
+          required: false
+          in: query
+          description: epoch time in milliseconds
+          schema:
+            type: number
+      responses:
+        '200':
+          description: Get all FlowRuns for a specific Flow in an Environment
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FlowRun'
+      security:
+        - api-key: []
+        - BearerAuth: []
+      summary: getFlowRuns
+      tags:
+        - FlowRuns
+  /v1/environment/{environment}/tables/{name}:
+    get:
+      description: Get a [Table](https://docs.ganymede.bio/app/tables/DataExplorer) in an Environment by its name.
+      operationId: getTable
+      parameters:
+        - name: environment
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: name
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Table
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Table'
+      security:
+        - api-key: []
+        - BearerAuth: []
+      summary: getTable
+      tags:
+        - Tables
+  /v1/environment/{environment}/tables:
+    get:
+      description: Get all [Tables](https://docs.ganymede.bio/app/tables/DataExplorer) in an Environment.
+      operationId: getTables
+      parameters:
+        - name: environment
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: pageNumber
+          required: false
+          in: query
+          schema:
+            type: number
+        - name: pageSize
+          required: false
+          in: query
+          description: number between 1 and 1000. default is 1000
+          schema:
+            type: number
+      responses:
+        '200':
+          description: Get all Tables in an Environment
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Table'
+      security:
+        - api-key: []
+        - BearerAuth: []
+      summary: getTables
+      tags:
+        - Tables
+  /v1/environment/{environment}/tables/query:
+    post:
+      description: Submit a SQL query against data in your [Tables](https://docs.ganymede.bio/app/tables/DataExplorer). The SQL query must be compatible with [BigQuery](https://cloud.google.com/bigquery/docs/introduction-sql).
+      operationId: postQuery
+      parameters:
+        - name: environment
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostQueryBody'
+      responses:
+        '200':
+          description: Results of the provided SQL query
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TableRow'
+      security:
+        - api-key: []
+        - BearerAuth: []
+      summary: postQuery
+      tags:
+        - Tables
+  /v1/environment/{environment}/tables/{tableId}/stream:
+    post:
+      description: |-
+        Ingest data into a specified table. If the table does not exist, it will be created automatically.
+          
+      operationId: streamData
+      parameters:
+        - name: environment
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: tableId
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StreamBody'
+      responses:
+        '201':
+          description: ''
+      security:
+        - api-key: []
+        - BearerAuth: []
+      summary: streamData
+      tags:
+        - Tables
+  /v0/environment/{environment}/commits:
+    get:
+      description: Get a signed URL to download latest user commits in an Environment.
+      operationId: getRepositoryCommits
+      parameters:
+        - name: environment
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: includeLibFiles
+          required: false
+          in: query
+          schema:
+            type: boolean
+        - name: flowName
+          required: false
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Signed URL
+          content:
+            application/json:
+              schema:
+                type: string
+      security:
+        - api-key: []
+        - BearerAuth: []
+      summary: getRepositoryCommits
+      tags:
+        - Commits
+    put:
+      description: Update existing user code in Flows to an Environment. Files are required to be base64 encoded.
+      operationId: postRepositoryCommits
+      parameters:
+        - name: environment
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/postRepositoryCommitsBody'
+      responses:
+        '200':
+          description: ''
+        '400':
+          description: This endpoint is only for updating existing files. Any file that is passed that does not exist will throw a 400.
+      security:
+        - api-key: []
+        - BearerAuth: []
+      summary: postRepositoryCommits
+      tags:
+        - Commits
+  /v1/environment/{environment}/instrument-runs:
+    post:
+      description: Create a new Instrument Run in an Environment.
+      operationId: createInstrumentRun
+      parameters:
+        - name: environment
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateInstrumentRunBody'
+      responses:
+        '201':
+          description: Instrument Run created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InstrumentRunDTO'
+        '400':
+          description: Bad Request - Invalid input data
+        '404':
+          description: Instrument not found
+      security:
+        - api-key: []
+        - BearerAuth: []
+      summary: createInstrumentRun
+      tags:
+        - Instrument Runs
+    get:
+      description: Get Instrument Runs in an Environment by various filters.
+      operationId: findInstrumentRuns
+      parameters:
+        - name: environment
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: fileUri
+          required: false
+          in: query
+          description: fileUri associated with the instrument run
+          schema:
+            type: string
+        - name: tableName
+          required: false
+          in: query
+          description: BigQuery table name associated with the instrument run
+          schema:
+            type: string
+        - name: sessionId
+          required: false
+          in: query
+          description: modular analysis session ID associated with the instrument run
+          schema:
+            type: string
+        - name: runBefore
+          required: false
+          in: query
+          description: epoch time in milliseconds
+          schema:
+            type: number
+        - name: runAfter
+          required: false
+          in: query
+          description: epoch time in milliseconds
+          schema:
+            type: number
+        - name: pageNumber
+          required: false
+          in: query
+          schema:
+            type: number
+        - name: pageSize
+          required: false
+          in: query
+          description: number between 1 and 10000. default is 10000
+          schema:
+            type: number
+      responses:
+        '200':
+          description: Instrument Run retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InstrumentRunDTO'
+        '404':
+          description: Instrument Run not found
+      security:
+        - api-key: []
+        - BearerAuth: []
+      summary: getInstrumentRunsByFilters
+      tags:
+        - Instrument Runs
+  /v1/environment/{environment}/instrument-runs/{id}:
+    get:
+      description: Get an Instrument Run by its ID in an Environment.
+      operationId: getInstrumentRun
+      parameters:
+        - name: environment
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: number
+      responses:
+        '200':
+          description: Instrument Run retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InstrumentRunDTO'
+        '404':
+          description: Instrument Run not found
+      security:
+        - api-key: []
+        - BearerAuth: []
+      summary: getInstrumentRun
+      tags:
+        - Instrument Runs
+    patch:
+      description: Update an existing Instrument Run in an Environment.
+      operationId: updateInstrumentRun
+      parameters:
+        - name: environment
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: number
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateInstrumentRunBody'
+      responses:
+        '200':
+          description: Instrument Run updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InstrumentRunDTO'
+        '400':
+          description: Bad Request - Invalid input data
+        '404':
+          description: Instrument Run not found
+      security:
+        - api-key: []
+        - BearerAuth: []
+      summary: updateInstrumentRun
+      tags:
+        - Instrument Runs
+    delete:
+      description: Delete an Instrument Run from an Environment.
+      operationId: deleteInstrumentRun
+      parameters:
+        - name: environment
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: number
+        - name: dry_run
+          required: false
+          in: query
+          schema:
+            type: boolean
+      responses:
+        '204':
+          description: Instrument Run deleted successfully
+        '404':
+          description: Instrument Run not found
+      security:
+        - api-key: []
+        - BearerAuth: []
+      summary: deleteInstrumentRun
+      tags:
+        - Instrument Runs
+  /v1/environment/{environment}/instrument-runs/external/{externalId}:
+    get:
+      description: Get Instrument Run(s) by an external ID in an Environment.
+      operationId: getInstrumentRunsByExternalId
+      parameters:
+        - name: environment
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: externalId
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Instrument Run(s) retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/InstrumentRunDTO'
+      security:
+        - api-key: []
+        - BearerAuth: []
+      summary: getInstrumentRunsByExternalId
+      tags:
+        - Instrument Runs
+  /v1/environment/{environment}/instrument-runs/flows/{flowId}/flowruns/{flowRunId}:
+    get:
+      description: Get Instrument Run(s) by a Flow Run ID and Flow ID in an Environment.
+      operationId: getInstrumentRunsByFlowRunId
+      parameters:
+        - name: environment
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: flowId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: flowRunId
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Instrument Run(s) retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/InstrumentRunDTO'
+      security:
+        - api-key: []
+        - BearerAuth: []
+      summary: getInstrumentRunsByFlowRunId
+      tags:
+        - Instrument Runs
+  /v1/environment/{environment}/instrument-runs/instrument/{instrumentId}:
+    get:
+      description: Get Instrument Run(s) by an Instrument Type ID in an Environment.
+      operationId: getInstrumentRunsByInstrumentId
+      parameters:
+        - name: environment
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: instrumentId
+          required: true
+          in: path
+          schema:
+            type: number
+        - name: runBefore
+          required: false
+          in: query
+          description: epoch time in milliseconds
+          schema:
+            type: number
+        - name: runAfter
+          required: false
+          in: query
+          description: epoch time in milliseconds
+          schema:
+            type: number
+        - name: pageNumber
+          required: false
+          in: query
+          schema:
+            type: number
+        - name: pageSize
+          required: false
+          in: query
+          description: number between 1 and 10000. default is 10000
+          schema:
+            type: number
+      responses:
+        '200':
+          description: Instrument Run(s) retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/InstrumentRunDTO'
+      security:
+        - api-key: []
+        - BearerAuth: []
+      summary: getInstrumentRunsByInstrumentId
+      tags:
+        - Instrument Runs
+  /v1/environment/{environment}/unit-operation-runs:
+    post:
+      description: Create a new Unit Operation Run in an Environment.
+      operationId: createUnitOperationRun
+      parameters:
+        - name: environment
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateUnitOperationRunBody'
+      responses:
+        '201':
+          description: Unit Operation Run created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnitOperationRunDTO'
+        '400':
+          description: Bad Request - Invalid input data
+        '404':
+          description: Unit Operation not found
+      security:
+        - api-key: []
+        - BearerAuth: []
+      summary: createUnitOperationRun
+      tags:
+        - Unit Operation Runs
+    get:
+      description: Get Unit Operation Runs in an Environment by various filters.
+      operationId: findUnitOperationRuns
+      parameters:
+        - name: environment
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: fileUri
+          required: false
+          in: query
+          description: fileUri associated with the unit operation run
+          schema:
+            type: string
+        - name: tableName
+          required: false
+          in: query
+          description: BigQuery table name associated with the unit operation run
+          schema:
+            type: string
+        - name: sessionId
+          required: false
+          in: query
+          description: modular analysis session ID associated with the instrument run
+          schema:
+            type: string
+        - name: runBefore
+          required: false
+          in: query
+          description: epoch time in milliseconds
+          schema:
+            type: number
+        - name: runAfter
+          required: false
+          in: query
+          description: epoch time in milliseconds
+          schema:
+            type: number
+        - name: pageNumber
+          required: false
+          in: query
+          schema:
+            type: number
+        - name: pageSize
+          required: false
+          in: query
+          description: number between 1 and 10000. default is 10000
+          schema:
+            type: number
+      responses:
+        '200':
+          description: Unit Operation Run retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnitOperationRunDTO'
+        '404':
+          description: Unit Operation Run not found
+      security:
+        - api-key: []
+        - BearerAuth: []
+      summary: getUnitOperationRunsByFilters
+      tags:
+        - Unit Operation Runs
+  /v1/environment/{environment}/unit-operation-runs/{id}:
+    get:
+      description: Get a Unit Operation Run by its ID in an Environment.
+      operationId: getUnitOperationRun
+      parameters:
+        - name: environment
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: number
+      responses:
+        '200':
+          description: Unit Operation Run retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnitOperationRunDTO'
+        '404':
+          description: Unit Operation Run not found
+      security:
+        - api-key: []
+        - BearerAuth: []
+      summary: getUnitOperationRun
+      tags:
+        - Unit Operation Runs
+    patch:
+      description: Update an existing Unit Operation Run in an Environment.
+      operationId: updateUnitOperationRun
+      parameters:
+        - name: environment
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: number
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateUnitOperationRunBody'
+      responses:
+        '200':
+          description: Unit Operation Run updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnitOperationRunDTO'
+        '400':
+          description: Bad Request - Invalid input data
+        '404':
+          description: Unit Operation Run not found
+      security:
+        - api-key: []
+        - BearerAuth: []
+      summary: updateUnitOperationRun
+      tags:
+        - Unit Operation Runs
+    delete:
+      description: Delete a Unit Operation Run from an Environment.
+      operationId: deleteUnitOperationRun
+      parameters:
+        - name: environment
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: number
+        - name: dry_run
+          required: false
+          in: query
+          schema:
+            type: boolean
+      responses:
+        '204':
+          description: Unit Operation Run deleted successfully
+        '404':
+          description: Unit Operation Run not found
+      security:
+        - api-key: []
+        - BearerAuth: []
+      summary: deleteUnitOperationRun
+      tags:
+        - Unit Operation Runs
+  /v1/environment/{environment}/unit-operation-runs/external/{externalId}:
+    get:
+      description: Get a Unit Operation Run(s) by external ID in an Environment.
+      operationId: getUnitOperationRunsByExternalId
+      parameters:
+        - name: environment
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: externalId
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Instrument Run(s) retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UnitOperationRunDTO'
+      security:
+        - api-key: []
+        - BearerAuth: []
+      summary: getUnitOperationRunsByExternalId
+      tags:
+        - Unit Operation Runs
+  /v1/environment/{environment}/unit-operation-runs/flows/{flowId}/flowruns/{flowRunId}:
+    get:
+      description: Get Unit Operation Run(s) by a Flow Run ID and Flow ID in an Environment.
+      operationId: getUnitOperationRunsByFlowRunId
+      parameters:
+        - name: environment
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: flowId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: flowRunId
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Unit Operation Run(s) retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UnitOperationRunDTO'
+      security:
+        - api-key: []
+        - BearerAuth: []
+      summary: getUnitOperationRunsByFlowRunId
+      tags:
+        - Unit Operation Runs
+  /v1/environment/{environment}/unit-operation-runs/unit-operation/{unitOperationId}:
+    get:
+      description: Get Unit Operation Run(s) by a Unit Operation ID in an Environment.
+      operationId: getUnitOperationRunsByUnitOperationId
+      parameters:
+        - name: environment
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: unitOperationId
+          required: true
+          in: path
+          schema:
+            type: number
+        - name: runBefore
+          required: false
+          in: query
+          description: epoch time in milliseconds
+          schema:
+            type: number
+        - name: runAfter
+          required: false
+          in: query
+          description: epoch time in milliseconds
+          schema:
+            type: number
+        - name: pageNumber
+          required: false
+          in: query
+          schema:
+            type: number
+        - name: pageSize
+          required: false
+          in: query
+          description: number between 1 and 10000. default is 10000
+          schema:
+            type: number
+      responses:
+        '200':
+          description: Unit Operation Run(s) retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UnitOperationRunDTO'
+      security:
+        - api-key: []
+        - BearerAuth: []
+      summary: getUnitOperationRunsByUnitOperationId
+      tags:
+        - Unit Operation Runs
+  /v1/environment/{environment}/process-runs:
+    post:
+      description: Create a Process Run in an Environment.
+      operationId: createProcessRun
+      parameters:
+        - name: environment
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateProcessRunBody'
+      responses:
+        '201':
+          description: Process Run created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProcessRunDTO'
+        '404':
+          description: Process not found
+      security:
+        - api-key: []
+        - BearerAuth: []
+      summary: createProcessRun
+      tags:
+        - Process Runs
+    get:
+      description: Get Process Runs in an Environment by various filters.
+      operationId: findProcessRuns
+      parameters:
+        - name: environment
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: fileUri
+          required: false
+          in: query
+          description: fileUri associated with the process run
+          schema:
+            type: string
+        - name: tableName
+          required: false
+          in: query
+          description: BigQuery table name associated with the process run
+          schema:
+            type: string
+        - name: sessionId
+          required: false
+          in: query
+          description: modular analysis session ID associated with the process run
+          schema:
+            type: string
+        - name: runBefore
+          required: false
+          in: query
+          description: epoch time in milliseconds
+          schema:
+            type: number
+        - name: runAfter
+          required: false
+          in: query
+          description: epoch time in milliseconds
+          schema:
+            type: number
+        - name: pageNumber
+          required: false
+          in: query
+          schema:
+            type: number
+        - name: pageSize
+          required: false
+          in: query
+          description: number between 1 and 10000. default is 10000
+          schema:
+            type: number
+      responses:
+        '200':
+          description: Process Run retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProcessRunDTO'
+        '404':
+          description: Process Run not found
+      security:
+        - api-key: []
+        - BearerAuth: []
+      summary: getProcessRunsByFilters
+      tags:
+        - Process Runs
+  /v1/environment/{environment}/process-runs/{id}:
+    get:
+      description: Get a Process Run from an Environment by its id.
+      operationId: getProcessRun
+      parameters:
+        - name: environment
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: number
+      responses:
+        '200':
+          description: Process Run
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProcessRunDTO'
+        '404':
+          description: Process Run not found
+      security:
+        - api-key: []
+        - BearerAuth: []
+      summary: getProcessRun
+      tags:
+        - Process Runs
+    patch:
+      description: Update a Process Run in an Environment.
+      operationId: updateProcessRun
+      parameters:
+        - name: environment
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: number
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateProcessRunBody'
+      responses:
+        '200':
+          description: Process Run updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProcessRunDTO'
+        '404':
+          description: Process Run not found
+      security:
+        - api-key: []
+        - BearerAuth: []
+      summary: updateProcessRun
+      tags:
+        - Process Runs
+    delete:
+      description: Delete a Process Run from an Environment.
+      operationId: deleteProcessRun
+      parameters:
+        - name: environment
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: number
+        - name: dry_run
+          required: false
+          in: query
+          schema:
+            type: boolean
+      responses:
+        '204':
+          description: Process Run deleted successfully
+        '404':
+          description: Process Run not found
+      security:
+        - api-key: []
+        - BearerAuth: []
+      summary: deleteProcessRun
+      tags:
+        - Process Runs
+  /v1/environment/{environment}/process-runs/external/{externalId}:
+    get:
+      description: Get a Process Run(s) from an Environment by its external ID.
+      operationId: getProcessRunsByExternalId
+      parameters:
+        - name: environment
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: externalId
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Instrument Run(s) retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProcessRunDTO'
+      security:
+        - api-key: []
+        - BearerAuth: []
+      summary: getProcessRunsByExternalId
+      tags:
+        - Process Runs
+  /v1/environment/{environment}/process-runs/flows/{flowId}/flowruns/{flowRunId}:
+    get:
+      description: Get Process Run(s) by a Flow Run ID and Flow ID in an Environment.
+      operationId: getProcessRunsByFlowRunId
+      parameters:
+        - name: environment
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: flowId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: flowRunId
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Process Run(s) retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProcessRunDTO'
+      security:
+        - api-key: []
+        - BearerAuth: []
+      summary: getProcessRunsByFlowRunId
+      tags:
+        - Process Runs
+  /v1/environment/{environment}/process-runs/process/{processId}:
+    get:
+      description: Get Process Run(s) by a Process ID in an Environment.
+      operationId: getProcessRunsByProcessId
+      parameters:
+        - name: environment
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: processId
+          required: true
+          in: path
+          schema:
+            type: number
+        - name: runBefore
+          required: false
+          in: query
+          description: epoch time in milliseconds
+          schema:
+            type: number
+        - name: runAfter
+          required: false
+          in: query
+          description: epoch time in milliseconds
+          schema:
+            type: number
+        - name: pageNumber
+          required: false
+          in: query
+          schema:
+            type: number
+        - name: pageSize
+          required: false
+          in: query
+          description: number between 1 and 10000. default is 10000
+          schema:
+            type: number
+      responses:
+        '200':
+          description: Process Run(s) retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProcessRunDTO'
+      security:
+        - api-key: []
+        - BearerAuth: []
+      summary: getProcessRunsByProcessId
+      tags:
+        - Process Runs
+  /v1/environment/{environment}/process/{id}:
+    get:
+      description: Get a Process from an Environment by its id, including UnitOperations and Instruments.
+      operationId: getProcess
+      parameters:
+        - name: environment
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: number
+      responses:
+        '200':
+          description: Process retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Process'
+        '404':
+          description: Process not found
+      security:
+        - api-key: []
+        - BearerAuth: []
+      summary: getProcess
+      tags:
+        - Processes
+  /v1/environment/{environment}/instruments:
+    post:
+      description: Create a new Instrument in an Environment.
+      operationId: createInstrument
+      parameters:
+        - name: environment
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateInstrumentBody'
+      responses:
+        '201':
+          description: Instrument created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InstrumentDTO'
+      security:
+        - api-key: []
+        - BearerAuth: []
+      summary: createInstrument
+      tags:
+        - Instruments
+    get:
+      description: Get all Instruments in an Environment.
+      operationId: getInstruments
+      parameters:
+        - name: environment
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of Instruments
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/InstrumentDTO'
+      security:
+        - api-key: []
+        - BearerAuth: []
+      summary: getInstruments
+      tags:
+        - Instruments
+  /v1/environment/{environment}/instruments/{id}:
+    get:
+      description: Get an Instrument by its ID in an Environment.
+      operationId: getInstrument
+      parameters:
+        - name: environment
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: number
+      responses:
+        '200':
+          description: Instrument retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InstrumentDTO'
+        '404':
+          description: Instrument not found
+      security:
+        - api-key: []
+        - BearerAuth: []
+      summary: getInstrument
+      tags:
+        - Instruments
+  /v1/environment/{environment}/modularAnalysis/{appFolder}/sessions:
+    get:
+      description: Get all [Modular Analysis](https://docs.ganymede.bio/app/ma/ModularAnalysisOverview) sessions for a specific Modular Analysis by appFolder.
+      operationId: getModularAnalysisSessions
+      parameters:
+        - name: environment
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: appFolder
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: pageNumber
+          required: false
+          in: query
+          schema:
+            type: number
+        - name: pageSize
+          required: false
+          in: query
+          description: number between 1 and 10000. default is 10000
+          schema:
+            type: number
+      responses:
+        '200':
+          description: Get all sessions for a specific Modular Analysis in an Environment
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ModularAnalysisSessionDTO'
+      security:
+        - api-key: []
+        - BearerAuth: []
+      summary: getModularAnalysisSessions
+      tags:
+        - ModularAnalysis
+  /v1/environment/{environment}/app-configs:
+    post:
+      description: Create a new app configuration. This endpoint is only available to users and when using API key
+      operationId: createAppConfig
+      parameters:
+        - name: environment
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAppConfigDto'
+      responses:
+        '201':
+          description: App configuration created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppConfig'
+      security:
+        - api-key: []
+        - BearerAuth: []
+      summary: createAppConfig
+      tags:
+        - App Configs
+    put:
+      description: Update an app configuration. This endpoint is only available to users and when using API key
+      operationId: updateAppConfig
+      parameters:
+        - name: environment
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateAppConfigDto'
+      responses:
+        '200':
+          description: App configuration updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppConfig'
+        '404':
+          description: App configuration not found
+      security:
+        - api-key: []
+        - BearerAuth: []
+      summary: updateAppConfig
+      tags:
+        - App Configs
+  /v1/environment/{environment}/app-configs/{appId}:
+    get:
+      description: Get all app configurations for an app
+      operationId: getAppConfigs
+      parameters:
+        - name: environment
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: appId
+          required: true
+          in: path
+          description: The ID of the panel app
+          schema:
+            type: number
+        - name: allConfigs
+          required: false
+          in: query
+          description: Whether to include all configurations, including other users
+          schema:
+            default: false
+            type: boolean
+      responses:
+        '200':
+          description: List of app configurations
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AppConfig'
+      security:
+        - api-key: []
+        - BearerAuth: []
+      summary: getAppConfigs
+      tags:
+        - App Configs
+  /v1/environment/{environment}/app-configs/{id}:
+    get:
+      description: Get a specific app configuration by ID
+      operationId: getAppConfig
+      parameters:
+        - name: environment
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: number
+      responses:
+        '200':
+          description: App configuration found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppConfig'
+        '404':
+          description: App configuration not found
+      security:
+        - api-key: []
+        - BearerAuth: []
+      summary: getAppConfig
+      tags:
+        - App Configs
+    delete:
+      description: Delete an app configuration. This endpoint is only available to users and not when using API key
+      operationId: deleteAppConfig
+      parameters:
+        - name: environment
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: number
+        - name: dry_run
+          required: false
+          in: query
+          schema:
+            type: boolean
+      responses:
+        '204':
+          description: App configuration deleted successfully
+        '404':
+          description: App configuration not found
+      security:
+        - api-key: []
+        - BearerAuth: []
+      summary: deleteAppConfig
+      tags:
+        - App Configs
+info:
+  title: ''
+  description: ''
+  version: 1.0.0
+  contact: {}
+tags: null
+servers:
+  - url: https://{host}
+    description: ''
+    variables:
+      host:
+        default: app.ganymede.bio
+components:
+  securitySchemes:
+    api-key:
+      type: apiKey
+      in: header
+      name: api-key
+    BearerAuth:
+      scheme: bearer
+      bearerFormat: JWT
+      type: http
+      description: JWT Bearer token authentication
+  schemas:
+    AgentState:
+      type: string
+      enum:
+        - Active
+        - Archived
+        - Disabled
+    Tag:
+      type: object
+      properties:
+        id:
+          type: string
+          description: User defined unique identifier for the tag
+        type:
+          type: string
+          description: Id of the tag type
+        value:
+          type: string
+          description: User defined display value for the tag
+        url:
+          type: string
+          nullable: true
+          description: External URL to associate with the tag
+      required:
+        - type
+        - value
+    AgentVersion:
+      type: object
+      properties:
+        agentVersion:
+          type: string
+        author:
+          type: string
+        processor:
+          type: string
+        configuration:
+          type: string
+        coreAgentVersion:
+          type: string
+        createdAt:
+          format: date-time
+          type: string
+        message:
+          type: string
+        requireFullUpdate:
+          type: boolean
+      required:
+        - agentVersion
+        - processor
+        - configuration
+        - coreAgentVersion
+        - createdAt
+        - message
+    Agent:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        state:
+          allOf:
+            - $ref: '#/components/schemas/AgentState'
+        version:
+          type: string
+        processorVersion:
+          type: string
+        agentCodebaseVersion:
+          type: string
+        environment:
+          type: string
+        creator:
+          type: string
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+        versionHistory:
+          type: array
+          items:
+            $ref: '#/components/schemas/AgentVersion'
+      required:
+        - id
+        - name
+        - state
+        - version
+        - processorVersion
+        - agentCodebaseVersion
+        - environment
+    ConnectionState:
+      type: string
+      enum:
+        - Live
+        - Updating
+        - Disconnected
+        - Shutdown
+        - Deprecated
+        - Error
+    Connection:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        state:
+          allOf:
+            - $ref: '#/components/schemas/ConnectionState'
+        version:
+          type: string
+        startTime:
+          type: string
+        agentId:
+          type: string
+        environment:
+          type: string
+        agentCodebaseVersion:
+          type: string
+        agentVersion:
+          type: string
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+        labels:
+          nullable: true
+          description: identifier metadata for a connection
+          type: array
+          items:
+            type: string
+      required:
+        - id
+        - name
+        - state
+        - version
+        - startTime
+        - agentId
+        - environment
+        - agentCodebaseVersion
+        - agentVersion
+    File:
+      type: object
+      properties:
+        uri:
+          type: string
+        name:
+          type: string
+        creator:
+          type: string
+        createdAt:
+          type: number
+        size:
+          type: number
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+      required:
+        - uri
+        - name
+        - createdAt
+        - size
+    FileUploadBody:
+      type: object
+      properties:
+        hostPath:
+          type: string
+          description: hostPath is the full file path of the file on the host, used to store additional metadata and check for file upload completeness within an environment.
+        dry_run:
+          type: boolean
+          description: If true, perform a dry run without actually uploading the file
+        name:
+          type: string
+        initiator:
+          type: string
+        bucket:
+          type: string
+      required:
+        - name
+        - initiator
+    FileUpload:
+      type: object
+      properties:
+        url:
+          type: string
+        formData:
+          type: object
+      required:
+        - url
+    FileTagUpdateBody:
+      type: object
+      properties:
+        tagsToRemove:
+          default: []
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+        tagsToAdd:
+          default: []
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+        files:
+          minItems: 1
+          type: array
+          items:
+            $ref: '#/components/schemas/File'
+        dry_run:
+          type: boolean
+          description: If true, perform a dry run without actually modifying file tags
+      required:
+        - tagsToRemove
+        - tagsToAdd
+        - files
+    Flow:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        environment:
+          type: string
+        version:
+          type: string
+        docsMarkdown:
+          type: string
+        assignees:
+          type: array
+          items:
+            type: string
+      required:
+        - id
+        - name
+        - environment
+    FlowInputSchema:
+      type: object
+      properties:
+        task:
+          type: string
+        param:
+          type: string
+        value:
+          type: string
+        dataType:
+          type: string
+        multi:
+          type: boolean
+      required:
+        - task
+        - param
+        - value
+        - dataType
+    FlowInput:
+      type: object
+      properties:
+        task:
+          type: string
+        param:
+          type: string
+        value:
+          type: string
+        dataType:
+          type: string
+      required:
+        - task
+        - param
+        - value
+        - dataType
+    TriggerFlowBody:
+      type: object
+      properties:
+        flowInputs:
+          type: array
+          items:
+            $ref: '#/components/schemas/FlowInput'
+        dry_run:
+          type: boolean
+          description: If true, perform a dry run without actually triggering the flow
+      required:
+        - flowInputs
+    FlowRunState:
+      type: string
+      enum:
+        - Queued
+        - Running
+        - Success
+        - Failed
+        - unknown
+    FlowRun:
+      type: object
+      properties:
+        id:
+          type: string
+        flowId:
+          type: string
+        version:
+          type: string
+        environmentVersion:
+          type: string
+        libVersion:
+          type: string
+        initiator:
+          type: string
+        state:
+          allOf:
+            - $ref: '#/components/schemas/FlowRunState'
+        startTime:
+          format: date-time
+          type: string
+        endTime:
+          format: date-time
+          type: string
+        inputFiles:
+          type: array
+          items:
+            type: string
+        inputStrings:
+          type: array
+          items:
+            type: string
+        outputFiles:
+          type: array
+          items:
+            type: string
+        outputTables:
+          type: array
+          items:
+            type: string
+        triggeredFlows:
+          type: array
+          items:
+            type: string
+      required:
+        - id
+        - flowId
+        - version
+        - environmentVersion
+        - initiator
+        - state
+    SchemaField:
+      type: object
+      properties:
+        name:
+          type: string
+        type:
+          type: string
+        mode:
+          type: string
+        description:
+          type: string
+        pdFieldType:
+          type: string
+        pdFieldName:
+          type: string
+      required:
+        - name
+        - type
+    Table:
+      type: object
+      properties:
+        name:
+          type: string
+        environment:
+          type: string
+        description:
+          type: string
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/SchemaField'
+      required:
+        - name
+        - environment
+    PostQueryBody:
+      type: object
+      properties:
+        sqlQuery:
+          type: string
+      required:
+        - sqlQuery
+    TableRow:
+      type: object
+      properties:
+        row:
+          type: object
+          additionalProperties: true
+        error:
+          type: string
+      required:
+        - row
+    StreamBody:
+      type: object
+      properties:
+        sourceId:
+          type: string
+          description: Id of the source sending the data.
+          example: connectionId
+        payload:
+          type: object
+          description: Data to be streamed
+        dry_run:
+          type: boolean
+          description: If true, perform a dry run without actually streaming data
+      required:
+        - sourceId
+        - payload
+    HostState:
+      type: string
+      enum:
+        - Enabled
+        - Archived
+        - Disabled
+    EventConfiguration:
+      type: object
+      properties:
+        checkInterval:
+          type: number
+      required:
+        - checkInterval
+    SupportedHostOperatingSystems:
+      type: string
+      enum:
+        - Unsupported
+        - Windows
+        - Linux
+        - Darwin
+      description: The operating system that the connection is running on
+    SupportedHostMachineArchitectures:
+      type: string
+      enum:
+        - Unsupported
+        - arm64
+        - amd64
+        - x86_64
+      description: The machine architecture (e.g. arm64, amd64) that the connection is running on
+    HostInferredData:
+      type: object
+      properties:
+        installPath:
+          type: string
+          description: The location where the host executable and local logs can be found
+        macAddress:
+          type: string
+          description: The MAC Address for the network interface of the equipment that the agent is installed
+        machineName:
+          type: string
+          description: The hostname or node name for the machine where the agent exists
+        machineIP:
+          type: string
+          description: The external IP of the network that the agent uses to send data
+        serviceDisplayName:
+          type: string
+          description: The display name that the agent service can be found under in a service manager
+        runningAsUser:
+          type: string
+          description: The user that the service is installed and executing as
+        operatingSystem:
+          description: The operating system that the connection is running on
+          allOf:
+            - $ref: '#/components/schemas/SupportedHostOperatingSystems'
+        machineArchitecture:
+          description: The machine architecture (e.g. arm64, amd64) that the connection is running on
+          allOf:
+            - $ref: '#/components/schemas/SupportedHostMachineArchitectures'
+        timezone:
+          type: string
+        timeDrift:
+          type: string
+    HostVersionMetadata:
+      type: object
+      properties:
+        runtimeVersion:
+          type: string
+          description: version of the host configuration
+        gatewayVersion:
+          type: string
+          description: the version of the remote-agent repo used to build exes
+      required:
+        - runtimeVersion
+        - gatewayVersion
+    ConnectorTriggerOptions:
+      type: string
+      enum:
+        - file_watcher
+        - cron
+        - cloud_watcher
+        - one_shot
+    ConnectionFileWatcher:
+      type: object
+      properties:
+        trigger:
+          allOf:
+            - $ref: '#/components/schemas/ConnectorTriggerOptions'
+        inputPath:
+          type: string
+          default: ''
+        ignorePatterns:
+          default: []
+          type: array
+          items:
+            type: string
+        streamContents:
+          type: boolean
+          default: true
+        ignoreHiddenFiles:
+          type: boolean
+          default: true
+        ignoreHiddenDirectories:
+          type: boolean
+          default: true
+        stableTime:
+          type: number
+          default: 5
+      required:
+        - trigger
+        - inputPath
+    ConnectionCron:
+      type: object
+      properties:
+        trigger:
+          allOf:
+            - $ref: '#/components/schemas/ConnectorTriggerOptions'
+      required:
+        - trigger
+    ConnectionCloudWatcher:
+      type: object
+      properties:
+        trigger:
+          allOf:
+            - $ref: '#/components/schemas/ConnectorTriggerOptions'
+        topicId:
+          type: string
+      required:
+        - trigger
+        - topicId
+    ConnectionConfigOneShot:
+      type: object
+      properties:
+        trigger:
+          allOf:
+            - $ref: '#/components/schemas/ConnectorTriggerOptions'
+      required:
+        - trigger
+    CloudProvider:
+      type: string
+      enum:
+        - GCP
+        - AWS
+    BucketOwner:
+      type: string
+      enum:
+        - Ganymede
+        - Customer
+    IngestBucket:
+      type: object
+      properties:
+        cloudProvider:
+          allOf:
+            - $ref: '#/components/schemas/CloudProvider'
+        bucketOwner:
+          allOf:
+            - $ref: '#/components/schemas/BucketOwner'
+        name:
+          type: string
+        displayName:
+          type: string
+        createdAt:
+          format: date-time
+          type: string
+        region:
+          type: string
+        validated:
+          type: boolean
+        lastValidated:
+          format: date-time
+          type: string
+        deletedAt:
+          format: date-time
+          type: string
+          nullable: true
+      required:
+        - cloudProvider
+        - bucketOwner
+        - name
+        - createdAt
+        - validated
+        - deletedAt
+    ConnectorTriggerTemplate:
+      type: object
+      properties:
+        trigger:
+          allOf:
+            - $ref: '#/components/schemas/ConnectorTriggerOptions'
+        ingestBucket:
+          $ref: '#/components/schemas/IngestBucket'
+      required:
+        - trigger
+    ConfigurableConnectorsTypes:
+      type: string
+      enum:
+        - legacy_file_watcher_upload_run_flow
+        - legacy_file_watcher_upload
+        - legacy_cloud_watcher_save_file
+        - file_watcher_upload_run_flow
+        - file_watcher_upload
+        - cron_upload_run_flow
+        - cron_upload
+        - cloud_watcher_save_file
+        - one_shot_upload_run_flow
+        - one_shot_upload
+        - application_startup_agent
+        - application_cleanup_agent
+        - application_cleanup_flow_agent
+        - automatic_flow_grouping
+        - upload_after_pause
+        - cron_stream_data
+    LegacyFWFlowConnectionConfig:
+      type: object
+      properties:
+        triggerConfig:
+          $ref: '#/components/schemas/ConnectionFileWatcher'
+        connectorType:
+          allOf:
+            - $ref: '#/components/schemas/ConfigurableConnectorsTypes'
+      required:
+        - triggerConfig
+        - connectorType
+    LegacyFWUploadConnectionConfig:
+      type: object
+      properties:
+        triggerConfig:
+          $ref: '#/components/schemas/ConnectionFileWatcher'
+        connectorType:
+          allOf:
+            - $ref: '#/components/schemas/ConfigurableConnectorsTypes'
+      required:
+        - triggerConfig
+        - connectorType
+    FWFlowConnectionConfig:
+      type: object
+      properties:
+        triggerConfig:
+          $ref: '#/components/schemas/ConnectionFileWatcher'
+        connectorType:
+          allOf:
+            - $ref: '#/components/schemas/ConfigurableConnectorsTypes'
+      required:
+        - triggerConfig
+        - connectorType
+    FWUploadConnectionConfig:
+      type: object
+      properties:
+        triggerConfig:
+          description: File watcher trigger configuration
+          allOf:
+            - $ref: '#/components/schemas/ConnectionFileWatcher'
+        connectorType:
+          allOf:
+            - $ref: '#/components/schemas/ConfigurableConnectorsTypes'
+      required:
+        - triggerConfig
+        - connectorType
+    LegacyCWSaveFileConnectionConfig:
+      type: object
+      properties:
+        triggerConfig:
+          $ref: '#/components/schemas/ConnectionCloudWatcher'
+        connectorType:
+          allOf:
+            - $ref: '#/components/schemas/ConfigurableConnectorsTypes'
+      required:
+        - triggerConfig
+        - connectorType
+    CronFlowConnectionConfig:
+      type: object
+      properties:
+        triggerConfig:
+          type: object
+        connectorType:
+          allOf:
+            - $ref: '#/components/schemas/ConfigurableConnectorsTypes'
+      required:
+        - triggerConfig
+        - connectorType
+    CronUploadConnectionConfig:
+      type: object
+      properties:
+        triggerConfig:
+          type: object
+        connectorType:
+          allOf:
+            - $ref: '#/components/schemas/ConfigurableConnectorsTypes'
+      required:
+        - triggerConfig
+        - connectorType
+    CWSaveFileConnectionConfig:
+      type: object
+      properties:
+        triggerConfig:
+          description: Cloud watcher trigger configuration
+          allOf:
+            - $ref: '#/components/schemas/ConnectionCloudWatcher'
+        connectorType:
+          allOf:
+            - $ref: '#/components/schemas/ConfigurableConnectorsTypes'
+      required:
+        - triggerConfig
+        - connectorType
+    OneShotFlowConnectionConfig:
+      type: object
+      properties:
+        triggerConfig:
+          type: object
+        connectorType:
+          allOf:
+            - $ref: '#/components/schemas/ConfigurableConnectorsTypes'
+      required:
+        - triggerConfig
+        - connectorType
+    OneShotUploadConnectionConfig:
+      type: object
+      properties:
+        triggerConfig:
+          type: object
+        connectorType:
+          allOf:
+            - $ref: '#/components/schemas/ConfigurableConnectorsTypes'
+      required:
+        - triggerConfig
+        - connectorType
+    CronStreamDataConnectionConfig:
+      type: object
+      properties:
+        triggerConfig:
+          type: object
+        connectorType:
+          allOf:
+            - $ref: '#/components/schemas/ConfigurableConnectorsTypes'
+      required:
+        - triggerConfig
+        - connectorType
+    AppStartupConnectionConfig:
+      type: object
+      properties:
+        triggerConfig:
+          description: Cloud watcher trigger configuration
+          allOf:
+            - $ref: '#/components/schemas/ConnectionCloudWatcher'
+        connectorType:
+          allOf:
+            - $ref: '#/components/schemas/ConfigurableConnectorsTypes'
+        appId:
+          type: string
+        sessionFullPath:
+          type: string
+      required:
+        - triggerConfig
+        - connectorType
+        - appId
+    AppCleanupConnectionConfig:
+      type: object
+      properties:
+        triggerConfig:
+          $ref: '#/components/schemas/ConnectionFileWatcher'
+        connectorType:
+          allOf:
+            - $ref: '#/components/schemas/ConfigurableConnectorsTypes'
+        appId:
+          type: string
+        sessionFullPath:
+          type: string
+      required:
+        - triggerConfig
+        - connectorType
+        - appId
+    AppCleanupFlowConnectionConfig:
+      type: object
+      properties:
+        triggerConfig:
+          $ref: '#/components/schemas/ConnectionFileWatcher'
+        connectorType:
+          allOf:
+            - $ref: '#/components/schemas/ConfigurableConnectorsTypes'
+        appId:
+          type: string
+        sessionFullPath:
+          type: string
+      required:
+        - triggerConfig
+        - connectorType
+        - appId
+    ConnectionTemplate:
+      type: object
+      properties:
+        triggerConfig:
+          discriminator:
+            propertyName: trigger
+            mapping:
+              file_watcher: '#/components/schemas/ConnectionFileWatcher'
+              cron: '#/components/schemas/ConnectionCron'
+              cloud_watcher: '#/components/schemas/ConnectionCloudWatcher'
+              one_shot: '#/components/schemas/ConnectionConfigOneShot'
+          oneOf:
+            - $ref: '#/components/schemas/ConnectionFileWatcher'
+            - $ref: '#/components/schemas/ConnectionCron'
+            - $ref: '#/components/schemas/ConnectionCloudWatcher'
+            - $ref: '#/components/schemas/ConnectionConfigOneShot'
+          additionalProperties: false
+        connectorType:
+          allOf:
+            - $ref: '#/components/schemas/ConfigurableConnectorsTypes'
+      required:
+        - triggerConfig
+        - connectorType
+    FileTagType:
+      type: object
+      properties:
+        id:
+          type: string
+        description:
+          type: string
+          nullable: true
+        type:
+          type: string
+        hasUrl:
+          type: boolean
+        allowMultiple:
+          type: boolean
+        icon:
+          type: string
+          nullable: true
+        textColor:
+          type: string
+        backgroundColor:
+          type: string
+        tagCount:
+          type: number
+      required:
+        - id
+        - type
+        - hasUrl
+        - allowMultiple
+        - icon
+        - textColor
+        - backgroundColor
+    UnappliedFileTag:
+      type: object
+      properties:
+        tagTypeId:
+          type: string
+        type:
+          $ref: '#/components/schemas/FileTagType'
+        tagId:
+          type: string
+          nullable: true
+        displayValue:
+          type: string
+        url:
+          type: string
+          nullable: true
+          description: The external url that the User sets to be associated with tagged file
+        file_uri:
+          type: string
+          description: The gcs url for the file that the tag is attached to
+      required:
+        - tagTypeId
+        - displayValue
+    ConnectorState:
+      type: string
+      enum:
+        - Active
+        - Archived
+        - Disabled
+    GeneratedAsset:
+      type: object
+      properties:
+        created:
+          type: string
+          nullable: true
+          description: Date the asset was created. The bin should never be updated so confirm when downloaded the lastupdated is this
+        checksum:
+          type: string
+          nullable: true
+          description: crc32 checksum
+        storageUrl:
+          type: string
+          nullable: true
+          description: gsutil uri
+        signedUrl:
+          type: string
+          nullable: true
+          description: signed url that will be generated after pulling from db
+    AssetList:
+      type: object
+      properties:
+        linuxExe:
+          description: linux exe asset that can be downloaded
+          allOf:
+            - $ref: '#/components/schemas/GeneratedAsset'
+        windowsExe:
+          description: windows exe asset that can be downloaded
+          allOf:
+            - $ref: '#/components/schemas/GeneratedAsset'
+        windowsMsi:
+          description: windows msi asset that can be downloaded
+          allOf:
+            - $ref: '#/components/schemas/GeneratedAsset'
+      required:
+        - linuxExe
+        - windowsExe
+    BuildEventClass:
+      type: object
+      properties:
+        entity:
+          type: string
+        time:
+          type: string
+        type:
+          type: string
+          enum:
+            - FLOW
+            - CONTAINER
+            - AGENT
+            - GATEWAY
+        identifier:
+          type: string
+        buildStatus:
+          type: string
+          enum:
+            - PROCESSING
+            - COMPLETED
+            - ERROR
+            - PENDING
+        deployStatus:
+          type: string
+          enum:
+            - PROCESSING
+            - COMPLETED
+            - ERROR
+            - PENDING
+        userUid:
+          type: string
+      required:
+        - entity
+        - time
+        - type
+        - identifier
+        - buildStatus
+        - deployStatus
+        - userUid
+    ConnectorHistoryEntry:
+      type: object
+      properties:
+        connectorId:
+          type: string
+        connectorVersion:
+          type: string
+          description: connector version
+        message:
+          type: string
+          description: commit message for the change description
+        authorEmail:
+          type: string
+        processor:
+          type: string
+          description: user-defined code sha stored in git
+        configuration:
+          type: string
+          description: yaml of config for connector
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        legacyAssets:
+          $ref: '#/components/schemas/AssetList'
+        status:
+          $ref: '#/components/schemas/BuildEventClass'
+        requireLegacyFullUpdate:
+          type: boolean
+      required:
+        - connectorId
+        - connectorVersion
+        - message
+        - authorEmail
+        - processor
+        - configuration
+        - createdAt
+        - updatedAt
+        - legacyAssets
+        - status
+        - requireLegacyFullUpdate
+    HostStatus:
+      type: string
+      enum:
+        - Live
+        - Updating
+        - Disconnected
+        - Shutdown
+        - Deprecated
+        - Error
+    HostStatusEntity:
+      type: object
+      properties:
+        status:
+          allOf:
+            - $ref: '#/components/schemas/HostStatus'
+        errorMessage:
+          type: string
+        id:
+          type: string
+        latestPingTimestamp:
+          format: date-time
+          type: string
+      required:
+        - status
+        - id
+    Secret:
+      type: object
+      properties:
+        id:
+          type: number
+        name:
+          type: string
+        version:
+          type: string
+        gcpName:
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        deletedAt:
+          format: date-time
+          type: string
+          nullable: true
+      required:
+        - id
+        - name
+        - version
+        - gcpName
+        - updatedAt
+        - deletedAt
+    Host:
+      type: object
+      properties:
+        id:
+          type: string
+          description: uuid for the host. will be generated if not specified in yaml
+        name:
+          type: string
+        state:
+          default: Enabled
+          allOf:
+            - $ref: '#/components/schemas/HostState'
+        labels:
+          nullable: true
+          description: identifier metadata for a host
+          type: array
+          items:
+            type: string
+        updatesEnabled:
+          type: boolean
+          default: true
+        eventConfiguration:
+          $ref: '#/components/schemas/EventConfiguration'
+        serviceIdentityAccountNameSecretName:
+          type: string
+          nullable: true
+          description: The secret that should be retrieved for the account name of the specific user identity to install the connection with on the host operating system
+        serviceIdentityAccountNameSecretVersion:
+          type: string
+          nullable: true
+        serviceIdentityPasswordSecretName:
+          type: string
+          nullable: true
+          description: The secret that should be retrieved for the password of the specific user identity to install the connection with on the host operating system
+        serviceIdentityPasswordSecretVersion:
+          type: string
+          nullable: true
+        legacyConnectionId:
+          type: string
+        startTime:
+          format: date-time
+          type: string
+        inferredData:
+          description: Data that is not guaranteed to be accurate. The host attempts to piece together certain contextual information on its environment.
+          allOf:
+            - $ref: '#/components/schemas/HostInferredData'
+        apiServerTarget:
+          type: string
+        tenantName:
+          type: string
+        runningVersion:
+          description: This is the actual data running on the host based on last status ping received from it. Can be used to detect discrepancies between what the host should be at.
+          allOf:
+            - $ref: '#/components/schemas/HostVersionMetadata'
+        environment:
+          type: string
+          description: Temporary field to help scope a host to a specific environment until we can make it tenant-level.
+        connections:
+          type: array
+          items:
+            $ref: '#/components/schemas/ConnectorConnection'
+        description:
+          type: string
+        customImage:
+          $ref: '#/components/schemas/CustomImage'
+        expectedVersion:
+          description: There are the expected version the host should be running based on any changes from the UI. Can be used to detect discrepancies between what the host should be at.
+          allOf:
+            - $ref: '#/components/schemas/HostVersionMetadata'
+        emails:
+          nullable: true
+          description: email addresses associated with a host
+          type: array
+          items:
+            type: string
+        sendEmailAlerts:
+          type: boolean
+          description: send email alerts for host status
+        disconnectAlertTimeout:
+          type: number
+          description: time until email alert is sent for an offline host
+        disconnectAlertSent:
+          type: boolean
+          description: email alert has been sent for an offline host
+        sendAlertOnShutdown:
+          type: boolean
+          description: send email alert for host shutdown event
+        shouldAutoBuildOnRelease:
+          type: boolean
+        legacyAgentId:
+          type: string
+        deletedAt:
+          format: date-time
+          type: string
+        statusMetadata:
+          $ref: '#/components/schemas/HostStatusEntity'
+        serviceIdentityAccountNameSecret:
+          nullable: true
+          allOf:
+            - $ref: '#/components/schemas/Secret'
+        serviceIdentityPasswordSecret:
+          nullable: true
+          allOf:
+            - $ref: '#/components/schemas/Secret'
+      required:
+        - name
+        - state
+        - updatesEnabled
+        - startTime
+        - apiServerTarget
+        - tenantName
+        - runningVersion
+        - expectedVersion
+        - shouldAutoBuildOnRelease
+        - statusMetadata
+    PanelApp:
+      type: object
+      properties:
+        id:
+          type: number
+        appName:
+          type: string
+        appFolder:
+          type: string
+        description:
+          type: string
+        hidden:
+          type: boolean
+        customImage:
+          $ref: '#/components/schemas/CustomImage'
+        createdAt:
+          format: date-time
+          type: string
+        deletedAt:
+          format: date-time
+          type: string
+      required:
+        - appName
+        - appFolder
+        - description
+        - hidden
+    ownerType:
+      type: string
+      enum:
+        - Ganymede
+        - Customer
+    AccessType:
+      type: string
+      enum:
+        - admin
+        - reader
+        - runner
+        - writer
+        - none
+    ApplicationSession:
+      type: object
+      properties:
+        id:
+          type: string
+        application:
+          type: string
+        initiator:
+          type: string
+        status:
+          enum:
+            - Initializing
+            - Live
+            - Stopped
+            - Error
+            - Standby
+            - Paused
+            - Resuming
+          type: string
+        initializationStatus:
+          enum:
+            - Preparing Session Infrastructure
+            - Creating VM from template
+            - Generating VM Password
+            - Creating Network
+            - Scheduling VM Management
+            - Starting VM
+            - Sending VM Hello Message
+            - Waiting for Response
+            - Initialization Complete
+          type: string
+        inputFiles:
+          type: array
+          items:
+            type: string
+        outputFiles:
+          nullable: true
+          type: array
+          items:
+            type: string
+        startTime:
+          type: string
+        endTime:
+          type: string
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+        password:
+          type: string
+        domain:
+          type: string
+        port:
+          type: number
+        vmName:
+          type: string
+        timeout:
+          type: string
+        vncPassword:
+          type: string
+        preWarm:
+          type: boolean
+      required:
+        - id
+        - application
+        - initiator
+        - status
+        - initializationStatus
+        - inputFiles
+        - outputFiles
+        - startTime
+        - password
+        - domain
+        - port
+        - vmName
+        - timeout
+    User:
+      type: object
+      properties:
+        id:
+          type: number
+        role:
+          allOf:
+            - $ref: '#/components/schemas/AccessType'
+        email:
+          type: string
+        saml_id:
+          type: string
+        assigned_flows:
+          type: array
+          items:
+            $ref: '#/components/schemas/Flow'
+        githubLogin:
+          type: string
+        application_sessions:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApplicationSession'
+        lastSeenAt:
+          format: date-time
+          type: string
+        lastActiveAt:
+          format: date-time
+          type: string
+        deletedAt:
+          format: date-time
+          type: string
+          nullable: true
+        showSidebarTour:
+          type: boolean
+        showHomepageTour:
+          type: boolean
+        showFilesTour:
+          type: boolean
+        showFlowRunsTour:
+          type: boolean
+        showFlowEditorTour:
+          type: boolean
+        showAnalysisAppCardTour:
+          type: boolean
+        showProcessUnitOpsTour:
+          type: boolean
+        showGatewayTour:
+          type: boolean
+        showHostDetailsTour:
+          type: boolean
+        showConnectorConnectionDetailsTour:
+          type: boolean
+        showConnectorDetailsTour:
+          type: boolean
+        notificationPopupSetting:
+          type: string
+          enum:
+            - All
+            - Errors
+            - My Notifications
+            - None
+      required:
+        - id
+        - role
+        - email
+        - saml_id
+        - showSidebarTour
+        - showHomepageTour
+        - showFilesTour
+        - showFlowRunsTour
+        - showFlowEditorTour
+        - showAnalysisAppCardTour
+        - showProcessUnitOpsTour
+        - showGatewayTour
+        - showHostDetailsTour
+        - showConnectorConnectionDetailsTour
+        - showConnectorDetailsTour
+        - notificationPopupSetting
+    datasetKind:
+      type: string
+      enum:
+        - physical
+        - virtual
+    Dataset:
+      type: object
+      properties:
+        kind:
+          allOf:
+            - $ref: '#/components/schemas/datasetKind'
+        id:
+          type: number
+        displayName:
+          type: string
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        bqDataset:
+          type: string
+        tableName:
+          type: string
+        charts:
+          type: array
+          items:
+            $ref: '#/components/schemas/Chart'
+      required:
+        - id
+        - createdAt
+        - updatedAt
+        - bqDataset
+        - tableName
+    Chart:
+      type: object
+      properties:
+        id:
+          type: number
+        displayName:
+          type: string
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        permaLink:
+          type: boolean
+        dataset:
+          $ref: '#/components/schemas/Dataset'
+        dashboards:
+          type: array
+          items:
+            $ref: '#/components/schemas/Dashboard'
+      required:
+        - id
+        - createdAt
+        - updatedAt
+        - dataset
+    Dashboard:
+      type: object
+      properties:
+        ownerType:
+          allOf:
+            - $ref: '#/components/schemas/ownerType'
+        customImage:
+          nullable: true
+          allOf:
+            - $ref: '#/components/schemas/CustomImage'
+        name:
+          type: string
+        displayName:
+          type: string
+        supersetId:
+          type: number
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        owner:
+          $ref: '#/components/schemas/User'
+        version:
+          type: string
+        charts:
+          type: array
+          items:
+            $ref: '#/components/schemas/Chart'
+      required:
+        - name
+        - createdAt
+        - updatedAt
+        - version
+    BqTableColumn:
+      type: object
+      properties:
+        id:
+          type: number
+        bqTable:
+          $ref: '#/components/schemas/BqTable'
+        name:
+          type: string
+        type:
+          type: string
+          enum:
+            - ARRAY
+            - BOOL
+            - BYTES
+            - DATE
+            - DATETIME
+            - GEOGRAPHY
+            - INTERVAL
+            - JSON
+            - INT64
+            - NUMERIC
+            - BIGNUMERIC
+            - FLOAT64
+            - RANGE
+            - STRING
+            - STRUCT
+            - TIME
+            - TIMESTAMP
+        description:
+          type: string
+        pdColumnName:
+          type: string
+        pdColumnType:
+          type: string
+        createdAt:
+          format: date-time
+          type: string
+        lastModified:
+          format: date-time
+          type: string
+      required:
+        - bqTable
+        - name
+        - type
+    BqTable:
+      type: object
+      properties:
+        id:
+          type: number
+        name:
+          type: string
+        description:
+          type: string
+        createdAt:
+          format: date-time
+          type: string
+        lastModified:
+          format: date-time
+          type: string
+        columns:
+          type: array
+          items:
+            $ref: '#/components/schemas/BqTableColumn'
+        numRows:
+          type: string
+        isStream:
+          type: boolean
+      required:
+        - name
+        - numRows
+    InstrumentType:
+      type: object
+      properties:
+        id:
+          type: number
+        createdAt:
+          format: date-time
+          type: string
+        deletedAt:
+          format: date-time
+          type: string
+        name:
+          type: string
+        model:
+          type: string
+        manufacturer:
+          type: string
+        costPerRun:
+          type: string
+        customImage:
+          $ref: '#/components/schemas/CustomImage'
+        connectorId:
+          type: string
+        connector:
+          $ref: '#/components/schemas/Connector'
+        flows:
+          type: array
+          items:
+            $ref: '#/components/schemas/Flow'
+        dashboards:
+          type: array
+          items:
+            $ref: '#/components/schemas/Dashboard'
+        bqTables:
+          type: array
+          items:
+            $ref: '#/components/schemas/BqTable'
+        panelApps:
+          type: array
+          items:
+            $ref: '#/components/schemas/PanelApp'
+      required:
+        - id
+        - createdAt
+        - deletedAt
+    UnitOperation:
+      type: object
+      properties:
+        id:
+          type: number
+        name:
+          type: string
+        docsMarkdown:
+          type: string
+        instrumentOrder:
+          type: array
+          items:
+            type: number
+        instruments:
+          type: array
+          items:
+            $ref: '#/components/schemas/InstrumentType'
+        createdAt:
+          format: date-time
+          type: string
+        deletedAt:
+          format: date-time
+          type: string
+          nullable: true
+        customImage:
+          $ref: '#/components/schemas/CustomImage'
+        flows:
+          type: array
+          items:
+            $ref: '#/components/schemas/Flow'
+        dashboards:
+          type: array
+          items:
+            $ref: '#/components/schemas/Dashboard'
+        bqTables:
+          type: array
+          items:
+            $ref: '#/components/schemas/BqTable'
+        panelApps:
+          type: array
+          items:
+            $ref: '#/components/schemas/PanelApp'
+      required:
+        - id
+        - name
+        - instrumentOrder
+        - createdAt
+        - deletedAt
+    Process:
+      type: object
+      properties:
+        id:
+          type: number
+        name:
+          type: string
+        docsMarkdown:
+          type: string
+        unitOperationOrder:
+          type: array
+          items:
+            type: number
+        unitOperations:
+          type: array
+          items:
+            $ref: '#/components/schemas/UnitOperation'
+        createdAt:
+          format: date-time
+          type: string
+        deletedAt:
+          format: date-time
+          type: string
+          nullable: true
+        customImage:
+          $ref: '#/components/schemas/CustomImage'
+        flows:
+          type: array
+          items:
+            $ref: '#/components/schemas/Flow'
+        dashboards:
+          type: array
+          items:
+            $ref: '#/components/schemas/Dashboard'
+        bqTables:
+          type: array
+          items:
+            $ref: '#/components/schemas/BqTable'
+        panelApps:
+          type: array
+          items:
+            $ref: '#/components/schemas/PanelApp'
+      required:
+        - id
+        - name
+        - unitOperationOrder
+        - createdAt
+        - deletedAt
+    CustomImage:
+      type: object
+      properties:
+        id:
+          type: string
+        contentType:
+          type: string
+        filename:
+          type: string
+        flowName:
+          type: string
+          nullable: true
+        flow:
+          nullable: true
+          allOf:
+            - $ref: '#/components/schemas/Flow'
+        agentId:
+          type: string
+          nullable: true
+        connectionId:
+          type: string
+          nullable: true
+        connectorId:
+          type: string
+          nullable: true
+        connector:
+          nullable: true
+          allOf:
+            - $ref: '#/components/schemas/Connector'
+        connectorConnectionId:
+          type: string
+          nullable: true
+        connectorConnection:
+          nullable: true
+          allOf:
+            - $ref: '#/components/schemas/ConnectorConnection'
+        hostId:
+          type: string
+          nullable: true
+        host:
+          nullable: true
+          allOf:
+            - $ref: '#/components/schemas/Host'
+        panel:
+          $ref: '#/components/schemas/PanelApp'
+        instrument:
+          nullable: true
+          allOf:
+            - $ref: '#/components/schemas/InstrumentType'
+        dashboard:
+          nullable: true
+          allOf:
+            - $ref: '#/components/schemas/Dashboard'
+        unitOperations:
+          type: array
+          items:
+            $ref: '#/components/schemas/UnitOperation'
+        processes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Process'
+      required:
+        - id
+        - contentType
+        - filename
+        - flowName
+        - agentId
+        - connectionId
+        - connectorId
+        - connectorConnectionId
+        - hostId
+    LegacyAgentMetadata:
+      type: object
+      properties:
+        coreVersion:
+          type: string
+          description: Core agent version override
+        targetHost:
+          type: string
+          description: Target host override for local or ngrok usage
+        shouldAutoBuildOnRelease:
+          type: boolean
+          description: Whether to automatically build on agent release
+        autoUpdate:
+          type: boolean
+          description: Whether to auto deploy code and configuration changes to live connections
+    Connector:
+      type: object
+      properties:
+        id:
+          type: string
+          description: uuid for the connector. will be generated if not specified in yaml
+        name:
+          type: string
+        defaultVariables:
+          type: object
+          additionalProperties:
+            type: string
+          description: Key value metadata for a connector to reference throughout code
+          nullable: true
+        defaultTags:
+          description: Tags that the connector will apply to all files uploaded
+          nullable: true
+          type: array
+          items:
+            $ref: '#/components/schemas/UnappliedFileTag'
+        description:
+          type: string
+        version:
+          type: string
+          description: The version of the connector, timestamp of last update or install, to verify the status is from current version
+        creatorEmail:
+          type: string
+        connectorType:
+          allOf:
+            - $ref: '#/components/schemas/ConfigurableConnectorsTypes'
+        state:
+          allOf:
+            - $ref: '#/components/schemas/ConnectorState'
+        connections:
+          type: array
+          items:
+            $ref: '#/components/schemas/ConnectorConnection'
+        deletedAt:
+          format: date-time
+          type: string
+        history:
+          nullable: true
+          type: array
+          items:
+            $ref: '#/components/schemas/ConnectorHistoryEntry'
+        processorCommit:
+          type: string
+        customImage:
+          $ref: '#/components/schemas/CustomImage'
+        legacyAgentId:
+          type: string
+          nullable: true
+        legacyAgentMetadata:
+          $ref: '#/components/schemas/LegacyAgentMetadata'
+        gitPath:
+          type: string
+      required:
+        - id
+        - name
+        - defaultConfiguration
+        - description
+        - version
+        - connectorType
+        - state
+        - processorCommit
+        - gitPath
+    ConnectorConnectionState:
+      type: string
+      enum:
+        - Active
+        - Disabled
+    ConnectorConnectionStatus:
+      type: string
+      enum:
+        - Live
+        - Failing
+        - Deactivated
+    ConnectorConnection:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        connectorId:
+          type: string
+        connector:
+          $ref: '#/components/schemas/Connector'
+        variables:
+          type: object
+          additionalProperties:
+            type: string
+          description: Key value metadata for a connector to reference throughout code
+          default: {}
+        tagParams:
+          description: Tags that the connector will apply to all files uploaded
+          default: []
+          type: array
+          items:
+            $ref: '#/components/schemas/UnappliedFileTag'
+        labels:
+          description: identifier metadata for a connection
+          default: []
+          type: array
+          items:
+            type: string
+        enabledTime:
+          format: date-time
+          type: string
+        environment:
+          type: string
+        state:
+          default: Active
+          allOf:
+            - $ref: '#/components/schemas/ConnectorConnectionState'
+        connConfiguration:
+          type: object
+          description: Configuration for the connector
+        emails:
+          description: email addresses associated with a connection
+          nullable: true
+          type: array
+          items:
+            type: string
+        hostId:
+          type: string
+        host:
+          $ref: '#/components/schemas/Host'
+        runningConnectorVersion:
+          type: string
+        deletedAt:
+          format: date-time
+          type: string
+        customImage:
+          $ref: '#/components/schemas/CustomImage'
+        status:
+          allOf:
+            - $ref: '#/components/schemas/ConnectorConnectionStatus'
+        statusMessage:
+          type: string
+        legacyConnectionId:
+          type: string
+          nullable: true
+      required:
+        - id
+        - name
+        - connectorId
+        - enabledTime
+        - environment
+        - state
+        - connConfiguration
+        - hostId
+        - host
+        - runningConnectorVersion
+        - status
+    AddHostConnectionBody:
+      type: object
+      properties:
+        agentTemplateId:
+          type: string
+          description: ID of the agent template to add
+        name:
+          type: string
+          description: Name of the agent template
+        dry_run:
+          type: boolean
+          description: If true, perform a dry run without actually adding the connection
+      required:
+        - agentTemplateId
+    postRepositoryCommitsBody:
+      type: object
+      properties:
+        dry_run:
+          type: boolean
+          description: If true, perform a dry run without actually committing files
+        authorEmail:
+          type: string
+          format: email
+        message:
+          type: string
+        fileMap:
+          type: object
+      required:
+        - authorEmail
+        - message
+        - fileMap
+    FlowRunIdentifier:
+      type: object
+      properties:
+        runId:
+          type: string
+          pattern: /^\d+$/
+          description: Flow run ID associated with this run
+        flowId:
+          type: string
+          pattern: /^\S+$/
+          description: Flow ID associated with this run
+      required:
+        - runId
+        - flowId
+    InitiatorDTO:
+      type: object
+      properties:
+        userEmail:
+          type: string
+          format: email
+          description: User email if the initiator is a user
+        flowRun:
+          description: Flow run identifier consisting of the Flow runId and flowId
+          example:
+            runId: '1234567890124'
+            flowId: my-flow-2
+          allOf:
+            - $ref: '#/components/schemas/FlowRunIdentifier'
+        connectionId:
+          type: string
+          description: Connection ID if the initiator is a connection
+        connectorConnectionId:
+          type: string
+          description: Connector Connection ID if the initiator is a connector connection
+        systemActorId:
+          type: number
+          description: System Actor ID if the initiator is a system actor
+    CreateInstrumentRunBody:
+      type: object
+      properties:
+        instrumentId:
+          type: number
+          description: ID of the instrument for this run
+        unitOperationRunId:
+          type: number
+          description: ID of the unit operation run to associate with this instrument run
+        startTime:
+          type: string
+          description: Start time of the instrument run
+          format: date-time
+        endTime:
+          type: string
+          description: End time of the instrument run
+          format: date-time
+        state:
+          enum:
+            - Running
+            - Completed
+          type: string
+          description: State of the instrument run
+          default: Running
+        fileUris:
+          description: Array of file URIs to associate with this run
+          type: array
+          items:
+            type: string
+        flowRuns:
+          description: Array of flow run identifiers consisting of the Flow runId and flowId
+          example:
+            - runId: '1234567890123'
+              flowId: my-flow-1
+            - runId: '1234567890124'
+              flowId: my-flow-2
+          type: array
+          items:
+            $ref: '#/components/schemas/FlowRunIdentifier'
+        externalId:
+          type: string
+          description: External identifier for the instrument run
+        url:
+          type: string
+          description: URL associated with the external identifier
+        bqTableNames:
+          description: Array of BqTable Names to associate with this run
+          type: array
+          items:
+            type: string
+            pattern: /^\S+$/
+        panelSessionIds:
+          description: Array of panel session IDs to associate with this run
+          type: array
+          items:
+            type: string
+        initiator:
+          description: Initiator of the instrument run
+          allOf:
+            - $ref: '#/components/schemas/InitiatorDTO'
+        dry_run:
+          type: boolean
+          description: If true, perform a dry run without actually creating the instrument run
+      required:
+        - instrumentId
+        - externalId
+    InstrumentRunDTO:
+      type: object
+      properties:
+        id:
+          type: number
+        createdAt:
+          type: string
+        instrumentId:
+          type: number
+          description: ID of the instrument this run belongs to
+        startTime:
+          type: string
+          description: Start time of the instrument run
+          format: date-time
+        endTime:
+          type: string
+          description: End time of the instrument run
+          format: date-time
+        state:
+          enum:
+            - Running
+            - Completed
+          type: string
+          description: Current state of the instrument run
+        fileUris:
+          description: Array of file URIs associated with this run
+          type: array
+          items:
+            type: string
+        flowRunIds:
+          description: Array of flow run IDs associated with this run
+          type: array
+          items:
+            type: number
+        externalId:
+          type: string
+          description: External identifier for the instrument run
+        url:
+          type: string
+          description: URL associated with the external identifier
+        bqTableIds:
+          description: Array of BqTable IDs associated with this run
+          type: array
+          items:
+            type: number
+        panelSessionIds:
+          description: Array of panel session IDs associated with this run
+          type: array
+          items:
+            type: string
+        unitOperationRunId:
+          type: number
+          description: ID of the unit operation run this instrument run belongs to
+        initiator:
+          description: Initiator of the instrument run
+          allOf:
+            - $ref: '#/components/schemas/InitiatorDTO'
+      required:
+        - id
+        - createdAt
+        - instrumentId
+        - state
+    UpdateInstrumentRunBody:
+      type: object
+      properties:
+        unitOperationRunId:
+          type: number
+          description: ID of the unit operation run to associate with this instrument run
+        startTime:
+          type: string
+          description: Start time of the instrument run
+          format: date-time
+        endTime:
+          type: string
+          description: End time of the instrument run
+          format: date-time
+        state:
+          enum:
+            - Running
+            - Completed
+          type: string
+          description: State of the instrument run
+        fileUris:
+          description: Array of file URIs to associate with this run
+          type: array
+          items:
+            type: string
+        flowRuns:
+          description: Array of flow run identifiers consisting of the Flow runId and flowId
+          example:
+            - runId: '1234567890123'
+              flowId: my-flow-1
+            - runId: '1234567890124'
+              flowId: my-flow-2
+          type: array
+          items:
+            $ref: '#/components/schemas/FlowRunIdentifier'
+        externalId:
+          type: string
+          description: External identifier for the instrument run
+        url:
+          type: string
+          description: URL associated with the external identifier
+        bqTableNames:
+          description: Array of BqTable Names to associate with this run
+          type: array
+          items:
+            type: string
+            pattern: /^\S+$/
+        panelSessionIds:
+          description: Array of panel session IDs to associate with this run
+          type: array
+          items:
+            type: string
+        initiator:
+          description: Initiator of the instrument run
+          allOf:
+            - $ref: '#/components/schemas/InitiatorDTO'
+        dry_run:
+          type: boolean
+          description: If true, perform a dry run without actually updating the instrument run
+    CreateUnitOperationRunBody:
+      type: object
+      properties:
+        unitOperationId:
+          type: number
+          description: ID of the unit operation for this run
+        processRunId:
+          type: number
+          description: ID of the process run to associate with this unit operation run
+        startTime:
+          type: string
+          description: Start time of the unit operation run
+          format: date-time
+        endTime:
+          type: string
+          description: End time of the unit operation run
+          format: date-time
+        state:
+          enum:
+            - Running
+            - Completed
+          type: string
+          description: State of the unit operation run
+          default: Running
+        fileUris:
+          description: Array of file URIs to associate with this run
+          type: array
+          items:
+            type: string
+        flowRuns:
+          description: Array of flow run identifiers consisting of the Flow runId and flowId
+          example:
+            - runId: '1234567890123'
+              flowId: my-flow-1
+            - runId: '1234567890124'
+              flowId: my-flow-2
+          type: array
+          items:
+            $ref: '#/components/schemas/FlowRunIdentifier'
+        instrumentRunIds:
+          description: Array of instrument run IDs to associate with this run
+          type: array
+          items:
+            type: number
+        panelSessionIds:
+          description: Array of panel session IDs to associate with this run
+          type: array
+          items:
+            type: string
+        bqTableNames:
+          description: Array of BqTable Names to associate with this run
+          type: array
+          items:
+            type: string
+            pattern: /^\S+$/
+        externalId:
+          type: string
+          description: External identifier for the unit operation run
+        url:
+          type: string
+          description: URL associated with the external identifier
+        initiator:
+          description: Initiator of the unit operation run
+          allOf:
+            - $ref: '#/components/schemas/InitiatorDTO'
+        dry_run:
+          type: boolean
+          description: If true, perform a dry run without actually creating the unit operation run
+      required:
+        - unitOperationId
+        - externalId
+    UnitOperationRunDTO:
+      type: object
+      properties:
+        id:
+          type: number
+        createdAt:
+          type: string
+        unitOperationId:
+          type: number
+          description: ID of the unit operation this run belongs to
+        startTime:
+          type: string
+          description: Start time of the unit operation run
+          format: date-time
+        endTime:
+          type: string
+          description: End time of the unit operation run
+          format: date-time
+        state:
+          enum:
+            - Running
+            - Completed
+          type: string
+          description: Current state of the unit operation run
+        fileUris:
+          description: Array of file URIs associated with this run
+          type: array
+          items:
+            type: string
+        flowRunIds:
+          description: Array of flow run IDs associated with this run
+          type: array
+          items:
+            type: number
+        instrumentRunIds:
+          description: Array of instrument run IDs associated with this run
+          type: array
+          items:
+            type: number
+        instrumentRuns:
+          description: Array of instrument runs associated with this run
+          type: array
+          items:
+            $ref: '#/components/schemas/InstrumentRunDTO'
+        panelSessionIds:
+          description: Array of panel session IDs associated with this run
+          type: array
+          items:
+            type: string
+        bqTableIds:
+          description: Array of BQ table IDs associated with this run
+          type: array
+          items:
+            type: number
+        externalId:
+          type: string
+          description: External identifier for the unit operation run
+        url:
+          type: string
+          description: URL associated with the external identifier
+        processRunId:
+          type: number
+          description: ID of the process run this unit operation run belongs to
+        initiator:
+          description: Initiator of the unit operation run
+          allOf:
+            - $ref: '#/components/schemas/InitiatorDTO'
+      required:
+        - id
+        - createdAt
+        - unitOperationId
+        - state
+    UpdateUnitOperationRunBody:
+      type: object
+      properties:
+        processRunId:
+          type: number
+          description: ID of the process run to associate with this unit operation run
+        startTime:
+          type: string
+          description: Start time of the unit operation run
+          format: date-time
+        endTime:
+          type: string
+          description: End time of the unit operation run
+          format: date-time
+        state:
+          enum:
+            - Running
+            - Completed
+          type: string
+          description: State of the unit operation run
+        fileUris:
+          description: Array of file URIs to associate with this run
+          type: array
+          items:
+            type: string
+        flowRuns:
+          description: Array of flow run identifiers consisting of the Flow runId and flowId
+          example:
+            - runId: '1234567890123'
+              flowId: my-flow-1
+            - runId: '1234567890124'
+              flowId: my-flow-2
+          type: array
+          items:
+            $ref: '#/components/schemas/FlowRunIdentifier'
+        instrumentRunIds:
+          description: Array of instrument run IDs to associate with this run
+          type: array
+          items:
+            type: number
+        panelSessionIds:
+          description: Array of panel session IDs to associate with this run
+          type: array
+          items:
+            type: string
+        bqTableNames:
+          description: Array of BqTable Names to associate with this run
+          type: array
+          items:
+            type: string
+            pattern: /^\S+$/
+        externalId:
+          type: string
+          description: External identifier for the unit operation run
+        url:
+          type: string
+          description: URL associated with the external identifier
+        initiator:
+          description: Initiator of the unit operation run
+          allOf:
+            - $ref: '#/components/schemas/InitiatorDTO'
+        dry_run:
+          type: boolean
+          description: If true, perform a dry run without actually updating the unit operation run
+    CreateProcessRunBody:
+      type: object
+      properties:
+        processId:
+          type: number
+          description: ID of the process for this run
+        startTime:
+          type: string
+          description: Start time of the process run
+          format: date-time
+        endTime:
+          type: string
+          description: End time of the process run
+          format: date-time
+        state:
+          enum:
+            - Running
+            - Completed
+          type: string
+          description: State of the process run
+          default: Running
+        fileUris:
+          description: Array of file URIs to associate with this run
+          type: array
+          items:
+            type: string
+        flowRuns:
+          description: Array of flow run identifiers consisting of the Flow runId and flowId
+          example:
+            - runId: '1234567890123'
+              flowId: my-flow-1
+            - runId: '1234567890124'
+              flowId: my-flow-2
+          type: array
+          items:
+            $ref: '#/components/schemas/FlowRunIdentifier'
+        unitOperationRunIds:
+          description: Array of unit operation run IDs to associate with this run
+          type: array
+          items:
+            type: number
+        panelSessionIds:
+          description: Array of panel session IDs to associate with this run
+          type: array
+          items:
+            type: string
+        bqTableNames:
+          description: Array of BqTable Names to associate with this run
+          type: array
+          items:
+            type: string
+            pattern: /^\S+$/
+        externalId:
+          type: string
+          description: External identifier for the process run
+        url:
+          type: string
+          description: URL associated with the external identifier
+        initiator:
+          description: Initiator of the process run
+          allOf:
+            - $ref: '#/components/schemas/InitiatorDTO'
+        dry_run:
+          type: boolean
+          description: If true, perform a dry run without actually creating the process run
+      required:
+        - processId
+        - externalId
+    ProcessRunDTO:
+      type: object
+      properties:
+        id:
+          type: number
+        createdAt:
+          type: string
+        processId:
+          type: number
+          description: ID of the process this run belongs to
+        startTime:
+          type: string
+          description: Start time of the process run
+          format: date-time
+        endTime:
+          type: string
+          description: End time of the process run
+          format: date-time
+        state:
+          enum:
+            - Running
+            - Completed
+          type: string
+          description: Current state of the process run
+        fileUris:
+          description: Array of file URIs associated with this run
+          type: array
+          items:
+            type: string
+        flowRunIds:
+          description: Array of flow run identifiers consisting of the Flow runId and flowId
+          type: array
+          items:
+            type: number
+        unitOperationRunIds:
+          description: Array of unit operation run IDs associated with this run
+          type: array
+          items:
+            type: number
+        unitOperationRuns:
+          description: Array of unit operation runs associated with this run
+          type: array
+          items:
+            $ref: '#/components/schemas/UnitOperationRunDTO'
+        panelSessionIds:
+          description: Array of panel session IDs associated with this run
+          type: array
+          items:
+            type: string
+        bqTableIds:
+          description: Array of BQ table IDs associated with this run
+          type: array
+          items:
+            type: number
+        externalId:
+          type: string
+          description: External identifier for the process run
+        url:
+          type: string
+          description: URL associated with the external identifier
+        initiator:
+          description: Initiator of the process run
+          allOf:
+            - $ref: '#/components/schemas/InitiatorDTO'
+      required:
+        - id
+        - createdAt
+        - processId
+        - state
+    UpdateProcessRunBody:
+      type: object
+      properties:
+        startTime:
+          type: string
+          description: Start time of the process run
+          format: date-time
+        endTime:
+          type: string
+          description: End time of the process run
+          format: date-time
+        state:
+          enum:
+            - Running
+            - Completed
+          type: string
+          description: State of the process run
+        fileUris:
+          description: Array of file URIs to associate with this run
+          type: array
+          items:
+            type: string
+        flowRuns:
+          description: Array of flow run identifiers consisting of the Flow runId and flowId
+          example:
+            - runId: '1234567890123'
+              flowId: my-flow-1
+            - runId: '1234567890124'
+              flowId: my-flow-2
+          type: array
+          items:
+            $ref: '#/components/schemas/FlowRunIdentifier'
+        unitOperationRunIds:
+          description: Array of unit operation run IDs to associate with this run
+          type: array
+          items:
+            type: number
+        panelSessionIds:
+          description: Array of panel session IDs to associate with this run
+          type: array
+          items:
+            type: string
+        bqTableNames:
+          description: Array of BqTable Names to associate with this run
+          type: array
+          items:
+            type: string
+            pattern: /^\S+$/
+        externalId:
+          type: string
+          description: External identifier for the process run
+        url:
+          type: string
+          description: URL associated with the external identifier
+        initiator:
+          description: Initiator of the process run
+          allOf:
+            - $ref: '#/components/schemas/InitiatorDTO'
+        dry_run:
+          type: boolean
+          description: If true, perform a dry run without actually updating the process run
+    CreateInstrumentBody:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the instrument
+        location:
+          type: string
+          description: Location of the instrument
+        serial:
+          type: string
+          description: Serial of the instrument
+        metadata:
+          type: string
+          description: Metadata of the instrument
+        connectorConnectionIds:
+          description: Array of connection Ids to associate with this instrument
+          type: array
+          items:
+            type: string
+        instrumentTypeId:
+          type: number
+          description: Instrument Type ID for the instrument instance
+        dry_run:
+          type: boolean
+          description: If true, perform a dry run without actually creating the instrument
+      required:
+        - name
+    InstrumentDTO:
+      type: object
+      properties:
+        id:
+          type: number
+        createdAt:
+          type: string
+        name:
+          type: string
+          description: Name of the instrument
+        location:
+          type: string
+          description: Location of the instrument
+        serial:
+          type: string
+          description: Serial of the instrument
+        metadata:
+          type: string
+          description: Metadata of the instrument
+        connectorConnectionIds:
+          description: Array of connection Ids to associate with this run
+          type: array
+          items:
+            type: string
+        instrumentTypeId:
+          type: number
+          description: Instrument Type ID for the instrument instance
+      required:
+        - id
+        - createdAt
+        - name
+    ModularAnalysisDTO:
+      type: object
+      properties:
+        id:
+          type: number
+          description: Unique identifier for the modular analysis
+          nullable: true
+        appName:
+          type: string
+          description: Name of the modular analysis
+        appFolder:
+          type: string
+          description: Folder name where the modular analysis is stored
+        description:
+          type: string
+          description: Description of the modular analysis
+        hidden:
+          type: boolean
+          description: Whether the modular analysis is hidden from non-internal users
+          default: false
+      required:
+        - appName
+        - appFolder
+        - description
+    ModularAnalysisSessionDTO:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the modular analysis session
+        modularAnalysis:
+          description: Modular analysis associated with session
+          nullable: true
+          allOf:
+            - $ref: '#/components/schemas/ModularAnalysisDTO'
+        user:
+          type: string
+          description: User who started the session
+        startTime:
+          format: date-time
+          type: string
+          description: Start date and time of the modular analysis session
+          example: '2024-01-15T10:00:00Z'
+        endTime:
+          format: date-time
+          type: string
+          nullable: true
+          description: End date and time of the modular analysis session
+          example: '2024-01-15T12:00:00Z'
+        lastActivityTime:
+          format: date-time
+          type: string
+          description: Last activity date and time of the modular analysis session
+          example: '2024-01-15T12:00:00Z'
+      required:
+        - id
+        - user
+        - startTime
+        - lastActivityTime
+    AppConfigLevel:
+      type: string
+      enum:
+        - user
+        - app
+      description: The level of the configuration
+    CreateAppConfigDto:
+      type: object
+      properties:
+        appId:
+          type: number
+          description: The ID of the panel application
+          example: 1
+        name:
+          type: string
+          description: The name of the configuration
+          example: Default View
+        level:
+          description: The level of the configuration
+          example: user
+          allOf:
+            - $ref: '#/components/schemas/AppConfigLevel'
+        viewContent:
+          type: object
+          description: The view configuration content as JSON
+          example:
+            layout: grid
+            theme: dark
+        dry_run:
+          type: boolean
+          description: If true, perform a dry run without actually creating the app config
+      required:
+        - appId
+        - name
+        - level
+        - viewContent
+    AppConfig:
+      type: object
+      properties:
+        id:
+          type: number
+        name:
+          type: string
+        creator:
+          $ref: '#/components/schemas/User'
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        deletedAt:
+          format: date-time
+          type: string
+        app:
+          $ref: '#/components/schemas/PanelApp'
+        level:
+          enum:
+            - user
+            - app
+          type: string
+        viewContent:
+          type: object
+      required:
+        - id
+        - name
+        - creator
+        - createdAt
+        - updatedAt
+        - app
+        - level
+        - viewContent
+    UpdateAppConfigDto:
+      type: object
+      properties:
+        id:
+          type: number
+          description: The ID of the App Config to update
+          example: 1
+        appId:
+          type: number
+          description: The ID of the panel application
+          example: 1
+        name:
+          type: string
+          description: The name of the configuration
+          example: Default View
+        level:
+          description: The level of the configuration
+          example: user
+          allOf:
+            - $ref: '#/components/schemas/AppConfigLevel'
+        viewContent:
+          type: object
+          description: The view configuration content as JSON
+          example:
+            layout: grid
+            theme: dark
+        dry_run:
+          type: boolean
+          description: If true, perform a dry run without actually updating the app config
+      required:
+        - id
