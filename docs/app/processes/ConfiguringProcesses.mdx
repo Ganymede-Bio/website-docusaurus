@@ -12,9 +12,9 @@ Once a Process is defined, individual Run creation can be performed either manua
 
 Run tracking and retrieval are done by API calls from Agents and Flows, referencing the corresponding run + scoped to the relevant unit of execution.  This maximizes flexibility in how Processes are executed and tracked.
 
-- [Instrument Runs](/api#operation/getInstrumentRun) track execution of individual Instruments.
-- [Unit Operation Runs](/api#operation/getUnitOperationRun) track execution of Unit Operations.
-- [Process Runs](/api#operation/getProcessRun) track execution of entire Processes.
+- [Instrument Runs](/api#tag/Instrument%20Runs/getInstrumentRun) track execution of individual Instruments.
+- [Unit Operation Runs](/api#tag/Unit%20Operation%20Runs/getUnitOperationRun) track execution of Unit Operations.
+- [Process Runs](/api#tag/Process%20Runs/getProcessRun) track execution of entire Processes.
 
 :::tip
 
@@ -65,7 +65,7 @@ After doing so, you can view all associated items from the Instrument Type Detai
 
 ### Creating runs for instrument types
 
-To create a unique run for an instrument type, click on the  <div className="button darkblue_outline_button"><PlusOutlined /> Create Run</div>  button on the Instrument Type page or calling the [API](/api#operation/createInstrumentRun).
+To create a unique run for an instrument type, click on the  <div className="button darkblue_outline_button"><PlusOutlined /> Create Run</div>  button on the Instrument Type page or calling the [API](/api#tag/Instrument%20Runs/createInstrumentRun).
 
 <img width="800" alt="View Instrument Type Detail" src="https://ganymede-bio.mo.cloudinary.net/apiServer/CreateInstrumentRunUI_20251110.png" />
 &nbsp;
@@ -86,7 +86,7 @@ Instrument Types can be grouped into Unit Operations on the Edit tab.
 
 ### Creating runs for instrument types
 
-To create a unique run for a unit operation, click on the  <div className="button darkblue_outline_button"><PlusOutlined /> Create Run</div>  button on the corresponding Unit Operation page or calling the [API](/api#operation/createUnitOperationRun).
+To create a unique run for a unit operation, click on the  <div className="button darkblue_outline_button"><PlusOutlined /> Create Run</div>  button on the corresponding Unit Operation page or calling the [API](/api#tag/Unit%20Operation%20Runs/createUnitOperationRun).
 
 <img width="800" alt="View Instrument Type Detail" src="https://ganymede-bio.mo.cloudinary.net/apiServer/CreateUnitOperationRunUI_20251110.png" />
 &nbsp;
@@ -107,7 +107,7 @@ Unit Operations can be grouped into Processes on the Edit tab.
 
 ### Creating runs for instrument types
 
-To create a unique run for a process, click on the  <div className="button darkblue_outline_button"><PlusOutlined /> Create Run</div>  button on the corresponding Process page or calling the [API](/api#operation/createProcessRun).
+To create a unique run for a process, click on the  <div className="button darkblue_outline_button"><PlusOutlined /> Create Run</div>  button on the corresponding Process page or calling the [API](/api#tag/Process%20Runs/createProcessRun).
 
 <img width="800" alt="View Instrument Type Detail" src="https://ganymede-bio.mo.cloudinary.net/apiServer/CreateProcessRunUI_20251110.png" />
 &nbsp;

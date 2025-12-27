@@ -16,6 +16,14 @@ function ScalarApiReference({ specUrl }: { specUrl: string }) {
             url: specUrl,
           },
           layout: 'modern',
+          pathRouting: {
+            basePath: '/api',
+          },
+          generateOperationSlug: (operation: any) => {
+            // Use operationId for cleaner, more stable anchor links
+            // This makes links like /api#getFlows instead of /api#tag/flows/GET/v1/environment/{environment}/flows
+            return operation.operationId || `${operation.method}${operation.path}`;
+          },
           hideClientButton: true,
           hideModels: true,
           hideTestRequestButton: true,
@@ -44,7 +52,7 @@ function ScalarApiReference({ specUrl }: { specUrl: string }) {
             targetKey: 'shell',
             clientKey: 'curl',
           },
-          hiddenClients: ['ruby', 'c', 'csharp', 'php', 'swift', 'kotlin', 'go'],
+          hiddenClients: ['ruby', 'c', 'csharp', 'php', 'swift', 'kotlin', 'go', 'r', 'rust', 'java', 'clojure', 'ocaml'],
           customCss: `
             --scalar-color-1: #7508a3;
             --scalar-color-accent: #7508a3;

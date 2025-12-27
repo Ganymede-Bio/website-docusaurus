@@ -593,3 +593,20 @@ article h6 {
   position: relative;
   z-index: 1;
 }
+
+/* Fix language selector dropdown to have opaque background */
+.scalar-container select,
+.scalar-container [role="combobox"],
+.scalar-container [class*="language-selector"],
+.scalar-container [class*="client-selector"] {
+  background-color: var(--scalar-background-1) !important;
+  opacity: 1 !important;
+}
+
+/* Ensure dropdown menus have opaque backgrounds */
+.scalar-container [role="listbox"],
+.scalar-container [class*="dropdown"],
+.scalar-container [class*="menu"] {
+  background-color: var(--scalar-background-1) !important;
+  opacity: 1 !important;
+}
