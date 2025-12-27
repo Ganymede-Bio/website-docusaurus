@@ -22,23 +22,6 @@ module.exports = {
   },
   plugins: [
     [
-      'docusaurus-plugin-openapi-docs',
-      {
-        id: "api", // plugin id
-        docsPluginId: "classic", // configured for preset-classic
-        config: {
-          GanymedeApi: {
-            specPath: "api-server/common/public-api/openapi.yaml",
-            outputDir: "docs/api",
-            sidebarOptions: {
-              groupPathsBy: "tag",
-            },
-            showSchemas: true
-          },
-        }
-      },
-    ],
-    [
       '@docusaurus/plugin-client-redirects',
       {
         redirects: [
@@ -57,7 +40,7 @@ module.exports = {
       },
     ]
   ],
-  themes: ["docusaurus-theme-openapi-docs", '@docusaurus/theme-mermaid'], 
+  themes: ['@docusaurus/theme-mermaid'], 
   themeConfig: {
     prism: {
       additionalLanguages: ['python', 'bash', 'powershell', 'yaml'],
@@ -173,7 +156,6 @@ module.exports = {
           sidebarPath: require.resolve('./sidebars.js'),
           editUrl:
             'https://github.com/Ganymede-Bio/website-docusaurus/edit/main/',
-          docItemComponent: "@theme/ApiItem",
         },
         blog: false,
         gtag: {

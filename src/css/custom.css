@@ -512,3 +512,84 @@ article h6 {
   border-radius: 12px;
   box-shadow: var(--ifm-global-shadow-sm);
 }
+
+/* ═══════════════════════════════════════════════════════════════════
+   Scalar API Reference Integration Styles
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* Scalar root container - proper height for scrolling with footer visible */
+.scalar-container {
+  min-height: 600px;
+  height: auto;
+  width: 100%;
+}
+
+/* Integrate Scalar with Docusaurus theme colors */
+.scalar-container {
+  --scalar-color-1: var(--ifm-color-primary);
+  --scalar-color-2: var(--ifm-color-primary-dark);
+  --scalar-color-3: var(--ifm-color-primary-darker);
+  --scalar-color-accent: var(--ifm-color-primary);
+  --scalar-font: var(--ifm-font-family-base);
+  --scalar-font-code: var(--ifm-font-family-monospace);
+  --scalar-radius: 4px;
+  --scalar-border-width: 1px;
+}
+
+/* Dark mode support for Scalar */
+[data-theme='dark'] .scalar-container {
+  --scalar-background-1: #1e1e1e;
+  --scalar-background-2: #262626;
+  --scalar-background-3: #2d2d2d;
+  --scalar-background-accent: var(--ifm-color-primary-dark);
+  --scalar-color-1: #ffffff;
+  --scalar-color-2: #e5e5e5;
+  --scalar-color-3: #b3b3b3;
+}
+
+/* Light mode support for Scalar */
+[data-theme='light'] .scalar-container {
+  --scalar-background-1: #ffffff;
+  --scalar-background-2: #f7f7f7;
+  --scalar-background-3: #f0f0f0;
+  --scalar-background-accent: var(--ifm-color-primary-lightest);
+}
+
+/* Prevent sidebar section titles from navigating, only expand/collapse */
+.scalar-container .sidebar-section-title {
+  pointer-events: none;
+}
+
+.scalar-container .sidebar-section-title * {
+  pointer-events: auto;
+}
+
+/* Make section headers expand/collapse only, not navigate */
+.scalar-container [data-sidebar-section] > a {
+  cursor: pointer;
+  pointer-events: none;
+}
+
+.scalar-container [data-sidebar-section] > a > * {
+  pointer-events: auto;
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 768px) {
+  .scalar-container {
+    min-height: 400px;
+  }
+}
+
+/* Ensure code blocks in Scalar are readable */
+.scalar-container pre {
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+/* Fix z-index to prevent conflicts with Docusaurus navbar */
+.scalar-container {
+  position: relative;
+  z-index: 1;
+}
