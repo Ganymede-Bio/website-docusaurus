@@ -20,6 +20,8 @@ Specify semicolon-delimited tables to sync to Snowflake
   - Snowflake database to write to
 - **snowflake_schema**
   - Schema within snowflake database to write to
+- **run_id_column**
+  - If specified, only the data for the given run ID will be written to Snowflake
 
 ### Notes
 
