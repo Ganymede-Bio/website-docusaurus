@@ -597,12 +597,13 @@ paths:
         - name: pageNumber
           required: false
           in: query
+          description: default is 1
           schema:
             type: number
         - name: pageSize
           required: false
           in: query
-          description: number between 1 and 1000. default is 1000
+          description: number between 1 and 10000. default is 10000
           schema:
             type: number
       responses:
@@ -1989,17 +1990,17 @@ paths:
       tags:
         - App Configs
 info:
-  title: ''
-  description: ''
+  title: Ganymede Public API Specification
+  description: API specification for the Ganymede platform. Create an API key following the [instructions](https://docs.ganymede.bio/app/configuration/APISetup) to authenticate your requests.
   version: 1.0.0
   contact: {}
-tags: null
+tags: []
 servers:
   - url: https://{host}
     description: ''
     variables:
       host:
-        default: app.ganymede.bio
+        default: your_tenant.ganymede.bio
 components:
   securitySchemes:
     api-key:
@@ -2010,7 +2011,7 @@ components:
       scheme: bearer
       bearerFormat: JWT
       type: http
-      description: JWT Bearer token authentication
+      description: Enter JWT token
   schemas:
     AgentState:
       type: string
@@ -3777,6 +3778,44 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/UnappliedFileTag'
+        defaultConfiguration:
+          discriminator:
+            propertyName: connectorType
+            mapping:
+              legacy_file_watcher_upload_run_flow: '#/components/schemas/LegacyFWFlowConnectorConfig'
+              legacy_file_watcher_upload: '#/components/schemas/LegacyFWUploadConnectorConfig'
+              legacy_cloud_watcher_save_file: '#/components/schemas/LegacyCWSaveFileConnectorConfig'
+              file_watcher_upload_run_flow: '#/components/schemas/FWFlowConnectorConfig'
+              file_watcher_upload: '#/components/schemas/FWUploadConnectorConfig'
+              cron_upload_run_flow: '#/components/schemas/CronFlowConnectorConfig'
+              cron_upload: '#/components/schemas/CronUploadConnectorConfig'
+              cloud_watcher_save_file: '#/components/schemas/CWSaveFileConnectorConfig'
+              one_shot_upload_run_flow: '#/components/schemas/OneShotFlowConnectorConfig'
+              one_shot_upload: '#/components/schemas/OneShotUploadConnectorConfig'
+              application_startup_agent: '#/components/schemas/AppStartupConnectorConfig'
+              application_cleanup_agent: '#/components/schemas/AppCleanupConnectorConfig'
+              application_cleanup_flow_agent: '#/components/schemas/AppCleanupFlowConnectorConfig'
+              automatic_flow_grouping: '#/components/schemas/AutoFilePatternFlowMappingConfig'
+              upload_after_pause: '#/components/schemas/UploadAfterPause'
+              cron_stream_data: '#/components/schemas/CronStreamDataConnectorConfig'
+          oneOf:
+            - $ref: '#/components/schemas/LegacyFWFlowConnectorConfig'
+            - $ref: '#/components/schemas/LegacyFWUploadConnectorConfig'
+            - $ref: '#/components/schemas/LegacyCWSaveFileConnectorConfig'
+            - $ref: '#/components/schemas/FWFlowConnectorConfig'
+            - $ref: '#/components/schemas/FWUploadConnectorConfig'
+            - $ref: '#/components/schemas/CronFlowConnectorConfig'
+            - $ref: '#/components/schemas/CronUploadConnectorConfig'
+            - $ref: '#/components/schemas/CWSaveFileConnectorConfig'
+            - $ref: '#/components/schemas/OneShotFlowConnectorConfig'
+            - $ref: '#/components/schemas/OneShotUploadConnectorConfig'
+            - $ref: '#/components/schemas/AppStartupConnectorConfig'
+            - $ref: '#/components/schemas/AppCleanupConnectorConfig'
+            - $ref: '#/components/schemas/AppCleanupFlowConnectorConfig'
+            - $ref: '#/components/schemas/AutoFilePatternFlowMappingConfig'
+            - $ref: '#/components/schemas/UploadAfterPause'
+            - $ref: '#/components/schemas/CronStreamDataConnectorConfig'
+          additionalProperties: false
         description:
           type: string
         version:
@@ -3873,6 +3912,39 @@ components:
           allOf:
             - $ref: '#/components/schemas/ConnectorConnectionState'
         connConfiguration:
+          discriminator:
+            propertyName: connectorType
+            mapping:
+              legacy_file_watcher_upload_run_flow: '#/components/schemas/LegacyFWFlowConnectionConfig'
+              legacy_file_watcher_upload: '#/components/schemas/LegacyFWUploadConnectionConfig'
+              file_watcher_upload_run_flow: '#/components/schemas/FWFlowConnectionConfig'
+              file_watcher_upload: '#/components/schemas/FWUploadConnectionConfig'
+              legacy_cloud_watcher_save_file: '#/components/schemas/LegacyCWSaveFileConnectionConfig'
+              cron_upload_run_flow: '#/components/schemas/CronFlowConnectionConfig'
+              cron_upload: '#/components/schemas/CronUploadConnectionConfig'
+              cloud_watcher_save_file: '#/components/schemas/CWSaveFileConnectionConfig'
+              one_shot_upload_run_flow: '#/components/schemas/OneShotFlowConnectionConfig'
+              one_shot_upload: '#/components/schemas/OneShotUploadConnectionConfig'
+              cron_stream_data: '#/components/schemas/CronStreamDataConnectionConfig'
+              application_startup_agent: '#/components/schemas/AppStartupConnectionConfig'
+              application_cleanup_agent: '#/components/schemas/AppCleanupConnectionConfig'
+              application_cleanup_flow_agent: '#/components/schemas/AppCleanupFlowConnectionConfig'
+          oneOf:
+            - $ref: '#/components/schemas/LegacyFWFlowConnectionConfig'
+            - $ref: '#/components/schemas/LegacyFWUploadConnectionConfig'
+            - $ref: '#/components/schemas/FWFlowConnectionConfig'
+            - $ref: '#/components/schemas/FWUploadConnectionConfig'
+            - $ref: '#/components/schemas/LegacyCWSaveFileConnectionConfig'
+            - $ref: '#/components/schemas/CronFlowConnectionConfig'
+            - $ref: '#/components/schemas/CronUploadConnectionConfig'
+            - $ref: '#/components/schemas/CWSaveFileConnectionConfig'
+            - $ref: '#/components/schemas/OneShotFlowConnectionConfig'
+            - $ref: '#/components/schemas/OneShotUploadConnectionConfig'
+            - $ref: '#/components/schemas/CronStreamDataConnectionConfig'
+            - $ref: '#/components/schemas/AppStartupConnectionConfig'
+            - $ref: '#/components/schemas/AppCleanupConnectionConfig'
+            - $ref: '#/components/schemas/AppCleanupFlowConnectionConfig'
+          additionalProperties: false
           type: object
           description: Configuration for the connector
         emails:

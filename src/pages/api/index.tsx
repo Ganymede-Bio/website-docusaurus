@@ -36,7 +36,7 @@ function ScalarApiReference({ specUrl }: { specUrl: string }) {
           telemetry: true,
           isEditable: false,
           isLoading: false,
-          documentDownloadType: 'both',
+          documentDownloadType: 'none',
           hideSearch: false,
           showOperationId: false,
           hideDarkModeToggle: false,

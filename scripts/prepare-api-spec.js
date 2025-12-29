@@ -127,10 +127,23 @@ try {
     for (const server of spec.servers) {
       if (server.variables && server.variables.host) {
         if (server.variables.host.default === 'host') {
-          server.variables.host.default = 'app.ganymede.bio';
-          console.log('      Updated host default to app.ganymede.bio');
+          server.variables.host.default = 'your_tenant.ganymede.bio';
+          console.log('      Updated host default to your_tenant.ganymede.bio');
         }
       }
+    }
+  }
+
+  // 7. Set title and description
+  console.log('   🔧 Setting title and description...');
+  if (spec.info) {
+    if (!spec.info.title) {
+      spec.info.title = 'Ganymede Public API Specification';
+      console.log('      Set default title');
+    }
+    if (!spec.info.description) {
+      spec.info.description = 'API specification for the Ganymede platform. Create an API key following the [instructions](https://docs.ganymede.bio/app/configuration/APISetup) to authenticate your requests.';
+      console.log('      Set default description');
     }
   }
 
