@@ -16,13 +16,31 @@ yarn clear         # Clear cache/build artifacts
 yarn serve         # Serve production build locally
 ```
 
-### API Documentation Generation
+### Updating API Documentation
 ```bash
-# Generate API docs from OpenAPI spec
-yarn api           # Runs: docusaurus clean-api-docs all && docusaurus gen-api-docs all
+# Use the update script (recommended):
+./scripts/update-api-spec.sh
 
-# The OpenAPI spec is located at: api-server/common/public-api/openapi.yaml
+# Or manually:
+git submodule update --recursive --remote --init
+cp api-server/common/public-api/openapi.yaml static/openapi.yaml
+# Apply OpenAPI compatibility fixes manually if needed
+git add static/openapi.yaml
+git commit -m "Update API spec"
 ```
+
+**Note**: The update script (`scripts/update-api-spec.sh`) automatically applies OpenAPI specification fixes:
+- Adds `type: object` to `connConfiguration` property
+- Removes invalid properties from `BearerAuth` security scheme
+- Removes duplicate `PublicApi` tags
+- Removes empty `ganymede` tag
+- Sets proper server host default
+
+These fixes are needed until the issues are resolved upstream in api-server.
+
+**Source**: `api-server/common/public-api/openapi.yaml`
+**Served from**: `static/openapi.yaml`
+**Rendered by**: Scalar API Reference at `/api` (renders dynamically with automatic code sample generation)
 
 ### Node Documentation Generation
 ```bash
@@ -48,7 +66,7 @@ popd
 
 ### Documentation Structure
 - `/docs/app/` - Application documentation
-- `/docs/api/` - API documentation (auto-generated from OpenAPI spec)
+- `/src/pages/api/` - API documentation (Scalar API Reference integration)
 - `/docs/nodes/` - Node documentation (auto-generated from Python docstrings)
 - `/docs/sdk/` - SDK documentation
 - `/docs/releases/` - Release notes
@@ -59,7 +77,12 @@ popd
 - `src/css/custom.css` - Custom styling
 
 ### Documentation Generation Pipeline
-1. **API Docs**: Generated from `api-server/common/public-api/openapi.yaml` using docusaurus-plugin-openapi-docs
+1. **API Docs**: Served via Scalar API Reference at /api
+   - Source: `api-server/common/public-api/openapi.yaml`
+   - Copy to static: `cp api-server/common/public-api/openapi.yaml static/openapi.yaml`
+   - Scalar renders dynamically with automatic code sample generation (no generation step required)
+   - Configuration: `src/pages/api/index.tsx`
+   - Code samples automatically generated in cURL, JavaScript, Python, Node.js, and more
 2. **Node Docs**: Generated from Python docstrings in `core-operators` and `pylib` submodules using custom Python scripts in `/pydoc/`
 3. **SDK Docs**: Markdown files with auto-generated sidebars from JSON configs
 
@@ -87,55 +110,5 @@ popd
 - **Algolia Search**: Configured with app ID `SMEM8QA2TD`
 - **Analytics**: Vercel Analytics, Google Tag Manager, and Google Analytics configured
 - **Mermaid Diagrams**: Supported via @docusaurus/theme-mermaid
-- **OpenAPI Documentation**: Interactive API documentation with request/response examples
+- **API Documentation**: Interactive single-page API docs using Scalar API Reference at /api with automatic code sample generation
 - **Redirects**: Configured in plugin-client-redirects for URL migrations
-
-## API Documentation Build Optimization
-
-The API documentation includes some very large schema files (up to 2.5MB each) that can cause memory issues during builds. A systematic exclusion system has been implemented to manage these files.
-
-### Problem
-- Total API docs size: **15MB** with 160 files
-- Large files contain circular references and deeply nested objects
-- Files over 350KB cause build memory issues
-
-### Solution: Automated File Exclusion
-
-**Quick Commands:**
-```bash
-make api-generate    # Generate API docs with automatic exclusions
-make api-exclude     # Exclude large files from existing docs
-make api-restore     # Restore all excluded files
-make api-status      # Show current exclusion status
-make api-list        # List files that would be excluded
-make build           # Build site with exclusions applied
-```
-
-**Manual Management:**
-```bash
-./scripts/manage-api-docs.sh exclude  # Exclude large files
-./scripts/manage-api-docs.sh restore  # Restore excluded files
-./scripts/manage-api-docs.sh status   # Show status
-./scripts/manage-api-docs.sh list     # List large files
-```
-
-### Configuration Files
-- **`scripts/manage-api-docs.sh`** - Main exclusion script (350KB threshold)
-- **`docs/api/.exclude-list`** - Documents which files are excluded and why
-- **`scripts/update-sidebar.js`** - Removes references to excluded files from sidebar
-- **`Makefile`** - Provides convenient automation targets
-
-### How It Works
-1. Files larger than 350KB are renamed with `.excluded` extension
-2. Sidebar is updated to remove references to excluded files
-3. Build proceeds with ~3MB of docs instead of 15MB
-4. Excluded files are gitignored to keep repository clean
-
-### Excluded Files (Typical)
-- `process.schema.mdx` (2.5MB) - Circular references
-- `unitoperation.schema.mdx` (1.7MB) - Circular references
-- `instrumenttype.schema.mdx` (1.0MB) - Excessive enumerations
-- `get-process.api.mdx` (2.4MB) - Returns full process object
-- Plus ~14 other files over 350KB
-
-This system reduces build memory usage by ~80% while maintaining all essential API documentation.
