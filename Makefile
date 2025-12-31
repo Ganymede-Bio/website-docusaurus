@@ -21,6 +21,9 @@ help: ## Show this help message
 	@echo ""
 
 # ========== Development Commands ==========
+.PHONY: api
+api: ## Generate API specification
+	./scripts/update-api-spec.sh
 
 .PHONY: start
 start: ## Start development server

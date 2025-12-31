@@ -37,7 +37,7 @@ fi
 
 echo ""
 echo "📊 Changes summary:"
-git diff --stat static/openapi.yaml || echo "No git changes detected"
+git --no-pager diff --stat  static/openapi.yaml || echo "No git changes detected"
 
 echo ""
 echo "✅ API spec updated successfully!"

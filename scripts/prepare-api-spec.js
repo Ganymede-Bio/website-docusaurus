@@ -147,6 +147,28 @@ try {
     }
   }
 
+  // 8. Add x-internal to deprecated operations
+  console.log('   🚫 Hiding deprecated endpoints...');
+  let deprecatedHidden = 0;
+  for (const [path, pathItem] of Object.entries(spec.paths)) {
+    const methods = ['get', 'post', 'put', 'patch', 'delete', 'options', 'head'];
+    for (const method of methods) {
+      if (!pathItem[method]) continue;
+
+      const operation = pathItem[method];
+
+      // If operation is deprecated, add x-internal to hide it
+      if (operation.deprecated === true) {
+        operation['x-internal'] = true;
+        deprecatedHidden++;
+        console.log(`      Hidden: ${method.toUpperCase()} ${path}`);
+      }
+    }
+  }
+  if (deprecatedHidden > 0) {
+    console.log(`      Marked ${deprecatedHidden} deprecated operation(s) as internal`);
+  }
+
   // Write modified spec back
   const modifiedSpec = yaml.dump(spec, {
     lineWidth: -1, // Don't wrap lines
@@ -159,6 +181,7 @@ try {
   console.log('✅ Summary:');
   console.log(`   - Removed ${operationsRemoved} operation(s) from ${pathsRemoved} path(s)`);
   console.log(`   - Removed ${tagsRemoved} unwanted tag(s) from operations`);
+  console.log(`   - Hidden ${deprecatedHidden} deprecated operation(s)`);
   console.log(`   - Applied compatibility fixes`);
   console.log(`   - Updated ${SPEC_PATH}`);
 

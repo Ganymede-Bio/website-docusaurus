@@ -78,7 +78,7 @@ git push
 
 ## Generating API Docs
 
-`yarn api` will generate new docs based on the openapi yaml definition that is linked via api-server.
+`make api` will generate new docs based on the openapi yaml definition that is present in the api-server submodule.
 
 ## Dependencies
 
