@@ -423,6 +423,12 @@ module.exports = {
   releaseSideBar: [
     {
       type: 'category',
+      label: '2026',
+      collapsed: false,
+      items: ['releases/202601']
+    },
+    {
+      type: 'category',
       label: '2025',
       collapsed: false,
       items: ['releases/202512', 'releases/202511', 'releases/202510', 'releases/202509', 'releases/202508', 'releases/202507', 'releases/202506', 'releases/202505', 'releases/202504', 'releases/202503', 'releases/202502', 'releases/202501']

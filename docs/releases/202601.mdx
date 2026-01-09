@@ -1,0 +1,20 @@
+---
+id: 202601
+title: January 2026
+displayed_sidebar: releaseSideBar
+---
+### January 8 2026
+**Features**
+- **Web UI**: Added fields to Instrument objects to track latitude, longitude, timezone, and the start time of observation
+- **API**: Added support for data paging to multiple API endpoints to improve performance when handling large datasets. These endpoints are reachable via `v2` routes and should be used in place of the 
+    original endpoints which are supported, but deprecated.
+
+**Improvements**
+- **Agent**: Improved startup performance when checking for existing message subscriptions
+- **Web UI**: Tables will now be listed in alphabetical order by default
+- **Web UI**: Connections will now display details related to their associated Host
+
+**Bug Fixes**
+- **API**: Fixed an issue where paged requests to list Tables would not return the correct total count of items
+
+**Agent Version**: 5.5.99

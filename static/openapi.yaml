@@ -89,6 +89,7 @@ paths:
         - Agents
   /v1/environment/{environment}/agents:
     get:
+      deprecated: true
       description: A list of all [Agents](https://docs.ganymede.bio/app/agents/Agent) for an Environment.
       operationId: getAgents
       parameters:
@@ -97,6 +98,43 @@ paths:
           in: path
           schema:
             type: string
+      responses:
+        '200':
+          description: A list of all Agents for an Environment.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Agent'
+      security:
+        - api-key: []
+        - BearerAuth: []
+      summary: getAgents
+      tags:
+        - Agents
+  /v2/environment/{environment}/agents:
+    get:
+      description: A list of all [Agents](https://docs.ganymede.bio/app/agents/Agent) for an Environment with pagination support.
+      operationId: getAgentsV2
+      parameters:
+        - name: environment
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: pageNumber
+          required: false
+          in: query
+          description: Page number for pagination (1-based indexing). Default is 1, meaning the first page starts at 1, not 0.
+          schema:
+            type: number
+        - name: pageSize
+          required: false
+          in: query
+          description: number between 1 and 10000. default is 10000
+          schema:
+            type: number
       responses:
         '200':
           description: A list of all Agents for an Environment.
@@ -142,6 +180,7 @@ paths:
         - Connections
   /v1/environment/{environment}/connections:
     get:
+      deprecated: true
       description: A list of all [Connections](https://docs.ganymede.bio/app/agents/Agent#installing-connections) for an Environment.
       operationId: getConnections
       parameters:
@@ -155,6 +194,48 @@ paths:
           in: query
           schema:
             type: string
+      responses:
+        '200':
+          description: A list of all Connections for an Environment.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Connection'
+      security:
+        - api-key: []
+        - BearerAuth: []
+      summary: getConnections
+      tags:
+        - Connections
+  /v2/environment/{environment}/connections:
+    get:
+      description: A list of all [Connections](https://docs.ganymede.bio/app/agents/Agent#installing-connections) for an Environment with pagination support.
+      operationId: getConnectionsV2
+      parameters:
+        - name: environment
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: agentId
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: pageNumber
+          required: false
+          in: query
+          description: Page number for pagination (1-based indexing). Default is 1, meaning the first page starts at 1, not 0.
+          schema:
+            type: number
+        - name: pageSize
+          required: false
+          in: query
+          description: number between 1 and 10000. default is 10000
+          schema:
+            type: number
       responses:
         '200':
           description: A list of all Connections for an Environment.
@@ -223,6 +304,7 @@ paths:
         - name: pageNumber
           required: false
           in: query
+          description: Page number for pagination (1-based indexing). Default is 1, meaning the first page starts at 1, not 0.
           schema:
             type: number
         - name: pageSize
@@ -382,6 +464,7 @@ paths:
         - Flows
   /v1/environment/{environment}/flows:
     get:
+      deprecated: true
       description: Get all [Flows](https://docs.ganymede.bio/app/flows/FlowEditor#flows) in an Environment.
       operationId: getFlows
       parameters:
@@ -390,6 +473,43 @@ paths:
           in: path
           schema:
             type: string
+      responses:
+        '200':
+          description: Get all Flows in an Environment
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Flow'
+      security:
+        - api-key: []
+        - BearerAuth: []
+      summary: getFlows
+      tags:
+        - Flows
+  /v2/environment/{environment}/flows:
+    get:
+      description: Get all [Flows](https://docs.ganymede.bio/app/flows/FlowEditor#flows) in an Environment with pagination support.
+      operationId: getFlowsV2
+      parameters:
+        - name: environment
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: pageNumber
+          required: false
+          in: query
+          description: Page number for pagination (1-based indexing). Default is 1, meaning the first page starts at 1, not 0.
+          schema:
+            type: number
+        - name: pageSize
+          required: false
+          in: query
+          description: number between 1 and 10000. default is 10000
+          schema:
+            type: number
       responses:
         '200':
           description: Get all Flows in an Environment
@@ -516,6 +636,7 @@ paths:
         - FlowRuns
   /v1/environment/{environment}/flows/{flowId}/flowruns:
     get:
+      deprecated: true
       description: Get all [FlowRuns](https://docs.ganymede.bio/app/flows/FlowView#running-flows) for a specific [Flow](https://docs.ganymede.bio/app/flows/FlowEditor#flows) in an Environment.
       operationId: getFlowRuns
       parameters:
@@ -539,6 +660,60 @@ paths:
           required: false
           in: query
           description: epoch time in milliseconds
+          schema:
+            type: number
+      responses:
+        '200':
+          description: Get all FlowRuns for a specific Flow in an Environment
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FlowRun'
+      security:
+        - api-key: []
+        - BearerAuth: []
+      summary: getFlowRuns
+      tags:
+        - FlowRuns
+  /v2/environment/{environment}/flows/{flowId}/flowruns:
+    get:
+      description: Get all [FlowRuns](https://docs.ganymede.bio/app/flows/FlowView#running-flows) for a specific [Flow](https://docs.ganymede.bio/app/flows/FlowEditor#flows) in an Environment with pagination support.
+      operationId: getFlowRunsV2
+      parameters:
+        - name: environment
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: flowId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: runBefore
+          required: false
+          in: query
+          description: epoch time in milliseconds
+          schema:
+            type: number
+        - name: runAfter
+          required: false
+          in: query
+          description: epoch time in milliseconds
+          schema:
+            type: number
+        - name: pageNumber
+          required: false
+          in: query
+          description: Page number for pagination (1-based indexing). Default is 1, meaning the first page starts at 1, not 0.
+          schema:
+            type: number
+        - name: pageSize
+          required: false
+          in: query
+          description: number between 1 and 10000. default is 10000
           schema:
             type: number
       responses:
@@ -818,6 +993,7 @@ paths:
         - name: pageNumber
           required: false
           in: query
+          description: Page number for pagination (1-based indexing). Default is 1, meaning the first page starts at 1, not 0.
           schema:
             type: number
         - name: pageSize
@@ -1033,6 +1209,7 @@ paths:
         - name: pageNumber
           required: false
           in: query
+          description: Page number for pagination (1-based indexing). Default is 1, meaning the first page starts at 1, not 0.
           schema:
             type: number
         - name: pageSize
@@ -1131,6 +1308,7 @@ paths:
         - name: pageNumber
           required: false
           in: query
+          description: Page number for pagination (1-based indexing). Default is 1, meaning the first page starts at 1, not 0.
           schema:
             type: number
         - name: pageSize
@@ -1346,6 +1524,7 @@ paths:
         - name: pageNumber
           required: false
           in: query
+          description: Page number for pagination (1-based indexing). Default is 1, meaning the first page starts at 1, not 0.
           schema:
             type: number
         - name: pageSize
@@ -1442,6 +1621,7 @@ paths:
         - name: pageNumber
           required: false
           in: query
+          description: Page number for pagination (1-based indexing). Default is 1, meaning the first page starts at 1, not 0.
           schema:
             type: number
         - name: pageSize
@@ -1655,6 +1835,7 @@ paths:
         - name: pageNumber
           required: false
           in: query
+          description: Page number for pagination (1-based indexing). Default is 1, meaning the first page starts at 1, not 0.
           schema:
             type: number
         - name: pageSize
@@ -1738,7 +1919,7 @@ paths:
       tags:
         - Instruments
     get:
-      description: Get all Instruments in an Environment.
+      description: Get all Instruments in an Environment with pagination support.
       operationId: getInstruments
       parameters:
         - name: environment
@@ -1746,6 +1927,18 @@ paths:
           in: path
           schema:
             type: string
+        - name: pageNumber
+          required: false
+          in: query
+          description: Page number for pagination (1-based indexing). Default is 1, meaning the first page starts at 1, not 0.
+          schema:
+            type: number
+        - name: pageSize
+          required: false
+          in: query
+          description: number between 1 and 10000. default is 10000
+          schema:
+            type: number
       responses:
         '200':
           description: List of Instruments
@@ -1809,6 +2002,7 @@ paths:
         - name: pageNumber
           required: false
           in: query
+          description: Page number for pagination (1-based indexing). Default is 1, meaning the first page starts at 1, not 0.
           schema:
             type: number
         - name: pageSize
@@ -4058,9 +4252,11 @@ components:
         instrumentId:
           type: number
           description: ID of the instrument for this run
-        unitOperationRunId:
-          type: number
-          description: ID of the unit operation run to associate with this instrument run
+        unitOperationRunIds:
+          description: IDs of the unit operation run to associate with this instrument run
+          type: array
+          items:
+            type: number
         startTime:
           type: string
           description: Start time of the instrument run
@@ -4168,9 +4364,11 @@ components:
           type: array
           items:
             type: string
-        unitOperationRunId:
-          type: number
-          description: ID of the unit operation run this instrument run belongs to
+        unitOperationRunIds:
+          description: IDs of the unit operation run this instrument run belongs to
+          type: array
+          items:
+            type: number
         initiator:
           description: Initiator of the instrument run
           allOf:
@@ -4183,9 +4381,11 @@ components:
     UpdateInstrumentRunBody:
       type: object
       properties:
-        unitOperationRunId:
-          type: number
-          description: ID of the unit operation run to associate with this instrument run
+        unitOperationRunIds:
+          description: IDs of the unit operation run to associate with this instrument run
+          type: array
+          items:
+            type: number
         startTime:
           type: string
           description: Start time of the instrument run
@@ -4667,6 +4867,27 @@ components:
         instrumentTypeId:
           type: number
           description: Instrument Type ID for the instrument instance
+        observationStartTime:
+          type: string
+          description: Observation start time for the instrument
+          format: date-time
+          example: '2025-01-15T14:30:00Z'
+        timezone:
+          type: string
+          description: IANA timezone string (e.g., "America/New_York")
+          example: America/New_York
+        latitude:
+          type: number
+          minimum: -90
+          maximum: 90
+          description: Latitude coordinate (-90.0 to 90.0)
+          example: 40.7128
+        longitude:
+          type: number
+          minimum: -180
+          maximum: 180
+          description: Longitude coordinate (-180.0 to 180.0)
+          example: -74.006
         dry_run:
           type: boolean
           description: If true, perform a dry run without actually creating the instrument
@@ -4699,6 +4920,23 @@ components:
         instrumentTypeId:
           type: number
           description: Instrument Type ID for the instrument instance
+        observationStartTime:
+          type: string
+          description: Observation start time for the instrument
+          format: date-time
+        timezone:
+          type: string
+          description: IANA timezone string (e.g., "America/New_York")
+        latitude:
+          type: number
+          minimum: -90
+          maximum: 90
+          description: Latitude coordinate
+        longitude:
+          type: number
+          minimum: -180
+          maximum: 180
+          description: Longitude coordinate
       required:
         - id
         - createdAt
