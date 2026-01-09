@@ -524,37 +524,6 @@ article h6 {
   width: 100%;
 }
 
-/* Integrate Scalar with Docusaurus theme colors */
-.scalar-container {
-  --scalar-color-1: var(--ifm-color-primary);
-  --scalar-color-2: var(--ifm-color-primary-dark);
-  --scalar-color-3: var(--ifm-color-primary-darker);
-  --scalar-color-accent: var(--ifm-color-primary);
-  --scalar-font: var(--ifm-font-family-base);
-  --scalar-font-code: var(--ifm-font-family-monospace);
-  --scalar-radius: 4px;
-  --scalar-border-width: 1px;
-}
-
-/* Dark mode support for Scalar */
-[data-theme='dark'] .scalar-container {
-  --scalar-background-1: #1e1e1e;
-  --scalar-background-2: #262626;
-  --scalar-background-3: #2d2d2d;
-  --scalar-background-accent: var(--ifm-color-primary-dark);
-  --scalar-color-1: #ffffff;
-  --scalar-color-2: #e5e5e5;
-  --scalar-color-3: #b3b3b3;
-}
-
-/* Light mode support for Scalar */
-[data-theme='light'] .scalar-container {
-  --scalar-background-1: #ffffff;
-  --scalar-background-2: #f7f7f7;
-  --scalar-background-3: #f0f0f0;
-  --scalar-background-accent: var(--ifm-color-primary-lightest);
-}
-
 /* Prevent sidebar section titles from navigating, only expand/collapse */
 .scalar-container .sidebar-section-title {
   pointer-events: none;
