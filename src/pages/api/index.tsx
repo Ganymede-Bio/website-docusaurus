@@ -52,13 +52,48 @@ function ScalarApiReference({ specUrl }: { specUrl: string }) {
             targetKey: 'shell',
             clientKey: 'curl',
           },
-          hiddenClients: ['ruby', 'c', 'csharp', 'php', 'swift', 'kotlin', 'go', 'r', 'rust', 'java', 'clojure', 'ocaml'],
-          customCss: `
-            --scalar-color-1: #7508a3;
-            --scalar-color-accent: #7508a3;
-            --scalar-font: var(--ifm-font-family-base);
-            --scalar-font-code: var(--ifm-font-family-monospace);
-          `,
+          hiddenClients: {
+            // C
+            c: ['libcurl'],
+            // Clojure
+            clojure: ['clj_http'],
+            // C#
+            csharp: ['httpclient', 'restsharp'],
+            // Dart
+            dart: ['http'],
+            // F#
+            fsharp: ['httpclient'],
+            // Go
+            go: ['native'],
+            // Java
+            java: ['asynchttp', 'nethttp', 'okhttp', 'unirest'],
+            // JavaScript
+            js: ['axios', 'fetch', 'jquery', 'ofetch', 'xhr'],
+            // Kotlin
+            kotlin: ['okhttp'],
+            // Node.js
+            node: ['ofetch', 'undici'],
+            // Objective-C
+            objc: ['nsurlsession'],
+            // OCaml
+            ocaml: ['cohttp'],
+            // PHP
+            php: ['curl', 'guzzle'],
+            // PowerShell
+            powershell: ['restmethod', 'webrequest'],
+            // Python
+            python: ['python3', 'requests'],
+            // R
+            r: ['httr'],
+            // Ruby
+            ruby: ['native'],
+            // Rust
+            rust: ['reqwest'],
+            // Shell
+            shell: ['httpie', 'wget'],
+            // Swift
+            swift: ['nsurlsession'],
+          }
         });
       });
     }
