@@ -325,6 +325,12 @@ paths:
           description: name of the file
           schema:
             type: string
+        - name: includeArchived
+          required: false
+          in: query
+          description: Include archived files in results. When false or omitted, only non-archived files are returned.
+          schema:
+            type: boolean
       responses:
         '200':
           description: A list of filtered Files
@@ -366,6 +372,39 @@ paths:
         - api-key: []
         - BearerAuth: []
       summary: downloadFile
+      tags:
+        - Files
+  /v1/environment/{environment}/files/archive:
+    put:
+      description: |-
+        Archive or unarchive multiple [Files](https://docs.ganymede.bio/app/files/FileBrowser) in an Environment by their URIs. Only 100 files are supported per request.
+              
+      operationId: bulkUpdateArchiveStatus
+      parameters:
+        - name: environment
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateArchiveStatusDto'
+      responses:
+        '200':
+          description: Updated Files
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/File'
+      security:
+        - api-key: []
+        - BearerAuth: []
+      summary: bulkUpdateArchiveStatus
       tags:
         - Files
   /v1/environment/{environment}/files/upload:
@@ -2363,11 +2402,33 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Tag'
+        isArchived:
+          type: boolean
       required:
         - uri
         - name
         - createdAt
         - size
+        - isArchived
+    UpdateArchiveStatusDto:
+      type: object
+      properties:
+        fileUris:
+          minItems: 1
+          description: Array of file URIs to archive/unarchive
+          items:
+            type: array
+          type: array
+        isArchived:
+          type: boolean
+          description: Whether to archive (true) or unarchive (false) the files
+          example: true
+        dry_run:
+          type: boolean
+          description: If true, perform a dry run without actually modifying file tags
+      required:
+        - fileUris
+        - isArchived
     FileUploadBody:
       type: object
       properties:
