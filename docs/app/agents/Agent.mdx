@@ -9,40 +9,95 @@ import { DiffOutlined, PlusOutlined, SelectOutlined } from "@ant-design/icons";
 
 ## Overview
 
-Agents are Windows/Linux background services that can filter and process data, upload files into Ganymede Cloud, initiate data processing pipelines, and deliver data from Ganymede Cloud to instrument PCs.  Once configured, the executable associated with an Agent is built in the Cloud and downloaded to the instrument PC for installation.
+Agents are Windows/Linux background services that can filter and process data, upload files into Ganymede Cloud, initiate data processing pipelines, and deliver data from Ganymede Cloud to instrument PCs.
 
-Individual instances of an Agent are called [Connections](./AgentMonitoring.mdx).  Users configure Agent and Connection behavior through a combination of configuration and user-defined code, allowing for flexibility in capturing files and interacting with the Ganymede ecosystem.
+Starting with version 5.6.0, Ganymede introduces the **Gateway** architecture, which simplifies deployment and management of Agents across your infrastructure.
 
 <img
   alt="Connections front page"
-  src="https://ganymede-bio.mo.cloudinary.net/agent/GanymedeConnectionsFrontPage_20240521.png"
+  src="https://ganymede-bio.mo.cloudinary.net/agent/GanymedeConnectionsFrontPage_20260129.png"
 />
 &nbsp;
 
 For system requirements, see [Agent Network Config & Prerequisites](../configuration/AgentSystemRequirements).
 
+## Gateway Architecture
+
+The Gateway model allows you to install a single executable per PC that can host multiple Connections. This simplifies deployment and maintenance compared to installing separate executables for each Connection.
+
+### Key Concepts
+
+- **Gateway**: A single executable that you install on a PC. The Gateway manages one or more Connections and handles communication with Ganymede Cloud.
+- **Host**: A PC where a Gateway is installed and running. Each Host can run multiple Connections.
+- **Agent Template**: The code and configuration that defines how a Connection behaves (trigger, processor, and action logic). Agent Templates are created in the Ganymede UI and can be deployed to any Host.
+- **Connection**: A running instance of an Agent Template on a Host. Connections perform the actual work of watching directories, processing files, and interacting with Ganymede Cloud.
+
+### Benefits of the Gateway Model
+
+- **Simplified installation**: Install the Gateway executable once per PC, then add Connections through the Ganymede UI without additional installations.
+- **Centralized updates**: Core version updates apply to all Connections on a Host simultaneously.
+- **Flexible deployment**: Add, remove, or move Connections between Hosts without reinstalling executables.
+- **Enhanced monitoring**: The Gateway sends detailed telemetry to track files seen versus files uploaded, enabling advanced monitoring of Connection performance.
+
+### Traditional vs Gateway Architecture
+
+In the traditional model, each Connection requires its own executable to be downloaded and installed on the instrument PC. With the Gateway model, you install the Gateway executable once, and then create Connections on that Host through the Ganymede UI.
+
+| Aspect | Traditional Model | Gateway Model |
+|--------|------------------|---------------|
+| Installation | One executable per Connection | One Gateway executable per Host |
+| Adding Connections | Download and install new executable | Create Connection in UI |
+| Core updates | Update each Connection separately | Update Host once |
+| Moving Connections | Uninstall and reinstall | Move through UI |
+
+## Migrating from Agents to Gateway
+
+If you have existing Connections running on the traditional Agent model, you can migrate them to the Gateway architecture.
+
+### Migration Steps
+
+1. **Update the Host to version 5.6.0 or higher**, renaming the Host as appropriate
+2. **Update an additional Host to version 5.6.0 or higher** (if you want to move Connections between PCs)
+3. **Navigate to the page of the Host** where you'd like the Connection to move to
+4. **Select 'Create connection on host'**, then **'Move existing connection'**
+5. **Wait until the migration is complete**
+6. **Uninstall the old Host** from the PC at your next convenience—it will continue to run without any Connection
+
+:::note
+
+After migration, the original executable can be uninstalled using the standard uninstallation process described in [Uninstalling Agent Connections](./AgentMonitoring#uninstalling-agent-connections).
+
+:::
+
 ### Terminology
+
+#### Deployment architecture
+
+- **Gateway**: A single executable installed on a PC that manages one or more Connections and handles communication with Ganymede Cloud. Available in version 5.6.0+.
+- **Host**: A PC where a Gateway is installed and running. Hosts are identified by name in the Ganymede UI.
+- **Agent Template**: The code and configuration that defines Connection behavior. Agent Templates are created in the Ganymede UI and deployed to Hosts as Connections.
+- **Connection**: A running instance of an Agent Template on a Host, actively watching for triggers and processing data.
 
 #### Agent structure
 
 <div class="text--center">
 ```mermaid
-stateDiagram-v2 
+stateDiagram-v2
   direction LR
   [*] --> Trigger
-  Trigger --> Processor 
+  Trigger --> Processor
   Processor --> Trigger
-  Processor --> Action 
+  Processor --> Action
   Action --> Trigger
   Action --> [*]
 ```
 </div>
 
-- **Agent**: A combination of a trigger, processor, and action configuration to move data from a remote user device into Ganymede.
+- **Agent Template** (or **Agent**): A combination of a trigger, processor, and action configuration to move data from a remote user device into Ganymede.
 - **Trigger**: A component configured to initiate the Agent pipeline based on a specific change or event.
 - **Processor**: User-defined code that converts data produced by a trigger into a format suitable for the action.
 - **Action**: Interaction with Ganymede's cloud or application that moves the processed data to the desired location.
-- **Connection**: A running instance of the Agent that is or has been connected to Ganymede, waiting for the configured trigger.
+- **Connection**: A running instance of the Agent Template that is or has been connected to Ganymede, waiting for the configured trigger.
 - **Pipeline**: A data flow of trigger -> processor -> action, tailored to the use case. Pipelines may share the same trigger and action but differ in the processor template based on the use case.
 
 #### Agent / Connection configuration

@@ -11,7 +11,7 @@ const path = require('path');
 const yaml = require('js-yaml');
 
 const SPEC_PATH = path.join(__dirname, '..', 'static', 'openapi.yaml');
-const FILTERED_GROUPS = ['Secrets', 'Hosts'];
+const FILTERED_GROUPS = ['Secrets'];
 const UNWANTED_TAGS = ['PublicApi', 'ganymede'];
 
 console.log('🔧 Preparing OpenAPI spec for Scalar...');

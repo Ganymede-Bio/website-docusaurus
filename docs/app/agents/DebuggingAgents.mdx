@@ -15,13 +15,11 @@ import PrintPageButton from '@site/src/components/PrintPageButton';
 
 ### Checklist
 
-- [ ] **Agent Build**
-  - [ ] Windows executable and Linux binary are successfully built in UI
 - [ ] **Agent Installation**
   - [ ] Installation successfully runs without error
   - [ ] Logs are appearing in installation folder (Windows) or in systemd (Linux)
-  - [ ] Connection appears in UI
-  - [ ] Logs associated with Connection are appearing in UI
+  - [ ] Host appears in UI
+  - [ ] Logs associated with Host are appearing in UI
 - [ ] **Agent Execution**
    - [ ] Connection is connected initially
    - [ ] Connection remains connected (after 12 hours)
@@ -48,14 +46,14 @@ Agents that watch for files locally then run Flow require file inputs to be pass
 
 This is likely due to the Agent Connection being on a version prior to 5.5.1, which referenced the root cert on the computer that may have expired.
 
-#### Issue: I am unable to install an Agent Connection on Windows; the installer is failing at the final step.
+#### Issue: I am unable to install an Gateway on Windows; the installer is failing at the final step.
 
 Ensure that you are running the installer as an administrator.
 
 Check for existing installations that might conflict with the current installation:
 
 - Open Task Manager and navigate to the Services tab.
-- Look for any service starting with "GanymedeAgent-" and stop it by right-clicking and selecting "Stop."
+- Look for any service starting with "GanymedeGateway-" and stop it by right-clicking and selecting "Stop."
 - Open "Add or Remove Programs" and uninstall any existing Ganymede Agent installations.
 - Try installing the Agent again.
 
@@ -84,7 +82,7 @@ First, make sure that the Agent was installed with admin privileges.
 On Windows:
 
 - Open Task Manager and navigate to the Services tab.
-- Look for the Connection of interest (a service with a name starting with "GanymedeAgent-") and verify that its status is "Running."
+- Look for the Connection of interest (a service with a name starting with "GanymedeGateway-") and verify that its status is "Running."
 - If the service is not running, right-click on it and select "Start." Connections are configured to start upon reboot by default.
 
 If you still do not see the Agent Connection in the Ganymede App, check the startup log in the folder that the Agent was installed to (C:\\Program Files\\Ganymede\\\<Connection Name\>).
@@ -94,13 +92,13 @@ On Linux:
 - Open a terminal and run the following command to check the Agent's status:
 
   ```bash
-  sudo systemctl status GanymedeAgent-<agent_name>
+  sudo systemctl status GanymedeGateway-<agent_name>
   ```
 
   If the Agent is installed but not running, you can start it by running:
 
   ```bash
-  sudo systemctl start GanymedeAgent-<agent_name>
+  sudo systemctl start GanymedeGateway-<agent_name>
   ```
 
 ### Agent execution
@@ -379,7 +377,7 @@ Write-Output "$agentFileName has finished running"
 ```
 
 Parameters are defined as follows:
-- **-environment** (string, required): Specifies the full environment name to install the agent in (e.g., development, staging, production).
+- **-environment** (string, required): Specifies the full environment name for the connection. Use the value from the URL in the web UI.
 - **-tagParams** (array, required): An array of tags to include in the YAML file. Each tag should be an object with tagTypeId and displayValue properties.
 - **-connectionName** (string, optional): Sets the name for the connection. Defaults to the computer name if not provided.
 - **-installPath** (string, optional): Path to the installation directory. Defaults to C:\Program Files\Ganymede if not specified.

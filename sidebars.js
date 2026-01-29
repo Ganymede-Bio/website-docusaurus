@@ -82,17 +82,17 @@ module.exports = {
           {
             type: 'doc',
             id: 'app/agents/Agent',
-            label: 'Agent Overview & Configuration'
+            label: 'Overview, Gateway & Configuration'
           },
           {
-            type: 'doc', 
+            type: 'doc',
             id: 'app/agents/AgentInstall',
-            label: 'Installing Agent Connections'
+            label: 'Installing Hosts & Connections'
           },
           {
             type: 'doc',
             id: 'app/agents/AgentMonitoring',
-            label: 'Connections Configuration & Maintenance'
+            label: 'Hosts & Connections Maintenance'
           },
           {
             type: 'category',

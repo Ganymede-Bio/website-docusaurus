@@ -6,9 +6,78 @@ displayed_sidebar: webUiSidebar
 
 import { ApiOutlined, EditOutlined, PlusOutlined, DownloadOutlined } from "@ant-design/icons";
 
-To install a Connection, open the Ganymede application in a browser window and navigate to the Connection tab in the left sidebar. Select the desired Agent by name and download the relevant Windows/Linux installation file.
+Starting with version 5.6.0, Ganymede supports the **Gateway** installation model, which allows you to install a single executable per PC and then add Connections through the Ganymede UI. This is the recommended approach for new installations.
 
-## Windows Installation
+For existing installations, you can still install individual Connection executables as described in the [Legacy Installation](#legacy-installation) sections below.
+
+## Gateway Installation (Recommended)
+
+The Gateway model simplifies deployment by allowing you to install one executable per Host (PC), then create and manage Connections through the Ganymede UI.
+
+### Step 1: Download the Gateway
+
+1. Open the Ganymede application in Google Chrome: \<tenant\>.ganymede.bio
+2. Navigate to the appropriate environment (e.g., development or production) for your tenant.
+3. Navigate to the **Hosts** section of the Connections page by selecting the <div className="button darkblue_button"><ApiOutlined /></div> icon in the left toolbar.
+4. Click the <div className="button dark_gray_button"><PlusOutlined /> Add Host</div> button.
+5. Download the Gateway executable for your operating system (Windows or Linux).
+
+### Step 2: Install the Gateway
+
+#### Windows
+
+1. Run the downloaded Gateway executable **as an administrator**.
+2. Select "yes" when prompted by the User Account Control dialog.
+3. Follow the installation wizard:
+   - Specify a descriptive name for the Host (e.g., the PC name or location).
+   - Choose the installation directory. The default is `C:\Program Files\Ganymede\Gateway\`.
+   - Click **Install** to begin the installation.
+4. Once complete, ensure the **Launch Ganymede Gateway** checkbox is checked and click **Finish**.
+
+#### Linux
+
+1. Make the Gateway executable and run the installer:
+
+```bash
+# Make the gateway installer executable
+chmod 755 gateway_<timestamp>
+
+# Run the installer, replacing with your username and desired host name
+HOME=/home/<user>/Ganymede ./gateway_<timestamp> <host name>
+```
+
+2. The installer will set up the Gateway as a systemd service and start it automatically.
+
+### Step 3: Verify the Host is Online
+
+1. Navigate to the **Hosts** section in the Ganymede UI.
+2. Find your newly created Host and verify its status shows as "Live".
+
+### Step 4: Create Connections on the Host
+
+Once your Host is online, you can create Connections without downloading additional executables:
+
+1. Navigate to the Host's detail page in the Ganymede UI.
+2. Click <div className="button dark_gray_button"><PlusOutlined /> Create connection on host</div>.
+3. Select an existing Agent Template or create a new one.
+4. Configure the Connection settings (name, variables, labels, file tags).
+5. The Connection will start automatically on the Host.
+
+:::tip Moving Connections between Hosts
+
+You can move existing Connections to a different Host by selecting **'Move existing connection'** instead of creating a new one. This is useful for migrating Connections or redistributing workload across Hosts.
+
+:::
+
+---
+
+## Legacy Installation
+
+The legacy installation method involves downloading and installing a separate executable for each Connection. This method is still supported for environments where Connections are running at older versions.
+
+To install a Connection using the legacy method, open the Ganymede application in a browser window and navigate to the Connection tab in the left sidebar. Select the desired Agent by name and download the relevant Windows/Linux installation file.
+
+## Windows Installation (Legacy)
 
 ### Step 1: Download the Agent
 
@@ -141,7 +210,7 @@ There may be a slight delay as the service connection resumes.
 
 :::
 
-## Linux Installation
+## Linux Installation (Legacy)
 
 ### Step 1: Download the Agent Installer
 

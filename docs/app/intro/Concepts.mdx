@@ -33,13 +33,21 @@ A preview of a table output from Node.  These can be viewed by clicking on [View
 
 ## Agents / Connections
 
-### [Agent](../agents/Agent.mdx)
+### [Gateway](../agents/Agent.mdx#gateway-architecture)
 
-A locally-installed executable that captures data from external systems or delivers data to instrument PCs. Agents are configured and monitored within the Connections section of the Ganymede UI, and can be customized using user-defined Python.
+A single executable installed on a PC that manages one or more Connections and handles communication with Ganymede Cloud. The Gateway model (available in version 5.6.0+) simplifies deployment by allowing you to install one executable per PC and manage Connections through the UI.
+
+### Host
+
+A PC where a Gateway is installed and running. Hosts can run multiple Connections simultaneously.
+
+### [Agent Template](../agents/Agent.mdx) (or Agent)
+
+The code and configuration that defines how a Connection behaves. Agent Templates specify the trigger, processor, and action logic, and can be deployed to any Host as a Connection. Agent Templates are configured and monitored within the Connections section of the Ganymede UI.
 
 ### Connection
 
-An instance of an Agent.  For example, you may customize a single Agent for uploading data from multiple flow cytometers, but each flow cytometer would have its own Connection.
+A running instance of an Agent Template on a Host. For example, you may create a single Agent Template for uploading data from flow cytometers, but each flow cytometer would have its own Connection running on its respective Host.
 
 ### Other Agent-related terms
 
