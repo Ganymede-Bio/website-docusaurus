@@ -7,9 +7,75 @@ toc_max_heading_level: 4
 
 import { DiffOutlined, EditOutlined, EyeOutlined, PlusOutlined, SelectOutlined } from "@ant-design/icons";
 
-## Maintaining Agents
+## Managing Hosts
 
-Clicking on an Agent in the Ganymede web app UI opens up a page displaying the Agent's configuration.  This page allows you to view the Agent's configuration, logs, and build history, as well as update the configuration of Connections associated with the Agent.
+For environments using the [Gateway architecture](./Agent#gateway-architecture), Hosts are the PCs where Gateway executables are installed. The Hosts section of the Connections page allows you to view and manage all Hosts in your environment.
+
+### Viewing Hosts
+
+Navigate to the **Hosts** section in the Connections page to see all Hosts in your environment. Each Host card displays:
+
+- **Host Name**: The name assigned during Gateway installation
+- **Status**: Current status (Live, Disconnected, or Shutdown)
+- **Core Version**: The version of the Gateway running on the Host
+- **Connections**: Number of Connections running on the Host
+
+### Host Details
+
+Click on a Host to view its detail page, which includes:
+
+- **Host Information**: Name, status, IP address, MAC address, and installation path
+- **Active Connections**: List of all Connections running on this Host
+- **Host Telemetry**: Performance metrics and file processing statistics
+
+### Creating Connections on a Host
+
+1. Navigate to the Host's detail page
+2. Click <div className="button dark_gray_button"><PlusOutlined /> Create connection on host</div>
+3. Choose one of the following options:
+   - **Create new connection**: Select an Agent Template and configure a new Connection
+   - **Move existing connection**: Migrate a Connection from another Host to this one
+
+### Moving Connections Between Hosts
+
+To move a Connection from one Host to another:
+
+1. Navigate to the destination Host's detail page
+2. Click <div className="button dark_gray_button"><PlusOutlined /> Create connection on host</div>
+3. Select **Move existing connection**
+4. Choose the Connection to move from the list
+5. Wait for the migration to complete
+
+The Connection will stop on the source Host and start on the destination Host. No data is lost during the migration.
+
+### Updating Hosts
+
+Hosts running Gateway version 5.6.0+ can be updated through the Ganymede UI:
+
+1. Navigate to the Host's detail page
+2. If an update is available, an **Upgrade** button will appear
+3. Click **Upgrade** to update the Host to the latest Gateway version
+4. All Connections on the Host will be updated simultaneously
+
+### Removing Hosts
+
+To remove a Host:
+
+1. Move or delete all Connections on the Host
+2. Uninstall the Gateway from the PC using the standard uninstallation process
+3. The Host will appear as "Disconnected" and can be removed from the UI
+
+---
+
+## Maintaining Agent Templates
+
+Clicking on an Agent Template in the Ganymede web app UI opens up a page displaying the template's configuration. This page allows you to view the configuration, logs, and build history, as well as update the configuration of Connections associated with the Agent Template.
+
+:::note Terminology
+
+Agent Templates are also referred to as "Agents" throughout the UI and documentation. These terms are used interchangeably.
+
+:::
 
 <div class="text--center">
   <img
@@ -21,7 +87,7 @@ Clicking on an Agent in the Ganymede web app UI opens up a page displaying the A
 
 ### Updating Agents
 
-To modify Agent settings after creation, select the desired Agent in the Ganymede web app UI to update the Agent. Upon clicking <div className="button darkblue_button">Save</div>, the Agent will be built and then made available for download.
+To modify Agent settings after creation, select the desired Agent Template in the Ganymede web app UI to update the Agent. Upon clicking <div className="button darkblue_button">Save</div>, the changes to the Agent Template will be applied to any running Connections based on that Agent Template.
 
   Agents can also be archived or disabled. 
 
@@ -36,26 +102,26 @@ To update a Connection, select the desired Connection in the Connections tab and
 <div class="text--center">
   <img
     alt="Connection Detail UI"
-    src="https://ganymede-bio.mo.cloudinary.net/agent/ConnectionDetails20240726.png"
+    src="https://ganymede-bio.mo.cloudinary.net/agent/ConnectionDetails20260129.png"
     width="600"
   />
 </div>
 &nbsp;
 
-#### Updating existing Connections
+#### Updating Connections
 
 Every time the Connection contacts Ganymede with a health check-in, Ganymede responds with any changes that the Connection needs to incorporate. There are three level of changes that can occur.
 
-- **Core Version Update**: The core version corresponds to the underlying Agent code developed by Ganymede. These changes are new features or patches applied across all Agents, but each Agent manages which core version it is pinned to.
-- **Agent Configuration Update**: Updated through the Agent page or the Agent's processor notebook. This configuration applies to all Connections for that Agent. For example, if an Agent that runs flow upon file capture is updated to run a new flow, then all compatible Connections will begin to run the new flow.
-- **Connection Configuration Update**: Updates made to the Connection's configuration will only update a single Connection, rather than the Agent that it was generated from. Different Connection-level variables and labels can be configured for Connections associated with the same Agent.
+- **Core Version Update**: The core version corresponds to the underlying Host code developed by Ganymede. These changes are new features or patches applied across all Connections, but each Host manages which core version it is pinned to.
+- **Agent Template Update**: Updated through the Agent Template page or the Agent Template's processor notebook. This configuration applies to all Connections for that Agent. For example, if an Agent that runs flow upon file capture is updated to run a new flow, then all compatible Connections will begin to run the new flow.
+- **Connection Configuration Update**: Updates made to the Connection's configuration will only update a single Connection, rather than the Agent Template that it was generated from. Different Connection-level variables and labels can be configured for Connections associated with the same Agent Template.
 
 There are two types of remote updates that occur based on the type of update - full update or runtime update.
 
 #### Full Update
 
 **Compatibility**
-- Agents installed with core v4.8.0 or later.
+- Agents or Hosts running core v4.8.0 or later.
 - The core version of the installed connection must align with the major version of the core version of the agent Ganymede's UI. Otherwise, a breaking change requires reinstallation.
 - Auto-update is enabled for the agent.
 
@@ -65,7 +131,7 @@ A full update is only triggered for a "Core Version Update." The remote update i
 
 :::note
 
-In the Ganymede UI, an Agent's core version is listed on the right side of the page in a section called "Core Agent Infrastructure." If the agent is not up to date to the latest available core version, an "Upgrade" button will appear. The text will inform users what version is available and what version the agent is currently pinned to. 
+In the Ganymede UI, a Host's core version is listed on the right side of the page in a section called "Core Host Infrastructure." If the host is not up to date to the latest available core version, an "Upgrade" button will appear. The text will inform users what version is available and what version the host is currently pinned to. 
 
 :::
 
@@ -77,15 +143,15 @@ In the Ganymede UI, an Agent's core version is listed on the right side of the p
   />
 </div>
 
-Once a user clicks to Upgrade an agent, all connections will be told of the new version on their next status ping. 
+Once a user clicks to Upgrade an host, the host will update on its next status ping.
 
 ##### Update Process
 
-A full update requires reinstalling the executable, but Ganymede now handles this installation seamlessly; as such, after the full update is requested, it is performed for existing Connections after the executable builds. When a Connection receives a command to perform a full update, it continues to operate normally while attempting to start the new version in parallel after verifying the validity of the command and the executable. Once the new version registers with Ganymede as operational, the old Connection stops. The new executable also cleans up the artifacts of the old executable and its dependencies.
+A full update is handled by Ganymede seamlessly; as such, after the full update is requested, it is performed for the Host. When Host receives a command to perform a full update, it continues to operate normally while attempting to start the new version in parallel after verifying the validity of the command and the executable. Once the new version registers with Ganymede as operational, the old Gateway stops. The new executable also cleans up the artifacts of the old executable and its dependencies.
 
 There may be a disruption to any ongoing processing on the Agent during the update, so it is safest to request it when no activity occurs on the instruments where the Agent Connections are running.
 
-If the new Connection fails to start, the old Connection will resume, and the system will not attempt a full update again on that version to avoid putting the Connection in a precarious state.
+If the new Gateway fails to start, the old Gateway will resume, and the system will not attempt a full update again on that version to avoid putting the Host in a precarious state.
 
 #### Runtime Update
 
@@ -97,7 +163,7 @@ If the new Connection fails to start, the old Connection will resume, and the sy
 
 ##### How runtime updates are initiated
 
-Changes in the Agent configuration, including the Agent user-defined code, or Connection configuration, will be sent to the Connection on its next status ping as soon as they are saved.
+Changes in the Agent Template configuration, including the Agent user-defined code, or Connection configuration, will be sent to the Connection on its next status ping as soon as they are saved.
 
 ##### Update Process
 
@@ -105,7 +171,7 @@ A runtime update does not require any process restart or executable reinstallati
 
 ### Viewing Agent History
 
-#### Viewing Build History
+#### Viewing Build History (Legacy)
 
 Each iteration of Agent build can be viewed in the History tab of the Agent. This view provides context for each change, either as a log of the configuration change or through a custom commit message from the Agent notebook.
 
@@ -159,7 +225,7 @@ Connection data can be viewed by clicking on the appropriate connection card in 
 <div class="text--center">
   <img
     alt="Connection Detail UI"
-    src="https://ganymede-bio.mo.cloudinary.net/agent/ConnectionDetails20241113.png"
+    src="https://ganymede-bio.mo.cloudinary.net/agent/ConnectionDetails20260129.png"
     width="600"
   />
 </div>
@@ -191,10 +257,7 @@ Below the Connection Details box, you'll find Connection-specific configurations
 - **Connection File Tags**: [Tags](../files/Tags.mdx) placed on files uploaded by the Connection
 - **Variables**: [Key-value pairs](./Agent#variables-and-labels-in-windows-agent-connections) that can be referenced in user-defined code.  These are also used to specify [reserved keywords](Agent#reserved-variables-for-all-agents) for the Connection, if applicable.
 - **Labels**: [Strings](./Agent#variables-and-labels-in-windows-agent-connections) that can be used to group Connections in the Ganymede UI
-- **Emails**: Email addresses to notify when the Connection encounters an error or has an update in its [Connection status](#connection-status).  These email addresses are also used by the [notify function found in the `agent_sdk`](../../sdk/markdowns/AgentSDK#notifications).
-    - *Send Connection Status Email Notifications*: When enabled, Ganymede will send an email notification to the specified email addresses when the Connection status changes.
-    - *Connection Offline Alert Timeout (min)*: The number of minutes that the Connection must be offline before an email notification is sent.
-    - *Send Email Notification on Connection Shutdown*: When enabled, Ganymede will send an email notification to the specified email addresses when the Connection enters a shutdown state.
+- **Emails**: Email addresses to notify when the Connection encounters an error.  These email addresses are also used by the [notify function found in the `agent_sdk`](../../sdk/markdowns/AgentSDK#notifications).
 
 ### Connection Status
 
@@ -232,11 +295,35 @@ Logs can be found on the Logs tab for each Agent and Connection, and filtered on
 
 The Instrument tab within the Connection logs page contains downloadable text files for the Connection's logs, enabling you to search over logs locally if desired.
 
+### Host Details
+Host data can be viewed by clicking on the Host from the listing page or the Host chip.
+
+| Field Name | Description |
+|------------|-------------|
+| Status |  Current running status of the installed Host|
+| Gateway Version | The version of the Gateway exe that is running on the host|
+| Started At | UTC Time when the Host was first registered in Ganymede |
+| Last Status Ping | Time when last status ping was received from the Host by Ganymede |
+| Install Path | Directory path on the hosting machine where the executable was installed on |
+| Service Name | Windows service name for the Gateway exe on the hosting machine |
+| Machine Name | Hostname of the machine hosting the exe |
+| Machine IP  | IP address that Ganymede sees from the machine hosting the exe |
+| Machine Architecture | Processor architecture of the host machine |
+| Operation System  | OS of the host machine |
+| Running as User  | User identity of the Gateway Service |
+
+
+- **Emails**: Email addresses to notify when the Host encounters an error or has an update in its [Host status](#connection-status).  These email addresses are also used by the [notify function found in the `agent_sdk`](../../sdk/markdowns/AgentSDK#notifications).
+    - *Send Host Status Email Notifications*: When enabled, Ganymede will send an email notification to the specified email addresses when the Host status changes.
+    - *Connection Offline Alert Timeout (min)*: The number of minutes that the Host must be offline before an email notification is sent.
+    - *Send Email Notification on Host Shutdown*: When enabled, Ganymede will send an email notification to the specified email addresses when the Host enters a shutdown state.
+
+
 ## Uninstalling Agent Connections
 
 ### Windows
 
-A Connection can be uninstalled and its associated service removed through the “Add or Remove Programs” panel from the Control Panel.
+A Host can be uninstalled and its associated service removed through the “Add or Remove Programs” panel from the Control Panel.
 
 <div class="text--center">
   <img
@@ -247,17 +334,17 @@ A Connection can be uninstalled and its associated service removed through the �
 </div>
 &nbsp;
 
-After uninstalling the Agent, the Ganymede folder will remain in the Program Files directory. You can also run the `unins000.exe` file in the installation folder to remove the Connection and all other previously installed versions.
+After uninstalling the Gateway, the Ganymede folder will remain in the Program Files directory. You can also run the `unins000.exe` file in the installation folder to remove the Gateway and all other previously installed versions.
 
 :::warning
 
-By default, the installation directory of the Connection is retained, so that logs associated with Connection are kept on the instrument PC.  Removing the Ganymede folder will also remove these logs.
+By default, the installation directory of the Gateway is retained, so that logs associated with the Gateway are kept on the instrument PC.  Removing the Ganymede folder will also remove these logs.
 
 :::
 
 :::info
 
-If the Connection service continues to appear in the Services panel after uninstalling the Connection, you can remove it by running the following command in the Command Prompt:
+If the Gateway service continues to appear in the Services panel after uninstalling the Gateway, you can remove it by running the following command in the Command Prompt:
 
 ```bash
 sc delete <service_name>
@@ -267,7 +354,7 @@ sc delete <service_name>
 
 ### Linux
 
-To uninstall the Agent, stop the systemd service associated with the Agent and remove the service file from /etc/systemd/system/.
+To uninstall the Gateway, stop the systemd service associated with the Gateway and remove the service file from /etc/systemd/system/.
 
 ```bash
 # to stop the Agent Connection service

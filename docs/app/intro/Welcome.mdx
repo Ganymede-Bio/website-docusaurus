@@ -53,7 +53,9 @@ Modular Analysis enables interactive web applications to be developed in Python 
 
 ### [Agents](app/agents/Agent)
 
-Agents are locally installed executables for delivering data to and acquiring data from lab instruments.  They include a configurable Python component that, if enabled, allows users to remotely manage Agent behavior.
+Agents are locally installed executables for delivering data to and acquiring data from lab instruments. They include a configurable Python component that, if enabled, allows users to remotely manage Agent behavior.
+
+With the [Gateway architecture](app/agents/Agent#gateway-architecture), you can install a single Gateway executable per PC (Host), then add and manage Connections through the Ganymede UI without additional installations.
 
 <div style={{textAlign: 'center'}}>
   <a href="app/flows/FlowEditor">

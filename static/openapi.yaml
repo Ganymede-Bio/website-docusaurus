@@ -898,6 +898,180 @@ paths:
       summary: streamData
       tags:
         - Tables
+  /v1/environment/{environment}/hosts/{id}:
+    get:
+      description: Get a host by its id.
+      operationId: getHost
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: environment
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Host
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Host'
+      security:
+        - api-key: []
+        - BearerAuth: []
+      summary: getHost
+      tags:
+        - Hosts
+  /v1/environment/{environment}/hosts:
+    get:
+      description: A list of all hosts with pagination support
+      operationId: getHosts
+      parameters:
+        - name: environment
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: pageNumber
+          required: false
+          in: query
+          description: Page number for pagination (1-based indexing). Default is 1, meaning the first page starts at 1, not 0.
+          schema:
+            type: number
+        - name: pageSize
+          required: false
+          in: query
+          description: number between 1 and 10000. default is 10000
+          schema:
+            type: number
+      responses:
+        '200':
+          description: A list of all Hosts.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Host'
+      security:
+        - api-key: []
+        - BearerAuth: []
+      summary: getHosts
+      tags:
+        - Hosts
+  /v1/environment/{environment}/gateway/download:
+    get:
+      description: Get a signed URL to download a Gateway binary in an Environment by its version and OS type.
+      operationId: downloadGateway
+      parameters:
+        - name: environment
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: assetType
+          required: false
+          in: query
+          schema:
+            enum:
+              - Windows
+              - Linux
+            type: string
+        - name: version
+          required: false
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Signed URL
+          content:
+            application/json:
+              schema:
+                type: string
+      security:
+        - api-key: []
+        - BearerAuth: []
+      summary: downloadGateway
+      tags:
+        - Hosts
+  /v1/environment/{environment}/hosts/{hostId}/connections:
+    post:
+      description: Add a connection to a host.
+      operationId: addHostConnection
+      parameters:
+        - name: environment
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: hostId
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddHostConnectionBody'
+      responses:
+        '201':
+          description: Connection successfully added to host
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorConnection'
+        '404':
+          description: Host or agent template not found
+      security:
+        - api-key: []
+        - BearerAuth: []
+      summary: addHostConnection
+      tags:
+        - Hosts
+  /v1/environment/{environment}/agent_templates:
+    get:
+      description: A list of all Agent Templates for an Environment with pagination support
+      operationId: getAgentTemplates
+      parameters:
+        - name: environment
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: pageNumber
+          required: false
+          in: query
+          description: Page number for pagination (1-based indexing). Default is 1, meaning the first page starts at 1, not 0.
+          schema:
+            type: number
+        - name: pageSize
+          required: false
+          in: query
+          description: number between 1 and 10000. default is 10000
+          schema:
+            type: number
+      responses:
+        '200':
+          description: A list of all Agent Templates for an Environment.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Host'
+      security:
+        - api-key: []
+        - BearerAuth: []
+      summary: getAgentTemplates
+      tags:
+        - Hosts
   /v0/environment/{environment}/commits:
     get:
       description: Get a signed URL to download latest user commits in an Environment.
@@ -3773,6 +3947,9 @@ components:
           format: date-time
           type: string
         lastModified:
+          format: date-time
+          type: string
+        deletedAt:
           format: date-time
           type: string
         columns:
