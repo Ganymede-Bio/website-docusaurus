@@ -29,9 +29,10 @@ try {
   let operationsRemoved = 0;
   let pathsRemoved = 0;
   let tagsRemoved = 0;
+  let deprecatedRemoved = 0;
 
-  // 1. Filter out API groups (Secrets, Hosts)
-  console.log('   🔍 Filtering API groups...');
+  // 1. Filter out API groups (Secrets, Hosts) and deprecated endpoints
+  console.log('   🔍 Filtering API groups and deprecated endpoints...');
   for (const [path, pathItem] of Object.entries(spec.paths)) {
     const methods = ['get', 'post', 'put', 'patch', 'delete', 'options', 'head'];
     let pathHasOperations = false;
@@ -46,6 +47,10 @@ try {
         delete pathItem[method];
         operationsRemoved++;
         console.log(`      Removed: ${method.toUpperCase()} ${path}`);
+      } else if (operation.deprecated) {
+        delete pathItem[method];
+        deprecatedRemoved++;
+        console.log(`      Removed deprecated: ${method.toUpperCase()} ${path}`);
       } else if (pathItem[method]) {
         pathHasOperations = true;
       }
@@ -105,7 +110,7 @@ try {
   }
   if (connConfigFixed > 0) {
     console.log(`      Fixed ${connConfigFixed} connConfiguration propert(y/ies)`);
-  }
+  }  
 
   // 5. Fix BearerAuth security scheme
   console.log('   🔧 Fixing BearerAuth security scheme...');
@@ -158,6 +163,7 @@ try {
   console.log('');
   console.log('✅ Summary:');
   console.log(`   - Removed ${operationsRemoved} operation(s) from ${pathsRemoved} path(s)`);
+  console.log(`   - Removed ${deprecatedRemoved} deprecated endpoint(s)`);
   console.log(`   - Removed ${tagsRemoved} unwanted tag(s) from operations`);
   console.log(`   - Applied compatibility fixes`);
   console.log(`   - Updated ${SPEC_PATH}`);
