@@ -215,11 +215,6 @@ module.exports = {
           },
           {
             type: 'doc',
-            id: 'app/files/TagActivity',
-            label: 'Exploring Tag Activity'
-          },
-          {
-            type: 'doc',
             id: 'app/files/SuggestedTags',
             label: 'Suggested Tag Types'
           }
@@ -425,7 +420,7 @@ module.exports = {
       type: 'category',
       label: '2026',
       collapsed: false,
-      items: ['releases/202601']
+      items: ['releases/202602', 'releases/202601']
     },
     {
       type: 'category',
