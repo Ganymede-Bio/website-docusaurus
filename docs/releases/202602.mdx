@@ -3,6 +3,23 @@ id: 202602
 title: February 2026
 displayed_sidebar: releaseSideBar
 ---
+### February 13 2026
+**Features**
+- **Web UI**: Added support for creating Tables with partitioned columns via the Web UI
+  - Tables can now be created with partitioned columns, which can improve query performance and reduce costs for large datasets
+  - A Table can be partitioned on a Datetime column, or auto partitioned based on the row creation date
+  - Partition columns can be specified when creating a new Table only
+
+- **API**: Added new API endpoints to create/update/delete tables via API
+  - This allows for programmatic management of tables, which can be useful for automating data workflows or integrating with other systems
+
+**Bug Fixes**
+- **Agents**: Fixed an issue where Gateway Services would not restart on Host PC restart
+- **Agents**: Fixed an issue where the initial startup logs were not uploaded to Ganymede 
+
+**Gateway Version**: 5.6.7
+
+
 ### February 5 2026
 **Features**
 - **Web UI**: Tables can now be deleted via the Web UI

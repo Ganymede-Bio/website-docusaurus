@@ -87,32 +87,6 @@ paths:
       summary: downloadAgent
       tags:
         - Agents
-  /v1/environment/{environment}/agents:
-    get:
-      deprecated: true
-      description: A list of all [Agents](https://docs.ganymede.bio/app/agents/Agent) for an Environment.
-      operationId: getAgents
-      parameters:
-        - name: environment
-          required: true
-          in: path
-          schema:
-            type: string
-      responses:
-        '200':
-          description: A list of all Agents for an Environment.
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Agent'
-      security:
-        - api-key: []
-        - BearerAuth: []
-      summary: getAgents
-      tags:
-        - Agents
   /v2/environment/{environment}/agents:
     get:
       description: A list of all [Agents](https://docs.ganymede.bio/app/agents/Agent) for an Environment with pagination support.
@@ -176,37 +150,6 @@ paths:
         - api-key: []
         - BearerAuth: []
       summary: getConnection
-      tags:
-        - Connections
-  /v1/environment/{environment}/connections:
-    get:
-      deprecated: true
-      description: A list of all [Connections](https://docs.ganymede.bio/app/agents/Agent#installing-connections) for an Environment.
-      operationId: getConnections
-      parameters:
-        - name: environment
-          required: true
-          in: path
-          schema:
-            type: string
-        - name: agentId
-          required: false
-          in: query
-          schema:
-            type: string
-      responses:
-        '200':
-          description: A list of all Connections for an Environment.
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Connection'
-      security:
-        - api-key: []
-        - BearerAuth: []
-      summary: getConnections
       tags:
         - Connections
   /v2/environment/{environment}/connections:
@@ -501,32 +444,6 @@ paths:
       summary: getFlow
       tags:
         - Flows
-  /v1/environment/{environment}/flows:
-    get:
-      deprecated: true
-      description: Get all [Flows](https://docs.ganymede.bio/app/flows/FlowEditor#flows) in an Environment.
-      operationId: getFlows
-      parameters:
-        - name: environment
-          required: true
-          in: path
-          schema:
-            type: string
-      responses:
-        '200':
-          description: Get all Flows in an Environment
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Flow'
-      security:
-        - api-key: []
-        - BearerAuth: []
-      summary: getFlows
-      tags:
-        - Flows
   /v2/environment/{environment}/flows:
     get:
       description: Get all [Flows](https://docs.ganymede.bio/app/flows/FlowEditor#flows) in an Environment with pagination support.
@@ -673,49 +590,6 @@ paths:
       summary: getFlowRun
       tags:
         - FlowRuns
-  /v1/environment/{environment}/flows/{flowId}/flowruns:
-    get:
-      deprecated: true
-      description: Get all [FlowRuns](https://docs.ganymede.bio/app/flows/FlowView#running-flows) for a specific [Flow](https://docs.ganymede.bio/app/flows/FlowEditor#flows) in an Environment.
-      operationId: getFlowRuns
-      parameters:
-        - name: environment
-          required: true
-          in: path
-          schema:
-            type: string
-        - name: flowId
-          required: true
-          in: path
-          schema:
-            type: string
-        - name: runBefore
-          required: false
-          in: query
-          description: epoch time in milliseconds
-          schema:
-            type: number
-        - name: runAfter
-          required: false
-          in: query
-          description: epoch time in milliseconds
-          schema:
-            type: number
-      responses:
-        '200':
-          description: Get all FlowRuns for a specific Flow in an Environment
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/FlowRun'
-      security:
-        - api-key: []
-        - BearerAuth: []
-      summary: getFlowRuns
-      tags:
-        - FlowRuns
   /v2/environment/{environment}/flows/{flowId}/flowruns:
     get:
       description: Get all [FlowRuns](https://docs.ganymede.bio/app/flows/FlowView#running-flows) for a specific [Flow](https://docs.ganymede.bio/app/flows/FlowEditor#flows) in an Environment with pagination support.
@@ -798,6 +672,68 @@ paths:
       summary: getTable
       tags:
         - Tables
+    patch:
+      description: 'Update a [Table](https://docs.ganymede.bio/app/tables/DataExplorer) description and/or schema. Note: Existing columns cannot be removed, only added or have descriptions updated. BigQuery enforces schema validation.'
+      operationId: updateTable
+      parameters:
+        - name: environment
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: name
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateTableBody'
+      responses:
+        '200':
+          description: The Table was updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Table'
+        '400':
+          description: Invalid request body or BigQuery schema validation error.
+        '404':
+          description: Table not found.
+      security:
+        - api-key: []
+        - BearerAuth: []
+      summary: updateTable
+      tags:
+        - Tables
+    delete:
+      description: Delete a [Table](https://docs.ganymede.bio/app/tables/DataExplorer) from an Environment. This will soft-delete the table from the database and permanently delete it from BigQuery.
+      operationId: deleteTable
+      parameters:
+        - name: environment
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: name
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '204':
+          description: The Table was deleted successfully.
+        '404':
+          description: Table not found.
+      security:
+        - api-key: []
+        - BearerAuth: []
+      summary: deleteTable
+      tags:
+        - Tables
   /v1/environment/{environment}/tables:
     get:
       description: Get all [Tables](https://docs.ganymede.bio/app/tables/DataExplorer) in an Environment.
@@ -833,6 +769,38 @@ paths:
         - api-key: []
         - BearerAuth: []
       summary: getTables
+      tags:
+        - Tables
+    post:
+      description: Create a new [Table](https://docs.ganymede.bio/app/tables/DataExplorer) in an Environment.
+      operationId: createTable
+      parameters:
+        - name: environment
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTableBody'
+      responses:
+        '201':
+          description: The Table was created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Table'
+        '400':
+          description: Invalid request body or BigQuery validation error.
+        '409':
+          description: A Table with this name already exists.
+      security:
+        - api-key: []
+        - BearerAuth: []
+      summary: createTable
       tags:
         - Tables
   /v1/environment/{environment}/tables/query:
@@ -2197,9 +2165,125 @@ paths:
       summary: getInstrument
       tags:
         - Instruments
-  /v1/environment/{environment}/modularAnalysis/{appFolder}/sessions:
+  /v1/environment/{environment}/modularAnalysis:
     get:
-      description: Get all [Modular Analysis](https://docs.ganymede.bio/app/ma/ModularAnalysisOverview) sessions for a specific Modular Analysis by appFolder.
+      description: Get all [Modular Analysis](https://docs.ganymede.bio/app/ma/ModularAnalysisOverview) apps for an Environment.
+      operationId: getModularAnalysisApps
+      parameters:
+        - name: environment
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A list of all Modular Analysis apps for an Environment.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ModularAnalysisDTO'
+      security:
+        - api-key: []
+        - BearerAuth: []
+      summary: getModularAnalysisApps
+      tags:
+        - ModularAnalysis
+    post:
+      description: Create a new [Modular Analysis](https://docs.ganymede.bio/app/ma/ModularAnalysisOverview) app in an Environment.
+      operationId: createModularAnalysisApp
+      parameters:
+        - name: environment
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateModularAnalysisBody'
+      responses:
+        '201':
+          description: The Modular Analysis app was created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModularAnalysisDTO'
+        '409':
+          description: A Modular Analysis app with this slug already exists.
+      security:
+        - api-key: []
+        - BearerAuth: []
+      summary: createModularAnalysisApp
+      tags:
+        - ModularAnalysis
+  /v1/environment/{environment}/modularAnalysis/{slug}:
+    patch:
+      description: Update an existing [Modular Analysis](https://docs.ganymede.bio/app/ma/ModularAnalysisOverview) app.
+      operationId: updateModularAnalysisApp
+      parameters:
+        - name: environment
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: slug
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateModularAnalysisBody'
+      responses:
+        '200':
+          description: The Modular Analysis app was updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModularAnalysisDTO'
+        '404':
+          description: Modular Analysis app not found.
+      security:
+        - api-key: []
+        - BearerAuth: []
+      summary: updateModularAnalysisApp
+      tags:
+        - ModularAnalysis
+    delete:
+      description: Delete a [Modular Analysis](https://docs.ganymede.bio/app/ma/ModularAnalysisOverview) app from an Environment.
+      operationId: deleteModularAnalysisApp
+      parameters:
+        - name: environment
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: slug
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '204':
+          description: The Modular Analysis app was deleted successfully.
+        '404':
+          description: Modular Analysis app not found.
+      security:
+        - api-key: []
+        - BearerAuth: []
+      summary: deleteModularAnalysisApp
+      tags:
+        - ModularAnalysis
+  /v1/environment/{environment}/modularAnalysis/{slug}/sessions:
+    get:
+      description: Get all [Modular Analysis](https://docs.ganymede.bio/app/ma/ModularAnalysisOverview) sessions for a specific Modular Analysis by slug.
       operationId: getModularAnalysisSessions
       parameters:
         - name: environment
@@ -2207,7 +2291,7 @@ paths:
           in: path
           schema:
             type: string
-        - name: appFolder
+        - name: slug
           required: true
           in: path
           schema:
@@ -2796,6 +2880,8 @@ components:
           type: string
         pdFieldName:
           type: string
+        unit:
+          type: string
       required:
         - name
         - type
@@ -2804,17 +2890,108 @@ components:
       properties:
         name:
           type: string
+          description: Name of the table
         environment:
           type: string
+          description: Environment where the table exists
         description:
           type: string
+          description: Description of the table
         schema:
+          description: Schema fields for the table
           type: array
           items:
             $ref: '#/components/schemas/SchemaField'
+        timePartitioningMode:
+          enum:
+            - COLUMN
+            - INGESTION_TIME
+          type: string
+          description: 'Partitioning mode: COLUMN or INGESTION_TIME'
+        timePartitioningField:
+          type: string
+          description: Column name used for partitioning (only for COLUMN mode)
+        timePartitioningType:
+          enum:
+            - HOUR
+            - DAY
+            - MONTH
+            - YEAR
+          type: string
+          description: 'Partition granularity: HOUR, DAY, MONTH, or YEAR'
+        requirePartitionFilter:
+          type: boolean
+          description: Whether partition filter is required for queries
       required:
         - name
         - environment
+    TimePartitioningMode:
+      type: string
+      enum:
+        - COLUMN
+        - INGESTION_TIME
+      description: 'Partitioning mode: COLUMN (partition by a schema column) or INGESTION_TIME (partition by _PARTITIONTIME)'
+    PartitionGranularity:
+      type: string
+      enum:
+        - HOUR
+        - DAY
+        - MONTH
+        - YEAR
+      description: 'Partition granularity: HOUR, DAY, MONTH, or YEAR'
+    TimePartitioning:
+      type: object
+      properties:
+        mode:
+          description: 'Partitioning mode: COLUMN (partition by a schema column) or INGESTION_TIME (partition by _PARTITIONTIME)'
+          allOf:
+            - $ref: '#/components/schemas/TimePartitioningMode'
+        field:
+          type: string
+          description: Column name to partition by. Required when mode is COLUMN, must not be set when mode is INGESTION_TIME.
+        type:
+          description: 'Partition granularity: HOUR, DAY, MONTH, or YEAR'
+          allOf:
+            - $ref: '#/components/schemas/PartitionGranularity'
+        requirePartitionFilter:
+          type: boolean
+          description: When true, BigQuery rejects queries that do not include a WHERE clause on the partition column. Defaults to false.
+          default: false
+      required:
+        - mode
+        - type
+    CreateTableBody:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the table
+        description:
+          type: string
+          description: Description of the table
+        schema:
+          description: Schema fields for the table
+          type: array
+          items:
+            $ref: '#/components/schemas/SchemaField'
+        timePartitioning:
+          description: Optional time partitioning configuration
+          allOf:
+            - $ref: '#/components/schemas/TimePartitioning'
+      required:
+        - name
+        - schema
+    UpdateTableBody:
+      type: object
+      properties:
+        description:
+          type: string
+          description: Description of the table
+        schema:
+          description: Schema fields for the table. Existing columns cannot be removed, only added or have descriptions updated.
+          type: array
+          items:
+            $ref: '#/components/schemas/SchemaField'
     PostQueryBody:
       type: object
       properties:
@@ -3924,6 +4101,8 @@ components:
           type: string
         pdColumnType:
           type: string
+        unit:
+          type: string
         createdAt:
           format: date-time
           type: string
@@ -3959,6 +4138,22 @@ components:
         numRows:
           type: string
         isStream:
+          type: boolean
+        timePartitioningMode:
+          type: string
+          enum:
+            - COLUMN
+            - INGESTION_TIME
+        timePartitioningField:
+          type: string
+        timePartitioningType:
+          type: string
+          enum:
+            - HOUR
+            - DAY
+            - MONTH
+            - YEAR
+        requirePartitionFilter:
           type: boolean
       required:
         - name
@@ -5189,9 +5384,9 @@ components:
         appName:
           type: string
           description: Name of the modular analysis
-        appFolder:
+        slug:
           type: string
-          description: Folder name where the modular analysis is stored
+          description: Unique identifier (slug) for the modular analysis
         description:
           type: string
           description: Description of the modular analysis
@@ -5201,8 +5396,41 @@ components:
           default: false
       required:
         - appName
-        - appFolder
+        - slug
         - description
+    CreateModularAnalysisBody:
+      type: object
+      properties:
+        appName:
+          type: string
+          description: Name of the modular analysis app
+        slug:
+          type: string
+          pattern: SLUG_PATTERN
+          description: Unique identifier (slug) for the modular analysis app
+        description:
+          type: string
+          description: Description of the modular analysis app
+        hidden:
+          type: boolean
+          description: Whether the modular analysis app is hidden from non-internal users
+          default: false
+      required:
+        - appName
+        - slug
+        - description
+    UpdateModularAnalysisBody:
+      type: object
+      properties:
+        appName:
+          type: string
+          description: Name of the modular analysis app
+        description:
+          type: string
+          description: Description of the modular analysis app
+        hidden:
+          type: boolean
+          description: Whether the modular analysis app is hidden from non-internal users
     ModularAnalysisSessionDTO:
       type: object
       properties:
