@@ -3,6 +3,26 @@ id: 202602
 title: February 2026
 displayed_sidebar: releaseSideBar
 ---
+### February 20 2026
+
+**Features**
+- **API**: Added new API endpoints to update Flow settings via API
+
+**Improvements**
+- **Flows**: Added enforcement of sequential execution for Flows that have their concurrency set to 1
+  - This ensures that Flows with this option enabled will run in the order they were triggered, which can be important for certain workflows that require sequential processing
+  - This only applies to Flows that have their concurrency set to 1, which means that only one instance of the Flow can run at a time. Flows with higher concurrency settings will not be affected by this change
+- **Flows**: Added automated clean up for Flows that fail to start within 72 hours of being triggered
+- **Agents**: Improved the deployment process when a Gateway is installed on a network with private certificates
+- **Agents**: Improved the robustness of network requests that add Tags to Files
+- **Web UI**: Added more filtering against web scanning attempts
+
+**Bug Fixes**
+- **Files**: Fixed an issue with handling files with special characters in their names, which could cause errors when uploading or downloading files
+
+
+**Gateway Version**: 5.6.11
+
 ### February 13 2026
 **Features**
 - **Web UI**: Added support for creating Tables with partitioned columns via the Web UI
@@ -10,7 +30,7 @@ displayed_sidebar: releaseSideBar
   - A Table can be partitioned on a Datetime column, or auto partitioned based on the row creation date
   - Partition columns can be specified when creating a new Table only
 
-- **API**: Added new API endpoints to create/update/delete tables via API
+- **API**: Added new API endpoints to create/update/delete Tables via API
   - This allows for programmatic management of tables, which can be useful for automating data workflows or integrating with other systems
 
 **Bug Fixes**
