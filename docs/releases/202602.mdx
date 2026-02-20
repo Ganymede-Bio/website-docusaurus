@@ -12,7 +12,7 @@ displayed_sidebar: releaseSideBar
 - **Flows**: Added enforcement of sequential execution for Flows that have their concurrency set to 1
   - This ensures that Flows with this option enabled will run in the order they were triggered, which can be important for certain workflows that require sequential processing
   - This only applies to Flows that have their concurrency set to 1, which means that only one instance of the Flow can run at a time. Flows with higher concurrency settings will not be affected by this change
-- **Flows**: Added automate clean up for Flows that fail to start within 72 hours of being triggered
+- **Flows**: Added automated clean up for Flows that fail to start within 72 hours of being triggered
 - **Agents**: Improved the deployment process when a Gateway is installed on a network with private certificates
 - **Agents**: Improved the robustness of network requests that add Tags to Files
 - **Web UI**: Added more filtering against web scanning attempts
