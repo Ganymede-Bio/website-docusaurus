@@ -28,8 +28,7 @@ def execute(**kwargs) -> UploadFileParams | None:
     sdk.info(f"Connection tags: {[(t.tag_type_id, t.display_value) for t in connection_tags]}")
     sdk.info(f"Agent tags: {[(t.tag_type_id, t.display_value) for t in agent_tags]}")
 
-    new_file_param = FileParam(filename="tag_availability_1.txt", body="Hello, World!")
-    return UploadFileParams(files=[new_file_param])
+   # ... rest of processor code
 ```
 
 **Bug Fixes**
