@@ -1,0 +1,39 @@
+---
+id: 202603
+title: March 2026
+displayed_sidebar: releaseSideBar
+---
+### March 5 2026
+**Features**
+- **Web UI**: Added support longer Gateway log messages in the Web UI
+  - The text of log messages is now visible up to 10,000 characters, making it easier to debug issues and understand the context of log entries
+  - Click the expand button on log entries to view the full message
+  - Longer messages will be sent from Gateway version 5.6.21 and above
+
+**Improvements**
+- **Agents**: Added clearer logging when a Gateway EXE is launched within a firewalled network
+- **Agents**: Improved the availability of Tags supplied by the Connection and Agent Template in processor code
+  - This improvement should make it easier to use tags for dynamic processing and decision-making in Agents
+**Usage in processor code:**
+```python
+from agent_sdk import FileParam, UploadFileParams
+from gateway.processor_sdk import get_sdk
+
+def execute(**kwargs) -> UploadFileParams | None:
+    sdk = get_sdk(kwargs)
+
+    connection_tags = sdk.get_connection_tags()
+    agent_tags = sdk.get_agent_tags()
+    sdk.info(f"Connection tags: {[(t.tag_type_id, t.display_value) for t in connection_tags]}")
+    sdk.info(f"Agent tags: {[(t.tag_type_id, t.display_value) for t in agent_tags]}")
+
+    new_file_param = FileParam(filename="tag_availability_1.txt", body="Hello, World!")
+    return UploadFileParams(files=[new_file_param])
+```
+
+**Bug Fixes**
+- **Web UI**: Fixed an issue where the Flow save button was not reachable via scrolling
+
+**Gateway Version**: 5.6.21
+
+
