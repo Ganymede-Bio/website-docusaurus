@@ -16,6 +16,9 @@ cp api-server/common/public-api/openapi.yaml static/openapi.yaml
 # Prepare spec (filter, cleanup, fix)
 if command -v node &> /dev/null; then
     node scripts/prepare-api-spec.js
+    echo ""
+    echo "📦 Generating Postman collection..."
+    node scripts/generate-postman-collection.js
 else
     echo "⚠️  Node.js not found. Cannot prepare API spec."
     exit 1
