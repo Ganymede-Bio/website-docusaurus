@@ -194,6 +194,39 @@ paths:
       summary: getConnections
       tags:
         - Connections
+  /v1/environment/{environment}/connection/{connectionId}/file:
+    get:
+      description: Check whether a file with the given MD5 hash has already been uploaded by a specific connection.
+      operationId: fileExistsByMd5
+      parameters:
+        - name: environment
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: connectionId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: md5
+          required: true
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 'Returns { exists: true } if a file with the given MD5 has been uploaded by this connection.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FileExistsByMd5Response'
+      security:
+        - api-key: []
+        - BearerAuth: []
+      summary: fileExistsByMd5
+      tags:
+        - Files
   /v1/environment/{environment}/files/{uri}:
     get:
       description: Get a [File](https://docs.ganymede.bio/app/files/FileBrowser) in an Environment by its url-encoded [URI](https://docs.ganymede.bio/sdk/FileTags#get_file_url).
@@ -2757,6 +2790,14 @@ components:
         - environment
         - agentCodebaseVersion
         - agentVersion
+    FileExistsByMd5Response:
+      type: object
+      properties:
+        exists:
+          type: boolean
+          description: True if a file with the given MD5 exists for this connection.
+      required:
+        - exists
     File:
       type: object
       properties:
@@ -3352,7 +3393,8 @@ components:
           type: string
           default: ''
         ignorePatterns:
-          default: []
+          default:
+            - '**/*.tmp'
           type: array
           items:
             type: string
@@ -4336,10 +4378,13 @@ components:
           type: string
         pdColumnName:
           type: string
+          nullable: true
         pdColumnType:
           type: string
+          nullable: true
         unit:
           type: string
+          nullable: true
         createdAt:
           format: date-time
           type: string

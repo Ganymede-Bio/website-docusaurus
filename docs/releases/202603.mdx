@@ -3,6 +3,23 @@ id: 202603
 title: March 2026
 displayed_sidebar: releaseSideBar
 ---
+### March 18 2026
+
+**Features**
+- **Agents**: Added support for syncing files from a watch directory to Ganymede Storage in the Gateway Agent File Watcher Template
+  - This new feature allows users to easily sync files from a local directory to Ganymede Storage, based on the File's MD5 hash
+  - To use this feature, enable the "Sync to files on connection start" option in the file watcher settings
+  - When enabled, the connection will check for files in the specified watch directory and process any new or changed files at startup
+
+**Improvements**
+- **Web UI**: Increased enforcement of bot scanning rules
+
+**Bug Fixes**
+- **Web UI**: Fixed an issue where Flow Runs triggered by Connections were incorrectly labeled
+
+**Gateway Version**: 5.6.24
+
+
 ### March 12 2026
 
 **Improvements**
