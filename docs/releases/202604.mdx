@@ -7,21 +7,16 @@ displayed_sidebar: releaseSideBar
 ### April 2 2026
 
 **Features**
-- **Agents**: Added support to allow agents to capture both timezone information & inherent clock drift from host PCs.                                                                
-    - The amount of clock drift (and the timezone) is now captured and stored alongside host inferred data, making timing discrepancies   
-  observable and correctable  
-- **Web UI**: 
-    - Bulk metadata tag update - users with "Writer" environment permissions now have the ability to update file metadata tags in bulk through the UI
+- **Agents**: Added support to allow agents to capture both timezone information &  clock drift from host PCs.
+    - The amount of clock drift and timezone are now captured and stored alongside host inferred data, making timing discrepancies 
+  observable and correctable
+
 
 **Improvements**
-- **Agents**: Added improvements for:
-    - Agent restart behavior - specifically network outage recovery handling
-    - General End-to-End robustness
+- **Agents**: Fixed an issue where some Gateway Agent EXEs were consuming more memory than expected, leading to performance degradation over time
+- **Web UI**: Bulk metadata tag update - users with "Writer" environment permissions now have the ability to update file metadata tags in bulk through the UI
 
 **Bug Fixes**
-- **Agents**: Windows agents - fixed an issue with failed restart caused by gateway thread/memory leaks
-- **Web UI**: 
-    - Fixed an issue with page scroll behavior on the Data Explorer and Modular Analysis pages
-    - Fixed an issue with file resolution for files with percent-encoded storage paths
+- **Web UI**: Fixed an issue with page scroll behavior on the Data Explorer and Modular Analysis pages
 
-**Gateway Version**: 5.6.24
+**Gateway Version**: 5.6.29
