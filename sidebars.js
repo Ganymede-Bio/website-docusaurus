@@ -420,7 +420,7 @@ module.exports = {
       type: 'category',
       label: '2026',
       collapsed: false,
-      items: ['releases/202604', 'releases/202603','releases/202602', 'releases/202601']
+      items: ['releases/202605', 'releases/202604', 'releases/202603','releases/202602', 'releases/202601']
     },
     {
       type: 'category',
