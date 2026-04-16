@@ -112,7 +112,7 @@ p, li, td, th, dd, dt {
   --ifm-code-font-size: 95%;
 }
 
-.button {
+.button:not(#\#):not(#\#) {
   border: 1px;
   display: inline-block;
   border-radius: 4px;
@@ -149,23 +149,23 @@ p, li, td, th, dd, dt {
   border-color: var(--ifm-color-gray-darker);
 }
 
-.button.darker_gray_button::not(#\#):not(#\#) {
+.button.darker_gray_button:not(#\#):not(#\#) {
   background-color: var(--ifm-color-white);
   color: var(--ifm-color-gray-darker);
   font-weight: 700 !important;
 }
 
-.button.dark_gray_button::not(#\#):not(#\#) {
+.button.dark_gray_button:not(#\#):not(#\#) {
   color: var(--ifm-color-gray-dark);
   font-weight: 700 !important;
 }
 
-.button.gray_button::not(#\#):not(#\#) {
+.button.gray_button:not(#\#):not(#\#) {
   color: var(--ifm-color-gray);
   font-weight: 500 !important;
 }
 
-.button.black_button::not(#\#):not(#\#) {
+.button.black_button:not(#\#):not(#\#) {
   color: var(--ifm-color-black);
   font-weight: 700 !important;
 }
@@ -176,13 +176,13 @@ p, li, td, th, dd, dt {
   color: var(--ifm-color-gray-lighter);
 }
 
-.button.darkblue_outline_button::not(#\#):not(#\#) {
+.button.darkblue_outline_button:not(#\#):not(#\#) {
   border-color: var(--ifm-color-black);
   background-color: var(--ifm-color-white);
   color: var(--ifm-color-blue-dark);
 }
 
-.button.darkblue_inverted_button::not(#\#):not(#\#) {
+.button.darkblue_inverted_button:not(#\#):not(#\#) {
   border-color: var(--ifm-color-blue-dark);
   background-color: white;
   color: var(--ifm-color-blue-dark);
@@ -235,7 +235,7 @@ p, li, td, th, dd, dt {
   color: var(--ifm-color-gray-light);
 }
 
-.purple_alt_button::not(#\#):not(#\#) {
+.purple_alt_button:not(#\#):not(#\#) {
   border: 1px;
   display: inline-block;
   border-radius: 2px;
@@ -293,7 +293,7 @@ p, li, td, th, dd, dt {
   vertical-align: middle;
 }
 
-.button.superset_button::not(#\#):not(#\#) {
+.button.superset_button:not(#\#):not(#\#) {
   border-radius: 3px;
   padding-left: 6px;
   padding-right: 3px;
@@ -301,7 +301,7 @@ p, li, td, th, dd, dt {
   color: var(--ifm-color-black);
 }
 
-.button.jupyter_button::not(#\#):not(#\#) {
+.button.jupyter_button:not(#\#):not(#\#) {
   border-radius: 1px;
   padding-left: 6px;
   padding-right: 6px;
@@ -309,7 +309,7 @@ p, li, td, th, dd, dt {
   color: var(--ifm-color-black);
 }
 
-.button.system_button::not(#\#):not(#\#) {
+.button.system_button:not(#\#):not(#\#) {
   border-radius: 3px;
   padding-left: 6px;
   padding-right: 3px;
@@ -318,7 +318,7 @@ p, li, td, th, dd, dt {
   color: var(--ifm-color-black);
 }
 
-.button.run_queue_button::not(#\#):not(#\#) {
+.button.run_queue_button:not(#\#):not(#\#) {
   border-radius: 3px;
   padding-left: 6px;
   padding-right: 6px;
@@ -326,7 +326,7 @@ p, li, td, th, dd, dt {
   color: var(--ifm-color-black);
 }
 
-.button.datalist_button::not(#\#):not(#\#) {
+.button.datalist_button:not(#\#):not(#\#) {
   border-radius: 3px;
   padding-left: 6px;
   padding-right: 6px;
@@ -334,26 +334,26 @@ p, li, td, th, dd, dt {
   color: var(--ifm-color-gray);
 }
 
-.button.light_blue_button::not(#\#):not(#\#) {
+.button.light_blue_button:not(#\#):not(#\#) {
   background-color: #669ff4;
   color: white;
 }
 
-.button.lightblue_noborder_button::not(#\#):not(#\#) {
+.button.lightblue_noborder_button:not(#\#):not(#\#) {
   border: 0px;
   border-color: var(--ifm-color-black);
   background-color: var(--ifm-color-white);
   color: #669ff4;
 }
 
-.button.lightblue_noborder_button::not(#\#):not(#\#) {
+.button.lightblue_noborder_button:not(#\#):not(#\#) {
   border: 0px;
   border-color: var(--ifm-color-black);
   background-color: var(--ifm-color-white);
   color: #669ff4;
 }
 
-.button.blue_button::not(#\#):not(#\#) {
+.button.blue_button:not(#\#):not(#\#) {
   border-radius: 8px;
   padding-left: 10px;
   padding-right: 10px;
@@ -368,12 +368,12 @@ p, li, td, th, dd, dt {
   color: #387fd3;
 }
 
-.button.red_button::not(#\#):not(#\#) {
+.button.red_button:not(#\#):not(#\#) {
   background-color: red;
   color: white;
 }
 
-.button.red_text_button::not(#\#):not(#\#) {
+.button.red_text_button:not(#\#):not(#\#) {
   background-color: white;
   color: red;
   border: none;
