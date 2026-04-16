@@ -170,7 +170,7 @@ p, li, td, th, dd, dt {
   font-weight: 700 !important;
 }
 
-.button.darkblue_button {
+.button.darkblue_button:not(#\#):not(#\#) {
   border-color: var(--ifm-color-black);
   background-color: var(--ifm-color-blue-dark);
   color: var(--ifm-color-gray-lighter);
@@ -189,7 +189,7 @@ p, li, td, th, dd, dt {
   font-weight: normal;
 }
 
-.button.darkblue_button_mui {
+.button.darkblue_button_mui:not(#\#):not(#\#) {
   border-color: var(--ifm-color-black);
   background-color: var(--ifm-color-blue-dark);
   color: var(--ifm-color-gray-lighter);
@@ -197,7 +197,7 @@ p, li, td, th, dd, dt {
   padding-bottom: 2px;
 }
 
-.button.darkblue_button_mui_reverse {
+.button.darkblue_button_mui_reverse:not(#\#):not(#\#) {
   border-color: var(--ifm-color-black);
   background-color: var(--ifm-color-gray-lighter);
   color: var(--ifm-color-blue-dark);
@@ -205,7 +205,7 @@ p, li, td, th, dd, dt {
   padding-bottom: 2px;
 }
 
-.button.darkblue_button_icon {
+.button.darkblue_button_icon:not(#\#):not(#\#) {
   padding-left: 8px;
   padding-right: 8px;
   padding-top: 1px;
