@@ -4,6 +4,33 @@ title: April 2026
 displayed_sidebar: releaseSideBar
 ---
 
+### April 23 2026
+
+**Features**
+- **Agents**: Windows and Linux agents now have the ability to be installed without administrator privileges.
+    - This feature provides an additional level of flexibility for agent deployment to accommodate organizations with IT policies that restrict admin access on end-user machines.
+    - When installing an agent, the wizard now allows users to select between admin and non-admin installation via a selection page, with clear privilege-focused labels.
+    - Agents installed as non-admin have a few key functional differences from agents installed as admin:
+        - Admin Install:
+            - Process Type: Windows Service
+            - Auto-Start: Yes
+            - Auto-Update: Yes
+        - Non-Admin Install:
+            - Process: Plain Process
+            - Auto-Start: No
+            - Auto-Update: No
+
+**Improvements**
+- **Web UI / File Browser**: A number of performance improvements have been added to the File Browser. These improvements significantly increase the performance across the page, especially for tenants with high file volume. This includes decreased refresh latency for the files table and more performant search and filter.
+    - **Note: Ability to filter files by virtualization session is no longer supported with this release.**
+- **Web UI / General**: Page scroll behavior has been redesigned across the web app, improving consistency across the various page layouts in the UI.
+- **Web UI / Notifications**: The Notifications table now displays a connection name within the Source column if relevant for the notification type.
+
+**Bug Fixes**
+- **Agents**: Fixed an issue where File Watcher agents would fail to apply connection-level metadata tags to uploaded files.
+
+**Gateway Version**: 5.6.33
+
 ### April 16 2026
 
 **Bug Fixes**
