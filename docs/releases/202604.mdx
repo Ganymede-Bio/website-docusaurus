@@ -4,6 +4,28 @@ title: April 2026
 displayed_sidebar: releaseSideBar
 ---
 
+### April 30 2026
+
+**Features**
+- **Virtualization**: Launch new virtualization sessions from existing input files
+    - A new icon on each row of the Sessions table allows users to start a new virtualization session using the same input files from any previous session. Click the icon, select the application from the dropdown menu, and the new session is launched in a new browser window. The icon is hidden for sessions with no input files.
+- **Events**: Added the ability to disable writing event-initiated files to the Files table
+    - A new per-environment toggle on the Environment Settings page allows system admins to disable writing event file payloads to the Files table.
+    - When enabled, this setting applies to all future Events - existing files in storage are unaffected.
+
+**Improvements**
+- **Web UI / Connections**: Improved reliability and visibility of gateway update status
+    - The Hosts page now reflects gateway update progress in real time — hosts transition to "Updating" status immediately when an upgrade is triggered.
+    - If a gateway fails to upgrade and rolls back, an error banner is displayed showing the version the host rolled back to, with an "Upgrade" button available to retry.
+
+![Gateway upgrade in progress banner](./path/to/your-screenshot.png)
+![Gateway upgrade failed banner](./path/to/your-screenshot.png)
+
+**Bug Fixes**
+- **Web UI / Connections**: Fixed a display issue where long connection or host names were clipped in the connections table — the table now scrolls horizontally when content exceeds the panel width.
+
+**Gateway Version**: 5.6.35
+
 ### April 23 2026
 
 **Features**
