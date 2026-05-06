@@ -221,7 +221,7 @@ The scan runs in a background daemon thread that starts **after** the live watch
 4. For each remaining candidate, computes the local file's MD5 and skips it if the hash is already in the known set. Files with an unrecognized MD5 are enqueued through the same `add_file()` path used by the live watcher, so the configured `duplicate_handling` policy applies as a second safety net.
 5. Throttles uploads to roughly two per second to avoid overwhelming the API server.
 
-Scan errors are isolated per-Connection: a failure for one Connection (for example, an API timeout while fetching known hashes) is logged with the `[syncOnStart]` prefix and does not affect any other Connection on the host. Files modified while the gateway is running are always handled by the live watcher; the startup scan only covers files that changed while the Connection was offline.
+Files modified while the gateway is running are always handled by the live watcher; the startup scan only covers files that changed while the Connection was offline.
 
 This feature is independent of `deduplicate_by_md5` (which deduplicates uploads against Ganymede Storage during normal operation) — the startup scan always uses MD5 to decide what is "new", regardless of that setting.
 
