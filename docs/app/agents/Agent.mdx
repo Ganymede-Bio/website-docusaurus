@@ -207,6 +207,23 @@ A Connection watches a directory (and associated subdirectories) for new files a
 - `File Tags`: Tags to associate with the files uploaded to Ganymede Cloud.
 - `Image`: An image to associate with agent in the Ganymede UI.
 - `Auto deploy code and configuration changes to Live Connections`: If checked, updates to Agent code will be reflected on current Connections.
+- `Sync files on connection start`: When enabled, the Connection scans the watched directory at startup and uploads any files that were created or modified while the gateway was offline. See [Sync files on connection start](#sync-files-on-connection-start) for details.
+
+#### Sync files on connection start
+
+The "Sync files on connection start" toggle (available in the file watcher trigger options) protects against missed files when the Connection is not running — for example after a host reboot, a network outage, or a Connection update. When enabled, each time the Connection starts it performs a one-time reconciliation scan of the watched directory in addition to the live filesystem watcher.
+
+The scan runs in a background daemon thread that starts **after** the live watcher is up, so newly created files are never delayed by the scan. For each Connection with the toggle enabled, the gateway:
+
+1. Fetches the set of MD5 hashes already recorded for the Connection from Ganymede (paginated, 1,000 records per page).
+2. Walks the watched directory recursively, applying the same filters as the live watcher: `ignore_hidden_files`, `ignore_hidden_directories`, `ignore_list`, and the file watcher's configured glob patterns.
+3. Skips any file whose modification time is newer than `stable_time` seconds in the past — those will be picked up by the live watcher once they stabilize.
+4. For each remaining candidate, computes the local file's MD5 and skips it if the hash is already in the known set. Files with an unrecognized MD5 are enqueued through the same `add_file()` path used by the live watcher, so the configured `duplicate_handling` policy applies as a second safety net.
+5. Throttles uploads to roughly two per second to avoid overwhelming the API server.
+
+Files modified while the gateway is running are always handled by the live watcher; the startup scan only covers files that changed while the Connection was offline.
+
+This feature is independent of `deduplicate_by_md5` (which deduplicates uploads against Ganymede Storage during normal operation) — the startup scan always uses MD5 to decide what is "new", regardless of that setting.
 
 #### Reserved variables for File Watcher Agents
 
@@ -451,6 +468,7 @@ A Connection that monitors a local directory (and associated subdirectories) for
 - `File Tags`: Tags to associate with the files uploaded to Ganymede Cloud.
 - `Image`: An image to associate with Agent in the Ganymede UI.
 - `Auto deploy code and configuration changes to Live Connections`: If checked, updates to Agent code will be reflected on current Connections.
+- `Sync files on connection start`: When enabled, the Connection scans the watched directory at startup and uploads any files that were created or modified while the gateway was offline. See [Sync files on connection start](#sync-files-on-connection-start) for details.
 
 <div class="text--center">
   <img
