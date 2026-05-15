@@ -17,3 +17,25 @@ displayed_sidebar: releaseSideBar
 - **Web UI / Files**: A number of small improvements (table refresh, filter behavior) have been added to the Files page and File Browser modal.
 
 **Gateway Version**: 5.6.37
+
+### May 15 2026
+
+**Improvements**
+- **Web UI / Runs**: Run URLs on Process, Unit Operation, and Instrument run detail panels are now displayed as clickable links that open in a new tab.
+
+![Run URL as clickable hyperlink](/img/20260515_run_urls_clickable.png)
+
+- **Web UI / Help Menu**: The "Report a bug" option in the help menu now links directly to a new bug submission form within the Apprentice support portal.
+
+![Help menu Report a bug](/img/20260515_help_menu_report_bug.png)
+
+- **Agents**: Windows Agents now automatically restart and reconnect after an unexpected shutdown or startup failure, eliminating the need for manual intervention when a lab PC reboots.
+    - Agents now automatically detect and restart failing internal threads, and mark affected connections as "Failing" in the Ganymede UI so users have clear visibility when an issue occurs.
+    - Windows Agent startup is now more resilient — if the service fails to start, it will automatically retry up to 3 times with a maximum timeout of 5 minutes before requiring manual intervention.
+
+**Bug Fixes**
+- **Agents**: Fixed an issue where file watcher connections would remain "Live" in the Ganymede UI even when the configured watch directory was missing or unmounted. Connections now display as "Failing" when the directory is unavailable and automatically recover to "Live" when it is restored.
+- **Web UI / Files**: Fixed an issue where bookmarked File Browser URLs saved before April 7 would open without their saved filters applied.
+- **Web UI / Data Explorer**: Fixed an issue where the "Unit" field could not be populated when adding new columns to a table schema.
+
+**Gateway Version**: 5.6.41
