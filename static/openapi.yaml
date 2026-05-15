@@ -3349,6 +3349,12 @@ components:
         serviceDisplayName:
           type: string
           description: The display name that the agent service can be found under in a service manager
+        timezone:
+          type: string
+          description: IANA timezone string (e.g., "America/New_York (EST)") of the machine where the host is running
+        timeDrift:
+          type: number
+          description: Clock drift in seconds measured at host startup relative to the API server
         runningAsUser:
           type: string
           description: The user that the service is installed and executing as
@@ -3360,10 +3366,12 @@ components:
           description: The machine architecture (e.g. arm64, amd64) that the connection is running on
           allOf:
             - $ref: '#/components/schemas/SupportedHostMachineArchitectures'
-        timezone:
-          type: string
-        timeDrift:
-          type: string
+        isRunningAsAdmin:
+          type: boolean
+          description: Whether the gateway process is running with elevated / admin privileges
+        isRunningAsService:
+          type: boolean
+          description: Whether the gateway was started by the OS service manager and will restart automatically
     HostVersionMetadata:
       type: object
       properties:
@@ -3907,6 +3915,10 @@ components:
             - $ref: '#/components/schemas/HostStatus'
         errorMessage:
           type: string
+        updateInProgress:
+          type: boolean
+        updateFailed:
+          type: boolean
         id:
           type: string
         latestPingTimestamp:
