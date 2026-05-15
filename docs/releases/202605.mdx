@@ -15,7 +15,7 @@ displayed_sidebar: releaseSideBar
 
 ![Help menu Report a bug](/img/20260515_help_menu_report_bug.png)
 
-- **Agents**: Windows Agents now automatically restart and reconnect after an unexpected shutdown or startup failure, eliminating the need for manual intervention when a lab PC reboots.
+- **Agents**: Robustness improvements related to error handling and Windows service startup
     - Agents now automatically detect and restart failing internal threads, and mark affected connections as "Failing" in the Ganymede UI so users have clear visibility when an issue occurs.
     - Windows Agent startup is now more resilient — if the service fails to start, it will automatically retry up to 3 times with a maximum timeout of 5 minutes before requiring manual intervention.
 
@@ -23,6 +23,7 @@ displayed_sidebar: releaseSideBar
 - **Agents**: Fixed an issue where file watcher connections would remain "Live" in the Ganymede UI even when the configured watch directory was missing or unmounted. Connections now display as "Failing" when the directory is unavailable and automatically recover to "Live" when it is restored.
 - **Web UI / Files**: Fixed an issue where bookmarked File Browser URLs saved before April 7 would open without their saved filters applied.
 - **Web UI / Data Explorer**: Fixed an issue where the "Unit" field could not be populated when adding new columns to a table schema.
+- **Analysis Apps**: Addressed an issue where Analysis Apps would throw an internal server error after a change to the App was saved
 
 **Gateway Version**: 5.6.41
 
