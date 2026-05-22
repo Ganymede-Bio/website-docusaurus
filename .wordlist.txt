@@ -590,4 +590,5 @@ GanymedeGateway
 concentration
 mg/mL
 MA
-YYYYMMDD-HHmmssSSS
+YYYYMMDD
+HHmmssSSS
