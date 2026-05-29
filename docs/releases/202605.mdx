@@ -8,7 +8,7 @@ displayed_sidebar: releaseSideBar
 
 **Features**
 - **API**: Two new endpoints for managing instrument connections are now available. Connections can now be reconfigured and retired programmatically (at scale and in bulk) rather than instrument-by-instrument through the UI.
-    - updateInstrument - add or remove connections on an existing instrument by supplying `addConnectionIds` and/or `removeConnectionIds`. Both fields are optional and follow the same add/remove pattern used elsewhere in the public API.
+    - `updateInstrument` - add or remove connections on an existing instrument by supplying `addConnectionIds` and/or `removeConnectionIds`. Both fields are optional and follow the same add/remove pattern used elsewhere in the public API.
     - `deleteInstrument` - Deletes an instrument connection by ID. Returns a 404 if the instrument does not exist, and supports `dry_run` to validate the request without performing the deletion.
 
 **Improvements**

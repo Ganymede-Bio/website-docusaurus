@@ -594,5 +594,4 @@ YYYYMMDD
 HHmmssSSS
 reconfigured
 retired
-updateInstrument
 viewport
