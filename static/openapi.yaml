@@ -2312,6 +2312,73 @@ paths:
       summary: getInstrument
       tags:
         - Instruments
+    patch:
+      description: Update the connector connections associated with an existing Instrument. Supply the connector connection Ids to add and/or remove. Other Instrument fields cannot be modified through this endpoint.
+      operationId: updateInstrument
+      parameters:
+        - name: environment
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: number
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateInstrumentBody'
+      responses:
+        '200':
+          description: Instrument updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InstrumentDTO'
+        '400':
+          description: Bad Request - Invalid input data
+        '404':
+          description: Instrument not found
+      security:
+        - api-key: []
+        - BearerAuth: []
+      summary: updateInstrument
+      tags:
+        - Instruments
+    delete:
+      description: Delete an Instrument from an Environment.
+      operationId: deleteInstrument
+      parameters:
+        - name: environment
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: number
+        - name: dry_run
+          required: false
+          in: query
+          schema:
+            type: boolean
+      responses:
+        '204':
+          description: Instrument deleted successfully
+        '404':
+          description: Instrument not found
+      security:
+        - api-key: []
+        - BearerAuth: []
+      summary: deleteInstrument
+      tags:
+        - Instruments
   /v1/environment/{environment}/modularAnalysis:
     get:
       description: Get all [Modular Analysis](https://docs.ganymede.bio/app/ma/ModularAnalysisOverview) apps for an Environment.
@@ -5669,6 +5736,24 @@ components:
         - id
         - createdAt
         - name
+    UpdateInstrumentBody:
+      type: object
+      properties:
+        addConnectionIds:
+          default: []
+          description: Connector connection Ids to associate with this instrument. Each id must reference an existing connector connection.
+          type: array
+          items:
+            type: string
+        removeConnectionIds:
+          default: []
+          description: Connector connection Ids to disassociate from this instrument. Ids not currently associated with the instrument are ignored.
+          type: array
+          items:
+            type: string
+        dry_run:
+          type: boolean
+          description: If true, perform a dry run without actually updating the instrument
     ModularAnalysisDTO:
       type: object
       properties:
