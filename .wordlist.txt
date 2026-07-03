@@ -598,3 +598,4 @@ viewport
 Connectors
 expandable
 MES
+selectable
