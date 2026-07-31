@@ -4,6 +4,14 @@ title: July 2026
 displayed_sidebar: releaseSideBar
 ---
 
+### July 31 2026
+
+**Bug Fixes**
+- **Flows**: Fixed an issue where flows without an explicit concurrency limit could run with an unlimited number of simultaneous executions instead of the intended default cap of 40 concurrent runs.
+- **Dashboards / User Activity Metrics Chart**: Fixed an issue where the Daily Active Users chart undercounted usage because silently restored SSO sessions weren't being tracked as activity; the chart now accurately reflects all authenticated user activity. Note that this change does not affect past user activity data displayed in the chart, but applies to all user activity moving forward.
+
+**Gateway Version**: 5.6.63
+
 ### July 23 2026
 
 **Improvements**
