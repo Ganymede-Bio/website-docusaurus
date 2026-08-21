@@ -4,6 +4,23 @@ title: August 2026
 displayed_sidebar: releaseSideBar
 ---
 
+### August 20 2026
+
+**Improvements**
+- **Agents**: Improved Host reliability so that a single misconfigured Cloud Watcher connection can no longer interrupt triggers from other connections that are running on the same Host.
+- **WebApp / UI**: Font library has been refreshed to improve readability of text across all pages of the WebApp.
+
+**Bug Fixes**
+- **Agents**
+    - Fixed an issue where a file watcher connection could stop monitoring a folder after a network interruption or temporary loss of access, and would not automatically resume once access was restored.
+    - Fixed an issue where selecting the "Input bucket" option for a Cloud Watcher trigger could cause the connection to fail to start.
+    - Fixed an issue where multiple file watcher connections running on the same Host could interfere with each other, causing files from one connection to be silently dropped without triggering a Flow.
+    - Fixed an issue where connections with "Ignore hidden files" and "Ignore hidden directories" turned off in the UI would still silently ignore hidden files and directories.
+- **Web UI / Modular Analysis (MA)**: Fixed an issue where users saw an unexpected error message instead of a clear explanation of why a Modular Analysis app was unavailable to launch.
+    - **Important Note:** Moving forward, users need Runner permissions or higher to open Modular Analysis apps.
+
+**Gateway Version**: 5.6.72
+
 ### August 13 2026
 
 **Features**
