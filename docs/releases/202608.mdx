@@ -4,6 +4,18 @@ title: August 2026
 displayed_sidebar: releaseSideBar
 ---
 
+### August 28 2026
+
+**Features**
+- **Web UI / GxP Locks**: Flows, Data Tables, and Modular Analysis Apps provisioned as centrally managed GxP-validated assets now display a "GxP Validated" badge, and their edit controls (save, delete, configuration changes) are disabled to prevent accidental modification. Running, querying, and viewing remain fully available.
+
+**Bug Fixes**
+- **Agents**
+    - Fixed an issue where Cloud Watcher connections created in the Connections UI would default to matching every file in the bucket instead of only files for the selected Flow, resulting in unintended downloads.
+    - Fixed an issue where repeated configuration changes to a connection could cause files to be processed using an outdated configuration, potentially applying incorrect variables or file paths.
+
+**Gateway Version**: 5.6.73
+
 ### August 20 2026
 
 **Improvements**
