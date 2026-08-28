@@ -608,5 +608,4 @@ bioreactors
 queryable
 misconfigured
 WebApp
-BigQuery
 GxP
