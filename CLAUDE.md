@@ -35,8 +35,9 @@ git commit -m "Update API spec"
 - Removes duplicate `PublicApi` tags
 - Removes empty `ganymede` tag
 - Sets proper server host default
+- Groups `Tempo` endpoints into a separate `x-tagGroups` section ("Tempo tenants only"), keeping them in the docs but set apart from the general public API
 
-These fixes are needed until the issues are resolved upstream in api-server.
+The compatibility fixes are needed until the issues are resolved upstream in api-server. The Tempo grouping is intentional and permanent: Tempo endpoints are only available to Tempo-enabled tenants, so they are shown as their own section.
 
 **Source**: `api-server/common/public-api/openapi.yaml`
 **Served from**: `static/openapi.yaml`
