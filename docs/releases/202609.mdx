@@ -4,6 +4,35 @@ title: September 2026
 displayed_sidebar: releaseSideBar
 ---
 
+### September 17 2026
+
+**Features**
+- **API**: This release brings a major expansion of the public API, adding programmatic access to many resources that were previously only available through the web UI.
+    - **Users & Roles**: List and retrieve users, remove a user, list and update roles, and get or set the default role assigned to new users.
+    - **Flow Versions & Comparison**: List a flow's versions and view a diff between any two versions. You can also set or clear a flow's custom image and add or remove flow assignees.
+    - **Modular Analysis (MA) App Code**: Retrieve and update the source code for an MA App by slug.
+    - **Storage Buckets**: List storage buckets and retrieve a single bucket by name. This release covers read access only; write operations will follow in a later release.
+    - **Agent Templates**: Retrieve and delete agent templates (connectors) by ID.
+    - **Instrument Types**: List, retrieve, create, update, and delete instrument types.
+    - **Unit Operations**: List, retrieve, create, update, copy, and delete unit operations.
+    - **Processes**: List, retrieve, create, update, copy, and delete processes.
+    - **File Tag Types**: List file tag types and their values, and create, update, and delete tag types.
+    - **Connections & Hosts**: A safe subset of write operations — delete and move connections, add a connection to a host, and delete a host or its custom image.
+    - **Notifications**: Retrieve recent notifications and the latest flow-save notification.
+    - **Dashboards**: List dashboards and retrieve a single dashboard by name.
+    - **Custom Images**: List custom images and retrieve a single image by ID.
+    - **Tempo Snapshot**: Retrieve signed URLs for a Tempo snapshot export.
+    - **Tempo Public API**: New read (list) endpoints for a wide range of Tempo resources, including batch runs and templates, procedure runs and templates, exceptions, material definitions, lots, and sublots, locations, equipment, users, kits, signature logs, samples, and their associated bills of materials, bills of equipment, parameter values, sample results, steps, and process actions.
+
+**Improvements**
+- **API / Modular Analysis (MA)**: The canonical endpoint for updating MA App metadata is now `updateModularAnalysisAppMetadata`. The previous operation is deprecated but retained as a non-breaking alias, so existing integrations continue to work.
+- **API / Tempo Snapshot**: Signed URLs returned for Tempo snapshots are now scoped by exporter flow (`dagId`), so each snapshot resolves to the correct export.
+
+**Bug Fixes**
+- **API**: Fixed an issue where requests authenticated with an API key could return a 403 (Forbidden) instead of a 503 (Service Unavailable) when the service was under heavy load. Transient capacity errors are now reported correctly, rather than appearing to be permission failures.
+
+**Gateway Version**: 5.6.74
+
 ### September 10 2026
 
 **Features**
