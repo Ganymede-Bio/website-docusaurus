@@ -3,6 +3,7 @@
  * Prepare OpenAPI spec for Scalar
  * - Filters out API groups (Secrets, Hosts)
  * - Removes duplicate/unwanted tags
+ * - Groups Tempo endpoints separately (Tempo-tenant-only) via x-tagGroups
  * - Applies compatibility fixes
  */
 
@@ -13,6 +14,11 @@ const yaml = require('js-yaml');
 const SPEC_PATH = path.join(__dirname, '..', 'static', 'openapi.yaml');
 const FILTERED_GROUPS = ['Secrets', 'AppsSync'];
 const UNWANTED_TAGS = ['PublicApi', 'ganymede'];
+// Tempo endpoints are only available to Tempo-enabled tenants, so they are
+// shown as a separate group in the rendered docs (still included, but set apart
+// from the general public API). Tag applied to Tempo operations in api-server:
+const TEMPO_TAG = 'Tempo';
+const TEMPO_TAG_DESCRIPTION = 'Endpoints available to Tempo-enabled tenants only.';
 
 console.log('🔧 Preparing OpenAPI spec for Scalar...');
 
@@ -150,6 +156,45 @@ try {
       spec.info.description = 'API specification for the Ganymede platform. Create an API key following the [instructions](https://docs.ganymede.bio/app/configuration/APISetup) to authenticate your requests.';
       console.log('      Set default description');
     }
+  }
+
+  // 8. Group Tempo endpoints separately (Scalar renders x-tagGroups as
+  //    distinct sidebar sections). Tags are collected in order of first
+  //    appearance so the public group's ordering matches the spec.
+  console.log('   🗂️  Grouping tags (separating Tempo)...');
+  const methods = ['get', 'post', 'put', 'patch', 'delete', 'options', 'head'];
+  const orderedTags = [];
+  const seenTags = new Set();
+  for (const pathItem of Object.values(spec.paths)) {
+    for (const [method, operation] of Object.entries(pathItem)) {
+      if (!methods.includes(method)) continue;
+      for (const tag of operation.tags || []) {
+        if (!seenTags.has(tag)) {
+          seenTags.add(tag);
+          orderedTags.push(tag);
+        }
+      }
+    }
+  }
+
+  if (seenTags.has(TEMPO_TAG)) {
+    // Ensure a Tempo tag definition exists so the description renders.
+    spec.tags = Array.isArray(spec.tags) ? spec.tags : [];
+    const tempoDef = spec.tags.find(t => t.name === TEMPO_TAG);
+    if (tempoDef) {
+      tempoDef.description = tempoDef.description || TEMPO_TAG_DESCRIPTION;
+    } else {
+      spec.tags.push({ name: TEMPO_TAG, description: TEMPO_TAG_DESCRIPTION });
+    }
+
+    const publicTags = orderedTags.filter(t => t !== TEMPO_TAG);
+    spec['x-tagGroups'] = [
+      { name: 'Public API', tags: publicTags },
+      { name: 'Tempo (Tempo tenants only)', tags: [TEMPO_TAG] },
+    ];
+    console.log(`      Created tag groups: Public API (${publicTags.length} tags) + Tempo`);
+  } else {
+    console.log('      No Tempo endpoints found; skipping Tempo group');
   }
 
   // Write modified spec back
