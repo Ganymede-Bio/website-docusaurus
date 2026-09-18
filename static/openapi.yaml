@@ -121,6 +121,36 @@ paths:
       summary: getAgentTemplates
       tags:
         - AgentTemplates
+    post:
+      description: Create an Agent Template (Connector) in an Environment. The processor code is generated and committed to the Environment repository.
+      operationId: createAgentTemplate
+      parameters:
+        - name: environment
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAgentTemplateBody'
+      responses:
+        '201':
+          description: The created Agent Template.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Connector'
+        '400':
+          description: defaultConfiguration is missing, its connectorType is not a valid connector type, or it is a (deprecated) legacy connector type.
+      security:
+        - api-key: []
+        - BearerAuth: []
+      summary: createAgentTemplate
+      tags:
+        - AgentTemplates
   /v1/environment/{environment}/agent_templates/{id}:
     get:
       description: Get a single Agent Template (Connector) by its id.
@@ -174,6 +204,185 @@ paths:
         - api-key: []
         - BearerAuth: []
       summary: deleteAgentTemplate
+      tags:
+        - AgentTemplates
+    patch:
+      description: Update an Agent Template (Connector)'s editable fields. Updates are versioned and committed to the Environment repository, so a commit message is required.
+      operationId: updateAgentTemplate
+      parameters:
+        - name: environment
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateAgentTemplateBody'
+      responses:
+        '200':
+          description: The updated Agent Template.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Connector'
+        '404':
+          description: Agent Template not found.
+      security:
+        - api-key: []
+        - BearerAuth: []
+      summary: updateAgentTemplate
+      tags:
+        - AgentTemplates
+  /v1/environment/{environment}/agent_templates/{id}/custom-image:
+    put:
+      description: Upload and attach a custom image to an Agent Template (Connector). Replaces any existing custom image.
+      operationId: setAgentTemplateCustomImage
+      parameters:
+        - name: environment
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+              required:
+                - file
+      responses:
+        '200':
+          description: The custom image attached to the Agent Template.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicCustomImageDTO'
+        '404':
+          description: Agent Template not found.
+      security:
+        - api-key: []
+        - BearerAuth: []
+      summary: setAgentTemplateCustomImage
+      tags:
+        - AgentTemplates
+    delete:
+      description: Remove the custom image attached to an Agent Template (Connector).
+      operationId: deleteAgentTemplateCustomImage
+      parameters:
+        - name: environment
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Agent Template custom image removed.
+        '404':
+          description: Agent Template not found.
+      security:
+        - api-key: []
+        - BearerAuth: []
+      summary: deleteAgentTemplateCustomImage
+      tags:
+        - AgentTemplates
+  /v1/environment/{environment}/agent_templates/{id}/diff/{oldVersion}/{newVersion}:
+    get:
+      description: Get the diff (configuration + processor) between two versions of an Agent Template (Connector).
+      operationId: getAgentTemplateDiff
+      parameters:
+        - name: environment
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: oldVersion
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: newVersion
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The diff between the two versions.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Diff'
+        '404':
+          description: Agent Template not found.
+      security:
+        - api-key: []
+        - BearerAuth: []
+      summary: getAgentTemplateDiff
+      tags:
+        - AgentTemplates
+  /v1/environment/{environment}/agent_templates/{id}/download/{assetId}:
+    get:
+      description: Get a short-lived signed URL to download a MIGRATED (legacy) Agent Template's executable asset. assetId must be 'latest-windows' or 'latest-linux'. The per-template executable is a legacy-agent artifact; for modern gateway connectors use downloadGateway (GET .../gateway/download) instead.
+      operationId: downloadAgentTemplateAsset
+      parameters:
+        - name: environment
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: assetId
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A short-lived signed download URL.
+          content:
+            application/json:
+              schema:
+                type: string
+        '400':
+          description: assetId is not 'latest-windows' or 'latest-linux', or the Agent Template is a modern gateway connector with no legacy executable asset (use downloadGateway).
+        '404':
+          description: Agent Template not found.
+      security:
+        - api-key: []
+        - BearerAuth: []
+      summary: downloadAgentTemplateAsset
       tags:
         - AgentTemplates
   /v1/environment/{environment}/agents/{id}:
@@ -506,6 +715,114 @@ paths:
       summary: getBuckets
       tags:
         - Buckets
+    post:
+      description: Register a new Customer-owned storage (ingest) Bucket in an Environment.
+      operationId: createBucket
+      parameters:
+        - name: environment
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateBucketBody'
+      responses:
+        '201':
+          description: The created Bucket.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicBucketDTO'
+        '400':
+          description: The cloud provider is not AWS (customer bucket registration is AWS-only), or the bucket name is a reserved platform (built-in) bucket name.
+        '409':
+          description: A Bucket with this name already exists; use PUT to update it.
+      security:
+        - api-key: []
+        - BearerAuth: []
+      summary: createBucket
+      tags:
+        - Buckets
+  /v1/environment/{environment}/buckets/disableFileEventPayloadWrites:
+    post:
+      description: Enable or disable writing file-event payloads for the Environment.
+      operationId: setDisableFileEventPayloadWrites
+      parameters:
+        - name: environment
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SetDisableFileEventPayloadWritesBody'
+      responses:
+        '204':
+          description: The setting was updated.
+      security:
+        - api-key: []
+        - BearerAuth: []
+      summary: setDisableFileEventPayloadWrites
+      tags:
+        - Buckets
+  /v1/environment/{environment}/buckets/roles/awsRoleArn:
+    get:
+      description: Get the AWS IAM role ARN configured for the Environment (AWS only).
+      operationId: getAwsRoleArn
+      parameters:
+        - name: environment
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The configured AWS role ARN.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AwsRoleArnDTO'
+      security:
+        - api-key: []
+        - BearerAuth: []
+      summary: getAwsRoleArn
+      tags:
+        - Buckets
+    post:
+      description: Set the AWS IAM role ARN for the Environment (AWS only). Stored as a secret and in Environment config.
+      operationId: setAwsRoleArn
+      parameters:
+        - name: environment
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SetAwsRoleArnBody'
+      responses:
+        '201':
+          description: The AWS role ARN after the update.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AwsRoleArnDTO'
+      security:
+        - api-key: []
+        - BearerAuth: []
+      summary: setAwsRoleArn
+      tags:
+        - Buckets
   /v1/environment/{environment}/buckets/{name}:
     get:
       description: Get a single storage (ingest) Bucket by name.
@@ -534,6 +851,130 @@ paths:
         - api-key: []
         - BearerAuth: []
       summary: getBucket
+      tags:
+        - Buckets
+    put:
+      description: Update a storage Bucket's editable fields (display name, region).
+      operationId: updateBucket
+      parameters:
+        - name: environment
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: name
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateBucketBody'
+      responses:
+        '200':
+          description: The updated Bucket.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicBucketDTO'
+        '404':
+          description: Bucket not found.
+      security:
+        - api-key: []
+        - BearerAuth: []
+      summary: updateBucket
+      tags:
+        - Buckets
+    delete:
+      description: Delete a storage Bucket from an Environment.
+      operationId: deleteBucket
+      parameters:
+        - name: environment
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: name
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Bucket deleted.
+        '404':
+          description: Bucket not found.
+      security:
+        - api-key: []
+        - BearerAuth: []
+      summary: deleteBucket
+      tags:
+        - Buckets
+  /v1/environment/{environment}/buckets/{name}/sync:
+    post:
+      description: Sync a storage Bucket's files into the Environment. Returns the number of files synced.
+      operationId: syncBucket
+      parameters:
+        - name: environment
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: name
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '201':
+          description: The sync result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BucketSyncResultDTO'
+        '400':
+          description: The Bucket is not an AWS bucket (sync is AWS-only).
+        '404':
+          description: Bucket not found.
+      security:
+        - api-key: []
+        - BearerAuth: []
+      summary: syncBucket
+      tags:
+        - Buckets
+  /v1/environment/{environment}/buckets/{name}/validate:
+    post:
+      description: Validate a storage Bucket's access policy. Returns the validation error when the policy is invalid, or null when valid.
+      operationId: validateBucket
+      parameters:
+        - name: environment
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: name
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The validation result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BucketValidationResultDTO'
+        '400':
+          description: The Bucket is not an AWS bucket (validation is AWS-only).
+        '404':
+          description: Bucket not found.
+      security:
+        - api-key: []
+        - BearerAuth: []
+      summary: validateBucket
       tags:
         - Buckets
   /v1/environment/{environment}/connection-health:
@@ -689,6 +1130,41 @@ paths:
         - api-key: []
         - BearerAuth: []
       summary: deleteConnection
+      tags:
+        - Connections
+    patch:
+      description: Update a [Connection](https://docs.ganymede.bio/app/agents/Agent#installing-connections)'s display name and/or notification emails.
+      operationId: updateConnection
+      parameters:
+        - name: environment
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateConnectionBody'
+      responses:
+        '200':
+          description: The updated Connection.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Connection'
+        '404':
+          description: Connection not found.
+      security:
+        - api-key: []
+        - BearerAuth: []
+      summary: updateConnection
       tags:
         - Connections
   /v1/environment/{environment}/connections/{id}/move:
@@ -1939,6 +2415,41 @@ paths:
       summary: deleteHost
       tags:
         - Hosts
+    patch:
+      description: Update a Host's customer-editable fields (display name, labels, whether automatic gateway updates are enabled).
+      operationId: updateHost
+      parameters:
+        - name: environment
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: hostId
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateHostBody'
+      responses:
+        '200':
+          description: The updated Host.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Host'
+        '404':
+          description: Host not found.
+      security:
+        - api-key: []
+        - BearerAuth: []
+      summary: updateHost
+      tags:
+        - Hosts
   /v1/environment/{environment}/hosts/{hostId}/connections:
     post:
       description: Add a connection to a host.
@@ -1999,6 +2510,73 @@ paths:
         - api-key: []
         - BearerAuth: []
       summary: removeHostCustomImage
+      tags:
+        - Hosts
+    put:
+      description: Upload and attach a custom image to a Host. Replaces any existing custom image.
+      operationId: setHostCustomImage
+      parameters:
+        - name: environment
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: hostId
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+              required:
+                - file
+      responses:
+        '200':
+          description: The custom image attached to the Host.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicCustomImageDTO'
+        '404':
+          description: Host not found.
+      security:
+        - api-key: []
+        - BearerAuth: []
+      summary: setHostCustomImage
+      tags:
+        - Hosts
+  /v1/environment/{environment}/hosts/{hostId}/shutdown:
+    post:
+      description: Request that a Host shut down. This is an asynchronous control action; a 202 is returned once the shutdown has been requested.
+      operationId: shutdownHost
+      parameters:
+        - name: environment
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: hostId
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '202':
+          description: Shutdown requested.
+        '404':
+          description: Host not found.
+      security:
+        - api-key: []
+        - BearerAuth: []
+      summary: shutdownHost
       tags:
         - Hosts
   /v1/environment/{environment}/hosts/{id}:
@@ -6768,6 +7346,13 @@ components:
       required:
         - linuxExe
         - windowsExe
+    AwsRoleArnDTO:
+      type: object
+      properties:
+        awsRoleArn:
+          type: string
+          nullable: true
+          description: The configured AWS IAM role ARN, if any.
     BatchRun:
       title: BatchRun
       type: object
@@ -7219,6 +7804,21 @@ components:
       enum:
         - Ganymede
         - Customer
+    BucketSyncResultDTO:
+      type: object
+      properties:
+        syncedFileCount:
+          type: number
+          description: Number of files synced from the bucket.
+      required:
+        - syncedFileCount
+    BucketValidationResultDTO:
+      type: object
+      properties:
+        validationError:
+          type: string
+          nullable: true
+          description: The validation error if the bucket policy is invalid; null when valid.
     BuildEventClass:
       type: object
       properties:
@@ -7762,6 +8362,19 @@ components:
         - legacyAssets
         - status
         - requireLegacyFullUpdate
+    ConnectorRawSnapshot:
+      type: object
+      properties:
+        sha:
+          type: string
+        processor:
+          type: string
+        configuration:
+          type: string
+      required:
+        - sha
+        - processor
+        - configuration
     ConnectorState:
       type: string
       enum:
@@ -7802,6 +8415,62 @@ components:
           description: Name for the copied unit operation.
       required:
         - name
+    CreateAgentTemplateBody:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Display name of the Agent Template.
+        defaultConfiguration:
+          discriminator:
+            propertyName: connectorType
+            mapping:
+              file_watcher_upload_run_flow: '#/components/schemas/FWFlowConnectorConfig'
+              file_watcher_upload: '#/components/schemas/FWUploadConnectorConfig'
+              cron_upload_run_flow: '#/components/schemas/CronFlowConnectorConfig'
+              cron_upload: '#/components/schemas/CronUploadConnectorConfig'
+              cloud_watcher_save_file: '#/components/schemas/CWSaveFileConnectorConfig'
+              one_shot_upload_run_flow: '#/components/schemas/OneShotFlowConnectorConfig'
+              one_shot_upload: '#/components/schemas/OneShotUploadConnectorConfig'
+              application_startup_agent: '#/components/schemas/AppStartupConnectorConfig'
+              application_cleanup_agent: '#/components/schemas/AppCleanupConnectorConfig'
+              application_cleanup_flow_agent: '#/components/schemas/AppCleanupFlowConnectorConfig'
+              automatic_flow_grouping: '#/components/schemas/AutoFilePatternFlowMappingConfig'
+              upload_after_pause: '#/components/schemas/UploadAfterPause'
+              cron_stream_data: '#/components/schemas/CronStreamDataConnectorConfig'
+              opcua: '#/components/schemas/OpcuaConnectorConfig'
+          oneOf:
+            - $ref: '#/components/schemas/FWFlowConnectorConfig'
+            - $ref: '#/components/schemas/FWUploadConnectorConfig'
+            - $ref: '#/components/schemas/CronFlowConnectorConfig'
+            - $ref: '#/components/schemas/CronUploadConnectorConfig'
+            - $ref: '#/components/schemas/CWSaveFileConnectorConfig'
+            - $ref: '#/components/schemas/OneShotFlowConnectorConfig'
+            - $ref: '#/components/schemas/OneShotUploadConnectorConfig'
+            - $ref: '#/components/schemas/AppStartupConnectorConfig'
+            - $ref: '#/components/schemas/AppCleanupConnectorConfig'
+            - $ref: '#/components/schemas/AppCleanupFlowConnectorConfig'
+            - $ref: '#/components/schemas/AutoFilePatternFlowMappingConfig'
+            - $ref: '#/components/schemas/UploadAfterPause'
+            - $ref: '#/components/schemas/CronStreamDataConnectorConfig'
+            - $ref: '#/components/schemas/OpcuaConnectorConfig'
+          additionalProperties: false
+        defaultVariables:
+          type: object
+          additionalProperties:
+            type: string
+          description: Default variables available to all connections.
+        defaultTags:
+          description: Tags applied to all files uploaded by this Agent Template.
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+        description:
+          type: string
+          description: Description of the Agent Template.
+      required:
+        - name
+        - defaultConfiguration
     CreateAppConfigDto:
       type: object
       properties:
@@ -7832,6 +8501,28 @@ components:
         - name
         - level
         - viewContent
+    CreateBucketBody:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Bucket name (identifier).
+        cloudProvider:
+          enum:
+            - AWS
+          type: string
+          description: Cloud provider hosting the bucket. Must be AWS — customer bucket registration is AWS/S3-only.
+        region:
+          type: string
+          description: Cloud region of the bucket.
+        displayName:
+          type: string
+          description: Human-readable display name.
+      required:
+        - name
+        - cloudProvider
+        - region
+        - displayName
     CreateFileTagTypeBody:
       type: object
       properties:
@@ -8412,6 +9103,16 @@ components:
             - $ref: '#/components/schemas/AccessType'
       required:
         - role
+    Diff:
+      type: object
+      properties:
+        old:
+          $ref: '#/components/schemas/ConnectorRawSnapshot'
+        new:
+          $ref: '#/components/schemas/ConnectorRawSnapshot'
+      required:
+        - old
+        - new
     Equipment:
       title: Equipment
       type: object
@@ -9308,6 +10009,7 @@ components:
         lastValidated:
           format: date-time
           type: string
+          nullable: true
         deletedAt:
           format: date-time
           type: string
@@ -11543,6 +12245,22 @@ components:
         - gcpName
         - updatedAt
         - deletedAt
+    SetAwsRoleArnBody:
+      type: object
+      properties:
+        awsRoleArn:
+          type: string
+          description: The AWS IAM role ARN.
+      required:
+        - awsRoleArn
+    SetDisableFileEventPayloadWritesBody:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+          description: Whether to disable writing file-event payloads.
+      required:
+        - enabled
     SignatureLog:
       title: SignatureLog
       type: object
@@ -12117,6 +12835,30 @@ components:
         - createdAt
         - unitOperationId
         - state
+    UpdateAgentTemplateBody:
+      type: object
+      properties:
+        commitMsg:
+          type: string
+          description: Commit message for the update.
+        name:
+          type: string
+          description: New display name.
+        defaultVariables:
+          type: object
+          additionalProperties:
+            type: string
+          description: Default variables available to all connections.
+        defaultTags:
+          description: Tags applied to all files uploaded by this Agent Template.
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+        description:
+          type: string
+          description: Description of the Agent Template.
+      required:
+        - commitMsg
     UpdateAppConfigDto:
       type: object
       properties:
@@ -12167,6 +12909,26 @@ components:
       required:
         - fileUris
         - isArchived
+    UpdateBucketBody:
+      type: object
+      properties:
+        displayName:
+          type: string
+          description: New human-readable display name.
+        region:
+          type: string
+          description: New cloud region of the bucket.
+    UpdateConnectionBody:
+      type: object
+      properties:
+        name:
+          type: string
+          description: New display name for the Connection.
+        emails:
+          description: Email addresses to notify about this Connection.
+          type: array
+          items:
+            type: string
     UpdateDefaultNewUserRoleBody:
       type: object
       properties:
@@ -12223,6 +12985,20 @@ components:
       required:
         - tasks
         - authorEmail
+    UpdateHostBody:
+      type: object
+      properties:
+        name:
+          type: string
+          description: New display name for the Host.
+        labels:
+          description: Labels to attach to the Host.
+          type: array
+          items:
+            type: string
+        updatesEnabled:
+          type: boolean
+          description: Whether automatic gateway updates are enabled for the Host.
     UpdateInstrumentBody:
       type: object
       properties:
