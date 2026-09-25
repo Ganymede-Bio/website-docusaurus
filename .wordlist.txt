@@ -611,3 +611,7 @@ WebApp
 GxP
 assignees
 sublots
+SHA
+v0
+v2
+setups
