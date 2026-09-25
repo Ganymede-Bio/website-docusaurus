@@ -4,6 +4,24 @@ title: September 2026
 displayed_sidebar: releaseSideBar
 ---
 
+### September 24 2026
+
+**Features**
+- **Self-Managed Repository**: [Self-managed repositories](../app/configuration/SelfManagedRepo.mdx) now protect against accidentally overwriting changes when code is edited in more than one place, such as in the Ganymede UI and from your own GitHub repository at the same time.
+    - Pulling code into your repository now records the environment's current commit SHA. When you deploy, Ganymede checks that SHA against the environment, and if someone else has made changes since your last pull, the deploy is rejected with a 409 (Conflict) instead of silently overwriting their work. Re-pull to pick up the latest changes, then deploy again.
+    - Covers both Flow code and Agent connector code.
+    - The reference `flow-pull-action` and `flow-commit-action` GitHub Actions and the `self-managed-repo-template` have been updated to support this workflow. Existing setups continue to work unchanged until you adopt the new versions.
+    - For teams calling the API directly, this is available through the new v2 environment commit endpoints; the existing v0 endpoints are unchanged.
+- **API**: This release adds write access for storage buckets, hosts, connections, and agent templates to the public API.
+    - **Storage Buckets**: Create, update, delete, validate, and sync storage buckets, and get or set the AWS role ARN used for bucket access. This completes storage bucket coverage in the public API.
+    - **Hosts & Connections**: Update a host's name, labels, and automatic update setting, shut down a host, and set a host's custom image. You can also update a connection's name and notification emails.
+    - **Agent Templates**: Create and update agent templates (connectors), view a diff between two template versions, and set or remove a template's custom image.
+
+**Bug Fixes**
+- **Agents**: Fixed an issue where file uploads to customer-owned S3 buckets could start failing with a "400 Bad Request" error about an hour after a connection started, and would not recover until the connection was reset. Connections now refresh their bucket access credentials automatically.
+
+**Gateway Version**: 5.6.75
+
 ### September 17 2026
 
 **Features**
