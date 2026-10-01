@@ -59,7 +59,8 @@ popd
 ```
 
 ### Environment Setup
-- Requires Node.js v18 LTS (v18.12+ known to work)
+- Requires Node.js 24 LTS (selected by `.nvmrc` and `package.json` engines)
+- Use Yarn Classic 1.22.22 and `yarn install --frozen-lockfile` to preserve the dependency lockfile
 - An `.env` file is required for Typesense configuration (see internal docs)
 - Python environment for pydoc: `python3 -m venv env` in the pydoc directory
 

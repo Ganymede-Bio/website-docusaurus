@@ -6,7 +6,7 @@ This repository hosts documentation for using the Ganymede Cloud Server. It is s
 
 ## Setup for local development
 
-Download and install [nodejs](https://nodejs.org/en/download).  Install v18.16 LTS (or other LTS version with a major version number of 18) if possible.
+Download and install [Node.js 24 LTS](https://nodejs.org/en/download). If you use nvm, run `nvm install` and `nvm use` from the repository root to select the version in `.nvmrc`.
 
 Download and install [VS Code](https://code.visualstudio.com/) or other editor of choice.
 
@@ -33,8 +33,8 @@ git clone https://github.com/Ganymede-Bio/website-docusaurus.git
 ### Install packages required for running documentation website
 
 ```bash
-npm install --global yarn
-yarn install
+npm install --global yarn@1.22.22
+yarn install --frozen-lockfile
 yarn build
 ```
 
