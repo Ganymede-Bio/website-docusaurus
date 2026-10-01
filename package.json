@@ -3,6 +3,9 @@
   "version": "0.0.1",
   "license": "Apache-2.0",
   "private": false,
+  "engines": {
+    "node": "24.x"
+  },
   "scripts": {
     "start": "docusaurus start",
     "build": "DOCUSAURUS_IGNORE_SSG_WARNINGS=true docusaurus build",
