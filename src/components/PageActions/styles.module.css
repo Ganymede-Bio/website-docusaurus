@@ -1,0 +1,94 @@
+.pageActions {
+  position: relative;
+  flex-shrink: 0;
+  margin-left: auto;
+  margin-bottom: 0.8rem;
+}
+
+.splitButton {
+  display: inline-flex;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: var(--ifm-button-border-radius);
+  overflow: hidden;
+}
+
+.mainButton,
+.toggleButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.25rem 0.6rem;
+  border: none;
+  background: var(--ifm-background-surface-color);
+  color: var(--ifm-font-color-base);
+  font-size: 0.8rem;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.toggleButton {
+  border-left: 1px solid var(--ifm-color-emphasis-300);
+  font-size: 0.65rem;
+}
+
+.mainButton:hover,
+.toggleButton:hover {
+  background: var(--ifm-color-emphasis-100);
+}
+
+.menu {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 0.3rem);
+  z-index: calc(var(--ifm-z-index-dropdown) + 1);
+  min-width: 16rem;
+  margin: 0;
+  padding: 0.3rem;
+  list-style: none;
+  background: var(--ifm-background-surface-color);
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: var(--ifm-global-radius);
+  box-shadow: var(--ifm-global-shadow-md);
+}
+
+.menu button {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  width: 100%;
+  padding: 0.45rem 0.6rem;
+  border: none;
+  border-radius: var(--ifm-global-radius);
+  background: none;
+  color: var(--ifm-font-color-base);
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.menu button:hover,
+.menu button:focus-visible {
+  background: var(--ifm-color-emphasis-100);
+}
+
+.menu button > :global(.anticon) {
+  margin-top: 0.2rem;
+}
+
+.menu strong {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: var(--ifm-font-weight-semibold);
+}
+
+.menu small {
+  display: block;
+  color: var(--ifm-color-emphasis-700);
+  font-size: 0.75rem;
+}
+
+@media print {
+  .pageActions {
+    display: none;
+  }
+}
