@@ -81,11 +81,6 @@ module.exports = {
           position: 'left',
           docId: 'releases/ReleaseNotes',
           label: 'Release Notes'
-        },
-        {
-          href: 'https://chatgpt.com/g/g-67b0b562425881919087cb95e30876cb-ganymede-documentation',
-          label: 'Docs GPT',
-          position: 'right',
         }
       ],
     },
