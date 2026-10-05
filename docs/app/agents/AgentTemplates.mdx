@@ -555,6 +555,12 @@ def execute(**kwargs) -> UploadFileParams | None:
 
 The following example demonstrates how to query an OPC server for bioreactor data on a regular cadence, and places the results in Ganymede for querying and visualizing.
 
+:::tip
+
+To stream OPC-UA tag readings into Ganymede without writing code, use the [OPC-UA Subscription](./OpcUaSubscription) agent type. Use this cron example only when you need custom polling logic.
+
+:::
+
 ```python
 from agent_sdk import FileParam, TriggerFlowParams
 from agent_sdk import info

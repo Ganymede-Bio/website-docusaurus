@@ -61,6 +61,7 @@ module.exports = {
         collapsed: false,
         items: [
           'app/ma/ModularAnalysisOverview',
+          'app/ma/UsingModularAnalysisApps',
           {
             type: 'category',
             label: 'Example Applications',
@@ -83,6 +84,11 @@ module.exports = {
             type: 'doc',
             id: 'app/agents/Agent',
             label: 'Overview, Gateway & Configuration'
+          },
+          {
+            type: 'doc',
+            id: 'app/agents/OpcUaSubscription',
+            label: 'OPC-UA Subscription Agents'
           },
           {
             type: 'doc',
@@ -136,6 +142,11 @@ module.exports = {
             items: [
               'app/flows/FlowEditor',
               'app/flows/NodeEditor',
+              {
+                type: 'doc',
+                id: 'app/flows/OperatorExtensions',
+                label: 'Operator Extensions'
+              },
               {
                 type: 'doc',
                 id: 'app/flows/NotebookTips',
@@ -282,6 +293,11 @@ module.exports = {
             label: 'Ganymede Admin Settings'
           },
           {
+            type: 'doc',
+            id: 'app/admin/GxPValidation',
+            label: 'GxP Validation'
+          },
+          {
             type: 'category',
             label: 'Developer Configuration',
             collapsed: false,
@@ -290,6 +306,11 @@ module.exports = {
                 type: 'doc',
                 id: 'app/configuration/SelfManagedRepo',
                 label: 'Self-Managed Git Repositories'
+              },
+              {
+                type: 'doc',
+                id: 'app/configuration/PipelineRepoStructure',
+                label: 'Pipeline Repository Structure'
               },
               {
                 type: 'doc',
@@ -351,6 +372,11 @@ module.exports = {
     {
       type: 'doc',
       id: 'sdk/GanymedeClass',
+    },
+    {
+      type: 'doc',
+      id: 'sdk/ModularAnalysisDevelopment',
+      label: 'Developing Modular Analysis Apps',
     },
     {
       type: 'category',

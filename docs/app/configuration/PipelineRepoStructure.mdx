@@ -1,0 +1,157 @@
+---
+id: PipelineRepoStructure
+title: Pipeline Repository Structure
+displayed_sidebar: webUiSidebar
+toc_max_heading_level: 3
+---
+
+## Overview
+
+Ganymede keeps the code for each environment in a Git repository, the environment's pipeline repository. When you save a notebook in the Ganymede app, the change is committed to this repository. Flow code, shared library code and Agent connector code live alongside configuration files that Ganymede manages.
+
+This page describes that layout. It's for you if you:
+
+- Use a [self-managed repository](./SelfManagedRepo) and want to know how the files you pull map to what runs in Ganymede.
+- Read code pulled from Ganymede through the API (for example with the `flow-pull-action` GitHub Action).
+- Have access to your environment's pipeline repository and need to know which files you can change.
+
+:::note
+Flows and their structure (nodes and the connections between them) are created in the [Flow Editor](../flows/FlowEditor). The repository holds the code that runs inside each node, not the Flow definition.
+:::
+
+## What you see when you pull code
+
+A pull through the commits API returns a subset of the pipeline repository. The `flow-pull-action` GitHub Action and the [self-managed repository template](https://github.com/Ganymede-Bio/self-managed-repo-template) unpack it into a folder named after the environment (for example `dev/`).
+
+| Pipeline repository | In a pull (`GET /v2/environment/{environment}/commits`) | In a pull from the older v0 endpoint |
+| --- | --- | --- |
+| `dags/<flow>/<node>/function.py`, `query.sql` | `flows/<flow>/<node>/...` | `<flow>/<node>/...` |
+| `lib/` | `lib/` (included unless `includeLibFiles=false`) | `lib/` (when requested) |
+| `connectors/` | `connectors/` (full pulls only, not single-Flow pulls) | Not included |
+| `environment/`, `operators/`, `dashboards/`, `.github/` | Not included | Not included |
+
+When you deploy, the commits API maps the paths back: `flows/...` is written to `dags/...`, and `lib/` and `connectors/` keep their paths. Files outside these folders can't be changed through the commits API, so a self-managed repository can't change environment configuration, operator extensions or workflows.
+
+A self-managed repository that uses the current template looks like this:
+
+```text
+<your-repository>/
+├── .github/workflows/          # your pull and deploy workflows
+├── .ganymede-sha-dev           # commit SHA recorded by the last pull (Conflict Protection)
+└── dev/                        # one folder per Ganymede environment
+    ├── flows/
+    │   └── <flow>/
+    │       └── <node>/
+    │           ├── function.py
+    │           └── query.sql
+    ├── lib/
+    └── connectors/
+```
+
+## Pipeline repository layout
+
+```text
+<pipeline-repository>/
+├── dags/
+│   └── <flow>/
+│       └── <node>/
+│           ├── function.py
+│           └── query.sql
+├── lib/
+├── connectors/
+├── analysis/
+├── environment/
+│   ├── operators-ref.txt
+│   ├── container-versions.yaml
+│   ├── pipeline-operators.yaml
+│   ├── operators-migration.yaml
+│   └── requirements.txt
+├── dashboards/
+│   └── dashboards.yaml
+├── operators/
+│   └── <OPERATOR_NAME>/
+│       └── Dockerfile
+└── .github/
+    └── workflows/
+```
+
+Not every repository has every folder. For example, `operators/` exists only if your environment has an [operator extension](../flows/OperatorExtensions).
+
+## Flow code: `dags/`
+
+Each Flow has a folder under `dags/`, and each node with editable code has a folder inside it:
+
+- `<flow>` is the Flow's ID, the name shown in the Flow's URL.
+- `<node>` is the node's name in the Flow, such as `CSV_Read` or a name you gave it.
+
+| File | Contents |
+| --- | --- |
+| `function.py` | The node's User-defined Python cell, including its `execute` function. Every node with editable code has this file. |
+| `query.sql` | The node's User-defined SQL cell. Nodes that retrieve tables, such as Python nodes, have this file. File-reading nodes such as `Input_File` and `CSV_Read` have only `function.py`. |
+
+These are the same cells you edit in the [Node Editor](../flows/NodeEditor#pipeline-code-notebook-sections).
+
+The commits API updates node files that already exist. It doesn't create them. To add a node, add it in the Flow Editor and save the Flow; Ganymede then creates the node's folder and files. If a deploy tries to create a node file that doesn't exist, for example after a node was renamed, the request fails with a 400 error: `Creating a file with this API is prohibited`.
+
+Ganymede also writes files such as `dags/callbacks.py` and, in some environments, a `dag.yaml` file in each Flow folder. Pulls leave out `callbacks.py` and only include `.py` and `.sql` files. Don't edit these files; change the Flow in the Flow Editor instead.
+
+## Shared code: `lib/`
+
+Put Python modules that several Flows use in `lib/`. When a node runs, Ganymede copies the whole `lib/` folder, including nested folders, into the node's container next to the node's code. `lib/` code is also available in Node Editor notebooks.
+
+Import from `lib` as a package:
+
+```python
+# lib/plate_utils.py
+from lib.plate_utils import normalize_well_id
+
+# lib/instruments/plate_reader.py
+from lib.instruments.plate_reader import parse_export
+```
+
+To add or change `lib/` files, commit them through the commits API (or deploy them from a self-managed repository). Unlike node files, new files under `lib/` can be created this way.
+
+:::warning
+Every Flow in the environment uses the same `lib/` folder. A change to a `lib/` module affects every node that imports it the next time that node runs.
+:::
+
+## Environment configuration: `environment/`
+
+These files control which node types are available in the environment and which container image each node type runs in. Ganymede maintains them.
+
+| File | What it controls | Edit by hand? |
+| --- | --- | --- |
+| `operators-ref.txt` | A single commit SHA that pins the version of Ganymede's node type (operator) definitions for the environment. When it changes, Ganymede refreshes the node types available in the Flow Editor. | No. Ganymede updates it. |
+| `container-versions.yaml` | The container image each operator runs, one entry per operator (for example `python_node` or `csv_to_bq`). Each entry has a single `dev` key, whatever the environment is called. When a change to this file reaches `main`, Ganymede switches each operator to the listed image. | Only the entries for your own [operator extensions](../flows/OperatorExtensions), for example to roll back to an earlier build. Ganymede releases replace the stock entries. |
+| `pipeline-operators.yaml` | Operator definitions that the flow deploy reads. The deploy checks this file's YAML before it runs. | No. |
+| `operators-migration.yaml` | A list of `previous` and `current` node type names. When it changes, nodes that use a retired node type are moved to its replacement. | No. |
+| `requirements.txt` | Python packages for the environment that deploys and schedules your Flows, including the pinned `ganymede-sdk` version. | No. It doesn't change the packages available to node code. To add a package to a node, use an [operator extension](../flows/OperatorExtensions). |
+
+## Dashboards: `dashboards/dashboards.yaml`
+
+This file selects which Ganymede-provided dashboards are installed in the environment. Its `tags` list picks the dashboard sets, and `branch` picks the release they come from. When a change to the file is pushed, Ganymede syncs the dashboards. Ganymede maintains this file; to change which dashboards your environment receives, [contact Ganymede Support](../Support#ganymede-support).
+
+## Operator extensions: `operators/`
+
+Each folder under `operators/` holds a `Dockerfile` that extends one stock operator image, for example `operators/python_node/Dockerfile`. The folder name is the operator name used in `container-versions.yaml`. Use an extension to add Python packages or OS dependencies to the container a node runs in. See [Operator Extensions](../flows/OperatorExtensions).
+
+## GitHub workflows: `.github/workflows/`
+
+The pipeline repository includes GitHub Actions workflows that call shared workflows maintained by Ganymede. Don't edit them.
+
+| Workflow | Runs | What it does |
+| --- | --- | --- |
+| **Deploy Pipelines - Self-hosted** | On pushes to `main` that change `dags/`, `environment/` or `lib/` | Deploys Flow code and environment configuration. |
+| **Push repo to GCS bucket** | On every push to `main` | Copies the repository contents to the environment's cloud storage. |
+| **Deploy Container** | On pushes to `main`, except changes to `agents/`, `analysis/`, `editors/` and `.github/` | Builds an image for each folder whose `Dockerfile` changed. It doesn't update `container-versions.yaml`. |
+| **Deploy Tenant Operator** | Manually, from `main` | Builds `operators/<OPERATOR_NAME>/Dockerfile` and pins the new image in `container-versions.yaml`. See [Operator Extensions](../flows/OperatorExtensions#4-build-and-deploy-the-image). |
+| **Update Container Versions** | Started by Ganymede when it releases new operator images | Replaces `container-versions.yaml` with the new release, keeps the pins for your operator extensions and rebuilds each extension on the new release. |
+| **Deploy Agent V4**, **Deploy Gateway** | Started by Ganymede | Build Agent and Gateway installers. |
+
+## Other folders
+
+| Folder | Contents |
+| --- | --- |
+| `connectors/` | Agent connector code, one folder per connector containing `processor.py`. |
+| `analysis/` | Modular Analysis apps and analysis notebooks. |
+| `agents/` | Code for older Agents. |

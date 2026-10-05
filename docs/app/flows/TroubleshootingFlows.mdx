@@ -22,6 +22,10 @@ This issue may occur when the notebook fails to load properly. To resolve it:
 
 ### Flow Execution
 
+#### Issue: Flow run fails with `ModuleNotFoundError`, but the same code works in the node notebook
+
+The notebook and the flow run use different Python environments, so a package installed in the notebook isn't available when the flow runs. To add the package to the node's container, see [Operator Extensions](./OperatorExtensions).
+
 #### Issue: Flow run fails due to a Platform Error.  Run logs for the failing node contains "INFO - Data retrieval unsuccessful. Exception class: NotFound"
 
 This error often occurs when using a browser other than Google Chrome. Ganymede requires Google Chrome for Flow execution, so switch to Chrome to avoid this issue.

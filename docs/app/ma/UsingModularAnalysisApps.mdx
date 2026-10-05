@@ -1,0 +1,157 @@
+---
+id: UsingModularAnalysisApps
+title: Using Modular Analysis Apps
+sidebar_label: Using MA Apps
+displayed_sidebar: webUiSidebar
+---
+
+import {
+  CodeOutlined,
+  DeleteOutlined,
+  EditOutlined,
+  ReloadOutlined
+} from '@ant-design/icons';
+
+This page covers the lifecycle of a Modular Analysis (MA) app: creating it, changing its details, reviewing its version history, deleting it, and running it. It also covers the **Sessions** tab, which shows who has used which apps and when. For an introduction to MA and the app gallery on the **Apps** tab, see the [Modular Analysis Overview](./ModularAnalysisOverview).
+
+## Required roles
+
+| Task | Minimum role |
+|---|---|
+| View the **Apps** and **Sessions** tabs | Reader |
+| Launch and use an app | Runner |
+| Create an app, edit its code, edit its details, or delete it | Writer |
+
+Readers see the app cards but can't open them. See [Roles Panel](../admin/AdminControls#roles-panel) for details on each role.
+
+## Create an app
+
+1. Go to **Analysis > Modular Analysis**.
+2. Click **New Analysis App**.
+3. Enter a **Name**. The name is required.
+4. Optionally, enter a **Description** and upload an image for the app card. See [Change an app's name, description, or image](#change-an-apps-name-description-or-image) for image requirements.
+5. Click **Save**.
+
+Ganymede creates the app with a starter `app.py` file in your environment's Git repository, under `analysis/panel/<app folder>/`. The app folder is based on the app name. Renaming the app later doesn't change its folder.
+
+The new app appears on the **Apps** tab. To build it, click <CodeOutlined /> **Edit code** on its card, which opens the app's code in a notebook in a new browser tab.
+
+:::note
+
+The **New Analysis App** button isn't available in environments with [GxP Validation Mode](../admin/GxPValidation#gxp-validation-mode) enabled.
+
+:::
+
+## Edit an app
+
+On the **Apps** tab, click <EditOutlined /> **Edit App** on the app's card. The edit page has two tabs, **Config** and **History**, and a <DeleteOutlined /> **Delete** button in the top-right corner.
+
+### Change an app's name, description, or image
+
+On the **Config** tab:
+
+1. Change the **Name** or **Description**.
+2. To change the card image, click **Upload Custom Image** and choose a JPEG, GIF, PNG, or BMP file of up to 10 MB. You're prompted to crop the image before it's applied. To remove a custom image, click the delete icon on the selected image and confirm. Apps without a custom image use a default image.
+3. Click **Save**.
+
+Ganymede can mark an app as hidden. Hidden apps don't appear on the **Apps** tab for users in your organization. If every app in the environment is hidden, the **Apps** tab says that no apps are visible for your account. If you expect to see an app that isn't listed, ask your Ganymede contact.
+
+### View version history
+
+The **History** tab lists each committed version of the app, newest first.
+
+| Column | Description |
+|---|---|
+| **Version** | The version identifier |
+| **Information** | The commit message and the date and time of the commit |
+| **Created By** | The user who made the commit |
+
+Expand a row to compare that version with the latest version. The comparison shows a side-by-side view of each changed file. If the app has no versions yet, the tab shows _No version history available_.
+
+### Delete an app
+
+1. On the edit page, click <DeleteOutlined /> **Delete**.
+2. In the **Delete Analysis App** dialog, click **Delete**.
+
+Deleting an app removes it from the **Apps** tab and removes its source files from your environment's Git repository. Its past sessions stay on the [Sessions tab](#sessions-tab).
+
+:::note
+
+You can't edit or delete an app that shows a **GxP Validated** badge. See [GxP Validation](../admin/GxPValidation#gxp-validated-assets).
+
+:::
+
+## Use an app
+
+To open an app, click its card on the **Apps** tab. The app viewer has these tabs:
+
+- [**App**](#app-tab): the running app
+- [**Logs**](#logs-tab): log messages from the app
+- [**Container Health**](#container-health-tab): the health of the environment's shared analysis container
+
+### App tab
+
+The **App** tab shows the running app.
+
+Ganymede checks for new commits to the app every 30 seconds while you have it open. When a newer version has been committed, a banner appears above the app: _A newer version of this app has been committed to the repo._ Click <ReloadOutlined /> **Refresh** in the banner to reload the app with the latest version. Reloading the app resets it, so finish or save your work in the app first.
+
+If the app fails to load, the **App** tab shows a message that ends with _See Logs for details_. Open the **Logs** tab to see the error.
+
+### Logs tab
+
+The **Logs** tab lists log messages from your current session of the app.
+
+| Column | Description |
+|---|---|
+| **Timestamp** | When the message was logged |
+| **Level** | **Debug**, **Info**, **Warning**, or **Error** |
+| **Source** | The part of the app that logged the message |
+| **Message** | The log message |
+
+When a new message arrives while you're on another tab, a red dot appears on the **Logs** tab label.
+
+### Container Health tab
+
+The **Container Health** tab shows the health of the analysis container that runs MA apps in your environment. The container is shared by all apps in the environment, so the values describe the environment, not only the app you have open.
+
+| Field | Description |
+|---|---|
+| **Memory** | Memory in use, the container's memory limit, and the percentage used |
+| **Uptime** | How long the container has been running |
+| **Active sessions** | The number of app sessions running in the container |
+| **Mounted apps** | The apps loaded in the container, with each app's **Name** and **Status** |
+
+The tab shows a snapshot taken when you open it. Click <ReloadOutlined /> **Refresh** to update it. If the tab shows _Unable to reach the container health service_, try **Refresh** again later.
+
+:::note
+
+The **Container Health** tab isn't available in Tempo tenants or in environments hosted on AWS.
+
+:::
+
+## Sessions tab
+
+The **Sessions** tab on the Modular Analysis page lists app usage sessions for all users in the environment. Use it to track how MA apps are adopted and used.
+
+A session starts when an app finishes loading. It ends when you leave the app or close the browser tab, or automatically after a period of inactivity.
+
+| Column | Description |
+|---|---|
+| **App Name** | The app that was used. Click the name to open the app. A deleted app's name isn't a link. |
+| **User** | The user who ran the session |
+| **Session ID** | The first 8 characters of the session ID |
+| **Last Activity Time** | The last time the user interacted with the app |
+| **Start Time** | When the session started |
+| **End Time** | When the session ended. Shows a dash (-) for a session that's still active. |
+| **Duration** | How long the session lasted |
+
+You can filter the table by **App Name** and **User**, and sort it by **App Name**, **Last Activity Time**, **Start Time**, and **End Time**.
+
+## Troubleshooting
+
+| Symptom | What to do |
+|---|---|
+| You can't open an app, and its card is dimmed. | You need the Runner role or higher. Ask an Admin to change your role. |
+| **Edit code** and **Edit App** are disabled. | You need the Writer role or higher, or the app is a [GxP-validated asset](../admin/GxPValidation#gxp-validated-assets). Hover over the button to see which. |
+| The app fails to load. | Open the **Logs** tab and look for **Error** messages. |
+| You committed a change, but the app doesn't show it. | Wait for the _A newer version of this app has been committed to the repo._ banner, and then click **Refresh**. |

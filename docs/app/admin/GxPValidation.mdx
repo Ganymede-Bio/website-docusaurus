@@ -1,0 +1,81 @@
+---
+id: GxPValidation
+title: GxP Validation
+displayed_sidebar: webUiSidebar
+---
+
+Ganymede has two controls for environments that run GxP-regulated work:
+
+- **GxP-validated assets**: individual Flows, Data Tables, and Modular Analysis (MA) apps that Ganymede provisions and manages centrally. These assets are locked, so users can run, query, and view them but can't change or delete them.
+- **GxP Validation Mode**: an environment-level setting that removes or restricts features that aren't part of a validated configuration, such as Processes, MA app creation, and most Agent Template types.
+
+The two controls are independent. A GxP-validated asset is locked in any environment, and GxP Validation Mode changes what's available in the environment whether or not it has validated assets.
+
+## Who manages GxP validation
+
+Ganymede manages both controls. There is no option in **Environment Settings** to turn GxP Validation Mode on or off, or to lock or unlock an asset. To enable or disable GxP Validation Mode for an environment, [contact Ganymede Support](../Support#ganymede-support).
+
+To check whether GxP Validation Mode is enabled for an environment, call the [`getEnvironment`](/api#tag/Environments/getEnvironment) API endpoint and read the `gxpValidationModeEnabled` field.
+
+## GxP-validated assets
+
+A GxP-validated asset is a Flow, Data Table, or MA app that Ganymede provisions as a centrally managed asset. Ganymede locks the asset when it provisions it. The lock applies to every user in the environment, including Admins.
+
+### The GxP Validated badge
+
+Locked assets show a **GxP Validated** badge with a lock icon. Hover over the badge to see the message _This asset is centrally managed (GxP validated)._ The badge appears in these places:
+
+| Asset | Where the badge appears |
+|---|---|
+| Flow | Flow cards on the [Home](../Home) page, the Flow Editor header next to the Flow selector, and the [Flow View](../flows/FlowView) page |
+| Data Table | Next to the table name in the [Data Explorer](../tables/DataExplorer) |
+| MA app | The app's card on the **Apps** tab of the [Modular Analysis](../ma/ModularAnalysisOverview) page |
+
+Controls that would change a locked asset are disabled. Hover over a disabled control to see the message _This asset is centrally managed (GxP validated) and cannot be modified._
+
+### What's disabled and what still works
+
+| Asset | Disabled | Still available |
+|---|---|---|
+| Flow | **Save Flow**, adding nodes, renaming nodes, connecting or removing edges, the node code editor, **Copy flow**, **Delete flow**, and the configuration fields in the **Manage** panel (name, owner, retries, max active runs, Production Mode, email notifications, auto run trigger, and documentation). On the Home page Flow card, **Edit**, **Add User**, **Update Flow image**, **Delete**, and the star that assigns the Flow to you are disabled. | Running the Flow, viewing the Flow and its runs |
+| Data Table | **Edit** in the **Fields** tab (the [Table Structure Editor](../tables/DataExplorer#table-structure-editor)), **+ New field**, **Save**, and the delete icon next to the table name | Viewing and querying the table |
+| MA app | **Edit code** and **Edit App** on the app card. If you open the app's edit page directly, **Name**, **Description**, the app image, **Save**, and **Delete** are disabled. | Launching and using the app |
+
+The lock is also enforced on the server. API requests that would change a locked asset, such as updating a Flow's assignees or custom image, editing an MA app's code, or updating a table, are rejected with HTTP 403 and the message `This asset is centrally managed (GxP validated) and cannot be modified.`
+
+To find out through the API whether an MA app is locked, read the `isLocked` field returned by [`getModularAnalysisApps`](/api#tag/ModularAnalysis/getModularAnalysisApps).
+
+When Ganymede locks an asset, the change is recorded in the environment's [Audit Log](../configuration/AuditLog).
+
+### Changing a GxP-validated asset
+
+You can't unlock a GxP-validated asset from the web app or the API. Ganymede manages these assets centrally. If you have questions about a validated asset, [contact Ganymede Support](../Support#ganymede-support).
+
+## GxP Validation Mode
+
+When GxP Validation Mode is enabled, the following changes apply to every user in the environment.
+
+| Area | Change in GxP Validation Mode |
+|---|---|
+| **Processes** | The **Processes** group (**Runs**, **Processes**, **Unit Operations**, **Instrument Types**, and **Instruments**) is removed from the left navigation. Opening a Processes page by its URL redirects you to the Home page. The API endpoints for Processes, Unit Operations, and Instrument Types, and the endpoints that create, update, or delete Process, Unit Operation, and Instrument runs, return an error. See [Processes](../processes/Processes.mdx) for what these pages do in other environments. |
+| **Modular Analysis** | The **New Analysis App** button is removed from the Modular Analysis page, and creating an MA app through the API is blocked. Existing apps can still be launched, and apps that aren't GxP-validated can still be edited. |
+| **Agent Templates** | You can create and update only Agent Templates with the **OPC-UA Subscription** configuration type. The **Configuration Type** list shows only that option. The **Edit** button that opens an Agent Template's code is removed from the Agent Template page, so you can view the code with **View** but not change it. See [OPC-UA Subscription Agents](../agents/OpcUaSubscription) for OPC-UA Subscription settings. |
+| **Buckets** | On the **Integration** tab of **Environment Settings**, the **New Bucket** button is removed. The API endpoints that create, update, delete, or sync a bucket are blocked. See [External Platform Integration](./ExternalPlatform). |
+| **Tempo Team ID** | In Tempo tenants, the **Tempo Team ID** on the **Tempo** tab of **Environment Settings** can be set once. After a value is saved, the field is locked and shows the tooltip _Tempo Team ID is locked in GxP Validation Mode._ The value must contain only letters and numbers. |
+
+:::note
+
+GxP Validation Mode doesn't lock existing Flows, Data Tables, or MA apps. Only assets that Ganymede provisions as [GxP-validated assets](#gxp-validated-assets) are locked.
+
+:::
+
+## Troubleshooting
+
+| Message or behavior | Cause |
+|---|---|
+| A control is disabled and its tooltip says _This asset is centrally managed (GxP validated) and cannot be modified._ | The asset is a [GxP-validated asset](#gxp-validated-assets). |
+| An API request returns HTTP 403 with `This asset is centrally managed (GxP validated) and cannot be modified.` | The request tried to change a GxP-validated asset. |
+| An API request returns HTTP 403 with `This feature is disabled in GxP Validation Mode.` | The endpoint is blocked in [GxP Validation Mode](#gxp-validation-mode). |
+| Creating or saving an Agent Template fails with `Only OPC-UA connectors can be created in GxP Validation Mode.` | In GxP Validation Mode, only the **OPC-UA Subscription** configuration type is allowed. |
+| Saving the Tempo Team ID fails, and the API returns `Tempo Team ID cannot be changed in GxP Validation Mode.` | A Tempo Team ID is already set, and it can't be changed in GxP Validation Mode. |
+| The **Processes** group is missing from the left navigation, or a Processes link opens the Home page. | GxP Validation Mode is enabled for the environment. |

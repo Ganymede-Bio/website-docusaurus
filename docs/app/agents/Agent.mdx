@@ -172,7 +172,7 @@ The _Configuration Type_ input specifies the action performed by the Agent Templ
 - [**Load local files into Ganymede then run flow**](#load-local-files-into-ganymede-then-run-flow): Load selected local files into Ganymede one time, then run a flow to process them
 - [**Load local files into Ganymede**](#load-local-files-into-ganymede): Load selected local files into Ganymede one time
 - [**Set a cron job to upload files periodically**](#set-a-cron-job-to-upload-files-periodically): Periodically deliver files to Ganymede Cloud
-- [**OPC-UA Subscription**](#opc-ua-subscription): Subscribe to tags on an OPC-UA server and stream readings into a Ganymede table
+- [**OPC-UA Subscription**](./OpcUaSubscription): Subscribe to tags on an OPC-UA server and stream readings into a Ganymede table
 
 All configuration types except OPC-UA Subscription also have a `File Tags` input, for tags to apply to every file that the Agent Template's Connections upload, and every configuration type has an `Image` input, for an image to associate with the Agent Template in the Ganymede UI.
 
@@ -615,33 +615,9 @@ A local file is modified at regular intervals and needs to uploaded to Ganymede 
 
 ### OPC-UA Subscription
 
-A Connection that subscribes to tags (monitored items) on an OPC-UA server, such as a bioreactor or fermentation vessel control system, and streams live readings into a Ganymede data table as values change on the server.
+A Connection that subscribes to tags (monitored items) on an OPC-UA server, such as a bioreactor or fermentation vessel control system, and streams live readings into a Ganymede data table as values change on the server. No processor code, files, or flows are involved.
 
-#### Input Parameters
-
-- `Endpoint URL`: The OPC-UA server endpoint, for example `opc.tcp://host:4840`. Required.
-- `Security Mode`: **None**, **Sign**, or **Sign & Encrypt**.
-- `Security Policy`: Required when Security Mode is **Sign** or **Sign & Encrypt**.
-- `Client Certificate Secret Name` and `Client Key Secret Name`: Required when Security Mode is **Sign** or **Sign & Encrypt**. Select the secrets, stored in the Ganymede secrets manager, that contain the client certificate and the client private key.
-- `Auth Method`: **Anonymous** or **Username / Password**.
-- `Username` and `Password Secret Name`: Required when Auth Method is **Username / Password**. Select the secret, stored in the Ganymede secrets manager, that contains the password.
-- `Image`: An image to associate with the Agent Template in the Ganymede UI.
-
-Each Connection inherits these settings from the Agent Template and can override them in its Connection Settings.
-
-#### Selecting monitored items
-
-You choose the tags to monitor on each Connection:
-
-1. Create a Connection from the Agent Template on a Host, as described in [Creating an Agent Template](#creating-an-agent-template).
-2. Open the Connection and click **Edit Connection**.
-3. Under **Monitored Items**, click **Browse Tags** to explore the server's node hierarchy. The Host must be Live to browse tags.
-4. Select the variables you want to monitor and click **Apply Tags for Monitoring**.
-5. For each monitored item, check the data type and sampling interval, and then click **Save**.
-
-#### Example use case
-
-Process values from a bioreactor, such as temperature and agitation speed, are captured continuously and can be queried in near real time.
+See [OPC-UA Subscription Agents](./OpcUaSubscription) for setup, endpoint and security settings, monitored items, the destination table, and troubleshooting.
 
 ## Variables and Labels in Windows Agent Connections
 
