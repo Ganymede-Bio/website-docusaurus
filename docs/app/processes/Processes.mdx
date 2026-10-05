@@ -19,9 +19,9 @@ The Processes page is built around the key concepts laid out below, which each h
 - [**Processes**](#processes): High-level representations of laboratory workflows.
 - [**Unit Operations**](#unit-operations): Individual steps within a Process, each defined by a set of Instrument Types.
 - [**Instrument Types**](#instrument-types): Categories of Instruments used within Unit Operations.  
-- [**Instruments**](#instruments): Physical devices associated with specific Instrument Types.  These can be linked 1:1 to individual [Agent Connections](../agents/Agent.mdx).
+- [**Instruments**](#instruments): Physical devices associated with specific Instrument Types.  Each Instrument can be linked to one or more [Agent Connections](../agents/Agent.mdx).
 
-[**Runs**](#runs) are instances of Instrument, Unit Operation, or Process execution, scoping data and Flow runs to the relevant unit of execution.
+[**Runs**](#runs) are instances of Instrument, Unit Operation, or Process execution, scoping data and Flow runs to the relevant unit of execution.  Instrument Runs and Unit Operation Runs are many-to-many: an Instrument Run can belong to more than one Unit Operation Run, and a Unit Operation Run can include multiple Instrument Runs.
 
 ### Example Workflow - DNA Extraction
 
@@ -74,18 +74,58 @@ Instrument Types categorize the various instruments used within a Process. Each 
 
 ### Instruments
 
-Instruments are the physical devices or equipment used to perform tasks within a Process. Each Instrument is associated with a specific Instrument Type and can be associated to a Connection.
+Instruments are the physical devices or equipment used to perform tasks within a Process. Each Instrument is associated with a specific Instrument Type and can be associated with one or more Connections.
 
 The Instruments page allows you to track equipment within Ganymede, with or without connectivity to the instrument.  This offers a quick way to statefully track instruments and view integration status for instruments with connectivity to Ganymede.
 
 <img alt="Instruments Table" src="https://ganymede-bio.mo.cloudinary.net/apiServer/InstrumentsTable.png" />
 
-Each instrument can be associated with a [Connection](../agents/Agent.mdx), which allows you to monitor instrument uptime and programmatically interact with the lab instrument.
+Each instrument can be associated with one or more [Connections](../agents/Agent.mdx), which allows you to monitor instrument uptime and programmatically interact with the lab instrument.
+
+In addition to its name, Instrument Type, and Connections, each Instrument can track the following fields:
+
+- **Location**: Where the instrument is located.
+- **Serial Number**: The instrument's serial number.
+- **Metadata**: Free text for use in dashboards and downstream analysis.
+- **Observation Start Time**: When observation of the instrument started.
+- **Timezone**: The instrument's timezone, such as `America/New_York`.
+- **Latitude** and **Longitude**: The instrument's coordinates. Latitude must be between -90.0 and 90.0, and longitude between -180.0 and 180.0.
+
+See [Configuring Processes](./ConfiguringProcesses.mdx#instruments) for how to add Instruments individually or in bulk.
 
 ## Execution Tracking
 
 ### Runs
 
-Runs are instances of Process execution, tracking the progress and data generated during the workflow.  
+Runs are instances of Process, Unit Operation, or Instrument execution, tracking the progress and data generated during the workflow.  Open **Processes > Runs** to view Process, Unit Operation, and Instrument Runs in a single list.
 
 <img alt="Process Runs" src="https://ganymede-bio.mo.cloudinary.net/apiServer/ProcessRuns_20251110.png" />
+
+#### Finding runs
+
+Each run in the list shows the name of its Process, Unit Operation, or Instrument, the run's External ID, and its start date.  To narrow the list:
+
+- Type in the **Search runs...** box to match on External ID or on the Process, Unit Operation, or Instrument name.
+- Use the entity filter, which shows **All Runs** by default, to list only Process, Unit Operation, or Instrument Runs, or only the runs of a specific Process, Unit Operation, or Instrument.
+
+#### Viewing run details
+
+Select a run to open its details panel.  The page URL updates to point to the selected run, so you can share a link to it.
+
+The details panel shows:
+
+- **Run details**: The Process, Unit Operation, or Instrument the run belongs to, its parent run (if any), Start Time, End Time, Status, External ID, Initiator and URL (when set), and Created At.  The run URL opens in a new tab.
+- **Linked runs**: For a Process Run, the Unit Operation Runs it contains and their Instrument Runs.  For a Unit Operation Run, its Instrument Runs.  Click a linked run to open its details.
+- **Files**: Files associated with the run.
+- **Tables**: Tables modified during the run, with their row counts and columns.
+- **App Sessions**: [Modular Analysis](../ma/ModularAnalysisOverview.mdx) sessions associated with the run.
+- **Flow Runs**: Flow runs associated with the run, with their status, start time, and end time.
+
+To launch a [Virtualization](../virt/Virtualization.mdx) session from a run's files, select one or more files in the **Files** section, click **Run Application**, and choose an application.  You need at least Runner permission to run an application.
+
+#### Creating runs
+
+You can create runs in the Web UI or through the API.
+
+- **Web UI**: Click <div className="button darkblue_outline_button"><PlusOutlined /> Create Run</div> on a Process, Unit Operation, or Instrument Type page.  Enter an **External ID** (or click **Generate ID**), the **Initiator** email, and the **Start Time**, and optionally a **URL**.  When you create a Unit Operation Run, you can select a parent Process Run; when you create an Instrument Run, you can select a parent Unit Operation Run.  See [Configuring Processes](./ConfiguringProcesses.mdx) for details.
+- **API**: Agents, Flows, and Modular Analysis apps can create runs through the [Process Runs](/api#tag/Process%20Runs/createProcessRun), [Unit Operation Runs](/api#tag/Unit%20Operation%20Runs/createUnitOperationRun), and [Instrument Runs](/api#tag/Instrument%20Runs/createInstrumentRun) endpoints.  Through the API, you can associate an Instrument Run with multiple Unit Operation Runs.

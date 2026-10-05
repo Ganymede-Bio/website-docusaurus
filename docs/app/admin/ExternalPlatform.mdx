@@ -8,17 +8,29 @@ import {
   UserDeleteOutlined
 } from '@ant-design/icons';
 
-The Integration panel contains details about the Ganymede environment, which can be used for integration with external systems, as well as for IP whitelisting Ganymede.
+The Integration panel contains details about the Ganymede environment, which can be used for integration with external systems, as well as for IP whitelisting Ganymede. Only users with the Admin role see the Integration tab on the Environment Settings page.
 
 <img alt="Admin - Integration Panel" src="https://ganymede-bio.mo.cloudinary.net/apiServer/IntegrationPanel_20241115.png" />
 &nbsp;
 
-- **Notebook IP address**: IP address for hosted notebook environments
-- **Flow Runtime IP address**: IP address for workflow orchestration
-- **Notebook Service Account Email**: Service account for notebooks
-- **Flow Runtime Service Account Email**: Service account for workflow orchestration
-- **AWS Trust Policy JSON**: Role configuration for AWS Policy, to establish connectivity between AWS and Ganymede cloud
-- **AWS Bucket CORS**: CORS configuration for AWS S3 buckets
+The Integration panel contains the following sections, from top to bottom:
+
+- **Buckets table**: S3 buckets connected to the environment. To add a bucket, click **New Bucket**, enter the S3 Bucket Name, Region, and Display Name, and click **Add Bucket**. Each row shows the bucket's References, an IAM Policy Json and Bucket Policy Json to copy into AWS, and a **Validate setup** button that tests the bucket's S3 configuration.
+- **Export credentials table**: Service account credentials for external tools. See [Generating Service Account Credentials](#generating-service-account-credentials).
+- **Connection Health**: Shown for Tempo MES-connected environments. Lists the latest sync status for each Flow-based Tempo data connection, including the status, last run time, the tables that synced successfully or unsuccessfully, and the number of new rows written to each table.
+- **Event File Ingestion**:
+  - **Event Ingest Bucket URL**: Bucket where Event-initiated file payloads are stored
+  - **Disable Event file payload writes**: When enabled, new Event-initiated file payloads are not saved to the files table. Files already in the bucket and existing rows in the files table are unaffected.
+- **Integrations**:
+  - **Notebook IP address**: IP address for hosted notebook environments
+  - **Flow Runtime IP address**: IP address for workflow orchestration
+  - **Notebook Service Account Email**: Service account for notebooks
+  - **Flow Runtime Service Account Email**: Service account for workflow orchestration
+  - **AWS Ganymede Role ARN**: Role ARN that Ganymede uses to access your S3 buckets. Click the edit icon to open the **Update Aws ARN** dialog. Saving a new value also updates the _aws_s3_role_arn_ environment secret.
+  - **AWS Trust Policy JSON**: Role configuration for AWS Policy, to establish connectivity between AWS and Ganymede cloud
+  - **AWS Bucket CORS**: CORS configuration for AWS S3 buckets
+
+The Notebook fields are not shown for environments hosted on AWS, and the Flow Runtime fields appear only in environments with Flows enabled.
 
 ## Using Ganymede to Power External Applications
 

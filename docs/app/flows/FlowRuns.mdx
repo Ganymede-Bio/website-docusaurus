@@ -20,18 +20,25 @@ To download or obtain more information about an input or output file, click on t
 
 ### Observing Flow Status
 
+When no Flow is selected, the page shows a **Flow Runs Last 7 Days** chart that summarizes recent Flow runs across the environment.
+
 The run status table displayed consists of the following columns:
 
 - **Input File**: Input files and input parameters associated with Flow run.
 - **Output File**: Output files (if applicable).
-- **Run By**: Login associated with the user who ran the flow.
+- **Run By**: Who or what triggered the Flow run, such as a user, an agent, or a cron schedule. You can filter this column by Connection.
+- **Run Tag**: Run Tags associated with the Flow run.
+- **Flow Run ID**: ID unique to each execution of the Flow. Two Flow runs from different Flows can have the same ID.
 - **Start Time**: Timestamp of when the Flow was initiated.
-- **Run Duration**: The execution time of the flow in HH:MM format.
-- **Status**: The current status of the flow run instance. Possible status values include:
+- **Duration**: How long the Flow run ran.
+- **Status**: The current status of the flow run instance. You can filter this column by status. Clicking the status opens the run logs. Possible status values include:
+  - **Queued**: The Flow run is waiting to start.
   - **Running**: Job is in the process of running.
   - **Success**: All Nodes have run successfully.
-  - **Failed**: At least one Node has failed to run successfully.
-- **Logs**: Opens a modal with logs for each Node.
+  - **Validation Error**, **Connection Error**, or **Function Error**: At least one Node failed, and the status names the [error type](./FlowView.mdx#error-attribution) of the failure. If Nodes in the same run fail with different error types, Validation takes precedence over Connection, and Connection over Function.
+  - **Platform Error**: The Flow run failed and no error type was recorded for the failure.
+- **Logs**: Opens a modal with logs for each Node. For failed runs, the link reads **Error Logs**.
+- **Flow Version**: The version of the Flow that ran. See [Determining what code ran](#determining-what-code-ran).
 
 ### Observing Node Status
 

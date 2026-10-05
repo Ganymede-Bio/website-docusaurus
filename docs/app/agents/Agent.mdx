@@ -5,7 +5,7 @@ displayed_sidebar: webUiSidebar
 toc_max_heading_level: 4
 ---
 
-import { DiffOutlined, PlusOutlined, SelectOutlined } from "@ant-design/icons";
+import { DiffOutlined, DownloadOutlined, PlusOutlined, SelectOutlined } from "@ant-design/icons";
 
 ## Overview
 
@@ -113,9 +113,9 @@ stateDiagram-v2
 - **Connection Labels**: Strings used to categorize and identify Connections in the Ganymede UI.
 - **Connection Context**: An internal dictionary within the code that is not exposed to the user but allows data to pass between the Agent trigger, processor, and action if necessary.
 
-## Building an Agent
+## Creating an Agent Template
 
-To create a new Agent, click the <div className="button system_button"><PlusOutlined /> New Agent</div> button on the Agents tab of the Connections page.
+To create a new Agent Template, open **Connectors > Agent Templates** in the left navigation and click the <div className="button system_button"><PlusOutlined /> New Agent Template</div> button.
 
 <img
   alt="New Agent creation"
@@ -123,7 +123,7 @@ To create a new Agent, click the <div className="button system_button"><PlusOutl
 />
 &nbsp;
 
-The left side of the configuration panel is used to specify the Agent's configuration, while the right side displays the default Python script associated with the Agent, which can be modified after installation.
+Use the **Agent Template Settings** panel on the left to specify the Agent Template's configuration. The right side displays the default Python script for the selected Configuration Type, which you can modify after you create the Agent Template.
 
 <div class="text--center">
   <img
@@ -133,17 +133,27 @@ The left side of the configuration panel is used to specify the Agent's configur
 </div>
 &nbsp;
 
-After filling out the form, click <div className="button darkblue_button_icon">Create</div> to start building Windows and Linux executables. When the build is complete, the Agent can be downloaded from the Ganymede application by selecting the corresponding Agent from the Connections tab.
+After filling out the form, click <div className="button darkblue_button_icon">Save</div> to create the Agent Template. No executable is built for the Agent Template. Instead, you install the Gateway once on each PC and run the Agent Template on it as a Connection:
 
-Building an executable typically takes around 10 minutes. Once built, the Agent can be downloaded onto the instrument PC from the Connections tab of the Ganymede web app and installed.
+1. Click the <div className="button dark_gray_button"><DownloadOutlined /> Download Gateway</div> button, which is available on the **Connections**, **Hosts**, and **Agent Templates** pages, and install the Gateway on the PC. See [Gateway Installation](./AgentInstall#gateway-installation-recommended) for details.
+2. Open **Connectors > Hosts** in the left navigation and select the Host.
+3. Click <div className="button dark_gray_button"><PlusOutlined /> Create Connection on Host</div>, select **Create from Template**, enter a name for the Connection, select the Agent Template, and click **Create**.
+
+You can also click **Create Connection on Host** on the Agent Template's page and select the Host there.
+
+:::note Legacy Agents
+
+Before version 5.6.0, a Windows and Linux executable was built for each Agent and installed separately for each Connection. If an Agent Template has a legacy build and none of its Connections run on a Gateway, a **Download** button for the legacy executable appears on the Agent Template's page. Executables built before version 5.6.0 are listed on the **Legacy Builds** tab of the Agent Template's page. See [Legacy Installation](./AgentInstall#legacy-installation).
+
+:::
 
 ## Configuring Agents
 
-All Agents have two required input parameters, _Name_ and _Configuration_. Once the Configuration is selected, specific input parameters may appear.
+All Agent Templates have two required input parameters, _Agent Template Name_ and _Configuration Type_. Once you select the Configuration Type, input parameters for that type appear.
 
-The _Name_ input is used to specify the display name for the Agent.
+The _Agent Template Name_ input specifies the display name for the Agent Template.
 
-The _Configuration_ input specifies the action performed by the Agent, with options including:
+The _Configuration Type_ input specifies the action performed by the Agent Template, with options including:
 
 - [**Watch for files locally then run flow**](#watch-for-files-locally-then-run-flow): Monitor specified directory on the local file system for files to process and execute upon observing new files matching specified pattern
 - [**Set a cron job to run flows periodically**](#set-a-cron-job-to-run-flows-periodically): Periodically observe local directory for files and deliver those files to Ganymede Cloud for processing
@@ -152,15 +162,25 @@ The _Configuration_ input specifies the action performed by the Agent, with opti
 
   :::note
 
-  For Cloud Watcher agents that download files from Ganymede Cloud, you can specify that they watch for flow _inputs_ (instead of the flow outputs) by adding the following to the Additional Params input box:
+  To watch for flow _inputs_ instead of flow outputs, set **Watch Bucket** to **Input Bucket** in the Agent Template or in the Connection Settings. For legacy Agents, add the following to the Additional Params input box instead:
 
   ```bash
   -v "input_bucket=true" 
   ```
   :::
 
-- [**Load local files into Ganymede with a custom filter**](#load-local-files-into-ganymede-with-a-custom-filter): Send specified files on local instrument PC and process on Ganymede Cloud
+- [**Load local files into Ganymede then run flow**](#load-local-files-into-ganymede-then-run-flow): Load selected local files into Ganymede one time, then run a flow to process them
+- [**Load local files into Ganymede**](#load-local-files-into-ganymede): Load selected local files into Ganymede one time
 - [**Set a cron job to upload files periodically**](#set-a-cron-job-to-upload-files-periodically): Periodically deliver files to Ganymede Cloud
+- [**OPC-UA Subscription**](#opc-ua-subscription): Subscribe to tags on an OPC-UA server and stream readings into a Ganymede table
+
+All configuration types except OPC-UA Subscription also have a `File Tags` input, for tags to apply to every file that the Agent Template's Connections upload, and every configuration type has an `Image` input, for an image to associate with the Agent Template in the Ganymede UI.
+
+:::note Deployment settings
+
+Whether changes to an Agent Template's code and configuration reach running Connections is set on each Host, not on the Agent Template. On the Host's page, under **Deployment Settings**, select **Auto deploy code and configuration changes to Live Connections** or **Require re-installing executables for changes to take effect**, and then click **Save**.
+
+:::
 
 :::tip Conditional execution
 
@@ -172,7 +192,7 @@ The _execute_ function in user-defined code for every Agent type can return `Non
 
 ### Reserved variables for all Agents
 
-Reserved variables are used to configure Connection behavior; these can be set [at installation](./AgentInstall#windows-installation) or in the Connections panel post-installation.  The following reserved variables are available for all Agent types:
+Reserved variables are used to configure Connection behavior; these can be set [at installation](./AgentInstall#windows-installation-legacy) or in the Connections panel post-installation.  The following reserved variables are available for all Agent types:
 
 - `get_process_metrics`: for Agents v5.5.5+, specifies whether to collect host metrics (CPU, memory, disk) during file processing. Set to "false" to skip this collection if not needed; the default value is "true". 
 - `restart_cron_utc`: for Windows Agents v5.5.21+, specifies the UTC time at which the Windows service associated with the Agent will be restarted.  For example, setting this to "0 * * * *" will restart the service every hour on the hour.  This can be helpful for limiting memory usage for frequently executed Agents. Note: restarts will drop the state of captured files, and so generally usage aligns best with cron and file watcher agents with the "ignore_duplicates" toggle set.
@@ -194,20 +214,21 @@ A Connection watches a directory (and associated subdirectories) for new files a
 #### Input Parameters
 
 - `Flow Name`: The flow to run upon observing new files matching the specified pattern.
-- `Check Period (seconds)`: The frequency with which the Agent will poll the local directory for new files.
-- `If a discovered filename exists in storage`: Specifies whether to use the file in storage or the observed file in the local directory.
-- `File pattern to parameter mapping`: A [glob pattern](<https://en.wikipedia.org/wiki/Glob_(programming)>) associated with the input parameter(s) for the selected flow.
+- `Parameter Mapping`: A [glob pattern](<https://en.wikipedia.org/wiki/Glob_(programming)>) associated with each file input parameter of the selected flow.
 
   :::note
   
-  This option is only available during Agent creation. Further configuration updates will occur inside the notebook, not inside the agent configuration
+  This option is only available during Agent Template creation. Further configuration updates will occur inside the notebook, not inside the Agent Template configuration.
 
   :::
 
+- `If a discovered filename exists in storage`: Specifies what to do when a file with the same name already exists in Ganymede storage: **Use existing cloud version**, **Upload new file with unique filename**, or **Ignore duplicate files**.
+- `Ignore Patterns`: Patterns for files and directories that Connections skip. You can also set Ignore Patterns on each Connection; see [Reserved variables for File Watcher Agents](#reserved-variables-for-file-watcher-agents).
+- `De-duplication behavior`: When **Skip files with matching content (MD5)** is selected, files whose content is identical to a previously uploaded file are skipped. Clear it if files with the same content but different filenames (for example, renamed files) must each be uploaded and processed. Requires Gateway v5.6.23 or later.
+- `Sync files on connection start`: When enabled, the Connection scans the watched directory at startup and uploads any files that were created or modified while the gateway was offline. Requires Gateway v5.6.23 or later. See [Sync files on connection start](#sync-files-on-connection-start) for details.
+- `Uploaded Files Bucket`: The bucket that Connections upload files to. This input appears only when an S3 bucket has been added to the environment; see [Agent Upload to S3 Bucket](../configuration/AgentToS3BucketConfig).
 - `File Tags`: Tags to associate with the files uploaded to Ganymede Cloud.
-- `Image`: An image to associate with agent in the Ganymede UI.
-- `Auto deploy code and configuration changes to Live Connections`: If checked, updates to Agent code will be reflected on current Connections.
-- `Sync files on connection start`: When enabled, the Connection scans the watched directory at startup and uploads any files that were created or modified while the gateway was offline. See [Sync files on connection start](#sync-files-on-connection-start) for details.
+- `Image`: An image to associate with the Agent Template in the Ganymede UI.
 
 #### Sync files on connection start
 
@@ -227,16 +248,29 @@ This feature is independent of `deduplicate_by_md5` (which deduplicates uploads 
 
 #### Reserved variables for File Watcher Agents
 
-Reserved variables are used to configure Connection behavior.  These can be set [at installation](./AgentInstall#windows-installation) or in the Connections panel post-installation.
+For Connections that run on a Gateway (version 5.6.0 and later), the following settings are dedicated fields in the Connection's **Connection Settings** rather than variables. To change them, open the Connection, click **Edit Connection**, update the fields, and click **Save**.
 
-- `input_path`: specifies the directory to watch.
+| Gateway Connection Settings field | Legacy variable | Description |
+|-----------------------------------|-----------------|-------------|
+| `Input Path` | `input_path` | The directory to watch. Required. |
+| `Ignore Patterns` | `ignore_list` | Patterns for files and directories to skip. |
+| `Stable Time (seconds)` | `stable_time` | The number of seconds a file has to be unmodified before the file watcher marks it as observed. This is useful for files that are being written to when you only want to capture the final version of the file. |
+| `Stream Contents` | `stream_contents` | If enabled, the file watcher streams the contents of the file to the cloud as it is being written. If disabled, the file watcher waits until the file is closed before uploading it. |
+| `Ignore Hidden Files` | `ignore_hidden_files` | If enabled, the file watcher ignores files that the operating system considers hidden. |
+| `Ignore Hidden Directories` | `ignore_hidden_directories` | If enabled, the file watcher ignores files inside directories that the operating system considers hidden. |
+
+When you migrate a legacy Connection to a Gateway, these variables are converted to the corresponding fields.
+
+For legacy Agents (prior to version 5.6.0), reserved variables are used to configure Connection behavior.  These can be set [at installation](./AgentInstall#windows-installation-legacy) or in the Connections panel post-installation. On Gateway Connections, use the Connection Settings fields in the table above instead of the corresponding variables.
+
+- `input_path`: specifies the directory to watch. On Gateway Connections, use **Input Path**.
 - `check_interval`: for Agents v5.1.28+, specifies frequency (in seconds) with which a Connection will poll the local directory for new, stable files.  If left blank, the default value is 5 seconds.
-- `stable_time`: for Agents v5.1.28+, specifies the time (in seconds) that a file must remain unchanged before being considered stable.  If left blank, the default value is 5 seconds.
-- `ignore_hidden_files`: for Agents v5.4.61+, specifies that hidden files should be ignored if set to "true".  If left blank, the default value is "false".
-- `ignore_hidden_directories`: for Agents v5.4.68+, specifies that files in hidden directories should be ignored if set to "true".  If left blank, the default value is "false".
-- `ignore_list`: A comma-separated list of patterns that tell the Agent which files/directories to skip watching entirely (events will not hit the agent logs or processor code). Useful for ignoring large volumes of events from backup, log, or other oft-modified but irrelevant files.
+- `stable_time`: for Agents v5.1.28+, specifies the time (in seconds) that a file must remain unchanged before being considered stable.  If left blank, the default value is 5 seconds. On Gateway Connections, use **Stable Time (seconds)**.
+- `ignore_hidden_files`: for Agents v5.4.61+, specifies that hidden files should be ignored if set to "true".  If left blank, the default value is "false". On Gateway Connections, use **Ignore Hidden Files**.
+- `ignore_hidden_directories`: for Agents v5.4.68+, specifies that files in hidden directories should be ignored if set to "true".  If left blank, the default value is "false". On Gateway Connections, use **Ignore Hidden Directories**.
+- `ignore_list`: A comma-separated list of patterns that tell the Agent which files/directories to skip watching entirely (events will not hit the agent logs or processor code). Useful for ignoring large volumes of events from backup, log, or other oft-modified but irrelevant files. On Gateway Connections, use **Ignore Patterns**.
   - NOTE: These patterns use a simplified "glob" syntax where the double asterisk `**` can only appear at the start of a pattern. For example, `**/*.txt` is valid (matches text files in any directory), but `backup/**/*.txt` is not valid (`**` is not at the left). To match files in subdirectories, use single asterisks `*`. You'll need multiple patterns, one for each directory level - e.g. `**/backup/*.txt` AND `**/backup/*/*.txt` for files one level deeper, and so on for each additional subdirectory level (since right `**` doesn't work). Full pattern syntax details are in the [Python `pathlib` documentation](https://docs.python.org/3/library/pathlib.html#pathlib.PurePath.match).
-- `stream_contents`: for Agents v5.4.66+, specifies whether to deliver the file contents at the time of upload (by execute function), rather than file contents captured by get_param_mapping.  This can be useful for improving memory efficiency of Agents watching for groups of files if set to True.  By default, this is set to false.
+- `stream_contents`: for Agents v5.4.66+, specifies whether to deliver the file contents at the time of upload (by execute function), rather than file contents captured by get_param_mapping.  This can be useful for improving memory efficiency of Agents watching for groups of files if set to True.  By default, this is set to false. On Gateway Connections, use **Stream Contents**, which streams the file contents to the cloud while the file is being written, as described in the table above.
 - `max_concurrent_workers`: for Agents v5.4.79+, specifies the maximum number of concurrent workers used to process files.  By default, this is set to 10.  The true number of maximum concurrent workers is the minimum of this value, 4 * number of CPU cores, and 64.
 - `allow_overlapping_runs`: for Agents v5.4.79+, specifies whether file processing (file upload / Flow run) can overlap with the next file processing.  By default, this is set to true; if set to false, the Agent will wait for the current file processing to complete before starting the next file processing.
 
@@ -429,11 +463,11 @@ Additional examples can be found on the [Agent Templates page](./AgentTemplates.
 
 #### Input Parameters
 
-- `Flow Name`: Flow to run upon observing new files matching specified pattern
-- `Time Interval`: Frequency and times with which to run flow, based on UTC time
+- `Flow Name`: Flow to run on the configured schedule
+- `Cron Expression`: Frequency and times with which to run the flow, based on UTC time
+- `Uploaded Files Bucket`: The bucket that Connections upload files to. This input appears only when an S3 bucket has been added to the environment, and you can also set it on each Connection.
 - `File Tags`: Tags to associate with the files uploaded to Ganymede Cloud
-- `Image`: An image to associate with Agent in the Ganymede UI.
-- `Auto deploy code and configuration changes to Live Connections`: If checked, updates to Agent code will be reflected on current Connections.
+- `Image`: An image to associate with the Agent Template in the Ganymede UI.
 
 <div class="text--center">
   <img
@@ -446,7 +480,7 @@ Additional examples can be found on the [Agent Templates page](./AgentTemplates.
 
 #### Reserved variables for cron Agents
 
-Reserved variables are used to configure Connection behavior.  These can be set [at installation](./AgentInstall#windows-installation) or in the Connections panel post-installation.
+Reserved variables are used to configure Connection behavior.  These can be set [at installation](./AgentInstall#windows-installation-legacy) or in the Connections panel post-installation.
 
 - `max_concurrent_workers`: for Agents v5.4.78+, specifies the maximum number of concurrent workers used to process files.  By default, this is set to 10.  The true number of maximum concurrent workers is the minimum of this value, 4 * number of CPU cores, and 64.
 - `allow_overlapping_runs`: for Agents v5.4.78+, specifies whether file processing (file upload / Flow run) can overlap with the next file processing.  By default, this is set to true; if set to false, the Agent will wait for the current file processing to complete before starting the next file processing.
@@ -461,14 +495,16 @@ A Connection that monitors a local directory (and associated subdirectories) for
 
 #### Input Parameters
 
-- `Flow Name`: Flow to run upon observing new files matching specified pattern
-- `Check Period (seconds)`: Frequency with which Agent will poll local directory for new files
-- `If a discovered filename exists in storage`: Specifies whether to use the file in storage or the observed file in the local directory.
-- `File pattern to parameter mapping`: A [glob pattern](<https://en.wikipedia.org/wiki/Glob_(programming)>) associated with the input parameters for the selected flow.
+- `File Patterns`: The [glob patterns](<https://en.wikipedia.org/wiki/Glob_(programming)>) that files must match to be uploaded. At least one pattern is required. This option is only available during Agent Template creation.
+- `If a discovered filename exists in storage`: Specifies what to do when a file with the same name already exists in Ganymede storage: **Use existing cloud version**, **Upload new file with unique filename**, or **Ignore duplicate files**.
+- `Ignore Patterns`: Patterns for files and directories that Connections skip.
+- `De-duplication behavior`: When **Skip files with matching content (MD5)** is selected, files whose content is identical to a previously uploaded file are skipped. Requires Gateway v5.6.23 or later.
+- `Sync files on connection start`: When enabled, the Connection scans the watched directory at startup and uploads any files that were created or modified while the gateway was offline. Requires Gateway v5.6.23 or later. See [Sync files on connection start](#sync-files-on-connection-start) for details.
+- `Uploaded Files Bucket`: The bucket that Connections upload files to. This input appears only when an S3 bucket has been added to the environment.
 - `File Tags`: Tags to associate with the files uploaded to Ganymede Cloud.
-- `Image`: An image to associate with Agent in the Ganymede UI.
-- `Auto deploy code and configuration changes to Live Connections`: If checked, updates to Agent code will be reflected on current Connections.
-- `Sync files on connection start`: When enabled, the Connection scans the watched directory at startup and uploads any files that were created or modified while the gateway was offline. See [Sync files on connection start](#sync-files-on-connection-start) for details.
+- `Image`: An image to associate with the Agent Template in the Ganymede UI.
+
+The [Reserved variables for File Watcher Agents](#reserved-variables-for-file-watcher-agents), including the Connection Settings fields for Gateway Connections, also apply to this configuration type.
 
 <div class="text--center">
   <img
@@ -489,10 +525,10 @@ A Connection that monitors Flow file outputs, saving them to local directories a
 
 #### Input Parameters
 
-- `Flow Name`: The flow from which to download output files. This will autopopulate the glob pattern matching field correspondingly.
-- `Glob pattern matching`: The [glob patterns](<https://en.wikipedia.org/wiki/Glob_(programming)>) that output files must match in order to be downloaded.
-- `Image`: An image to associate with Agent in the Ganymede UI.
-- `Auto deploy code and configuration changes to Live Connections`: If checked, updates to Agent code will be reflected on current Connections.
+- `Watch Bucket`: The bucket to watch: **Output Bucket** for flow outputs, or **Input Bucket** for flow inputs. You can also set this on each Connection.
+- `File Patterns`: The [glob patterns](<https://en.wikipedia.org/wiki/Glob_(programming)>) that files must match in order to be downloaded.
+- `Flow Name`: The flow from which to download files. If `File Patterns` is empty, selecting a flow fills it with a pattern that matches only that flow's files.
+- `Image`: An image to associate with the Agent Template in the Ganymede UI.
 
 <div class="text--center">
   <img
@@ -515,9 +551,30 @@ For this configuration, the following reserved variables are available:
 
 Instructions for lab execution are generated in Ganymede Cloud and downloaded to the instrument PC for execution.
 
-### Load local files into Ganymede with a custom filter
+### Load local files into Ganymede then run flow
 
-A Connection that loads local files into Ganymede one time (as opposed to persistently monitoring a directory for new files and updates).  This can be useful for conducting data backfills.
+A Connection that loads local files into Ganymede one time, then runs a flow to process that data.  The user-defined code selects, filters, and normalizes the data before upload.  This can be useful for conducting data backfills that also need processing.
+
+#### Input Parameters
+
+- `Flow Name`: The flow to run on the loaded files.
+- `File Tags`: Tags to associate with the files uploaded to Ganymede Cloud.
+- `Image`: An image to associate with the Agent Template in the Ganymede UI.
+
+#### Example use case
+
+Historical instrument output files are loaded into Ganymede and processed by the same flow used for new runs.
+
+### Load local files into Ganymede
+
+A Connection that loads local files into Ganymede one time (as opposed to persistently monitoring a directory for new files and updates).  The user-defined code selects, filters, and normalizes the data before upload.  This can be useful for conducting data backfills.
+
+This configuration type was previously named "Load local files into Ganymede with a custom filter".
+
+#### Input Parameters
+
+- `File Tags`: Tags to associate with the files uploaded to Ganymede Cloud.
+- `Image`: An image to associate with the Agent Template in the Ganymede UI.
 
 <div class="text--center">
   <img
@@ -538,10 +595,10 @@ A Connection that uploads files to Ganymede Cloud on a scheduled cadence.
 
 #### Input Parameters
 
-- `Time Interval`: The frequency and times at which to upload files, based on UTC time.
+- `Cron Expression`: The frequency and times at which to upload files, based on UTC time.
+- `Uploaded Files Bucket`: The bucket that Connections upload files to. This input appears only when an S3 bucket has been added to the environment, and you can also set it on each Connection.
 - `File Tags`: Tags to associate with the files uploaded to Ganymede Cloud
-- `Image`: An image to associate with Agent in the Ganymede UI.
-- `Auto deploy code and configuration changes to Live Connections`: If checked, updates to Agent code will be reflected on current Connections.
+- `Image`: An image to associate with the Agent Template in the Ganymede UI.
 
 <div class="text--center">
   <img
@@ -556,9 +613,39 @@ A Connection that uploads files to Ganymede Cloud on a scheduled cadence.
 
 A local file is modified at regular intervals and needs to uploaded to Ganymede Cloud after each modification.
 
+### OPC-UA Subscription
+
+A Connection that subscribes to tags (monitored items) on an OPC-UA server, such as a bioreactor or fermentation vessel control system, and streams live readings into a Ganymede data table as values change on the server.
+
+#### Input Parameters
+
+- `Endpoint URL`: The OPC-UA server endpoint, for example `opc.tcp://host:4840`. Required.
+- `Security Mode`: **None**, **Sign**, or **Sign & Encrypt**.
+- `Security Policy`: Required when Security Mode is **Sign** or **Sign & Encrypt**.
+- `Client Certificate Secret Name` and `Client Key Secret Name`: Required when Security Mode is **Sign** or **Sign & Encrypt**. Select the secrets, stored in the Ganymede secrets manager, that contain the client certificate and the client private key.
+- `Auth Method`: **Anonymous** or **Username / Password**.
+- `Username` and `Password Secret Name`: Required when Auth Method is **Username / Password**. Select the secret, stored in the Ganymede secrets manager, that contains the password.
+- `Image`: An image to associate with the Agent Template in the Ganymede UI.
+
+Each Connection inherits these settings from the Agent Template and can override them in its Connection Settings.
+
+#### Selecting monitored items
+
+You choose the tags to monitor on each Connection:
+
+1. Create a Connection from the Agent Template on a Host, as described in [Creating an Agent Template](#creating-an-agent-template).
+2. Open the Connection and click **Edit Connection**.
+3. Under **Monitored Items**, click **Browse Tags** to explore the server's node hierarchy. The Host must be Live to browse tags.
+4. Select the variables you want to monitor and click **Apply Tags for Monitoring**.
+5. For each monitored item, check the data type and sampling interval, and then click **Save**.
+
+#### Example use case
+
+Process values from a bioreactor, such as temperature and agitation speed, are captured continuously and can be queried in near real time.
+
 ## Variables and Labels in Windows Agent Connections
 
-For Agents that reference local directories, the monitored directory is specified in the Additional Params input box.  All subdirectories of _input_path_ are also monitored.
+For legacy Agents (prior to version 5.6.0) that reference local directories, the monitored directory is specified in the Additional Params input box.  All subdirectories of _input_path_ are also monitored.  For Gateway Connections, set the monitored directory in the **Input Path** field of the Connection Settings instead.
 
 ```shell
 -v "input_path=/absolute/path"
@@ -649,5 +736,5 @@ To modify user-defined code executed by the Agent, select the Agent in the Ganym
 </div>
 &nbsp;
 
-Previously built Agents remain available for download in Ganymede in the [History tab](./AgentMonitoring#viewing-build-history).
+Agent executables built before version 5.6.0 remain available for download on the **Legacy Builds** tab of the Agent Template's page. See [Viewing Build History (Legacy)](./AgentMonitoring#viewing-build-history-legacy).
 

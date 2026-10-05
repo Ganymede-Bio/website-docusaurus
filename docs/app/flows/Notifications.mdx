@@ -6,25 +6,32 @@ displayed_sidebar: webUiSidebar
 
 import { BellOutlined } from '@ant-design/icons';
 
-The <div className="button darkblue_button"><BellOutlined /> **Notifications**</div> page provides real-time updates on the status of flow saves and runs. 
+The <div className="button darkblue_button"><BellOutlined /> **Notifications**</div> page provides real-time updates on the status of Flow saves, Flow runs, and Agent and container builds in the current environment. To open it, click the <BellOutlined /> bell icon in the header bar. A badge on the icon shows the number of unread notifications.
 
 <img alt="Flow Editor header" src="https://ganymede-bio.mo.cloudinary.net/apiServer/EnvironmentNotifications_20250128.png" />
 <br />
 
+Use the **Search Entity Name** bar to filter notifications by entity name, and the date range picker to limit them to a period of time.
+
 The notifications table provides the following information per event.
 
-- **Type**: Events are categorized as either _SAVE_ or _RUN_.
-    - _SAVE_: Created when Flows are saved.
-    - _RUN_: Created when Flows are executed.
-- **Flow Name**: The name of the Flow that was saved or run. A search bar is provided for filtering specific Flows.
-- **Date / Time**: The date and time when the event was created.
-- **Status**: The current status of the event, with the following possible values:
-    - **Processing**: The event has been initiated and is in progress. For _SAVE_ events, processing will temporarily disable users from running flows, as the entire environment is saved and deployed when a flow is saved. Flow runs will become available again once all SAVE events are no longer in the Processing state.
-    - **Completed**: Event completed successfully. 
-    - **Flow Error**: Applicable only to _RUN_ events, indicating that a Flow run has failed. Detailed logs can be viewed on the [Flow Runs page](FlowRuns.mdx).
-    - **Error**: An unexpected error occurred. Users should retry the operation or contact [Ganymede Support](../Support.mdx) for assistance.
-    - **Timeout**: The notification timed out 180 seconds after the event started. Users should check the Flow that triggered the event for the latest status or try the operation again.
-- **User**: The login of the user who triggered the associated event.
+- **ENTITY TYPE**: The kind of event. Possible values include:
+    - **Flow Save**: Created when a Flow is saved and the environment is built and deployed.
+    - **Flow Run**: Created when a Flow is executed.
+    - **Agent**: Created when an Agent is built.
+    - **Container**: Created when a container image is built.
+    - Notifications for Flows can also show the type **Flow**.
+- **ENTITY NAME**: The name of the Flow or Agent associated with the event.
+- **DATE / TIME**: The date and time when the event was created.
+- **STATUS**: The current status of the event. For Flow Run events, click the status to open the run's logs on the [Flow Runs page](FlowRuns.mdx). Possible values include:
+    - **Running**: A Flow run is in progress.
+    - **Building**: The build is in progress. While a Flow save is building or deploying, you can't run Flows, because the entire environment is saved and deployed when a Flow is saved.
+    - **Deploying**: The deploy is in progress.
+    - **Completed**: Event completed successfully.
+    - **Flow Error**: A Flow run has failed.
+    - **Error**: An unexpected error occurred. Retry the operation or contact [Ganymede Support](../Support.mdx) for assistance.
+    - **Timeout**: The notification timed out. Check the Flow that triggered the event for the latest status, or try the operation again.
+- **SOURCE**: Who or what triggered the event, such as a user, a Connection, a cron schedule, or a Flow. When the source is a Connection, the column shows the Connection name. Hover over a cron schedule to see it in plain language.
 
 Notification popup settings can be configured for each user in each environment.
 
