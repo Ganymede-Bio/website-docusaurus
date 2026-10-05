@@ -9,7 +9,7 @@ import { PlusOutlined, EditOutlined } from '@ant-design/icons';
 
 ## What are File Tags?
 
-File tags in Ganymede provide a way to organize and categorize files systematically. These tags, specified in user-defined code, allow for efficient filtering and searching within the file browser. Tags can be used to capture various details about a file, such as sample ID, run purpose, experiment ID, experiment step, and any other relevant characteristic defined by users in Ganymede.
+File tags in Ganymede provide a way to organize and categorize files systematically. These tags, applied in the File Browser or in user-defined code, allow for efficient filtering and searching within the file browser. Tags can be used to capture various details about a file, such as sample ID, run purpose, experiment ID, experiment step, and any other relevant characteristic defined by users in Ganymede.
 
 Once a file is tagged, it can be easily filtered in the file browser, enabling streamlined access to specific data.
 
@@ -45,6 +45,18 @@ For each tag type, the following attributes can be specified:
 The strict mode setting, if disabled, allows admins to delete or modify tags.  Tags may only be deleted if they are not applied to any files; the delete button will be grayed out if tag type deletion is not permitted.
 
 ## Tagging Files
+
+You can tag files in the File Browser or in user-defined code.
+
+### Tagging files in the UI
+
+To add or remove tags on files from the File Browser, select up to 100 files and click **Edit Tags**. In the **Bulk File Tag Edit** dialog, add tags by choosing a **Tag Type** and entering a **Tag Value**, remove tags from **Current Tags**, and then click **Apply**. You need the Writer role or higher to edit tags.
+
+When strict mode is enabled, the dialog shows **Strict Mode Enabled**. You can still add tags, but you can't remove existing ones.
+
+For step-by-step instructions, see [Editing tags](./FileBrowser#editing-tags) on the File Browser page.
+
+### Tagging files in code
 
 Files can be tagged in user-defined code within Flows and Agents, though the methods differ slightly.  In Flows, files are tagged by passing the file path to the `add_file_tag` function.  Within Agents, files are tagged either in the Connections UI, or by passing the [FileParam](../../sdk/markdowns/AgentSDK#agent-triggered-flows) object into the `add_file_tag_to_fileparam` function.  The FileParam object contains the file that the Agent submits to Ganymede storage (for initiating a flow if the Agent is configured to do so).
 

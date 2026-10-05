@@ -180,7 +180,7 @@ Next, configure **CORS** (Cross-Origin Resource Sharing):
 
 ### Step 8: Test the Connection
 
-With the setup complete, the final step is to test your connection.
+With the setup complete, test your connection.
 
 1. Return to the [Integrations panel](../admin/AdminControls#integration-panel) within the **Ganymede web app**.
 2. Next to your bucket, click the **Validate Setup** button.
@@ -191,6 +191,27 @@ With the setup complete, the final step is to test your connection.
           </div>
 3. A successful test will result in a **success message**.
 4. If testing does not succeed, please reach out to [Ganymede support](../Support#ganymede-support) for assistance.
+
+---
+
+### Step 9: Select the Bucket in an Agent Template
+
+Adding the bucket to the environment does not change where Agents upload files. To have Connections upload to the bucket, select it in the Agent Template:
+
+1. In the **Ganymede web app**, open **Connectors > Agent Templates** in the left navigation.
+2. Select the Agent Template and click **Edit**, or click **New Agent Template** to create one.
+3. In the **Uploaded Files Bucket** field, select the bucket.
+4. Click **Save**.
+
+If you leave **Uploaded Files Bucket** empty, Connections upload files to Ganymede storage. The **Uploaded Files Bucket** field appears for Agent Templates that watch for files locally or run on a cron schedule, and only after at least one bucket has been added to the environment. For cron-based Agent Templates, you can also select a bucket on an individual Connection in its **Connection Settings**.
+
+Flows can also store files in a bucket that you add here. Select the bucket in the flow's **Ingest Bucket** field.
+
+:::note
+
+The **References** column in the [Integration Panel](../admin/AdminControls#integration-panel) shows how many flows and Connections use each bucket. You can't delete a bucket while flows or Connections reference it. Remove the bucket from those flows and Connections before you delete it.
+
+:::
 
 ---
 

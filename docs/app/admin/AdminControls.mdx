@@ -12,22 +12,34 @@ The Admin page enables administrators to manage user access, configure environme
 
 ## Roles Panel
 
-The Roles panel shown below enables administrators to specify access levels for different users. The Last Seen column is populated in the permissions panel for users that have accessed Ganymede after [August 2024](../../releases/202408#august-15-2024), when the feature was introduced. 
+The Roles panel shown below enables administrators to specify access levels for different users. The Last Seen column is populated in the permissions panel for users that have accessed Ganymede after [August 2024](../../releases/202408#august-15-2024), when the feature was introduced. The Last Activity column shows the timestamp of each user's latest auditable action.
 
 <img alt="Admin - Access Panel" src="https://ganymede-bio.mo.cloudinary.net/apiServer/Admin_Panel_20240920.png" />
 &nbsp;
 
-There are five levels of access for Flows and Agents.
+There are five levels of access. Each user's role applies to a single environment.
 
 - **Admin**: Manage the environment settings, able to manage access of others. Admins are able to create, modify, and execute Flows and Agents.
-- **Writer**: Can create, modify, and execute Flows and Agents.
-- **Runner**: Can execute Flows, but cannot modify or create new Flows or Agents.  Can view Agent logs, Agent history, Connection statuses, and download and install Agent installers.
-- **Reader**: Can observe Flows and Agents, read data, and observe environment settings, but not permitted to execute or alter Flows.  Can view Agent logs and Connection history, but cannot download/install Agent installers.
+- **Writer**: Can create, modify, and execute Flows and Agents. Can bulk-edit file tags.
+- **Runner**: Can execute Flows and open Modular Analysis apps, but cannot modify or create new Flows or Agents.  Can view Agent logs, Agent history, Connection statuses, and download the Gateway installer.
+- **Reader**: Can observe Flows and Agents, read data, and observe environment settings, but not permitted to execute or alter Flows or open Modular Analysis apps.  Can view Agent logs and Connection history. Readers who hover over a code-edit button, such as the code editor button on a flow node or **Edit code** and **Edit App** on a Modular Analysis app card, see a tooltip asking them to contact an Admin to change their role.
 - **None**: Cannot see the environment as an option in the dropdown menu.  This is relevant for providing access to a specific environment; for example, a user may have **Runner** permission for prod but **None** permission for dev if that user is not involved in development.
 
-The New User Roles box appears for users with Admin privileges, enabling admins to set the default permission of new users added to the environment.  Admins can also click on <div className="button red_text_button"><UserDeleteOutlined /></div> to remove a user from an environment.
+The New User Roles box sets defaults for new users. Only Admins can change these settings:
 
-For dashboards, permissions can be viewed by navigating to the dashboards page and clicking Settings > List Users.  
+- **Default Role for New Users**: The role that new users get in this environment.
+- **Default Dashboard Access**: The default dashboard access level: Admin, Writer, Runner, Reader, or None. This setting applies to all environments.
+
+Admins can also click on <div className="button red_text_button"><UserDeleteOutlined /></div> to remove a user from an environment.
+
+### Dashboard Access
+
+Each user's role in an environment also sets their access to [dashboards](../visualization/Dashboards.mdx) in that environment. Dashboard access is scoped to the environment, so users only see the dashboards and data for environments they have access to.
+
+- **Admin** and **Writer**: Full content and data access, including SQL Lab, datasets, and charts.
+- **Runner**: Can view and run dashboards, charts, and datasets, but cannot create or edit them.
+- **Reader**: View-only access to published dashboards.
+- **None**: No dashboard access.
 
 ## Secrets Panel
 
@@ -63,4 +75,4 @@ The [Audit panel](../configuration/AuditLog.mdx) tracks historical activity in t
 
 ## Integration Panel
 
-The [Integration panel](./ExternalPlatform.mdx) contains details about the Ganymede environment, which can be used for integration with external systems, as well as for IP whitelisting Ganymede.
+The [Integration panel](./ExternalPlatform.mdx) contains details about the Ganymede environment, which can be used for integration with external systems, as well as for IP whitelisting Ganymede. Only Admins see the Integration tab.

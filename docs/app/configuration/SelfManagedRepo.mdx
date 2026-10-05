@@ -91,6 +91,18 @@ If you run into any challenges configuring the repo, you can compare your self-m
 - **Manual Deployment**: Deployment can be triggered using the workflow dispatch action, provided a user email matching a Ganymede user is supplied
 - **Automatic Deployment**: For automatic deployments, you can set up a GitHub Action to trigger on push events to the repository and use a modified version of the [`flow-commit-action`](https://github.com/Ganymede-Bio/flow-commit-action/blob/main/action.yml)
 
+### Conflict Protection
+
+Conflict protection stops a deploy from overwriting changes made elsewhere, such as edits saved in the Ganymede UI while you work in your repository.
+
+- **Pull**: Pulling code from Ganymede records the environment's current commit SHA.
+- **Deploy**: When you deploy, Ganymede checks that SHA against the environment. If someone changed the environment's code after your last pull, Ganymede rejects the deploy with a 409 (Conflict) response instead of overwriting their work.
+- **Resolve**: Re-pull to pick up the latest changes, then deploy again.
+
+Conflict protection covers both Flow code and Agent connector code. It requires the updated versions of the [`flow-pull-action`](https://github.com/Ganymede-Bio/flow-pull-action) and [`flow-commit-action`](https://github.com/Ganymede-Bio/flow-commit-action) GitHub Actions and the [self-managed-repo-template](https://github.com/Ganymede-Bio/self-managed-repo-template). Existing setups continue to work unchanged until you adopt the new versions.
+
+If you call the API directly, use the v2 environment commit endpoints. `GET /v2/environment/{environment}/commits` returns the environment's current commit SHA as `headSha`. Pass that value as `baseSha` to `PUT /v2/environment/{environment}/commits`. If the two values don't match, the response is a 409 that includes the environment's current commit SHA. The existing v0 endpoints are unchanged.
+
 ### Customizing Code Management
 
 - The APIs to manage committing to your environments are available in the [Ganymede API documentation](https://docs.ganymede.bio/api)
@@ -106,3 +118,4 @@ If you run into any challenges configuring the repo, you can compare your self-m
 
 - If you encounter issues with syncing or deploying flows, ensure that the GitHub Actions workflows have the correct permissions and that the API tokens are valid.
 - Ensure that you are on the latest version of the [flow-commit-action](https://github.com/Ganymede-Bio/flow-commit-action/tree/main) and [flow-pull-action](https://github.com/Ganymede-Bio/flow-pull-action) actions.
+- If a deploy fails with a 409 (Conflict) error, the environment's code changed after your last pull. Re-pull to pick up the latest changes, then deploy again. See [Conflict Protection](#conflict-protection).

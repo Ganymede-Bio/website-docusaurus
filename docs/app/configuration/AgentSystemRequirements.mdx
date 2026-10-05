@@ -28,7 +28,12 @@ To ensure that the [Agent](../agents/Agent) is able to communicate with Ganymede
 
 ## Installation permissions
 
-Administrative access is required so that the Agent can be installed to run as a service, which enables the Agent to launch automatically on system startup.  Once configured, users are not required to log in as an admin.  
+The Gateway installer supports both admin and non-admin installation:
+
+- **Admin installation** (recommended): the Gateway runs as a service, starts automatically on system startup, and updates automatically. Once it is installed, users are not required to log in as an admin.
+- **Non-admin installation**: for PCs where IT policies don't allow administrator access. The Gateway runs as a plain process, so it stops when the user logs out or the PC restarts and doesn't start again on its own. You can't upgrade it from the Ganymede UI; to upgrade, download the new version and run the installer manually on the Host.
+
+For details, see [Admin and non-admin installations](../agents/AgentInstall#admin-and-non-admin-installations).
 
 ## Proxy and Firewall Configuration
 

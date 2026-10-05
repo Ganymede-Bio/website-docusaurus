@@ -45,8 +45,18 @@ The header bar contains buttons for creating flows and monitoring Flow runs.
 * **Node**: Opens right sidebar for selecting new node to add.  
 * **View**: Opens right sidebar for specifying whether Flow should be laid out horizontally or vertically
 * **History**: Opens a view showing historical commits from the Flow Editor or [Node Editor](./NodeEditor.mdx)
-* **Analysis**: Enables access to Jupyter notebooks which can be used for ad-hoc observation and data analysis.  These notebooks are hosted on a virtual machine (VM) separate from the workflow management software running the Flow.
+
+The right side of the header bar contains:
+
+* [**Flow save status indicator**](#flow-save-status-indicator): Shows the progress of the current Flow save, or the time of the last successful deploy.
 * **Save**: Button to save Flow layout to git repo and deploy code to workflow management system.
+* **Manage**: Opens the sidebar for [managing Flows](#managing-flows).
+
+:::note
+
+Analysis notebooks are deprecated, and the Flow Editor header no longer has an **Analysis** button. For ad-hoc data analysis, use [Modular Analysis](../ma/ModularAnalysisOverview.mdx) apps or [Dashboards](../visualization/Dashboards.mdx).
+
+:::
 
 ### Managing Flows
 

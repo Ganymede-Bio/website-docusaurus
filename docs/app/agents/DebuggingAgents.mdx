@@ -48,7 +48,7 @@ This is likely due to the Agent Connection being on a version prior to 5.5.1, wh
 
 #### Issue: I am unable to install an Gateway on Windows; the installer is failing at the final step.
 
-Ensure that you are running the installer as an administrator.
+If you chose an admin installation, make sure that you run the installer with an account that has administrator privileges, and select **Yes** if Windows shows a User Account Control prompt. If you can't get administrator access on the PC, choose a non-admin installation instead. See [Admin and non-admin installations](./AgentInstall#admin-and-non-admin-installations).
 
 Check for existing installations that might conflict with the current installation:
 
@@ -77,17 +77,17 @@ To resolve, ensure that outbound port 443 communication is available to the web 
 
 #### Issue: The Agent Connection is not actively running. How do I check?
 
-First, make sure that the Agent was installed with admin privileges.
+First, check whether the Gateway was installed with or without admin privileges. In the left navigation, open **Connectors > Hosts** and select the Host. A Gateway installed without admin privileges shows an **Updates must be applied manually** warning, and, if it isn't running as a service, a **Gateway will stop on logout or reboot** warning. The Host logs also include an `Identity detection: running_as_admin=..., running_as_service=...` message when the Gateway starts.
 
-On Windows:
+On Windows (admin installation):
 
 - Open Task Manager and navigate to the Services tab.
 - Look for the Connection of interest (a service with a name starting with "GanymedeGateway-") and verify that its status is "Running."
-- If the service is not running, right-click on it and select "Start." Connections are configured to start upon reboot by default.
+- If the service is not running, right-click on it and select "Start." With an admin installation, the Gateway is configured to start upon reboot by default.
 
 If you still do not see the Agent Connection in the Ganymede App, check the startup log in the folder that the Agent was installed to (C:\\Program Files\\Ganymede\\\<Connection Name\>).
 
-On Linux:
+On Linux (admin installation):
 
 - Open a terminal and run the following command to check the Agent's status:
 
@@ -100,6 +100,18 @@ On Linux:
   ```bash
   sudo systemctl start GanymedeGateway-<agent_name>
   ```
+
+On Windows or Linux (non-admin installation):
+
+- A non-admin Gateway runs as a plain process, not as a service. It doesn't appear in the Services tab or in systemd, and it doesn't start again on its own after the user logs out or the PC restarts.
+- The Host logs can include messages such as `find_gateway_service: skipping SCM enumeration (non-admin, no services registered)` and `Cleanup: non-admin install — terminating gateway process (no Windows service registered)`. These messages are expected for a non-admin installation.
+- If the Gateway needs to keep running across logouts and restarts, reinstall it with an admin installation.
+
+#### Issue: The Upgrade button on the Host's page is disabled.
+
+If the Host shows an **Updates must be applied manually** warning, the Gateway was installed without admin privileges, and you can't upgrade it from the Ganymede UI. To upgrade, download the new version with **Download Gateway** on the **Connectors** pages and run the installer manually on the Host.
+
+The **Upgrade** button is also disabled while an upgrade is already in progress.
 
 ### Agent execution
 
@@ -130,6 +142,8 @@ On Windows:
   - Ensure that "Set time automatically" is enabled, and click "Sync now."
 
 #### Issue: The Agent Connection does not restart when the computer is restarted.
+
+A Gateway installed without admin privileges doesn't start automatically after a restart. See [The Agent Connection is not actively running](#issue-the-agent-connection-is-not-actively-running-how-do-i-check) to check how the Gateway was installed. The steps below apply to admin installations.
 
 ##### Windows - Determine whether the Agent Connection is timing out on startup
 
@@ -221,7 +235,7 @@ _thread.ExceptHookArgs(exc_type=<class 'google.auth.exceptions.RefreshError'>, e
     - Right-click on the system clock and select "Adjust date/time."
     - Ensure that "Set time automatically" is enabled, and click "Sync now."
 
-Verify that the watch folder is correctly specified during [Agent installation](./AgentInstall#windows-installation).
+Verify that the watch folder is correctly specified during [Agent installation](./AgentInstall#windows-installation-legacy).
 
 ```bash
 -v "input_path=C:/Users/<username>/Desktop/watch_folder"
