@@ -38,6 +38,21 @@ module.exports = {
         debug: false,
         mode: 'auto',
       },
+    ],
+    [
+      // Generates llms.txt, llms-full.txt, and a .md copy of every doc page so
+      // AI tools (and the page "Copy page" menu) can read the docs as Markdown
+      'docusaurus-plugin-llms',
+      {
+        description: 'Documentation for Ganymede, the lab data platform: app, nodes, SDK, API, and release notes.',
+        rootContent:
+          'The REST API reference is available as an OpenAPI 3 spec: https://docs.ganymede.bio/openapi.yaml',
+        generateMarkdownFiles: true,
+        excludeImports: true,
+        removeDuplicateHeadings: true,
+        rewriteImageUrls: true,
+        includeOrder: ['app/**', 'sdk/**', 'nodes/**', 'releases/**'],
+      },
     ]
   ],
   themes: ['@docusaurus/theme-mermaid'], 
@@ -81,11 +96,6 @@ module.exports = {
           position: 'left',
           docId: 'releases/ReleaseNotes',
           label: 'Release Notes'
-        },
-        {
-          href: 'https://chatgpt.com/g/g-67b0b562425881919087cb95e30876cb-ganymede-documentation',
-          label: 'Docs GPT',
-          position: 'right',
         }
       ],
     },
