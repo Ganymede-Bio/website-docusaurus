@@ -1,0 +1,268 @@
+---
+id: OpcUaSubscription
+title: OPC-UA Subscription Agents
+displayed_sidebar: webUiSidebar
+toc_max_heading_level: 4
+---
+
+import { PlusOutlined } from "@ant-design/icons";
+
+## Overview
+
+The **OPC-UA Subscription** Agent Template type captures process values from industrial automation systems that run an OPC-UA server, such as bioreactor and fermentation vessel control systems. You choose the tags (monitored items) to capture, and the Connection streams readings into a Ganymede table as the values change on the server. You can then query the readings in near real time from the Data Explorer, dashboards, and flows.
+
+Use an OPC-UA Subscription Agent when an instrument or control system exposes live values over OPC-UA and you want a continuous time series of those values. If the instrument writes result files instead, use a file watcher Agent. See [Agent Overview & Configuration](./Agent#configuring-agents).
+
+How it works:
+
+- The Gateway on a Host connects to the OPC-UA server as a client, using the endpoint, security, and authentication settings from the Agent Template and the Connection.
+- You browse the server's node hierarchy from the Connection's page and select the variables to monitor. Browsing runs through the Gateway, so the Host must be Live.
+- The Connection subscribes to the selected variables and sends each reading to Ganymede, which writes it to a table named `opcua_<connectionId>`.
+
+OPC-UA Subscription Agents don't use user-defined processor code to capture readings, don't upload files, and don't run flows. Connections of this type have no **Connection File Tags** setting.
+
+:::note GxP Validation Mode
+
+In environments with [GxP Validation Mode](../admin/GxPValidation#gxp-validation-mode) enabled, **OPC-UA Subscription** is the only Configuration Type available when you create an Agent Template.
+
+:::
+
+## Prerequisites
+
+- **Role**: You need the Writer role or higher to create and edit Agent Templates and Connections. You need the Admin role to add secrets in **Environment Settings**. See [Environment Settings](../admin/AdminControls#roles-panel).
+- **Gateway**: A Host running the Gateway. Support for OPC-UA Subscription Agents was released with Gateway version 5.6.68 ([August 13 2026](../../releases/202608#august-13-2026)), so use that version or later. To install or upgrade a Gateway, see [Gateway Installation](./AgentInstall#gateway-installation-recommended) and [Updating Hosts](./AgentMonitoring#updating-hosts).
+- **Network access to the OPC-UA server**: The machine that runs the Gateway must be able to open a connection to the host and port in the server's endpoint URL, for example port 4840 in `opc.tcp://host:4840`. Check firewalls and network segmentation between the Host and the control system. The Host also needs the usual outbound access to Ganymede. See [Agent System Requirements](../configuration/AgentSystemRequirements).
+- **Endpoint and credentials**: The server's endpoint URL, the security mode and security policy it accepts, and the credentials it requires: a username and password, a client certificate and private key, or both.
+- **Secrets**: Passwords, client certificates, and private keys are stored as Ganymede environment secrets. You select a secret by name in the Agent settings; the value itself is never entered in the Agent Template or Connection. See [Store credentials as secrets](#store-credentials-as-secrets).
+
+## Set up an OPC-UA Subscription Agent
+
+### Store credentials as secrets
+
+Skip this step if the server accepts anonymous connections with Security Mode **None**.
+
+1. Click the bubble containing your email address in the top right corner, and select **Environment Settings**.
+2. In the [Secrets panel](../admin/AdminControls#secrets-panel), click **Add Secret**.
+3. Add a secret for each credential the server requires:
+   - **Password**: the password for the OPC-UA user.
+   - **Client certificate**: the PEM-encoded client certificate.
+   - **Client private key**: the PEM-encoded private key that matches the client certificate.
+4. Note the secret names. You select them in the Agent Template or Connection settings.
+
+A Connection can read only the secrets that are named in its OPC-UA settings, whether set on the Connection or inherited from the Agent Template.
+
+:::tip
+
+OPC-UA servers typically accept a signed or encrypted session only from a client certificate they trust. Register the client certificate on the server according to the server vendor's instructions.
+
+:::
+
+### Create the Agent Template
+
+1. Open **Connectors > Agent Templates** and click <div className="button system_button"><PlusOutlined /> New Agent Template</div>.
+2. Enter an **Agent Template Name**.
+3. For **Configuration Type**, select **OPC-UA Subscription**.
+4. Enter the **Endpoint URL** of the OPC-UA server, for example `opc.tcp://host:4840`.
+5. Select the **Security Mode**. If you select **Sign** or **Sign & Encrypt**, also select the **Security Policy**, the **Client Certificate Secret Name**, and the **Client Key Secret Name**.
+6. Select the **Auth Method**. If you select **Username / Password**, enter the **Username** and select the **Password Secret Name**.
+7. Click **Save**.
+
+The settings you enter on the Agent Template are the defaults for every Connection created from it. See [Endpoint and security settings](#endpoint-and-security-settings) for each field.
+
+### Create a Connection on a Host
+
+Create the Connection from the Host's page:
+
+1. Open **Connectors > Hosts** and select the Host that can reach the OPC-UA server.
+2. Click <div className="button dark_gray_button"><PlusOutlined /> Create Connection on Host</div>.
+3. Select **Create from Template**.
+4. Enter a **Name** for the Connection, select the OPC-UA Subscription **Agent Template**, and click **Create**.
+
+:::note
+
+Create OPC-UA Subscription Connections from the Host's page. The **Create Connection on Host** dialog on an OPC-UA Subscription Agent Template's page doesn't currently list any Hosts.
+
+:::
+
+### Select monitored items
+
+A new Connection has no monitored items of its own. Select the tags to capture from the Connection's page:
+
+1. Open the Connection, for example from the **Connections** list on the Host's page.
+2. Under **Connection Settings**, click **Edit Connection**.
+3. Under **Monitored Items**, click **Browse Tags**. The **Browse OPC UA Tags** dialog opens at the server's `Objects` folder.
+4. Expand folders to find the variables you want. Only variables have a checkbox; select the checkbox next to each variable to monitor.
+5. Click **Apply Tags for Monitoring**. Each selected variable is added to **Monitored Items** with a **Data Type** of **Double** and a **Sampling Interval** of `1000` milliseconds.
+6. For each monitored item, select the **Data Type** that matches the variable on the server, and adjust the **Sampling Interval** if needed.
+7. Click **Save**.
+
+Readings start to arrive once the Connection is running with the saved monitored items. Whether saved changes reach a Live Connection automatically depends on the Host's **Deployment Settings**. See [Host Details](./AgentMonitoring#host-details).
+
+## Endpoint and security settings
+
+These fields appear on the Agent Template and on each Connection's **Connection Settings**.
+
+| Field | Description |
+|-------|-------------|
+| **Endpoint URL** | The OPC-UA server endpoint, for example `opc.tcp://host:4840`. Required on the Agent Template. |
+| **Security Mode** | **None**, **Sign**, or **Sign & Encrypt**. Defaults to **None**. |
+| **Security Policy** | Shown when Security Mode is **Sign** or **Sign & Encrypt**, and then required. The available policy is **Basic256 / SHA-256**. |
+| **Client Certificate Secret Name** | Shown when Security Mode is **Sign** or **Sign & Encrypt**, and then required on the Agent Template. The secret that contains the PEM-encoded client certificate. |
+| **Client Key Secret Name** | Shown when Security Mode is **Sign** or **Sign & Encrypt**, and then required on the Agent Template. The secret that contains the PEM-encoded client private key. |
+| **Auth Method** | **Anonymous** or **Username / Password**. Defaults to **Username / Password**. |
+| **Username** | Shown when Auth Method is **Username / Password**. The OPC-UA user name. |
+| **Password Secret Name** | Shown when Auth Method is **Username / Password**. The secret that contains the user's password. |
+
+When Auth Method is **Username / Password**, you must provide both **Username** and **Password Secret Name**; you can't save one without the other.
+
+Security Mode and Auth Method are independent. For example, a server can require **Sign & Encrypt** with a client certificate and also a username and password.
+
+### Overriding settings on a Connection
+
+Each Connection inherits the Agent Template's settings. On the Connection's page, empty fields show **Inherited from template**. To use a different value for one Connection, such as a different endpoint for a second vessel, click **Edit Connection**, enter the value, and click **Save**.
+
+The **Security Policy**, certificate, and key fields appear on the Connection only when you select **Sign** or **Sign & Encrypt** as the Connection's own **Security Mode**. Likewise, **Username** and **Password Secret Name** appear only when you select **Username / Password** as the Connection's own **Auth Method**. To override a credential for one Connection, select the Security Mode or Auth Method on the Connection as well.
+
+## Monitored items
+
+Each row under **Monitored Items** is one OPC-UA variable that the Connection subscribes to.
+
+| Field | Description |
+|-------|-------------|
+| Tag | The variable's display name and Node ID, for example `Temperature (ns=2;s=Channel1.Device1.Tag1)`. Set by the tag browser; read-only. |
+| **Data Type** | The OPC-UA data type of the variable: `Boolean`, `SByte`, `Byte`, `Int16`, `UInt16`, `Int32`, `UInt32`, `Int64`, `UInt64`, `Float`, `Double`, `String`, `DateTime`, or `ByteString`. New items default to `Double`. The value is recorded in the `dataType` column of the table. |
+| **Sampling Interval** | How often, in milliseconds, the server samples the variable for changes. Must be 0 or greater. New items default to `1000`. |
+
+Readings are recorded as values change on the server, so a variable whose value doesn't change produces few rows.
+
+Readings are accepted only for the Connection's configured monitored items.
+
+### Inheriting monitored items from the Agent Template
+
+An Agent Template can also define a list of monitored items. A Connection that has no monitored items of its own uses the Agent Template's list. As soon as the Connection has its own list, that list replaces the Agent Template's list entirely; the two lists aren't merged.
+
+The Agent Template page doesn't show monitored items. To define them on the Agent Template, set the `tags` list in the Agent Template's trigger configuration with the `createAgentTemplate` or `updateAgentTemplate` operation in the [API Reference](https://docs.ganymede.bio/api). Each item has a `nodeId`, an optional `name`, a `dataType`, and a `samplingInterval` in milliseconds.
+
+The Connection's **Monitored Items** list shows only the Connection's own items. When a Connection inherits the Agent Template's list, its **Monitored Items** list is empty.
+
+## Where readings are stored
+
+Each Connection writes its readings to its own table in the environment, named `opcua_<connectionId>`. The Connection ID is the last part of the URL of the Connection's page, `.../connections/<connectionId>`. The table is created when the Connection sends its first reading, so it doesn't exist until then.
+
+The table has one row per reading:
+
+| Column | BigQuery type | Description |
+|--------|---------------|-------------|
+| `connectionId` | STRING | The ID of the Connection that captured the reading |
+| `tagId` | STRING | The Node ID of the monitored item |
+| `name` | STRING | The display name of the monitored item, if known. Can be null. |
+| `value` | JSON | The value reported by the OPC-UA server |
+| `dataType` | STRING | The data type configured for the monitored item |
+| `sourceTimestamp` | TIMESTAMP | The source timestamp that the OPC-UA server reported for the value |
+| `statusCode` | STRING | The OPC-UA status (quality) code reported with the value |
+| `recordedAt` | TIMESTAMP | When Ganymede received the reading |
+| `dt` | TIMESTAMP | Partition column: the start of the hour in which Ganymede received the reading |
+
+:::warning Partition filter required
+
+The table is partitioned by `dt`, and every query on it must filter on `dt`. A query without a `dt` filter fails. This applies to queries in the Data Explorer, dashboard datasets, and flow nodes.
+
+:::
+
+`dt` is based on when Ganymede received the reading, not on `sourceTimestamp`. To select readings by the server's time, filter on `dt` to limit the data scanned, widened by an hour or so on each side, and then filter on `sourceTimestamp` for the exact window.
+
+If you delete a Connection and create a new one, the new Connection has a new ID and writes to a new table.
+
+### Query readings in the Data Explorer
+
+1. Open the **Data Explorer** and search for `opcua_` to find the table. See [Data Explorer](../tables/DataExplorer).
+2. The **Preview** tab shows up to 10 readings received in the last 24 hours.
+3. On the **Query** tab, the default query already includes a 24-hour `dt` filter:
+
+   ```sql
+   SELECT * FROM `opcua_<connectionId>` WHERE dt >= TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 24 HOUR) LIMIT 25;
+   ```
+
+The `value` column is JSON. Use a JSON conversion function such as `LAX_FLOAT64`, `LAX_INT64`, `LAX_BOOL`, or `LAX_STRING` to get a typed value. For example, to get the numeric readings for one tag over a time window:
+
+```sql
+SELECT
+  name,
+  tagId,
+  LAX_FLOAT64(value) AS reading,
+  sourceTimestamp,
+  statusCode
+FROM `opcua_<connectionId>`
+WHERE dt BETWEEN TIMESTAMP('2026-08-20 07:00:00') AND TIMESTAMP('2026-08-20 18:00:00')
+  AND sourceTimestamp BETWEEN TIMESTAMP('2026-08-20 08:00:00') AND TIMESTAMP('2026-08-20 17:00:00')
+  AND tagId = 'ns=2;s=Channel1.Device1.Tag1'
+ORDER BY sourceTimestamp
+```
+
+To get the latest reading for each tag:
+
+```sql
+SELECT
+  name,
+  tagId,
+  value,
+  sourceTimestamp
+FROM `opcua_<connectionId>`
+WHERE dt >= TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 2 HOUR)
+QUALIFY ROW_NUMBER() OVER (PARTITION BY tagId ORDER BY sourceTimestamp DESC) = 1
+```
+
+## Edit monitored items later
+
+1. Open the Connection and click **Edit Connection**.
+2. To add or remove items with the tag browser, click **Browse Tags**. The variables that are already monitored are selected. Select new variables, clear the ones you no longer want, and click **Apply Tags for Monitoring**. New items are added with the default Data Type and Sampling Interval, and cleared items are removed from the list.
+3. To remove a single item, click the remove icon at the end of its row.
+4. To change an item's **Data Type** or **Sampling Interval**, edit it in its row.
+5. Click **Save**. To discard your changes, click **Cancel**.
+
+After you save, the Connection stops recording readings for removed items. Readings already in the table are kept.
+
+Once a Connection has its own monitored items, it must keep at least one. To stop capturing readings entirely, deactivate the Connection instead. See [Connection Status](./AgentMonitoring#connection-status).
+
+## Troubleshooting
+
+#### The Browse Tags button is disabled
+
+- Click **Edit Connection** first. **Browse Tags** is available only while you edit the Connection.
+- The Connection's Host must be Live. Check the Host's status under **Connectors > Hosts**. See [Host Status](./AgentMonitoring#host-status).
+- You need the Writer role or higher to edit a Connection.
+
+#### The tag browser shows an error instead of the server's nodes
+
+- The Host is no longer Live. Wait until it's Live again, or see [Agent FAQ and Troubleshooting](./DebuggingAgents).
+- The Gateway didn't return the server's nodes within about 15 seconds. Check that the Host can reach the server at the **Endpoint URL**, that the security and authentication settings match what the server accepts, and that the server trusts the client certificate. Check the Host's logs for details. See [Viewing Logs](./AgentMonitoring#viewing-logs).
+
+Close the dialog and click **Browse Tags** again to retry.
+
+#### A folder in the tag browser has no children
+
+The node has no child nodes, or it couldn't be browsed. Check the server's access rights for the user or certificate the Connection uses.
+
+#### The Connection can't be saved
+
+- **Both username and password secret name are required when using Username / Password authentication.** Enter a **Username** and select a **Password Secret Name**, or change the Auth Method.
+- **Security policy is required when security mode is Sign or Sign & Encrypt.** Select a **Security Policy**, or set Security Mode to **None**.
+- Saving fails after you remove every monitored item. Keep at least one item, or deactivate the Connection.
+
+#### A secret isn't listed in the secret dropdown
+
+Only secrets that exist in the environment are listed. Ask an Admin to add the secret in the [Secrets panel](../admin/AdminControls#secrets-panel), and then reload the page.
+
+#### There's no `opcua_` table, or no new readings
+
+- The table is created with the first reading. Check that the Connection is Live, that its monitored items were saved, and that its Host's **Deployment Settings** deploy changes to Live Connections.
+- Readings are recorded when values change. A value that stays constant on the server produces few new rows.
+- If the Connection was deleted and recreated, look for the table that matches the new Connection ID.
+
+#### A query on the table fails because of a missing partition filter
+
+Add a filter on `dt` to the `WHERE` clause. See [Where readings are stored](#where-readings-are-stored).
+
+#### Recent readings are missing from a query
+
+`dt` is based on when Ganymede received the reading. Widen the `dt` filter by an hour or so on each side, and filter on `sourceTimestamp` for the exact time window.

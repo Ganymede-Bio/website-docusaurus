@@ -21,7 +21,7 @@ The <div className="button darkblue_button"><TableOutlined /> **Data Explorer**<
   <img alt="Data Explorer - Fields" src="https://ganymede-bio.mo.cloudinary.net/apiServer/DataExplorerFields_20231108.png" />
 
     - Each field has a **Name**, a **Type**, a **BigQuery name**, a **BigQuery type**, a **Required** flag, an optional **Description**, and an optional **Unit**. **Name** and **Type** are the column name and data type you use when you work with the data in pandas. **BigQuery name** and **BigQuery type** are the column name and data type in the database; use the BigQuery name in SQL queries.
-    - If the table is partitioned, the **Partitioning** entry above the fields shows the partitioning column (or ingestion time) and granularity. If it also shows **Partition filter required**, queries on the table must filter on the partition column.
+    - If the table is partitioned, the **Partitioning** entry above the fields shows the partitioning column (or ingestion time) and granularity. If it also shows **Partition filter required**, queries on the table must filter on the partition column. Tables that OPC-UA Subscription Connections stream into (`opcua_<connectionId>`) require a filter on `dt`; see [OPC-UA Subscription Agents](../agents/OpcUaSubscription#where-readings-are-stored).
     - You can edit a schema with the [Table Structure Editor](#table-structure-editor) <img className="inline-img" src="img/data/editButton.png"/> button. In Edit mode, you can edit the table description, and add fields and change some of the field information. 
 
   - The **Preview** tab displays the first 10 data rows of the selected table.
@@ -74,6 +74,6 @@ Deleting a table is permanent. It removes the table and all its data.
 
 ### GxP validated tables
 
-Tables that are centrally managed as GxP validated assets show a **GxP Validated** badge. You can't edit or delete these tables, but you can still view and query them.
+Tables that are centrally managed as GxP validated assets show a **GxP Validated** badge. You can't edit or delete these tables, but you can still view and query them. See [GxP-validated assets](../admin/GxPValidation#gxp-validated-assets).
 
 

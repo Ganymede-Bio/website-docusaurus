@@ -1,0 +1,311 @@
+---
+id: ModularAnalysisDevelopment
+title: Developing Modular Analysis Apps
+displayed_sidebar: SDKSidebar
+sidebar_label: Modular Analysis Development
+---
+
+This page is for developers who build or change [Modular Analysis (MA)](../app/ma/ModularAnalysisOverview) apps. It covers how an app is put together, how to read Ganymede data from inside an app, how saving creates a new version, how to manage app code through the API, and how to fix an app that won't load.
+
+To use or launch existing apps, see the [Modular Analysis Overview](../app/ma/ModularAnalysisOverview).
+
+## Prerequisites
+
+- **Writer** role or higher in the environment to use **Edit code** and **Edit App**. Users with the **Runner** role or higher can launch apps.
+- Working knowledge of Python and [Panel](https://panel.holoviz.org/), the open-source library that MA apps are built with.
+- To manage app code through the API, an API key. See [Connect to Ganymede API](../app/configuration/APISetup).
+
+:::note
+Apps marked **GxP Validated** are centrally managed. You can launch them, but you can't edit their code or settings, and the API rejects code changes to them.
+:::
+
+## How an MA app works
+
+An MA app is a Panel app. Its source code is stored as Python files in a folder for the app in your environment's repository, and the app's entry point is `app.py`.
+
+When you create an app, Ganymede commits a starter `app.py` to the app's folder:
+
+```python
+import panel as pn
+
+pn.extension()
+
+def render():
+    print("Rendering Slider")
+    slider = pn.widgets.IntSlider(name="Slider 123", start=0, end=5, value=3)
+    return pn.Column(slider.rx() * "x")
+
+layout = render()
+layout.servable()
+```
+
+Ganymede builds a single-cell notebook from the app's Python files. That notebook is what opens when you click **Edit code**, and it's what Ganymede runs when someone launches the app. Each user who launches the app gets their own session, and anything your code marks with `.servable()` is shown in the app.
+
+### Single-file and multi-file apps
+
+Keep your app in a single `app.py` file where you can. When the app folder contains a single Python file, Ganymede uses its code as-is, so what you write is exactly what runs.
+
+You can split a larger app into several modules, for example `app.py` plus a `lib/` package. When an app has more than one Python file, Ganymede combines them into one notebook cell:
+
+- Modules are ordered by their imports, and `app.py` always runs last.
+- Top-level imports from all files are merged into one import section at the top of the cell, and imports between your own modules are removed.
+- References such as `module.function` to your own modules are rewritten to the bare name.
+- All `pn.extension(...)` calls are merged into one call.
+- Each module's code follows a comment header with the module's name. When you save, Ganymede uses these headers to split the cell back into separate files.
+
+Because everything runs in one namespace, keep these rules in mind for multi-file apps:
+
+- Top-level names (functions, classes, variables) must be unique across all of your modules.
+- Put imports at the top level of each file, not inside functions or `if` blocks.
+- When you edit the combined cell in the notebook, don't change or remove the module header comments.
+- Files named `__init__.py`, `test_*.py` or `*_test.py`, and hidden files are not included in the app.
+
+The [qPCR](../app/ma/apps/qPCR) base app is an example of a multi-file app: `app.py` builds the layout, separate modules handle data loading, the sidebar, and visualizations, and shared helpers live in a `lib/` package.
+
+## Edit app code in the notebook
+
+1. Go to **Analysis > Modular Analysis**.
+2. On the app's card, click **Edit code**. The notebook opens in a new tab when it's ready.
+3. Edit the code. The notebook uses the **Modular Analysis** kernel, so you can run cells to check your code for errors.
+4. Save your changes. See [Save and create a new version](#save-and-create-a-new-version).
+5. Launch the app from its card to confirm that it loads and works.
+
+:::warning
+Each time someone opens **Edit code** or launches the app, Ganymede rebuilds the notebook from the most recently saved code. Unsaved changes in the notebook are discarded, so save before you launch the app to test it.
+:::
+
+:::warning
+Every code cell in the notebook is saved into the app's code; Markdown cells are not. Delete any scratch or test cells before you save.
+:::
+
+:::note
+The notebook and the running app use separate Python environments. Code that runs in the notebook can still fail when the app loads, for example if it imports a package that isn't available to running apps. Always launch the app after you save to confirm that it loads.
+:::
+
+## Read Ganymede data in your app
+
+Use the `modular_analysis` package to read and write Ganymede data from an app. Its services call the Ganymede API as the user who is running the app, so each user sees only the data their role allows.
+
+:::warning
+The `ganymede_sdk` package, including the [Ganymede class](./GanymedeClass) and the `ganymede_sdk.panel` widgets, is for Flows and notebooks. It isn't available to running MA apps, so an app that imports it fails to load. Use the `modular_analysis` equivalents on this page instead.
+:::
+
+### Query tables
+
+`SqlService.retrieve_sql` runs a SQL query against your environment's tables and returns a pandas DataFrame. Write table names in backticks, as in the [Data Explorer](../app/tables/DataExplorer).
+
+```python
+import panel as pn
+from modular_analysis.services.sql_service import SqlService
+
+pn.extension("tabulator")
+
+sql_service = SqlService()
+
+runs = sql_service.retrieve_sql(
+    "SELECT * FROM `instrument_runs` ORDER BY run_date DESC LIMIT 100"
+)
+
+pn.widgets.Tabulator(runs).servable()
+```
+
+| Method | Description |
+| --- | --- |
+| `retrieve_sql(query)` | Runs one query and returns a DataFrame. |
+| `retrieve_sql_batch(queries)` | Runs a list of queries one after another and returns a list of DataFrames. |
+| `retrieve_sql_parallel(queries, max_workers=4)` | Runs a list of queries in parallel and returns a list of DataFrames in the same order as the queries. |
+
+### Work with files
+
+`FileService` finds, downloads, and uploads files in your environment.
+
+```python
+from modular_analysis.services.file_service import FileService
+
+file_service = FileService()
+
+# Find files by tag (tagName:tagValue) and download the first match
+files = file_service.get_files(tag="Experiment:EXP-001")
+content = file_service.download_file(files[0].uri)
+
+# Upload a file; returns the new file's URI
+file_uri = file_service.upload_file("summary.csv", file_content=b"sample,value\nA,1\n")
+```
+
+| Method | Description |
+| --- | --- |
+| `get_files(**filters)` | Lists files. Accepts the same filters as the [`getFiles`](/api#tag/Files/getFiles) endpoint, such as `tag`, `name`, `created_after`, and `created_before` (epoch time in milliseconds). |
+| `get_file(file_ref)` | Returns a file's metadata, including its `uri`, `name`, and `tags`. |
+| `download_file(file_uri)` | Returns the file's contents as bytes. |
+| `upload_file(file_name, file_content)` | Uploads bytes as a new file and returns its URI. By default, the upload is attributed to the user running the app. |
+
+### Start a Flow
+
+To run a Flow from an app, use `FlowService` with `FlowInputBuilder`, or add a `RunFlowButton` that starts the Flow when clicked. `FlowInputBuilder` takes the name of the input node in the Flow.
+
+```python
+from modular_analysis.components import RunFlowButton
+from modular_analysis.services.flow_service import FlowInputBuilder, FlowService
+
+# Start a Flow directly
+FlowService().trigger_flow(
+    "my-flow",
+    flow_inputs=[
+        FlowInputBuilder("Input_File").from_file_upload("results.csv", b"sample,value\nA,1\n"),
+        FlowInputBuilder("Input_Param").from_string_param("EXP-001"),
+    ],
+)
+
+# Or add a button that builds the inputs when clicked
+def build_inputs():
+    return [FlowInputBuilder("Input_Param").from_string_param("EXP-001")]
+
+run_button = RunFlowButton("my-flow", build_inputs)
+```
+
+`RunFlowButton` also accepts `pre_submit_check`, a function that must return `True` for the Flow to start, and `on_submission` (`FlowSubmission.DISABLE` or `FlowSubmission.RESET`, imported from `modular_analysis.components.widgets.run_flow`), which controls whether the button stays disabled or resets after it starts a Flow.
+
+### Other components
+
+The `modular_analysis.components` module also includes:
+
+| Component | Description |
+| --- | --- |
+| `TableWidgetWithDownloadButton` | A Panel Tabulator table with a button to download its data. |
+| `DownloadablePane` | Wraps a Panel pane, such as a plot, and adds a download button. |
+| `GanymedeStyledButton` | A Panel button that accepts a color and variant. |
+| `GanymedeHeader` | A header pane with a customizable icon. |
+
+### Call other API endpoints
+
+For anything the services don't cover, use the `ganymede_api` client with `GanymedePanelApiClient`, which adds the current user's credentials to each request. The available operations are listed in the [API Reference](/api).
+
+```python
+import ganymede_api
+from modular_analysis.ganymede_api.client import GanymedePanelApiClient
+from modular_analysis.ganymede_api.config import get_config
+
+with GanymedePanelApiClient() as api_client:
+    flows = ganymede_api.FlowsApi(api_client).get_flows_v2(get_config()["env"])
+```
+
+## Get the current user
+
+`get_current_user` returns the email address of the user who is running the current session. Use it to show who is signed in, to filter data to the user, or to record who made a change.
+
+```python
+from modular_analysis.auth import get_current_user
+
+user_email = get_current_user()
+```
+
+`get_current_user` raises a `ValueError` if it can't find the user's credentials.
+
+## Sessions
+
+Ganymede records a session each time a user opens an app. You don't need to add any code for this.
+
+- The session starts when the app finishes loading.
+- While the user is active in the app, Ganymede updates the session's last activity time.
+- The session ends when the user leaves the app page or closes the browser tab. If the browser doesn't report this, the session ends after about five minutes with no activity. If the user comes back to the tab, the session resumes.
+
+Sessions appear on the **Sessions** tab of the Modular Analysis page and are available through the [`getModularAnalysisSessions`](/api#tag/ModularAnalysis/getModularAnalysisSessions) endpoint. Each session records the app, the user, and the start, end, and last activity times.
+
+## Save and create a new version
+
+Saving in the notebook commits your code and creates a new version of the app. To save:
+
+- Click the save button in the notebook toolbar,
+- Press `Cmd+Shift+S` (Mac) or `Ctrl+Shift+S` (Windows/Linux), or
+- Select **Kernel > Save Commit and Deploy**.
+
+Ganymede lints the code and then asks for a commit message. If linting finds problems, you can click **Cancel** to go back and fix them, or click **Save and commit** to save anyway. If you leave the message blank, the commit message is `Commit from analysis notebook`.
+
+When the commit completes:
+
+- The app's card shows the new version as **Version: YYYYMMDD-HHmmssSSS**, the date and time of the commit.
+- The next time someone launches the app, it runs the new code.
+- Users who already have the app open see **A newer version of this app has been committed to the repo.** Clicking **Refresh** reloads the app with the new version.
+
+## View versions and compare changes
+
+1. Go to **Analysis > Modular Analysis**.
+2. On the app's card, click **Edit App**.
+3. Click the **History** tab.
+
+The **History** tab lists every version of the app, newest first:
+
+| Column | Description |
+| --- | --- |
+| **Version** | The version identifier, based on the commit time. |
+| **Information** | The commit message and the date the version was created. |
+| **Created By** | The user who made the commit, if known. |
+
+Expand a row to compare that version with the latest version. Each changed file is shown side by side, with the older version on the left and the latest version on the right.
+
+## Manage app code with the API
+
+You can read and update app code, list versions, and compare versions through the Ganymede API, for example to edit an app in your own IDE or to sync code from source control. Endpoints identify an app by its slug, which is the app's folder name. The slug is shown in the breadcrumb on the **Edit App** page and is returned by [`getModularAnalysisApps`](/api#tag/ModularAnalysis/getModularAnalysisApps).
+
+| Operation | Method and path | Description |
+| --- | --- | --- |
+| [`getModularAnalysisAppCode`](/api#tag/ModularAnalysis/getModularAnalysisAppCode) | `GET /v1/environment/{environment}/modularAnalysis/{slug}/code` | Returns the app's files. Each file has a `path`, relative to the app folder, and its `content`. |
+| [`updateModularAnalysisAppCode`](/api#tag/ModularAnalysis/updateModularAnalysisAppCode) | `PUT /v1/environment/{environment}/modularAnalysis/{slug}/code` | Writes files to the app folder in one commit, which creates a new version. Returns the app's files after the update. |
+| [`getPanelAppVersions`](/api#tag/ModularAnalysis/getPanelAppVersions) | `GET /v1/environment/{environment}/modularAnalysis/{slug}/versions` | Lists the app's versions, newest first, with each version's commit message, commit SHA, commit time, and author email. |
+| [`panelAppVersionDiff`](/api#tag/ModularAnalysis/panelAppVersionDiff) | `GET /v1/environment/{environment}/modularAnalysis/{slug}/diff/{oldVersion}/{newVersion}` | Returns each file that changed between two versions, with its contents at both versions. |
+| [`updateModularAnalysisAppMetadata`](/api#tag/ModularAnalysis/updateModularAnalysisAppMetadata) | `PATCH /v1/environment/{environment}/modularAnalysis/{slug}/metadata` | Updates the app's display name (`appName`) and `description`. |
+
+### Update app code
+
+The request body for `updateModularAnalysisAppCode` has these fields:
+
+| Field | Required | Description |
+| --- | --- | --- |
+| `files` | Yes | One or more files, each with a `path` relative to the app folder (for example, `app.py`) and its full `content`. Paths can't be absolute or contain `..`. |
+| `commitMessage` | No | The commit message. Defaults to `Update Modular Analysis app '<slug>' code`. |
+| `authorEmail` | No | The email of the user to attribute the commit to. Must be a user in the environment. |
+
+```bash
+curl -X PUT "https://<your-subdomain>.ganymede.bio/v1/environment/<environment>/modularAnalysis/<slug>/code" \
+  -H "api-key: <your-api-key>" \
+  -H "Content-Type: application/json" \
+  -d '{
+        "files": [{"path": "app.py", "content": "import panel as pn\n\npn.extension()\n\npn.pane.Markdown(\"Hello\").servable()\n"}],
+        "commitMessage": "Simplify layout"
+      }'
+```
+
+Each file you send fully replaces the file at that path. Files you don't include are left unchanged, so to remove a module you no longer use, delete it from the app in the notebook instead.
+
+The endpoint returns `403` for **GxP Validated** apps and `404` if the slug doesn't exist.
+
+### Compare versions
+
+To compare two versions, call `getPanelAppVersions` and pass two of the returned `version` values to `panelAppVersionDiff` as `oldVersion` and `newVersion`.
+
+## Troubleshooting
+
+### The app doesn't load
+
+If the app fails to start, the app page shows **App failed to load** and the **Logs** tab is marked with a red dot. Open the **Logs** tab to see the error and Python traceback. The **Logs** tab shows errors from your current session of the app:
+
+- Errors raised while the app starts, such as a syntax error, a missing import, or an exception in top-level code, prevent the app from loading.
+- Errors raised later, for example in a callback when a user clicks a button, are logged while the app keeps running.
+
+The **Logs** tab shows errors only. Output from `print` isn't shown there.
+
+Common causes of load errors:
+
+| Cause | Fix |
+| --- | --- |
+| The app imports `ganymede_sdk` or a package that isn't available to running apps. | Use the `modular_analysis` services described on this page. |
+| The code contains `from __future__ import ...`. | Remove it. Ganymede adds its own code before yours when it runs the app, so a `from __future__` import is no longer at the top of the file and Python raises a `SyntaxError`. |
+| A multi-file app has duplicate top-level names, or imports inside functions. | Follow the [rules for multi-file apps](#single-file-and-multi-file-apps), or combine the app into a single `app.py`. |
+| Test or scratch cells were saved with the app. | Remove the extra cells in the notebook and save again. |
+
+After you fix the code, save it and launch the app again.
+
+### Changes don't appear in the app
+
+- Make sure you saved and committed your changes; the version on the app's card should show the time of your commit.
+- If the app was already open when you saved, click **Refresh** in the banner at the top of the app, or reload the page.

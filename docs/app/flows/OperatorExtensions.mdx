@@ -1,0 +1,209 @@
+---
+id: OperatorExtensions
+title: Operator Extensions
+displayed_sidebar: webUiSidebar
+toc_max_heading_level: 3
+---
+
+## Overview
+
+Each node in a Flow runs in a container built from a stock Ganymede image for that node type, called an operator. The image includes the Python packages that node type needs. When your node code needs a package or an OS dependency that the stock image doesn't include, you can extend the operator: you add a `Dockerfile` to your environment's pipeline repository that builds on the stock image, then run a GitHub workflow that builds the image and switches the operator to it.
+
+Operator extensions replace the `RunContainer` node, which is no longer available. Instead of running a separate container step, you add what you need to the container your existing node already runs in.
+
+An extension applies to every node of that operator in the environment. For example, extending `python_node` changes the image for every Python node in the environment.
+
+## When you need an extension
+
+You need an extension when a flow run fails with an error like this in the node's logs:
+
+```text
+ModuleNotFoundError: No module named 'docx'
+```
+
+The same code can work in the Node Editor notebook, because the notebook server has its own set of packages. Flow runs use the operator image, not the notebook's packages.
+
+Don't add the package to `environment/requirements.txt`. That file sets packages for the environment that deploys and schedules your Flows, not for node containers. See [Pipeline Repository Structure](../configuration/PipelineRepoStructure#environment-configuration-environment).
+
+## Prerequisites
+
+- Access to your environment's pipeline repository on GitHub, with permission to push to `main` and run GitHub Actions workflows.
+- The repository contains `.github/workflows/deploy-tenant-operator.yaml` (the **Deploy Tenant Operator** workflow).
+
+If you use a [self-managed repository](../configuration/SelfManagedRepo), you can't add an extension from it: the commits API only syncs Flow code, `lib/` and connector code. If you don't have access to the pipeline repository, [contact Ganymede Support](../Support#ganymede-support) with the operator name and the packages you need.
+
+## Add a package to a node's container
+
+### 1. Find the node's operator
+
+Look up the node type in the [node type to operator table](#node-type-to-operator) below. The operator name is the folder name you create under `operators/` and the key in `environment/container-versions.yaml`.
+
+Extend the operator of the node that raises the error. If the failing import is in an `Input_File` node, extending `python_node` doesn't help; that node runs in `file_read`.
+
+If you renamed the node and aren't sure of its type, get the Flow with the `getFlowV2` operation of the [Ganymede API](/api). Each task's `operator` value is a class path such as `ganymede.operators.csv.csv_to_bq_pod.PodOperator`. The operator name is the segment before `.PodOperator`, without `_pod`: here, `csv_to_bq`.
+
+### 2. Test the package in the Node Editor (optional)
+
+Before you build an image, you can check that your code works with the package. Open the node's notebook from the Flow Editor, then run this in a cell in the Testing Section:
+
+```python
+import sys
+!uv pip install --python {sys.executable} python-docx==1.2.0
+```
+
+Restart the kernel (**Kernel > Restart Kernel**), then run your code. The notebook kernels don't include `pip`, so use `uv pip` rather than `%pip`.
+
+If the install fails with a `401 Unauthorized` error for a package index, install from PyPI only:
+
+```python
+import sys
+!uv pip install --python {sys.executable} --no-config --default-index https://pypi.org/simple python-docx==1.2.0
+```
+
+:::note
+This installs the package in your notebook session only. It's removed when the notebook server restarts, and it doesn't change the image your flow runs use.
+:::
+
+### 3. Write the Dockerfile
+
+Create `operators/<OPERATOR_NAME>/Dockerfile` in the pipeline repository. For a Python node, that's `operators/python_node/Dockerfile`:
+
+```dockerfile
+ARG VERSION=latest
+
+FROM <stock-image-path>/ganymede_python_node:${VERSION}
+
+RUN uv pip install --system python-docx==1.2.0
+```
+
+- **Base image**: the stock image for an operator is named `ganymede_<OPERATOR_NAME>`. Replace `<stock-image-path>` with the path that the stock entries in `environment/container-versions.yaml` use: everything before `/ganymede_<operator>:`. If your repository already has a Dockerfile under `operators/`, copy its `FROM` line and change the image name.
+- **`ARG VERSION`**: the workflow passes its `BASE_VERSION` input as `VERSION`, so keep the `${VERSION}` tag.
+- **Python packages**: the stock images include `uv`. Install with `uv pip install --system`, and pin versions so rebuilds are repeatable.
+- **OS packages**: the stock images are Debian-based. Install OS packages before your Python packages:
+
+  ```dockerfile
+  RUN apt-get update && apt-get install -y --no-install-recommends <package> \
+      && rm -rf /var/lib/apt/lists/*
+  ```
+
+- **Build context**: the image builds from the root of the repository, so `COPY` paths are relative to the root. Wheel files (`.whl`) placed directly in `operators/` are copied to the root of the build context, so you can `COPY` and install a private package:
+
+  ```dockerfile
+  COPY my_package-1.0.0-py3-none-any.whl /tmp/
+  RUN uv pip install --system /tmp/my_package-1.0.0-py3-none-any.whl
+  ```
+
+Commit the Dockerfile and merge it to `main`.
+
+:::note
+Merging the Dockerfile starts the **Deploy Container** workflow, which builds the image but doesn't change which image your nodes use. Run **Deploy Tenant Operator** to switch the operator to your image.
+:::
+
+### 4. Build and deploy the image
+
+1. In the pipeline repository on GitHub, open **Actions** and select **Deploy Tenant Operator**.
+2. Select **Run workflow** and set **Use workflow from** to `main`.
+3. Enter the inputs below, then select **Run workflow**.
+
+| Input | Required | Default | Description |
+| --- | --- | --- | --- |
+| `OPERATOR_NAME` | Yes | | The folder name under `operators/`, for example `python_node`. It must match the operator's key in `environment/container-versions.yaml`. |
+| `BASE_VERSION` | No | `latest` | The tag of the stock image to build from. To match the stock release your environment runs, use the tag from a stock entry in `container-versions.yaml` (the part after the colon, in the form `YYYYMMDD-HHMMSS-<version>`). |
+
+The workflow:
+
+1. Builds `operators/<OPERATOR_NAME>/Dockerfile`.
+2. Pushes the image to your environment's container registry, tagged with the build time (`YYYYMMDD-HHMMSS`).
+3. Sets the operator's entry in `environment/container-versions.yaml` to the new image and commits the change to `main`.
+
+:::warning
+Run the workflow from `main`. The workflow commits to `main`, so a run started from another branch fails at the **Commit changes** step.
+:::
+
+### 5. Check the pin and re-run the Flow
+
+After the workflow finishes, `environment/container-versions.yaml` on `main` points the operator at your image:
+
+```yaml
+python_node:
+  dev: <your-environment-registry>/python_node:20261001-221057
+```
+
+The key is always `dev`, whatever your environment is called. When this change reaches `main`, Ganymede switches every node of that operator to the new image. Re-run the Flow to confirm the import works.
+
+## What happens when Ganymede releases new operators
+
+When Ganymede releases new stock operator images, the **Update Container Versions** workflow replaces `environment/container-versions.yaml`. For each folder under `operators/`, it:
+
+1. Keeps your operator's current pin, so your nodes continue to use your image.
+2. Starts **Deploy Tenant Operator** with `BASE_VERSION` set to the new stock release, which rebuilds your extension on the new release and pins the result.
+
+You'll see two `Update container-versions.yaml` commits on `main` for each release. If the rebuild fails, your nodes keep using your previous image.
+
+## Roll back or remove an extension
+
+- **Roll back**: edit the operator's entry in `environment/container-versions.yaml` to point at an earlier tag of your own image, and commit it to `main`.
+- **Remove**: delete the `operators/<OPERATOR_NAME>/` folder. To switch back to the stock image right away, set the operator's entry to the stock image, using the same path and tag as the other stock entries. Otherwise, the next Ganymede release pins the stock image.
+
+## Node type to operator
+
+Several node types share an operator. For example, `CSV_Read` and `CSV_Read_Multi` both run in `csv_to_bq`, so one extension covers both.
+
+| Node type | Operator (`OPERATOR_NAME`) |
+| --- | --- |
+| `Python` | `python_node` |
+| `Trigger_Python` | `trigger_python` |
+| `Transform_SQL` | `transform_sql` |
+| `Input_File`, `Input_File_Multi` | `file_read` |
+| `Input_Param` | `input_param` |
+| `CSV_Read`, `CSV_Read_Multi` | `csv_to_bq` |
+| `CSV_Write` | `csv_write` |
+| `Excel_Read`, `Excel_Read_Multi` | `excel_read` |
+| `Excel_Write` | `excel_write` |
+| `Image_Read`, `Image_Read_Multi` | `image_read` |
+| `Image_Write` | `image_write` |
+| `PDF_Read`, `PDF_Read_Multi` | `pdf_read` |
+| `Powerpoint_Write` | `powerpoint` |
+| `XML_Read`, `WSP_Read` | `xml_read` |
+| `Zip_Read` | `zip_read` |
+| `LC_Read`, `LC_Read_Multi` | `lc_read` |
+| `LCMS_Read`, `LCMS_Read_Multi` | `lcms_read` |
+| `API_Node` | `api` |
+| `Airtable_Import` | `airtable_import` |
+| `Airtable_Export` | `airtable_export` |
+| `Azure_Read` | `azure_read` |
+| `Azure_Write` | `azure_write` |
+| `Azure_Query` | `azure_sql` |
+| `Benchling_Write` | `benchling_api` |
+| `Benchling_Write_Object` | `benchling_write_object` |
+| `Benchling_Warehouse_Query` | `benchling_warehouse` |
+| `Benchling_Warehouse_Sync` | `benchling_sync_warehouse` |
+| `Benchling_Event` | `benchling_event` |
+| `Coda_Read` | `coda_read` |
+| `Coda_Write` | `coda_write` |
+| `ELabNext_Write` | `elabnext_write` |
+| `Load_Parquet_to_Table` | `parquet_to_table` |
+| `S3_Read` | `s3_read` |
+| `S3_Write` | `s3_write` |
+| `S3_Event` | `s3_event` |
+| `Smartsheet_Read` | `smartsheet_read` |
+| `Snowflake_Write` | `snowflake_write` |
+| `Webhook_Event` | `webhook_event` |
+
+If a node type isn't listed, find its operator from the Flow definition as described in [Find the node's operator](#1-find-the-nodes-operator).
+
+## Troubleshooting
+
+#### The Flow still fails with `ModuleNotFoundError` after the rebuild
+
+- Check that you extended the operator of the node that fails. See [Node type to operator](#node-type-to-operator).
+- Check that `environment/container-versions.yaml` on `main` points that operator at your new image tag. If it doesn't, the workflow didn't finish; check its run in **Actions**.
+- Check the import name. Some packages install under a different name than you import; for example, you install `python-docx` and import `docx`.
+
+#### Deploy Tenant Operator fails at the Commit changes step with `src refspec main does not match any`
+
+The workflow ran from a branch other than `main`. Merge the Dockerfile to `main`, then run the workflow again with **Use workflow from** set to `main`.
+
+#### Deploy Tenant Operator fails at the Build Docker image step
+
+Check the build log for the failing line in your Dockerfile. Common causes are a `FROM` path or image name that doesn't match the operator, a `BASE_VERSION` tag that doesn't exist, or a package version that can't be installed. If you can't resolve it, [contact Ganymede Support](../Support#ganymede-support) with the link to the workflow run.

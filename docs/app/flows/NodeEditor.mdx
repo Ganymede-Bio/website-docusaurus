@@ -109,6 +109,12 @@ Multiple queries can be specified as input by separating them with semicolons. T
 
 ### User-defined Python
 
+:::tip
+
+Node code can import shared modules from the environment's `lib/` folder; see [Shared code](../configuration/PipelineRepoStructure#shared-code-lib). If a package works in the notebook but a flow run fails with `ModuleNotFoundError`, see [Operator Extensions](./OperatorExtensions).
+
+:::
+
 ```python
 import pandas as pd
 from typing import Union, List
