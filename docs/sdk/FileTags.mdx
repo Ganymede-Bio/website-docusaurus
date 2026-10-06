@@ -13,8 +13,8 @@ The Ganymede SDK provides methods for interacting with File Tags from the Flow e
 
 Adds a file tag to a file.
 
-- _param_ **input_file_path**: str - The name of the file to tag.  The file path can be obtained from the keys in the dictionary returned by the [retrieve_files](../sdk/GanymedeClass#method-retrieve_files) for Ganymede class or by calling the [get_gcs_uri method](#get_gcs_uri).
-- _param_ **tag_type_id**: str - The name of the tag type to apply to the file.  This corresponds with the tag type created on the Manage Tag Types tab of the Files page in the Ganymede UI.
+- _param_ **input_file_path**: str - The name of the file to tag.  The file path can be obtained from the keys in the dictionary returned by the [retrieve_files](../sdk/GanymedeClass#method-retrieve_files) for Ganymede class or by calling the [get_uri function](#get_uri).
+- _param_ **tag_type_id**: str - The name of the tag type to apply to the file.  This corresponds with the tag type created on the Manage Tag Types tab of the File Browser in the Ganymede UI.
 - _param_ **display_value**: str - Value to apply to the tag.
 - _param_ **tag_id**: str | None - The tag id that acts as a unique identifier for the tag. 
 - _param_ **url**: str | None - URL associated with the file Tag, which can be used to link the tag to external sources
@@ -24,7 +24,7 @@ Adds a file tag to a file.
 
 Gets all tags for a file.
 
-- _param_ **input_file_path**: Path to the file for listing tags.  This path is the GCS URI, which can be obtained by passing the file path to the [get_gcs_uri function](#get_gcs_uri).
+- _param_ **input_file_path**: Path to the file for listing tags.  This path is the cloud storage URI (`gs://` or `s3://`), which can be obtained by passing the file path to the [get_uri function](#get_uri).
 - _param_ **bucket**: str | None - The bucket to use for the file uri; either "input" or "output"
 
 ### delete_file_tag
@@ -32,7 +32,7 @@ Gets all tags for a file.
 Deletes all tags of type tag_type_id from the specified file.
 
 - _param_ **tag_type_id**: str - Tag type to delete
-- _param_ **input_file_path**: Path to the file for listing tags.  This path is the GCS URI, which can be obtained by passing the file path to the [get_gcs_uri function](#get_gcs_uri).
+- _param_ **input_file_path**: Path to the file for listing tags.  This path is the cloud storage URI (`gs://` or `s3://`), which can be obtained by passing the file path to the [get_uri function](#get_uri).
 - _param_ **bucket**: str | None - The bucket to use for the file uri; either "input" or "output"
 
 ### delete_specific_file_tag
@@ -41,7 +41,7 @@ Deletes a specific tag from a File.
 
 - _param_ **tag_type_id**: str - Tag type to delete
 - _param_ **tag_value**: str - Value of the specific tag to delete
-- _param_ **file_uri**: Path to the file for listing tags.  This path is the GCS URI, which can be obtained by passing the file path to the [get_gcs_uri function](#get_gcs_uri).
+- _param_ **file_uri**: Path to the file for listing tags.  This path is the cloud storage URI (`gs://` or `s3://`), which can be obtained by passing the file path to the [get_uri function](#get_uri).
 - _param_ **bucket**: str | None - The bucket to use for the file uri; either "input" or "output"
 
 ### upsert_file_tag
@@ -49,7 +49,7 @@ Deletes a specific tag from a File.
 Add or replace a file tag on a file.
 
 - _param_ **input_file_path**: str - The name of the file to tag.  The file path can be obtained from the keys in the dictionary returned by the [retrieve_files](../sdk/GanymedeClass#method-retrieve_files) for Ganymede class.
-- _param_ **tag_type_id**: str - The name of the tag type to apply to the file.  This corresponds with the tag type created on the Manage Tag Types tab of the Files page in the Ganymede UI.
+- _param_ **tag_type_id**: str - The name of the tag type to apply to the file.  This corresponds with the tag type created on the Manage Tag Types tab of the File Browser in the Ganymede UI.
 - _param_ **display_value**: str - Value to apply to the tag.
 - _param_ **tag_id**: str | None - The tag id that acts as a unique identifier for the tag. 
 - _param_ **url**: str | None - URL associated with the file Tag, which can be used to link the tag to external sources
@@ -66,9 +66,28 @@ Retrieve File URL associated with the specified file.
 - _param_ **filename** : str - Path to the file within the bucket, without a leading slash
 - _param_ **bucket**: str - Bucket that the file is in; either 'input' or 'output'
 
+### get_uri
+
+Retrieve the cloud storage URI associated with a file path.  The URI starts with `gs://` or `s3://`, depending on where the environment is hosted.  This function does not check that the file exists.
+
+- _param_ **bucket_type**: str - Bucket that the file is in; either 'input' or 'output'
+- _param_ **file_path** : str - Path to the file within the bucket, without a leading slash.  The file path can be obtained using the [list_files method](./GanymedeClass#method-list_files)
+
+```python
+from ganymede_sdk.storage import get_uri
+
+file_uri = get_uri("output", "my_folder/my_file.csv")
+```
+
 ### get_gcs_uri
 
-Retrieve GCS URI associated with file path.
+:::warning
 
-- _param_ **file_path** : str - Path to the file within the bucket, without a leading slash.  The file path can be obtained using the [list_files method](./GanymedeClass#method-list_files)
+`get_gcs_uri` is deprecated and will emit a `DeprecationWarning`.  Use [get_uri](#get_uri) instead, which takes the same parameters.
+
+:::
+
+Retrieve the cloud storage URI associated with a file path.
+
 - _param_ **bucket_type**: str - Bucket that the file is in; either 'input' or 'output'
+- _param_ **file_path** : str - Path to the file within the bucket, without a leading slash.

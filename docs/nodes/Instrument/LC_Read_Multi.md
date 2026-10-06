@@ -8,11 +8,11 @@ displayed_sidebar: webUiSidebar
 
 ### Node Description
 
-Parse data from CDF files with LC data and ingest into Ganymede data lake.
+Parse data from an LC file and ingest into Ganymede data lake.
 
 ### Node Attributes
 
-- **lc**
+- **lc** (parameter key: `input_multi_lc`)
   - Glob pattern matching the LC file to be read.
 
 ### Example

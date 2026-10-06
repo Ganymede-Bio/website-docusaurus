@@ -15,7 +15,7 @@ return one or more tables for storage in Ganymede data lake.
 
 ### Node Attributes
 
-- **pdf**
+- **pdf** (parameter key: `input_file_pdf`)
   - File extension for valid PDF files submitted.  For example, filling in this attribute with "*.pdf" will only allow files with the extension .pdf to be uploaded.
 - **output_table_results**
   - Table displayed on [Table Head](https://docs.ganymede.bio/app/intro/Concepts#table-head) in Ganymede UI.

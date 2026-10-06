@@ -15,8 +15,11 @@ and uses result to execute downstream flow
 
 ## User-Defined Python
 
-The [FlowInputs object](../NodeOverview#flowinputs-object) holds the inputs for the Flow to trigger.
+Processes data, then optionally triggers downstream Flow.
 
+FlowInputs holds the inputs for the Flow to trigger.
+
+There are three types of inputs for Flows:
 - files: Files to be passed to the Flow to trigger
 - params: Input parameters to be passed to the Flow to trigger
 - tags: Flow Tags to be passed to the Flow to trigger
@@ -25,14 +28,16 @@ The [FlowInputs object](../NodeOverview#flowinputs-object) holds the inputs for 
 
 - **df_sql_result** : `pd.DataFrame | list[pd.DataFrame]`
   - Table(s) or list of tables retrieved from user-defined SQL query
-- **ganymede_context** : `Optional[GanymedeContext]`
+- **ganymede_context** : `GanymedeContext`
   - Ganymede context variable, which stores flow run metadata
 
 ### Returns
 
-`tuple[str, FlowInputs]`
+`tuple[str | None, FlowInputs | None]`
   Tuple where first element is the ID of the flow to trigger
-  and second element is the FlowInputs class containing all inputs for the flow to trigger
+  and second element is the FlowInputs class containing all inputs for the flow to trigger.
+ 
+  To prevent any flow from being triggered, return (None, None).
 
 ### Notes
 

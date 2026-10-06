@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * Prepare OpenAPI spec for Scalar
- * - Filters out API groups (Secrets, Hosts)
+ * - Filters out internal API groups (AppsSync)
  * - Removes duplicate/unwanted tags
  * - Groups Tempo endpoints separately (Tempo-tenant-only) via x-tagGroups
  * - Applies compatibility fixes
@@ -12,7 +12,7 @@ const path = require('path');
 const yaml = require('js-yaml');
 
 const SPEC_PATH = path.join(__dirname, '..', 'static', 'openapi.yaml');
-const FILTERED_GROUPS = ['Secrets', 'AppsSync'];
+const FILTERED_GROUPS = ['AppsSync'];
 const UNWANTED_TAGS = ['PublicApi', 'ganymede'];
 // Tempo endpoints are only available to Tempo-enabled tenants, so they are
 // shown as a separate group in the rendered docs (still included, but set apart
@@ -37,7 +37,7 @@ try {
   let tagsRemoved = 0;
   let deprecatedRemoved = 0;
 
-  // 1. Filter out API groups (Secrets, Hosts) and deprecated endpoints
+  // 1. Filter out internal API groups (AppsSync) and deprecated endpoints
   console.log('   🔍 Filtering API groups and deprecated endpoints...');
   for (const [path, pathItem] of Object.entries(spec.paths)) {
     const methods = ['get', 'post', 'put', 'patch', 'delete', 'options', 'head'];

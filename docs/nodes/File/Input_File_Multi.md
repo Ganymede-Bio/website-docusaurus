@@ -13,10 +13,8 @@ result to Ganymede cloud storage.
 
 ### Node Attributes
 
-- **file_pattern**
-  - Filename pattern for specifying valid input files.  For example, filling in this attribute
-  - with "exp_*.xml" will only allow files with the prefix "exp_" and the extension ".xml" to
-  - be uploaded.
+- **file_pattern** (parameter key: `input_multi_file_pattern`)
+  - Filename pattern for specifying valid input files.  For example, filling in this attribute with "exp_*.xml" will only allow files with the prefix "exp_" and the extension ".xml" to be uploaded.
 
 ### Example
 

@@ -69,7 +69,7 @@ For Agent notebooks:
 ```python
 from ganymede_sdk import lib
 
-if lib._is_agent_notebook_():
+if lib._is_agent_notebook():
     print("This is an Agent notebook")
 else:
     print("This is not an Agent notebook")
@@ -101,16 +101,16 @@ else:
     print("This is not agent code")
 ```
 
-### Detecting Airflow Pipeline Execution
+### Detecting Flow Execution
 
-To check if the flow is running in Airflow, use:
+To check if the code is running in a Flow pod, use `_is_airflow`.  Despite its name, this function doesn't depend on Airflow; it returns True when the `GANYMEDE_POD` environment variable is set, which is the case for Nodes executed as part of a Flow run.
 
 ```python
 from ganymede_sdk import lib
 
 if lib._is_airflow():
-    print("Flow is running in airflow")
+    print("Code is running in a Flow pod")
 else:
-    print("Flow is not running in airflow")
+    print("Code is not running in a Flow pod")
 ```
 

@@ -639,3 +639,6 @@ PyPI
 ModularAnalysisDevelopment
 OperatorExtensions
 PipelineRepoStructure
+bqstorage
+EnvironmentDetection
+UAT

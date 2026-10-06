@@ -24,7 +24,7 @@ Signals object to interact with Signals API through read and write type methods.
 &nbsp; &nbsp; &nbsp; &nbsp; Tag associated with flow run  
 
 
-## `function` Signals.__init__
+## `function` Signals.\_\_init\_\_
   
 Set up the Signals object  
   

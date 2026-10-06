@@ -12,7 +12,12 @@ Loads parquet files saved in Ganymede storage into data lake tables.
 
 ## User-Defined Python
 
-Specify list of Ganymede Parquet files to reference in Ganymede tables.  
+Specify list of Ganymede Parquet files to reference in Ganymede tables.
+
+### Parameters
+
+- **ganymede_context** : `GanymedeContext`
+  - Ganymede context object
 
 ### Returns
 

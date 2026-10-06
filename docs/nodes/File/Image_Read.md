@@ -15,7 +15,7 @@ image(s) to the storage bucket
 
 ### Node Attributes
 
-- **image**
+- **image** (parameter key: `input_file_image`)
   - File extension for valid image files submitted.  For example, filling in this attribute with "*.bmp" will only allow files with the extension .bmp to be uploaded.
 - **output_table_image_info**
   - Table to write metadata into.  This table is displayed on the [Table Head](https://docs.ganymede.bio/app/intro/Concepts#table-head) in Ganymede UI.

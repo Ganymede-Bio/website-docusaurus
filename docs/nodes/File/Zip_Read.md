@@ -14,7 +14,7 @@ which are written to the Ganymede data lake.
 
 ### Node Attributes
 
-- **zip**
+- **zip** (parameter key: `input_file_zip`)
   - File extension for valid zip files submitted.  For example, filling in this attribute with "*.zip" will only allow files with the extension .zip to be uploaded.
 - **output_table_results**
   - Table displayed on [Table Head](https://docs.ganymede.bio/app/intro/Concepts#table-head) in Ganymede UI.

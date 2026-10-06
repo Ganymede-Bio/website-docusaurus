@@ -66,7 +66,7 @@ The full set of methods available for programmatically interacting with tags can
 
 To tag a file within a flow, use the `add_file_tag` function in the `ganymede_sdk.file_tag` module.  This function takes the following arguments:
 
-- _param_ **input_file_path**: str - The name of the file to tag.  The file path can be obtained from the keys in the dictionary returned by the [retrieve_files](../../sdk/GanymedeClass#method-retrieve_files) for Ganymede class or by calling the [get_gcs_uri method](../../sdk/GanymedeClass#method-get_gcs_uri).
+- _param_ **input_file_path**: str - The name of the file to tag.  The file path can be obtained from the keys in the dictionary returned by the [retrieve_files](../../sdk/GanymedeClass#method-retrieve_files) for Ganymede class or by calling the [get_uri function](../../sdk/FileTags#get_uri) in `ganymede_sdk.storage`.
 - _param_ **tag_type_id**: str - The name of the tag type to apply to the file.
 - _param_ **display_value**: str - Value of the tag to display in the file browser.
 - _param_ **tag_id**: Optional[str] - The tag id that acts as a unique identifier for the tag. 

@@ -13,7 +13,7 @@ table in Ganymede data lake
 
 ### Node Attributes
 
-- **xml**
+- **xml** (parameter key: `input_file_xml`)
   - File extension for valid XML files submitted.  For example, filling in this attribute with "*.xml" will only allow files with the extension .xml to be uploaded.
 - **output_table_results**
   - Table displayed on [Table Head](https://docs.ganymede.bio/app/intro/Concepts#table-head) in Ganymede UI.
