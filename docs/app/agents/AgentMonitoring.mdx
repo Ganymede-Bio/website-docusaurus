@@ -9,7 +9,7 @@ import { DiffOutlined, EditOutlined, EyeOutlined, PlusOutlined, SelectOutlined }
 
 ## Managing Hosts
 
-For environments using the [Gateway architecture](./Agent#gateway-architecture), Hosts are the PCs where Gateway executables are installed. The Hosts section of the Connections page allows you to view and manage all Hosts in your environment.
+For environments using the [Gateway architecture](./Agent#gateway-architecture), Hosts are the PCs where Gateway executables are installed. The **Connectors > Hosts** page allows you to view and manage all Hosts in your environment.
 
 ### Viewing Hosts
 
@@ -81,6 +81,12 @@ Hosts running Gateway version 5.6.0+ can be updated through the Ganymede UI:
 3. Click **Upgrade** to update the Host to the latest Gateway version
 4. All Connections on the Host will be updated simultaneously
 
+:::note
+
+A Gateway that runs without admin privileges can't be upgraded from the Ganymede UI. The **Core Host Infrastructure** panel shows **Updates must be applied manually**, and the **Upgrade** button is disabled. To upgrade, download the new version and run the installer manually on the host machine.
+
+:::
+
 ### Removing Hosts
 
 To remove a Host:
@@ -93,13 +99,7 @@ To remove a Host:
 
 ## Maintaining Agent Templates
 
-Clicking on an Agent Template in the Ganymede web app UI opens up a page displaying the template's configuration. This page allows you to view the configuration, logs, and build history, as well as update the configuration of Connections associated with the Agent Template.
-
-:::note Terminology
-
-Agent Templates are also referred to as "Agents" throughout the UI and documentation. These terms are used interchangeably.
-
-:::
+Clicking on an Agent Template on the **Connectors > Agent Templates** page opens up a page displaying the template's configuration. This page allows you to view the configuration, logs, and build history, as well as update the configuration of Connections associated with the Agent Template.
 
 <div class="text--center">
   <img
@@ -111,17 +111,17 @@ Agent Templates are also referred to as "Agents" throughout the UI and documenta
 
 ### Updating Agents
 
-To modify Agent settings after creation, select the desired Agent Template in the Ganymede web app UI to update the Agent. Upon clicking <div className="button darkblue_button">Save</div>, the changes to the Agent Template will be applied to any running Connections based on that Agent Template.
+To modify an Agent Template after creation, select it on the **Connectors > Agent Templates** page and update its configuration. Upon clicking <div className="button darkblue_button">Save</div>, the changes to the Agent Template will be applied to any running Connections based on that Agent Template.
 
-  Agents can also be archived or disabled. 
+Agent Templates can also be archived, disabled, or deleted. Use the links below the Connections table on the Agent Template's page:
 
-Archived Agents cannot be updated, but the Agent's connections can still communicate with Ganymede Cloud.  All associated connections for these Agents will continue to run, but the Agent can no longer be modified.  Archived agents can be restored to an active state by selecting the desired Agent and clicking on the <u>Restore Agent</u> link.
-
-Disabled Agents cannot be updated and its connections can no longer communicate with Ganymede Cloud.
+- **Archive Agent Template**: Archived Agent Templates can't be modified, but all associated Connections continue to run. To make an archived Agent Template active again, click **Restore Agent Template**.
+- **Disable Agent Template**: Available for archived Agent Templates. Disabled Agent Templates can't be modified, and all associated Connections are moved to the Deprecated state. To make a disabled Agent Template active again, click **Re-enable Agent Template**.
+- **Delete Agent Template**: Available for disabled Agent Templates.
 
 ### Updating Connections
 
-To update a Connection, select the desired Connection in the Connections tab and click the <div className="button darker_gray_button"><EditOutlined /> Edit Connections</div> button.  You can update the following fields on a connection from the Ganymede UI:
+To update a Connection, select the desired Connection on the **Connectors > Connections** page and click the <div className="button darker_gray_button"><EditOutlined /> Edit Connection</div> button in the **Connection Settings** panel. Update the fields and click **Save**. The fields you can update are listed under [Connection Details](#connection-details).
 
 <div class="text--center">
   <img
@@ -147,7 +147,8 @@ There are two types of remote updates that occur based on the type of update - f
 **Compatibility**
 - Agents or Hosts running core v4.8.0 or later.
 - The core version of the installed connection must align with the major version of the core version of the agent Ganymede's UI. Otherwise, a breaking change requires reinstallation.
-- Auto-update is enabled for the agent.
+- For Hosts, the Host's **Deployment Settings** are set to **Auto deploy code and configuration changes to Live Connections**. For legacy Agents, auto-update is enabled for the Agent.
+- For Hosts, the Gateway runs with admin privileges. See [Updating Hosts](#updating-hosts).
 
 ##### How full updates are initiated
 
@@ -183,7 +184,7 @@ If the new Gateway fails to start, the old Gateway will resume, and the system w
 
 - Agents _installed_ with core v1.0.0 or later
 - The core version of the installed connection must match the core version of the agent Ganymede's UI
-- Auto-update is enabled for the agent
+- For Hosts, the Host's **Deployment Settings** are set to **Auto deploy code and configuration changes to Live Connections**. For legacy Agents, auto-update is enabled for the Agent.
 
 ##### How runtime updates are initiated
 
@@ -244,7 +245,7 @@ Connection status updates and logs can be accessed in the Ganymede web app UI.
 </div>
 &nbsp;
 
-Connection data can be viewed by clicking on the appropriate connection card in the Connections tab. 
+Connection data can be viewed by clicking on the appropriate connection card on the **Connectors > Connections** page.
 
 <div class="text--center">
   <img
@@ -277,9 +278,11 @@ This opens up a page displaying parameters associated with the Connection:
 
 Fields without a value are hidden. Other machine details, such as the install path, are on the Host's detail page.
 
-Below the Connection Details box, you'll find Connection-specific configurations:
+Below the Connection Details box, the **Connection Settings** panel contains Connection-specific configurations. Click **Edit Connection** to change them:
 
-- **Name**: Name of the Agent associated with the Connection
+- **Image**: The image shown for the Connection. By default, this is the Agent Template's image. To use a different image, click **Upload Custom Image** while editing.
+- **Name**: Display name used to identify the Connection. It is required, can be up to 255 characters, and doesn't have to be unique across Connections or within a Host.
+- **Trigger settings**: Settings that depend on the Agent Template's trigger. For file watcher Agent Templates, these are **Input Path**, **Ignore Patterns**, **Stable Time (seconds)**, **Stream Contents**, **Ignore Hidden Files**, and **Ignore Hidden Directories**. See [Reserved variables for File Watcher Agents](./Agent#reserved-variables-for-file-watcher-agents). For OPC-UA Subscription Agent Templates, see [OPC-UA Subscription Agents](./OpcUaSubscription).
 - **Connection File Tags**: [Tags](../files/Tags.mdx) placed on files uploaded by the Connection
 - **Variables**: [Key-value pairs](./Agent#variables-and-labels-in-windows-agent-connections) that can be referenced in user-defined code.  These are also used to specify [reserved keywords](Agent#reserved-variables-for-all-agents) for the Connection, if applicable.
 - **Labels**: [Strings](./Agent#variables-and-labels-in-windows-agent-connections) that can be used to group Connections in the Ganymede UI
@@ -294,6 +297,12 @@ A Connection's status combines its own state with the status of the Host it runs
 - **Disconnected**: The Connection's Host can't communicate with Ganymede. Ganymede has not received a status ping from the Host in the last 65 seconds, or the Host stopped processing for 15 minutes. When the Host is installed as a service, it restarts itself after a 15-minute stall.
 - **Shutdown**: The Connection runs on a Host that was shut down.
 - **Deactivated**: Processing for the Connection was turned off with **Disable Connection** in the Connection State panel on the Connection's page. Click **Activate Connection** to turn it back on.
+
+### Deactivating and Deleting Connections
+
+To stop a Connection without deleting it, open the Connection and click **Disable Connection** in the **Connection State** panel, then confirm. The Connection no longer runs or processes data, and its status changes to **Deactivated**. To resume processing, click **Activate Connection**.
+
+You can delete Connections that you no longer use. Only Disconnected, Shutdown, or Deactivated Connections can be deleted. On the **Connectors > Connections** page, click the delete icon on the Connection's card and confirm. You can also delete these Connections from the Connections table on an Agent Template's page. Changing a Connection's state or deleting it requires Writer access.
 
 ### Connection Notifications
 
@@ -409,10 +418,12 @@ sc delete <service_name>
 
 To uninstall the Gateway, stop the systemd service associated with the Gateway and remove the service file from /etc/systemd/system/.
 
+Replace `<service_name>` with the **Service Name** shown on the Host's detail page.
+
 ```bash
-# to stop the Agent Connection service
-sudo systemctl stop ganymede_example_agent.service
+# stop the Gateway service
+sudo systemctl stop <service_name>.service
 
 # remove the service file
-sudo rm /etc/systemd/system/ganymede_example_agent.service
+sudo rm /etc/systemd/system/<service_name>.service
 ```

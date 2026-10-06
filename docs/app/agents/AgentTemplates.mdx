@@ -15,6 +15,26 @@ The _execute_ function in user-defined code for every Agent type can return `Non
 
 :::
 
+## Reading Connection and Agent Template tags
+
+The examples on this page import objects such as `FileParam` and `UploadFileParams` from `agent_sdk`, which also applies to processor code on Gateway Connections. On Gateway v5.6.21 and later, processor code can also read the tags configured on the Connection and on the Agent Template. Pass the `kwargs` that _execute_ receives to `get_sdk` from `gateway.processor_sdk`, and then call `get_connection_tags()` or `get_agent_tags()`:
+
+```python
+from agent_sdk import FileParam, UploadFileParams
+from gateway.processor_sdk import get_sdk
+
+def execute(**kwargs) -> UploadFileParams | None:
+    sdk = get_sdk(kwargs)
+
+    connection_tags = sdk.get_connection_tags()
+    agent_tags = sdk.get_agent_tags()
+    sdk.info(f"Connection tags: {[(t.tag_type_id, t.display_value) for t in connection_tags]}")
+    sdk.info(f"Agent tags: {[(t.tag_type_id, t.display_value) for t in agent_tags]}")
+
+    # ... rest of processor code
+```
+
+Each tag has a `tag_type_id` and a `display_value`.
 
 ## Watch for files locally and run Flow
 
@@ -441,6 +461,8 @@ Variables (e.g. - _parent_dir_ and _recency_min_) can be configured during the i
 ```
 
 Post-installation, for Agents v4.8+, the parameters for Windows Connections can be [updated in the Connection UI](../../app/agents/AgentMonitoring#maintaining-agent-connections).
+
+For Connections that run on a Gateway, edit variables in the Connection's **Connection Settings**: open the Connection, click **Edit Connection**, update the variables, and click **Save**.
 
 ### Watch directory and upload zip of directory after files in the directory have stabilized
 

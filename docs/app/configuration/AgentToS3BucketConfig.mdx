@@ -60,7 +60,7 @@ Next, we need to add the S3 bucket to your Ganymede environment:
 
 ### Step 3: Set Up an AWS Role ARN
 
-Next, we need to set up an AWS role with the appropriate permissions to access the bucket. If you already have a role ARN set up within Ganymede, you can modify it to ensure it has the correct permissions for your bucket.
+Next, we need to set up an AWS role with the appropriate permissions to access the bucket. If the **AWS Ganymede Role ARN** row in the [Integration Panel](../admin/AdminControls#integration-panel) already has a value, you can modify that role to ensure it has the correct permissions for your bucket.
 
 1. In a *new browser window*, navigate to the **IAM Console** in AWS: [https://console.aws.amazon.com/iam/](https://console.aws.amazon.com/iam/)
     <div style={{textAlign: 'center', width:'700px'}}>
@@ -103,7 +103,7 @@ Keep both AWS and Ganymede browser windows open for the subsequent steps.
 1. Return to the browser window with your **Ganymede web app**: [https://tenant.ganymede.bio](https://tenant.ganymede.bio)
 2. Select the environment to which you want to add the S3 bucket.
 3. Access **Environment Settings** in the top right corner and navigate to the [Integration Panel](../admin/AdminControls#integration-panel).
-4. Find the **AWS Ganymede Role ARN** field and paste the **Role ARN** you just copied.
+4. In the **AWS Ganymede Role ARN** row, click the edit icon. In the **Update Aws ARN** dialog, paste the **Role ARN** you just copied into the **AWS Role ARN** field and click **Update Aws ARN**. Saving the Role ARN also updates the _aws_s3_role_arn_ environment secret.
     <div style={{textAlign: 'center', width:'700px'}}>
       <img alt="AWS Role ARN"
           src="https://storage.googleapis.com/ganymede-bio-website/public/apiServer/agent_s3_role_arn_masked20250306.png"
