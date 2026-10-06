@@ -639,3 +639,7 @@ PyPI
 ModularAnalysisDevelopment
 OperatorExtensions
 PipelineRepoStructure
+BenchlingEventConfig
+GenericWebhookConfig
+Webhooks
+webhooks

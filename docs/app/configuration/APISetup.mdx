@@ -24,3 +24,49 @@ api-key: <your_secure_string>
 ``` 
 
 The provided sample code in the API Reference shows how to use the API key in various programming languages, such as curl, Python, JavaScript, and others.
+
+### API Key Scope
+
+An API key belongs to the environment where you created its secret. Use it with endpoints for that environment, which include the environment name in their path (for example, `/v1/environment/{environment}/files`). Requests to another environment's endpoints with that key are rejected.
+
+The one exception is [`getEnvironments`](/api#tag/Environments/getEnvironments) (`GET /v1/environments`), which lists the environments in your tenant. An API key from any environment in the tenant works with this endpoint.
+
+### Endpoints That Require a User Access Token
+
+The Secrets endpoints (`getSecrets`, `updateSecret`, and `deleteSecret`) don't accept API keys. Call them with a user access token, sent as a Bearer token in the `Authorization` header. For more on secrets, see [Secrets Panel](../admin/AdminControls.mdx#secrets-panel).
+
+## Available Resources
+
+Beyond Flows, Flow runs, Files, and Tables, the public API covers many resources that you can otherwise manage only in the web app, including:
+
+- Users and roles, including the default role for new users
+- Hosts, Connections, and Agent Templates
+- Storage buckets and export credentials
+- File tag types
+- Processes, Unit Operations, Instrument Types, and Instruments
+- Modular Analysis apps, including their code and version history
+- Flow versions, Flow assignees, and custom images
+- Dashboards and notifications
+- The audit log
+- Secrets (with a user access token; see above)
+
+For the full list of endpoints, see the [API Reference](https://docs.ganymede.bio/api).
+
+## Pagination
+
+Several list endpoints have paginated `v2` versions, such as [`getFlowsV2`](/api#tag/Flows/getFlowsV2), [`getFlowRunsV2`](/api#tag/FlowRuns/getFlowRunsV2), [`getAgentsV2`](/api#tag/Agents/getAgentsV2), and [`getConnectionsV2`](/api#tag/Connections/getConnectionsV2). Use the `pageNumber` (starting at 1) and `pageSize` query parameters to page through results. The original `v1` endpoints still work but are deprecated, so use the `v2` endpoints in new code.
+
+[`getFiles`](/api#tag/Files/getFiles) also supports cursor-based pagination, which stays fast for very large file lists. To get the next page, pass the `createdAt` and `uri` of the last file on the current page as the `cursorCreatedAt` and `cursorUri` query parameters. If you omit both cursor parameters, `getFiles` uses `pageNumber` and `pageSize` instead.
+
+## Rate Limits
+
+Public API endpoints are rate-limited. Each limit applies to one endpoint for each client. By default, an endpoint accepts up to 30 requests per second. Some endpoints have lower limits:
+
+| Endpoints | Limit |
+|---|---|
+| Endpoints that write code to the environment's repository, such as committing code, creating a Flow, updating a Flow's pipeline, creating, updating, or deleting an Agent Template, and creating or deleting a Modular Analysis app | 1 request per second |
+| Triggering a Flow run (`triggerFlow`) | 2 requests per second |
+| Many other endpoints that create, update, or delete resources | 3 requests per second |
+| Querying tables (`postQuery`) | 5 requests per second |
+
+Requests over the limit are rejected with HTTP 429 (Too Many Requests). If you get a 429 response, wait and retry the request, increasing the delay between retries.

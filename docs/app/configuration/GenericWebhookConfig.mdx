@@ -4,17 +4,44 @@ title: Configuring Webhook-Driven Flows
 displayed_sidebar: webUiSidebar
 ---
 
-Webhooks are commonly used for robust communication between software systems.
+Webhooks are commonly used for robust communication between software systems. Ganymede can receive webhook events from an external system and use them to trigger Flows.
 
-1. From [Ganymede Support](../Support.mdx), obtain the following information:
+## Set Up a Webhook
 
-- API endpoint to deliver events to: https://your_subdomain.ganymede.bio/event/ENV_NAME/webhook
-- Auth header in include in delivered events: `SECRET_NAME`: `SECRET_VALUE`
+1. In **Environment Settings > Secrets**, add a secret for the system that sends the events. See [Secrets Panel](../admin/AdminControls.mdx#secrets-panel).
+    - **Secret Name**: a lowercase name that identifies the sending system, such as `my_eln`. Ganymede matches the header name in lowercase, so a name with uppercase letters won't match.
+    - **Secret Value**: a long random string. This is the key the sending system includes with each event.
 
-`ENV_NAME` is your Ganymede environment; for example, if you have development and production Ganymede environments, then webhooks would be configured separately for each of these environments.
+2. Configure the sending system to deliver events as HTTP POST requests with a JSON body to:
 
-`SECRET_NAME` is a designated name for the secret associated with the webhook
+    ```
+    https://<subdomain>.ganymede.bio/event/<environment>/webhook
+    ```
 
-`SECRET_VALUE` is a random API key
+    - `<subdomain>` is your Ganymede tenant subdomain.
+    - `<environment>` is your Ganymede environment. For example, if you have development and production Ganymede environments, configure webhooks separately for each of them, each with its own secret.
 
-2. Verify that the `SECRET_NAME`: `SECRET_VALUE` key-value pair is present in the [Environment Administration panel](../admin/AdminControls.mdx).
+3. Include the secret in a request header named `x-api-key-` followed by the secret name:
+
+    ```http
+    x-api-key-my_eln: <secret value>
+    ```
+
+4. Add a [Webhook_Event](../../nodes/App/Webhook_Event) node to the Flow that should run when an event arrives, and set its `input_filter_path` to match the events you want.
+
+For example, this request sends an event to the `dev` environment of the `xyz` tenant:
+
+```shell
+curl -X POST "https://xyz.ganymede.bio/event/dev/webhook" \
+  -H "Content-Type: application/json" \
+  -H "x-api-key-my_eln: <secret value>" \
+  -d '{"event_type": "sample.created", "sample_id": "S-001"}'
+```
+
+:::note
+You can also authenticate with an API key instead. Send an `api-key` header with the value of a secret whose name starts with `ganymede_api_key_` in the same environment. See [Connect to Ganymede API](./APISetup.mdx).
+:::
+
+## Event Payload Storage
+
+Ganymede saves each event payload as a file in the environment's Event Ingest Bucket. To stop new event payloads from being saved to the files table, turn on **Disable Event file payload writes** in the Integration panel of Environment Settings. This setting doesn't affect payloads that are already saved. See [Integration Panel](../admin/ExternalPlatform.mdx).

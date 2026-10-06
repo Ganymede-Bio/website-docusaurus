@@ -26,4 +26,10 @@ Event bus name: xyz
 Event types: v2.entity.registered
 ```
 
-3. Notify [Ganymede Support](../Support.mdx) to complete the configuration of your tenant for handling Benchling Events.
+3. Notify [Ganymede Support](../Support.mdx) to complete the configuration of your tenant for handling Benchling Events. Tell Ganymede Support which environments should receive events from your Benchling tenant.
+
+:::note
+Events from one Benchling tenant can go to more than one Ganymede environment. In that case, each receiving environment needs a matching `benchling_api_key` secret, which Ganymede Support configures. If the key doesn't match for any one of these environments, the event is rejected for all of them.
+:::
+
+Ganymede saves each Benchling event payload as a file in the environment's Event Ingest Bucket. To stop new event payloads from being saved to the files table, turn on **Disable Event file payload writes** in the Integration panel of Environment Settings. See [Integration Panel](../admin/ExternalPlatform.mdx).
