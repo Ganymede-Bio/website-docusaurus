@@ -8,7 +8,7 @@ displayed_sidebar: SDKSidebar
 # benchling.io.events
 
 
-## `function` FlowInputs.__init__
+## `function` FlowInputs.\_\_init\_\_
   
 Representation of all inputs for a flow  
   

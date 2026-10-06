@@ -259,3 +259,16 @@ The _execute_ function may call classes and functions found within the User-Defi
 | Instrument | LC_Read_Multi             | Read and process multiple Agilent Chemstation / MassStation HPLC files       |
 | Instrument | WSP_Read                  | Read FlowJo WSP file into data lake                                          |
 | Tag        | Input_Param               | Input parameter into Flow                                                    |
+
+### Nodes Available on AWS-hosted Environments
+
+On AWS-hosted environments, the Add Node palette shows a subset of the Nodes listed above:
+
+| [Category](#node-categories)   | Nodes                                                                                                    |
+|------------|----------------------------------------------------------------------------------------------------------|
+| Analysis   | Python, Transform_SQL, Trigger_Python                                                                    |
+| App        | Webhook_Event                                                                                            |
+| File       | CSV_Read, CSV_Read_Multi, CSV_Write, Excel_Read, Excel_Read_Multi, Excel_Write, Image_Read, Image_Read_Multi, Image_Write, Input_File, Input_File_Multi, PDF_Read, PDF_Read_Multi, Powerpoint_Write, XML_Read, Zip_Read |
+| Tag        | Input_Param                                                                                              |
+
+Other Nodes are not available on AWS-hosted environments.

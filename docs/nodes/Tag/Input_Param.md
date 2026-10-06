@@ -13,7 +13,7 @@ access to a input parameter specified by the Flow runner.
 
 ### Node Attributes
 
-- **input_string_param**
+- **param** (parameter key: `input_string_param`)
   - input string to be read into the Flow
 
 ### Example

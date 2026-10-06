@@ -11,18 +11,20 @@ displayed_sidebar: SDKSidebar
 ## `class` MSD
   
 A class to represent a Mesoscale Discovery (MSD) file.  
+Files can contain data from more than one plate.  
   
 ### Attributes  
   
-**header_data** : `pd.DataFrame`  
-&nbsp; &nbsp; &nbsp; &nbsp; The metadata from the header of the MSD file.  
-**msd_data** : `pd.DataFrame`  
-&nbsp; &nbsp; &nbsp; &nbsp; The MSD data from the MSD file, multiindexed by row and column.  
+**output_data** : `a dict mapping the plate(s) barcode string(s) to:`  
+&nbsp; &nbsp; &nbsp; &nbsp; header_data : pd.DataFrame  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; The metadata from the header of the plate.  
+&nbsp; &nbsp; &nbsp; &nbsp; msd_data : pd.DataFrame  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; The MSD data from the plate, multiindexed by row and column.  
   
 ### Methods  
   
 **parse_msd_data(msd_data_bytes: bytes)**  
-&nbsp; &nbsp; &nbsp; &nbsp; Parses MSD byte data into header data and MSD data and returns as pandas DataFrames.  
+&nbsp; &nbsp; &nbsp; &nbsp; Parses MSD byte data into header data and MSD data and returns dict.  
 
 
 ## `function` MSD.parse_msd_data
@@ -43,8 +45,9 @@ Parse MSD data from bytes and return as pandas DataFrame
   
 ### Returns  
   
-`pd.DataFrame`  
-&nbsp; &nbsp; &nbsp; &nbsp; Header data - dataframe of keys and values from metadata in file header  
-`pd.DataFrame`  
-&nbsp; &nbsp; &nbsp; &nbsp; MSD data - dataframe with multiindex of Rows (A, B, C, etc.) and Columns  
-&nbsp; &nbsp; &nbsp; &nbsp; (1, 2, 3, etc.), with separate columns for each microwell  
+**output_data** : `a dict mapping the plate(s) barcode string(s) to:`  
+&nbsp; &nbsp; &nbsp; &nbsp; pd.DataFrame  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Header data - dataframe of keys and values from metadata in file header  
+&nbsp; &nbsp; &nbsp; &nbsp; pd.DataFrame  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; MSD data - dataframe with multiindex of Rows (A, B, C, etc.) and Columns  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; (1, 2, 3, etc.), with separate columns for each microwell  

@@ -16,10 +16,13 @@ Read files from Azure Blob Storage into data lake.
   - Windows Azure Storage Blob (WASB) URI to set URL for blob service endpoint
 - **src_azure_container_name**
   - Azure container name to pull from
-- **src_azure_blob_name**
-  - Azure blob name to pull
-- **dest_blob_name**
-  - GCP blob name to store
+- **src_azure_blob_starts_with**
+  - Search for Azure blob names that start with the passed argument
+- **duplicate_behavior**
+  - How to handle files that already exist in Ganymede storage. Options are:
+    - save: Always download file
+    - ignore: Skip files that are in Ganymede storage
+    - compare: Check if files changed in Azure with respect to Ganymede storage
 
 ### Notes
 
@@ -40,5 +43,4 @@ An example configuration is shown below:
 
 - **azure_storage_uri**: https://abc123.blob.core.windows.net
 - **src_azure_container_name**: abc123
-- **src_azure_blob_name**: `"run_results/filename.parquet"`
-- **dest_blob_name**: filename.parquet
+- **src_azure_name_starts_with**: "run_results/filename.parquet"

@@ -1687,6 +1687,18 @@ paths:
           description: Include archived files in results. When false or omitted, only non-archived files are returned.
           schema:
             type: boolean
+        - name: cursorCreatedAt
+          required: false
+          in: query
+          description: 'Keyset pagination cursor: the createdAt (epoch ms) of the last File from the previous page. May be 0, since Files with no timestamp report createdAt 0. Supply together with cursorUri to fetch the next page without OFFSET, which scales past deep pages that time out. When both cursor params are omitted, pageNumber/pageSize offset paging is used.'
+          schema:
+            type: number
+        - name: cursorUri
+          required: false
+          in: query
+          description: 'Keyset pagination cursor: the uri of the last File from the previous page. Supply together with cursorCreatedAt to fetch the next page. Results are ordered by (createdAt DESC, uri DESC).'
+          schema:
+            type: string
       responses:
         '200':
           description: A list of filtered Files
@@ -4284,6 +4296,128 @@ paths:
       summary: updateRoles
       tags:
         - Roles
+  /v1/environment/{environment}/secret/{secretName}:
+    get:
+      description: Retrieve value of a secret. Currently, this endpoint can only be used with a user access token.
+      operationId: getSecret
+      parameters:
+        - name: environment
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: secretName
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Value of the secret
+          content:
+            application/json:
+              schema:
+                type: string
+      security:
+        - api-key: []
+        - BearerAuth: []
+      summary: getSecret
+      tags:
+        - Secrets
+  /v1/environment/{environment}/secrets:
+    get:
+      description: List all Secrets in an Environment with pagination support. Secret values are never returned.
+      operationId: getSecrets
+      parameters:
+        - name: environment
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: pageNumber
+          required: false
+          in: query
+          description: Page number (1-based). Default 1.
+          schema:
+            type: number
+        - name: pageSize
+          required: false
+          in: query
+          description: Results per page (1–10000). Default 10000.
+          schema:
+            type: number
+      responses:
+        '200':
+          description: List of secrets (names and lastUpdated only; values are never returned).
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PublicSecretDTO'
+      security:
+        - api-key: []
+        - BearerAuth: []
+      summary: getSecrets
+      tags:
+        - Secrets
+  /v1/environment/{environment}/secrets/{secretName}:
+    post:
+      description: Create or update a Secret in an Environment. Currently, this endpoint can only be used with a user access token.
+      operationId: updateSecret
+      parameters:
+        - name: environment
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: secretName
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateSecretBody'
+      responses:
+        '201':
+          description: The created or updated Secret (name and lastUpdated only; value is never echoed back).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicSecretDTO'
+      security:
+        - api-key: []
+        - BearerAuth: []
+      summary: updateSecret
+      tags:
+        - Secrets
+    delete:
+      description: Delete a Secret from an Environment. Currently, this endpoint can only be used with a user access token.
+      operationId: deleteSecret
+      parameters:
+        - name: environment
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: secretName
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Secret deleted.
+      security:
+        - api-key: []
+        - BearerAuth: []
+      summary: deleteSecret
+      tags:
+        - Secrets
   /v1/environment/{environment}/tables:
     get:
       description: Get all [Tables](https://docs.ganymede.bio/app/tables/DataExplorer) in an Environment.
@@ -4516,6 +4650,12 @@ paths:
           in: path
           schema:
             type: string
+        - name: version
+          required: false
+          in: query
+          description: Optional snapshot version to pin (format YYYYMMDDTHHMMSSffffffZ-<uuid8>, e.g. 20260921T213010123456Z-a1b2c3d4). When omitted the current snapshot from the manifest is used; when set, URLs point at that version so a client can hold one consistent version across multiple requests.
+          schema:
+            type: string
         - name: tables
           required: true
           in: query
@@ -4535,6 +4675,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TempoSnapshotSignedUrls'
+        '400':
+          description: Invalid dagId, tables, or version query parameter
         '404':
           description: No flow named `dagId` exists in this environment (the exporter flow name is unknown)
       security:
@@ -6796,6 +6938,75 @@ paths:
       summary: getAgents
       tags:
         - Agents
+  /v2/environment/{environment}/commits:
+    get:
+      description: Get a signed URL to download the latest user commits in an Environment, along with the current HEAD SHA of the main branch.
+      operationId: getRepositoryCommitsV2
+      parameters:
+        - name: includeLibFiles
+          required: false
+          in: query
+          schema:
+            type: boolean
+        - name: environment
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: flowName
+          required: false
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Signed URL and current HEAD SHA
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetV2CommitsResponse'
+      security:
+        - api-key: []
+        - BearerAuth: []
+      summary: getRepositoryCommitsV2
+      tags:
+        - Commits
+    put:
+      description: Update user code on main in an Environment with conflict detection. Optionally provide baseSha to guard against concurrent writes (returns 409 on mismatch).
+      operationId: postRepositoryCommitsV2
+      parameters:
+        - name: environment
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostV2CommitsBody'
+      responses:
+        '200':
+          description: Commit succeeded — returns the resulting commit SHA
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostV2CommitsResponse'
+        '400':
+          description: Invalid request — e.g. attempting to create a file that does not exist
+        '409':
+          description: baseSha does not match current HEAD — returns the actual current HEAD SHA
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommitConflictResponse'
+      security:
+        - api-key: []
+        - BearerAuth: []
+      summary: postRepositoryCommitsV2
+      tags:
+        - Commits
   /v2/environment/{environment}/connections:
     get:
       description: A list of all [Connections](https://docs.ganymede.bio/app/agents/Agent#installing-connections) for an Environment with pagination support.
@@ -7092,6 +7303,25 @@ components:
         - triggerConfig
         - connectorType
         - appId
+    AppCleanupConnectorConfig:
+      type: object
+      properties:
+        triggerConfig:
+          $ref: '#/components/schemas/ConnectorFileWatcher'
+        actionConfig:
+          $ref: '#/components/schemas/ConnectorTagWOUpload'
+        connectorType:
+          allOf:
+            - $ref: '#/components/schemas/ConfigurableConnectorsTypes'
+        appId:
+          type: string
+        sessionFullPath:
+          type: string
+      required:
+        - triggerConfig
+        - actionConfig
+        - connectorType
+        - appId
     AppCleanupFlowConnectionConfig:
       type: object
       properties:
@@ -7106,6 +7336,25 @@ components:
           type: string
       required:
         - triggerConfig
+        - connectorType
+        - appId
+    AppCleanupFlowConnectorConfig:
+      type: object
+      properties:
+        triggerConfig:
+          $ref: '#/components/schemas/ConnectorFileWatcher'
+        actionConfig:
+          $ref: '#/components/schemas/ConnectorTriggerFlow'
+        connectorType:
+          allOf:
+            - $ref: '#/components/schemas/ConfigurableConnectorsTypes'
+        appId:
+          type: string
+        sessionFullPath:
+          type: string
+      required:
+        - triggerConfig
+        - actionConfig
         - connectorType
         - appId
     AppConfig:
@@ -7166,6 +7415,29 @@ components:
           type: string
       required:
         - triggerConfig
+        - connectorType
+        - appId
+    AppStartupConnectorConfig:
+      type: object
+      properties:
+        triggerConfig:
+          description: Cloud watcher trigger configuration
+          allOf:
+            - $ref: '#/components/schemas/ConnectorCloudWatcher'
+        actionConfig:
+          description: No operation action configuration
+          allOf:
+            - $ref: '#/components/schemas/ConnectorNoOp'
+        connectorType:
+          allOf:
+            - $ref: '#/components/schemas/ConfigurableConnectorsTypes'
+        appId:
+          type: string
+        sessionFullPath:
+          type: string
+      required:
+        - triggerConfig
+        - actionConfig
         - connectorType
         - appId
     ApplicationSession:
@@ -7346,6 +7618,27 @@ components:
       required:
         - linuxExe
         - windowsExe
+    AutoFilePatternFlowMappingConfig:
+      type: object
+      properties:
+        triggerConfig:
+          $ref: '#/components/schemas/ConnectorFileWatcher'
+        actionConfig:
+          $ref: '#/components/schemas/ConnectorTriggerFlow'
+        connectorType:
+          allOf:
+            - $ref: '#/components/schemas/ConfigurableConnectorsTypes'
+        extensionMapping:
+          default: []
+          description: Maps a file glob pattern to a flow parameter.
+          nullable: false
+          type: array
+          items:
+            $ref: '#/components/schemas/ConnectorGlobParam'
+      required:
+        - triggerConfig
+        - actionConfig
+        - connectorType
     AwsRoleArnDTO:
       type: object
       properties:
@@ -7872,6 +8165,24 @@ components:
       required:
         - triggerConfig
         - connectorType
+    CWSaveFileConnectorConfig:
+      type: object
+      properties:
+        triggerConfig:
+          description: Cloud watcher trigger configuration
+          allOf:
+            - $ref: '#/components/schemas/ConnectorCloudWatcher'
+        actionConfig:
+          description: No operation action configuration
+          allOf:
+            - $ref: '#/components/schemas/ConnectorNoOp'
+        connectorType:
+          allOf:
+            - $ref: '#/components/schemas/ConfigurableConnectorsTypes'
+      required:
+        - triggerConfig
+        - actionConfig
+        - connectorType
     ChangedFileDTO:
       type: object
       properties:
@@ -7919,6 +8230,14 @@ components:
       enum:
         - GCP
         - AWS
+    CommitConflictResponse:
+      type: object
+      properties:
+        currentHeadSha:
+          type: string
+          description: Actual current HEAD SHA of main at the time of the conflict
+      required:
+        - currentHeadSha
     ConfigurableConnectorsTypes:
       type: string
       enum:
@@ -8183,6 +8502,43 @@ components:
         - state
         - processorCommit
         - gitPath
+    ConnectorActionOptions:
+      type: string
+      enum:
+        - trigger_flow
+        - upload_file
+        - no_op
+        - tag_without_upload
+        - stream_data
+        - stream_tag_reading
+    ConnectorActionTemplate:
+      type: object
+      properties:
+        action:
+          allOf:
+            - $ref: '#/components/schemas/ConnectorActionOptions'
+      required:
+        - action
+    ConnectorCloudWatcher:
+      type: object
+      properties:
+        trigger:
+          allOf:
+            - $ref: '#/components/schemas/ConnectorTriggerOptions'
+        ingestBucket:
+          $ref: '#/components/schemas/IngestBucket'
+        flowName:
+          type: string
+        globs:
+          default: []
+          type: array
+          items:
+            type: string
+        topicId:
+          type: string
+      required:
+        - trigger
+        - topicId
     ConnectorConnection:
       type: object
       properties:
@@ -8319,6 +8675,62 @@ components:
         - Live
         - Failing
         - Deactivated
+    ConnectorCron:
+      type: object
+      properties:
+        trigger:
+          allOf:
+            - $ref: '#/components/schemas/ConnectorTriggerOptions'
+        ingestBucket:
+          $ref: '#/components/schemas/IngestBucket'
+        cronExpression:
+          type: string
+          default: 0 0 * * *
+      required:
+        - trigger
+    ConnectorFileWatcher:
+      type: object
+      properties:
+        trigger:
+          allOf:
+            - $ref: '#/components/schemas/ConnectorTriggerOptions'
+        ingestBucket:
+          $ref: '#/components/schemas/IngestBucket'
+        duplicateHandling:
+          default: create_new_version
+          allOf:
+            - $ref: '#/components/schemas/DuplicateHandling'
+        deduplicateByMd5:
+          type: boolean
+          default: false
+        globs:
+          default:
+            - '*'
+          type: array
+          items:
+            type: string
+        ignorePatterns:
+          default:
+            - '**/*.tmp'
+          type: array
+          items:
+            type: string
+        syncOnStart:
+          type: boolean
+          description: If enabled, the connection scans the watched directory on startup and processes any files missed while offline.
+          default: false
+      required:
+        - trigger
+    ConnectorGlobParam:
+      type: object
+      properties:
+        fileExtension:
+          type: string
+        flowParamNode:
+          type: string
+      required:
+        - fileExtension
+        - flowParamNode
     ConnectorHistoryEntry:
       type: object
       properties:
@@ -8362,6 +8774,44 @@ components:
         - legacyAssets
         - status
         - requireLegacyFullUpdate
+    ConnectorInputParam:
+      type: object
+      properties:
+        type:
+          allOf:
+            - $ref: '#/components/schemas/ConnectorInputParameterType'
+        key:
+          type: string
+      required:
+        - type
+        - key
+    ConnectorInputParameterType:
+      type: string
+      enum:
+        - empty
+        - file
+        - multi
+        - string
+        - event
+        - tag
+    ConnectorNoOp:
+      type: object
+      properties:
+        action:
+          allOf:
+            - $ref: '#/components/schemas/ConnectorActionOptions'
+      required:
+        - action
+    ConnectorOneShot:
+      type: object
+      properties:
+        trigger:
+          allOf:
+            - $ref: '#/components/schemas/ConnectorTriggerOptions'
+        ingestBucket:
+          $ref: '#/components/schemas/IngestBucket'
+      required:
+        - trigger
     ConnectorRawSnapshot:
       type: object
       properties:
@@ -8381,6 +8831,47 @@ components:
         - Active
         - Archived
         - Disabled
+    ConnectorStreamData:
+      type: object
+      properties:
+        action:
+          allOf:
+            - $ref: '#/components/schemas/ConnectorActionOptions'
+      required:
+        - action
+    ConnectorStreamTagReading:
+      type: object
+      properties:
+        action:
+          allOf:
+            - $ref: '#/components/schemas/ConnectorActionOptions'
+      required:
+        - action
+    ConnectorTagWOUpload:
+      type: object
+      properties:
+        action:
+          allOf:
+            - $ref: '#/components/schemas/ConnectorActionOptions'
+      required:
+        - action
+    ConnectorTriggerFlow:
+      type: object
+      properties:
+        action:
+          allOf:
+            - $ref: '#/components/schemas/ConnectorActionOptions'
+        flowName:
+          type: string
+        flowParams:
+          description: Parameters to pass to the flow execution
+          default: []
+          type: array
+          items:
+            $ref: '#/components/schemas/ConnectorInputParam'
+      required:
+        - action
+        - flowName
     ConnectorTriggerOptions:
       type: string
       enum:
@@ -8399,6 +8890,14 @@ components:
           $ref: '#/components/schemas/IngestBucket'
       required:
         - trigger
+    ConnectorUploadFile:
+      type: object
+      properties:
+        action:
+          allOf:
+            - $ref: '#/components/schemas/ConnectorActionOptions'
+      required:
+        - action
     CopyProcessBody:
       type: object
       properties:
@@ -8936,6 +9435,24 @@ components:
       required:
         - triggerConfig
         - connectorType
+    CronFlowConnectorConfig:
+      type: object
+      properties:
+        triggerConfig:
+          description: Cron trigger configuration
+          allOf:
+            - $ref: '#/components/schemas/ConnectorCron'
+        actionConfig:
+          description: Trigger flow action configuration
+          allOf:
+            - $ref: '#/components/schemas/ConnectorTriggerFlow'
+        connectorType:
+          allOf:
+            - $ref: '#/components/schemas/ConfigurableConnectorsTypes'
+      required:
+        - triggerConfig
+        - actionConfig
+        - connectorType
     CronStreamDataConnectionConfig:
       type: object
       properties:
@@ -8947,6 +9464,20 @@ components:
       required:
         - triggerConfig
         - connectorType
+    CronStreamDataConnectorConfig:
+      type: object
+      properties:
+        triggerConfig:
+          $ref: '#/components/schemas/ConnectorCron'
+        actionConfig:
+          $ref: '#/components/schemas/ConnectorStreamData'
+        connectorType:
+          allOf:
+            - $ref: '#/components/schemas/ConfigurableConnectorsTypes'
+      required:
+        - triggerConfig
+        - actionConfig
+        - connectorType
     CronUploadConnectionConfig:
       type: object
       properties:
@@ -8957,6 +9488,20 @@ components:
             - $ref: '#/components/schemas/ConfigurableConnectorsTypes'
       required:
         - triggerConfig
+        - connectorType
+    CronUploadConnectorConfig:
+      type: object
+      properties:
+        triggerConfig:
+          $ref: '#/components/schemas/ConnectorCron'
+        actionConfig:
+          $ref: '#/components/schemas/ConnectorUploadFile'
+        connectorType:
+          allOf:
+            - $ref: '#/components/schemas/ConfigurableConnectorsTypes'
+      required:
+        - triggerConfig
+        - actionConfig
         - connectorType
     CustomImage:
       type: object
@@ -9113,6 +9658,12 @@ components:
       required:
         - old
         - new
+    DuplicateHandling:
+      type: string
+      enum:
+        - use_existing_file
+        - ignore_duplicate
+        - create_new_version
     Equipment:
       title: Equipment
       type: object
@@ -9390,6 +9941,22 @@ components:
       required:
         - triggerConfig
         - connectorType
+    FWFlowConnectorConfig:
+      type: object
+      properties:
+        triggerConfig:
+          $ref: '#/components/schemas/ConnectorFileWatcher'
+        actionConfig:
+          description: Trigger flow action configuration
+          allOf:
+            - $ref: '#/components/schemas/ConnectorTriggerFlow'
+        connectorType:
+          allOf:
+            - $ref: '#/components/schemas/ConfigurableConnectorsTypes'
+      required:
+        - triggerConfig
+        - actionConfig
+        - connectorType
     FWUploadConnectionConfig:
       type: object
       properties:
@@ -9402,6 +9969,24 @@ components:
             - $ref: '#/components/schemas/ConfigurableConnectorsTypes'
       required:
         - triggerConfig
+        - connectorType
+    FWUploadConnectorConfig:
+      type: object
+      properties:
+        triggerConfig:
+          description: File watcher trigger configuration
+          allOf:
+            - $ref: '#/components/schemas/ConnectorFileWatcher'
+        actionConfig:
+          description: Upload file action configuration
+          allOf:
+            - $ref: '#/components/schemas/ConnectorUploadFile'
+        connectorType:
+          allOf:
+            - $ref: '#/components/schemas/ConfigurableConnectorsTypes'
+      required:
+        - triggerConfig
+        - actionConfig
         - connectorType
     FailureReason:
       type: string
@@ -9736,6 +10321,18 @@ components:
           type: string
           nullable: true
           description: signed url that will be generated after pulling from db
+    GetV2CommitsResponse:
+      type: object
+      properties:
+        signedUrl:
+          type: string
+          description: Signed URL to download the current snapshot as a ZIP
+        headSha:
+          type: string
+          description: Current HEAD SHA of the target branch
+      required:
+        - signedUrl
+        - headSha
     HealthRecordDto:
       type: object
       properties:
@@ -9870,6 +10467,33 @@ components:
         sendAlertOnShutdown:
           type: boolean
           description: send email alert for host shutdown event
+        sendMetricAlerts:
+          type: boolean
+          description: send email alerts for resource usage thresholds, independent of the disconnect/shutdown alerts gated by sendEmailAlerts
+        diskAlertThresholdPercent:
+          type: number
+          description: disk usage percentage at or above which an email alert is sent
+        cpuAlertThresholdPercent:
+          type: number
+          description: cpu usage percentage at or above which an email alert is sent
+        memoryAlertThresholdPercent:
+          type: number
+          description: memory usage percentage at or above which an email alert is sent
+        metricAlertWindowMinutes:
+          type: number
+          description: minutes a metric must stay at or above its threshold before an alert is sent, shared across disk/cpu/memory
+        metricAlertConfigVersion:
+          type: number
+          description: Optimistic-lock version for the metric alert configuration, and the generation marker the heartbeat stamps onto host_status. Clients must echo back the value they were served; a save carrying a stale version has its alert configuration rejected while its other fields still apply.
+        diskAlertSent:
+          type: boolean
+          description: email alert has been sent for disk usage
+        cpuAlertSent:
+          type: boolean
+          description: email alert has been sent for cpu usage
+        memoryAlertSent:
+          type: boolean
+          description: email alert has been sent for memory usage
         shouldAutoBuildOnRelease:
           type: boolean
         legacyAgentId:
@@ -9966,6 +10590,15 @@ components:
           type: boolean
         updateFailed:
           type: boolean
+        diskUsagePercent:
+          type: number
+          nullable: true
+        cpuUsagePercent:
+          type: number
+          nullable: true
+        memoryUsagePercent:
+          type: number
+          nullable: true
         id:
           type: string
         latestPingTimestamp:
@@ -10281,6 +10914,20 @@ components:
       required:
         - triggerConfig
         - connectorType
+    LegacyCWSaveFileConnectorConfig:
+      type: object
+      properties:
+        triggerConfig:
+          $ref: '#/components/schemas/ConnectorCloudWatcher'
+        actionConfig:
+          $ref: '#/components/schemas/ConnectorUploadFile'
+        connectorType:
+          allOf:
+            - $ref: '#/components/schemas/ConfigurableConnectorsTypes'
+      required:
+        - triggerConfig
+        - actionConfig
+        - connectorType
     LegacyFWFlowConnectionConfig:
       type: object
       properties:
@@ -10292,6 +10939,27 @@ components:
       required:
         - triggerConfig
         - connectorType
+    LegacyFWFlowConnectorConfig:
+      type: object
+      properties:
+        triggerConfig:
+          $ref: '#/components/schemas/ConnectorFileWatcher'
+        actionConfig:
+          $ref: '#/components/schemas/ConnectorTriggerFlow'
+        connectorType:
+          allOf:
+            - $ref: '#/components/schemas/ConfigurableConnectorsTypes'
+        extensionMapping:
+          default: []
+          description: Maps a file glob pattern to a flow parameter. Only required during connector creation. Ignored afterward so only an api field and not a db field.
+          nullable: false
+          type: array
+          items:
+            $ref: '#/components/schemas/ConnectorGlobParam'
+      required:
+        - triggerConfig
+        - actionConfig
+        - connectorType
     LegacyFWUploadConnectionConfig:
       type: object
       properties:
@@ -10302,6 +10970,20 @@ components:
             - $ref: '#/components/schemas/ConfigurableConnectorsTypes'
       required:
         - triggerConfig
+        - connectorType
+    LegacyFWUploadConnectorConfig:
+      type: object
+      properties:
+        triggerConfig:
+          $ref: '#/components/schemas/ConnectorFileWatcher'
+        actionConfig:
+          $ref: '#/components/schemas/ConnectorUploadFile'
+        connectorType:
+          allOf:
+            - $ref: '#/components/schemas/ConfigurableConnectorsTypes'
+      required:
+        - triggerConfig
+        - actionConfig
         - connectorType
     Location:
       title: Location
@@ -10768,6 +11450,24 @@ components:
       required:
         - triggerConfig
         - connectorType
+    OneShotFlowConnectorConfig:
+      type: object
+      properties:
+        triggerConfig:
+          description: One-shot trigger configuration
+          allOf:
+            - $ref: '#/components/schemas/ConnectorOneShot'
+        actionConfig:
+          description: Trigger flow action configuration
+          allOf:
+            - $ref: '#/components/schemas/ConnectorTriggerFlow'
+        connectorType:
+          allOf:
+            - $ref: '#/components/schemas/ConfigurableConnectorsTypes'
+      required:
+        - triggerConfig
+        - actionConfig
+        - connectorType
     OneShotUploadConnectionConfig:
       type: object
       properties:
@@ -10778,6 +11478,20 @@ components:
             - $ref: '#/components/schemas/ConfigurableConnectorsTypes'
       required:
         - triggerConfig
+        - connectorType
+    OneShotUploadConnectorConfig:
+      type: object
+      properties:
+        triggerConfig:
+          $ref: '#/components/schemas/ConnectorOneShot'
+        actionConfig:
+          $ref: '#/components/schemas/ConnectorUploadFile'
+        connectorType:
+          allOf:
+            - $ref: '#/components/schemas/ConfigurableConnectorsTypes'
+      required:
+        - triggerConfig
+        - actionConfig
         - connectorType
     OpcuaAuthMethod:
       type: string
@@ -10830,6 +11544,65 @@ components:
             $ref: '#/components/schemas/OpcuaTag'
       required:
         - trigger
+    OpcuaConnectorConfig:
+      type: object
+      properties:
+        triggerConfig:
+          $ref: '#/components/schemas/OpcuaConnectorTriggerConfig'
+        actionConfig:
+          $ref: '#/components/schemas/ConnectorStreamTagReading'
+        connectorType:
+          allOf:
+            - $ref: '#/components/schemas/ConfigurableConnectorsTypes'
+      required:
+        - triggerConfig
+        - actionConfig
+        - connectorType
+    OpcuaConnectorTriggerConfig:
+      type: object
+      properties:
+        trigger:
+          allOf:
+            - $ref: '#/components/schemas/ConnectorTriggerOptions'
+        ingestBucket:
+          $ref: '#/components/schemas/IngestBucket'
+        endpointUrl:
+          type: string
+          example: opc.tcp://host:4840
+        securityMode:
+          default: none
+          allOf:
+            - $ref: '#/components/schemas/OpcuaSecurityMode'
+        securityPolicy:
+          default: none
+          allOf:
+            - $ref: '#/components/schemas/OpcuaSecurityPolicy'
+        authMethod:
+          default: UsernamePassword
+          allOf:
+            - $ref: '#/components/schemas/OpcuaAuthMethod'
+        username:
+          type: string
+        passwordSecretName:
+          type: string
+          description: Name of the GCP Secret Manager secret — not the password value
+        clientCertSecretName:
+          type: string
+          description: Name of the GCP Secret Manager secret containing the PEM-encoded client certificate
+        clientKeySecretName:
+          type: string
+          description: Name of the GCP Secret Manager secret containing the PEM-encoded client private key
+        tags:
+          nullable: true
+          type: array
+          items:
+            $ref: '#/components/schemas/OpcuaTag'
+      required:
+        - trigger
+        - endpointUrl
+        - securityMode
+        - authMethod
+        - tags
     OpcuaDataType:
       type: string
       enum:
@@ -11001,6 +11774,37 @@ components:
           type: string
       required:
         - sqlQuery
+    PostV2CommitsBody:
+      type: object
+      properties:
+        authorEmail:
+          type: string
+          format: email
+          description: Email of a registered Ganymede user authoring this commit
+        message:
+          type: string
+          description: Commit message
+        fileMap:
+          type: object
+          description: Map of repo-relative file paths to base64-encoded contents
+        dry_run:
+          type: boolean
+          description: If true, validate inputs without writing to the repository
+        baseSha:
+          type: string
+          description: Expected current HEAD SHA of main. If the HEAD does not match, the request is rejected with 409 Conflict and the actual current HEAD SHA.
+      required:
+        - authorEmail
+        - message
+        - fileMap
+    PostV2CommitsResponse:
+      type: object
+      properties:
+        commitSha:
+          type: string
+          description: SHA of the resulting commit, or empty string on dry_run
+      required:
+        - commitSha
     ProcedureRun:
       title: ProcedureRun
       type: object
@@ -12593,7 +13397,7 @@ components:
         version:
           type: string
           description: Snapshot version the returned URLs point at
-          example: 20260909T174158Z
+          example: 20260921T213010123456Z-a1b2c3d4
         urls:
           type: object
           description: Map of requested table name to its short-lived signed download URL
@@ -13375,6 +14179,29 @@ components:
         dry_run:
           type: boolean
           description: If true, perform a dry run without actually updating the unit operation run
+    UploadAfterPause:
+      type: object
+      properties:
+        triggerConfig:
+          $ref: '#/components/schemas/ConnectorCron'
+        actionConfig:
+          $ref: '#/components/schemas/ConnectorUploadFile'
+        connectorType:
+          allOf:
+            - $ref: '#/components/schemas/ConfigurableConnectorsTypes'
+        unmodifiedTimePeriod:
+          type: number
+          description: how long, in seconds, that a file should be unmodified before marked as ready to act on
+        globs:
+          type: array
+          items:
+            type: string
+      required:
+        - triggerConfig
+        - actionConfig
+        - connectorType
+        - unmodifiedTimePeriod
+        - globs
     User:
       type: object
       properties:
@@ -13509,6 +14336,7 @@ x-tagGroups:
       - Notifications
       - Process Runs
       - Processes
+      - Secrets
       - Tables
       - Unit Operation Runs
       - UnitOperations

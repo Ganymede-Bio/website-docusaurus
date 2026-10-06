@@ -52,7 +52,7 @@ Calls AWS to get data for flow to trigger
   - File name in S3 bucket
 - **bucket_name** : `str`
   - Name of S3 bucket
-- **aws_session**: `AWS Session`
+- **aws_session** : `AWS Session`
   - AWS Session
 
 ### Returns

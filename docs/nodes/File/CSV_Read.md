@@ -15,7 +15,7 @@ return one or more tables for storage in Ganymede data lake.
 
 ### Node Attributes
 
-- **csv**
+- **csv** (parameter key: `input_file_csv`)
   - File extension for valid CSV files submitted.  For example, filling in this attribute with "*.csv" will only allow files with the extension .csv to be uploaded.
 - **output_table_results**
   - Table displayed on [Table Head](https://docs.ganymede.bio/app/intro/Concepts#table-head) in Ganymede UI.

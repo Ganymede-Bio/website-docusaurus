@@ -132,6 +132,24 @@ Append peak information to an existing CDF file
 &nbsp; &nbsp; &nbsp; &nbsp; If False, append data to the existing CDF file  
 
 
+## `function` CDF.parse_cdf_to_dataframes
+  
+Convert a CDF file to a dictionary of DataFrames, containing raw data, metadata, and peak data  
+  
+### Parameters  
+  
+**filename** : `str`  
+&nbsp; &nbsp; &nbsp; &nbsp; Name of the CDF file  
+**cdf_file** : `bytes`  
+&nbsp; &nbsp; &nbsp; &nbsp; CDF file as bytes object  
+  
+### Returns  
+  
+**dataframes** : `dict`  
+&nbsp; &nbsp; &nbsp; &nbsp; Dictionary containing DataFrames for raw data, metadata, and peak data  
+&nbsp; &nbsp; &nbsp; &nbsp; Keys are "raw_data", "metadata", and "peak_data"  
+
+
 ## `function` CDFOutput.\_\_init\_\_
   
 Initialize LCOutput object for outputting data from netCDF file in AIA format  

@@ -134,6 +134,35 @@ The FlowTag class is used to represent a tag that can be applied to a file.  Thi
 - _param_ **bucket_name**: str - Bucket name of file to delete Tag from
 - _param_ **storage_provider**: str - Storage provider of file to delete Tag from, either 'gcs' or 's3'
 
+### `function` get_sdk
+
+`get_sdk` returns a processor SDK object that gives processor code access to the Tags supplied by the Connection and the Agent Template.  Import it from `gateway.processor_sdk` and pass it the keyword arguments of the processor's `execute` function.
+
+- _param_ **kwargs**: dict - Keyword arguments passed to the processor's `execute` function
+
+The returned object provides the following methods:
+
+- **get_connection_tags()** - Returns the Tags supplied by the Connection.  Each Tag has `tag_type_id` and `display_value` attributes.
+- **get_agent_tags()** - Returns the Tags supplied by the Agent Template.  Each Tag has `tag_type_id` and `display_value` attributes.
+- **info(message)** - Logs a message at the info level.
+
+These Tags can be used for dynamic processing and decision-making in processor code.
+
+```python
+from agent_sdk import FileParam, UploadFileParams
+from gateway.processor_sdk import get_sdk
+
+def execute(**kwargs) -> UploadFileParams | None:
+    sdk = get_sdk(kwargs)
+
+    connection_tags = sdk.get_connection_tags()
+    agent_tags = sdk.get_agent_tags()
+    sdk.info(f"Connection tags: {[(t.tag_type_id, t.display_value) for t in connection_tags]}")
+    sdk.info(f"Agent tags: {[(t.tag_type_id, t.display_value) for t in agent_tags]}")
+
+    # ... rest of processor code
+```
+
 ## Checksum functions
 
 Agent utility functions are provided in `agent_sdk` for validating data integrity and interacting with file systems.
@@ -317,7 +346,7 @@ activity('Display activity message')
 error('Display error message')
 ```
 
-In the UI, these log messages are [viewable and filterable on the corresponding Connections page](../../app/agents/AgentMonitoring#viewing-logs).
+In the UI, these log messages are [viewable and filterable on the corresponding Connection under **Connectors > Connections**](../../app/agents/AgentMonitoring#viewing-logs).
 
 ## Notifications
 

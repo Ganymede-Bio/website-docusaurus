@@ -28,7 +28,34 @@ module.exports = {
         {
           to: '/app/agents/Agent',
           from: '/connectivity/Agent',
-          }
+          },
+        // RunContainer node was replaced by operator extensions
+        {
+          to: '/app/flows/OperatorExtensions',
+          from: '/nodes/Analysis/RunContainer',
+        },
+        // nodes that were removed or are no longer available in the node palette
+        {
+          to: '/nodes/NodeOverview',
+          from: [
+            '/nodes/App/Azure_Read_Multi',
+            '/nodes/App/Benchling_Api',
+            '/nodes/App/SciNote_API',
+            '/nodes/File/AVI_Read',
+            '/nodes/File/AVI_Read_Multi',
+            '/nodes/File/HDF5_Read',
+            '/nodes/Instrument/Agilent_HPLC_Read',
+            '/nodes/Instrument/Instron_Tensile_Read',
+            '/nodes/Instrument/Profilometer_Read',
+            '/nodes/Instrument/Synergy_Read',
+            '/nodes/Instrument/Synergy_Read_Multi',
+          ],
+        },
+        // ganymede_sdk.api.benchling.io.benchling_write module was removed
+        {
+          to: '/sdk/GanymedeSDKOverview',
+          from: '/sdk/markdowns/benchling.io.benchling_write',
+        },
         ]
       }
     ],

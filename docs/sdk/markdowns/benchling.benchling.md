@@ -28,7 +28,7 @@ Benchling object to interact with Benchling API through read and write type meth
 &nbsp; &nbsp; &nbsp; &nbsp; Benchling molecule service to create or update molecules  
 
 
-## `function` Benchling.__init__
+## `function` Benchling.\_\_init\_\_
   
 Set up the Benchling object  
   
@@ -56,6 +56,60 @@ Lists schemas, filtered by type if provided
 &nbsp; &nbsp; &nbsp; &nbsp; list of schemas  
 
 
+## `function` Benchling.get_tables_from_benchling_entry
+  
+Get tables with prefix `table_name_prefix` from a Benchling entry.  
+  
+Example:  
+&nbsp; &nbsp; &nbsp; &nbsp; If you have several tables named "Platemap 1", "Platemap 2", etc., you can specify "Platemap" as the `table_name_prefix` to get all tables with that prefix.  
+  
+Benchling forces tables to be unique, so if you only want one table, you can specify full name as the `table_name_prefix`.  
+  
+Example:  
+&nbsp; &nbsp; &nbsp; &nbsp; If you have a table named "Platemap 1", you can specify "Platemap 1" as the `table_name_prefix` to get that specific table.  
+  
+  
+### Parameters  
+  
+**entry** : `dict | Entry`  
+&nbsp; &nbsp; &nbsp; &nbsp; Benchling entry containing tables. Result of `b.get("entries", id=entry_id)`  
+**table_name_prefix** : `str`  
+&nbsp; &nbsp; &nbsp; &nbsp; Prefix of table name to search for in the entry  
+  
+### Returns  
+  
+`dict[str, pd.DataFrame]`  
+&nbsp; &nbsp; &nbsp; &nbsp; Dictionary with table names as keys and pandas DataFrames as values  
+
+
+## `function` Benchling.get_result_tables_from_entry
+  
+Extracts table ids from&nbsp; &nbsp; Benchling entry content based on the table's schema ID.  
+  
+Returns a list of table IDs that match the specified schema ID within the passed entry  
+  
+  
+### Parameters  
+  
+**entry** : `dict | Entry`  
+&nbsp; &nbsp; &nbsp; &nbsp; Benchling entry containing tables. Result of `b.get("entries", id=entry_id)`  
+**assay_results_id** : `str`  
+&nbsp; &nbsp; &nbsp; &nbsp; results schema of format "assaysch_XXX" corresponding to the result table to search for  
+  
+### Returns  
+  
+  
+`list[str]`  
+&nbsp; &nbsp; &nbsp; &nbsp; List of table IDs that match the specified assay results schema ID within the passed entry  
+  
+### Notes  
+  
+Result table names with are not returned by the API for entries, so in cases where multiple tables  
+with the same schema_id are present in an entry, we have to infer their names by enforcing a  
+pre-defined order in the entry.  
+  
+
+
 ## `function` Benchling.get_schema_id_by_name
   
 Get schema by name  
@@ -74,7 +128,9 @@ Get schema by name
 
 
 ## `function` Benchling.is_http_429_error
-Check if the exception is a Benchling HTTP 429 (rate limit) error.
+  
+Check if the exception is a Benchling HTTP 429 (rate limit) error.  
+
 
 ## `function` Benchling.create_or_update_custom_entity
   
@@ -366,6 +422,8 @@ Transfer entities to a plate in Benchling.
 &nbsp; &nbsp; &nbsp; &nbsp; - concentration_units: str | None  
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Units of the concentration  
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Valid units are molar (M), mass (g/L), and count (cells/L) concentration units. Otherwise, use U/L units. See ContainerQuantityUnits for options to use in the form `f"\{mass or count unit\}/\{volume unit\}"`  
+**max_api_polling_attempts** : `int`  
+&nbsp; &nbsp; &nbsp; &nbsp; Maximum number of attempts to wait for the API to complete the transfer. Default is 10. Each attempt it will wait i**2 seconds, where i is the attempt number.  
 
 
 ## `function` Benchling.write_dataframe_to_benchling_table
@@ -841,6 +899,61 @@ It then downloads the resulting PDF and returns its contents.
   
 **HTTPError**  
 &nbsp; &nbsp; &nbsp; &nbsp; If any of the requests fail.  
+
+
+## `function` Benchling.convert_dropdown_values_to_ids
+  
+Convert all values in a dataframe that correspond to a dropdown field in Benchling to  
+its respective dropdown id.  
+  
+### Parameters  
+  
+**dataframe** : `pd.DataFrame`  
+&nbsp; &nbsp; &nbsp; &nbsp; dataframe containing data to be written to Benchling, e.g. entities to create or assay  
+&nbsp; &nbsp; &nbsp; &nbsp; results to write, where each column is a different field on the schema  
+&nbsp; &nbsp; &nbsp; &nbsp; - column names must match schema field names exactly  
+**schema_id** : `str`  
+&nbsp; &nbsp; &nbsp; &nbsp; id of the Benchling schema that will be written to  
+**schema_type** : `str`  
+&nbsp; &nbsp; &nbsp; &nbsp; type of the Benchling schema that will be written to  
+&nbsp; &nbsp; &nbsp; &nbsp; must be one of: assay_result, assay_run, batch, box, container, entity, entry, location,  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; plate, request, request_task, workflow_task  
+  
+### Returns  
+  
+`pd.DataFrame`  
+&nbsp; &nbsp; &nbsp; &nbsp; Returns dataframe, with any values corresponding to a dropdown field in its schema to  
+&nbsp; &nbsp; &nbsp; &nbsp; its dropdown id  
+  
+
+
+## `function` Benchling.create_schema_dropdown_map
+  
+Creates a dictionary map for all dropdown fields in a specified schema  
+  
+### Parameters  
+  
+**schema_id** : `str`  
+&nbsp; &nbsp; &nbsp; &nbsp; schema id to create dictionary map for  
+**schema_type** : `str`  
+&nbsp; &nbsp; &nbsp; &nbsp; type of the Benchling schema  
+&nbsp; &nbsp; &nbsp; &nbsp; must be one of: assay_result, assay_run, batch, box, container, entity, entry, location,  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; plate, request, request_task, workflow_task  
+  
+### Returns  
+  
+`dict`  
+&nbsp; &nbsp; &nbsp; &nbsp; dictionary of all dropdown fields in the specified schema, with corresponding dropdown  
+&nbsp; &nbsp; &nbsp; &nbsp; values and ids  
+&nbsp; &nbsp; &nbsp; &nbsp; Format is  
+&nbsp; &nbsp; &nbsp; &nbsp; \{field_name: \{dropdown_value: dropdown_value_id\}\}  
+  
+### Raises  
+  
+&nbsp; &nbsp; &nbsp; &nbsp; ValueError  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; If schema_type provided is not in acceptable list or schema_id does not exist in  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Benchling for that schema type  
+  
 
 
 ## `class` SchemaError

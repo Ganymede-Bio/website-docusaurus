@@ -14,12 +14,8 @@ Write files from data lake to Azure Blob Storage.
 
 - **azure_storage_uri**
   - Windows Azure Storage Blob (WASB) URI to set URL for blob service endpoint
-- **src_object_name**
-  - Data lake object to write
 - **dest_azure_container_name**
   - Destination Azure container to write to
-- **dest_azure_blob_name**
-  - Destination Azure blob name to write to
 
 ### Notes
 
@@ -39,6 +35,22 @@ assistance, please don't hesitate to reach out to Ganymede.
 An example configuration is shown below:
 
 - **azure_storage_uri**: https://abc123.blob.core.windows.net
-- **src_object_name**: filename.parquet
 - **dest_azure_container_Name**: abc123
-- **dest_azure_blob_name**: "\{\{dag.dag_id\}\}/filename.parquet"
+
+## User-Defined Python
+
+Specify list of Ganymede files in output bucket to write to Azure blob storage.
+
+### Parameters
+
+- **ganymede_context** : `GanymedeContext`
+  - Ganymede context object
+
+### Returns
+
+`list[GanymedeToAzure]`
+  List of GanymedeToAzure objects to upload to Azure
+
+### Notes
+
+The list GoogleToAzure objects are applied in the order that they are returned.

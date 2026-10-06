@@ -24,7 +24,7 @@ A class to interact with the Coda API.
 &nbsp; &nbsp; &nbsp; &nbsp; The authorization header used in requests to the Coda API.  
 
 
-## `function` Coda.__init__
+## `function` Coda.\_\_init\_\_
   
 Initialize the Coda class  
   

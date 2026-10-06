@@ -147,6 +147,11 @@ def extract_docstrings(file_path):
 
 
 def convert_docstring_to_markdown(method, docstring):
+    # a docstring that starts on the opening quotes line has an unindented first line, which
+    # stops dedent from working; dedent the remaining lines on their own
+    if docstring and not docstring.startswith("\n"):
+        first_line, _, rest = docstring.partition("\n")
+        docstring = "\n" + first_line + "\n" + textwrap.dedent(rest)
     docstring = textwrap.dedent(docstring)
 
     # Remove single uses of > and < since they throw HTML errors
@@ -163,6 +168,8 @@ def convert_docstring_to_markdown(method, docstring):
     # Keep new line structure on markdown view
     docstring = re.sub(r"\n", r"  \n", docstring)
 
+    # escape dunder names (e.g. __init__) so MDX doesn't render them as bold
+    method = method.replace("__", r"\_\_")
     docstring = f"## {method}\n{docstring}"
 
     return docstring

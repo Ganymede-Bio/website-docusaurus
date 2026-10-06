@@ -9,10 +9,14 @@ displayed_sidebar: SDKSidebar
 
 
 ## `class` LimitType
-Enum for types of control limits
+  
+Enum for types of control limits  
+
 
 ## `class` ControlLimits
-Class to hold control limit specifications
+  
+Class to hold control limit specifications  
+
 
 ## `class` WesternElectricRules
   
@@ -101,12 +105,12 @@ with open(output_file_path, "wb") as f:
     f.write(report)  
 ```
 
-## `function` WesternElectricRules.__repr__
+## `function` WesternElectricRules.\_\_repr\_\_
   
 Print the documention of the class.  
 
 
-## `function` WesternElectricRules.__init__
+## `function` WesternElectricRules.\_\_init\_\_
   
 Initialize WesternElectricRules with flexible control limit options.  
   
