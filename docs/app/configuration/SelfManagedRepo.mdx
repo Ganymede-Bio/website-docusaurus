@@ -6,7 +6,7 @@ displayed_sidebar: webUiSidebar
 
 ## Overview
 
-Self-managed repositories allow you to host and manage your Ganymede flow code within your organization, giving you greater control over version control, CI/CD, and code governance.
+Self-managed repositories allow you to host and manage your Ganymede code, including Flow code and Agent Template (connector) code, within your organization, giving you greater control over version control, CI/CD, and code governance.
 
 ### Benefits
 
@@ -104,6 +104,20 @@ Conflict protection stops a deploy from overwriting changes made elsewhere, such
 Conflict protection covers both Flow code and Agent connector code. It requires the updated versions of the [`flow-pull-action`](https://github.com/Ganymede-Bio/flow-pull-action) and [`flow-commit-action`](https://github.com/Ganymede-Bio/flow-commit-action) GitHub Actions and the [self-managed-repo-template](https://github.com/Ganymede-Bio/self-managed-repo-template). Existing setups continue to work unchanged until you adopt the new versions.
 
 If you call the API directly, use the v2 environment commit endpoints. `GET /v2/environment/{environment}/commits` returns the environment's current commit SHA as `headSha`. Pass that value as `baseSha` to `PUT /v2/environment/{environment}/commits`. If the two values don't match, the response is a 409 that includes the environment's current commit SHA. The existing v0 endpoints are unchanged.
+
+The v2 endpoints work as follows:
+
+- **`GET /v2/environment/{environment}/commits`** returns `signedUrl`, a link to download the environment's code as a ZIP file, and `headSha`.
+   - Set the `flowName` query parameter to download only one Flow's code. If the Flow doesn't exist, the response is a 404.
+   - Set `includeLibFiles` to `false` to leave out the `lib/` folder. It defaults to `true`.
+- **`PUT /v2/environment/{environment}/commits`** commits files to the environment. The request body has these fields:
+   - `authorEmail`: the email of a registered Ganymede user, recorded as the commit author.
+   - `message`: the commit message.
+   - `fileMap`: a map of repository file paths to base64-encoded file contents. Use the same paths as in the downloaded ZIP file, such as `flows/<flow name>/...`, `lib/...`, and `connectors/...`. You can update existing files and add files under `lib/`. Other new files are rejected with a 400.
+   - `baseSha` (optional): the `headSha` from your last pull. Include it in CI pushes so that a deploy can't overwrite changes made since your last pull.
+   - `dry_run` (optional): set to `true` to check the request without committing anything.
+
+   A successful commit returns the new commit SHA as `commitSha`.
 
 ### Customizing Code Management
 
