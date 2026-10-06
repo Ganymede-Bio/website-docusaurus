@@ -35,6 +35,8 @@ import PrintPageButton from '@site/src/components/PrintPageButton';
 
 #### Issue: The build for a "Watch for files locally then run flow" Agent keeps failing, with no Windows executable or Linux binary created.
 
+This issue applies only to legacy Agents. Gateway Agent Templates don't build an executable for each Agent; you install the Gateway once per Host and create Connections in the Ganymede UI.
+
 Agents that watch for files locally then run Flow require file inputs to be passed to the Flow for execution.
 
 1. Ensure that the Flow being triggered by the Agent has at least one Node for ingesting files.
@@ -44,7 +46,9 @@ Agents that watch for files locally then run Flow require file inputs to be pass
 
 #### Issue: I am unable to install an Agent Connection; the installer succeeds, but I see an issue related to expired certs in the logs.
 
-This is likely due to the Agent Connection being on a version prior to 5.5.1, which referenced the root cert on the computer that may have expired.
+For a legacy Agent Connection, this is likely due to the Agent Connection being on a version prior to 5.5.1, which referenced the root cert on the computer that may have expired.
+
+For a Gateway, certificate errors usually mean that a proxy or firewall on your network inspects TLS traffic. See [The Gateway can't connect on a network with a firewall, proxy, or private certificates](#issue-the-gateway-cant-connect-on-a-network-with-a-firewall-proxy-or-private-certificates).
 
 #### Issue: I am unable to install an Gateway on Windows; the installer is failing at the final step.
 
@@ -74,6 +78,33 @@ ssl.SSLCertVerificationError: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verif
 in the Connection logs file found locally on the computer. These logs can be found in the directory that the Agent Connection is installed in.
 
 To resolve, ensure that outbound port 443 communication is available to the web addresses mentioned on the [Agent System Requirements page](../configuration/AgentSystemRequirements#testing-connectivity).
+
+#### Issue: The Gateway can't connect on a network with a firewall, proxy, or private certificates
+
+Starting with Gateway version 5.6.21, the Gateway logs clearer messages when a firewall or proxy blocks its access to Ganymede. Look for the following messages in the Gateway logs.
+
+**Firewall or proxy blocking outbound traffic**
+
+- `All connectivity checks failed (API server, Pub/Sub, GCS). This strongly suggests a firewall is blocking outbound traffic from this machine. Please review firewall/proxy rules and ensure port 443 is open.`
+- `Unable to ping API Server at <url> — connection refused. A firewall may be actively blocking port 443.`
+- `Unable to ping API Server at <url> — connection timed out. A firewall may be blocking port 443.`
+- `Connection to <host> failed — a firewall may be blocking port <port>. Check your network/firewall configuration.`
+- `Failed to publish message to <topic> — the host may be unable to reach GCP. Check your network/firewall configuration.`
+
+To resolve, ask your IT team to allow outbound HTTPS (port 443) from the Host to the addresses listed in [Proxy and Firewall Configuration](../configuration/AgentSystemRequirements#proxy-and-firewall-configuration), then run the [connectivity tests](../configuration/AgentSystemRequirements#testing-connectivity) from the Host.
+
+**Proxy or enterprise certificate authority (CA)**
+
+Some networks inspect TLS traffic and re-sign certificates with a private or enterprise CA. Gateway version 5.6.11 improved deployment on networks with private certificates. When certificate verification fails, the Gateway tries the operating system's trust store and logs messages such as:
+
+- `Target cert chain issuers: <issuers>. Cert may be signed by a network proxy or enterprise CA.` The Gateway reached a Ganymede endpoint, but the certificate it received appears to be signed by a proxy or enterprise CA. The listed issuers show which CA signed it.
+- `SSL verification failed with certifi, attempting to use system trust store.` The Gateway is retrying certificate verification with the operating system's trust store.
+- `System trust store certificates injected successfully.` The Gateway now uses the operating system's trust store.
+- `Failed to inject system trust store certificates` or `truststore package not available. Cannot inject system trust store certificates.` The Gateway couldn't use the operating system's trust store.
+
+To resolve, make sure that the CA certificate shown in the issuer list is installed in the operating system's trust store on the Host, or ask your IT team to exclude the addresses in [Proxy and Firewall Configuration](../configuration/AgentSystemRequirements#proxy-and-firewall-configuration) from TLS inspection. If the Gateway still can't connect, contact [Ganymede Support](../Support.mdx) and send the Host logs.
+
+If the logs show `Target cert is signed by a Google Trust Services CA. No cert interception detected.`, the network isn't intercepting the certificate, and the issue is elsewhere.
 
 #### Issue: The Agent Connection is not actively running. How do I check?
 
@@ -121,6 +152,8 @@ This is a Windows-specific issue that can occur if the system time is not proper
 
 First, verify that there are [no issues with connectivity](../configuration/AgentSystemRequirements.mdx#testing-connectivity).  If you are able to pass all of the connectivity tests, check the system time on the machine where the Agent is installed.
 
+For a Gateway, you can check the clock from the Ganymede UI. In the left navigation, open **Connectors > Hosts** and select the Host. **Clock Drift (s)** shows the difference between the Host's clock and Ganymede's servers, measured when the Host starts. If the clock is off, the Host logs show `Clock drift detected: system clock is off by <seconds> seconds. This may cause SSL certificate validation failures.`
+
 To resolve this:
 
 - Right-click on the time in the bottom right corner of the screen and select "Adjust date/time."
@@ -131,6 +164,8 @@ To resolve this:
 
 - If you observe an error in local logs related to expired cert, verify that the Agent Connection is on version 5.5.1+. 
 Prior to this, the Agent referenced the root cert on the computer, which may have expired.  
+- Starting with Gateway version 5.6.78, a Host that stops processing for 15 minutes shows as disconnected and, when installed as a service, restarts itself. If a Host repeatedly disconnects this way, check the Host logs for errors and contact [Ganymede Support](../Support.mdx).
+- If the clock on the PC drifts, the Host logs show a `Clock drift detected` message. See [Agent unable to connect with access token expiration error in logs](#issue-agent-unable-to-connect-with-access-token-expiration-error-in-logs).
 
 On Windows:
 
@@ -144,6 +179,14 @@ On Windows:
 #### Issue: The Agent Connection does not restart when the computer is restarted.
 
 A Gateway installed without admin privileges doesn't start automatically after a restart. See [The Agent Connection is not actively running](#issue-the-agent-connection-is-not-actively-running-how-do-i-check) to check how the Gateway was installed. The steps below apply to admin installations.
+
+On Windows, a Gateway installed as a service handles most startup failures on its own:
+
+- **Recovery actions**: The Gateway configures the Windows service's failure recovery actions automatically. The Host logs show `SCM failure recovery actions configured for <service name>`. If the logs show `Failed to configure SCM recovery actions for <service name>` instead, set the recovery actions manually as described in [Configuring the Agent Connection to restart on failure](#windows---configuring-the-agent-connection-to-restart-on-failure).
+- **Startup retries**: Starting with Gateway version 5.6.41, if the service fails to start, the Gateway retries up to 3 times, with a maximum timeout of 5 minutes, before it requires manual intervention. The Host logs show `Retrying to start service '<service name>' (attempt <n>)` for each retry.
+- **Startup watchdog**: If the Gateway doesn't finish starting in time, it exits so that Windows can restart the service. The Host logs show `Startup watchdog fired: host.run() did not reach liveness ping within <timeout>s — forcing process exit for SCM recovery`.
+
+If the Gateway still doesn't start, use the steps below to find the cause.
 
 ##### Windows - Determine whether the Agent Connection is timing out on startup
 
@@ -314,7 +357,9 @@ watch_directory = Path(kwargs.get("vars", {}).get("input_path", DEFAULT_PATH))
 
 #### Q: Can Windows Agents be installed headlessly?
 
-A: Yes - Agent installers (v4.10+) can be installed headlessly, either with a [Powershell script](#using-a-powershell-script) or a [Windows batch script](#using-a-batch-script).
+A: Yes, for legacy Agents. Legacy per-Connection Agent installers (v4.10+) can be installed headlessly, either with a [Powershell script](#using-a-powershell-script) or a [Windows batch script](#using-a-batch-script).
+
+These scripts install a legacy Agent executable (`agent.exe`) with a `connection.yaml` configuration file, and don't apply to the Gateway installer. The Gateway is available as a Windows EXE or a Windows MSI package; see [Download the Gateway](./AgentInstall#step-1-download-the-gateway). For help installing the Gateway headlessly, contact [Ganymede Support](../Support.mdx).
 
 ##### Using a Powershell Script
 

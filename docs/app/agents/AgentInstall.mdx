@@ -4,7 +4,7 @@ title: Installing Agent Connections
 displayed_sidebar: webUiSidebar
 ---
 
-import { ApiOutlined, EditOutlined, PlusOutlined, DownloadOutlined } from "@ant-design/icons";
+import { EditOutlined, PlusOutlined, DownloadOutlined } from "@ant-design/icons";
 
 Starting with version 5.6.0, Ganymede supports the **Gateway** installation model, which allows you to install a single executable per PC and then add Connections through the Ganymede UI. This is the recommended approach for new installations.
 
@@ -88,15 +88,17 @@ HOME=/home/<user>/Ganymede ./gateway_<timestamp> <host name>
 
 Once your Host is online, you can create Connections without downloading additional executables:
 
-1. Navigate to the Host's detail page in the Ganymede UI.
-2. Click <div className="button dark_gray_button"><PlusOutlined /> Create connection on host</div>.
-3. Select an existing Agent Template or create a new one.
-4. Configure the Connection settings (name, variables, labels, file tags).
-5. The Connection will start automatically on the Host.
+1. In the left navigation, open **Connectors > Hosts** and select the Host.
+2. Click <div className="button dark_gray_button"><PlusOutlined /> Create Connection on Host</div>.
+3. Under **Connection Source**, select **Create from Template**.
+4. Enter a **Name** for the Connection, select an **Agent Template**, and click **Create**. The Connection starts automatically on the Host.
+5. To configure the Connection, open its page and click <div className="button dark_gray_button"><EditOutlined /> Edit Connection</div>. Along with the name, file tags, variables, and labels, the Connection settings include the trigger options for the Agent Template's type. For example, a file watcher Connection has settings such as **Input Path**, **Ignore Patterns**, and **Stable Time (seconds)**.
+
+You can also create a Connection from an Agent Template. In the left navigation, open **Connectors > Agent Templates** and select the template. On the **Configuration** tab, click **Create Connection on Host**, enter a **Name**, select a Host, and click **Create**.
 
 :::tip Moving Connections between Hosts
 
-You can move existing Connections to a different Host by selecting **'Move existing connection'** instead of creating a new one. This is useful for migrating Connections or redistributing workload across Hosts.
+You can move existing Connections to a different Host by selecting **Move Existing Connection** under **Connection Source** instead of **Create from Template**. This is useful for migrating Connections or redistributing workload across Hosts.
 
 :::
 
@@ -118,7 +120,7 @@ The Gateway restarts under the new identity. The Host logs show `Auth full-updat
 
 The legacy installation method involves downloading and installing a separate executable for each Connection. This method is still supported for environments where Connections are running at older versions.
 
-To install a Connection using the legacy method, open the Ganymede application in a browser window and navigate to the Connection tab in the left sidebar. Select the desired Agent by name and download the relevant Windows/Linux installation file.
+To install a Connection using the legacy method, download the executable for the Agent Template from **Connectors > Agent Templates**, as described in the steps below. Executables are available only for Agent Templates that have a legacy agent build.
 
 ## Windows Installation (Legacy)
 
@@ -126,11 +128,11 @@ To install a Connection using the legacy method, open the Ganymede application i
 
 1. Open the Ganymede application in a Google Chrome window: \<tenant\>.ganymede.bio
 2. On the top panel, navigate to the appropriate environment (e.g. - development or production, as appropriate) for your tenant (if not already there).
-3. Navigate to the Connections page by selecting the <div className="button darkblue_button"><ApiOutlined /></div> icon in the left toolbar.
-4. Select the Agents subsection of the Connections page to view all available Agents.
-5. Find your Agent and hover over the <div className="button darkblue_button_mui_reverse"><DownloadOutlined /> Download</div> button. 
-    1. Select the Windows EXE option to download the agent in your browser.
-    1. An executable named \<your_agent>_\<id\>.exe should download to the PC
+3. In the left navigation, open **Connectors > Agent Templates** and select your Agent Template.
+4. Download the executable in one of the following ways:
+    - Hover over the <div className="button darkblue_button_mui_reverse"><DownloadOutlined /> Download</div> button in the page header and select **Windows EXE**. The button appears only when the Agent Template has a legacy build and none of its Connections run on a Gateway.
+    - Open the **Legacy Builds** tab, find the **Agent Version** you want, and click **Windows EXE** in the **Executables** column.
+5. An executable named \<your_agent>_\<id\>.exe should download to the PC
 
 :::tip programmatically downloading the agent
 
@@ -176,10 +178,10 @@ The Windows Agent installer can be [run headlessly](./DebuggingAgents.mdx#q-can-
 
 ### Step 3: Check the Connection Status
 
-1. Navigate to the Connections page in Ganymede. 
+1. Open the Connections page in Ganymede.
     1. Open the Ganymede application in a browser window: \<tenant\>.ganymede.bio
     2. On the top panel, navigate to the \<tenant\>-\<tenant-env\> environment
-    3. Navigate to the Connections page.
+    3. In the left navigation, open **Connectors > Connections**.
     4. Find your Connection and click it to open the detailed Connection page.
     5. On the top of the Connection settings you should see the Status is “Live”
     
@@ -231,6 +233,12 @@ The domain must be included as part of the username. If the username is created 
 Any changes to the secret values will propagate to the connection and force the service to restart with that information.
 
 :::
+
+:::note Identity errors
+
+Starting with Agent version 5.5.5, the Connection detects errors and configuration issues with its identity and displays them in the Ganymede UI. To resolve an identity error, click **Edit Connection** on the Connection's page, correct the username and password secrets, and save the Connection.
+
+:::
 &nbsp;
 
 <img alt="Admin - Access Panel" src="https://ganymede-bio.mo.cloudinary.net/agent/WindowsIdentitySettings.png" />
@@ -265,11 +273,11 @@ There may be a slight delay as the service connection resumes.
 
 1. Open the Ganymede application in a Google Chrome window: \<tenant\>.ganymede.bio
 2. On the top panel, navigate to the appropriate environment (e.g. - development or production, as appropriate) for your tenant (if not already there).
-3. Navigate to the Connections page by selecting the <div className="button darkblue_button"><ApiOutlined /></div> icon in the left toolbar.
-4. Select the Agents subsection of the Connections page to view all available Agents.
-5. Find your Agent and hover over the <div className="button darkblue_button_mui_reverse"><DownloadOutlined /> Download</div> button. 
-    1. Select the Linux option to download the agent in your browser.
-    1. A binary named \<your_agent>_\<id\> should download to the PC
+3. In the left navigation, open **Connectors > Agent Templates** and select your Agent Template.
+4. Download the executable in one of the following ways:
+    - Hover over the <div className="button darkblue_button_mui_reverse"><DownloadOutlined /> Download</div> button in the page header and select **Linux**. The button appears only when the Agent Template has a legacy build and none of its Connections run on a Gateway.
+    - Open the **Legacy Builds** tab, find the **Agent Version** you want, and click **Linux** in the **Executables** column.
+5. A binary named \<your_agent>_\<id\> should download to the PC
 
 :::info
 
@@ -299,10 +307,10 @@ This Agent installer will install the Agent in /home/\<user\>/Ganymede/\<connect
 
 ### Step 3: Check the Connection Status / Configure the Connection
 
-1. Navigate to the Connections page in Ganymede. 
+1. Open the Connections page in Ganymede.
     1. Open the Ganymede application in a browser window: \<tenant\>.ganymede.bio
     2. On the top panel, navigate to the \<tenant\>-\<tenant-env\> environment
-    3. Navigate to the Connections page.
+    3. In the left navigation, open **Connectors > Connections**.
     4. Find your Connection and click it to open the detailed Connection page.
     5. On the top of the Connection settings you should see the Status is “Live”
 
@@ -384,10 +392,12 @@ WantedBy=multi-user.target
 
 ## Post-Installation Activities
 
+For a Connection that runs on a Gateway, the Connection's page shows the **Host** it runs on. Details such as the installation path and service name are on the Host's page.
+
 ### Set up Connection Tags and Variables
 
-1. Navigate to the Connections pane in the Ganymede app by selecting the <div className="button darkblue_button"><ApiOutlined /></div> icon in the left toolbar and selecting the Connections pane. 
-2. Find the Connection you just created. Click the <div className="button dark_gray_button"><EditOutlined /> **Edit Connections**</div> button at the bottom right of the Connection Settings
+1. In the left navigation, open **Connectors > Connections**.
+2. Find the Connection you just created and click it to open its page. Click the <div className="button dark_gray_button"><EditOutlined /> **Edit Connection**</div> button.
 3. Click <div className="button darkblue_outline_button"><PlusOutlined /> Add file tag</div> to open the file tag popup.
     1. Select the appropriate Tag Type Name from the dropdown
     2. Add a Display Value which will appear next to each file uploaded to Ganymede via this Connection

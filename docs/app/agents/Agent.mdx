@@ -5,7 +5,7 @@ displayed_sidebar: webUiSidebar
 toc_max_heading_level: 4
 ---
 
-import { DiffOutlined, DownloadOutlined, PlusOutlined, SelectOutlined } from "@ant-design/icons";
+import { CodeOutlined, DiffOutlined, DownloadOutlined, EyeOutlined, PlusOutlined } from "@ant-design/icons";
 
 ## Overview
 
@@ -59,7 +59,7 @@ If you have existing Connections running on the traditional Agent model, you can
 1. **Update the Host to version 5.6.0 or higher**, renaming the Host as appropriate
 2. **Update an additional Host to version 5.6.0 or higher** (if you want to move Connections between PCs)
 3. **Navigate to the page of the Host** where you'd like the Connection to move to
-4. **Select 'Create connection on host'**, then **'Move existing connection'**
+4. **Click Create Connection on Host**. In the **Add Connection** dialog, set **Connection Source** to **Move Existing Connection**, select the Connection in **Connection to Move**, and click **Move Connection**. In the **Confirm Move Connection** dialog, click **Move Connection** again.
 5. **Wait until the migration is complete**
 6. **Uninstall the old Host** from the PC at your next convenience—it will continue to run without any Connection
 
@@ -222,13 +222,23 @@ A Connection watches a directory (and associated subdirectories) for new files a
 
   :::
 
-- `If a discovered filename exists in storage`: Specifies what to do when a file with the same name already exists in Ganymede storage: **Use existing cloud version**, **Upload new file with unique filename**, or **Ignore duplicate files**.
+- `If a discovered filename exists in storage`: Specifies what to do when a file with the same name already exists in Ganymede storage: **Use existing cloud version**, **Upload new file with unique filename**, or **Ignore duplicate files**. See [Duplicate file handling](#duplicate-file-handling).
 - `Ignore Patterns`: Patterns for files and directories that Connections skip. You can also set Ignore Patterns on each Connection; see [Reserved variables for File Watcher Agents](#reserved-variables-for-file-watcher-agents).
-- `De-duplication behavior`: When **Skip files with matching content (MD5)** is selected, files whose content is identical to a previously uploaded file are skipped. Clear it if files with the same content but different filenames (for example, renamed files) must each be uploaded and processed. Requires Gateway v5.6.23 or later.
+- `De-duplication behavior`: When **Skip files with matching content (MD5)** is selected, files whose content is identical to a previously uploaded file are skipped. Clear it if files with the same content but different filenames (for example, renamed files) must each be uploaded and processed. Requires Gateway v5.6.23 or later. See [Duplicate file handling](#duplicate-file-handling).
 - `Sync files on connection start`: When enabled, the Connection scans the watched directory at startup and uploads any files that were created or modified while the gateway was offline. Requires Gateway v5.6.23 or later. See [Sync files on connection start](#sync-files-on-connection-start) for details.
 - `Uploaded Files Bucket`: The bucket that Connections upload files to. This input appears only when an S3 bucket has been added to the environment; see [Agent Upload to S3 Bucket](../configuration/AgentToS3BucketConfig).
 - `File Tags`: Tags to associate with the files uploaded to Ganymede Cloud.
 - `Image`: An image to associate with the Agent Template in the Ganymede UI.
+
+#### Duplicate file handling
+
+Connections that watch for files check each file against the files already uploaded to Ganymede. For Agents v5.5.24 and later, a Connection always skips a file when a previously uploaded file has both the same file name and the same MD5 hash. Two settings control how the Connection handles other duplicates:
+
+- `If a discovered filename exists in storage` (`duplicate_handling`): Specifies what to do when a file with the same name but different content already exists in Ganymede storage.
+  - **Use existing cloud version** (`use_existing_file`): Don't upload the file, and use the version already in storage.
+  - **Upload new file with unique filename** (`create_new_version`): Upload the file under a unique filename. This is the default for new Agent Templates.
+  - **Ignore duplicate files** (`ignore_duplicate`): Skip the file. For Agent Templates that run flows, no flow run is triggered for the skipped file.
+- `De-duplication behavior` (`deduplicate_by_md5`): When **Skip files with matching content (MD5)** is selected, the Connection also skips any file whose MD5 hash matches a previously uploaded file, even if the file name is different. This setting is off by default, and Connections migrated from legacy Agents start with it off. It requires Gateway v5.6.23 or later. If any of the Agent Template's Connections run an older Gateway, the form shows a warning that the setting won't take effect until the Gateway is updated.
 
 #### Sync files on connection start
 
@@ -239,7 +249,7 @@ The scan runs in a background daemon thread that starts **after** the live watch
 1. Fetches the set of MD5 hashes already recorded for the Connection from Ganymede (paginated, 1,000 records per page).
 2. Walks the watched directory recursively, applying the same filters as the live watcher: `ignore_hidden_files`, `ignore_hidden_directories`, `ignore_list`, and the file watcher's configured glob patterns.
 3. Skips any file whose modification time is newer than `stable_time` seconds in the past — those will be picked up by the live watcher once they stabilize.
-4. For each remaining candidate, computes the local file's MD5 and skips it if the hash is already in the known set. Files with an unrecognized MD5 are enqueued through the same `add_file()` path used by the live watcher, so the configured `duplicate_handling` policy applies as a second safety net.
+4. For each remaining candidate, computes the local file's MD5 and skips it if the hash is already in the known set. Files with an unrecognized MD5 are enqueued through the same `add_file()` path used by the live watcher, so the configured `duplicate_handling` policy (see [Duplicate file handling](#duplicate-file-handling)) applies as a second safety net.
 5. Throttles uploads to roughly two per second to avoid overwhelming the API server.
 
 Files modified while the gateway is running are always handled by the live watcher; the startup scan only covers files that changed while the Connection was offline.
@@ -260,6 +270,12 @@ For Connections that run on a Gateway (version 5.6.0 and later), the following s
 | `Ignore Hidden Directories` | `ignore_hidden_directories` | If enabled, the file watcher ignores files inside directories that the operating system considers hidden. |
 
 When you migrate a legacy Connection to a Gateway, these variables are converted to the corresponding fields.
+
+:::note Watched directory availability
+
+If the watched directory (`Input Path` or `input_path`) is deleted or becomes inaccessible, the file watcher restarts automatically (Agents v5.5.29 and later). If a watched network share stops responding, the Connection reports the path as unhealthy and resumes on its own once the share responds again (Gateway v5.6.78 and later).
+
+:::
 
 For legacy Agents (prior to version 5.6.0), reserved variables are used to configure Connection behavior.  These can be set [at installation](./AgentInstall#windows-installation-legacy) or in the Connections panel post-installation. On Gateway Connections, use the Connection Settings fields in the table above instead of the corresponding variables.
 
@@ -285,7 +301,7 @@ The user-defined code will be generated to map those file patterns to parameters
 For example, if the instrument outputs a CSV file called "\{id\}\_lc_output\<YYYYMMDD\>.csv" that is to be ingested by a [CSV_Read node](../../nodes/File/CSV_Read.md) called "Ingest_Data", an appropriate configuration would be "\{id\}\_lc_output\*.csv" for the input box associated with the "Ingest_Data.csv" node.  The corresponding user-defined code would be:
 
 ```python
-from ganymede_sdk.agent.models import TriggerFlowParams, FileWatcherResult
+from agent_sdk import TriggerFlowParams, FileWatcherResult
 import re
 from typing import Dict, Callable
 import glob
@@ -437,7 +453,7 @@ A Connection executes a Python script on a set cadence.  Commonly, this Agent ty
 Cron Agents can conditionally trigger code, depending on the return value of the execute function; no Flow is triggered if None is returned.
 
 ```python
-from ganymede_sdk.agent.models import FileParam, UploadFileParams
+from agent_sdk import FileParam, UploadFileParams
 
 
 # Required Function
@@ -496,9 +512,9 @@ A Connection that monitors a local directory (and associated subdirectories) for
 #### Input Parameters
 
 - `File Patterns`: The [glob patterns](<https://en.wikipedia.org/wiki/Glob_(programming)>) that files must match to be uploaded. At least one pattern is required. This option is only available during Agent Template creation.
-- `If a discovered filename exists in storage`: Specifies what to do when a file with the same name already exists in Ganymede storage: **Use existing cloud version**, **Upload new file with unique filename**, or **Ignore duplicate files**.
+- `If a discovered filename exists in storage`: Specifies what to do when a file with the same name already exists in Ganymede storage: **Use existing cloud version**, **Upload new file with unique filename**, or **Ignore duplicate files**. See [Duplicate file handling](#duplicate-file-handling).
 - `Ignore Patterns`: Patterns for files and directories that Connections skip.
-- `De-duplication behavior`: When **Skip files with matching content (MD5)** is selected, files whose content is identical to a previously uploaded file are skipped. Requires Gateway v5.6.23 or later.
+- `De-duplication behavior`: When **Skip files with matching content (MD5)** is selected, files whose content is identical to a previously uploaded file are skipped. Requires Gateway v5.6.23 or later. See [Duplicate file handling](#duplicate-file-handling).
 - `Sync files on connection start`: When enabled, the Connection scans the watched directory at startup and uploads any files that were created or modified while the gateway was offline. Requires Gateway v5.6.23 or later. See [Sync files on connection start](#sync-files-on-connection-start) for details.
 - `Uploaded Files Bucket`: The bucket that Connections upload files to. This input appears only when an S3 bucket has been added to the environment.
 - `File Tags`: Tags to associate with the files uploaded to Ganymede Cloud.
@@ -692,7 +708,12 @@ To do so, follow the steps below:
 
 ## Configuring User-Defined Python
 
-To modify user-defined code executed by the Agent, select the Agent in the Ganymede app and click on the <div className="button gray_button"><SelectOutlined />Code</div> button. This opens a notebook where the user can modify the code executed on observed files before transfer.
+To view or modify the user-defined code that an Agent Template runs, open **Connectors > Agent Templates** in the left navigation and select the Agent Template. The **Code** actions are in the page header:
+
+- <div className="button gray_button"><EyeOutlined /> View</div> opens the code in a read-only viewer, where you can copy it.
+- <div className="button gray_button"><CodeOutlined /> Edit</div> opens a notebook in a new browser tab, where you can modify the code executed on observed files before transfer. **Edit** is unavailable if you don't have permission to modify the Agent Template or the Agent Template is disabled or archived, and it isn't shown in environments with [GxP Validation Mode](../admin/GxPValidation#gxp-validation-mode) enabled.
+
+For legacy Agent Templates, the header can also show a **Download** button for the legacy executable; see [Legacy Agents](#creating-an-agent-template).
 
 <div class="text--center">
   <img
@@ -713,4 +734,25 @@ To modify user-defined code executed by the Agent, select the Agent in the Ganym
 &nbsp;
 
 Agent executables built before version 5.6.0 remain available for download on the **Legacy Builds** tab of the Agent Template's page. See [Viewing Build History (Legacy)](./AgentMonitoring#viewing-build-history-legacy).
+
+### Processor SDK
+
+User-defined code imports objects such as `FileParam`, `TriggerFlowParams`, and `UploadFileParams` from `agent_sdk` (Agents v5.0 and later; earlier Agents used `ganymede_sdk.agent`). See the [Agent SDK](../../sdk/markdowns/AgentSDK) reference.
+
+On Gateway v5.6.21 and later, processor code can also read the tags configured on the Connection and on the Agent Template. Pass the `kwargs` that _execute_ receives to `get_sdk` from `gateway.processor_sdk`, and then call `get_connection_tags()` or `get_agent_tags()`. Each tag has a `tag_type_id` and a `display_value`.
+
+```python
+from agent_sdk import FileParam, UploadFileParams
+from gateway.processor_sdk import get_sdk
+
+def execute(**kwargs) -> UploadFileParams | None:
+    sdk = get_sdk(kwargs)
+
+    connection_tags = sdk.get_connection_tags()
+    agent_tags = sdk.get_agent_tags()
+    sdk.info(f"Connection tags: {[(t.tag_type_id, t.display_value) for t in connection_tags]}")
+    sdk.info(f"Agent tags: {[(t.tag_type_id, t.display_value) for t in agent_tags]}")
+
+    # ... rest of processor code
+```
 

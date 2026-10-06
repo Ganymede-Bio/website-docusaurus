@@ -7,9 +7,40 @@ toc_max_heading_level: 4
 
 ## Agent State Diagrams
 
-The diagrams in this section show the steps that an Agent transitions through during installation, startup, and execution.  This can be useful for flagging or debugging issues related to Agent operation.
+This section describes the states that Hosts and Connections pass through during installation, startup, and execution.  This can be useful for flagging or debugging issues related to Agent operation.
 
-### Binary Installation
+### Gateway Hosts and Connections
+
+With the [Gateway architecture](./Agent#gateway-architecture) (v5.6.0 and later), you install one Gateway per PC, and that Host runs all of its Connections. The Gateway stores the Host's configuration in a `host.yaml` file on the PC. You create and configure Connections in the Ganymede web app rather than with a separate installer and configuration file for each Connection. When you change a Connection or its Agent Template, Ganymede sends the updated configuration to the Host. See [Updating Connections](./AgentMonitoring#updating-connections).
+
+During startup, the Gateway checks its connectivity to Ganymede, inspects the certificate chain, checks for clock drift, and registers the Host with Ganymede. While it runs, the Gateway sends a status ping to Ganymede every 30 seconds and runs the Host's Connections. The log messages for each of these steps are listed in [Gateway Log Messages](#gateway-log-messages).
+
+The Ganymede web app shows a status for each Host and each Connection. A Connection's status combines its own state with the status of its Host.
+
+| **Host Status** | **Description** |
+| --- | --- |
+| Live | The Host is running and can communicate with Ganymede. |
+| Updating | The Host is upgrading to a new Gateway version. |
+| Error | The Host is in an error state and needs user intervention. |
+| Disconnected | Ganymede has not received a status ping from the Host in the last 65 seconds, or the Host stopped processing for 15 minutes. |
+| Shutdown | The host PC was shut down or is asleep, or the Host service was stopped. |
+| Deprecated | The Host was disabled or deleted. |
+
+&nbsp;
+
+| **Connection Status** | **Description** |
+| --- | --- |
+| Live | The Connection is running and can communicate with Ganymede. |
+| Failing | The Connection is running but not working properly, or its Host is in an Error state. |
+| Disconnected | The Connection's Host can't communicate with Ganymede. |
+| Shutdown | The Connection runs on a Host that was shut down. |
+| Deactivated | Processing for the Connection was turned off with **Disable Connection**. |
+
+For details on each status, see [Host Status](./AgentMonitoring#host-status) and [Connection Status](./AgentMonitoring#connection-status).
+
+### Binary Installation (Legacy)
+
+The diagrams and states in this section and the next two sections apply to Connections installed with the legacy, per-Connection installer (prior to v5.6.0). They don't apply to Gateway Hosts.
 
 Upon installing the binary associated with an Agent, the Connection associated with the Agent looks for whether a connection file exists to determine configuration.  If not available, configuration information is collected in a wizard (graphical for Windows, CLI for Linux) and a Connection configuration file is stored to a local file based on these inputs.  
 
@@ -19,7 +50,7 @@ Upon installing the binary associated with an Agent, the Connection associated w
 
 If the binary associated with the Agent is re-run, the Agent will attempt to use the previous configuration (found in the same directory as the binary) if available.  This can be convenient if there is a need re-install an Agent; to avoid using the existing connection configuration, remove the existing configuration file.
 
-### Connection Startup
+### Connection Startup (Legacy)
 
 The Connection startup processes follows the config validation execution flow described in the prior section.  These steps are executed by the service that is created immediately after an Agent binary has been run.
 
@@ -34,7 +65,7 @@ The Connection startup processes follows the config validation execution flow de
 - **Start status ping**: Status ping thread starts executing.  This thread also handles version updates and responds to Ganymede Cloud requests to shut down (e.g. - if a user disables the Agent in the Ganymede web app)
 - **Execute pipeline**: Connection executes its stated purpose (e.g. - scans local directory for new/modified files and uploads them)
 
-### Execution
+### Execution (Legacy)
 
 Connections associated with an Agent pass through runtime states shown below.  The activities described in Connection Startup occur in the INITIALIZATION connection runtime state.  Transitions between the different states can be found in Connection log messages.
 
@@ -66,13 +97,15 @@ This section lists the log messages that Gateways and Connections write. To view
 
 ### Logging Level
 
-| **Logging Level** | **Description**                                                            |
-| ---------------- | ------------------------------------------------------------------------------ |
-| INTERNAL             | Internal systems messages are written locally, but not presented in the web UI. |
-| DEBUG         | For debugging Connection activity, but unnecessary for interpreting typical behavior. |
-| INFO         | Informational messages for contextualizing Connection behavior, but does not reflect changes to Connection state or interaction with Ganymede web server.                                      |
-| ACTIVITY         | Regards changes to state or operations performed by the Agent.                                      |
-| ERROR         | Indicates failure of Agent to perform an intended operation.  Note that the Connection may continue to function after observing errors, if the specific error is one that the Connection is able to recover from.                                      |
+Each log message has one of the following levels. In the web app, the **Log Levels** filter on a Host's or Connection's logs lets you show any of Error, Activity, Info, and Debug. Internal messages aren't shown in the web app. See [Viewing Logs](./AgentMonitoring#viewing-logs).
+
+| **Logging Level** | **Shown in the web app** | **Description** |
+| --- | --- | --- |
+| ERROR | Yes, as **Error** | Indicates failure of the Host or Connection to perform an intended operation.  Note that the Connection may continue to function after observing errors, if the specific error is one that the Connection is able to recover from. |
+| ACTIVITY | Yes, as **Activity** | Regards changes to state or operations performed by the Host or Connection. |
+| INFO | Yes, as **Info** | Informational messages for contextualizing Connection behavior, but does not reflect changes to Connection state or interaction with Ganymede web server. |
+| DEBUG | Yes, as **Debug** | For debugging Connection activity, but unnecessary for interpreting typical behavior. |
+| INTERNAL | No | Internal systems messages are written locally on the host PC, but not presented in the web app. |
 
 
 ## Gateway Log Messages

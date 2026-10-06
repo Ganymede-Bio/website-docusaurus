@@ -26,6 +26,8 @@ To ensure that the [Agent](../agents/Agent) is able to communicate with Ganymede
 - [ ] Either Windows 10 or newer with display, or Ubuntu/Debian Linux prior to EOL
 - [ ] Operating system should be up to date with latest patches and updates
 
+On Windows, the Gateway is available as an EXE installer or an MSI package. The Windows installer is available in 13 languages. See [Install the Gateway](../agents/AgentInstall#windows).
+
 ## Installation permissions
 
 The Gateway installer supports both admin and non-admin installation:
@@ -71,13 +73,23 @@ $ IWR -URI <tenant_name>.ganymede.bio
 
 For Linux Agents, connectivity can be tested by installing [netcat](https://netcat.sourceforge.net/) and running the following commands in a terminal:
 
-```shell 
-$ nc -vz storage.googleapis.com -Port 443
-$ nc -vz pubsub.googleapis.com -Port 443
-$ nc -vz firebase.googleapis.com -Port 443
-$ nc -vz oauth2.googleapis.com -Port 443
-$ nc -vz <tenant_name>.ganymede.bio -Port 443
+```shell
+$ nc -vz storage.googleapis.com 443
+$ nc -vz pubsub.googleapis.com 443
+$ nc -vz firebase.googleapis.com 443
+$ nc -vz oauth2.googleapis.com 443
+$ nc -vz <tenant_name>.ganymede.bio 443
 ```
+
+### Gateway connectivity diagnostics
+
+The Gateway checks its own connectivity and logs diagnostics when it can't reach Ganymede. Starting with Gateway version 5.6.21, these messages identify firewall and proxy issues more clearly:
+
+- If the Gateway can't reach the Ganymede API server, Pub/Sub, or Cloud Storage, the logs show `All connectivity checks failed (API server, Pub/Sub, GCS). This strongly suggests a firewall is blocking outbound traffic from this machine.`
+- If a connection is refused or times out, the logs show messages such as `Unable to ping API Server at <url> — connection refused. A firewall may be actively blocking port 443.`
+- If the certificate for a Ganymede endpoint appears to be signed by a network proxy or an enterprise certificate authority (CA), the logs list the certificate chain issuers and show `Cert may be signed by a network proxy or enterprise CA.`
+
+For how to act on these messages, see [Gateway connectivity on networks with a firewall, proxy, or private certificates](../agents/DebuggingAgents#issue-the-gateway-cant-connect-on-a-network-with-a-firewall-proxy-or-private-certificates).
 
 ## Agent Configuration Considerations
 
@@ -101,7 +113,7 @@ Frequently, the data producer is not the same person who is configuring Agents. 
 
 ### Instrument Run Metadata
 
-[Tagging files](../files/Tags) with relevant characteristics is critical for ensuring that data remains appropriately organized and accessible once captured in Ganymede.  By default, Ganymede captures PC information as shown in the [Monitoring Agent Connections section of the Agent documentation](../agents/AgentMonitoring#maintaining-agent-connections), but instrument data often can be shaped to a degree by end-user needs.  Some questions to consider when tagging files are:
+[Tagging files](../files/Tags) with relevant characteristics is critical for ensuring that data remains appropriately organized and accessible once captured in Ganymede.  By default, Ganymede captures PC information, such as the machine name, operating system, and install path, as shown in the [Host Details section of the Agent documentation](../agents/AgentMonitoring#host-details-1), but instrument data often can be shaped to a degree by end-user needs.  Some questions to consider when tagging files are:
 
 - What are the metadata fields that are relevant to the instrument?  Some examples include:
   - Instrument name / vendor
