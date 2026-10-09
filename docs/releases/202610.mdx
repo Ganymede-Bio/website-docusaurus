@@ -4,6 +4,22 @@ title: October 2026
 displayed_sidebar: releaseSideBar
 ---
 
+### October 08 2026
+
+**Features**
+- **Web UI / Flow Runs**: Users can now download the complete log for a flow run step whose log is too long to show in full.
+    - The logs view still shows the most recent log entries, where errors usually appear, along with a **Download complete log** button. If a step was retried, each attempt can have its own download.
+    - Downloads are available for runs of flows saved or deployed after this release. For older runs, the logs view says that a full download isn't available.
+
+![Flow Run Logs drawer showing a notice that the log is too large to display in full, with a Download complete log button](/img/20261008_flow_run_log_download.png)
+
+**Bug Fixes**
+- **Agents**: Fixed an issue where a file watcher connection could stop picking up new files while still showing as **Live**, until someone restarted the Host by hand.
+    - The Host now checks that each watched folder is still reporting changes. If one stops, the Host reconnects to it automatically and uploads any files written in the meantime.
+    - To run this check, the Host briefly creates a small temporary file in a watched folder that has had no activity for 10 minutes, then deletes it right away. This file is never uploaded and never triggers a flow. If the Host can't write to the folder, it uses a read-only check instead.
+
+**Gateway Version**: 5.6.80
+
 ### October 01 2026
 
 **Features**
