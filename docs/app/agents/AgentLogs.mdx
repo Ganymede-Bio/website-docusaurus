@@ -59,14 +59,10 @@ Connections associated with an Agent pass through runtime states shown below.  T
 
 ## Logging
 
-The table below shows log messsages that can be found in Agents / Connections.  These can be found in the UI by navigating to the relevant Connection.
+This section lists the log messages that Gateways and Connections write. To view them, open **Connectors > Hosts** and select the Host. A Connection's page shows the log messages for that Connection.
 
-* **Message**: message received from Agent
-* **Description**: contextualized version of message emitted by Agent
-* **Section**: section within Agent code generating message
-* **Logging Level**: level of severity that log indicates
-* **OS**: operating system that the message pertains to, if applicable
-* **Associated Error Type**: associated Agent error type, if applicable
+- [Gateway Log Messages](#gateway-log-messages) apply to Gateway installations (v5.6.0 and later).
+- [Legacy Connection Log Messages](#legacy-connection-log-messages) apply to Connections installed with the legacy, per-Connection installer (prior to v5.6.0).
 
 ### Logging Level
 
@@ -78,6 +74,669 @@ The table below shows log messsages that can be found in Agents / Connections.  
 | ACTIVITY         | Regards changes to state or operations performed by the Agent.                                      |
 | ERROR         | Indicates failure of Agent to perform an intended operation.  Note that the Connection may continue to function after observing errors, if the specific error is one that the Connection is able to recover from.                                      |
 
+
+## Gateway Log Messages
+
+The tables below list the log messages that the Gateway (v5.6.0 and later) writes, grouped by area. Values in braces, such as `{hostname}`, are filled in when the message is logged. If you use the Ganymede web app in a language other than English, the Host log shows translated versions of most of these messages.
+
+Gateway messages refer to the Host rather than to a single Connection. For example, `Host {name} successfully initialized` replaces the legacy `Connection successfully initialized` message, and `Starting new host {id} with labels {labels}` replaces `Starting new connection {id} with labels {labels} and vars {variables}`.
+
+### Connectivity, firewall, and proxy checks
+
+When the Gateway starts, it tests its connection to the Ganymede API server, Pub/Sub, and Google Cloud Storage. These messages report the result of those checks and point to a firewall or proxy when a connection is refused or times out.
+
+| **Message** |
+| --- |
+| `All connectivity checks failed (API server, Pub/Sub, GCS). This strongly suggests a firewall is blocking outbound traffic from this machine. Please review firewall/proxy rules and ensure port 443 is open.` |
+| `Connection to {hostname} failed — a firewall may be blocking outbound traffic. Check your network/firewall configuration. Error: {e}` |
+| `Connection to {hostname} timed out — a firewall may be blocking outbound traffic. Check your network/firewall configuration.` |
+| `Connection to {host} failed — a firewall may be blocking port {port}. Check your network/firewall configuration. Error: {e}` |
+| `Connection to {host} timed out during connection or SSL handshake — a firewall may be blocking port {port}. Check that the gateway host is reachable from this machine.` |
+| `Failed to publish message to {topic_id} — the host may be unable to reach GCP. Check your network/firewall configuration.` |
+| `Failed to reach {hostname} because res.status_code={status_code}` |
+| `Failed to reach {hostname}` |
+| `Reconnecting publishers: rotating to fresh gRPC channel` |
+| `Status publisher has had a publish failure — recreating publishers so a fresh gRPC channel is ready when the network recovers.` |
+| `Testing communication to {hostname} has concluded` |
+| `Testing communication to {hostname}` |
+| `Unable to ping API Server at {target_url} — connection refused. A firewall may be actively blocking port 443.` |
+| `Unable to ping API Server at {target_url} — connection timed out. A firewall may be blocking port 443.` |
+| `Unable to ping API Server` |
+| `Unable to ping GCS API Server` |
+| `Unable to ping Pub/Server API Server` |
+
+### Certificates and system trust store
+
+These messages report the certificate inspection the Gateway runs at startup. A certificate chain that is not issued by Google Trust Services can mean that a network proxy or enterprise certificate authority is intercepting traffic. If SSL verification fails, the Gateway tries the operating system's trust store.
+
+| **Message** |
+| --- |
+| `Cert inspection failed, continuing startup: {e}` |
+| `Cert inspection not needed for non-HTTPS target: {host}` |
+| `Cert inspection: could not determine hostname from {host}` |
+| `Cert inspection: could not retrieve certificate from target host.` |
+| `Failed to inject system trust store certificates: {inject_err}` |
+| `SSL verification failed with certifi, attempting to use system trust store. Error: {e}` |
+| `System trust store certificates injected successfully.` |
+| `Target cert chain issuers: {issuer_list}. Cert may be signed by a network proxy or enterprise CA. Subject CN: {subject_cn}, Expires: {not_after}` |
+| `Target cert is signed by a Google Trust Services CA. No cert interception detected. Expires: {not_after}` |
+| `truststore package not available. Cannot inject system trust store certificates.` |
+
+### Clock drift
+
+At startup, the Gateway compares the system clock with the Ganymede servers. A large drift can cause SSL certificate validation failures. The measured drift also appears in the **Clock Drift (s)** field on the Host's page.
+
+| **Message** |
+| --- |
+| `Clock drift check could not retrieve Date header from server` |
+| `Clock drift check failed, continuing startup: {e}` |
+| `Clock drift check passed. Drift: {drift_seconds} seconds.` |
+| `Clock drift detected: system clock is off by {drift_seconds} seconds. This may cause SSL certificate validation failures.` |
+
+### NATS messaging
+
+These messages cover the Gateway's connection to the NATS messaging server.
+
+| **Message** |
+| --- |
+| `Connected to NATS server` |
+| `Connecting to NATS server at {url}` |
+| `Draining NATS connection during cleanup` |
+| `Exception in host command handler: {err}` |
+| `Failed to publish to {subject}: {err}` |
+| `Failed to write NATS environment variables to service registry for {service_name}` |
+| `NATS connection disconnected` |
+| `NATS connection reconnected` |
+| `NATS environment variables written to service registry for {service_name}` |
+| `NATS error: {err}` |
+| `NATS is connected; resetting publisher failure counters` |
+| `NATS server URL could not be parsed: {url}` |
+| `NATS stream verified: {stream_name}` |
+| `Pull consumer created. Durable: {durable}, subject: {subject}` |
+| `Received host command on subject {subject}` |
+| `Required NATS stream not found: {stream_name}` |
+| `Unable to connect to NATS at {host}:{port} — connection refused` |
+| `Unable to connect to NATS at {host}:{port} — connection timed out` |
+| `Unable to connect to NATS at {host}:{port}: {err}` |
+| `Unable to reach NATS server at {url}` |
+| `Unexpected error in host command poll loop: {err}` |
+| `Verifying required NATS JetStream streams` |
+
+### Host configuration and identity
+
+These messages report the configuration the Gateway loads at startup, including whether it is running with admin privileges and as a service.
+
+| **Message** |
+| --- |
+| `Agent-to-gateway upgrade detected. Sending legacyConnectionId: {legacyConnectionId}` |
+| `Failed to persist service name to host.yaml: {error}` |
+| `Failed to read service name from host.yaml: {error}` |
+| `Identity detection: running_as_admin={is_admin}, running_as_service={is_service}, parent_process={parent_process}, os={os}, user={user}` |
+| `Inferred data: is_running_as_admin={is_running_as_admin}, is_running_as_service={is_running_as_service}` |
+| `Loading legacy connection configuration to preserve ID` |
+| `Persisted service name '{service_name}' to host.yaml` |
+| `Running as {current_user} and should be running as {expected_user}` |
+| `Running as {user} when should be running as a default account because the identity has not been specified` |
+| `Service detection failed; preserving known service name '{preservedServiceName}'` |
+| `The new inferred metadata collected: {inferred_data}` |
+| `The operating system ({os}) is not supported` |
+| `The system architecture ({arch}) is not supported` |
+| `Windows changed to running as {running_as_user}` |
+
+### Host updates
+
+These messages cover full updates (a new Gateway version or a new Service Installation Identity) and runtime updates (new Host configuration).
+
+| **Message** |
+| --- |
+| `Auth full-update with current exe -new_state={new_state} -{self}` |
+| `Binary {bin_location} should now be deleted.` |
+| `Detected update. Retrying sooner than planned` |
+| `Error restarting service with new auth, rolling back host configuration` |
+| `Error starting service during full update, rolling back full update` |
+| `Escaping a sleep function because of a request to update.` |
+| `Failed to re-register after rollback: {reg_err}` |
+| `Full update installer completed. Waiting for new service to become active...` |
+| `Full update process dispatched. Moving to next ping cycle while new executable loads.` |
+| `Full update thread has concluded` |
+| `Ganymede Services running prior to update {s_for_s_in_existing}` |
+| `New gateway service did not take over within {timeout}s. Rolling back.` |
+| `New gateway service stopped unexpectedly before taking over. Rolling back.` |
+| `No need to update. Already in progress {runtime_state}` |
+| `Old host detected during full update. Current gateway version: {current_gateway_version}, Expected gateway version: {expected_gateway_version}. Shutting down old host.` |
+| `Reloading new config into host complete {to_dict}` |
+| `Runtime update process complete.` |
+| `Setting FULL_UPDATE_INSTALL_DIR to {current_install_dir}` |
+| `Skipping stale update message: expected gateway version {expected} is older than running {running}` |
+| `Starting full update process. Current Gateway Version {current_gateway_version} and Runtime Version {runtime_version}. Upgrading to Gateway version {new_gateway_version}` |
+| `Starting host full update to gateway version {gateway_version}. For auth ({needs_auth_update}) or gateway version ({needs_gateway_version_update}).` |
+| `starting host runtime update to version {runtime_version}.` |
+| `The host files were updated. Going to prepare those to be imported next loop.` |
+| `These services were removed because they are considered older version {services_to_remove}` |
+| `Traditional full-update with new exe version -new_state={new_state} -{self}` |
+| `Unable to complete the runtime update to host version {runtime_version}` |
+| `Unable to set values of full update for logging purposes, new_state={new_state}` |
+| `Waiting for full update thread to conclude` |
+| `Writing the new config files is complete. Reloading config.` |
+
+### Connection status
+
+These messages report status changes for the Connections that run on the Host.
+
+| **Message** |
+| --- |
+| `Connection '{name}' has recovered and is now live.` |
+| `Connection '{name}' is failing: {message}` |
+| `Connection {name} status changed from {old_status} to {new_status}: {message}` |
+| `Failed to report status {status} to API server for connection {name} (last_reported={last_reported_status})` |
+| `Nothing to execute for this connection's action {connection_executing}` |
+| `Nothing to initialize for this connection's action {connection_executing}` |
+| `Removed {count} connection(s) from host {id}: {sorted}` |
+| `Skipping status update to {status} for connection {name}: already reported (last_reported={last_reported_status})` |
+| `Syncing connection {name} status from state (state={state}, status={status}, last_reported={last_reported_status})` |
+
+### File tags
+
+These messages cover the file tags that Connections apply to uploaded files.
+
+| **Message** |
+| --- |
+| `Adding tag {tag} for {filename} based on the combined connection tag configuration` |
+| `Applying {count} tags to {file_uri}: {tags}` |
+| `Batch tag API call for {file_uri}: status={status_code}` |
+| `Batch tag client error for {file_uri}: status={status}` |
+| `Batch tag rate limited for {file_uri}: status={status}` |
+| `Batch tag server error for {file_uri}: status={status}` |
+| `Combined {count} connection-level tags and {count_1} connector-level tags into {count_2} total tags for {count_3} files` |
+| `Error applying tag {tagTypeId}/{displayValue} to {filePath} (file_uri={fileUri})` |
+| `Error applying tags in batch to {upload_uri}` |
+| `No tags to apply to {file_uri}, skipping batch call` |
+| `Running this operation would add tag {tag_obj} to file {input_file_path}` |
+| `Running this operation would add {count} tags to file {file_uri}` |
+| `Tag {tag_type_id}/{display_value} already exists for {file_path} (file_uri={file_uri})` |
+| `The files parameter returned by the execute function requires an object of type list[FileParam]. Param {param} violates this contract` |
+| `The tag files action requires an object of type TagFilesOnly; received {params_type}` |
+| `Timeout waiting for {upload_filename} to be uploaded to {upload_uri}. Will skip applying file tags` |
+
+### Host lifecycle
+
+These messages cover Host startup, the status ping that keeps the Host live in Ganymede, shutdown, and cleanup of old files.
+
+| **Message** |
+| --- |
+| `Cannot send status ping {status} because not connected to cloud` |
+| `Cleaning up old files. {globs_to_match} and {globs_to_skip}` |
+| `Closing ping thread.` |
+| `Closing ping_health_check thread.` |
+| `Error cleaning up old artifacts: {e}` |
+| `Error during host execution. Should continue to next loop to resume operations. Attempt number: {attempt_number}. {time_since_last_success} seconds since last success` |
+| `Error verifying the state` |
+| `Escaping a sleep function because of a request to shutdown.` |
+| `Failed to clear processor module cache` |
+| `Failed to create processor directory {processor_internal_dir}: {e}` |
+| `For file {glob_pattern}, found Glob file patterns file_paths={file_paths} and deps_dir={deps_dir}` |
+| `Found file {path} to remove` |
+| `Full host before starting connections: {self}` |
+| `Host {id} has complete shutdown` |
+| `Host {id} has completed shutdown process` |
+| `Host {name} successfully initialized` |
+| `Pipeline loop has exited. Shutdown process will proceed.` |
+| `Pipeline loop has iterated without update or exception.` |
+| `Proceeding to cleanup all artifacts not related to service {service_name}` |
+| `Processors exist at {processor_internal_dir}` |
+| `Received message: attributes: {attributes} update_message: {update_message}` |
+| `Registration failed with error: {err}` |
+| `Running alongside {count} Ganymede processes {list_of_ganymede_processes}` |
+| `Running alongside {count} services {full_service_list}` |
+| `Shutdown being complete in another thread. Skipping...` |
+| `Shutdown did not succeed in allotted time. Forcing exit.` |
+| `Skipping removal of {path}` |
+| `Skipping status ping health check {id} with {runtime_state}` |
+| `Skipping status ping {id} with {runtime_state}` |
+| `stacktrace: {formatted_stacktrace}` |
+| `Starting new host {id} with labels {labels}` |
+| `Starting status ping {id} with {runtime_state}` |
+| `Startup watchdog cancelled — liveness ping reached` |
+| `Status ping appears to have failed. Kicking it off again.` |
+| `Status ping health check is not running. Starting it again.` |
+| `Status ping thread is not alive — restarting to restore host liveness reporting` |
+| `Stopping and disabling host service. It will not resume without user intervention. Reason: {reason}` |
+| `Stopping and uninstalling host service {service_name}. It will not resume without user intervention. Reason: {reason}` |
+| `The entity {full_path_to_remove} could not be removed` |
+| `The service {service_name} could not be removed` |
+| `Took lock for host_command_handler` |
+| `Unable to completely cleanup old artifacts but will not hold back normal operations` |
+| `Unable to execute events` |
+| `Unhandled exception in thread {name}. Exception: {exc_value}` |
+| `Waiting for host command seek before starting connections.` |
+| `Waiting for lock for host_command_handler` |
+| `Waiting for lock to cleanup old artifacts` |
+| `{log_msg}. Attempt number: {attempt_number}` |
+
+### Duplicate detection (MD5)
+
+Before uploading a file, the Gateway compares its MD5 hash with files already in Ganymede and skips or reuses duplicates, depending on the **De-duplication behavior** setting.
+
+| **Message** |
+| --- |
+| `Could not resolve deduplicate_by_md5 from connector config: {e}` |
+| `Could not resolve duplicate_handling from connector config: {e}` |
+| `Error calculating MD5: {error}` |
+| `Error comparing MD5 hashes: {error}` |
+| `Error comparing MD5 hashes: {e}` |
+| `Fetched {count} known MD5s across {pages} page(s) for connection {connection_id}` |
+| `File with exact content exists as {file_name} in {upload_dir}. Not uploading or passing to the action` |
+| `File with matching MD5 already in database for {file_name}. Not uploading or passing to the action` |
+| `MD5 comparison: Local={local_md5}, GCS={gcs_md5_hex}, Match={md5_matches}` |
+| `MD5 comparison: Local={local_md5}, S3={s3_etag}, Match={md5_matches}` |
+| `MD5 dedup: database lookup failed for {file_path}, falling back to GCS check` |
+| `MD5 dedup: database match found for {file_path} (md5={local_md5})` |
+| `MD5 dedup: failed to compute MD5 for {file_path}` |
+| `S3 object appears to be from a multipart upload, MD5 comparison not possible` |
+| `upload_file: database lookup failed for {file_path}, falling back to GCS check` |
+| `upload_file: database match found for {file_path} (md5={md5})` |
+| `upload_file: failed to compute MD5 for {file_path}` |
+| `upload_file: file with exact content already in GCS for {file_path}, skipping upload` |
+| `upload_file: file with matching MD5 already in database for {file_path}, skipping upload` |
+| `upload_file: GCS existence check failed for {file_path}, proceeding with upload` |
+| `upload_file: {file_path} exists in GCS — skipping per ignore_duplicate policy` |
+| `upload_file: {file_path} exists in GCS — using existing file per policy` |
+
+### Sync on start
+
+When the **Sync files on connection start** option is enabled for a File Watcher, the Gateway scans the watch folder at startup and uploads files that are not already in Ganymede. These messages start with `[syncOnStart]`.
+
+| **Message** |
+| --- |
+| `[syncOnStart] Error examining {file_path}` |
+| `[syncOnStart] Error processing {file_path}` |
+| `[syncOnStart] Failed to fetch file records from API — aborting scan` |
+| `[syncOnStart] Fetched {count} known MD5s` |
+| `[syncOnStart] Skipping already-uploaded file: {file_path}` |
+| `[syncOnStart] Starting startup reconciliation scan` |
+| `[syncOnStart] Startup reconciliation scan complete` |
+| `[syncOnStart] Unhandled error in scan for {connection_id}` |
+| `[syncOnStart] {count} candidate file(s) to check` |
+
+### File Watcher
+
+These messages cover how File Watcher Connections detect files in the watch folder, match them to Flow inputs, and group files for a Flow run.
+
+| **Message** |
+| --- |
+| `add_file raised an unhandled exception for {path}` |
+| `All values in the get_param_mapping dict should have a type of Callable[[str], bool] or list[Callable[[str], bool]]]` |
+| `AttributeError: os.stat().st_file_attributes not available on this platform; should only occur with Windows + Python < 3.8` |
+| `Checking if matching group is ready. Matched {matched} of required {required}, queue size {queue_size}` |
+| `Checking item {queued_file} to determine if it matches an existing param filter for {upload_path}. Checking these files: {filenames_to_check}` |
+| `Did not find a param with a matching filter for path {join}` |
+| `Error cleaning up file watcher {host_id}: {error}` |
+| `File matched a filter for {upload_path}` |
+| `File watcher input path {path} does not exist or is not accessible` |
+| `File Watcher {id} added` |
+| `File {curr_path} was detected as a {change_type} event.` |
+| `File {file_detected_sanitized} matches to param {flow_param}...` |
+| `File {file_name} exists in {upload_dir}. Not uploading or passing to the action` |
+| `File {file_path} is hidden and will be ignored.` |
+| `File {file_path} is in a hidden directory and will be ignored.` |
+| `File {file_path} matches ignore pattern {pattern} and will be ignored.` |
+| `File {file_path} no longer exists, ignoring.` |
+| `File {filename} added to matching group. Queue size: {queue_size}` |
+| `File {file} could not be found. This is typically a result of it being moved or deleted. Marking as complete.` |
+| `File {path} was not able to be successfully processed` |
+| `File {queued_file} did not match a filter for {upload_path} searching {join}.` |
+| `find_match_in_filter for {param_name}` |
+| `Flow input structure: {flow_input_structure}` |
+| `Found file addition, running for {path}. This includes modified files, not just new additions.` |
+| `Found param ({param}) matching to filter with path {path}` |
+| `get_param_mapping should return a dict[str, Callable[[str], bool] \| list[Callable[[str], bool]]]; received {filter_type}` |
+| `Going to look for any matching files to determine if group is full and action can be triggered. Filter length to determine full group: {filter_len}. Param to match to {param_str} with new file obj {upload_path}` |
+| `Legacy File Watcher {id} added` |
+| `Matched files were added back to the waiting queue. waiting queue now {count}` |
+| `Matching group is not full. Need to place matched files back into waiting queue. Matched len {num_matched} and required len {filter_len}. Waiting queue currently size {count}` |
+| `Param {param_str} not in flow input structure {flow_input_structure}. Not going to check for matches.` |
+| `Patterns that will be monitored inside the {input_path} directory are {patterns} and these paths will be ignored {globs_to_ignore}` |
+| `Skipping file watcher setup: connection {connection_id} is disabled.` |
+| `Starting: flow_param={flow_param} pattern={pattern} file_detected_sanitized={file_detected_sanitized} file_detected_sanitized={file_detected_sanitized_1} glob_matches={glob_matches} watched_dir={watched_dir} Watch dir: {join} {glob_matches_1}` |
+| `The matched param data found: param_data={param_data}` |
+| `Unable to handle {change_type} event` |
+| `Waiting Queue Group {waiting_queue}` |
+| `Watch directory {path} has been deleted` |
+
+### Cloud Watcher
+
+These messages cover Cloud Watcher Connections and their Pub/Sub subscriptions.
+
+| **Message** |
+| --- |
+| `Cloud Watcher Subscriber has shutdown with a exception. Need to re-initialize it` |
+| `Cloud Watcher Subscriber has Shutdown with a result of {result_of_subscriber}` |
+| `Cloud Watcher {id} added` |
+| `Creating subscription {subscription_path} on {topic_path}` |
+| `Deleting subscription: {subscription_id}` |
+| `Error creating subscription` |
+| `Error deleting subscription {subscription_id}. {err}` |
+| `File exists and not using it. Appending timestamp for new location: {upload_location}` |
+| `Found a new file from watcher. Triggering processor. File {filename} with metadata {description}` |
+| `Legacy Cloud Watcher {id} added` |
+| `Received flow output message` |
+| `Running locally. Filter: {subscription_request}` |
+| `Skipping cloud watcher setup: connection {name} is disabled.` |
+| `Subscribing to {subscription_path}` |
+| `Subscribing to {topic_id}` |
+| `Subscription {subscription_id} already exists` |
+| `Subscription {subscription_id} created and subscribed to topic {topic_id}.` |
+| `Subscription {subscription_id} deleted.` |
+| `Unable to close stale subscriber client: {err}` |
+| `Unable to process message after 5 tries: {message}` |
+
+### Cron
+
+These messages cover Connections that run on a cron schedule.
+
+| **Message** |
+| --- |
+| `Cron handler created for connection {connection_id}, next run: {next_runtime}` |
+| `Cron {id} added` |
+| `Cron {id} previous run still in progress, skipping this trigger` |
+| `Failed to start cron thread for connection {connection_id}` |
+| `Found cron connection {connection_id} with expression: {cron_expression}` |
+| `Pipeline execution failed` |
+| `Running cron {id}` |
+| `Skipping cron setup - connection {name} is disabled.` |
+| `Unhandled exception in cron trigger for connection {connection_id}` |
+
+### One-shot
+
+These messages cover one-shot Connections, which run their processor once and then shut down.
+
+| **Message** |
+| --- |
+| `Executing one-shot connection {name} one time` |
+| `Running processor for one-shot connection. The connection will shutdown after attempt regardless of outcome.` |
+| `Skipping one-shot setup - connection {name} is disabled.` |
+
+### Event listener
+
+| **Message** |
+| --- |
+| `Conditions met, going to trigger processor for connection {connection_id}. Processor file: {connector_id}.py / args={args}.` |
+| `Could not find the corresponding action to run {action_type}` |
+| `No action to process data further` |
+| `Processor indicated not to proceed to action from value {args}` |
+| `Triggering action from value {args}` |
+
+### Flow triggers
+
+These messages cover how a Connection builds the inputs for a Flow run and starts it, including retries when the Flow fails to start.
+
+| **Message** |
+| --- |
+| `A file parameter has been improperly configured. Missing the node param. {filename}` |
+| `Additional params {additional_params} were added for flow {flow}. Conf now shows {next_run}` |
+| `Additional params {additional_params} will be added for flow {flow}` |
+| `All Multifile Params {keys} have completed file uploads with paths {upload_paths} for flow {flow} have been populated. Conf now shows {next_run}.` |
+| `Executing trigger Flow {flow} with params` |
+| `Flow execution requires an object of type TriggerFlowParams; received {params_type}` |
+| `Found multi file parameters to use for flow run. {keys}` |
+| `Found single parameters to use for flow run. {keys}` |
+| `Function {fn_name} failed after {attempts} attempts. Running Flow {flow}. Run configuration was {config}` |
+| `Going to iterate over {param} param to populate conf with files.` |
+| `Invalid param {param}` |
+| `Loading flow parameters for {flow} is complete. Run conf is ready to be sent` |
+| `Multifile Param {curr_file_param} has completed file uploads with paths {upload_paths} for flow {flow}. Param list now shows {next_run}.` |
+| `Retrying {fn_name} after {error}. Retry count is {attempt}. Will retry up to {max_retries} times. Running Flow {flow}. Run configuration was {config}` |
+| `Running flow {flow} with run id {run_id}` |
+| `Starting retry loop for flow {flow}. Max tries is set to {max_retry_count}. Retries are not initiated for flow failures, just whether the flow fails to start.` |
+| `The additional_params parameter for flow execution requires an object of type dict[str, str]` |
+| `The benchling_tag parameter for flow execution requires an object of type dict[str, FlowTag]` |
+| `The multi_file_params parameter for flow execution requires an object of type dict[str, MultiFileParam]` |
+| `The single_file_params parameter for flow execution requires an object of type dict[str, FileParam]` |
+| `Trigger flow action initialized with options flow {flow} and tags {tags}` |
+| `Upload path {current_upload_path} for {curr_file_param} has been added to flow {flow}. The conf now looks like {next_run}` |
+
+### File upload and storage
+
+These messages cover reading local files and uploading them to Ganymede storage.
+
+| **Message** |
+| --- |
+| `Configuring GCS Provider.` |
+| `Configuring S3 Provider.` |
+| `Creaing S3 Provider for bucket: {bucketName}` |
+| `Downloaded new asset {filename} with length {length}. Saving to file {output_file}.` |
+| `Failed to upload file {filePath} to {location}: {error}` |
+| `File not found during refreshing os.stat of file: {filePath}` |
+| `File not found when trying to open: {filePath}` |
+| `File not found: {filePath}` |
+| `File upload requires an object of type StreamDataParams; received {params_type}` |
+| `File upload requires an object of type UploadFileParams; received {params_type}` |
+| `Files list contains a non-FileParam element; expected list[FileParam]. Files Found: {files}` |
+| `Getting inputs for flow {flow_id}` |
+| `Log file already exists, so will not upload again. Dir: {upload_dir}, File: {upload_filename}` |
+| `Missing ingest bucket on S3 Provider` |
+| `No encoding provided. Unable to decode bytes into string` |
+| `No encoding provided. Unable to encode string into bytes` |
+| `No string encoding present for interpreting raw contents as binary` |
+| `Permission denied during refreshing os.stat of file: {filePath}` |
+| `Permission denied when trying to open file: {filePath}` |
+| `The files parameter returned by the execute function requires an object of type list[FileParam]. Params Found: {files}` |
+| `Transient error when uploading file {filePath} to {location}: {error}` |
+| `Unable to convert the contents into a bytes from {str_encoding} string. Unsure of encoding so cannot set` |
+| `Unable to convert the contents into bytes using {str_encoding} encoding.` |
+| `Unable to decode the contents into a string using {str_encoding} encoding` |
+| `Unable to read connector ingest bucket: {e}` |
+| `Unexpected error reading file {filePath}: {error}` |
+| `Unexpected error refreshing os.stat for file {filePath}: {error}` |
+| `Upload failed for {filePath} to {location}: {error}` |
+| `Uploaded new file to: {location} has completed` |
+| `Uploading new file filename: {file_name} as {upload_filename}, content type: {content_type}` |
+| `Uploading new file to {location} of size {size} in chunks. Should timeout every {timeout} seconds per chunk to allow larger files.` |
+
+### Virtualization
+
+| **Message** |
+| --- |
+| `Changing websocket port to {socket_port}` |
+| `Error adding firewall rule` |
+| `Error starting websockify service` |
+| `Error updating websockify run file` |
+| `Error writing to {full_path}` |
+| `Publishing message to topic {topic_id} with data: {data_str} and message type: {message_type}` |
+| `Received message from Ganymede, processing: {message}` |
+| `Saving file {session_filename} to {session_save_path}` |
+| `Skipping publish_virtualization_message: msg_publisher not initialized yet` |
+| `Unable to determine machine name from the GCP metadata server` |
+| `Unable to process message after 5 tries: {message}` |
+| `Waiting for session file to be created by startup connection at {session_full_path}` |
+| `{conn_label} file watcher input path {input_path} does not exist or is not accessible` |
+
+### System metrics
+
+The Gateway collects CPU, memory, storage, and network metrics from the Host. These messages report problems collecting them.
+
+| **Message** |
+| --- |
+| `Continuing to loop here. Restarting count. {msg}` |
+| `Found open file {path} at {process} or {pid}` |
+| `Machine network throughput metrics was unable to be inspected: {error}` |
+| `Network connections was unable to be inspected: {error}` |
+| `Process {pid} was unable to be inspected: {error}` |
+| `Skip {info}:{info_1} – {err}` |
+| `The entity {path} was not recognized as a file or directory. Did not remove.` |
+| `Unable to collect machine cpu metrics because of err {error}` |
+| `Unable to collect machine CPU metrics: {error}` |
+| `Unable to collect machine memory metrics because of err {error}` |
+| `Unable to collect machine memory metrics: {error}` |
+| `Unable to collect machine network connection metrics because of err {error}` |
+| `Unable to collect machine network throughput metrics because of err {error}` |
+| `Unable to collect machine storage metrics because of err {error}` |
+| `Unable to collect machine storage metrics: {error}` |
+| `Unable to collect open files for {pid} because {err}` |
+| `Unable to collect process cpu percent: {error}` |
+| `Unable to collect process memory usage: {error}` |
+| `Unable to remove directory {path}` |
+| `Unable to remove file {path}` |
+
+### Windows
+
+These messages are specific to Gateways on Windows, including Windows service management and Windows Event Log collection. Messages that mention a non-admin install or skipping SCM enumeration are expected when the Gateway was installed without admin privileges.
+
+| **Message** |
+| --- |
+| `An error occurred while checking service {service_name}: {e}. Skipping.` |
+| `Cannot get process info for pid {pid}; skipping: {error}` |
+| `Cannot get process info for pid {pid}; skipping` |
+| `Cannot kill pid {pid}; skipping: {error}` |
+| `Cannot kill pid {pid}; skipping` |
+| `Cannot terminate pid {pid}; skipping: {error}` |
+| `Cannot terminate pid {pid}; skipping` |
+| `Cannot wait for pid {pid}; skipping: {error}` |
+| `Checking for services with executables in: {deps_dir}` |
+| `Cleanup: found service '{service_name}' via binpath` |
+| `Cleanup: found service '{service_name}' via name prefix` |
+| `Cleanup: host.yaml missing or has no name; using system hostname '{host_name}'` |
+| `Cleanup: no gateway service found for host '{host_name}'` |
+| `Cleanup: no gateway service found to uninstall` |
+| `Cleanup: non-admin install — terminating gateway process (no Windows service registered)` |
+| `Cleanup: searching for gateway service matching host '{host_name}' (deps_dir: {deps_dir}, fallback_prefix: {fallback_prefix})` |
+| `Cleanup: terminating gateway process PID {pid} ({name})` |
+| `Cleanup: uninstalling gateway service '{service_name}'` |
+| `Could not get deps directory: {e}` |
+| `Could not verify PID for {service_name}: {e}` |
+| `Did not stop service {service_name} as expected` |
+| `Disabled service {exe} is complete. Output: {stdout}, Error: {stderr}, Return Code: {return_code}` |
+| `Error checking binpath for {service_name}: {e}` |
+| `Error finding gateway service for host '{host_name}': {error}` |
+| `Executing pipeline for ({svc_name}) with display name {svc_display_name}. c.running_version.gateway_version={gateway_version}, c.running_version.runtime_version={runtime_version}` |
+| `Failed to cleanup gateway service: {e}` |
+| `Failed to configure SCM recovery actions for {service_name}: {exc}` |
+| `Failed to initialize windows host` |
+| `Failed to initiate start of service {service_name}` |
+| `find_gateway_service: could not get deps directory: {e}` |
+| `find_gateway_service: skipping SCM enumeration (non-admin, no services registered)` |
+| `Found a new windows event to log. Formatting.` |
+| `Going to create event subscription using query {query}` |
+| `Going to load init event files using query {query}.` |
+| `Going to run command {logged_args} for service {service_name}` |
+| `Killing orphaned gateway process {process} (pid {pid})` |
+| `list_installed_services: Returning {count} service(s): {filtered_services}` |
+| `list_installed_services: skipping SCM enumeration (running as non-admin, no services registered)` |
+| `No Windows events were found. Skipping upload` |
+| `Orphaned gateway process (pid {pid}) did not terminate in time` |
+| `QueryServiceStatus failed for {name}` |
+| `Received a non-shutdown signal. Will not shutdown but {reason} is the signal ID, {signal_msg} is python's attempt to interpret the signal ID` |
+| `Received a non-shutdown signal. Will not shutdown; ID: {reason} - Message {signal_msg}` |
+| `RemoveService({name}) failed` |
+| `Request to shutdown received, stopping host. Signal: {signal} - Message {message}` |
+| `Retrying to start service '{service_name}' (attempt {current_attempt})` |
+| `Running service ({svc_name}) with display name {display_name} and args {args}` |
+| `SCM failure recovery actions configured for {service_name}` |
+| `Service '{service_name}' did not reach running state within timeout.` |
+| `Service '{service_name}' failed to start (status: {status}).` |
+| `Service '{service_name}' is running.` |
+| `Service '{service_name}' start initiated.` |
+| `service cmd {service_cmd} not implemented yet` |
+| `Service detection: Checking for services with executables in: {deps_dir}` |
+| `Service detection: Could not check service '{service_name}': {e}` |
+| `Service detection: Could not get deps directory: {e}` |
+| `Service detection: Could not verify binpath for '{service_name}': {e}` |
+| `Service detection: Error checking service '{service_name}': {e}` |
+| `Service detection: Exception occurred during detection: {e}` |
+| `Service detection: Failed to get PID for service '{service_name}': {e}` |
+| `Service detection: Found service with matching PID {current_pid} but unexpected name: '{service_name}'` |
+| `Service detection: No running services found with prefixes {fallback_prefixes}` |
+| `Service detection: Successfully matched gateway service '{service_name}' with PID {current_pid} (fallback name matching)` |
+| `Service detection: Successfully matched service '{service_name}' by binpath and PID {current_pid}` |
+| `Service detection: Successfully matched service '{service_name}' by PID {current_pid} and name prefix` |
+| `Service detection: Windows modules not available: {e}` |
+| `Skipping service {service_name} - matches current PID {current_pid}` |
+| `Starting service with command {cmd} timed out. Output: {output}, Error: {stderr}` |
+| `Startup watchdog fired: host.run() did not reach liveness ping within {timeout}s — forcing process exit for SCM recovery` |
+| `Stopped service {exe} is complete. Output: {stdout}, Error: {stderr}, Return Code: {return_code}` |
+| `StopService({name}) failed` |
+| `Successfully queried {query_handle}` |
+| `Successfully uninstalled service {service_name}` |
+| `Unable to destroy service. Output: {stdout}, Error: {stderr}, Return Code: {return_code}. Required for {reason}` |
+| `Unable to destroy service: {reason}` |
+| `Unable to load init event logs. This error will not block execution of main pipeline. Error: {e}` |
+| `Unable to render log as-is. Event handle: {event_handle}` |
+| `Unable to start service. Output: {stdout}, Error: {stderr}, Return Code: {return_code}` |
+| `Unable to start service.` |
+| `Unable to uninstall service {service_name}. Required for {reason}` |
+| `Windows event {if_msg_is_none_el} {new_evt}` |
+| `[+{elapsed}s] [Startup] Deferred uploads raised an exception: {deferred_exc} — service will continue` |
+| `[+{elapsed}s] [Startup] Logger initialization raised an exception: {logger_exc} — service will continue` |
+| `{name} did not reach state {desired} in {timeout}s` |
+
+### Linux
+
+These messages are specific to Gateways on Linux, including systemd service management.
+
+| **Message** |
+| --- |
+| `- {service}` |
+| `Copied host.yaml from {host_yaml_source} to {host_yaml_dest}` |
+| `Could not read legacy connection config: {e}` |
+| `Current service {service_name} is running as PID {current_pid}` |
+| `Found file {file_path} to remove` |
+| `Found legacy agent service to cleanup: {service_name}` |
+| `Found legacy connection ID for agent service matching: {legacy_connection_id}` |
+| `Handling cmd with args: {args_str}` |
+| `Installer run is complete. Output: {stdout}, Error: {stderr}, Return Code: {return_code}` |
+| `Logger initialization raised an exception: {logger_exc} — service will continue` |
+| `Message {signal_msg} - Signal: {reason}` |
+| `Request to shutdown received by signal handler, stopping` |
+| `Request to shutdown received, stopping. signal: {signal} - Message {message}` |
+| `Running as script` |
+| `Running launch on {exe_location}` |
+| `Running service command: {args}` |
+| `Running systemctl cmd {full_cmd} is complete. Return Code: {returncode}` |
+| `Searching files for {service_dir} with glob_pattern={glob_pattern} found file_paths={file_paths}` |
+| `service cmd {cmd} not implemented yet` |
+| `Service detection: cgroup read failed: {e}` |
+| `Service detection: Could not check ExecStart for '{service_name}': {e}` |
+| `Service detection: Could not parse ExecStart for '{service_name}': {strip}` |
+| `Service detection: found service name '{service_name}' from cgroup` |
+| `Service detection: Found {count} matching services but none had matching PID:` |
+| `Service detection: No services found matching fallback prefixes {fallback_prefixes}` |
+| `Service detection: Service '{service_name}' has matching path but different PID` |
+| `Service detection: Service '{service_name}' PID does not match current process` |
+| `Service detection: Starting fallback name-based matching for prefixes {fallback_prefixes}` |
+| `Service detection: Successfully matched gateway service '{service_name}' with PID {pid} (fallback name matching)` |
+| `Service detection: Successfully matched service '{service_name}' by ExecStart path and PID {pid}` |
+| `Service detection: systemctl command failed with return code {returncode}` |
+| `Shutdown being complete in another thread. Skipping` |
+| `Skipped copying host.yaml - source and destination are the same file: {host_yaml_source}` |
+| `The entity {file_path} could not be removed` |
+| `The entity {file_path} was not recognized as a file. Did not remove.` |
+| `Unable complete cmd {cmd}. Output: {stdout}, Error: {stderr}, Return Code: {return_code}` |
+| `Unable complete cmd {cmd}` |
+| `Unable to disable service. Required for {reason}` |
+| `Unable to execute pipeline as a service` |
+| `Unable to execute service command` |
+| `Unable to reload daemon. Required for {reason}` |
+| `Unable to stop service. Required for {reason}` |
+| `Unable to teardown signal handler` |
+| `Will remove binary at {service_location}` |
+| `Writing new service file to {destination}` |
+
+## Legacy Connection Log Messages
+
+:::note
+
+The messages in this section apply to Connections installed with the legacy, per-Connection installer (prior to v5.6.0). For Gateway installations, see [Gateway Log Messages](#gateway-log-messages).
+
+:::
+
+The legacy tables use the following columns:
+
+* **Message**: message received from Agent
+* **Description**: contextualized version of message emitted by Agent
+* **Section**: section within Agent code generating message
+* **Logging Level**: level of severity that log indicates
+* **OS**: operating system that the message pertains to, if applicable
+* **Associated Error Type**: associated Agent error type, if applicable
 
 ### System-generated messages
 

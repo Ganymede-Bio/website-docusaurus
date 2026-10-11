@@ -5,14 +5,13 @@ displayed_sidebar: webUiSidebar
 ---
 
 import {
+  ApiOutlined,
   BellOutlined,
   BranchesOutlined,
-  CheckCircleOutlined,
-  FileSearchOutlined,
-  FileTextOutlined,
-  FolderOutlined,
+  DotChartOutlined,
   HomeOutlined,
-  SettingOutlined,
+  QuestionCircleOutlined,
+  TableOutlined,
   UserOutlined
 } from '@ant-design/icons';
 
@@ -44,17 +43,19 @@ To assign a flow to yourself, select the All Flows tab and star the relevant flo
 
 ### Collapsible Sidebar
 
-The navigation sidebar contains pages for building and running flows, as well as observing data processed by flows.
+The navigation sidebar groups pages into collapsible sections. Click a section to expand it and see its pages. Only one section is open at a time. Use the arrow at the bottom of the sidebar to expand or collapse the sidebar. When the sidebar is collapsed, it shows only the section icons.
 
 [<div className="button darkblue_button"><HomeOutlined /> **Home**</div>](./Home.mdx) - Home screen used to access flows to run
 
-[<div className="button darkblue_button"><BranchesOutlined /> **Flow Editor**</div>](./flows/FlowEditor.mdx) - Editor for modifying flows and their underlying code
+<div className="button darkblue_button">**Processes**</div> - Track [**Runs**, **Processes**, **Unit Operations**, **Instrument Types**, and **Instruments**](./processes/Processes.mdx). This section is hidden in environments with GxP Validation Mode enabled.
 
-[<div className="button darkblue_button"><CheckCircleOutlined /> **Flow Runs**</div>](./flows/FlowRuns.mdx) - Table for tracking status of current and prior Flow runs
+<div className="button darkblue_button"><ApiOutlined /> **Connectors**</div> - Manage [**Connections**, **Hosts**](./agents/AgentMonitoring.mdx), and [**Agent Templates**](./agents/AgentTemplates.mdx)
 
-[<div className="button darkblue_button"><FileSearchOutlined /> **Data Explorer**</div>](./tables/DataExplorer.mdx) - Tools for querying and managing tabular data created by flows
+<div className="button darkblue_button"><BranchesOutlined /> **Flows**</div> - Build flows in the [**Flow Editor**](./flows/FlowEditor.mdx) and track current and prior runs in [**Flow Runs**](./flows/FlowRuns.mdx). This section appears only in environments with Flows enabled.
 
-[<div className="button darkblue_button"><FolderOutlined /> **Files**</div>](./files/FileBrowser) - File browser for accessing snapshotted input and output data processed through flows
+<div className="button darkblue_button"><TableOutlined /> **Data**</div> - Query and manage tabular data in the [**Data Explorer**](./tables/DataExplorer.mdx), and access input and output files in the [**File Browser**](./files/FileBrowser)
+
+<div className="button darkblue_button"><DotChartOutlined /> **Analysis**</div> - Open [**Modular Analysis**](./ma/ModularAnalysisOverview.mdx) apps, build charts on the [**Dashboard**](./visualization/Dashboards.mdx), and review [**Virtualization**](./virt/Virtualization.mdx) sessions. **Virtualization** appears only in environments with Virtualization applications set up.
 
 ### Environment Selector
 
@@ -63,12 +64,17 @@ In order to change them please feel free to contact the ganymede email in order 
 
 ### Header Navigation
 
-The header contains buttons for accessing environment notifications, app documentation, and settings for administering access to Ganymede and secrets stored used on Ganymede platform.
+The header contains the environment selector and buttons for notifications, help, and your user settings.
 
 [<div className="button darkblue_button"><BellOutlined /> **Notifications**</div>](./flows/Notifications.mdx) - Activity (e.g. - Flow saves, Flow runs, etc.) associated with Ganymede tenant environment
 
-[<div className="button darkblue_button"><FileTextOutlined /> **Docs**</div>](https://docs.ganymede.bio) - Link to Ganymede's documentation, which can also be accessed directly at [docs.ganymede.bio](https://docs.ganymede.bio/) 
+[<div className="button darkblue_button"><QuestionCircleOutlined /></div>](./Support.mdx) - Help menu with links to:
+- **Documentation** - Ganymede's documentation, which can also be accessed directly at [docs.ganymede.bio](https://docs.ganymede.bio/)
+- [**Product Tours**](./Support.mdx#product-tours) - Guided walkthroughs of the Ganymede web app
+- [**Contact Support**](./Support.mdx#ganymede-support) - Link to the Apprentice support portal
 
-[<div className="button darkblue_button"><SettingOutlined /> **Admin**</div>](./admin/AdminControls.mdx) - Panel for configuring access to Ganymede and secrets for accessing third-party applications from Ganymede
-
-[<div className="button darkblue_button"><UserOutlined /> **Log Out**</div>](https://www.ganymede.bio) - Log out from Ganymede cloud
+<div className="button darkblue_button"><UserOutlined /></div> - User menu, opened by clicking the bubble containing your email address:
+- [**Environment Settings**](./admin/AdminControls.mdx) - Panel for configuring access to Ganymede and secrets for accessing third-party applications from Ganymede
+- **Language** - Picker for the language of the Ganymede web app
+- The current Ganymede version number. Click it to copy the version number to your clipboard.
+- **Log Out** - Log out from Ganymede cloud

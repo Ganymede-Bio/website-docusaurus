@@ -117,18 +117,39 @@ This table contains a record for each user associated with an application sessio
 
 ## Instruments
 
+Instrument Types and Instruments are stored in separate tables. Despite its name, the `public_instrument` table holds Instrument Types. Individual Instruments are in the `public_instrument_instance` table.
+
 **public_instrument**
+
+This table contains a record for each Instrument Type.
+
 | Field Name | Data Type | Description |
 |-------------|-----------|-------------|
-| `connectionId` | string | The Connection id that is associated with this Instrument |
+| `connectorId` | string | The id of the Agent Template associated with this Instrument Type |
 | `costPerRun` | string | The user-defined cost per run |
-| `id` | integer | The id of the instrument |
-| `location` | string | The user-defined location of the instrument |
-| `manufacturer` | string | The user-defined location of the instrument |
-| `metadata` | string | The user-configurable metadata of the instrument |
-| `model` | string | The user-defined model of the instrument |
-| `name` | string | The user-defined name of the instrument |
-| `serial` | string |The user-defined serial number of the instrument |
+| `id` | integer | The id of the Instrument Type |
+| `manufacturer` | string | The user-defined manufacturer of the Instrument Type |
+| `model` | string | The user-defined model of the Instrument Type |
+| `name` | string | The user-defined name of the Instrument Type |
+
+**public_instrument_instance**
+
+This table contains a record for each Instrument. The table is joined to the `public_instrument` table by the `instrumentTypeId` field.
+
+| Field Name | Data Type | Description |
+|-------------|-----------|-------------|
+| `id` | integer | The id of the Instrument |
+| `instrumentTypeId` | integer | The id of the Instrument Type of this Instrument |
+| `latitude` | float | The latitude of the Instrument |
+| `location` | string | The user-defined location of the Instrument |
+| `longitude` | float | The longitude of the Instrument |
+| `metadata` | string | The user-configurable metadata of the Instrument |
+| `name` | string | The user-defined name of the Instrument |
+| `observationStartTime` | timestamp | The observation start time of the Instrument |
+| `serial` | string | The user-defined serial number of the Instrument |
+| `timezone` | string | The timezone of the Instrument (e.g. - America/New_York) |
+
+An Instrument can be associated with more than one Connection. These associations aren't stored in `public_instrument_instance`.
 
 ## Users
 

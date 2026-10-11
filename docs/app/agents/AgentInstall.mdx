@@ -18,23 +18,54 @@ The Gateway model simplifies deployment by allowing you to install one executabl
 
 1. Open the Ganymede application in Google Chrome: \<tenant\>.ganymede.bio
 2. Navigate to the appropriate environment (e.g., development or production) for your tenant.
-3. Navigate to the **Hosts** section of the Connections page by selecting the <div className="button darkblue_button"><ApiOutlined /></div> icon in the left toolbar.
-4. Click the <div className="button dark_gray_button"><PlusOutlined /> Add Host</div> button.
-5. Download the Gateway executable for your operating system (Windows or Linux).
+3. In the left navigation, open **Connectors > Hosts**. The **Download Gateway** button is also available on the **Connections** and **Agent Templates** tabs.
+4. Click <div className="button dark_gray_button"><DownloadOutlined /> Download Gateway</div>. The menu shows the Gateway version that is available to download.
+5. Select the installer for your operating system: **Windows EXE**, **Windows MSI**, or **Linux**.
+
+:::tip Downloading the Gateway programmatically
+
+To download the Gateway through a script, use the [`downloadGateway` endpoint](/api#tag/Hosts/downloadGateway) of the Ganymede API. It returns a signed URL for the Gateway installer for a given version and operating system.
+
+:::
 
 ### Step 2: Install the Gateway
 
+#### Admin and non-admin installations
+
+The Gateway installer lets you choose between an admin installation and a non-admin installation. Use an admin installation unless your IT policies prevent you from installing software with administrator privileges.
+
+| | **Admin installation** | **Non-admin installation** |
+| --- | --- | --- |
+| Process type | Service (Windows Service or systemd service) | Plain process |
+| Starts automatically | Yes | No |
+| Updates automatically | Yes | No |
+
+A non-admin Gateway stops when the user who started it logs out or the PC restarts, and it does not start again on its own. You can't upgrade a non-admin Gateway from the Ganymede UI: on the Host's page, the **Upgrade** button is disabled and an **Updates must be applied manually** warning appears. To upgrade, download the new version and run the installer manually on the Host.
+
 #### Windows
 
-1. Run the downloaded Gateway executable **as an administrator**.
-2. Select "yes" when prompted by the User Account Control dialog.
-3. Follow the installation wizard:
+1. Run the downloaded Gateway installer.
+2. Select the language for the installer. The Windows installer is available in English, Danish, German, Spanish, French, Croatian, Italian, Japanese, Korean, Dutch, Portuguese, Swedish, and Chinese (Simplified).
+
+<div class="text--center">
+  <img
+    alt="Gateway installer language selection dialog"
+    src="/img/gateway_installer_languages.png"
+    width="400"
+  />
+</div>
+&nbsp;
+
+3. Choose an admin or non-admin installation, as described in [Admin and non-admin installations](#admin-and-non-admin-installations). If you choose an admin installation and Windows shows a User Account Control prompt, select **Yes**.
+4. Follow the installation wizard:
    - Specify a descriptive name for the Host (e.g., the PC name or location).
    - Choose the installation directory. The default is `C:\Program Files\Ganymede\Gateway\`.
    - Click **Install** to begin the installation.
-4. Once complete, ensure the **Launch Ganymede Gateway** checkbox is checked and click **Finish**.
+5. Once complete, ensure the **Launch Ganymede Gateway** checkbox is checked and click **Finish**.
 
 #### Linux
+
+Linux Gateways also support admin and non-admin installation.
 
 1. Make the Gateway executable and run the installer:
 
@@ -46,11 +77,11 @@ chmod 755 gateway_<timestamp>
 HOME=/home/<user>/Ganymede ./gateway_<timestamp> <host name>
 ```
 
-2. The installer will set up the Gateway as a systemd service and start it automatically.
+2. For an admin installation, the installer sets up the Gateway as a systemd service and starts it automatically.
 
 ### Step 3: Verify the Host is Online
 
-1. Navigate to the **Hosts** section in the Ganymede UI.
+1. In the left navigation, open **Connectors > Hosts**.
 2. Find your newly created Host and verify its status shows as "Live".
 
 ### Step 4: Create Connections on the Host
@@ -68,6 +99,18 @@ Once your Host is online, you can create Connections without downloading additio
 You can move existing Connections to a different Host by selecting **'Move existing connection'** instead of creating a new one. This is useful for migrating Connections or redistributing workload across Hosts.
 
 :::
+
+### Step 5 (if desired): Set a Service Installation Identity
+
+On Windows Hosts, you can install the Gateway service under a specific user account, for example an account that has access to a network drive. You set this identity on the Host, not on individual Connections. The **Service Installation Identity** section appears only for Windows Hosts.
+
+1. Add the account name and password as environment secrets, as described in [Add Identity Secrets to Ganymede](#add-identity-secrets-to-ganymede).
+2. In the left navigation, open **Connectors > Hosts** and select the Host.
+3. In **Host Settings**, click **Edit Host**.
+4. Under **Service Installation Identity**, select the **Account Name Secret** and the **Password Secret**. You must set both secrets together.
+5. Click **Save**.
+
+The Gateway restarts under the new identity. The Host logs show `Auth full-update with current exe`, and the **Running as User** field on the Host's page shows the account the Gateway runs as.
 
 ---
 
@@ -147,6 +190,12 @@ If the Connection is not showing up in Ganymede, or if the status is anything ot
 :::
 
 ### Step 4 (if desired): Service Identity Setup
+
+:::note
+
+These steps apply to legacy Connections. For a Gateway installation, set the identity on the Host instead, as described in [Step 5 (if desired): Set a Service Installation Identity](#step-5-if-desired-set-a-service-installation-identity).
+
+:::
 
 :::info
 

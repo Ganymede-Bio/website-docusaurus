@@ -42,6 +42,10 @@ Click the dashboard button <div className="button darkblue_button"><AreaChartOut
 
 ### Step 2b: Load plate reader data for charting
 
+:::note
+You need the Writer role or higher to use SQL Lab and save datasets.
+:::
+
 Hover over SQL in the top menu bar and click on SQL Lab.  This will open a SQL editor that lets you preview tables and run SQL queries:
 
 <img alt="Dashboard - SQL Editor" src="https://ganymede-bio.mo.cloudinary.net/apiServer/SQL_Lab_Annotated20231220.png" />
@@ -50,13 +54,13 @@ Hover over SQL in the top menu bar and click on SQL Lab.  This will open a SQL e
 Enter the following SQL query in the editor and click <div className="button darkblue_button">**RUN**</div> to execute it.
 
 ```sql
--- Quickstart_Absorbance_Change_Run_Parameters table
+-- Quickstart_Absorbance_Change_Absolute_Differences dataset
 SELECT field, run_diff, left(field, 1) as row, cast(right(field, length(field)-1) as int64) as column
-FROM Quickstart_Absorbance_Change_data
-UNPIVOT (value for run IN (run1, run2))
-WHERE field not in ('Time [s]', 'Temp. [°C]', 'Cycle Nr.')
+FROM quickstart_Python_results
 ORDER BY row, column
 ```
+
+This query reads the `quickstart_Python_results` table, which the Python node in the [Build a Flow guide](../flows/QuickstartBuildFlow) creates. That table contains only the well measurements, along with the `run_diff` column.
 
 After running the query, the SQL editor should return the results:
 
@@ -69,12 +73,14 @@ Save the results as a virtual dataset by clicking on the <div className="button 
 Return to the SQL Editor and run the following query, then save the output as a virtual dataset named **Quickstart_Absorbance_Change_Run_Parameters**. 
 
 ```sql
--- Quickstart_Absorbance_Change_Absolute_Differences table
+-- Quickstart_Absorbance_Change_Run_Parameters dataset
 SELECT field, value, trim(run, 'run') as run_number
-FROM Quickstart_Absorbance_Change_Excel_Read_results 
+FROM Quickstart_Absorbance_Change_data
 UNPIVOT (value for run IN (run1, run2))
 WHERE field in ('Time [s]', 'Temp. [°C]', 'Cycle Nr.')
 ```
+
+This query reads the `Quickstart_Absorbance_Change_data` table, which the Input_File node in the [Build a Flow guide](../flows/QuickstartBuildFlow) creates.
 
 ## Step 3: Create run parameters pivot table
 

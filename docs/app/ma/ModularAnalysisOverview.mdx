@@ -5,15 +5,11 @@ sidebar_label: Overview
 displayed_sidebar: webUiSidebar
 ---
 
-import {
-  DotChartOutlined, EditOutlined, PlayCircleOutlined, PlusOutlined, CodeOutlined
-} from '@ant-design/icons';
-
 Modular Analysis (MA) enables users to develop interactive web apps from Jupyter notebooks and deploy them to users in their Ganymede tenant.  These applications are natively integrated with Ganymede data storage, enabling them to present context-rich interfaces for data capture and analyses.
 
 ## Accessing Modular Analysis
 
-To access MA, click on the <div className="button darkblue_button"><DotChartOutlined /> **Analysis**</div> icon in the left sidebar.
+To access MA, go to **Analysis > Modular Analysis** in the left sidebar.
 
 <div style={{ textAlign: 'center' }}>
     <img
@@ -23,11 +19,21 @@ To access MA, click on the <div className="button darkblue_button"><DotChartOutl
     />
 </div>
 
-Each MA application receives its own tile, containing the name, description, and icon for the app, as well as the following buttons:
+The Modular Analysis page has two tabs:
 
-- <div className="button lightblue_noborder_button"><PlayCircleOutlined /></div>: launch the MA application
-- <div className="button lightblue_noborder_button"><CodeOutlined /></div>: edit the code behind an MA application in a Jupyter notebook
-- <div className="button lightblue_noborder_button"><EditOutlined /></div>: edit the name, description, and or icon on the tile for the app
+- **Apps**: the MA applications in the environment
+- **Sessions**: the MA application sessions in the environment
+
+On the **Apps** tab, each MA application has its own card, showing the name, image, and description of the app. To launch an app, click its card. You need the Runner role or higher to launch an app.
+
+Each card also has the following actions, which require the Writer role or higher:
+
+- **Edit code**: edit the code behind the MA application in a Jupyter notebook
+- **Edit App**: edit the name, description, and image of the app
+
+Each card shows the app version as **Version: YYYYMMDD-HHmmssSSS**, the date and time of the last commit to the app. A new app that hasn't been committed yet shows **Pending first commit** instead of a version.
+
+Apps that are centrally managed as GxP validated assets show a **GxP Validated** badge. You can launch these apps, but you can't edit their code or settings.
 
 
 

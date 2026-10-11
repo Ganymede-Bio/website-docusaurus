@@ -26,15 +26,48 @@ To locate a file by name, enter your query in the search box in the upper left c
 
 ### Advanced Search
 
-The advanced search panel allows you to filter files by various file characteristics or [File Tags](./Tags).  To use this feature, define tag types on the [Manage Tag Types panel](./Tags#configuring-file-tag-types), and assign tags to specific files using methods found in the [file_tags module](../../sdk/FileTags) of the Ganymede SDK.
+The advanced search panel allows you to filter files by various file characteristics or [File Tags](./Tags).  To use this feature, define tag types on the [Manage Tag Types panel](./Tags#configuring-file-tag-types), and assign tags to files [in the File Browser](#editing-tags) or with the methods in the [file_tags module](../../sdk/FileTags) of the Ganymede SDK.
 
 ![Advanced Search](https://ganymede-bio.mo.cloudinary.net/apiServer/AdvancedSearch20240507.png)
 
 Searches combine conditions across fields with an AND logic, while conditions within the same field use OR logic. For example, searching for files with the "LC" and "MS" instrument tags will return files tagged with either "LC" or "MS" (or both). Adding a size filter of "greater than 1MB" will further narrow the results to files with the "LC" or "MS" tags that are also larger than 1MB.
 
+To filter by file extension, such as CSV or PDF, select one or more values in the **File Type** filter. Select **No extension** to find files that don't have an extension.
+
+Archived files are hidden from search results by default. To include them, check **Include archived files**. See [Archiving files](#archiving-files).
+
+## Selecting files
+
+To act on several files at once, select them with the checkboxes in the file table. The buttons above the table (**Archive Files**, **Edit Tags**, **Download All** and **Run Application**) apply to the selected files. Hover over a disabled button to see why it's unavailable.
+
 ## Downloading files
 
 To download a file, click the file's name in the _File name_ column.
+
+To download several files as a single zip file, select two or more files and click **Download All**. Keep the page open while Ganymede prepares the download; the zip file downloads when it's ready. A bulk download is limited to 2 GB. For larger selections, download the files individually.
+
+## Editing tags
+
+You need the Writer role or higher to edit tags.
+
+To add or remove [File Tags](./Tags) on files:
+
+1. Select up to 100 files and click **Edit Tags**.
+2. In the **Bulk File Tag Edit** dialog, choose a **Tag Type**, enter a **Tag Value** and click **Add**. Repeat for each tag you want to add.
+3. To remove a tag, click the remove icon on the tag in **Current Tags**. Removed tags move to **Tags to Remove**.
+4. Click **Apply**.
+
+If a tag type doesn't allow multiple values, you can't add a second tag of that type to a file. When strict mode is enabled, the dialog shows **Strict Mode Enabled**, and you can add tags but can't remove existing ones. Admins can turn off strict mode on the [Manage Tag Types](./Tags#configuring-file-tag-types) tab.
+
+## Archiving files
+
+Archiving hides files from the File Browser without deleting them. You need the Admin role to archive or restore files.
+
+To archive files, select up to 100 files and click **Archive Files**, then confirm. To restore archived files, check **Include archived files** in [Advanced Search](#advanced-search), select the archived files and click **Archive Files**, then confirm. Select either only archived files or only files that aren't archived; you can't mix the two.
+
+## Running an application
+
+To open a [Virtualization](../virt/Virtualization) session with files from the File Browser, select the files, click **Run Application** and choose an application. The selected files are passed to the session. You need the Runner role or higher to run an application.
 
 ## Linking to files
 
