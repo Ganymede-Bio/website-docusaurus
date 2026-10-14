@@ -29,17 +29,40 @@ Some examples of analyses that could be suitable are:
 - ddPCR analysis
 - Statistical charting / data visualization
 
-To use this feature, scientists select files relevant files for processing from the [File Browser](app/files/FileBrowser.mdx), conduct an analysis in the software, and then store relevant results back to Ganymede File Storage by saving output files in the appropriate location.
+To use this feature, scientists select relevant files for processing from the [File Browser](../files/FileBrowser.mdx), conduct an analysis in the software, and then store relevant results back to Ganymede File Storage by saving output files in the appropriate location.
 
 If you're interested in adding an application (whether external application or internally developed application), please reach out to [Ganymede](mailto:support@ganymede.bio) to explore your specific use case.
 
 ## Using Virtualization
 
-Users can start a session from the [File Browser](app/files/FileBrowser.mdx) by selecting files and the relevant App. The selected files will become input files to the session and will appear in the C:\Users\appuser\Desktop\input_files directory.
+Users can start a session by selecting files and the relevant App, either from the [File Browser](../files/FileBrowser.mdx) or from a run's files on **Processes > Runs**. You can also start a new session with the same input files as an earlier session. The selected files will become input files to the session and will appear in the C:\Users\appuser\Desktop\input_files directory.
+
+You need at least Runner permission to start or open a session.
+
+### Virtualization page
+
+Open **Analysis > Virtualization** to see your environment's sessions. **Virtualization** appears only in environments with Virtualization applications set up. The page has two tabs:
+
+- **Sessions**: A table of the environment's sessions. The table refreshes every 10 seconds to show the latest session status.
+- **App Library**: The applications available in your environment, with their descriptions.
+
+The Sessions table has these columns:
+
+- **Application**: The application the session runs.
+- **Initiator**: The user who started the session.
+- **Session Id**: The session ID. For a session with Live or Error status, click the ID to open the session in a new tab. The icons next to the ID let you copy a link to the session (**Click to copy link to session**), end the session (**Click to end session**), pause it (**Click to pause session**) and resume a paused session (**Click to resume session**).
+- **Status**: Starting, Live, Paused, Stopped or Error.
+- **Input Files**: The files passed to the session. For a Live session, the Add files icon adds more input files. The **Run new session with same input files** icon starts a new session with these files.
+- **Output Files**: The files saved from the session to Ganymede.
+- **Accessors**: The users who have opened the session.
+- **Time Remaining**: The time left before the session times out, for Live and Error sessions.
+- **Time Started** and **Time Closed**: When the session started and ended.
 
 ### Starting a Session
 
-1. Navigate to the File Browser.
+#### From the File Browser
+
+1. Navigate to **Data > File Browser**.
 2. Filter for the relevant files to bring into the session.  Commonly, this would be done by filtering for [files with a specific Tag or set of Tags](../files/Tags.mdx).
 3. Select the relevant files by using the checkboxes on the left side of the files table.
 
@@ -56,7 +79,27 @@ The checkbox in the top-left corner of the table will select all files on the cu
   />
 </div>
 
-5. A new window will open, and the session will start loading. Sessions typically take 2-3 minutes to initialize. You can navigate away while it loads; if the window is closed, you can return to the session via the Sessions page.
+#### From a run
+
+1. Navigate to **Processes > Runs** and select a run to open its details panel.
+2. In the **Files** section, select the relevant files by using the checkboxes in the files table.
+3. Click **Run Application** and select the relevant app from the dropdown.
+
+For more about runs, see [Processes](../processes/Processes.mdx).
+
+#### Relaunching with the same input files
+
+To start a new session with the same input files as an earlier session:
+
+1. Navigate to **Analysis > Virtualization** and open the **Sessions** tab.
+2. In the **Input Files** column of the earlier session, click the **Run new session with same input files** icon.
+3. Select the relevant app from the dropdown.
+
+The icon is hidden for sessions with no input files.
+
+#### After you start a session
+
+The session opens in a new browser tab and starts loading, and the original tab shows the Sessions table on **Analysis > Virtualization**. Sessions typically take 2-3 minutes to initialize. While the session loads, the new tab shows the current initialization step. You can navigate away while it loads. If you close the session tab, open the session again from the Sessions table by clicking its Session Id once the session is Live.
 
 <div style={{textAlign: 'center'}}>
   <img width="800" alt="Launching Virtualization VM" src="https://ganymede-bio.mo.cloudinary.net/virtualization/VirtualizationVMLaunching20240507.png"
@@ -79,7 +122,7 @@ When the session first loads, you will see a Windows lock screen with a Ganymede
 1. As denoted by the arrows, you will need to select the “appuser” account.
 1. The session password is displayed at the bottom of the screen. Click on the <div className="button darkblue_button"><CopyOutlined /> **Paste Password**</div> button and paste it into the password field.
 
-Once the session is opened, a Windows desktop appears. On the desktop, there is a directory called “Input_Files”. This directory contains the files that were selected in the File Browser during session creation.
+Once the session is opened, a Windows desktop appears. On the desktop, there is a directory called “Input_Files”. This directory contains the files that were selected when the session was created.
 
 <div style={{ textAlign: 'center' }}>
   <img width="800" alt="Virtualization Desktop" src="https://ganymede-bio.mo.cloudinary.net/virtualization/VirtualizationDesktop20241111.png"
@@ -87,11 +130,23 @@ Once the session is opened, a Windows desktop appears. On the desktop, there is 
 </div>
 &nbsp;
 
+#### Session control bar
+
+The control bar at the bottom of the session window shows:
+
+- **Session name**: The application name, followed by **Session** and the first eight characters of the session ID. Hover over the info icon to see when the session started.
+- **Password**: The session password and the **Paste Password** button. See [Logging into a session](#logging-into-a-session).
+- **Creator** and **Accessors**: The user who started the session and the users who have opened it.
+- **Add Files**: Adds files from Ganymede data storage to the session. See [Adding files to a session](#adding-files-to-a-session).
+- **View files**: Opens the Sessions table on **Analysis > Virtualization** in the current tab, where you can see the session's input and output files.
+- **Pause Session**: Pauses the session after you confirm. See [Pausing a session](#pausing-a-session).
+- **End Session**: Ends the session after you confirm. Ending a session cannot be undone. If no output files have been captured, the confirmation dialog warns you before you end the session.
+
 #### Adding files to a session
 
-If additional files are needed, you can add them from either the Sessions page or directly within the session:
+If additional files are needed, you can add them from either the Sessions table or directly within the session:
 
-- **From the Sessions Page**: Navigate to the relevant session and click the Add Files (+) icon next to the input files.
+- **From the Sessions Table**: Navigate to **Analysis > Virtualization**, find the relevant session, and click the Add files icon in its **Input Files** column. The icon appears only for Live sessions.
 
 <div style={{ textAlign: 'center' }}>
   <img alt="Adding files to a Virtualization Session from the Sessions page" src="https://ganymede-bio.mo.cloudinary.net/virtualization/VirtualizationSessionAddFiles20240507.png"
@@ -99,7 +154,7 @@ If additional files are needed, you can add them from either the Sessions page o
 </div>
 &nbsp;
 
-- **From Within the Session**: Navigate to the relevant session and click the Add Files (+) icon next to the input files.
+- **From Within the Session**: Click **Add Files** in the control bar at the bottom of the screen.
 
 <div style={{ textAlign: 'center' }}>
   <img alt="Adding files to a Virtualization Session from the active session" src="https://ganymede-bio.mo.cloudinary.net/virtualization/VirtualizationAddFiles20241111.png"
@@ -107,7 +162,7 @@ If additional files are needed, you can add them from either the Sessions page o
 </div>
 &nbsp;
 
-which launches a modal for selecting files from Ganymede data storage to add.
+Either option launches a modal for selecting files from Ganymede data storage to add. Select the files and click **Add files to session**.
 
 <div style={{ textAlign: 'center' }}>
   <img alt="File select modal for Virtualization Session" src="https://ganymede-bio.mo.cloudinary.net/virtualization/VirtualizationFileSelectModal20240507.png"
@@ -135,7 +190,7 @@ Application state is not preserved; any unsaved work within the application will
 
 ### Resuming a session
 
-To resume a paused session, navigate to the Sessions page and click the Resume button next to the relevant session.
+To resume a paused session, navigate to **Analysis > Virtualization**, click the resume icon (**Click to resume session**) next to the relevant session's ID, and click **Confirm Resume Session**.
 
 <div style={{ textAlign: 'center' }}>
   <img alt="Resuming a session" src="https://ganymede-bio.mo.cloudinary.net/virtualization/VirtualizationResumeSession_20241111.png"
@@ -156,7 +211,7 @@ Remember to capture output files, as any files not saved in Ganymede will be los
 
 To capture an output file:
 1. **Move Files to Output Directory**: Copy or move the output files to the "Output_files" directory on the desktop (C:\Users\appuser\Desktop\Output_files).
-1. **Verify File Capture**: Check the "Output Files" section in the control bar at the bottom of the screen to ensure files were captured.
+1. **Verify File Capture**: Click **View files** in the control bar and check the session's **Output Files** column in the Sessions table to ensure files were captured.
 
 <div style={{ textAlign: 'center' }}>
   <img alt="Virtualization Output Files" src="https://ganymede-bio.mo.cloudinary.net/virtualization/VirtualizationOutputFiles20240507.png"

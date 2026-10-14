@@ -1,14 +1,50 @@
 ---
 id: TroubleshootingVirtualization
-title: Troubleshooting Flows and Virtualization
+title: Troubleshooting Virtualization
 displayed_sidebar: webUiSidebar
 toc_max_heading_level: 4
 ---
-
-import { BranchesOutlined } from '@ant-design/icons';
 
 #### Issue: I have the virtualization session open, but am unable to input text into the virtualization session.
 
 Make sure that your mouse cursor is hovering over the virtualization session, and move your mouse slightly on the page.
 
 The source of this issue is a security feature to guard against keyloggers for remote desktop sessions.
+
+#### Issue: The Run Application button is disabled.
+
+Hover over the button to see why:
+
+- **Please select files that will be passed to session**: Select at least one file first.
+- **Need at least Runner permission to run application**: Ask an environment Admin for the Runner role or higher.
+- **This environment does not have any applications installed. Please contact Ganymede support to learn more.**: No Virtualization applications are set up in the environment. Contact [Ganymede Support](mailto:support@ganymede.bio).
+
+On the Sessions table, the **Run new session with same input files** icon shows **No applications available** for the same reason.
+
+#### Issue: I see "Error creating session".
+
+The session couldn't be created. Try starting the session again. If the error persists, contact [Ganymede Support](mailto:support@ganymede.bio).
+
+#### Issue: The session is stuck loading.
+
+Sessions typically take 2-3 minutes to initialize. While the session loads, its tab shows the current initialization step, and the session has the Starting status in the Sessions table on **Analysis > Virtualization**. You can close the tab and open the session again from the Sessions table by clicking its Session Id once the session is Live.
+
+If the session doesn't finish initializing, end it with the end icon (**Click to end session**) next to its Session Id, and contact [Ganymede Support](mailto:support@ganymede.bio) if the issue persists.
+
+#### Issue: I see "Session is Disconnected" or "Session encountered a connection error."
+
+Your browser couldn't connect to the session. Ganymede sets the session status to Error and returns you to the Sessions table.
+
+A session with Error status stays in the Sessions table, and its Session Id stays a link. Click the Session Id to try opening the session again, or end the session if you no longer need it.
+
+If your browser loses the connection after the session was already open, for example when your computer sleeps, the session window tries to reconnect automatically.
+
+#### Issue: I see "Session Unavailable" or "This session has already been stopped."
+
+The session you opened has ended. Ganymede shows the session in the Sessions table instead.
+
+A stopped session can't be reopened. To continue working with the same files, use the **Run new session with same input files** icon in the session's **Input Files** column. See [Relaunching with the same input files](./Virtualization.mdx#relaunching-with-the-same-input-files).
+
+#### Issue: I can't open a session from the Sessions table.
+
+The Session Id is a link only for sessions with Live or Error status, and only for users with the Runner role or higher. Paused sessions must be resumed first. See [Resuming a session](./Virtualization.mdx#resuming-a-session).

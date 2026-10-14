@@ -4,7 +4,7 @@ title: Processes, Unit Operations, and Instruments
 displayed_sidebar: webUiSidebar
 ---
 
-import { PlusOutlined } from '@ant-design/icons';
+import { PlusOutlined, CopyOutlined, MoreOutlined } from '@ant-design/icons';
 
 The Processes page provides a way to map laboratory workflows to Ganymede, allowing you to pull up the relevant [Modular Analyses](../ma/ModularAnalysisOverview.mdx), [Agents](../agents/Agent.mdx),
 [Flows](../flows/FlowEditor.mdx), tables, and files associated with a given Process.  This frames the various components of Ganymede in the context of your lab's workflows, making it easier
@@ -14,7 +14,7 @@ for users with different roles to navigate to the pieces of a Process relevant f
 
 ## Concepts
 
-The Processes page is built around the key concepts laid out below, which each have their own dedicated pages within the Processes section in the Web UI.  
+The Processes page is built around the key concepts laid out below.  Each has its own page in the **Processes** group of the left navigation, which contains **Runs**, **Processes**, **Unit Operations**, **Instrument Types**, and **Instruments**.
 
 - [**Processes**](#processes): High-level representations of laboratory workflows.
 - [**Unit Operations**](#unit-operations): Individual steps within a Process, each defined by a set of Instrument Types.
@@ -22,6 +22,12 @@ The Processes page is built around the key concepts laid out below, which each h
 - [**Instruments**](#instruments): Physical devices associated with specific Instrument Types.  Each Instrument can be linked to one or more [Agent Connections](../agents/Agent.mdx).
 
 [**Runs**](#runs) are instances of Instrument, Unit Operation, or Process execution, scoping data and Flow runs to the relevant unit of execution.  Instrument Runs and Unit Operation Runs are many-to-many: an Instrument Run can belong to more than one Unit Operation Run, and a Unit Operation Run can include multiple Instrument Runs.
+
+:::note
+
+The **Processes** group isn't available in environments with [GxP Validation Mode](../admin/GxPValidation.mdx#gxp-validation-mode) enabled.  In those environments, it's removed from the left navigation, and opening a Processes page by its URL redirects you to the Home page.
+
+:::
 
 ### Example Workflow - DNA Extraction
 
@@ -60,17 +66,56 @@ Each Process can also have Flows, Tables, Dashboards, and Analysis apps associat
 
 <img alt="Process View" src="https://ganymede-bio.mo.cloudinary.net/apiServer/ProcessView.png" />
 
+Each Process page has two tabs:
+
+- **Details**: The **Process Details** panel shows the Process's image, **Id**, name, and **Documentation**.  Below it are the Process's Unit Operations with their Instrument Types, followed by the associated Flows, Tables, Dashboards, and Modular Analysis apps.  Use the Id to create Process Runs through the API.
+- **Edit**: Change the Process's image, name, and documentation, add and order its Unit Operations, and choose its **Related Entities**.  The **Documentation** field is a Markdown editor, so you can record instructions or context for the people who run the Process.
+
+Unit Operations, Instrument Types, and Instruments also have **Details** and **Edit** tabs.  Each Process, Unit Operation, Instrument Type, and Instrument can have an image, which you set on its **Edit** tab.  The image appears on its card and in its details panel.
+
+#### Related entity cards
+
+Associated Flows, Tables, Dashboards, and Modular Analysis apps appear as cards on the **Details** tab of a Process, Unit Operation, or Instrument Type.  Modular Analysis cards show the app's image.
+
+Dashboard cards show a thumbnail image.  To set a custom image for a Dashboard, click <MoreOutlined rotate={90} /> on its card, select **Update dashboard image**, and upload an image.
+
+#### Copying a Process
+
+To create a new Process based on an existing one:
+
+1. Open the Process and select the **Edit** tab.
+2. Click <div className="button darkblue_outline_button"><CopyOutlined /> Copy</div>.
+3. Enter a name for the new Process.  By default, the name is the original name followed by `(Copy)`.
+4. Click **Copy**.  The new Process opens.
+
+The copy has the same image, documentation, Unit Operations and their order, and associated Flows, Tables, Dashboards, and Modular Analysis apps as the original.  The Unit Operations themselves aren't duplicated: both Processes use the same ones.  Runs aren't copied.  You need the Writer role or higher to copy a Process.
+
+You can also copy a Process through the [`copyProcess`](/api#tag/Processes/copyProcess) endpoint.
+
 ### Unit Operations
 
 Unit Operations represent the individual steps or stages within a Process. Each Unit Operation consists of a sequence of Instrument Types which define the specific tasks to be performed.
 
 <img alt="Unit Operations" src="https://ganymede-bio.mo.cloudinary.net/apiServer/UnitOperations.png" />
 
+The **Unit Operation Details** panel shows the Unit Operation's image, **Id**, name, and **Documentation**.  Use the Id to create Unit Operation Runs through the API.  Like Processes, Unit Operations have a Markdown **Documentation** field on the **Edit** tab.
+
+To copy a Unit Operation, open its **Edit** tab, click <div className="button darkblue_outline_button"><CopyOutlined /> Copy</div>, enter a name, and click **Copy**.  The copy has the same image, documentation, Instrument Types and their order, and associated Flows, Tables, Dashboards, and Modular Analysis apps as the original.  You need the Writer role or higher.  You can also use the [`copyUnitOperation`](/api#tag/UnitOperations/copyUnitOperation) endpoint.
+
 ### Instrument Types
 
 Instrument Types categorize the various instruments used within a Process. Each Instrument Type represents a specific model of an instrument, your lab may have multiple Instruments of a single Instrument Type.
 
 <img alt="Instrument Types" src="https://ganymede-bio.mo.cloudinary.net/apiServer/InstrumentType.png" />
+
+The Instrument Types page has two views:
+
+- **Gallery View** (the default): A card for each Instrument Type.  Use the **Search instrument types** box to filter the cards by name or model.
+- **Table View**: A table of each Instrument Type's **Name**, **Model**, **Manufacturer**, **Cost Per Run**, and **Agent Template**, which you can sort and filter by column.
+
+The page URL records the selected view, so a shared link opens in the same view.
+
+The **Instrument Type Details** panel shows the Instrument Type's image, **Id**, **Name**, **Model**, **Manufacturer**, **Cost per run**, **Agent Template**, and **Created At**.  Use the Id to create Instrument Runs through the API.
 
 ### Instruments
 
@@ -79,6 +124,8 @@ Instruments are the physical devices or equipment used to perform tasks within a
 The Instruments page allows you to track equipment within Ganymede, with or without connectivity to the instrument.  This offers a quick way to statefully track instruments and view integration status for instruments with connectivity to Ganymede.
 
 <img alt="Instruments Table" src="https://ganymede-bio.mo.cloudinary.net/apiServer/InstrumentsTable.png" />
+
+Like Instrument Types, the Instruments page has a **Gallery View** (the default), where you can filter cards by name with the **Search instruments** box, and a **Table View**, which you can sort and filter by column.  The page URL records the selected view.
 
 Each instrument can be associated with one or more [Connections](../agents/Agent.mdx), which allows you to monitor instrument uptime and programmatically interact with the lab instrument.
 
@@ -90,6 +137,8 @@ In addition to its name, Instrument Type, and Connections, each Instrument can t
 - **Observation Start Time**: When observation of the instrument started.
 - **Timezone**: The instrument's timezone, such as `America/New_York`.
 - **Latitude** and **Longitude**: The instrument's coordinates. Latitude must be between -90.0 and 90.0, and longitude between -180.0 and 180.0.
+
+The **Instrument Instance Details** panel shows these fields along with the Instrument's image, **Id**, and **Created At** time.
 
 See [Configuring Processes](./ConfiguringProcesses.mdx#instruments) for how to add Instruments individually or in bulk.
 

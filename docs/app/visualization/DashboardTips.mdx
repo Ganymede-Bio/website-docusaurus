@@ -36,12 +36,13 @@ The images below display a common use case for dashboards during development - a
 
 #### Creating more meaningful labels for table chart types
 
-Variables are saved with to the database with spaces and special characters replaced with
-underscores. However, you can change the label shown in tables with something more meaningful such
-as adding spaces, units, etc in the `Edit dataset` from `Chart Source`. In the `Columns` tab, click
-the dropdown for the variable you want to add a label to and fill in the LABEL field. For an
-example, if your variable is `my_variable` you can set the label to be `My Variable (units)` and
-this would automatically set the column name in your table chart types to this new label.
+Column names in the database can contain only letters, numbers, and underscores. These are the
+**BigQuery name** values in the table schema in the [Data Explorer](../tables/DataExplorer.mdx#table-structure-editor),
+and dashboards use them as column labels. The table schema can also record a **Unit** for each field.
+To show a more meaningful label in tables, such as one with spaces or units, open `Edit dataset` from
+`Chart Source`. In the `Columns` tab, click the dropdown for the variable you want to add a label to
+and fill in the LABEL field. For example, if your variable is `my_variable`, you can set the label to
+`My Variable (units)`, and table chart types use this label as the column name.
 
 #### Customizing chart colors
 

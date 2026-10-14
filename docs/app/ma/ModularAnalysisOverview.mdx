@@ -5,7 +5,11 @@ sidebar_label: Overview
 displayed_sidebar: webUiSidebar
 ---
 
-Modular Analysis (MA) enables users to develop interactive web apps from Jupyter notebooks and deploy them to users in their Ganymede tenant.  These applications are natively integrated with Ganymede data storage, enabling them to present context-rich interfaces for data capture and analyses.
+Modular Analysis (MA) enables users to develop interactive web apps and deploy them to users in their Ganymede tenant.  These applications are natively integrated with Ganymede data storage, enabling them to present context-rich interfaces for data capture and analyses.
+
+Each MA app is a [Panel](https://panel.holoviz.org/) app written in Python, with `app.py` as its entry point.  You edit an app's code in a notebook in the Ganymede web app, and each save creates a new version of the app.
+
+MA apps can be translated into the 13 languages that the Ganymede web app supports.  An app shows its text in the language you've selected for the web app, and shows English for any text that doesn't have a translation in that language.
 
 ## Accessing Modular Analysis
 
@@ -35,7 +39,11 @@ Each card shows the app version as **Version: YYYYMMDD-HHmmssSSS**, the date and
 
 Apps that are centrally managed as GxP validated assets show a **GxP Validated** badge. You can launch these apps, but you can't edit their code or settings. See [GxP-validated assets](../admin/GxPValidation#gxp-validated-assets).
 
+## Developing Modular Analysis apps
 
+To build or change an app, see [Developing Modular Analysis Apps](../../sdk/ModularAnalysisDevelopment). It covers how an app's code is structured, how to read Ganymede data from an app, how to get the user who is running the current session, and how Ganymede records sessions.
+
+Ganymede records the start and end time of each app session without any code in your app. Sessions appear on the [Sessions tab](./UsingModularAnalysisApps#sessions-tab) and are also available in [System Metadata](../visualization/SystemMetadata) for use in dashboards.
 
 ## Base Applications
 

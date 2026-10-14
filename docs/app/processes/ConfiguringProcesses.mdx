@@ -6,7 +6,7 @@ displayed_sidebar: webUiSidebar
 
 import { PlusOutlined } from '@ant-design/icons';
 
-[Configuring Processes](./ConfiguringProcesses.mdx) is done bottoms-up, starting with Instruments, then Instrument Types, then Unit Operations, and finally Processes in the Web UI.
+Configure Processes in the Web UI from the bottom up: start with Instrument Types, then add Instruments, which reference an Instrument Type. Next, group Instrument Types into Unit Operations, and finally group Unit Operations into Processes.
 
 Once a Process is defined, individual Run creation can be performed either manually from the Web UI on the corresponding Instrument Run, Unit Operations, or Process page, or programmatically via API calls.
 
@@ -16,35 +16,17 @@ Run tracking and retrieval are done by API calls from Agents and Flows, referenc
 - [Unit Operation Runs](/api#tag/Unit%20Operation%20Runs/getUnitOperationRun) track execution of Unit Operations.
 - [Process Runs](/api#tag/Process%20Runs/getProcessRun) track execution of entire Processes.
 
+You can also manage the configuration itself through the public API:
+
+- [Instrument Types](/api#tag/InstrumentTypes/getInstrumentTypes): list, retrieve, create, update, and delete Instrument Types.
+- [Instruments](/api#tag/Instruments/getInstruments): list, retrieve, and create Instruments. Use [`updateInstrument`](/api#tag/Instruments/updateInstrument) to add or remove Connections on an Instrument, and [`deleteInstrument`](/api#tag/Instruments/deleteInstrument) to delete an Instrument. Set `dry_run` to validate a delete without performing it.
+- [Unit Operations](/api#tag/UnitOperations/getUnitOperations): list, retrieve, create, update, [copy](/api#tag/UnitOperations/copyUnitOperation), and delete Unit Operations.
+- [Processes](/api#tag/Processes/getProcesses): list, retrieve, create, update, [copy](/api#tag/Processes/copyProcess), and delete Processes.
+
 :::tip
 
-InstrumentId, unitOperationId, and processId are each small integers that can be found in the URL when navigating to the corresponding Instrument, Unit Operation, or Process page in the Web UI.  Each integer increments by 1 for each new item created.
+Each Instrument Type, Instrument, Unit Operation, and Process shows its numeric ID in the details panel on its **Details** tab. On Instrument Type, Unit Operation, and Process pages, hover over the **Id** label for a tooltip about using the ID to create runs through the API.  The `instrumentId` that the Instrument Runs API expects is the ID of an Instrument Type.
 
-:::
-
-## Instruments
-
-### Adding an instrument
-
-New instruments can be added by clicking on the  <div className="button darkblue_outline_button"><PlusOutlined /> New Instrument</div>  button to open New Instrument form, shown below.
-
-<img width="500" alt="New Instrument" src="https://ganymede-bio.mo.cloudinary.net/apiServer/NewInstrumentForm.png" />
-
-The New Instrument Form allows you to populate instrument characteristics relevant for tracking, associate an instrument with a Connection, and associate an instrument with an Instrument Type. The only required field is the **Name** field, which must be unique within the environment.
-
-### Adding instruments in bulk
-
-If you have a list of instruments to add, you can upload them using the Bulk Upload Instruments feature. 
-
-<img width="500" alt="Bulk Upload Instruments" src="https://ganymede-bio.mo.cloudinary.net/apiServer/BulkUploadInstruments.png" />
-
-To use this feature, download the template CSV file in the bulk upload instruments form and fill it out, adding 
-one instrument per row. 
-
-Upon upload, the CSV file will be validated by Ganymede. If any errors are found, a descriptive error message is displayed, explaining the issue.
-
-:::note
-The "Connection Id" column in the instrument bulk upload template file requires Connection ID.  This differs from the form for adding instruments individually, which requests a Connection name from a dropdown list.  Connection ID can be found on the Connection page.
 :::
 
 ## Instrument Types
@@ -65,15 +47,61 @@ After doing so, you can view all associated items from the Instrument Type Detai
 
 ### Creating runs for instrument types
 
-To create a unique run for an instrument type, click on the  <div className="button darkblue_outline_button"><PlusOutlined /> Create Run</div>  button on the Instrument Type page or calling the [API](/api#tag/Instrument%20Runs/createInstrumentRun).
+To create a unique run for an instrument type, click on the  <div className="button darkblue_outline_button"><PlusOutlined /> Create Run</div>  button on the **Details** tab of the Instrument Type page or calling the [API](/api#tag/Instrument%20Runs/createInstrumentRun).
 
 <img width="800" alt="View Instrument Type Detail" src="https://ganymede-bio.mo.cloudinary.net/apiServer/CreateInstrumentRunUI_20251110.png" />
 &nbsp;
 
+The **Create Instrument Run** form has these fields:
+
+- **External ID** (required): enter an ID, or click **Generate ID** to create one.
+- **URL** (optional): a link related to the run.
+- **Unit Operation Run** (optional): one or more Unit Operation Runs that this Instrument Run belongs to.
+- **Initiator** (required): the email address of the person who started the run. It defaults to your email address.
+- **Start Time** (required): it defaults to the current time.
+
+Instrument Runs and Unit Operation Runs have a many-to-many relationship: an Instrument Run can belong to more than one Unit Operation Run, and a Unit Operation Run can include many Instrument Runs.
+
 :::note
 
-The instrument type ID can be found in the URL https://\<subtenant\>.ganymede.bio/\<environment\>/instrument-types/\<**instrument_type_id**\>.
+The instrument type ID is shown in the **Instrument Type Details** panel. It also appears in the page URL: `https://<subtenant>.ganymede.bio/<environment>/instrument-types/<instrument_type_id>/edit`.
 
+:::
+
+## Instruments
+
+### Adding an instrument
+
+New instruments can be added by clicking on the  <div className="button darkblue_outline_button"><PlusOutlined /> New Instrument</div>  button to open New Instrument form, shown below.
+
+<img width="500" alt="New Instrument" src="https://ganymede-bio.mo.cloudinary.net/apiServer/NewInstrumentForm.png" />
+
+The New Instrument form has these fields. The only required field is **Name**.
+
+- **Name**: must be unique within the environment.
+- **Location**
+- **Serial Number**
+- **Metadata**: text for use in dashboards and downstream analysis.
+- **Instrument Type**: the Instrument Type for this instrument. The list shows each type's model to help you tell similar types apart.
+- **Observation Start Time**
+- **Timezone**: an IANA timezone, such as `America/New_York`.
+- **Latitude**: a value from -90 to 90.
+- **Longitude**: a value from -180 to 180.
+- **Connections**: one or more Connections to associate with the instrument. Select **Live connections only** to list only Connections whose Host is Live. Hover over a Connection name to see its ID.
+
+### Adding instruments in bulk
+
+If you have a list of instruments to add, you can upload them using the Bulk Upload Instruments feature. 
+
+<img width="500" alt="Bulk Upload Instruments" src="https://ganymede-bio.mo.cloudinary.net/apiServer/BulkUploadInstruments.png" />
+
+To use this feature, download the template CSV file in the bulk upload instruments form and fill it out, adding 
+one instrument per row. 
+
+Upon upload, the CSV file will be validated by Ganymede. If any errors are found, a descriptive error message is displayed, explaining the issue.
+
+:::note
+The **Connection Ids (comma separated)** column in the bulk upload template takes Connection IDs, not Connection names.  To associate an instrument with more than one Connection, enter the IDs separated by commas.  If you edit the file in a text editor, enclose a cell that has more than one ID in double quotes.  To find a Connection's ID, hover over its name in the **Connections** list on the New Instrument form.
 :::
 
 ## Unit Operations
@@ -84,16 +112,21 @@ Instrument Types can be grouped into Unit Operations on the Edit tab.
 
 <img width="800" alt="Associate instrument types with unit ops" src="https://ganymede-bio.mo.cloudinary.net/apiServer/EditUnitOps_20251110.png" />
 
-### Creating runs for instrument types
+### Creating runs for unit operations
 
-To create a unique run for a unit operation, click on the  <div className="button darkblue_outline_button"><PlusOutlined /> Create Run</div>  button on the corresponding Unit Operation page or calling the [API](/api#tag/Unit%20Operation%20Runs/createUnitOperationRun).
+To create a unique run for a unit operation, click on the  <div className="button darkblue_outline_button"><PlusOutlined /> Create Run</div>  button on the **Details** tab of the corresponding Unit Operation page or calling the [API](/api#tag/Unit%20Operation%20Runs/createUnitOperationRun).
 
 <img width="800" alt="View Instrument Type Detail" src="https://ganymede-bio.mo.cloudinary.net/apiServer/CreateUnitOperationRunUI_20251110.png" />
 &nbsp;
 
+The **Create Unit Operation Run** form has the same **External ID**, **URL**, **Initiator**, and **Start Time** fields as the Create Instrument Run form. It also has:
+
+- **Process Run** (optional): the Process Run that this Unit Operation Run belongs to.
+- **Create related run entities?**: select this to also create an Instrument Run for each Instrument Type in the Unit Operation.
+
 :::note
 
-The unit operation ID can be found in the URL https://\<subtenant\>.ganymede.bio/\<environment\>/unit-operations/\<**unit_operation_id**\>.
+The unit operation ID is shown in the **Unit Operation Details** panel. It also appears in the page URL: `https://<subtenant>.ganymede.bio/<environment>/unit-operations/<unit_operation_id>/edit`.
 
 :::
 
@@ -105,15 +138,17 @@ Unit Operations can be grouped into Processes on the Edit tab.
 
 <img width="800" alt="Associate unit ops with processes" src="https://ganymede-bio.mo.cloudinary.net/apiServer/ConfigureProcess_20251110.png" />
 
-### Creating runs for instrument types
+### Creating runs for processes
 
-To create a unique run for a process, click on the  <div className="button darkblue_outline_button"><PlusOutlined /> Create Run</div>  button on the corresponding Process page or calling the [API](/api#tag/Process%20Runs/createProcessRun).
+To create a unique run for a process, click on the  <div className="button darkblue_outline_button"><PlusOutlined /> Create Run</div>  button on the **Details** tab of the corresponding Process page or calling the [API](/api#tag/Process%20Runs/createProcessRun).
 
 <img width="800" alt="View Instrument Type Detail" src="https://ganymede-bio.mo.cloudinary.net/apiServer/CreateProcessRunUI_20251110.png" />
 &nbsp;
 
+The **Create Process Run** form has the same **External ID**, **URL**, **Initiator**, and **Start Time** fields as the Create Instrument Run form. Select **Create related run entities?** to also create a Unit Operation Run for each Unit Operation in the Process, along with an Instrument Run for each Instrument Type in those Unit Operations.
+
 :::note
 
-The process ID can be found in the URL https://\<subtenant\>.ganymede.bio/\<environment\>/processes/\<**process_id**\>.
+The process ID is shown in the **Process Details** panel. It also appears in the page URL: `https://<subtenant>.ganymede.bio/<environment>/processes/<process_id>/edit`.
 
 :::
