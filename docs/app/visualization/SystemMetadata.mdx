@@ -8,7 +8,7 @@ import { CheckCircleOutlined } from '@ant-design/icons';
 
 Ganymede metadata tables allow users to query and reference details about flow runs, tables, and files stored within the Ganymede platform. These tables can be utilized for various purposes, such as debugging previous runs, locating specific files or table records associated with past runs, and systematically displaying tags used to contextualize and ensure traceability of captured data.
 
-The tables described below are found in the Ganymede database under the metadata schema, and can be referenced in [Dashboards](../visualization/Dashboards.mdx).
+The tables described below are found in the Ganymede database under the metadata schema, and can be referenced in [Dashboards](../visualization/Dashboards.mdx). Each table below lists the columns that are most useful for reporting. Some tables contain additional columns.
 
 ## Flow Runs
 
@@ -23,12 +23,102 @@ The **flow_run_metadata** table captures a record for each flow execution.
 | `flow_id` | Flow name |
 | `inputs_dict` | Run context for the Flow; corresponds to the run context described in the [Ganymede Class overview](../../sdk/GanymedeClass.mdx#overview) |
 | `initiator` | Flow run initiator; agent name + MAC address for agent-initiated Flows, user email for user-initiated flows, event name for event-triggered Flows, or Flow name if triggered from another Flow |
-| `initiator_type` | Type of the user who initiated the flow run (AGENT, USER, EVENT, FLOW) |
+| `initiator_type` | Type of initiator of the Flow run (`User`, `Agent`, `Event`, `Flow`, `Cron`, `API`, or `Connection`) |
 | `flow_version` | Commit hash associated with flow execution |
-| `state` | Final disposition of Flow run (Success, Failed) |
-| `table_output` | JSON containing database table write info associated with Flow run; table, type of write operation (e.g. - replace, append), table columns, and row count are available in data | 
+| `state` | Status of the Flow run: `Queued`, `Running`, `Success`, `Failed`, or `unknown`. For the error type of a failed run, see `public_flow_run_error` |
+| `table_outputs` | Array of database table writes associated with the Flow run; each entry contains the table, the type of write operation (e.g. - replace, append), the table columns, and the row count |
+| `file_outputs` | Array of files produced by the Flow run; each entry contains the file URI (`fileValueUri`) and the output name (`name`) |
+| `string_outputs` | Array of string outputs of the Flow run; each entry contains the value (`stringValue`) and the output name (`name`) |
+
+**public_flow**
+| Field Name | Data Type | Description |
+|-------------|-----------|-------------|
+| `description` | string | Description of the Flow |
+| `displayName` | string | The display name of the Flow |
+| `docsMarkdown` | string | The Markdown description of the Flow |
+| `id` | integer | The id of the Flow |
+| `name` | string | The name of the Flow |
+| `owner` | string | The email of the User that owns the Flow |
+| `schedule` | string | The cron schedule of the Flow |
+
+**public_flow_run**
+| Field Name | Data Type | Description |
+|-------------|-----------|-------------|
+| `end_time` | timestamp with time zone | The time that the Flow Run ended |
+| `execution_time` | timestamp with time zone | The time that the Flow Run started running |
+| `flowId` | integer | The id of the Flow |
+| `id` | integer | The id of the Flow Run |
+| `initiator` | string | Name of the Flow run initiator (e.g. - email address for users, Connection id for Agents) |
+| `initiator_type` | USER-DEFINED | Type of initiator of the Flow run (`User`, `Agent`, `Event`, `Flow`, `Cron`, `API`, or `Connection`) |
+| `run_id` | string | The id of the Flow Run as used by the orchestrator |
+| `start_time` | timestamp with time zone | The time that the Flow Run was requested to start |
+| `state` | string | Status of the Flow run: `Queued`, `Running`, `Success`, `Failed`, or `unknown`. For the error type of a failed run, see `public_flow_run_error` |
+
+**public_flow_run_error**
+
+This table contains a record for each error raised by a node during a Flow run. A Flow run can have more than one error. The table is joined to the `public_flow_run` table by the `flowRunId` field.
+
+| Field Name | Data Type | Description |
+|-------------|-----------|-------------|
+| `exception_type` | string | The type of error (`Validation`, `Connection`, `Function`, or `Platform`) |
+| `flowRunId` | integer | The id of the Flow Run |
+| `function` | string | The function in which the error occurred |
+| `id` | integer | The id of the error |
+| `lineno` | integer | The line number at which the error occurred |
+| `message` | string | The error message |
+| `node` | string | The name of the node that raised the error |
+| `traceback` | string | The traceback of the error |
+
+When a failed Flow run has errors of more than one type, Ganymede reports its error type as `Validation` first, then `Connection`, then `Function`. A failed Flow run with no recorded error is reported as `Platform`.
+
+**public_flow_run_output**
+
+This table contains a record for each output of a Flow run. Each record has a value in exactly one of `stringValue`, `fileValueUri`, or `tableValueId`. The table is joined to the `public_flow_run` table by the `flowRunId` field.
+
+| Field Name | Data Type | Description |
+|-------------|-----------|-------------|
+| `fileValueUri` | string | The URI of an output file; joins to `uri` in `public_file` |
+| `flowRunId` | integer | The id of the Flow Run |
+| `id` | integer | The id of the output |
+| `name` | string | The name of the output |
+| `node` | string | The name of the node that produced the output |
+| `stringValue` | string | A string output value |
+| `tableValueId` | integer | The id of a table write; joins to `id` in `public_table_output` |
+| `timestamp` | string | The time the output was recorded |
+
+**public_table_output**
+
+This table contains a record for each table write made by a Flow run.
+
+| Field Name | Data Type | Description |
+|-------------|-----------|-------------|
+| `columns` | string | The table columns written |
+| `id` | integer | The id of the table write |
+| `row_count` | string | The number of rows written |
+| `table` | string | The name of the table |
+| `type` | string | The type of write operation (e.g. - replace, append) |
+
+**flow_run_metadata_params**
+
+This view contains a record for each Flow run that has input parameters. The `inputs_dict` field of `flow_run_metadata` is built from it.
+
+| Field Name | Data Type | Description |
+|-------------|-----------|-------------|
+| `flowRunId` | integer | The id of the Flow Run (`id` in `public_flow_run`) |
+| `params` | array | The input parameters of the Flow run. Each entry has a `KEY` (the parameter name) and a `value`. For file inputs, `value` is the path to the file within its storage bucket |
+
+**flow_run_metadata_tags**
+
+This view contains a record for each Flow run that has run tags.
+
+| Field Name | Data Type | Description |
+|-------------|-----------|-------------|
+| `flowRunId` | integer | The id of the Flow Run (`id` in `public_flow_run`) |
+| `runTag` | array | The run tags of the Flow run. Each entry has a `KEY` (the tag id) and a `value` (the tag display name) |
 
 ## Application Sessions
+
+These tables record Virtualization sessions.
 
 **public_application_session**
 
@@ -41,6 +131,7 @@ The **flow_run_metadata** table captures a record for each flow execution.
 | `inputFiles` | text | A comma delimited list of file URIs that were provided to the application session |
 | `outputFiles` | text  |A comma delimited list of file URIs that were generate by the application session | |
 | `startTime` | string |The start time of the application session  |
+| `status` | string | The status of the application session (`Initializing`, `Live`, `Stopped`, `Error`, `Standby`, `Paused`, or `Resuming`) |
 
 **public_application_session_users_user**
 
@@ -50,6 +141,51 @@ This table contains a record for each user associated with an application sessio
 |-------------|-----------|-------------|
 | `applicationSessionId` | string | The id of the application session |
 | `userId` | integer | The id of a user who accessed an application session |
+
+## Modular Analysis
+
+**public_panel_app**
+
+This table contains a record for each Modular Analysis app.
+
+| Field Name | Data Type | Description |
+|-------------|-----------|-------------|
+| `appFolder` | string | The folder name (slug) of the app |
+| `appName` | string | The name of the app |
+| `createdAt` | timestamp | The time the app was created |
+| `deletedAt` | timestamp | The time the app was deleted, if it has been deleted |
+| `description` | string | The description of the app |
+| `hidden` | boolean | Whether the app is hidden |
+| `id` | integer | The id of the app |
+
+**public_panel_app_version**
+
+This table contains a record for each saved version of a Modular Analysis app. The table is joined to the `public_panel_app` table by the `panelAppId` field.
+
+| Field Name | Data Type | Description |
+|-------------|-----------|-------------|
+| `commitMessage` | string | The commit message of the version |
+| `commitSha` | string | The commit SHA of the version |
+| `commitTimestamp` | timestamp | The time of the commit |
+| `createdAt` | timestamp | The time the version record was created |
+| `id` | integer | The id of the version record |
+| `panelAppId` | integer | The id of the app |
+| `treeSha` | string | The Git tree SHA of the version |
+| `userId` | integer | The id of the User associated with the version (`id` in `public_user`) |
+| `version` | string | The version identifier |
+
+**public_panel_session**
+
+This table contains a record for each session in which a User opened a Modular Analysis app. Use it to report on app usage.
+
+| Field Name | Data Type | Description |
+|-------------|-----------|-------------|
+| `app_id` | integer | The id of the app (`id` in `public_panel_app`). Can be empty for some older sessions of deleted apps |
+| `endTime` | timestamp | The time the session ended |
+| `id` | string | The id of the session |
+| `lastActivityTime` | timestamp | The last time activity was recorded in the session |
+| `startTime` | timestamp | The time the session started |
+| `user_id` | integer | The id of the User (`id` in `public_user`) |
 
 ## Files
 
@@ -89,31 +225,33 @@ This table contains a record for each user associated with an application sessio
 | `textColor` | string | The hex code of the File Tag text color |
 | `type` | string | The name of the File Tag Type |  
 
-## Flow Runs
+## Processes
 
-**public_flow**
+**public_process**
+
+This table contains a record for each Process.
+
 | Field Name | Data Type | Description |
 |-------------|-----------|-------------|
-| `description` | string | Description of the Flow |
-| `displayName` | string | The display name of the Flow |
-| `docsMarkdown` | string | The Markdown description of the Flow |
-| `id` | integer | The id of the Flow |
-| `name` | string | The name of the Flow |
-| `owner` | string | The email of the User that owns the Flow |
-| `schedule` | string | The cron schedule of the Flow |
+| `createdAt` | timestamp | The time the Process was created |
+| `deletedAt` | timestamp | The time the Process was deleted, if it has been deleted |
+| `docsMarkdown` | string | The Markdown description of the Process |
+| `id` | integer | The id of the Process |
+| `name` | string | The user-defined name of the Process |
 
-**public_flow_run**
+**public_unit_operation**
+
+This table contains a record for each Unit Operation.
+
 | Field Name | Data Type | Description |
 |-------------|-----------|-------------|
-| `end_time` | timestamp with time zone | The time that the Flow Run ended |
-| `execution_time` | timestamp with time zone | The time that the Flow Run started running |
-| `flowId` | integer | The id of the Flow |
-| `id` | integer | The id of the Flow Run |
-| `initiator` | string | Name of the Flow run initiator (e.g. - email address for users, Connection id for Agents) |
-| `initiator_type` | USER-DEFINED | Type of the user who initiated the flow run (AGENT, USER, EVENT, FLOW)  |
-| `run_id` | string | The id of the Flow RUn as used by the orchestrator |
-| `start_time` | timestamp with time zone | The time that the Flow Run was requested to start |
-| `state` | string | Final disposition of Flow run (Success, Failed) |
+| `createdAt` | timestamp | The time the Unit Operation was created |
+| `deletedAt` | timestamp | The time the Unit Operation was deleted, if it has been deleted |
+| `docsMarkdown` | string | The Markdown description of the Unit Operation |
+| `id` | integer | The id of the Unit Operation |
+| `name` | string | The user-defined name of the Unit Operation |
+
+The links between Processes, Unit Operations, and Instrument Types aren't stored in these tables.
 
 ## Instruments
 
@@ -150,6 +288,68 @@ This table contains a record for each Instrument. The table is joined to the `pu
 | `timezone` | string | The timezone of the Instrument (e.g. - America/New_York) |
 
 An Instrument can be associated with more than one Connection. These associations aren't stored in `public_instrument_instance`.
+
+## Connectors
+
+**public_host**
+
+This table contains a record for each Host.
+
+| Field Name | Data Type | Description |
+|-------------|-----------|-------------|
+| `deletedAt` | timestamp | The time the Host was deleted, if it has been deleted |
+| `environment` | string | The environment the Host is scoped to |
+| `expectedVersionGatewayversion` | string | The gateway version the Host is expected to run |
+| `expectedVersionRuntimeversion` | string | The configuration version the Host is expected to run |
+| `id` | string | The id of the Host |
+| `inferredDataMachineip` | string | The IP address of the Host machine, as reported by the Host |
+| `inferredDataMachinename` | string | The name of the Host machine, as reported by the Host |
+| `inferredDataOperatingsystem` | string | The operating system of the Host machine (e.g. - Windows, Linux, Darwin) |
+| `name` | string | The user-defined name of the Host |
+| `runningVersionGatewayversion` | string | The gateway version the Host reported in its last status ping |
+| `runningVersionRuntimeversion` | string | The configuration version the Host reported in its last status ping |
+| `state` | string | The state of the Host (`Enabled`, `Disabled`, or `Archived`) |
+
+**public_host_status**
+
+This table contains the latest status of each Host. The table is joined to the `public_host` table by the `id` field.
+
+| Field Name | Data Type | Description |
+|-------------|-----------|-------------|
+| `id` | string | The id of the Host |
+| `latestPingTimestamp` | timestamp | The time of the last status ping from the Host |
+| `status` | string | The status of the Host (`Live`, `Updating`, `Disconnected`, `Shutdown`, `Deprecated`, or `Error`) |
+
+**public_connector**
+
+This table contains a record for each Agent Template.
+
+| Field Name | Data Type | Description |
+|-------------|-----------|-------------|
+| `connectorType` | string | The type of the Agent Template (e.g. - `file_watcher_upload_run_flow`, `cron_upload`, `opcua`) |
+| `creatorEmail` | string | The email of the User who created the Agent Template |
+| `deletedAt` | timestamp | The time the Agent Template was deleted, if it has been deleted |
+| `description` | string | The description of the Agent Template |
+| `id` | string | The id of the Agent Template |
+| `name` | string | The name of the Agent Template |
+| `state` | string | The state of the Agent Template (`Active`, `Disabled`, or `Archived`) |
+| `version` | string | The version of the Agent Template |
+
+**public_connector_connection**
+
+This table contains a record for each Connection. The table is joined to the `public_connector` table by the `connectorId` field, and to the `public_host` table by the `hostId` field.
+
+| Field Name | Data Type | Description |
+|-------------|-----------|-------------|
+| `connectorId` | string | The id of the Agent Template of this Connection |
+| `deletedAt` | timestamp | The time the Connection was deleted, if it has been deleted |
+| `environment` | string | The environment of the Connection |
+| `hostId` | string | The id of the Host that runs this Connection |
+| `id` | string | The id of the Connection |
+| `name` | string | The user-defined name of the Connection |
+| `state` | string | The administrative state of the Connection (`Active` or `Disabled`) |
+| `status` | string | The operational status of the Connection (`Live`, `Failing`, or `Deactivated`) |
+| `statusMessage` | string | A message that describes the status of the Connection |
 
 ## Users
 

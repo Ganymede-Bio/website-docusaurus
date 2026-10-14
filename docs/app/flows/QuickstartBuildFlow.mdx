@@ -7,16 +7,13 @@ displayed_sidebar: webUiSidebar
 import {
     BellOutlined,
     BranchesOutlined,
-    CheckCircleOutlined,
     CodeOutlined,
     DownOutlined,
-    FolderOutlined,
     PlayCircleOutlined,
     PlusCircleOutlined,
     PlusOutlined,
     SaveFilled,
     SettingOutlined,
-    TableOutlined,
     UserOutlined
 } from '@ant-design/icons';
 
@@ -52,13 +49,13 @@ Click the <div className="button darkblue_inverted_button"><PlusOutlined /> New 
 <img width="1124" alt="Quickstart" src="https://ganymede-bio.mo.cloudinary.net/apiServer/Quickstart_Add_New_Flow_20240823.png"/>
 &nbsp;
 
-This exposes a modal for adding a new Flow. Name the Flow "Quickstart_Absorbance_Change" as shown below, add a description, and then hit the "Create Flow" button.
+This opens the <div className="button darkblue_button"><BranchesOutlined /> **Flow Editor**</div> with a modal for adding a new Flow. Name the Flow "Quickstart_Absorbance_Change" as shown below, add a description, and then hit the "Create Flow" button.
 
 <div class="text--center">
 <img alt="Quickstart Flow description" src="https://ganymede-bio.mo.cloudinary.net/apiServer/QuickstartFlowDesc_20230110.png"/>
 </div>
 
-After a few seconds, your Flow will be created and you'll be redirected to a blank Flow editor page where you can edit your new Flow.  Select your Flow from the Choose A Flow dropdown.
+Creating the Flow can take a few minutes. When it's complete, your new Flow loads automatically in the Flow Editor, so you don't need to select it from the **Choose A Flow** dropdown.
 
 ### Step 4: Add nodes to ingest and process data
 
@@ -140,7 +137,7 @@ def execute(file_data: Dict[str, bytes], ganymede_context=None) -> NodeReturn:
 ```
 
 :::info non-tabular data
-Non-tabular data can be stored by returning a dictionary of files to upload in the `files_to_upload` key of the `NodeReturn` object.  Stored files can be retrieved from the [Files page](../files/FileBrowser.mdx) or the [Flow Runs panel](../flows/FlowRuns.mdx).
+Non-tabular data can be stored by returning a dictionary of files to upload in the `files_to_upload` key of the `NodeReturn` object.  Stored files can be retrieved from the [File Browser](../files/FileBrowser.mdx) (**Data > File Browser**) or the [Flow Runs page](../flows/FlowRuns.mdx) (**Flows > Flow Runs**).
 :::
 
 Run the **User-Defined Function** cell by selecting the cell and then clicking on the <div className="button jupyter_button">▶️ Run</div> button in the header, which runs the selected cell.  In the "Testing" section below, you can test uploading the original plate reader excel file and passing it into the **User-Defined Function**.  This is a great way to debug your code before deploying the Flow.
@@ -218,9 +215,9 @@ After saving the Flow, close the editor notebook associated with the Python node
 On the <div className="button darkblue_button"><BranchesOutlined /> **Flow Editor**</div> page, click <div className="button darkblue_button_mui"><ExpandLessOutlined className="white_icon" />**Expand**</div> in the Run Queue bar at the bottom of the screen to expand the input form for running nodes. Click the "Drag and drop files here or Browse" button and upload the "PlateReader.xlsx" file downloaded at the beginning of this quickstart.
 
 :::note
-The associated file ingested into the Flow can be now found in the <div className="button darkblue_button"><FolderOutlined /> **Files**</div> tab of Ganymede.
+The associated file ingested into the Flow can now be found in **Data > File Browser**.
 
-<img alt="Files tab input files" src="https://ganymede-bio.mo.cloudinary.net/apiServer/QuickstartFiles_20230731.png"/>
+<img alt="File Browser input files" src="https://ganymede-bio.mo.cloudinary.net/apiServer/QuickstartFiles_20230731.png"/>
 :::
 
 
@@ -229,7 +226,7 @@ Click the <div className="button run_queue_button">**Run** <PlayCircleOutlined /
 <img alt="Example Flow running" src="https://ganymede-bio.mo.cloudinary.net/apiServer/QuickstartFlowRunning_20240823.png"/>
 
 :::tip
-You can also click on <div className="button darkblue_button"><CheckCircleOutlined /> **Flow Runs**</div> in the left sidebar to monitor the current run or browse past runs.
+You can also go to **Flows > Flow Runs** in the left navigation to monitor the current run or browse past runs.
 :::
 
 When the job is complete, the Flow status should indicate success:
@@ -238,7 +235,7 @@ When the job is complete, the Flow status should indicate success:
 
 ### Step 8: Observe results in Data Explorer
 
-Click on <div className="button darkblue_button"><TableOutlined /> **Data Explorer**</div> in the left sidebar and look for Quickstart_Absorbance_Change_data in the table browser.
+Go to **Data > Data Explorer** in the left navigation and look for Quickstart_Absorbance_Change_data in the table browser.
 
 This allows you to observe and query the `Quickstart_Absorbance_Change_data` table. 
 

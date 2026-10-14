@@ -5,24 +5,23 @@ displayed_sidebar: webUiSidebar
 ---
 
 import {
-  ApiOutlined,
-  CheckCircleOutlined,
-  FilterFilled,
-  FolderOutlined,
   LinkOutlined,
   SyncOutlined,
 } from '@ant-design/icons';
-import useBaseUrl from '@docusaurus/useBaseUrl';
 
-The <div className="button darkblue_button"><FolderOutlined /> **Files**</div> page allows users to search, filter, download, and link to files within the Ganymede environment.
+The **Data > File Browser** page allows users to search, filter, download, and link to files within the Ganymede environment. The page has two tabs: **Files**, which lists the files in the environment, and **Manage Tag Types**, where you [configure tag types](./Tags#configuring-file-tag-types).
 
 ![Files](https://ganymede-bio.mo.cloudinary.net/apiServer/GanymedeFileBrowser_20240401.png)
 
+The file table has the following columns: _File name_, _Creator_, _Tags_, _Created at_, _Size_, _Type_, _Origin type_, _Origin_, _Usage_ and _Field names_. See [Viewing related entities](#viewing-related-entities) for what the origin and usage columns show.
+
 ## Finding files
 
-To locate a file by name, enter your query in the search box in the upper left corner of the page. For more advanced filtering, click the filter icon ( <FilterFilled /> ) next to the column headers to apply filters based on specific file properties. After selecting your desired filters, click OK.
+To locate a file by name, enter your query in the search box in the upper left corner of the page and press Enter. To filter by file properties or [File Tags](./Tags), click **Advanced Search**. To remove the search and all filters, click **Clear Filters**.
 
-![Files (filtered)](https://ganymede-bio.mo.cloudinary.net/apiServer/Files-Filtered-2024-04-01.png)
+To save or share the current search, click the copy icon next to **Advanced Search**. This copies the page URL, including the search and filters, to your clipboard. Bookmark the URL or send it to other users in the same Ganymede environment.
+
+If a search takes too long to complete, the File Browser shows a warning. Narrow the results by adding a **Created at** date range in Advanced Search, and then search again.
 
 ### Advanced Search
 
@@ -30,11 +29,21 @@ The advanced search panel allows you to filter files by various file characteris
 
 ![Advanced Search](https://ganymede-bio.mo.cloudinary.net/apiServer/AdvancedSearch20240507.png)
 
-Searches combine conditions across fields with an AND logic, while conditions within the same field use OR logic. For example, searching for files with the "LC" and "MS" instrument tags will return files tagged with either "LC" or "MS" (or both). Adding a size filter of "greater than 1MB" will further narrow the results to files with the "LC" or "MS" tags that are also larger than 1MB.
+The Advanced Search panel has three sections:
+
+- **Recent Tags**: Recently used tags. Click a tag to add it as a filter.
+- **Tag filters**: Click **Add Tag Type** and choose a tag type, and then select one or more values. Use **Search Tag Value** to find a value. If you don't select a value, files with any value of that tag type match.
+- **File metadata filters**: Filter by **Creator**, **Created at** date range, **Size**, **Origin Type**, **Origin**, **Usage**, **Field Name** and **File Type**. For **Size**, set a **Min**, a **Max** or both. To find files used in a specific flow run, type at least 6 characters of the run ID in the **Usage** filter.
+
+After you set your filters, click **Search**. To reset them, click **Clear Filters**.
+
+Searches combine conditions across fields with an AND logic, while conditions within the same field use OR logic. For example, searching for files with the "LC" and "MS" instrument tags will return files tagged with either "LC" or "MS" (or both). Adding a minimum size of 1 MB will further narrow the results to files with the "LC" or "MS" tags that are also larger than 1 MB.
 
 To filter by file extension, such as CSV or PDF, select one or more values in the **File Type** filter. Select **No extension** to find files that don't have an extension.
 
 Archived files are hidden from search results by default. To include them, check **Include archived files**. See [Archiving files](#archiving-files).
+
+You can't filter files by Virtualization session.
 
 ## Selecting files
 
@@ -71,7 +80,7 @@ To open a [Virtualization](../virt/Virtualization) session with files from the F
 
 ## Linking to files
 
-To copy a link to a file, click the link icon ( <LinkOutlined /> ) next to a file's name in the _File name_ column.  This link can be shared with other users in the same Ganymede environment.  Visiting the link will open the <div className="button darkblue_button"><FolderOutlined /> **Files**</div> page filtered to show only the linked file.
+To copy a link to a file, click the link icon ( <LinkOutlined /> ) next to a file's name in the _File name_ column.  This link can be shared with other users in the same Ganymede environment.  Visiting the link will open the File Browser filtered to show only the linked file.
 
 ![Files (copying link)](https://ganymede-bio.mo.cloudinary.net/apiServer/Files-Copying-Link-2023-08-31.png)
 &nbsp;
@@ -98,10 +107,17 @@ Ganymede tenant in a separate Google Chrome browser tab and try again.
 
 ## Viewing related entities
 
-For each file, the <div className="button darkblue_button"><FolderOutlined /> **Files**</div> page displays the ID of the Flow or Agent that originated the file (_Origin_) along with the IDs of all Flows and Flow Runs that the file was used in (_Usage_), as applicable.  Click any Flow ID, Agent ID or Flow Run ID to view details for that entity in the <div className="button darkblue_button"><img src={useBaseUrl('/img/flows_icon.svg')} className="filter-white" /> **Flow View**</div>, <div className="button darkblue_button"><ApiOutlined /> **Connections**</div>, and <div className="button darkblue_button"><CheckCircleOutlined /> **Flow Runs**</div> pages, respectively.
+For each file, the File Browser shows where the file came from and where it was used:
+
+- _Origin type_: How the file reached Ganymede: Web upload, Connection upload, API upload, Flow output or App output.
+- _Origin_: The name of the Flow and Flow Run, the Connection, or the Virtualization session that created the file.
+- _Usage_: The Flows and Flow Runs, and the Virtualization sessions, that used the file.
+- _Field names_: The names of the flow parameters the file was passed to or produced by.
+
+Click a name in the _Origin_ or _Usage_ column to open that Flow, Flow Run, Connection or Virtualization session.
 
 ![Files (usage)](https://ganymede-bio.mo.cloudinary.net/apiServer/Files-Usage-2023-08-31.png)
 
 ## Refreshing
 
-The _Last refreshed_ timestamp in the lower-left corner of the page indicates when the file browser last retrieved an up-to-date list of files from Ganymede storage. To check for newly added files, click the <div className="button darkblue_inverted_button"><SyncOutlined /> Refresh</div> button.
+The indicator below the file table shows how many files are loaded and when the File Browser last retrieved the list of files, in the form _Showing X of N files, last refreshed_ followed by a timestamp. If more than 10,000 files match (or more than 1,000 when filters are applied), the total shows as _many_. To check for newly added files, click the <div className="button darkblue_inverted_button"><SyncOutlined /> Refresh</div> button.

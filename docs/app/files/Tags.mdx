@@ -20,7 +20,7 @@ Once a file is tagged, it can be easily filtered in the file browser, enabling s
 
 ## Configuring File Tag Types
 
-Before tagging files, a file tag type must be configured.  This is done in the **Manage Tag Types** section on the Files page.
+Before tagging files, a file tag type must be configured.  This is done on the **Manage Tag Types** tab of the **Data > File Browser** page.
 
 <div class="text--center">
   <img alt="Manage Tag Types" src="https://ganymede-bio.mo.cloudinary.net/apiServer/tags/Manage_Tag_Types20231221.png" />
@@ -35,18 +35,23 @@ To create a new tag type, click the <div className="button darkblue_inverted_but
 &nbsp;
 
 For each tag type, the following attributes can be specified:
-- **Tag Type Name**: The name of the tag type.
+- **Tag Type Name**: The name of the tag type. Ganymede generates the tag type's ID by removing spaces from the name and converting it to lowercase. The ID appears in the **Tag Type Id** column of the Manage Tag Types table, and you use it to apply tags in code.
 - **Description**: A brief description of the tag type.
-- **Has URL**: Indicates whether the tag value must be a URL (rendered as a link in the file browser).
-- **Allow Multiple**: Allows multiple tags of this type to be applied to a single file.
-- **Fill**: The background color for tags of this type.
-- **Text**: The text color for tags of this type.
+- **Has URL**: Requires tags of this type to have a URL when they're created (rendered as a link in the file browser). If this is off and tags of this type are already applied to files, you can't turn it on.
+- **Allow Multiple**: Allows multiple tags of this type to be applied to a single file. If this is on and tags of this type are already applied to files, you can't turn it off.
+- **Icon**: An icon for tags of this type.
+- **Fill**: The background color for tags of this type. Pick any color or one of the **Presets**.
+- **Text**: The text color for tags of this type. Pick any color or one of the **Presets**.
 
-The strict mode setting, if disabled, allows admins to delete or modify tags.  Tags may only be deleted if they are not applied to any files; the delete button will be grayed out if tag type deletion is not permitted.
+You need the Admin role to edit or delete tag types. A tag type can't be deleted once it has tags applied to files; the delete button will be grayed out if tag type deletion is not permitted. Deleting a tag type is permanent. Files still display tags of a deleted tag type, but no new tags of that type can be added unless you re-create the tag type.
+
+### Strict mode
+
+The **Enable strict mode for all Tag Types** toggle on the Manage Tag Types tab applies to every tag type in the environment. When strict mode is on, tag types can't be edited or deleted, and individual file tags can't be modified or deleted. Turn strict mode off to let admins edit or delete tag types again.
 
 ## Tagging Files
 
-You can tag files in the File Browser or in user-defined code.
+You can tag files in the File Browser, through the API or in user-defined code.
 
 ### Tagging files in the UI
 
@@ -55,6 +60,10 @@ To add or remove tags on files from the File Browser, select up to 100 files and
 When strict mode is enabled, the dialog shows **Strict Mode Enabled**. You can still add tags, but you can't remove existing ones.
 
 For step-by-step instructions, see [Editing tags](./FileBrowser#editing-tags) on the File Browser page.
+
+### Tagging files via the API
+
+To add or remove tags on files from outside Ganymede, use the [`modifyFileTags`](/api#tag/Files/modifyFileTags) endpoint (`PUT /v1/environment/{environment}/files/tags`). Each request can update tags on up to 100 files. Set `dry_run` to `true` to check a request without changing any tags. See [API Setup](../configuration/APISetup.mdx) to set up API access.
 
 ### Tagging files in code
 
@@ -122,7 +131,7 @@ def execute(file_data: Dict[str, bytes], ganymede_context) -> NodeReturn:
 
 #### From the Connections UI
 
-To configure file tagging from the Connections UI, navigate to the relevant Connection on the Connections page.  In the Connection Settings box, click on <div className="button darker_gray_button"><EditOutlined /> Edit Connections</div>, followed by <div className="button darkblue_outline_button"><PlusOutlined /> Add file tag</div>.  
+To configure file tagging from the Connections UI, open the relevant Connection under **Connectors > Connections**.  Click <div className="button darker_gray_button"><EditOutlined /> Edit Connection</div>, and then click <div className="button darkblue_outline_button"><PlusOutlined /> Add file tag</div> under **Connection File Tags**.  
 
 Doing so opens up the modal shown below, where you can specify the tag type and value to apply to files delivered by the Connection.
 
@@ -131,9 +140,11 @@ Doing so opens up the modal shown below, where you can specify the tag type and 
 </div>
 &nbsp;
 
+Tags configured on the Connection's Agent Template (under **Connectors > Agent Templates**) are combined with the Connection File Tags, and the combined set is applied to every file the Connection uploads. If a Connection file tag has the same tag type and value as an Agent Template tag, the tag is applied only once.
+
 #### From Agent user-defined code
 
-To tag a file delivered by an Agent to Ganymede, you can configure an Agent or Connection to tag any files submitted from it using the [File tags parameter in Agent configuration](../agents/Agent).
+To tag a file delivered by an Agent to Ganymede, you can configure an Agent Template or Connection to tag any files submitted from it using the [File tags parameter in Agent configuration](../agents/Agent).
 
 For example, you might configure the agent to automatically tag files with an instrument ID and a connection from that agent to tag files with a lab location.
 
@@ -188,9 +199,26 @@ def execute(flow_params_fw: FileWatcherResult, **kwargs) -> TriggerFlowParams:
             multi_file_params[param] = MultiFileParam.from_file_param(files)
 ```
 
+Processor code can also read the tags configured on the Connection and its Agent Template, for example to decide how to process a file. Call `get_connection_tags()` and `get_agent_tags()` on the processor SDK object. Each tag has a `tag_type_id` and a `display_value`.
+
+```python
+from agent_sdk import UploadFileParams
+from gateway.processor_sdk import get_sdk
+
+def execute(**kwargs) -> UploadFileParams | None:
+    sdk = get_sdk(kwargs)
+
+    connection_tags = sdk.get_connection_tags()
+    agent_tags = sdk.get_agent_tags()
+    sdk.info(f"Connection tags: {[(t.tag_type_id, t.display_value) for t in connection_tags]}")
+    sdk.info(f"Agent tags: {[(t.tag_type_id, t.display_value) for t in agent_tags]}")
+
+    # ... rest of processor code
+```
+
 :::note Tagging Agent-Captured Files
 
-Files captured by Agents can be tagged via either the Connections page or by code, but should not be tagged in both spots.
+Tags configured on the Agent Template and the Connection are already applied to every file the Connection uploads. If you also tag files in processor code, don't add a tag that the Agent Template or Connection already applies. To use the configured tags in processor logic, read them with `get_connection_tags()` and `get_agent_tags()`.
 
 :::
 

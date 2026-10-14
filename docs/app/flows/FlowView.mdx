@@ -12,9 +12,7 @@ import {
 } from '@ant-design/icons';
 
 
-import useBaseUrl from '@docusaurus/useBaseUrl';
-
-The <div className="button darkblue_button"><img src={useBaseUrl('/img/flows_icon.svg')} className="filter-white" /> **Flow View**</div> page provides access to running flows and viewing run history.  You can access this page by clicking on a Flow on the <div className="button darkblue_button"><HomeOutlined /> **Home**</div> page.
+The **Flow View** page provides access to running flows and viewing run history.  You can access this page by clicking on a Flow on the <div className="button darkblue_button"><HomeOutlined /> **Home**</div> page.
 
 ## Running Flows
 
@@ -96,25 +94,17 @@ The Run History table displays status information for each historical run:
 - **File**: The input files and parameters associated with the flow run.
 - **Run Tag**: Tags associated with the flow run, such as a Benchling custom entity ID used to reference a table within Benchling.
 - **Status**: The current status of the flow run. Possible status values include:
-  - Running: The job is currently in progress.
-  - Success: All nodes have successfully completed.
-  - Failed: At least one node failed to complete successfully.
+  - **Queued**: The flow run is waiting to start.
+  - **Running**: The job is currently in progress.
+  - **Success**: All nodes have successfully completed.
+  - **Validation Error**, **Connection Error**, or **Function Error**: At least one node failed, and the status names the [error type](#error-attribution) of the failure.
+  - **Platform Error**: The flow run failed and no error type was recorded for the failure.
 
 ### Node-level status
 
 <img alt="Node status indicator" src="https://ganymede-bio.mo.cloudinary.net/apiServer/NodeStatusAndLog_20230831.png" />
 
-You can click the plus sign on the left side of each record in the Run History table to expand the view and display node-level status.
-
-The color of the node status indicators reflects the current status:
-- ![#B22222](https://placehold.co/2x2/B22222/B22222.png) **Red**: The node failed after retries were exhausted.
-- ![#01FF70](https://placehold.co/2x2/01FF70/01FF70.png) **Light green**: The node is currently running.
-- ![#2ECC40](https://placehold.co/2x2/2ECC40/2ECC40.png) **Dark green**: The node successfully completed.
-- ![#A9A9A9](https://placehold.co/2x2/A9A9A9/A9A9A9.png) **Gray**: The node is queued and awaiting system resource to start.
-- ![#FFFF00](https://placehold.co/2x2/FFFF00/FFFF00.png) **Yellow**: The node failed at least once but is awaiting a retry.
-- ![#FFA500](https://placehold.co/2x2/FFA500/FFA500.png) **Orange**: A dependency for the node failed, preventing this node from running.
-
-Logs for each flow step can be accessed by clicking on the corresponding colored box.
+Click a run's status, or its **Logs** link, to open the **Flow Run Logs** drawer. The drawer lists each node in the run with a labeled status chip, such as **Success**, **Running**, **Queued**, **Up for retry**, **Upstream failed**, **Skipped**, or the error type of a failed node. Click a node to display its logs in the drawer. For the full list of node status chips and how logs are displayed, see [Observing Node Status](./FlowRuns.mdx#observing-node-status).
 
 ### Error Attribution
 
@@ -124,7 +114,9 @@ Developers using the platform can specify error types and messages associated wi
 from ganymede_sdk.flow_runtime import GanymedeException
 
 # available exception types are: Validation, Connection, Function
-raise GanymedeException(message=”Peaks not detected in results”, exception_type=”Function”)
+raise GanymedeException(message="Peaks not detected in results", exception_type="Function")
 ```
+
+**Platform** is a system-assigned error type. When a node fails and no error type was recorded, the status chip shows **Platform Error**.
 
 More detail on error types can be found in the [GanymedeException section of the Ganymede SDK documentation](../../sdk/DataValidation#class-ganymedeexception).
