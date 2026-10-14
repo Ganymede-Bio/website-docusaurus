@@ -35,7 +35,9 @@ A preview of a table output from Node.  These can be viewed by clicking on [View
 
 ### [Gateway](../agents/Agent.mdx#gateway-architecture)
 
-A single executable installed on a PC that manages one or more Connections and handles communication with Ganymede Cloud. The Gateway model (available in version 5.6.0+) simplifies deployment by allowing you to install one executable per PC and manage Connections through the UI.
+A single executable installed on a PC that manages one or more Connections and handles communication with Ganymede Cloud. The Gateway is the recommended way to install Agents: you install one executable per PC and manage Connections through the UI.
+
+A Gateway installed without admin rights runs as a plain process instead of a service, so it doesn't start automatically or update automatically. See [Admin and non-admin installations](../agents/AgentInstall.mdx#admin-and-non-admin-installations).
 
 ### Host
 
@@ -43,11 +45,15 @@ A PC where a Gateway is installed and running. Hosts can run multiple Connection
 
 ### [Agent Template](../agents/Agent.mdx) (or Agent)
 
-The code and configuration that defines how a Connection behaves. Agent Templates specify the trigger, processor, and action logic, and can be deployed to any Host as a Connection. Agent Templates are configured and monitored within the Connections section of the Ganymede UI.
+The code and configuration that defines how a Connection behaves. Agent Templates specify the trigger, processor, and action logic, and can be deployed to any Host as a Connection. Agent Templates are configured and monitored under **Connectors > Agent Templates** in the Ganymede UI.
 
 ### Connection
 
 A running instance of an Agent Template on a Host. For example, you may create a single Agent Template for uploading data from flow cytometers, but each flow cytometer would have its own Connection running on its respective Host.
+
+### [Connection Status](../agents/AgentMonitoring.mdx#connection-status)
+
+The state of a Connection, shown on the **Connectors > Connections** page: **Live**, **Failing**, **Disconnected**, **Shutdown**, or **Deactivated**. A Connection's status combines its own state with the status of its Host. On a Connection's card, the Disconnected status appears as **Host Disconnected**.
 
 ### Other Agent-related terms
 
@@ -63,5 +69,40 @@ A user-defined label applied to files to facilitate organization and searching.
 
 Category that a Tag pertains to.  Each Tag is linked to a specific Tag type, which defines the label category. For example, a Ganymede environment might include an `Instrument` Tag type, which an analytical chemistry team uses to label raw chromatograms with an `LC` Tag. 
 
-Tag types are set up through the Manage Tag Types view on the Files page in the Ganymede UI. Once configured, these Tag types can be referenced in user-defined code associated with Agents and Flows or specified in the Agent and Connection configuration pages within the Ganymede UI.
+Tag types are set up on the **Manage Tag Types** tab of the **Data > File Browser** page in the Ganymede UI. Once configured, these Tag types can be referenced in user-defined code associated with Agents and Flows or specified in the Agent and Connection configuration pages within the Ganymede UI.
 
+## Processes
+
+### [Process](../processes/Processes.mdx#processes)
+
+A representation of a laboratory workflow, made up of Unit Operations. Flows, tables, dashboards, and Modular Analysis apps can be associated with a Process. Processes are managed under **Processes > Processes**.
+
+### [Unit Operation](../processes/Processes.mdx#unit-operations)
+
+An individual step within a Process, defined by a set of Instrument Types. Unit Operations are managed under **Processes > Unit Operations**.
+
+### [Instrument Type](../processes/Processes.mdx#instrument-types)
+
+A category of Instrument, such as a specific instrument model, used within Unit Operations. Instrument Types are managed under **Processes > Instrument Types**.
+
+### [Instrument](../processes/Processes.mdx#instruments)
+
+A physical device of a specific Instrument Type, tracked under **Processes > Instruments**. An Instrument can be linked to one or more Connections, which lets you monitor its uptime, or tracked without any Connection.
+
+### [Run](../processes/Processes.mdx#runs)
+
+An instance of a Process, Unit Operation, or Instrument execution. A Run scopes files, tables, and Flow runs to the unit of execution they belong to. Runs are listed under **Processes > Runs**.
+
+## Analysis
+
+### [Modular Analysis App](../ma/ModularAnalysisOverview.mdx)
+
+An interactive Python web app, built with Panel and edited in a notebook in the Ganymede web app, that is deployed to users in the environment. Apps are launched from **Analysis > Modular Analysis**.
+
+### [Dashboard](../visualization/Dashboards.mdx)
+
+A set of charts built from datasets on data stored in Ganymede, available under **Analysis > Dashboard**.
+
+### [Virtualization Session](../virt/Virtualization.mdx)
+
+A Windows desktop session that runs an analysis application, so you can add manual processing steps to an automated workflow. You start a session by selecting files in **Data > File Browser**, or in a run's **Files** section on **Processes > Runs**, and clicking **Run Application**. The selected files become the session's input files, and you save results back to Ganymede from the session.

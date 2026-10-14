@@ -23,7 +23,22 @@ The <div className="button darkblue_button"><HomeOutlined /> **Home**</div> page
 <img width="1302" alt="Home" src="https://storage.googleapis.com/ganymede-bio-website/public/apiServer/HomeScreen_20240812.png"/>
 <br /><br /> 
 
-Clicking on the ellipsis in the upper-right hand corner of a flow card allows you to edit, run, or update the associated flow image associated with a flow.
+The Home page has two sections:
+- **Flows** - Cards for the flows in the environment. This section appears only in environments with Flows enabled.
+- **Connections** - Cards for Connections that recently uploaded files, with Live Connections first and the most recent uploads first within each status. Click **See all Connections** to open the [Connections](./agents/AgentMonitoring.mdx) page, or **See all recent files** to open the [**File Browser**](./files/FileBrowser.mdx). This section is hidden until several Connections have recently uploaded files.
+
+## Flows
+
+Type in the search box above the flow cards to filter flows by name. Search results come from all flows in the environment, so the **My Flows** tab is unavailable while the search box contains text.
+
+Click the ellipsis in the upper-right corner of a flow card to open its menu:
+- **Run** - Open the flow's [Flow View](./flows/FlowView.mdx) page to run it
+- **Edit** - Open the flow in the [**Flow Editor**](./flows/FlowEditor.mdx)
+- **Add User** - Open the flow in the **Flow Editor** with the [**Manage**](./flows/FlowEditor.mdx#managing-flows) sidebar open, where you can assign users to the flow
+- **Update Flow image** - Upload a custom image for the flow card
+- **Delete** - Delete the flow
+
+**Add User**, **Update Flow image**, and **Delete** appear only for users with the Writer role or higher. For [GxP-validated](./admin/GxPValidation.mdx) flows, every item except **Run** is disabled, and you can't star the flow.
 <img width="1302" alt="Home" src="https://storage.googleapis.com/ganymede-bio-website/public/apiServer/HomeScreenEditFlow_20240122.png"/>
 <br /><br /> 
 
@@ -59,8 +74,9 @@ The navigation sidebar groups pages into collapsible sections. Click a section t
 
 ### Environment Selector
 
-This dropdown decides which environment that is currently being looked at. All tables, flows, and dashboards that are shown are associated with this environment. They can be color coded and have icons to distinguish them a bit easier.
-In order to change them please feel free to contact the ganymede email in order to get it adjusted. 
+Use this dropdown in the header to choose the environment you're working in. All tables, flows, and dashboards shown in the app belong to the selected environment. Environments can have a color and an icon to help you tell them apart.
+
+Ganymede sets each environment's color and icon. To change them, click the question mark icon in the top right corner of the app and select **Contact Support**. See [Ganymede Support](./Support.mdx#ganymede-support).
 
 ### Header Navigation
 
@@ -75,6 +91,6 @@ The header contains the environment selector and buttons for notifications, help
 
 <div className="button darkblue_button"><UserOutlined /></div> - User menu, opened by clicking the bubble containing your email address:
 - [**Environment Settings**](./admin/AdminControls.mdx) - Panel for configuring access to Ganymede and secrets for accessing third-party applications from Ganymede
-- **Language** - Picker for the language of the Ganymede web app
+- **Language** - Dropdown for choosing the language of the Ganymede web app: English, Spanish, Japanese, German, French, Italian, Korean, Dutch, Portuguese, Swedish, Danish, Croatian, or Chinese (Simplified)
 - The current Ganymede version number. Click it to copy the version number to your clipboard.
 - **Log Out** - Log out from Ganymede cloud

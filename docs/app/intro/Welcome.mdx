@@ -55,10 +55,12 @@ Modular Analysis enables interactive web applications to be developed in Python 
 
 Agents are locally installed executables for delivering data to and acquiring data from lab instruments. They include a configurable Python component that, if enabled, allows users to remotely manage Agent behavior.
 
-With the [Gateway architecture](app/agents/Agent#gateway-architecture), you can install a single Gateway executable per PC (Host), then add and manage Connections through the Ganymede UI without additional installations.
+With the [Gateway architecture](app/agents/Agent#gateway-architecture), you can install a single Gateway executable per PC (Host), then add and manage Connections through the Ganymede UI without additional installations. You configure Agents under **Connectors**, which has tabs for Connections, Hosts, and Agent Templates.
+
+In addition to Agents that capture and deliver files, the [OPC-UA Subscription](app/agents/OpcUaSubscription) Agent Template type streams live readings from an OPC-UA server, such as a bioreactor control system, into a Ganymede table.
 
 <div style={{textAlign: 'center'}}>
-  <a href="app/flows/FlowEditor">
+  <a href="app/agents/Agent">
     <img
           alt="Connections front page"
           src="https://ganymede-bio.mo.cloudinary.net/agent/GanymedeConnectionsFrontPage_20240521.png"
@@ -89,7 +91,7 @@ Flows provide a Python/SQL development environment where [code changes are track
 Processes and Unit Operations allow users to model and track lab workflows, linking data capture and processing to specific steps in a process.
 
 <div style={{textAlign: 'center'}}>
-  <a href="app/flows/FlowEditor">
+  <a href="app/processes/Processes">
     <img alt="Ganymede sample flow"
           src="https://ganymede-bio.mo.cloudinary.net/apiServer/ProcessView.png"
           width="70%" />
@@ -100,7 +102,7 @@ Processes and Unit Operations allow users to model and track lab workflows, link
 
 ### [File Browser](app/files/FileBrowser)
 
-The File Browser allows users to filter and select data files by [Tags](app/files/Tags), which [Flows](app/flows/FlowEditor) and/or [Agents](app/agents/Agent), and other file attributes.  This allows you to quickly find relevant files by the aspects relevant to you.
+The File Browser, under **Data > File Browser**, allows users to filter and select data files by [Tags](app/files/Tags) and by other file metadata, such as creator, type, origin, and usage.  This allows you to quickly find relevant files by the aspects relevant to you.
 
 <div style={{textAlign: 'center'}}>
   <a href="app/files/FileBrowser">
@@ -163,7 +165,7 @@ The environment administration panel in Ganymede provides administrators with to
 
 ## Getting Started
 
-To get started, you can navigate through a [guided tour](../../app/Support#product-tours) of your Ganymede environment by clicking on the question mark icon in the top right corner of the app.
+To get started, you can navigate through a [guided tour](../../app/Support#product-tours) of your Ganymede environment. Click the question mark icon in the top right corner of the app and select **Product Tours**. Tours are available for the Sidebar, Homepage, File Browser, Connectors, Flow Runs, and Flow Editor. The Flow Runs and Flow Editor tours are listed only in environments where Flows are enabled.
 
 <div style={{textAlign: 'center'}}>
   <img alt="Product Tours" width="300" src="https://storage.googleapis.com/ganymede-bio-website/public/apiServer/ProductToursTypes20241206.png"/>
