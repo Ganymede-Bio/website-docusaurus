@@ -4,10 +4,10 @@ title: Dashboards
 displayed_sidebar: webUiSidebar
 ---
 
-import { AreaChartOutlined, DownOutlined, PlusOutlined } from '@ant-design/icons';
+import { DownOutlined, PlusOutlined } from '@ant-design/icons';
 import DashboardFilterIcon from '@site/static/img/dashboard_filter_icon.svg';
 
-The <div className="button darkblue_button"><AreaChartOutlined /> **Dashboard**</div> page offers charts and dashboard visualizations based on data stored within Ganymede.  
+The **Dashboard** page offers charts and dashboard visualizations based on data stored within Ganymede. To open it, select **Analysis > Dashboard** in the left navigation.
 
 <img alt="Ganymede Dashboard" src="https://ganymede-bio.mo.cloudinary.net/apiServer/Dashboard_20230831.png" />
 &nbsp;
@@ -17,6 +17,21 @@ To assemble a dashboard:
 - [Create a chart](#creating-a-chart) from the dataset.
 - [Save the chart](#saving-charts-to-dashboards) to a specified dashboard.
 - [Modify dashboards and chart layouts](#editing-dashboards) by selecting the corresponding dashboard from the **Dashboards** tab in the top menu bar.
+
+## Built-in dashboards
+
+Ganymede creates a set of built-in dashboards in each environment. If you don't see them in your environment, [contact Ganymede Support](../Support.mdx).
+
+| Dashboard | What it shows |
+|-----------|---------------|
+| **Core Metrics** | **User Activity**: User Logins by Day, and Unique User Activity by Day, which counts the users with authenticated activity each day (daily active users).<br />**Data Capture (Connections and Agents)**: Agent Connections and Status, and Connection Status Mix by Version.<br />**Data Management**: file count and file size in GB over time, by file extension and by Agent connection, and Files by Applied Tag. |
+| **Core Metrics Flows** | **Flows and Automation**: Distinct Flows by Month, Count of Flow Runs by Month, Files Processed by Flows, and Processing Time per Flow. This dashboard is created in environments that use Flows. |
+| **Agent Host Metrics** | **Host Metrics**: Host CPU Utilization, Host Memory Utilization, and Host Disk Usage (GB).<br />**Connection Metrics**: File Events, Files Seen by Connection, and Files Uploaded by Connection. |
+| **MA App Usage Dashboard** | Session activity for your [Modular Analysis](../ma/ModularAnalysisOverview.mdx) apps.<br />**Cumulative Metrics**: App Usage Summary, total app sessions and session duration, average session duration, and sessions and session duration per user.<br />**Weekly Metrics**: weekly app sessions, unique app users, session duration (sum and average), sessions and session duration per user, and each user's share of sessions and session duration. |
+
+## Linking dashboards to Processes
+
+You can associate a dashboard with a Process, Unit Operation, or Instrument Type in the **Dashboards** field of its edit page. The dashboard then appears as a card on that entity's page. To give the dashboard an image, open the menu on the card and select **Update dashboard image**. For more information, see [Configuring Processes](../processes/ConfiguringProcesses.mdx).
 
 ## Adding a Dataset
 
@@ -266,3 +281,14 @@ Note that if 2 charts are backed by different datasets which share a field name,
 be used to manipulate both tables simultaneously. 
 
 :::
+
+## Dashboard roles
+
+Your role in an environment sets your access to dashboards in that environment, so you can have different dashboard access in different environments. For more information about roles, see [Dashboard Access](../admin/AdminControls.mdx#dashboard-access).
+
+| Role | Dashboard access |
+|------|------------------|
+| **Admin** and **Writer** | Full content and data access, including SQL Lab, datasets, and charts. |
+| **Runner** | View and run dashboards, charts, and datasets. Runners can't create or edit them. |
+| **Reader** | View-only access to published dashboards. |
+| **None** | No dashboard access. The Dashboard page shows the message "Sorry, you do not have access to the Dashboard. Please reach out to an admin for access." |

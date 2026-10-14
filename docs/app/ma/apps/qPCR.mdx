@@ -6,29 +6,29 @@ displayed_sidebar: webUiSidebar
 ---
 
 import {
-  TableOutlined, ExperimentOutlined, BarChartOutlined, DotChartOutlined, PercentageOutlined
+  TableOutlined, ExperimentOutlined, BarChartOutlined, DotChartOutlined, PercentageOutlined,
+  LineChartOutlined, SaveOutlined
 } from '@ant-design/icons';
 
-The qPCR app within the Ganymede platform provides a comprehensive solution for analyzing quantitative PCR data from gene expression and viral load studies. This specialized application automates the complex calculations required for qPCR analysis (quantitative real-time PCR), a molecular biology technique used to amplify and simultaneously detect targeted DNA molecules. The app supports both qPCR and RT-qPCR (reverse transcription qPCR) experiments, enabling standardized analysis workflows across your organization.
+The qPCR app within the Ganymede platform analyzes quantitative PCR data from gene expression and compound screening studies. It automates the Ct-based calculations used in qPCR analysis (quantitative real-time PCR), a molecular biology technique used to amplify and simultaneously detect targeted DNA molecules. The app works with Ct values from both qPCR and RT-qPCR (reverse transcription qPCR) experiments, so you can standardize analysis workflows across your organization.
 
 ## Overview
 
-As part of the Ganymede data platform, the qPCR app transforms how laboratories analyze gene expression data by providing interactive visualization, automated ΔΔCt calculations, and multi-condition analysis in a single unified interface. The app eliminates the need for error-prone spreadsheet calculations while ensuring consistency across different users and experiments. Users can analyze complex experimental designs, normalize data across multiple reference genes and controls, and generate publication-ready visualizations while maintaining full traceability for regulatory compliance.
+As part of the Ganymede data platform, the qPCR app combines plate visualization, ΔΔCt calculations, percent inhibition, and dose-response curve fitting in a single interface. It replaces spreadsheet calculations with a consistent method that every user applies the same way. You can normalize each target to a housekeeping gene and a control condition, exclude wells or points from the analysis, and save the state of an analysis to reload it later.
 
 ### Common Use Cases
 
-The qPCR app excels in various qPCR analytical scenarios:
+The qPCR app supports these analytical scenarios:
 
-- **Gene Expression Analysis** — Quantify mRNA levels using RT-qPCR with multiple reference genes
-- **Copy Number Variation** — Detect genomic duplications and deletions
-- **Viral Load Testing** — Quantify pathogen levels in clinical samples
+- **Gene Expression Analysis** — Quantify mRNA levels with RT-qPCR relative to a housekeeping gene
+- **Copy Number Variation** — Compare target levels relative to a reference gene across samples
 - **Gene Knockdown Validation** — Assess RNAi or CRISPR efficiency
-- **Quality Control** — Validate primer efficiency and standard curves
+- **Compound Screening** — Calculate percent inhibition and fit dose-response curves to estimate IC50 values
 - **Biomarker Discovery** — Compare expression profiles across conditions
 - **Pathway Analysis** — Monitor gene networks and signaling cascades
 - **miRNA Quantification** — Measure microRNA expression levels
 
-The features shown below provide a representative set of capabilities available in the qPCR app. Your implementation will be tailored to your specific qPCR workflows, gene panels, and analytical requirements.
+The features shown below are the capabilities of the qPCR base app. Your implementation will be tailored to your specific qPCR workflows, gene panels, and analytical requirements.
 
 ## Representative Analysis Workflow
 
@@ -36,12 +36,12 @@ The qPCR app follows a logical workflow that guides users through data analysis:
 
 | **Step** | **Action** | **Description** |
 |:--------:|-----------|-----------------|
-| 1️⃣ | **Data Import** | Select runs from Ganymede's data lake with automatic Ct parsing |
-| 2️⃣ | **Plate Layout** | Define sample positions, controls, and use lasso tool for exclusions |
-| 3️⃣ | **Normalization Setup** | Choose reference genes and control conditions for ΔΔCt calculations |
-| 4️⃣ | **Analysis Execution** | Automatically calculate all derived metrics (ΔCt, ΔΔCt, fold change) |
-| 5️⃣ | **Quality Review** | Assess replicate consistency and validate using built-in metrics |
-| 6️⃣ | **Results Export** | Generate reports, export data tables, and save publication-ready figures |
+| 1️⃣ | **Data Selection** | Select a run from the **Available Datasets** table and load its Ct values from Ganymede |
+| 2️⃣ | **Plate Review** | Review the plate layout, label wells, and exclude problematic wells |
+| 3️⃣ | **Normalization Setup** | Choose a housekeeping gene, a normalization condition, and optionally an inhibition condition |
+| 4️⃣ | **Analysis Execution** | Calculate ΔCt, ΔΔCt, fold induction, and percent inhibition |
+| 5️⃣ | **Curve Fitting** | Fit dose-response curves, review each fit, and calculate IC50 values |
+| 6️⃣ | **Save and Export** | Save the analysis state, download results as Excel files, and download curve fits as a PowerPoint file |
 
 :::note
 
@@ -49,11 +49,22 @@ The workflow steps shown are representative. Your implementation will be customi
 
 :::
 
+## App Layout
+
+The app has a sidebar titled **qPCR Analysis** and four main tabs:
+
+- **Data Selection**: The **Protocol Selection** tab, where you choose a run to load, and the **Analysis Selection** tab, where you save and reload analysis states.
+- **Metadata**: The **Run Metadata** table for the loaded run.
+- **Plate Results**: The plate view, bar graphs, and results tables.
+- **Curve Fitting**: Dose-response curve fits for each compound and condition.
+
+After you load a run, the sidebar shows **Save Analysis**, **Selected Metadata** (the run's protocol, plate, and run ID), **Plate Controls**, **Analysis Controls: Normalization**, and **Plot Controls** sections. The collapsed **Memory Monitor** section shows the app's memory use and the Panel version, which can help you troubleshoot a slow app.
+
 ## Key Features
 
 ### <TableOutlined /> Run Selection and Management
 
-Efficiently navigate and select from multiple experimental runs with comprehensive filtering options:
+Select the run to analyze on the **Data Selection** > **Protocol Selection** tab:
 
 <div style={{ textAlign: 'center' }}>
     <img
@@ -63,16 +74,16 @@ Efficiently navigate and select from multiple experimental runs with comprehensi
     />
 </div>
 
-*The Run Selection interface allows filtering by multiple parameters to quickly locate specific experiments from the Ganymede data lake.*
+*The **Available Datasets** table lists the runs available in Ganymede, grouped by experiment name.*
 
-- **Multi-parameter filtering** — Search by date, ELN ID, genes, and run identifiers
-- **Run metadata display** — View experimental details including instrument and operator
-- **Batch selection** — Process multiple plates simultaneously
-- **Clear selection controls** — Reset filters and selections with one click
+- **Search** — Type in the search box to filter the table
+- **Run metadata display** — View each run's metadata columns in the table
+- **Single-run loading** — Select one run, then click **Load Selected Data** to read in its data
+- **Clear selection** — Click **Clear Selection** to clear the loaded data
 
 ### <DotChartOutlined /> Plate Visualization and Ct Analysis
 
-Interactive plate layouts with real-time Ct value visualization and comprehensive analysis controls:
+The **Plate Results** tab shows the loaded data on a plate layout, along with the calculated results:
 
 <div style={{ textAlign: 'center' }}>
     <img
@@ -82,36 +93,37 @@ Interactive plate layouts with real-time Ct value visualization and comprehensiv
     />
 </div>
 
-*The Plate View displays Ct values as a heatmap with interactive controls for layout definition, normalization setup, and metric selection.*
+*The Plate View shows each well's labels, and the analysis section displays the selected result as a plate heatmap.*
 
 ### Key Capabilities:
 
 **Dynamic Plate Heatmap Visualization**
 
-The plate view supports visualization of multiple calculated metrics, organized by analysis type:
+Choose a result in **Plot Controls** > **Select Result**, then choose **Plate Heatmap**, **Condition Result Charts**, or **Table** to display it. The available results depend on the normalization settings you choose:
 
 | **Metric Category** | **Available Metrics** | **Use Case** |
 |-------------------|-------------------|------------|
 | **Basic Measurements** | CT, Delta_CT, Mean_Delta_CT | Initial data review and quality assessment |
 | **Comparative Analysis** | Delta_Delta_CT, Fold_Induction, Mean_Fold_Induction | Gene expression comparisons |
-| **Normalized Results** | Normalized_Fold_Induction, Mean_Normalized_Fold_Induction | Multi-experiment comparisons |
+| **Normalized Results** | Normalized_Fold_Induction, Mean_Normalized_Fold_Induction | Comparisons relative to the normalization condition |
 | **Inhibition Analysis** | Percent_Inhibition, Mean_Percent_Inhibition, SEM_Percent_Inhibition | Knockdown and drug studies |
 
+CT is always available. The Delta_CT results require a housekeeping gene. The comparative and normalized results also require a normalization condition, and the inhibition results also require an inhibition condition.
+
 **Interactive Well Selection and Editing**
-- **Lasso selection tool** — Draw custom selections to exclude problematic wells from analysis
-- **Individual well toggle** — Click specific wells to include/exclude
-- **Automatic outlier flagging** — Visual indicators for wells outside quality thresholds
+- **Well exclusion** — In the **Plate View**, click wells or use the box select tool to exclude them from the analysis
+- **Include_Well column** — The **Results Table** shows whether each well is included
+- **Point exclusion** — In **Condition Result Charts**, switch the **Chart Type** to **Scatter**, use the box or lasso select tool to select points, and click **Exclude Selected Points**. Click **Reset All** to include all points again.
 
 **Plate Format and Layout Configuration**
-- **Flexible plate formats** — Support for 96 and 384 well plates
-- **Layout controls** — Define conditions, controls, and treatment groups
-- **Primary layout editor** — Assign samples, controls, and conditions to wells
-- **Template saving** — Store and reuse common plate layouts
-- **Normalization setup** — Select reference genes and control conditions
+- **Plate formats** — The base app displays a 384-well plate. The plate view also supports 96-well plates.
+- **Plate selection** — Choose a plate in **Plate Controls** > **Select a Plate** when a run has more than one plate
+- **Condition variable** — Choose the column that defines each well's condition in **Select Plate's Condition Variable**
+- **Well labels** — Label and color wells by any text column with **Well Label 1** and **Well Label 2** in the **Layout Controls**
 
 ### <BarChartOutlined /> Results Analysis and Visualization
 
-Comprehensive data tables with interactive bar chart visualizations for multi-condition comparisons:
+Data tables and bar charts let you compare results across conditions:
 
 <div style={{ textAlign: 'center' }}>
     <img
@@ -122,16 +134,16 @@ Comprehensive data tables with interactive bar chart visualizations for multi-co
 </div>
 &nbsp;
 
-- **Detailed results table** — View all wells with associated metadata
-- **Multi-gene analysis** — Compare expression across different targets
-- **Condition grouping** — Aggregate technical replicates automatically
-- **Statistical calculations** — Mean, standard deviation, and confidence intervals
-- **Interactive bar charts** — Click to filter and explore specific conditions
-- **Export capabilities** — Download analysis and plots for reports
+- **Results table** — View all wells with their metadata on the **Results Table** tab, and download the table as a CSV file
+- **Bar Graph** — Plot any numeric column on the **Bar Graph** tab by choosing an **X Variable (Categorical)**, a **Y Variable (Numeric)**, and optionally **Color By** and **Facet By** columns
+- **Condition Result Charts** — Show the selected result for each condition as a **Bar**, **Scatter**, or **Combined** chart
+- **Multi-target analysis** — Each target is normalized to the housekeeping gene separately, so you can compare expression across targets
+- **Condition grouping** — Results are averaged across the wells of each condition
+- **Excel export** — Click **Download analysis** or **Download as plate** to download the results as an Excel file
 
 ### <ExperimentOutlined /> Fold Induction Analysis
 
-Calculate and visualize gene expression changes with flexible normalization options:
+Calculate and visualize gene expression changes with the ΔΔCt method:
 
 <div style={{ textAlign: 'center' }}>
     <img
@@ -142,19 +154,16 @@ Calculate and visualize gene expression changes with flexible normalization opti
 </div>
 &nbsp;
 
-- **Multiple normalization methods**:
-  - **ΔΔCt Method**: Standard 2^-ΔΔCt calculation for equal efficiency
-  - **Pfaffl Method**: Efficiency-corrected calculation for variable amplification
-  - **Custom calculations**: User-defined formulas for specialized analyses
-- **Reference gene selection** — Normalize to single or multiple housekeeping genes (geometric mean for multiple)
-- **Control condition flexibility** — Choose any sample or condition average as baseline
-- **Automatic fold change calculation** — Real-time updates using formula: Fold Change = 2^-ΔΔCt
-- **Statistical significance** — Calculate p-values and confidence intervals for expression changes
-- **Grouped visualizations** — Compare fold changes across multiple conditions with error bars
+Set up the calculation in the **Analysis Controls: Normalization** section of the sidebar, then click **Create or Update Analysis**:
+
+- **Reference gene selection** — Choose the housekeeping gene in **Select Housekeeping Gene**. ΔCt is each well's Ct minus the housekeeping gene's Ct.
+- **Control condition** — Choose the baseline in **Select Normalization condition (e.g. Bottom)**. ΔΔCt is each well's ΔCt minus the mean ΔCt of the normalization condition.
+- **Fold induction** — Calculated as 2^-ΔΔCt
+- **Normalized fold induction** — Fold induction divided by the mean fold induction of the normalization condition
 
 ### <PercentageOutlined /> Gene Knockdown and Inhibition Analysis
 
-Specialized calculations for gene knockdown and pathway inhibition studies:
+Calculate percent inhibition for gene knockdown and compound studies:
 
 <div style={{ textAlign: 'center' }}>
     <img
@@ -165,82 +174,80 @@ Specialized calculations for gene knockdown and pathway inhibition studies:
 </div>
 &nbsp;
 
-- **Knockdown efficiency calculations** — Quantify RNAi or CRISPR effectiveness
-- **Positive and negative controls** — Define baseline and complete knockdown references
-- **Time course analysis** — Track knockdown kinetics over multiple time points
-- **Multi-target validation** — Compare knockdown across different genes
-- **Off-target assessment** — Monitor unintended gene suppression
-- **Statistical validation** — Calculate significance and confidence intervals
+- **Inhibition reference** — Choose a second reference condition in **Condition to calculate %inhibition (e.g. Top)**
+- **Scaled calculation** — Percent inhibition is calculated from the normalized fold induction and scaled so that the normalization condition is 100% and the inhibition condition is 0%
+- **Replicate statistics** — The app calculates the mean and standard error of the mean (SEM) of percent inhibition for each condition
+
+### <LineChartOutlined /> Curve Fitting
+
+Fit dose-response curves on the **Curve Fitting** tab. Click **Create or Update Analysis** first, so the tab has results to fit.
+
+- **Metric and model** — Choose **Percent_Inhibition** or **Fold_Induction** in **Fit Curves on**. The app fits a four-parameter logistic (4PL) model, or a three-parameter model when you turn on **Fix Hill to 1 (3PL)**. Click **Refresh Curves** to fit the curves.
+- **Concentrations** — The app reads each compound's concentration from the condition name, such as `Compound1 10uM`
+- **Point exclusion** — Click a point on a curve to exclude it from the fit, or click an excluded point to include it again. Excluded points are listed in the **Excluded Points** table.
+- **Manual parameters** — Fix the bottom (**Fix Bottom**), top (**Fix Top**), or Hill slope (**Fix Hill Slope**) at a value you enter
+- **Custom IC values** — Calculate two additional inhibitory concentrations, set in **IC Value 1 (%)** and **IC Value 2 (%)** (80% and 90% by default)
+- **Fit review** — The **Fit Comparison** table shows R², minimum, maximum, Hill slope, and relative and absolute IC50 values for the current and initial fits. Click **Validate**, **Reject Inactive**, or **Reject Unreliable** to record your review of each fit.
+- **Results summary** — Click **Results Preview** to see the **IC50 Results** for all compounds, and download them as a PowerPoint file
+
+### <SaveOutlined /> Saving and Reloading Analyses
+
+Save the state of an analysis so you or a colleague can reload it later:
+
+- **Save App State** — Click **Save App State** in the sidebar, the **Analysis Selection** tab, or the **Curve Fitting** tab. Review the summary and click **Confirm Save**.
+- **Saved contents** — A saved state records the run, your normalization selections, the excluded wells, the qPCR results, the curve fits, and who saved it and when
+- **Reload** — On the **Data Selection** > **Analysis Selection** tab, select a saved state and click **Read Selected File** to restore it
+
+In the base app, **Save App State** runs the `qpcr-save-analysis` Flow, which stores the state as a JSON file, and the app lists saved states from the `modular_app_qPCR_templates` table.
 
 ## Data Types Analyzed
 
 The qPCR app processes and manages multiple types of qPCR data:
 
 ### Raw qPCR Data
-- **Amplification curves** — Real-time fluorescence intensities across cycles
-- **Ct/Cq values** — Threshold cycle determinations for each well
-- **Melt curve data** — Temperature dissociation curves for specificity validation
-- **Baseline corrections** — Automatic or manual baseline adjustments
-- **Threshold settings** — Fluorescence threshold for Ct determination
+- **Ct values** — Threshold cycle values for each well
+- **Well metadata** — Well position, target, reporter, and sample or condition names
+- **Treatment information** — Compound and concentration values parsed from condition names
 
 ### Processed Calculations
-- **ΔCt values** — Target normalized to reference genes
-- **ΔΔCt values** — Treatment relative to control conditions
-- **Fold change** — Linear expression differences
-- **Percent inhibition/activation** — Drug effect quantification
-- **Standard curve interpolation** — Absolute quantification
-- **Efficiency corrections** — Adjusted calculations for non-ideal amplification
+- **ΔCt values** — Target normalized to the housekeeping gene
+- **ΔΔCt values** — Treatment relative to the normalization condition
+- **Fold induction** — Linear expression differences, raw and normalized
+- **Percent inhibition** — Compound or knockdown effect, with mean and SEM per condition
+- **Curve fit parameters** — Minimum, maximum, Hill slope, R², and IC50 and custom IC values
 
 ### Quality Metrics
 
-#### Automated Quality Control Features
+#### Curve Fit Quality Checks
 
-The qPCR app includes comprehensive quality control capabilities.  These are customizable; by default, they are:
-
-| **QC Metric** | **Threshold** | **Purpose** |
-|--------------|--------------|------------|
-| **Amplification Efficiency** | 90-110% (slope: -3.1 to -3.6) | Validates primer performance |
-| **R² Value** | >0.98 for standard curves | Ensures linearity |
-| **CV (Coefficient of Variation)** | &lt;5% for technical replicates | Confirms reproducibility |
-| **Ct Standard Deviation** | &lt;0.5 between replicates | Identifies pipetting errors |
-| **Melt Curve Analysis** | Single peak expected | Detects primer dimers/non-specific binding |
-| **No Template Control** | Ct >35 or undetermined | Confirms no contamination |
+The **Fit Comparison** table includes a **QC** column. By default, a fit fails the R² check when R² is below 0.6. You can then validate or reject each fit, and the review is included in the **IC50 Results** summary.
 
 #### Replicate Handling
-- **Technical Replicates**: Automatically averaged with outlier detection
-- **Biological Replicates**: Maintained separately for statistical analysis
-- **Outlier Detection**: Grubbs' test or 2SD exclusion methods
-- **Failed Well Handling**: Automatic exclusion with manual override option
+- **Condition means**: Results are averaged across the included wells of each condition
+- **Excluded wells**: Wells you exclude in the **Plate View** are left out of the calculations
+- **Excluded points**: Points you exclude from a curve are left out of that fit and listed in the results summary
 
 ### Experimental Metadata
-- **Plate layouts** — Sample positions and dilutions
-- **Treatment conditions** — Compound names and concentrations
-- **Time points** — Kinetic experiment tracking
-- **Operator information** — User and timestamp data
-- **Instrument parameters** — Cycling conditions and detection settings
+- **Run metadata** — The **Metadata** tab shows all columns of the run metadata table for the loaded run
+- **Selected run summary** — The **Selected Metadata** section of the sidebar shows the protocol, plate, and run ID
 
 ## Data Integration
 
-The qPCR app seamlessly integrates with Ganymede's data infrastructure:
+The qPCR app integrates with Ganymede's data infrastructure:
 
 ### Data Management Features
-- **Direct data lake connection** — Access all qPCR data stored in Ganymede tables via SQL queries
-- **Automatic data parsing** — Extract Ct values, amplification curves, melt curves, and metadata
-- **Batch import** — Process multiple runs simultaneously with validation checks
-- **Template management** — Save and reuse plate layouts, gene panels, and analysis parameters
-- **LIMS connectivity** — Automatic linking of sample IDs, patient data, and experimental metadata
-- **Version control** — Track analysis versions and parameter changes
-- **Audit trail maintenance** — Complete record of all analysis steps for 21 CFR Part 11 compliance
+- **Direct data lake connection** — The app reads qPCR data stored in Ganymede tables with SQL queries. The base app reads run metadata from the `qpcr_run_metadata` table and Ct values from the `qpcr_raw_readings` table. Update the queries in `app.py` and `data_retriever.py` to match your tables.
+- **Saved analysis states** — Save and reload an analysis, including its selections, exclusions, and curve fits
 
 ### Export Capabilities
 
 | **Export Type** | **Formats** | **Contents** |
 |----------------|------------|------------|
-| **Raw Data** | CSV, Excel | Ct values, sample names, well positions |
-| **Processed Results** | CSV, Excel, JSON | All calculated metrics with statistics |
-| **Reports** | PDF, HTML | Complete analysis with figures and tables |
-| **Figures** | PNG, SVG, PDF | Publication-ready plots |
-| **Analysis Parameters** | JSON | Complete configuration for reproducibility |
+| **Results Table** | CSV | Each well's Ct value, metadata, and inclusion status |
+| **Download analysis** | Excel | One sheet per calculated result, plus the raw results |
+| **Download as plate** | Excel | The selected result and plate map in plate layout |
+| **Curve fitting results** | PowerPoint | One slide per compound and one slide per condition, with the IC50 results |
+| **Saved analysis state** | JSON | The run, selections, exclusions, results, and curve fits |
 
 ## Workflow Benefits
 
@@ -249,9 +256,8 @@ Implementing the qPCR app in your laboratory workflows provides significant adva
 - **Reduced analysis time** — Automate calculations that typically require manual spreadsheet work
 - **Improved consistency** — Standardize normalization and calculation methods across users
 - **Enhanced accuracy** — Eliminate manual transcription errors and calculation mistakes
-- **Better visualization** — Generate publication-quality figures instantly
-- **Increased throughput** — Analyze multiple plates and conditions simultaneously
-- **Complete traceability** — Maintain records of all analysis parameters and decisions
+- **Better visualization** — Review results as a plate heatmap, charts, and tables
+- **Reproducible analyses** — Save the selections and exclusions behind each analysis and reload them later
 
 ## Learn More
 
