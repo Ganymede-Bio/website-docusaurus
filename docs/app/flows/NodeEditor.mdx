@@ -66,6 +66,15 @@ A full listing of available nodes and their key characteristics can be found on 
 Editable nodes contain a terminal icon (<CodeOutlined className="button darkblue_button"/>) in their upper-right corner. Clicking this icon opens the notebook backing the node. 
 These notebooks format code upon cell execution using [black](https://black.readthedocs.io/en/stable/), and perform type checking, hinting, and code diagnostics using [Jupyter LSP](https://github.com/jupyter-lsp/jupyterlab-lsp) configured with [Ruff](https://docs.astral.sh/ruff/).
 
+:::note Who can edit node code
+
+- Opening the notebook requires the Writer role or higher. For users with a lower role, such as Reader, the terminal icon is disabled. Hovering over it shows a tooltip that names your current role and asks you to reach out to an Admin to change it.
+- The terminal icon is also disabled until the Flow has been saved. Hovering over it shows _Please save flow before editing notebook_.
+- Nodes in a [GxP-validated Flow](../admin/GxPValidation.mdx#gxp-validated-assets) show a lock icon, and their notebooks can't be opened for editing.
+- If your environment uses a [self-managed repository](../configuration/SelfManagedRepo.mdx), saving a notebook changes the environment's code. A later deploy from your repository that is based on an older pull is rejected with a 409 (Conflict) response. Re-pull to pick up the latest changes, then deploy again. See [Conflict Protection](../configuration/SelfManagedRepo.mdx#conflict-protection).
+
+:::
+
 ### Code Warnings and Errors
 
 Hover over any underlined piece of code to see warnings and errors from the LSP:
@@ -149,7 +158,7 @@ def execute(
     Notes
     -----
     Files can also be retrieved and processed using the list_files and retrieve_files functions.
-    Documentation on these functions can be found at https://docs.ganymede.bio/sdk/ModuleIO
+    Documentation on these functions can be found at https://docs.ganymede.bio/sdk/GanymedeClass
     """
 
     # Retrieve single table from SQL query into a dictionary
@@ -199,7 +208,7 @@ from ganymede_sdk import Ganymede
 g = Ganymede()
 
 # Retrieve dataframes to process; the context object enables rendering of Jinja template variables used in data retrieval
-# More detail can be found on the Flow Context & Metadata page of this documentation, under the Template Variables section
+# More detail can be found on the Data Validation page of this documentation, under the Jinja templating for SQL Queries section
 result_dfs = g.retrieve_sql(query_sql)
 result_dfs
 
@@ -279,4 +288,4 @@ Flows can be configured to accept user inputs at the start of each run by select
 - Text (string) inputs (e.g. - string)
 - Tag inputs (e.g. - Input_Param)
 
-A list of available nodes and their associated categories can be found on the [table listing of node characteristics](../../nodes/Overview.mdx#list-of-available-nodes-and-key-characteristics)  More detail can be found on the [Node documentation page](../../nodes/Overview.mdx).
+A list of available nodes and their associated categories can be found on the [table listing of node characteristics](../../nodes/NodeOverview#list-of-available-nodes-and-key-characteristics).  More detail can be found on the [Node documentation page](../../nodes/NodeOverview).

@@ -60,13 +60,23 @@ Analysis notebooks are deprecated, and the Flow Editor header no longer has an *
 
 ### Managing Flows
 
-Click the <div className="button darkblue_button">**Manage <SettingOutlined />**</div> button to add, delete, configure, or [document](#documenting-flows) Flows. On the configurations pane, you will find:
+Click the <div className="button darkblue_button">**Manage <SettingOutlined />**</div> button to add, delete, configure, or [document](#documenting-flows) Flows. The top of the Manage pane has the **Add new flow**, **Copy flow**, and **Delete flow** buttons. Below them are two tabs:
+
+* **Configuration**: Settings for the Flow, listed below.
+* **Documentation**: Markdown documentation for the Flow. See [Documenting Flows](#documenting-flows).
+
+After changing a setting on either tab, click **Save** at the bottom of the pane.
+
+The **Configuration** tab contains:
 
 * **Name**: Display name of the Flow.
 * **Id**: Unique ID for the Flow.
 * **Owner**: Owner of the Flow.  The Flow will appear on the home page for the owner of a flow.
 * [**Retries**](#configuring-retries): How many times the Flow would retry to execute a node, in case of an error or a timeout.
 * **Max Active Runs**: Maximum number of Flow runs that can be active for the Flow at the same time; additional Flow runs requested are queued for later execution.  This can be useful, for example, for preventing contention issues resulting from multiple Flow runs making similar requests to a third-party API in a Flow used for synchronizing systems.
+  * The default is 40.
+  * Set it to 1 to run the Flow sequentially. Runs then execute one at a time, in the order they were triggered.
+  * Queued runs that don't start within 72 hours of being triggered are cleaned up automatically.
 * **Production Mode**: Toggle to place Flow in *production mode*, which makes all tabular data written by the Flow to be done append-only.  
 
 :::info
@@ -80,6 +90,13 @@ If enabled, this toggle overwrites the configuration specified on the NodeReturn
 * [**Send Email Notifications**](#configuring-email-notifications): Emails to notify in case of a failure.
 * [**Auto run trigger**](#scheduling-flow-execution): Cron schedule for running the Flow, if enabled
 * **Assign Flow to**: Users assigned a Flow will have the Flow appear under the [My Flows tab of their Home page](../Home.mdx).
+* **Ingest Bucket**: S3 bucket where files collected by the Flow are stored. This setting appears only when S3 buckets are connected to the environment on the **Integration** tab of **Environment Settings**. See [External Platform Integration](../admin/ExternalPlatform.mdx).
+
+#### Permissions and GxP-validated Flows
+
+Creating or saving a Flow requires the Writer role or higher, and copying or deleting a Flow requires the Admin role. If your role doesn't allow an action, the button is disabled. Hover over it to see a tooltip that names your current role and asks you to reach out to an Admin to change it.
+
+Flows that Ganymede provisions as centrally managed [GxP-validated assets](../admin/GxPValidation.mdx#gxp-validated-assets) show a **GxP Validated** badge next to the Flow selector in the header. For these Flows, **Save**, adding nodes, **Copy flow**, **Delete flow**, and the settings in the Manage pane are disabled. Hovering over a disabled control shows the message _This asset is centrally managed (GxP validated) and cannot be modified._ You can still run and view the Flow.
 
 ## Run Queue Bar
 
@@ -98,13 +115,15 @@ The Run Queue Bar located at the bottom of the screen contains buttons for execu
 
 ### Creating Flows
 
-To create a new Flow, click the <div className="button darkblue_button">**Manage <SettingOutlined />**</div> button in the upper right hand corner of the screen. Then click the <div className="button black_button"><PlusOutlined /> Add New Flow</div> button on the sidebar.  This action exposes a modal for naming and describing the Flow.  
+To create a new Flow, click the <div className="button darkblue_button">**Manage <SettingOutlined />**</div> button in the upper right hand corner of the screen. Then click the <div className="button black_button"><PlusOutlined /> Add new flow</div> button on the sidebar.  You can also click **New Flow** in the Flows section of the [Home](../Home.mdx) page, which opens the Flow Editor with the same modal.
+
+The modal asks for a **Flow Name** and **Flow Description**. If S3 buckets are connected to the environment, you can also choose an **Ingest Bucket**. Click **Create Flow** to start building the Flow. Building can take a few minutes, and the new Flow loads in the editor automatically once it's complete.  
 
 <img alt="Add new flow" src="https://ganymede-bio.mo.cloudinary.net/apiServer/AddNewFlow_20241101.png"/>
 
 ### Copying Flows
 
-Flows can be copied within an environment, or promoted to a different environment within the same tenant by clicking on the <div className="button black_button"><CopyOutlined /> Copy code</div> icon.  This opens a modal that allows you to specify the environment and Flow name for the new Flow.
+Flows can be copied within an environment, or promoted to a different environment within the same tenant by clicking on the <div className="button black_button"><CopyOutlined /> Copy flow</div> button in the Manage pane.  This opens a modal where you choose the **Destination Environment** and enter the **Flow Name** for the new Flow. Copying a Flow requires the Admin role.
 
 ### Modifying and Deleting Flows
 
@@ -112,7 +131,13 @@ Edges can be removed by selecting them and pressing "delete" or "backspace" on t
 
 To make two nodes dependent on each other within a run, click and drag between two orbs two different nodes.  Flow dependencies run top-to-bottom (if vertical layout is specified) or left-to-right (if horizontal layout is specified).
 
-Flows can be deleted by clicking the <div className="button black_button"><DeleteOutlined /> Delete Flow</div> icon in the Flow Editor sidebar.
+Flows can be deleted by clicking the <div className="button black_button"><DeleteOutlined /> Delete flow</div> button in the Manage pane. Deleting a Flow requires the Admin role.
+
+:::note
+
+You can't modify, copy, or delete a [GxP-validated Flow](#permissions-and-gxp-validated-flows).
+
+:::
 
 ### Flow Save Status Indicator
 
@@ -204,7 +229,7 @@ To load a Flow, specify the Flow to load in the <div className="button datalist_
 
 <img alt="Loading a flow" src="https://ganymede-bio.mo.cloudinary.net/apiServer/LoadFlow2_20240331.png"/>
 
-After saving a Flow, the entire environment (which contains all flows) is saved and deployed. When this save and deploy is taking place, users are temporarily restricted from running flows. A tooltip will be displayed to the user if they try to run a Flow during this time. Users can observe the status of environment updates on the [<div className="button darkblue_button"><NotificationOutlined /> **Notifications**</div>](Notifications.mdx) page.
+After saving a Flow, the entire environment (which contains all flows) is saved and deployed. When this save and deploy is taking place, users are temporarily restricted from running flows. A tooltip will be displayed to the user if they try to run a Flow during this time. Users can observe the status of environment updates on the [<div className="button darkblue_button"><NotificationOutlined /> **Notifications**</div>](Notifications.mdx) page, which you open from the **Notifications** item in the left navigation.
 
 
 ### Running Flows
@@ -219,7 +244,7 @@ If the input file is uploaded from local computer and has previously been upload
 
 To run the same Flow with different sets of input files, add additional rows to the input box by clicking on the <div className="button darkblue_button"><PlusOutlined /> Add run</div> button.
 
-Clicking the <div className="button run_queue_button">**Run** <PlayCircleOutlined /></div> button on the Flow Inputs node kicks off the Flow run.  Run progress can be tracked by clicking on the **Runs** button in the header, or by navigating to the [<div className="button darkblue_button"><CheckCircleOutlined /> **Flow Runs**</div>](FlowRuns.mdx) page.
+Clicking the <div className="button run_queue_button">**Run** <PlayCircleOutlined /></div> button on the Flow Inputs node kicks off the Flow run.  Run progress can be tracked on the [<div className="button darkblue_button"><CheckCircleOutlined /> **Flow Runs**</div>](FlowRuns.mdx) page, under **Flows > Flow Runs** in the left navigation.
 
 All inputs MUST be filled out otherwise the run will not be started. A message box will appear saying which inputs have not been filled. 
 

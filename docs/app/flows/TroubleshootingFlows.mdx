@@ -26,6 +26,25 @@ This issue may occur when the notebook fails to load properly. To resolve it:
 
 The notebook and the flow run use different Python environments, so a package installed in the notebook isn't available when the flow runs. To add the package to the node's container, see [Operator Extensions](./OperatorExtensions).
 
+#### Issue: A failed Flow run shows a Validation, Connection, Function, or Platform Error status
+
+The status chip on a failed run names the error type of the failure. Open the run's logs from the [Flow Runs](./FlowRuns.mdx) page to see which node failed and its error message.
+
+- **Validation Error**: Schema validation failed, for example a DataFrame that doesn't match a Pandera schema. Check the input data against the expected schema.
+- **Connection Error**: A connection to an external service failed. Check authentication, service availability, and access methods.
+- **Function Error**: The node's function logic failed, for example a failed call to a Python package. Check the traceback in the node's logs.
+- **Platform Error**: The run failed and no error type was recorded for the failure. Check the node's logs for details.
+
+To set the error type from your own node code, see [Error Attribution](./FlowView.mdx#error-attribution).
+
+#### Issue: A Flow run stays Queued and doesn't start
+
+Each Flow has a **Max Active Runs** setting in the [Manage pane](./FlowEditor.mdx#managing-flows) of the Flow Editor. The default is 40. When the Flow already has that many active runs, new runs are queued until an active run finishes. Check whether earlier runs of the Flow are still running, or raise **Max Active Runs**.
+
+If **Max Active Runs** is set to 1, runs execute one at a time, in the order they were triggered, so a new run waits for every earlier run to finish.
+
+Runs that don't start within 72 hours of being triggered are cleaned up automatically.
+
 #### Issue: Flow run fails due to a Platform Error.  Run logs for the failing node contains "INFO - Data retrieval unsuccessful. Exception class: NotFound"
 
 This error often occurs when using a browser other than Google Chrome. Ganymede requires Google Chrome for Flow execution, so switch to Chrome to avoid this issue.
@@ -44,7 +63,7 @@ If the environment status says "Deploy Successful" as shown below, but the Run b
 
 <img alt="Environment Status - deploy successful" src="https://ganymede-bio.mo.cloudinary.net/apiServer/DeploySuccessful_20240331.png" width="250"/>
 
-click on your user name in the upper-right hand corner, navigate to Environment Settings, and verify that your role is either runner, writer, or admin.
+click the button with your email address in the upper-right corner, select **Environment Settings**, and verify that your role is **Runner**, **Writer**, or **Admin**.
 
 If you are still unable to run the Flow, please [reach out to Ganymede Support](../Support).
 
@@ -55,6 +74,10 @@ If you are still unable to run the Flow, please [reach out to Ganymede Support](
 Error committing file 400 - \{“statusCode”: 400, “message”: “Creating a file with this API is prohibited, attempted to create dags/…/function.py\}
 
 This error occurs when you try to save a notebook after modifying the name of the respective node in the Flow. You can copy and paste your new code into a reopened notebook to save the changes.
+
+#### Issue: A deploy from a self-managed repository is rejected with a 409 (Conflict)
+
+The environment's code changed after your last pull, for example from an edit saved in the Ganymede UI. Ganymede rejects the deploy instead of overwriting those changes. Re-pull to pick up the latest changes, then deploy again. See [Conflict Protection](../configuration/SelfManagedRepo.mdx#conflict-protection).
 
 #### Issue: I received a 5xx status code while saving a notebook.
 

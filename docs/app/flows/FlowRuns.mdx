@@ -5,9 +5,7 @@ sidebar_label: Monitoring Flows
 displayed_sidebar: webUiSidebar
 ---
 
-import { CheckCircleOutlined } from '@ant-design/icons';
-
-The <div className="button darkblue_button"><CheckCircleOutlined /> **Flow Runs**</div> page contains the current status of different Flow runs that have been executed.  To view historical runs for a specific Flow, select the Flow from the datalist in the header.
+The **Flow Runs** page, at **Flows > Flow Runs** in the left navigation, contains the current status of different Flow runs that have been executed.  To view historical runs for a specific Flow, select the Flow from the datalist in the header.
 
 <img width="1288" alt="FlowRuns" src="https://ganymede-bio.mo.cloudinary.net/apiServer/FlowRuns_20240812.png"/>
 &nbsp;
@@ -37,19 +35,31 @@ The run status table displayed consists of the following columns:
   - **Success**: All Nodes have run successfully.
   - **Validation Error**, **Connection Error**, or **Function Error**: At least one Node failed, and the status names the [error type](./FlowView.mdx#error-attribution) of the failure. If Nodes in the same run fail with different error types, Validation takes precedence over Connection, and Connection over Function.
   - **Platform Error**: The Flow run failed and no error type was recorded for the failure.
-- **Logs**: Opens a modal with logs for each Node. For failed runs, the link reads **Error Logs**.
+- **Logs**: Opens the [**Flow Run Logs**](#observing-node-status) drawer for the run. For failed runs, the link reads **Error Logs**.
 - **Flow Version**: The version of the Flow that ran. See [Determining what code ran](#determining-what-code-ran).
 
 ### Observing Node Status
 
-Expanding the status box shows a list of nodes with corresponding run statuses indicated by color.  Some common color codes are:
-  - ![#B22222](https://placehold.co/2x2/B22222/B22222.png) **Red**: failure after retries exhausted
-  - ![#01FF70](https://placehold.co/2x2/01FF70/01FF70.png) **Light green**: currently running
-  - ![#2ECC40](https://placehold.co/2x2/2ECC40/2ECC40.png) **Dark green**: successful run
-  - ![#A9A9A9](https://placehold.co/2x2/A9A9A9/A9A9A9.png) **Gray**: queued; awaiting system resource to commence
-  - ![#FFFF00](https://placehold.co/2x2/FFFF00/FFFF00.png) **Yellow**: failure to run on at least 1 try; awaiting retry
-  - ![#9932CC](https://placehold.co/2x2/9932CC/9932CC.png) **Dark Orchid**: skipped prior to completion; this color may indicate a system resource limitation
-  - ![#FFA500](https://placehold.co/2x2/FFA500/FFA500.png) **Orange**: dependency for node has failed, preventing this node from being run
+Clicking a run's status or its **Logs** link opens the **Flow Run Logs** drawer. The drawer has two panes:
+
+- **Node Status**: Lists each Node in the run with a status chip. Click a Node to display its logs. If the Flow has an owner, the owner's contact is shown below the list.
+- **Node Logs**: Shows the logs for the selected Node. If the Node raised an error, the error message, line number, and function appear at the top of the logs.
+
+Node status chips include:
+  - **Success**: The Node completed successfully.
+  - **Running**: The Node is currently running.
+  - **Queued**: The Node is awaiting system resources to start.
+  - **Up for retry**: The Node failed on at least one try and is awaiting a retry.
+  - **Upstream failed**: A dependency for the Node failed, preventing this Node from being run.
+  - **Skipped**: The Node was skipped before completion. This may indicate a system resource limitation.
+  - **Validation Error**, **Connection Error**, or **Function Error**: The Node failed, and the chip names the [error type](./FlowView.mdx#error-attribution) of the failure.
+  - **Platform Error**: The Node failed and no error type was recorded for the failure.
+
+You may also see **Scheduled**, **Up for reschedule**, **Deferred**, **Removed**, **Restarting**, or **None**.
+
+The logs show the most recent entries, so the error messages and tracebacks from a failed Node are visible. If a log is too long to show in full, the drawer says so and shows only the most recent lines. To get the full output, click **Download complete log**. If the Node was retried, each attempt can have its own download button, labeled with the attempt number. Downloads are available for runs of Flows saved or deployed after the October 08 2026 release. For older runs, the drawer says that the complete log isn't available for the run.
+
+Older runs whose execution details have expired show no Nodes in the drawer.
 
 ### Determining what code ran
 
