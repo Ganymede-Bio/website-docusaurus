@@ -53,7 +53,22 @@ module.exports = {
         rewriteImageUrls: true,
         includeOrder: ['app/**', 'sdk/**', 'nodes/**', 'releases/**'],
       },
-    ]
+    ],
+    // Scalar's pathRouting writes URLs like /api/tag/commits. Register /api as a
+    // non-exact route so the client router renders the API reference for those
+    // paths instead of a 404. vercel.json rewrites /api/* to the /api HTML.
+    function apiReferenceRoute() {
+      return {
+        name: 'api-reference-route',
+        async contentLoaded({ actions }) {
+          actions.addRoute({
+            path: '/api',
+            exact: false,
+            component: '@site/src/components/ApiReference',
+          });
+        },
+      };
+    },
   ],
   themes: ['@docusaurus/theme-mermaid'], 
   themeConfig: {
