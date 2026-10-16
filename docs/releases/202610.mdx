@@ -4,6 +4,19 @@ title: October 2026
 displayed_sidebar: releaseSideBar
 ---
 
+### October 15 2026
+
+**Improvements**
+- **Web UI / Modular Analysis (MA)**
+    - Added a safety feature that prevents MA Apps from modifying the global Python state, such as by assigning into an imported module. This protects other apps running on the shared analysis server. It applies in all environments.
+        - **Important Note:** An MA App that does this now fails to load. To fix it, update the app so it no longer changes imported modules, then redeploy it.
+    - When an MA App fails to load, the **Logs** tab now shows a short, plain-English explanation of why, along with the full traceback. For example, "App failed to load because it modifies global Python state."
+
+**Bug Fixes**
+- **Agents**: Fixed an issue where a file watcher connection ignored its configured `stable_time` and always waited 5 seconds before uploading a file. Each connection now uses its own value, whether it is set in the connection's stable time field or as a `stable_time` connection variable. Connections that watch the same folder with different values no longer affect each other.
+
+**Gateway Version**: 5.6.85
+
 ### October 08 2026
 
 **Features**
